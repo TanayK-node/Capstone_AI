@@ -7,6 +7,9 @@ Evidence returned here is only what the LLM claims (quote + chunk_id); the verif
 from __future__ import annotations
 
 import logging
+import time
+from collections.abc import Callable
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -56,6 +59,8 @@ class GroupRun:
     items: int = 0
     truncated: bool = False
     error: str | None = None
+    seconds: float = 0.0  # wall time of the call, retries included
+    attempts: int = 0  # 2 = failed once, re-tried after a pause
 
 
 @dataclass
@@ -79,45 +84,78 @@ def extract_document(
     *,
     metadata: dict[str, Any] | None = None,
     max_group_chars: int = 48_000,
+    parallel_calls: int = 1,
+    retry_failed_after_s: float = 0.0,
+    sleep: Callable[[float], None] = time.sleep,
 ) -> ExtractionRun:
     extraction = PaperExtraction(metadata=_metadata(doc, metadata or {}))
     pages = {b.id: b.page for b in doc.blocks}
     groups = build_groups(doc, max_group_chars)
-    runs: list[GroupRun] = []
+    names = [n for n in GROUP_SPECS if groups[n].text]
 
-    for name, (template, schema) in GROUP_SPECS.items():
-        group = groups[name]
-        if not group.text:
+    # Calls may run concurrently (the gateway's rate limiter is thread-safe); results are
+    # absorbed afterwards in GROUP_SPECS order so item ids do not depend on timing.
+    outcomes: dict[str, tuple[GroupRun, BaseModel | None]] = {}
+    with ThreadPoolExecutor(max_workers=max(1, parallel_calls)) as pool:
+        for name, outcome in zip(
+            names, pool.map(lambda n: _call_group(client, n, groups[n]), names), strict=True
+        ):
+            outcomes[name] = outcome
+    failed = [n for n in names if outcomes[n][0].status == "failed"]
+    if failed:
+        # A demand spike usually passes within seconds: one more try per failed group.
+        log.warning("extraction groups %s failed; retrying in %.0fs", failed, retry_failed_after_s)
+        sleep(retry_failed_after_s)
+        for name in failed:
+            first = outcomes[name][0]
+            outcomes[name] = _call_group(client, name, groups[name])
+            outcomes[name][0].attempts = 2
+            outcomes[name][0].seconds += first.seconds
+
+    runs: list[GroupRun] = []
+    for name in GROUP_SPECS:
+        if name not in outcomes:
             runs.append(GroupRun(name, "skipped"))
             continue
-        variables: dict[str, Any] = {"text": group.text}
-        if name == "experiments":
-            variables["hints"] = find_hints(group.blocks)
-        prompt = prompts.render(template, **variables)
-        try:
-            result = client.generate_json(prompt, schema, role="extraction")
-        except LLMError as exc:
-            log.warning("extraction group %s failed: %s", name, exc)
-            runs.append(GroupRun(name, "failed", prompt.id, error=f"{type(exc).__name__}: {exc}"))
-            continue
-        added = _absorb(extraction, result.value, group, pages)
-        runs.append(
-            GroupRun(
-                name,
-                "done",
-                prompt.id,
-                result.meta.provider,
-                result.meta.model,
-                result.meta.cached,
-                added,
-                group.truncated,
-            )
-        )
+        run, value = outcomes[name]
+        if value is not None:
+            run.items = _absorb(extraction, value, groups[name], pages)
+        runs.append(run)
 
     _add_code_urls(extraction, doc)
     _dedupe(extraction)
     _number_items(extraction)
     return ExtractionRun(extraction, runs)
+
+
+def _call_group(
+    client: LLMClient, name: str, group: GroupText
+) -> tuple[GroupRun, BaseModel | None]:
+    template, schema = GROUP_SPECS[name]
+    variables: dict[str, Any] = {"text": group.text}
+    if name == "experiments":
+        variables["hints"] = find_hints(group.blocks)
+    prompt = prompts.render(template, **variables)
+    started = time.monotonic()
+    try:
+        result = client.generate_json(prompt, schema, role="extraction")
+    except LLMError as exc:
+        log.warning("extraction group %s failed: %s", name, exc)
+        run = GroupRun(name, "failed", prompt.id, error=f"{type(exc).__name__}: {exc}")
+        run.seconds, run.attempts = round(time.monotonic() - started, 1), 1
+        return run, None
+    run = GroupRun(
+        name,
+        "done",
+        prompt.id,
+        result.meta.provider,
+        result.meta.model,
+        result.meta.cached,
+        truncated=group.truncated,
+        seconds=round(time.monotonic() - started, 1),
+        attempts=1,
+    )
+    return run, result.value
 
 
 # ------------------------------------------------------------------ conversion

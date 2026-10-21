@@ -3,7 +3,8 @@
 Every call goes through LLMClient, which handles, in order:
   1. cache lookup (any provider in the chain, so a cached Gemini answer beats a fresh Qwen call)
   2. per-model rate limiting (RPM bucket, RPD counter)
-  3. retries with exponential backoff + jitter on 429 / transient errors
+  3. retries with exponential backoff + jitter on 429 / transient errors, then the model's
+     overload fallback (another model of the same provider, e.g. Flash -> Flash-Lite)
   4. fallback from the primary provider to the fallback (sticky after N failed calls)
   5. Pydantic validation with one repair re-ask
   6. logging of provider / model / prompt_version / tokens / latency
@@ -306,7 +307,7 @@ class LLMClient:
             )
             started = self._clock()
             try:
-                resp = self._call_with_retry(name, request)
+                resp, model = self._call_model(name, request)
             except QuotaExhaustedError as exc:
                 errors[name] = exc
                 self._record(name, ok=False, sticky=True)
@@ -380,6 +381,26 @@ class LLMClient:
         if hint is not None:
             delay = max(delay, min(hint, retry.max_delay_s))
         return max(0.0, delay * (1 + self._rng.uniform(-retry.jitter, retry.jitter)))
+
+    def _call_model(self, name: str, request: ProviderRequest) -> tuple[ProviderResponse, str]:
+        """Call the configured model; if it stays overloaded (5xx / 429 after every retry) or
+        its daily quota is spent, try the provider's overload fallback model once.
+        Returns the response and the model that actually answered (logged and cached)."""
+        section = self.cfg.gemini if name == "gemini" else self.cfg.ollama
+        backup = section.overload_fallback.get(request.model)
+        try:
+            return self._call_with_retry(name, request), request.model
+        except (TransientError, QuotaExhaustedError) as exc:
+            if not backup or backup == request.model:
+                raise
+            log.warning(
+                "llm.model_overloaded provider=%s model=%s backup=%s error=%s",
+                name,
+                request.model,
+                backup,
+                exc,
+            )
+        return self._call_with_retry(name, replace(request, model=backup)), backup
 
     def _call_with_retry(self, name: str, request: ProviderRequest) -> ProviderResponse:
         provider = self.providers[name]

@@ -209,6 +209,8 @@ def run_extract(
             client,
             metadata={**(paper.meta or {}), "source_url": paper.source_url},
             max_group_chars=settings.extraction.max_group_chars,
+            parallel_calls=settings.extraction.parallel_calls,
+            retry_failed_after_s=settings.extraction.retry_failed_after_s,
         )
         job.detail = {
             "groups": [g.__dict__ for g in run.groups],
@@ -220,7 +222,8 @@ def run_extract(
             raise RuntimeError(f"every extraction call failed ({errors})")
         done = [g for g in run.groups if g.status == "done"]
         job.provider = done[0].provider if done else None
-        job.model = done[0].model if done else None
+        # Several models when a group fell back to the overload backup (e.g. Flash-Lite).
+        job.model = ",".join(dict.fromkeys(g.model for g in done if g.model)) or None
         job.prompt_version = ",".join(g.prompt_version for g in done if g.prompt_version)
         session.merge(
             ExtractionRow(

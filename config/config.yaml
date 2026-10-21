@@ -29,9 +29,9 @@ llm:
   cache_version: 1
 
   retry:
-    max_attempts: 4           # per provider, for 429 / 5xx / timeouts
+    max_attempts: 5           # per model, for 429 / 5xx / timeouts (waits 2+4+8+16 s)
     base_delay_s: 2.0
-    max_delay_s: 30.0
+    max_delay_s: 45.0
     jitter: 0.5               # +/- fraction of the delay
 
   gemini:
@@ -39,8 +39,10 @@ llm:
     # with `uv run python -m app.llm.check --list-models` and update here, never in code.
     # Oct 2026: the 2.5 models return 404 for new API keys; Google's error names
     # gemini-3.5-flash-lite as the replacement.
+    # Extraction runs on Flash-Lite too: Flash's free-tier daily limit (~250 requests) is too
+    # small for ~6 calls per paper; Lite allows ~1000/day. Flash is kept as the backup below.
     models:
-      extraction: gemini-3.5-flash
+      extraction: gemini-3.5-flash-lite
       small: gemini-3.5-flash-lite
       vision: gemini-3.5-flash
     # Free-tier limits per model. These change without notice: re-check Google's
@@ -49,6 +51,12 @@ llm:
       gemini-3.5-flash:      { rpm: 9,  rpd: 240 }
       gemini-3.5-flash-lite: { rpm: 14, rpd: 950 }
     default_rate_limit: { rpm: 5, rpd: 100 }
+    # When a model stays overloaded after every retry (HTTP 503 "high demand", common on the
+    # free tier) or its daily quota is spent, the call is tried once on this backup model.
+    # The model that answered is logged and stored with the result (CLAUDE.md rule 8).
+    # Flash is only used here, so its small daily quota is rarely touched.
+    overload_fallback:
+      gemini-3.5-flash-lite: gemini-3.5-flash
 
   ollama:
     base_url: http://localhost:11434
@@ -80,12 +88,19 @@ parsing:
 
 pipeline:
   # true = run stages in the API process (no Redis/Celery needed); handy on Windows.
+  # Either way papers are processed one at a time, in upload order.
   eager: false
 
 extraction:
   # Characters of paper text per section-group call (~4 chars per token). Gemini Flash
   # takes far more; this keeps calls fast and the free-tier token budget small.
   max_group_chars: 48000
+  # Section-group calls in flight at once (4 groups per paper). 2 roughly halves the time
+  # per paper and stays well under the free-tier RPM; set 1 if you keep seeing 503s.
+  parallel_calls: 2
+  # A group whose call still failed (after the gateway's retries and backup model) is
+  # re-tried once after this pause, so a short demand spike does not lose a section.
+  retry_failed_after_s: 20
 
 embeddings:
   model: BAAI/bge-small-en-v1.5

@@ -121,7 +121,11 @@ def test_falls_back_to_ollama_when_gemini_keeps_failing(
     assert result.meta.provider == "ollama"
     assert result.meta.fell_back
     assert result.meta.model == fb_settings.llm.ollama.models.extraction
-    assert len(gemini.calls) == fb_settings.llm.retry.max_attempts
+    # Every retry on the configured model, then every retry on its overload backup.
+    assert len(gemini.calls) == 2 * fb_settings.llm.retry.max_attempts
+    primary = fb_settings.llm.gemini.models.extraction
+    backup = fb_settings.llm.gemini.overload_fallback[primary]
+    assert {c.model for c in gemini.calls} == {primary, backup}
 
 
 def test_sticky_fallback_after_n_failed_calls_then_recovers(
@@ -151,7 +155,7 @@ def test_quota_exhaustion_switches_immediately(fb_settings: Settings, clock: Fak
     client = make_client(fb_settings, clock, gemini, ollama)
     client.generate_text("q")
     assert client.status()["active"] == "ollama"
-    assert len(gemini.calls) == 1  # quota errors are not retried
+    assert len(gemini.calls) == 2  # not retried; one try on the backup model, then fallback
 
 
 def test_all_providers_failing_raises_with_both_errors(
@@ -205,3 +209,16 @@ def test_default_config_has_no_fallback(settings: Settings, clock: FakeClock) ->
     with pytest.raises(AllProvidersFailedError) as info:
         client.generate_text("q")
     assert set(info.value.errors) == {"gemini"}
+
+
+def test_overloaded_model_falls_back_to_backup_model(settings: Settings, clock: FakeClock) -> None:
+    """Gemini 503 "high demand" after every retry -> the call goes to the backup model."""
+    attempts = settings.llm.retry.max_attempts
+    primary = settings.llm.gemini.models.extraction
+    gemini = FakeProvider("gemini", [*[TransientError("503 high demand")] * attempts, GOOD])
+    client = make_client(settings, clock, gemini, None)
+    result = client.generate_json(toy_prompt(), ToyExtraction)
+    assert result.meta.provider == "gemini"
+    assert result.meta.model == settings.llm.gemini.overload_fallback[primary] != primary
+    assert [c.model for c in gemini.calls].count(primary) == attempts
+    assert client.status()["consecutive_failures"] == 0  # the call succeeded

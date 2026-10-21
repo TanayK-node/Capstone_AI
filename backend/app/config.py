@@ -62,6 +62,9 @@ class ProviderSection(BaseModel):
     models: ModelRoles
     rate_limits: dict[str, RateLimit] = Field(default_factory=dict)
     default_rate_limit: RateLimit = Field(default_factory=RateLimit)
+    # model -> backup model of the same provider, tried when the model stays overloaded
+    # (Gemini 503 "high demand") or its daily quota is spent.
+    overload_fallback: dict[str, str] = Field(default_factory=dict)
 
     def rate_limit_for(self, model: str) -> RateLimit:
         return self.rate_limits.get(model, self.default_rate_limit)
@@ -105,6 +108,8 @@ class PipelineSection(BaseModel):
 
 class ExtractionSection(BaseModel):
     max_group_chars: int = 48_000
+    parallel_calls: int = 2  # section-group calls in flight at once
+    retry_failed_after_s: float = 20.0  # pause before re-trying groups whose call failed
 
 
 class EmbeddingsSection(BaseModel):

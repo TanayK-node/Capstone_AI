@@ -6,6 +6,8 @@ from pathlib import Path
 from app.config import Settings
 from app.llm.cache import MemoryCache
 from app.llm.client import LLMClient
+from app.llm.errors import LLMError
+from app.llm.types import ProviderRequest, ProviderResponse
 from app.pipeline.extract.extractor import extract_document
 from app.pipeline.parse.grobid import parse_with_tei
 from app.pipeline.structure.sections import structure_document
@@ -92,3 +94,32 @@ def test_no_llm_leaves_support_unchecked(settings: Settings) -> None:
     }
     assert statuses <= {"unchecked", "unlocated"}
     assert run.warnings
+
+
+class FlakyClosing(FakePaperProvider):
+    """Fails the first call for the closing group, like a Gemini error that outlasts retries."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.failed = False
+
+    def generate(self, request: ProviderRequest) -> ProviderResponse:
+        if "limitations" in (request.json_schema or {}).get("properties", {}) and not self.failed:
+            self.failed = True
+            raise LLMError("HTTP 500")
+        return super().generate(request)
+
+
+def test_failed_group_is_retried_and_parallel_order_is_stable(settings: Settings) -> None:
+    doc = fixture_doc()
+    serial = extract_document(doc, client(settings, FakePaperProvider()), parallel_calls=1)
+    pauses: list[float] = []
+    run = extract_document(
+        doc, client(settings, FlakyClosing()), parallel_calls=4,
+        retry_failed_after_s=20, sleep=pauses.append,
+    )  # fmt: skip
+    assert pauses == [20]
+    closing = next(g for g in run.groups if g.name == "closing")
+    assert closing.status == "done" and closing.attempts == 2
+    # Same items and ids whether the calls ran one by one or concurrently.
+    assert run.extraction == serial.extraction

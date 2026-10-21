@@ -32,6 +32,17 @@ PaperLens runs on the Gemini API free tier only. The Ollama provider is still in
 switched off (`llm.fallback: null` in `config/config.yaml`). Without `GEMINI_API_KEY` the
 health page shows "No LLM provider".
 
+## Watching a paper go through the pipeline
+
+Open a paper and pick the **Pipeline** tab (it opens by itself while a paper is running):
+each stage with its time, the GROBID / Gemini model and prompt versions it used, the four
+extraction calls with their time, model and item count, and the verification numbers.
+Papers are processed one at a time in upload order, so uploading several just queues them.
+
+Gemini free-tier hiccups are absorbed in three layers: retries with backoff (2+4+8+16 s),
+then the configured backup model (`llm.gemini.overload_fallback`), then one more try of a
+failed section group after `extraction.retry_failed_after_s`.
+
 ## Phase 2 exit check
 
 With GROBID running and `GEMINI_API_KEY` in `.env`, from `backend/`:

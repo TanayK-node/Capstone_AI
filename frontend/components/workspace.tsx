@@ -16,6 +16,7 @@ import {
 } from "@/lib/api";
 import { BLOCK_COLORS, BLOCK_TYPES, ROLE_LABELS } from "@/lib/blocks";
 import { GROUNDING_COLORS, Overview, type EvidenceTarget } from "./overview";
+import { PipelineView } from "./pipeline-view";
 import type { Highlight } from "./pdf/pdf-viewer";
 import { StatusBadge } from "./status-badge";
 import { TableView } from "./table-view";
@@ -27,13 +28,15 @@ const PdfViewer = dynamic(() => import("./pdf/pdf-viewer"), {
 
 const STAGES = ["ingest", "parse", "structure", "extract", "verify"] as const;
 const ACTIVE = ["queued", "processing"];
-type Tab = "overview" | "structure" | "tables" | "block";
+type Tab = "pipeline" | "overview" | "structure" | "tables" | "block";
+const TABS: Tab[] = ["pipeline", "overview", "structure", "tables", "block"];
 
 export function Workspace() {
   const { id } = useParams<{ id: string }>();
   const queryClient = useQueryClient();
   const [selected, setSelected] = useState<string | null>(null);
-  const [tab, setTab] = useState<Tab>("overview");
+  // null = not picked yet: follow the paper (Pipeline while it runs, Overview once done).
+  const [pickedTab, setTab] = useState<Tab | null>(null);
   // The block overlay is a debug view; evidence highlights are drawn on their own layer.
   const [showBlocks, setShowBlocks] = useState(false);
   const [visible, setVisible] = useState(
@@ -48,6 +51,7 @@ export function Workspace() {
     refetchInterval: (q) => (q.state.data && ACTIVE.includes(q.state.data.status) ? 5000 : false),
   });
   const status = paper.data?.status;
+  const tab: Tab = pickedTab ?? (status && ACTIVE.includes(status) ? "pipeline" : "overview");
   const stages = paper.data?.stages;
   const structured = stages?.structure?.status === "done";
   const extracted = stages?.extract?.status === "done";
@@ -153,7 +157,7 @@ export function Workspace() {
             counts={p.parse?.block_counts ?? {}}
           />
           <nav className="flex gap-1 border-b border-zinc-200 px-3 dark:border-zinc-800">
-            {(["overview", "structure", "tables", "block"] as Tab[]).map((t) => (
+            {TABS.map((t) => (
               <button
                 key={t}
                 onClick={() => setTab(t)}
@@ -168,6 +172,7 @@ export function Workspace() {
             ))}
           </nav>
           <div className="min-h-0 flex-1 overflow-y-auto p-4 text-sm">
+            {tab === "pipeline" && <PipelineView paper={p} />}
             {tab === "overview" &&
               (extraction.data ? (
                 <Overview
