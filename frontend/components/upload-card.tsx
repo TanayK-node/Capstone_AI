@@ -80,6 +80,12 @@ export function UploadCard() {
         </button>
       </form>
 
+      <p className="text-xs text-zinc-500">
+        Privacy: the paper&apos;s text is sent to the Google Gemini API (free tier) for extraction.
+        Google may use free-tier inputs to improve its models, so do not upload unpublished or
+        confidential papers.
+      </p>
+
       {mutation.isPending && (
         <p className="text-sm text-zinc-500">Fetching and checking the PDF…</p>
       )}

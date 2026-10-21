@@ -1,30 +1,40 @@
-"""Papers API (SCOPE.md §7): upload / link, library, status, PDF, parsed blocks, rerun."""
+"""Papers API (SCOPE.md §7): upload / link, library, status, PDF, parsed blocks, extraction,
+progress events (SSE), exports, rerun."""
 
 from __future__ import annotations
 
-from collections.abc import Iterator
+import asyncio
+import json
+import time
+from collections.abc import AsyncIterator, Iterator
 from datetime import datetime
 from typing import Any, Literal
 
-from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
+from fastapi import APIRouter, Depends, File, Form, HTTPException, Query, Request, UploadFile
 from fastapi.concurrency import run_in_threadpool
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response, StreamingResponse
 from pydantic import BaseModel
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.config import Settings, get_settings
 from app.db import get_sessionmaker
-from app.models import BlockRow, Paper, ParseResult
-from app.pipeline import dispatch
+from app.models import BlockRow, ExtractionRow, Paper, ParseResult
+from app.pipeline import dispatch, export
 from app.pipeline.ingest import storage
 from app.pipeline.ingest.resolver import InputError
 from app.pipeline.ingest.service import IngestResult, ingest_link, ingest_pdf_bytes
 from app.pipeline.ingest.sources import FetchError, NoOpenAccessPdfError
 from app.pipeline.ingest.validate import InvalidPdfError
 from app.pipeline.runner import STAGES, stage_statuses
+from app.schemas.extraction import PaperExtraction
 
 router = APIRouter(prefix="/api/papers", tags=["papers"])
+
+ANALYSIS_STAGES = ("extract", "verify")
+FINAL_STATUSES = {"ready", "partial", "failed"}
+EVENT_POLL_SECONDS = 0.5
+EVENT_TIMEOUT_SECONDS = 15 * 60
 
 
 def get_session() -> Iterator[Session]:
@@ -79,8 +89,20 @@ class BlocksResponse(BaseModel):
     blocks: list[BlockOut]
 
 
+class ExtractionResponse(BaseModel):
+    paper_id: str
+    verified: bool
+    grounding_score: float | None
+    provider: str | None
+    model: str | None
+    prompt_version: str | None
+    created_at: datetime
+    status_counts: dict[str, int]  # grounding status -> number of evidence quotes
+    data: dict[str, Any]  # PaperExtraction
+
+
 class RerunRequest(BaseModel):
-    stages: list[Literal["parse", "structure"]] | None = None
+    stages: list[Literal["parse", "structure", "extract", "verify"]] | None = None
 
 
 # ------------------------------------------------------------------ helpers
@@ -136,11 +158,13 @@ async def create_paper(
 
     paper = result.paper
     dispatched: str | None = None
-    # New papers, and old ones whose processing failed, go (back) into the pipeline.
-    if result.created or paper.status == "failed":
+    # New papers, and old ones whose processing failed, go (back) into the pipeline. A
+    # "partial" paper parsed fine, so only its analysis stages are retried (e.g. once a key is set).
+    if result.created or paper.status in ("failed", "partial"):
+        stages = ANALYSIS_STAGES if paper.status == "partial" else STAGES
         paper.status = "queued"
         session.commit()
-        dispatched = dispatch.enqueue(settings, paper.id)
+        dispatched = dispatch.enqueue(settings, paper.id, stages)
     return CreatePaperResponse(
         paper_id=paper.id,
         status=paper.status,
@@ -244,4 +268,101 @@ def rerun(
         status=paper.status,
         duplicate=True,
         dispatched_to=dispatch.enqueue(settings, paper.id, stages),
+    )
+
+
+def _load_extraction(session: Session, paper_id: str) -> ExtractionRow:
+    _paper_or_404(session, paper_id)
+    row = session.get(ExtractionRow, paper_id)
+    if row is None:
+        raise HTTPException(404, "no extraction yet for this paper")
+    return row
+
+
+@router.get("/{paper_id}/extraction", response_model=ExtractionResponse)
+def get_extraction(paper_id: str, session: Session = Depends(get_session)) -> ExtractionResponse:
+    row = _load_extraction(session, paper_id)
+    extraction = PaperExtraction.model_validate(row.data)
+    counts: dict[str, int] = {}
+    for _, item in extraction.all_items():
+        for ev in item.evidence:
+            counts[ev.grounding_status] = counts.get(ev.grounding_status, 0) + 1
+    return ExtractionResponse(
+        paper_id=paper_id,
+        verified=row.verified,
+        grounding_score=row.grounding_score,
+        provider=row.provider,
+        model=row.model,
+        prompt_version=row.prompt_version,
+        created_at=row.created_at,
+        status_counts=counts,
+        data=extraction.model_dump(mode="json"),
+    )
+
+
+@router.get("/{paper_id}/export")
+def export_paper(
+    paper_id: str,
+    format: Literal["json", "md", "bib", "csv"] = Query("json"),
+    session: Session = Depends(get_session),
+) -> Response:
+    row = _load_extraction(session, paper_id)
+    media_type, ext = export.FORMATS[format]
+    body = export.render(PaperExtraction.model_validate(row.data), format)
+    name = f"paperlens-{paper_id[:12]}.{ext}"
+    return Response(
+        body,
+        media_type=media_type,
+        headers={"Content-Disposition": f'attachment; filename="{name}"'},
+    )
+
+
+def _snapshot(paper_id: str) -> tuple[str, str | None, dict[str, dict[str, Any]]] | None:
+    with get_sessionmaker()() as session:
+        paper = session.get(Paper, paper_id)
+        if paper is None:
+            return None
+        return paper.status, paper.error, stage_statuses(session, paper_id)
+
+
+def _sse(event: str, data: dict[str, Any]) -> str:
+    return f"event: {event}\ndata: {json.dumps(data, default=str)}\n\n"
+
+
+@router.get("/{paper_id}/events")
+async def paper_events(paper_id: str, request: Request) -> StreamingResponse:
+    """Server-sent events: one `stage` event per stage status change, then `done` with the
+    paper's final status. Polls the database, so it works with Celery workers in another
+    process as well as with the in-process pipeline."""
+    if await run_in_threadpool(_snapshot, paper_id) is None:
+        raise HTTPException(404, "paper not found")
+
+    async def stream() -> AsyncIterator[str]:
+        seen: dict[str, str] = {}
+        last_status = ""
+        deadline = time.monotonic() + EVENT_TIMEOUT_SECONDS
+        while time.monotonic() < deadline:
+            snap = await run_in_threadpool(_snapshot, paper_id)
+            if snap is None:
+                return
+            status, error, stages = snap
+            for stage, info in stages.items():
+                if seen.get(stage) != info["status"]:
+                    seen[stage] = info["status"]
+                    yield _sse("stage", {"stage": stage, **info})
+            if status != last_status:
+                last_status = status
+                if status in FINAL_STATUSES:
+                    yield _sse("done", {"status": status, "error": error})
+                    return
+                yield _sse("status", {"status": status})
+            if await request.is_disconnected():
+                return
+            await asyncio.sleep(EVENT_POLL_SECONDS)
+        yield _sse("timeout", {"status": last_status})
+
+    return StreamingResponse(
+        stream(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )

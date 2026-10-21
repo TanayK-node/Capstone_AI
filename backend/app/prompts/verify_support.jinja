@@ -1,0 +1,16 @@
+{# version: 1 #}
+For each numbered item, decide whether the QUOTE from a research paper supports the VALUE
+that was extracted from it.
+
+- "yes": the quote clearly states the value.
+- "partial": the quote is related and supports part of the value, or the value adds details
+  the quote does not contain.
+- "no": the quote does not support the value.
+
+Judge only from the quote. Return one verdict per item id.
+
+{% for item in items -%}
+{{ item.id }}. FIELD: {{ item.field }}
+   VALUE: {{ item.value }}
+   QUOTE: {{ item.quote }}
+{% endfor %}

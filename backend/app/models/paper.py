@@ -6,7 +6,7 @@ import uuid
 from datetime import UTC, datetime
 from typing import Any
 
-from sqlalchemy import DateTime, ForeignKey, Integer, String, Text
+from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.models.base import Base
@@ -111,3 +111,20 @@ class ChunkRow(Base):
     page: Mapped[int] = mapped_column(Integer)
     boxes: Mapped[list[dict[str, Any]]] = mapped_column(JSONType, default=list)
     text: Mapped[str] = mapped_column(Text)
+
+
+class ExtractionRow(Base):
+    """Latest extraction for a paper (overwritten on re-run: stages are idempotent)."""
+
+    __tablename__ = "extractions"
+
+    paper_id: Mapped[str] = mapped_column(
+        ForeignKey("papers.id", ondelete="CASCADE"), primary_key=True
+    )
+    data: Mapped[dict[str, Any]] = mapped_column(JSONType)  # PaperExtraction
+    provider: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    model: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    prompt_version: Mapped[str | None] = mapped_column(String(256), nullable=True)
+    grounding_score: Mapped[float | None] = mapped_column(Float, nullable=True)
+    verified: Mapped[bool] = mapped_column(Boolean, default=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)

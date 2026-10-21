@@ -33,10 +33,14 @@ See SCOPE.md for the full scope, architecture and phase plan.
 - Everything: `docker compose up --build` from the repo root
 
 - Phase 1 exit check: `uv run python -m app.pipeline.check_parse` (needs GROBID; downloads 10 arXiv papers)
+- Phase 2 exit check: `uv run python -m app.pipeline.check_extract` (needs GROBID + GEMINI_API_KEY;
+  about 6 Gemini calls per paper; `--limit 3` to save quota)
 
 ## Current phase
-Phase 1 (ingest, parse, structure). Do not start Phase 2 until `check_parse` reports PASS
-(10 arXiv papers parse without errors, tables on >= 8) on a machine that can reach arXiv.
+Phase 2 (grounded extraction, verification, Overview tab, click-to-highlight, SSE, export).
+Phase 1 passed: check_parse 10/10 on the reference papers (Oct 2026).
+Exit: full Overview for any arXiv paper in <= 3 min; every item has an evidence chip that
+highlights correctly. Not passed yet: needs a check_extract run with a real Gemini key.
 
 ## Notes
 - Coordinates everywhere are PDF points, origin top-left, pages 1-indexed (schemas/document.py).
@@ -45,5 +49,10 @@ Phase 1 (ingest, parse, structure). Do not start Phase 2 until `check_parse` rep
   or on the wrong page. A grid that fails grid_problem() is dropped: no grid beats a wrong grid.
 - When changing table code, re-run it on real papers, not only the synthetic tests:
   `uv run python -m app.pipeline.check_parse --pdf-dir <pdfs>` and read report.md.
+- Extraction: one LLM call per section group (extract/groups.py); the LLM returns value + verbatim
+  quote + chunk_id. Python normalises values, dedupes, and verify/grounding.py locates each quote
+  (rapidfuzz >= 90) and maps it to sentence boxes. Unfound quotes stay, marked "unlocated".
+- Paper status "partial" = parsed fine but extract/verify failed (e.g. no key); re-upload or
+  "Re-run analysis" retries only those stages.
 - Tests use SQLite with foreign keys enforced (db.make_engine); the app uses Postgres.
 - Docling is not wired in yet (its models download from Hugging Face); it is an A1 ablation option.

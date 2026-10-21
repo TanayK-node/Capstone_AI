@@ -20,6 +20,7 @@ dependencies = [
     "pymupdf>=2.0",
     "lxml>=6.1.3",
     "python-multipart>=0.0.32",
+    "rapidfuzz>=3.14.6",
 ]
 
 [dependency-groups]
@@ -47,6 +48,8 @@ extend-immutable-calls = ["fastapi.Depends", "fastapi.File", "fastapi.Form", "fa
 [tool.ruff.lint.per-file-ignores]
 "tests/fixtures/make_fixtures.py" = ["E501"]  # HTML fixture content
 "app/pipeline/parse/tables.py" = ["RUF001", "RUF002", "RUF003"]  # matches unicode dashes/signs
+"app/pipeline/verify/grounding.py" = ["RUF001", "RUF002", "RUF003"]
+"app/pipeline/extract/normalize.py" = ["RUF001", "RUF002", "RUF003"]
 
 [tool.ruff.lint.isort]
 # The migrations folder is named alembic/; make sure the library still sorts as third-party.
@@ -66,7 +69,7 @@ ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
 # PyMuPDF's API is only partly annotated.
-module = ["app.pipeline.parse.*", "app.pipeline.ingest.validate", "tests.*"]
+module = ["app.pipeline.parse.*", "app.pipeline.verify.*", "app.pipeline.ingest.validate", "tests.*"]
 disallow_untyped_calls = false
 
 [[tool.mypy.overrides]]

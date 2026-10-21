@@ -4,9 +4,16 @@ Not just what a paper says, but whether you can reproduce it. Every extracted fa
 back to the sentence it came from. See [SCOPE.md](SCOPE.md) for the full plan and
 [CLAUDE.md](CLAUDE.md) for the working rules.
 
-**Status: Phase 1 (ingest and parse).** Upload a PDF or paste a link; the pipeline parses it
-into blocks with page coordinates, rebuilds results tables, labels sections and chunks the
-text. The paper page shows the PDF with a debug overlay of every parsed block.
+**Status: Phase 2 (grounded extraction).** Upload a PDF or paste a link; the pipeline parses
+it into blocks with page coordinates, rebuilds results tables, labels sections, then asks
+Gemini for a structured Overview (problem, contributions, method, datasets, hyperparameters,
+compute, limitations, ...). Every item carries a verbatim quote; Python locates the quote in
+the paper and a second check asks whether it supports the item. Click an evidence chip and
+the PDF scrolls to the sentence and highlights it. Progress streams over server-sent events;
+the Overview exports as JSON, Markdown, BibTeX or CSV.
+
+Privacy: paper text is sent to the Gemini API free tier, whose inputs Google may use to
+improve its models. Do not upload unpublished or confidential papers.
 
 ## Quick start
 
@@ -24,6 +31,21 @@ docker compose up --build
 PaperLens runs on the Gemini API free tier only. The Ollama provider is still in the code but
 switched off (`llm.fallback: null` in `config/config.yaml`). Without `GEMINI_API_KEY` the
 health page shows "No LLM provider".
+
+## Phase 2 exit check
+
+With GROBID running and `GEMINI_API_KEY` in `.env`, from `backend/`:
+
+```bash
+uv run python -m app.pipeline.check_extract            # the 10 Phase 1 papers
+uv run python -m app.pipeline.check_extract --limit 3  # fewer Gemini calls (~6 per paper)
+uv run python -m app.pipeline.check_extract --pdf-dir ./pdfs
+```
+
+Per paper it reports pipeline time, items, and how many quotes were verified / partial /
+unsupported / unlocated. A paper passes when it takes at most 3 minutes, every extraction call
+succeeds, every item has a quote, and every located quote has boxes to highlight. The full
+Overviews go to `data/phase2_check/report.md`.
 
 ## Phase 1 exit check
 

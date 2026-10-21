@@ -16,6 +16,7 @@ from app.llm.errors import (
     RateLimitedError,
     TransientError,
 )
+from app.llm.schema import inline_refs
 from app.llm.types import ProviderRequest, ProviderResponse
 
 _RETRY_DELAY_RE = re.compile(r"^(\d+(?:\.\d+)?)s$")
@@ -91,7 +92,7 @@ class GeminiProvider:
         )
         if request.json_schema is not None:
             config.response_mime_type = "application/json"
-            config.response_json_schema = request.json_schema
+            config.response_json_schema = inline_refs(request.json_schema)
         if not request.thinking:
             # Thinking off by default (CLAUDE.md); how depends on the model generation.
             if off_mode == "budget":

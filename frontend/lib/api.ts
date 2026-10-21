@@ -29,7 +29,8 @@ export type Health = {
 
 // ---- papers (mirrors app/api/papers.py)
 
-export type PaperStatus = "queued" | "processing" | "ready" | "failed";
+// "partial": parsed fine, but an analysis stage (extract / verify) failed.
+export type PaperStatus = "queued" | "processing" | "ready" | "partial" | "failed";
 
 export type PaperSummary = {
   id: string;
@@ -127,6 +128,88 @@ export type CreatePaperResponse = {
   dispatched_to: string | null;
 };
 
+// ---- extraction (mirrors app/schemas/extraction.py)
+
+export type GroundingStatus = "verified" | "partial" | "unlocated" | "unsupported" | "unchecked";
+
+export type Evidence = {
+  chunk_id: string;
+  page: number;
+  bbox: Box | null;
+  boxes: Box[];
+  quote: string;
+  grounding_status: GroundingStatus;
+  match_score: number | null;
+};
+
+export type Item = {
+  id: string;
+  value: string;
+  evidence: Evidence[];
+  confidence: number;
+  source: "llm" | "rule";
+  // Dataset
+  name?: string;
+  split?: string;
+  size?: string;
+  public?: string;
+  // Hyperparameter
+  value_raw?: string;
+  value_norm?: number | null;
+  scope?: string;
+  // Claim
+  kind?: string;
+};
+
+export type ExtractionMetadata = {
+  title: string | null;
+  authors: string[];
+  venue: string | null;
+  year: string | null;
+  arxiv_id: string | null;
+  doi: string | null;
+  urls: string[];
+};
+
+export const ITEM_FIELDS = [
+  "problem",
+  "task",
+  "contributions",
+  "method_summary",
+  "novelty",
+  "datasets",
+  "baselines",
+  "metrics",
+  "hyperparameters",
+  "compute",
+  "seeds_and_runs",
+  "ablations",
+  "claims",
+  "limitations",
+  "future_work",
+  "ethics",
+  "code_urls",
+] as const;
+export type ItemField = (typeof ITEM_FIELDS)[number];
+
+export type PaperExtraction = { metadata: ExtractionMetadata; results: unknown[] } & {
+  [K in ItemField]: Item[];
+};
+
+export type ExtractionResponse = {
+  paper_id: string;
+  verified: boolean;
+  grounding_score: number | null;
+  provider: string | null;
+  model: string | null;
+  prompt_version: string | null;
+  created_at: string;
+  status_counts: Partial<Record<GroundingStatus, number>>;
+  data: PaperExtraction;
+};
+
+export type ExportFormat = "json" | "md" | "bib" | "csv";
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${API_URL}${path}`, { cache: "no-store", ...init });
   if (!res.ok) {
@@ -147,6 +230,12 @@ export const listPapers = () => request<PaperSummary[]>("/api/papers");
 export const getPaper = (id: string) => request<PaperDetail>(`/api/papers/${id}`);
 export const getBlocks = (id: string) => request<BlocksResponse>(`/api/papers/${id}/blocks`);
 export const pdfUrl = (id: string) => `${API_URL}/api/papers/${id}/pdf`;
+export const getExtraction = (id: string) =>
+  request<ExtractionResponse>(`/api/papers/${id}/extraction`);
+export const exportUrl = (id: string, format: ExportFormat) =>
+  `${API_URL}/api/papers/${id}/export?format=${format}`;
+/** Server-sent events: `stage` per stage status change, `status`, then `done`. */
+export const eventsUrl = (id: string) => `${API_URL}/api/papers/${id}/events`;
 
 /** Upload a PDF file or submit a link (arXiv id/URL, DOI, OpenReview, ACL, PDF URL). */
 export function createPaper(input: { file: File } | { url: string }) {
@@ -156,5 +245,9 @@ export function createPaper(input: { file: File } | { url: string }) {
   return request<CreatePaperResponse>("/api/papers", { method: "POST", body: form });
 }
 
-export const rerunPaper = (id: string) =>
-  request<CreatePaperResponse>(`/api/papers/${id}/rerun`, { method: "POST" });
+export const rerunPaper = (id: string, stages?: string[]) =>
+  request<CreatePaperResponse>(`/api/papers/${id}/rerun`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(stages ? { stages } : {}),
+  });

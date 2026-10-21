@@ -3,9 +3,20 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
 import { useParams } from "next/navigation";
-import { useMemo, useState } from "react";
-import { getBlocks, getPaper, pdfUrl, rerunPaper, type Block, type PaperDetail } from "@/lib/api";
+import { useEffect, useMemo, useState } from "react";
+import {
+  eventsUrl,
+  getBlocks,
+  getExtraction,
+  getPaper,
+  pdfUrl,
+  rerunPaper,
+  type Block,
+  type PaperDetail,
+} from "@/lib/api";
 import { BLOCK_COLORS, BLOCK_TYPES, ROLE_LABELS } from "@/lib/blocks";
+import { GROUNDING_COLORS, Overview, type EvidenceTarget } from "./overview";
+import type { Highlight } from "./pdf/pdf-viewer";
 import { StatusBadge } from "./status-badge";
 import { TableView } from "./table-view";
 
@@ -14,34 +25,61 @@ const PdfViewer = dynamic(() => import("./pdf/pdf-viewer"), {
   loading: () => <p className="p-4 text-sm text-zinc-500">Loading viewer…</p>,
 });
 
-const STAGES = ["ingest", "parse", "structure"] as const;
-type Tab = "structure" | "tables" | "block";
+const STAGES = ["ingest", "parse", "structure", "extract", "verify"] as const;
+const ACTIVE = ["queued", "processing"];
+type Tab = "overview" | "structure" | "tables" | "block";
 
 export function Workspace() {
   const { id } = useParams<{ id: string }>();
   const queryClient = useQueryClient();
   const [selected, setSelected] = useState<string | null>(null);
-  const [tab, setTab] = useState<Tab>("structure");
+  const [tab, setTab] = useState<Tab>("overview");
+  // The block overlay is a debug view; evidence highlights are drawn on their own layer.
+  const [showBlocks, setShowBlocks] = useState(false);
   const [visible, setVisible] = useState(
     () => new Set(BLOCK_TYPES.filter((t) => t !== "reference")),
   );
+  const [evidence, setEvidence] = useState<EvidenceTarget | null>(null);
 
   const paper = useQuery({
     queryKey: ["paper", id],
     queryFn: () => getPaper(id),
-    refetchInterval: (q) =>
-      q.state.data && ["queued", "processing"].includes(q.state.data.status) ? 1500 : false,
+    // Server-sent events drive updates (below); this slow poll is only a safety net.
+    refetchInterval: (q) => (q.state.data && ACTIVE.includes(q.state.data.status) ? 5000 : false),
   });
-  const ready = paper.data?.status === "ready";
+  const status = paper.data?.status;
+  const stages = paper.data?.stages;
+  const structured = stages?.structure?.status === "done";
+  const extracted = stages?.extract?.status === "done";
   const blocks = useQuery({
-    queryKey: ["blocks", id, paper.data?.stages.structure?.finished_at],
+    queryKey: ["blocks", id, stages?.structure?.finished_at],
     queryFn: () => getBlocks(id),
-    enabled: ready,
+    enabled: structured,
+  });
+  const extraction = useQuery({
+    queryKey: ["extraction", id, stages?.extract?.finished_at, stages?.verify?.finished_at],
+    queryFn: () => getExtraction(id),
+    enabled: extracted,
   });
   const rerun = useMutation({
-    mutationFn: () => rerunPaper(id),
+    mutationFn: (only?: string[]) => rerunPaper(id, only),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["paper", id] }),
   });
+
+  // Live progress: refetch the paper whenever a stage changes, until a final status.
+  const active = status !== undefined && ACTIVE.includes(status);
+  useEffect(() => {
+    if (!active) return;
+    const source = new EventSource(eventsUrl(id));
+    const refresh = () => queryClient.invalidateQueries({ queryKey: ["paper", id] });
+    source.addEventListener("stage", refresh);
+    source.addEventListener("status", refresh);
+    source.addEventListener("done", () => {
+      refresh();
+      source.close();
+    });
+    return () => source.close();
+  }, [active, id, queryClient]);
 
   const byId = useMemo(
     () => new Map((blocks.data?.blocks ?? []).map((b) => [b.id, b])),
@@ -53,6 +91,21 @@ export function Workspace() {
     setTab("block");
   };
 
+  // Evidence located in the paper has its own sentence boxes. An unlocated quote has none,
+  // so the cited paragraph is shown instead, in the "unlocated" grey.
+  const highlight = useMemo<Highlight | null>(() => {
+    if (!evidence) return null;
+    const ev = evidence.evidence;
+    const fallback = byId.get(ev.chunk_id);
+    const boxes = ev.boxes.length ? ev.boxes : (fallback?.boxes ?? []);
+    if (!boxes.length) return null;
+    return {
+      key: `${evidence.itemId}#${evidence.index}`,
+      boxes,
+      color: GROUNDING_COLORS[ev.grounding_status],
+    };
+  }, [evidence, byId]);
+
   if (paper.isLoading) return <p className="p-6 text-sm text-zinc-500">Loading…</p>;
   if (paper.error || !paper.data)
     return (
@@ -62,10 +115,15 @@ export function Workspace() {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <Header paper={p} onRerun={() => rerun.mutate()} rerunning={rerun.isPending} />
+      <Header paper={p} onRerun={(only) => rerun.mutate(only)} rerunning={rerun.isPending} />
       {p.status === "failed" && (
         <p className="mx-6 mb-3 rounded-lg bg-red-50 p-3 text-sm text-red-800 dark:bg-red-950/40 dark:text-red-200">
           Processing failed: {p.error}
+        </p>
+      )}
+      {p.status === "partial" && (
+        <p className="mx-6 mb-3 rounded-lg bg-amber-50 p-3 text-sm text-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
+          The paper was parsed, but analysis did not finish: {p.error}
         </p>
       )}
       <div className="grid min-h-0 flex-1 grid-cols-1 border-t border-zinc-200 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] dark:border-zinc-800">
@@ -75,20 +133,27 @@ export function Workspace() {
               url={pdfUrl(id)}
               pages={blocks.data.pages}
               blocks={blocks.data.blocks}
-              visibleTypes={visible}
-              selectedId={selected}
+              visibleTypes={showBlocks ? visible : new Set()}
+              selectedId={showBlocks || tab === "block" ? selected : null}
               onSelect={select}
+              highlight={highlight}
             />
           ) : (
             <p className="p-6 text-sm text-zinc-500">
-              {ready ? "Loading blocks…" : "The PDF appears here once parsing finishes."}
+              {structured ? "Loading blocks…" : "The PDF appears here once parsing finishes."}
             </p>
           )}
         </div>
         <aside className="flex min-h-0 flex-col border-l border-zinc-200 dark:border-zinc-800 lg:h-[calc(100vh-9.5rem)]">
-          <Legend visible={visible} setVisible={setVisible} counts={p.parse?.block_counts ?? {}} />
+          <Legend
+            show={showBlocks}
+            setShow={setShowBlocks}
+            visible={visible}
+            setVisible={setVisible}
+            counts={p.parse?.block_counts ?? {}}
+          />
           <nav className="flex gap-1 border-b border-zinc-200 px-3 dark:border-zinc-800">
-            {(["structure", "tables", "block"] as Tab[]).map((t) => (
+            {(["overview", "structure", "tables", "block"] as Tab[]).map((t) => (
               <button
                 key={t}
                 onClick={() => setTab(t)}
@@ -103,6 +168,25 @@ export function Workspace() {
             ))}
           </nav>
           <div className="min-h-0 flex-1 overflow-y-auto p-4 text-sm">
+            {tab === "overview" &&
+              (extraction.data ? (
+                <Overview
+                  paperId={id}
+                  extraction={extraction.data}
+                  activeKey={highlight?.key ?? null}
+                  onEvidence={setEvidence}
+                />
+              ) : (
+                <p className="text-zinc-500">
+                  {extraction.error
+                    ? `Could not load the extraction: ${extraction.error.message}`
+                    : stages?.extract?.status === "failed"
+                      ? "Extraction failed (see above). Re-run the analysis once it is fixed."
+                      : ACTIVE.includes(p.status)
+                        ? "Extracting… the overview appears here when it is done."
+                        : "No extraction yet."}
+                </p>
+              ))}
             {tab === "structure" && <Structure paper={p} byId={byId} onSelect={select} />}
             {tab === "tables" &&
               (tables.length ? (
@@ -142,9 +226,10 @@ function Header({
   rerunning,
 }: {
   paper: PaperDetail;
-  onRerun: () => void;
+  onRerun: (stages?: string[]) => void;
   rerunning: boolean;
 }) {
+  const busy = rerunning || ACTIVE.includes(paper.status);
   const authors = paper.parse?.metadata.authors?.map((a) => a.name).join(", ");
   return (
     <header className="space-y-2 px-6 py-4">
@@ -155,13 +240,24 @@ function Header({
           </h1>
           {authors && <p className="text-sm text-zinc-500">{authors}</p>}
         </div>
-        <button
-          onClick={onRerun}
-          disabled={rerunning || paper.status === "processing" || paper.status === "queued"}
-          className="rounded-lg border border-zinc-300 px-3 py-1.5 text-xs disabled:opacity-40 dark:border-zinc-700"
-        >
-          Re-run parsing
-        </button>
+        <div className="flex gap-2">
+          {paper.stages.structure?.status === "done" && (
+            <button
+              onClick={() => onRerun(["extract", "verify"])}
+              disabled={busy}
+              className="rounded-lg border border-zinc-300 px-3 py-1.5 text-xs disabled:opacity-40 dark:border-zinc-700"
+            >
+              Re-run analysis
+            </button>
+          )}
+          <button
+            onClick={() => onRerun()}
+            disabled={busy}
+            className="rounded-lg border border-zinc-300 px-3 py-1.5 text-xs disabled:opacity-40 dark:border-zinc-700"
+          >
+            Re-run all
+          </button>
+        </div>
       </div>
       <div className="flex flex-wrap items-center gap-2 text-xs">
         {STAGES.map((s) => (
@@ -184,36 +280,44 @@ function Header({
 }
 
 function Legend({
+  show,
+  setShow,
   visible,
   setVisible,
   counts,
 }: {
+  show: boolean;
+  setShow: (v: boolean) => void;
   visible: Set<string>;
   setVisible: (s: Set<string>) => void;
   counts: Record<string, number>;
 }) {
   return (
     <div className="flex flex-wrap gap-x-3 gap-y-1 border-b border-zinc-200 px-4 py-2 text-xs dark:border-zinc-800">
-      <span className="text-zinc-500">Overlay:</span>
-      {BLOCK_TYPES.filter((t) => counts[t]).map((t) => (
-        <label key={t} className="flex cursor-pointer items-center gap-1">
-          <input
-            type="checkbox"
-            checked={visible.has(t)}
-            onChange={() => {
-              const next = new Set(visible);
-              if (next.has(t)) next.delete(t);
-              else next.add(t);
-              setVisible(next);
-            }}
-          />
-          <span
-            className="inline-block h-2.5 w-2.5 rounded-sm"
-            style={{ background: BLOCK_COLORS[t] }}
-          />
-          {t} ({counts[t]})
-        </label>
-      ))}
+      <label className="flex cursor-pointer items-center gap-1 text-zinc-500">
+        <input type="checkbox" checked={show} onChange={() => setShow(!show)} />
+        Block overlay (debug)
+      </label>
+      {show &&
+        BLOCK_TYPES.filter((t) => counts[t]).map((t) => (
+          <label key={t} className="flex cursor-pointer items-center gap-1">
+            <input
+              type="checkbox"
+              checked={visible.has(t)}
+              onChange={() => {
+                const next = new Set(visible);
+                if (next.has(t)) next.delete(t);
+                else next.add(t);
+                setVisible(next);
+              }}
+            />
+            <span
+              className="inline-block h-2.5 w-2.5 rounded-sm"
+              style={{ background: BLOCK_COLORS[t] }}
+            />
+            {t} ({counts[t]})
+          </label>
+        ))}
     </div>
   );
 }
@@ -231,7 +335,7 @@ function Structure({
   if (!sections.length)
     return (
       <p className="text-zinc-500">
-        {paper.status === "ready" ? "No sections found." : "Waiting for parsing…"}
+        {paper.stages.structure?.status === "done" ? "No sections found." : "Waiting for parsing…"}
       </p>
     );
   return (

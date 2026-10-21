@@ -1,0 +1,18 @@
+{# version: 1 #}
+You extract the closing remarks of a research paper (limitations, discussion, conclusion).
+Use only the text below. Every paragraph starts with an id in brackets.
+
+Rules for every item:
+- "value": a short statement in your own words.
+- "quote": ONE sentence copied character-for-character from the text that states the item.
+- "chunk_id": the id in brackets of the paragraph the quote comes from.
+- "confidence": 0 to 1.
+- If the text does not state something, return an empty list for it. Never invent items.
+
+Fields:
+- limitations: limitations the authors acknowledge.
+- future_work: directions the authors propose for future work.
+- ethics: ethical considerations, societal impact or risks the authors discuss.
+
+Text:
+{{ text }}

@@ -1,4 +1,4 @@
-"""Stage runner: Parse -> Structure for one paper (Phase 1 stages).
+"""Stage runner: Parse -> Structure -> Extract -> Verify for one paper.
 
 Every stage is idempotent (CLAUDE.md rule 8): it deletes its previous output for the paper
 before writing, and records a Job row with what produced the result.
@@ -17,10 +17,12 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from app.config import Settings, get_settings
 from app.llm.client import LLMClient
-from app.models import BlockRow, ChunkRow, Job, Paper, ParseResult
+from app.models import BlockRow, ChunkRow, ExtractionRow, Job, Paper, ParseResult
+from app.pipeline.extract.extractor import extract_document
 from app.pipeline.ingest import storage
 from app.pipeline.parse import get_parser
 from app.pipeline.structure.sections import structure_document
+from app.pipeline.verify.grounding import ground, grounding_score
 from app.schemas.document import (
     Block,
     DocumentMetadata,
@@ -30,10 +32,13 @@ from app.schemas.document import (
     Sentence,
     TableData,
 )
+from app.schemas.extraction import PaperExtraction
 
 log = logging.getLogger("paperlens.pipeline")
 
-STAGES = ("parse", "structure")
+STAGES = ("parse", "structure", "extract", "verify")
+# Stages after these are "analysis": if one fails the paper is still usable ("partial").
+CORE_STAGES = ("parse", "structure")
 
 
 @contextmanager
@@ -113,6 +118,7 @@ def load_document(session: Session, paper_id: str) -> ParsedDocument | None:
             section_path=r.section_path,
             text=r.text,
             label=r.label,
+            role=r.role,
             sentences=[Sentence.model_validate(s) for s in (r.data or {}).get("sentences", [])],
             table=TableData.model_validate(t) if (t := (r.data or {}).get("table")) else None,
         )
@@ -187,6 +193,74 @@ def run_structure(
         }
 
 
+def _require_llm(llm: LLMClient | None) -> LLMClient:
+    if llm is None or not llm.providers:
+        raise RuntimeError("no LLM provider configured: set GEMINI_API_KEY in .env")
+    return llm
+
+
+def run_extract(
+    session: Session, settings: Settings, paper: Paper, doc: ParsedDocument, llm: LLMClient | None
+) -> None:
+    with stage_job(session, paper.id, "extract") as job:
+        client = _require_llm(llm)
+        run = extract_document(
+            doc,
+            client,
+            metadata={**(paper.meta or {}), "source_url": paper.source_url},
+            max_group_chars=settings.extraction.max_group_chars,
+        )
+        job.detail = {
+            "groups": [g.__dict__ for g in run.groups],
+            "llm_calls": run.calls,
+            "items": len(run.extraction.all_items()),
+        }
+        if run.all_failed:
+            errors = "; ".join(f"{g.name}: {g.error}" for g in run.groups if g.error)
+            raise RuntimeError(f"every extraction call failed ({errors})")
+        done = [g for g in run.groups if g.status == "done"]
+        job.provider = done[0].provider if done else None
+        job.model = done[0].model if done else None
+        job.prompt_version = ",".join(g.prompt_version for g in done if g.prompt_version)
+        session.merge(
+            ExtractionRow(
+                paper_id=paper.id,
+                data=run.extraction.model_dump(mode="json"),
+                provider=job.provider,
+                model=job.model,
+                prompt_version=job.prompt_version,
+                grounding_score=None,
+                verified=False,
+                created_at=datetime.now(UTC),
+            )
+        )
+
+
+def run_verify(
+    session: Session, settings: Settings, paper: Paper, doc: ParsedDocument, llm: LLMClient | None
+) -> None:
+    with stage_job(session, paper.id, "verify") as job:
+        row = session.get(ExtractionRow, paper.id)
+        if row is None:
+            raise RuntimeError("nothing to verify: the extract stage has not produced results")
+        extraction = PaperExtraction.model_validate(row.data)
+        client = llm if llm is not None and llm.providers else None
+        run = ground(extraction, doc, client, storage.pdf_path(settings, paper.id))
+        score = grounding_score(extraction)
+        row.data = extraction.model_dump(mode="json")
+        row.grounding_score = score
+        row.verified = True
+        job.provider, job.model, job.prompt_version = run.provider, run.model, run.prompt_version
+        job.detail = {
+            "located": run.located,
+            "unlocated": run.unlocated,
+            "support_checked": run.checked,
+            "llm_calls": run.support_calls,
+            "grounding_score": score,
+            "warnings": run.warnings,
+        }
+
+
 def process_paper(
     paper_id: str,
     *,
@@ -215,8 +289,8 @@ def process_paper(
                 doc = load_document(session, paper_id)
                 if doc is None:
                     raise RuntimeError("no parse result to structure; run parse first")
+            client = llm() if callable(llm) else llm
             if "structure" in stages:
-                client = llm() if callable(llm) else llm
                 run_structure(session, paper, doc, client)
         except Exception as exc:
             log.exception("pipeline failed for %s", paper_id)
@@ -224,9 +298,26 @@ def process_paper(
             paper.status, paper.error = "failed", f"{type(exc).__name__}: {exc}"
             session.commit()
             return "failed"
-        paper.status = "ready"
+
+        # Analysis stages: a failure keeps the parsed paper usable ("partial"), never blank.
+        errors: list[str] = []
+        if any(st in stages for st in ("extract", "verify")):
+            doc = load_document(session, paper_id) or doc  # now with section roles
+        for name, fn in (("extract", run_extract), ("verify", run_verify)):
+            if name not in stages:
+                continue
+            if name == "verify" and errors:
+                break  # nothing fresh to verify
+            try:
+                fn(session, settings, paper, doc, client)
+            except Exception as exc:
+                log.warning("%s failed for %s: %s", name, paper_id, exc)
+                paper = session.merge(paper)
+                errors.append(f"{name}: {type(exc).__name__}: {exc}")
+        paper.status = "partial" if errors else "ready"
+        paper.error = "; ".join(errors) or None
         session.commit()
-        return "ready"
+        return paper.status
 
 
 def stage_statuses(session: Session, paper_id: str) -> dict[str, dict[str, Any]]:

@@ -1,8 +1,10 @@
-"""Upload -> ingest -> parse -> structure through the API, on SQLite with the PyMuPDF parser
-(no GROBID, Redis or LLM needed)."""
+"""Upload -> ingest -> parse -> structure -> extract -> verify through the API, on SQLite with
+the PyMuPDF parser and a fake LLM (no GROBID, Redis or network needed)."""
 
+import random
 from collections.abc import Iterator
 from pathlib import Path
+from typing import Any
 
 import pytest
 from fastapi.testclient import TestClient
@@ -10,10 +12,16 @@ from sqlalchemy.orm import sessionmaker
 
 from app.config import Settings, get_settings
 from app.db import make_engine
+from app.llm.cache import MemoryCache
+from app.llm.client import LLMClient
 from app.models import Base
 from app.pipeline import dispatch, runner
+from tests.conftest import FakeClock
+from tests.fake_llm import FakePaperProvider
 
 FIXTURES = Path(__file__).parent / "fixtures"
+# Tests flip this to simulate a missing GEMINI_API_KEY.
+LLM_STATE: dict[str, Any] = {"enabled": True}
 
 
 @pytest.fixture
@@ -30,9 +38,18 @@ def client(
         }
     )
 
+    clock = FakeClock()
+    llm = LLMClient(test_settings, {"gemini": FakePaperProvider()}, MemoryCache(), clock=clock,
+                    sleep=clock.sleep, rng=random.Random(0))  # fmt: skip
+    LLM_STATE["enabled"] = True
+
     def run_now(s: Settings, paper_id: str, stages: tuple[str, ...] = runner.STAGES) -> str:
         runner.process_paper(
-            paper_id, settings=test_settings, session_factory=factory, llm=None, stages=stages
+            paper_id,
+            settings=test_settings,
+            session_factory=factory,
+            llm=llm if LLM_STATE["enabled"] else None,
+            stages=stages,
         )
         return "inline"
 
@@ -65,6 +82,8 @@ def test_upload_runs_pipeline_and_serves_results(client: TestClient) -> None:
         "ingest": "done",
         "parse": "done",
         "structure": "done",
+        "extract": "done",
+        "verify": "done",
     }
     assert detail["stages"]["parse"]["provider"] == "pymupdf"
     assert detail["parse"]["block_counts"]["table"] == 1
@@ -79,6 +98,55 @@ def test_upload_runs_pipeline_and_serves_results(client: TestClient) -> None:
     pdf = client.get(f"/api/papers/{pid}/pdf")
     assert pdf.headers["content-type"] == "application/pdf"
     assert [p["id"] for p in client.get("/api/papers").json()] == [pid]
+
+    extraction = client.get(f"/api/papers/{pid}/extraction").json()
+    assert extraction["verified"] is True and extraction["grounding_score"] > 0.8
+    data = extraction["data"]
+    items = [i for k, v in data.items() if k not in ("metadata", "results") for i in v]
+    assert items and all(i["evidence"] for i in items)
+    ev = data["contributions"][0]["evidence"][0]
+    assert ev["grounding_status"] == "verified" and ev["boxes"]
+
+
+def test_exports(client: TestClient) -> None:
+    pid = upload(client, "paper_single.pdf")["paper_id"]
+    as_json = client.get(f"/api/papers/{pid}/export?format=json")
+    assert as_json.json()["metadata"]["title"].startswith("Sparse Routing")
+    md = client.get(f"/api/papers/{pid}/export?format=md").text
+    assert md.startswith("# Sparse Routing") and "## Contributions" in md and "p. " in md
+    bib = client.get(f"/api/papers/{pid}/export?format=bib").text
+    assert bib.startswith("@article{") and "Sparse Routing" in bib
+    csv_text = client.get(f"/api/papers/{pid}/export?format=csv").text
+    assert csv_text.splitlines()[0].startswith("field,id,value")
+    assert "attachment" in as_json.headers["content-disposition"]
+    assert client.get(f"/api/papers/{pid}/export?format=xml").status_code == 422
+
+
+def test_events_stream_ends_with_final_status(client: TestClient) -> None:
+    pid = upload(client, "paper_single.pdf")["paper_id"]
+    with client.stream("GET", f"/api/papers/{pid}/events") as resp:
+        assert resp.headers["content-type"].startswith("text/event-stream")
+        body = "".join(resp.iter_text())
+    assert "event: stage" in body and '"stage": "verify"' in body
+    last = body.strip().split("\n\n")[-1]
+    assert last.startswith("event: done") and '"status": "ready"' in last
+
+
+def test_without_llm_the_paper_is_partial(client: TestClient) -> None:
+    LLM_STATE["enabled"] = False
+    pid = upload(client, "paper_single.pdf")["paper_id"]
+    detail = client.get(f"/api/papers/{pid}").json()
+    assert detail["status"] == "partial"
+    assert "GEMINI_API_KEY" in detail["error"]
+    stages = {s: v["status"] for s, v in detail["stages"].items()}
+    assert stages == {"ingest": "done", "parse": "done", "structure": "done", "extract": "failed"}
+    assert client.get(f"/api/papers/{pid}/extraction").status_code == 404
+
+    # Re-uploading once a key is set retries only the analysis stages.
+    LLM_STATE["enabled"] = True
+    again = upload(client, "paper_single.pdf")
+    assert again["duplicate"] is True and again["dispatched_to"] == "inline"
+    assert client.get(f"/api/papers/{pid}").json()["status"] == "ready"
 
 
 def test_duplicate_upload_is_not_reprocessed(client: TestClient) -> None:

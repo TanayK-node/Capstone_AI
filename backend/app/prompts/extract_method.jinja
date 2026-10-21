@@ -1,0 +1,18 @@
+{# version: 1 #}
+You extract structured information from the method section of a research paper. Use only
+the text below. Every paragraph starts with an id in brackets.
+
+Rules for every item:
+- "value": a short statement in your own words (one or two sentences).
+- "quote": ONE sentence copied character-for-character from the text that states the item.
+- "chunk_id": the id in brackets of the paragraph the quote comes from, e.g. "b0031".
+- "confidence": 0 to 1.
+- If the text does not state something, return an empty list for it. Never invent items.
+
+Fields:
+- method_summary: the main components of the proposed approach (architecture, objective,
+  training procedure), 2-6 items.
+- novelty: what the authors say is new compared with prior work.
+
+Text:
+{{ text }}

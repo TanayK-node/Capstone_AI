@@ -3,7 +3,7 @@
 // Must be loaded with next/dynamic { ssr: false }: PDF.js needs browser APIs.
 import { useEffect, useRef, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
-import type { Block, PageInfo } from "@/lib/api";
+import type { Block, Box, PageInfo } from "@/lib/api";
 import { BLOCK_COLORS, mergeBoxes } from "@/lib/blocks";
 
 // react-pdf: the worker must be configured in the same module that renders <Document>.
@@ -12,6 +12,9 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   import.meta.url,
 ).toString();
 
+/** Evidence to highlight, drawn on its own layer above the (optional) block overlay. */
+export type Highlight = { key: string; boxes: Box[]; color: string };
+
 type Props = {
   url: string;
   pages: PageInfo[];
@@ -19,6 +22,7 @@ type Props = {
   visibleTypes: Set<string>;
   selectedId: string | null;
   onSelect: (id: string) => void;
+  highlight?: Highlight | null;
 };
 
 export default function PdfViewer({
@@ -28,6 +32,7 @@ export default function PdfViewer({
   visibleTypes,
   selectedId,
   onSelect,
+  highlight = null,
 }: Props) {
   const container = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(600);
@@ -49,6 +54,15 @@ export default function PdfViewer({
       .getElementById(`box-${selectedId}`)
       ?.scrollIntoView({ block: "center", behavior: "smooth" });
   }, [selectedId]);
+
+  useEffect(() => {
+    if (!highlight) return;
+    document
+      .getElementById("evidence-highlight-0")
+      ?.scrollIntoView({ block: "center", behavior: "smooth" });
+  }, [highlight]);
+
+  const highlightBoxes = highlight ? mergeBoxes(highlight.boxes) : [];
 
   const byPage = new Map<number, Block[]>();
   for (const b of blocks) {
@@ -72,6 +86,8 @@ export default function PdfViewer({
             blocks={byPage.get(info.number) ?? []}
             selectedId={selectedId}
             onSelect={onSelect}
+            highlight={highlight}
+            highlightBoxes={highlightBoxes}
           />
         ))}
       </Document>
@@ -85,12 +101,16 @@ function LazyPage({
   blocks,
   selectedId,
   onSelect,
+  highlight,
+  highlightBoxes,
 }: {
   info: PageInfo;
   width: number;
   blocks: Block[];
   selectedId: string | null;
   onSelect: (id: string) => void;
+  highlight: Highlight | null;
+  highlightBoxes: Box[];
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [seen, setSeen] = useState(info.number <= 2);
@@ -150,6 +170,28 @@ function LazyPage({
             }),
         )}
       </div>
+      {highlight && (
+        <div className="pointer-events-none absolute inset-0">
+          {highlightBoxes.map((box, i) =>
+            box.page === info.number ? (
+              <div
+                key={`${highlight.key}-${i}`}
+                id={`evidence-highlight-${i}`}
+                className="evidence-highlight absolute rounded-[2px]"
+                style={{
+                  left: box.x0 * scale - 2,
+                  top: box.y0 * scale - 2,
+                  width: (box.x1 - box.x0) * scale + 4,
+                  height: (box.y1 - box.y0) * scale + 4,
+                  background: `${highlight.color}33`,
+                  outline: `2px solid ${highlight.color}`,
+                  mixBlendMode: "multiply",
+                }}
+              />
+            ) : null,
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -99,6 +99,7 @@ class Block(BaseModel):
     sentences: list[Sentence] = Field(default_factory=list)
     table: TableData | None = None
     label: str | None = None  # "Table 2", "Figure 3", "(4)"
+    role: str | None = None  # section role, set by the structure stage (M3)
 
 
 class PageInfo(BaseModel):
