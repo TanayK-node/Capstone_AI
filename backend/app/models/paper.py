@@ -128,3 +128,20 @@ class ExtractionRow(Base):
     grounding_score: Mapped[float | None] = mapped_column(Float, nullable=True)
     verified: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+
+class ReproReport(Base):
+    """Latest reproducibility scorecard for a paper (SCOPE.md §6 repro_reports)."""
+
+    __tablename__ = "repro_reports"
+
+    paper_id: Mapped[str] = mapped_column(
+        ForeignKey("papers.id", ondelete="CASCADE"), primary_key=True
+    )
+    score: Mapped[float | None] = mapped_column(Float, nullable=True)  # 0-100
+    data: Mapped[dict[str, Any]] = mapped_column(JSONType)  # Scorecard
+    checklist_version: Mapped[int] = mapped_column(Integer)
+    provider: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    model: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    prompt_version: Mapped[str | None] = mapped_column(String(256), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)

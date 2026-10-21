@@ -43,6 +43,23 @@ Gemini free-tier hiccups are absorbed in three layers: retries with backoff (2+4
 then the configured backup model (`llm.gemini.overload_fallback`), then one more try of a
 failed section group after `extraction.retry_failed_after_s`.
 
+## Reproducibility scorecard (Phase 3)
+
+The **Reproducibility** tab scores each paper 0-100 against the 21-item checklist in
+`config/checklist.yaml` (code, data, setup, compute, statistics). Pattern rules and the
+GitHub API (license, dependency file, README commands, released weights; nothing is cloned)
+decide first; one Gemini call settles the rest, and its quotes are checked like the
+Overview's. Missing items become questions for the authors.
+
+GitHub's API allows 60 unauthenticated requests per hour (3 per paper). Add a token for
+more: `GITHUB_TOKEN=...` in `.env` (a fine-grained token with no permissions is enough).
+
+Exit check (needs the team's annotations, see `eval/gold/README.md`):
+
+```bash
+uv run python -m app.pipeline.check_repro --pdf-dir <pdfs>
+```
+
 ## Phase 2 exit check
 
 With GROBID running and `GEMINI_API_KEY` in `.env`, from `backend/`:

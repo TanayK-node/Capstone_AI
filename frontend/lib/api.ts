@@ -210,6 +210,66 @@ export type ExtractionResponse = {
 
 export type ExportFormat = "json" | "md" | "bib" | "csv";
 
+// ---- reproducibility (mirrors app/schemas/repro.py)
+
+export type ItemStatus = "present" | "partial" | "missing" | "not_applicable" | "unknown";
+
+export type ChecklistResult = {
+  id: string;
+  group: string;
+  description: string;
+  weight: number;
+  status: ItemStatus;
+  source: "rule" | "extraction" | "repo" | "llm" | "none";
+  note: string;
+  evidence: Evidence[];
+  question: string;
+};
+
+export type GroupScore = {
+  id: string;
+  label: string;
+  weight: number;
+  score: number | null;
+  counts: Partial<Record<ItemStatus, number>>;
+};
+
+export type RepoInfo = {
+  url: string;
+  host: string;
+  owner: string | null;
+  name: string | null;
+  reachable: boolean | null;
+  license: string | null;
+  stars: number | null;
+  pushed_at: string | null;
+  archived: boolean | null;
+  root_files: string[];
+  error: string | null;
+};
+
+export type Scorecard = {
+  checklist_version: number;
+  score: number | null;
+  groups: GroupScore[];
+  items: ChecklistResult[];
+  missing: string[];
+  questions: string[];
+  repo: RepoInfo | null;
+  warnings: string[];
+};
+
+export type ReproResponse = {
+  paper_id: string;
+  score: number | null;
+  checklist_version: number;
+  provider: string | null;
+  model: string | null;
+  prompt_version: string | null;
+  created_at: string;
+  scorecard: Scorecard;
+};
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${API_URL}${path}`, { cache: "no-store", ...init });
   if (!res.ok) {
@@ -232,6 +292,8 @@ export const getBlocks = (id: string) => request<BlocksResponse>(`/api/papers/${
 export const pdfUrl = (id: string) => `${API_URL}/api/papers/${id}/pdf`;
 export const getExtraction = (id: string) =>
   request<ExtractionResponse>(`/api/papers/${id}/extraction`);
+export const getReproducibility = (id: string) =>
+  request<ReproResponse>(`/api/papers/${id}/reproducibility`);
 export const exportUrl = (id: string, format: ExportFormat) =>
   `${API_URL}/api/papers/${id}/export?format=${format}`;
 /** Server-sent events: `stage` per stage status change, `status`, then `done`. */

@@ -28,19 +28,20 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
-from app.config import get_settings
+from app.config import Settings, get_settings
 from app.llm.cache import MemoryCache
-from app.llm.client import build_client
+from app.llm.client import LLMClient, build_client
 from app.pipeline import export
 from app.pipeline.check_parse import DEFAULT_IDS
-from app.pipeline.extract.extractor import extract_document
+from app.pipeline.extract.extractor import ExtractionRun, extract_document
 from app.pipeline.ingest.resolver import resolve
 from app.pipeline.ingest.sources import SourceFetcher
 from app.pipeline.ingest.validate import validate_pdf
 from app.pipeline.parse import get_parser
 from app.pipeline.parse.grobid import GrobidParser
 from app.pipeline.structure.sections import structure_document
-from app.pipeline.verify.grounding import ground, grounding_score
+from app.pipeline.verify.grounding import VerifyRun, ground, grounding_score
+from app.schemas.document import ParsedDocument
 
 TIME_LIMIT_SECONDS = 180
 # Fields every ML paper states somewhere; an empty one usually means a missed section.
@@ -99,24 +100,8 @@ def main() -> int:
                 print(f"  (pausing {args.pause:.0f}s between papers)", flush=True)
                 time.sleep(args.pause)
             # Only pipeline time counts towards the limit, not the download or the pause.
-            timer = _Timer()
-            with timer("parse"):
-                doc = parser.parse(path)
-            with timer("structure"):
-                roles = structure_document(doc, llm).block_roles
-            for block in doc.blocks:
-                block.role = roles.get(block.id)
-            with timer("extract"):
-                run = extract_document(
-                    doc,
-                    llm,
-                    metadata={},
-                    max_group_chars=settings.extraction.max_group_chars,
-                    parallel_calls=settings.extraction.parallel_calls,
-                    retry_failed_after_s=settings.extraction.retry_failed_after_s,
-                )
-            with timer("verify"):
-                verify = ground(run.extraction, doc, llm, path)
+            timer = Timer()
+            _doc, run, verify = run_paper(path, parser, llm, settings, timer)
             row |= _summarize(run, verify, timer.total)
             row["stage_seconds"] = timer.stages
             md += [f"## {name}\n", export.to_markdown(run.extraction), ""]
@@ -146,7 +131,32 @@ def main() -> int:
     return 0 if ok else 1
 
 
-class _Timer:
+def run_paper(
+    path: Path, parser: Any, llm: LLMClient, settings: Settings, timer: Timer
+) -> tuple[ParsedDocument, ExtractionRun, VerifyRun]:
+    """Parse -> structure -> extract -> verify in-process, timing each stage.
+    Shared with check_repro."""
+    with timer("parse"):
+        doc = parser.parse(path)
+    with timer("structure"):
+        roles = structure_document(doc, llm).block_roles
+    for block in doc.blocks:
+        block.role = roles.get(block.id)
+    with timer("extract"):
+        run = extract_document(
+            doc,
+            llm,
+            metadata={},
+            max_group_chars=settings.extraction.max_group_chars,
+            parallel_calls=settings.extraction.parallel_calls,
+            retry_failed_after_s=settings.extraction.retry_failed_after_s,
+        )
+    with timer("verify"):
+        verify = ground(run.extraction, doc, llm, path)
+    return doc, run, verify
+
+
+class Timer:
     def __init__(self) -> None:
         self.stages: dict[str, float] = {}
 

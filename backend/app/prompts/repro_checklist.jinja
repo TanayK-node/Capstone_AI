@@ -1,0 +1,33 @@
+{# version: 1 #}
+You check a research paper against a reproducibility checklist. Use only the text below
+(experiment sections, tables and appendix). Every paragraph or table starts with an id in
+brackets.
+
+For EACH checklist item below, return one entry:
+- "id": the item id exactly as given.
+- "status":
+  - "present": the paper clearly states this.
+  - "partial": the paper states some of it (e.g. hyperparameters for the proposed method but
+    not for the baselines; training time for one model only).
+  - "missing": the text below does not state it.
+  - "not_applicable": the item cannot apply to this paper (e.g. no baselines are compared).
+- "quote": for present/partial, ONE sentence (or one table caption/row) copied
+  character-for-character from the text that shows it. Empty for missing/not_applicable.
+- "chunk_id": the id in brackets of the paragraph or table the quote comes from, or empty.
+- "note": one short sentence explaining the status (what is stated, or what is missing).
+
+Judge only from the text. Do not assume something is stated because it is common practice.
+Do not compute anything.
+
+Checklist items:
+{% for item in items -%}
+- {{ item.id }}: {{ item.description }}
+{% endfor %}
+{% if extracted %}
+Already extracted from the paper (for context; check it against the text):
+{% for line in extracted -%}
+- {{ line }}
+{% endfor %}
+{% endif %}
+Paper text:
+{{ text }}

@@ -112,6 +112,12 @@ class ExtractionSection(BaseModel):
     retry_failed_after_s: float = 20.0  # pause before re-trying groups whose call failed
 
 
+class ReproSection(BaseModel):
+    github_check: bool = True  # read repo metadata / README via the GitHub API (no clone)
+    github_timeout_s: float = 15.0
+    max_context_chars: int = 48_000  # paper text sent with the checklist LLM call
+
+
 class EmbeddingsSection(BaseModel):
     model: str = "BAAI/bge-small-en-v1.5"
     device: str = "cpu"
@@ -134,6 +140,7 @@ class Settings(BaseSettings):
     parsing: ParsingSection = Field(default_factory=ParsingSection)
     pipeline: PipelineSection = Field(default_factory=PipelineSection)
     extraction: ExtractionSection = Field(default_factory=ExtractionSection)
+    repro: ReproSection = Field(default_factory=ReproSection)
     embeddings: EmbeddingsSection = Field(default_factory=EmbeddingsSection)
     features: dict[str, bool] = Field(default_factory=dict)
 

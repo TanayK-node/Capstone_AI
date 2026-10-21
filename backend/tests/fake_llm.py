@@ -4,6 +4,8 @@ Extraction: for each list field the schema asks for, it returns one item quoting
 sentence from the tagged paragraphs in the prompt ("[b0012] ..."), so grounding can locate
 it. Field-specific keywords pick sensible sentences. Verification: every item is "yes".
 An optional invented quote lets tests check that hallucinated evidence is caught.
+Reproducibility checklist: items with a keyword below are "present" with a quoted sentence,
+the rest "missing"; `repro_invented` makes one item cite a sentence that is not in the paper.
 """
 
 from __future__ import annotations
@@ -27,12 +29,22 @@ KEYWORDS = {
 }
 
 
+REPRO_KEYWORDS = {
+    "datasets_named": "Test BLEU",
+    "eval_protocol": "Test BLEU",
+    "hyperparameters_all": "learning rate",
+}
+
+
 class FakePaperProvider:
     name = "gemini"
 
-    def __init__(self, invented_quote_for: str | None = None) -> None:
+    def __init__(
+        self, invented_quote_for: str | None = None, repro_invented: str | None = None
+    ) -> None:
         self.calls: list[ProviderRequest] = []
         self.invented_quote_for = invented_quote_for
+        self.repro_invented = repro_invented
 
     def generate(self, request: ProviderRequest) -> ProviderResponse:
         self.calls.append(request)
@@ -44,6 +56,8 @@ class FakePaperProvider:
                 json.dumps({"verdicts": [{"id": i, "verdict": "yes"} for i in ids]})
             )
         paragraphs = _TAGGED.findall(request.prompt)
+        if fields == ["items"]:
+            return ProviderResponse(json.dumps({"items": self._checklist(request, paragraphs)}))
         out: dict[str, Any] = {}
         for name in fields:
             out[name] = [self._item(name, paragraphs)] if paragraphs else []
@@ -72,6 +86,31 @@ class FakePaperProvider:
         if name == "claims":
             item |= {"kind": "quantitative"}
         return item
+
+    def _checklist(
+        self, request: ProviderRequest, paragraphs: list[tuple[str, str]]
+    ) -> list[dict[str, str]]:
+        section = request.prompt.split("Checklist items:")[1].split("Paper text:")[0]
+        ids = re.findall(r"^- (\w+): ", section, re.M)
+        answers = []
+        for item_id in ids:
+            key = REPRO_KEYWORDS.get(item_id)
+            hit = next(
+                ((bid, s) for bid, t in paragraphs for s in _SENT.split(t) if key and key in s),
+                None,
+            )
+            if item_id == self.repro_invented:
+                hit = (paragraphs[0][0], "We release every checkpoint and all training logs.")
+            if hit is None:
+                answers.append(
+                    {"id": item_id, "status": "missing", "quote": "", "chunk_id": "", "note": "-"}
+                )
+                continue
+            answers.append(
+                {"id": item_id, "status": "present", "quote": hit[1], "chunk_id": hit[0],
+                 "note": "stated"}
+            )  # fmt: skip
+        return answers
 
     def list_models(self) -> list[str]:
         return ["fake"]

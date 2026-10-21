@@ -9,6 +9,7 @@ import {
   getBlocks,
   getExtraction,
   getPaper,
+  getReproducibility,
   pdfUrl,
   rerunPaper,
   type Block,
@@ -17,6 +18,7 @@ import {
 import { BLOCK_COLORS, BLOCK_TYPES, ROLE_LABELS } from "@/lib/blocks";
 import { GROUNDING_COLORS, Overview, type EvidenceTarget } from "./overview";
 import { PipelineView } from "./pipeline-view";
+import { ReproView } from "./repro-view";
 import type { Highlight } from "./pdf/pdf-viewer";
 import { StatusBadge } from "./status-badge";
 import { TableView } from "./table-view";
@@ -26,10 +28,10 @@ const PdfViewer = dynamic(() => import("./pdf/pdf-viewer"), {
   loading: () => <p className="p-4 text-sm text-zinc-500">Loading viewer…</p>,
 });
 
-const STAGES = ["ingest", "parse", "structure", "extract", "verify"] as const;
+const STAGES = ["ingest", "parse", "structure", "extract", "verify", "repro"] as const;
 const ACTIVE = ["queued", "processing"];
-type Tab = "pipeline" | "overview" | "structure" | "tables" | "block";
-const TABS: Tab[] = ["pipeline", "overview", "structure", "tables", "block"];
+type Tab = "pipeline" | "overview" | "reproducibility" | "structure" | "tables" | "block";
+const TABS: Tab[] = ["pipeline", "overview", "reproducibility", "structure", "tables", "block"];
 
 export function Workspace() {
   const { id } = useParams<{ id: string }>();
@@ -64,6 +66,11 @@ export function Workspace() {
     queryKey: ["extraction", id, stages?.extract?.finished_at, stages?.verify?.finished_at],
     queryFn: () => getExtraction(id),
     enabled: extracted,
+  });
+  const repro = useQuery({
+    queryKey: ["repro", id, stages?.repro?.finished_at],
+    queryFn: () => getReproducibility(id),
+    enabled: stages?.repro?.status === "done",
   });
   const rerun = useMutation({
     mutationFn: (only?: string[]) => rerunPaper(id, only),
@@ -192,6 +199,24 @@ export function Workspace() {
                         : "No extraction yet."}
                 </p>
               ))}
+            {tab === "reproducibility" &&
+              (repro.data ? (
+                <ReproView
+                  repro={repro.data}
+                  activeKey={highlight?.key ?? null}
+                  onEvidence={setEvidence}
+                />
+              ) : (
+                <p className="text-zinc-500">
+                  {repro.error
+                    ? `Could not load the scorecard: ${repro.error.message}`
+                    : stages?.repro?.status === "failed"
+                      ? "The reproducibility check failed (see the Pipeline tab)."
+                      : ACTIVE.includes(p.status)
+                        ? "Scoring… the scorecard appears here when it is done."
+                        : "No scorecard yet. Re-run the analysis to create one."}
+                </p>
+              ))}
             {tab === "structure" && <Structure paper={p} byId={byId} onSelect={select} />}
             {tab === "tables" &&
               (tables.length ? (
@@ -248,7 +273,7 @@ function Header({
         <div className="flex gap-2">
           {paper.stages.structure?.status === "done" && (
             <button
-              onClick={() => onRerun(["extract", "verify"])}
+              onClick={() => onRerun(["extract", "verify", "repro"])}
               disabled={busy}
               className="rounded-lg border border-zinc-300 px-3 py-1.5 text-xs disabled:opacity-40 dark:border-zinc-700"
             >

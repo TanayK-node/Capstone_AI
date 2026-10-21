@@ -191,6 +191,24 @@ def _row_on_line(
     return any(page.search_for(c, clip=line) for c in cells[1:3])
 
 
+def attach_location(ev: Evidence, blocks: dict[str, Block], pdf: pymupdf.Document | None) -> bool:
+    """Find the quote in the paper and fill chunk_id / page / boxes. False = not found,
+    and the evidence is marked "unlocated" (kept, never dropped)."""
+    match = locate(ev.quote, ev.chunk_id, blocks)
+    if match is None:
+        ev.grounding_status = "unlocated"
+        ev.match_score = None
+        return False
+    ev.chunk_id = match.block.id
+    ev.page = match.block.page
+    ev.match_score = round(match.score, 1)
+    ev.boxes = span_boxes(match, pdf, ev.quote)
+    ev.bbox = union_box(ev.boxes)
+    if ev.boxes:
+        ev.page = ev.boxes[0].page
+    return True
+
+
 def ground(
     extraction: PaperExtraction,
     doc: ParsedDocument,
@@ -204,20 +222,10 @@ def ground(
         to_check: list[tuple[str, str, Evidence]] = []  # (field, value, evidence)
         for name, item in extraction.all_items():
             for ev in item.evidence:
-                match = locate(ev.quote, ev.chunk_id, blocks)
-                if match is None:
-                    ev.grounding_status = "unlocated"
-                    ev.match_score = None
+                if not attach_location(ev, blocks, pdf):
                     run.unlocated += 1
                     continue
                 run.located += 1
-                ev.chunk_id = match.block.id
-                ev.page = match.block.page
-                ev.match_score = round(match.score, 1)
-                ev.boxes = span_boxes(match, pdf, ev.quote)
-                ev.bbox = union_box(ev.boxes)
-                if ev.boxes:
-                    ev.page = ev.boxes[0].page
                 if item.source == "rule":
                     ev.grounding_status = "verified"  # a regex hit is its own evidence
                 else:
@@ -232,11 +240,11 @@ def ground(
             run.warnings.append("no LLM available: support of located quotes not checked")
         return run
     for start in range(0, len(to_check), SUPPORT_BATCH):
-        _check_support(client, to_check[start : start + SUPPORT_BATCH], run)
+        check_support(client, to_check[start : start + SUPPORT_BATCH], run)
     return run
 
 
-def _check_support(
+def check_support(
     client: LLMClient, batch: list[tuple[str, str, Evidence]], run: VerifyRun
 ) -> None:
     prompt = prompts.render(

@@ -35,6 +35,8 @@ See SCOPE.md for the full scope, architecture and phase plan.
 - Phase 1 exit check: `uv run python -m app.pipeline.check_parse` (needs GROBID; downloads 10 arXiv papers)
 - Phase 2 exit check: `uv run python -m app.pipeline.check_extract` (needs GROBID + GEMINI_API_KEY;
   about 6 Gemini calls per paper; `--limit 3` to save quota)
+- Phase 3 exit check: `uv run python -m app.pipeline.check_repro --pdf-dir <pdfs>` (needs the team's
+  annotations in eval/gold/repro_gold.csv; see eval/gold/README.md)
 
 ## Current phase
 Phase 3 (reproducibility: M6 analyzer, checklist YAML, Reproducibility tab).
@@ -55,5 +57,9 @@ Phase 2 passed: check_extract 10/10 on the reference papers with gemini-3.5-flas
   Table quotes are rows as the prompt shows them ("cell | cell"); they highlight that row.
 - Paper status "partial" = parsed fine but extract/verify failed (e.g. no key); re-upload or
   "Re-run analysis" retries only those stages.
+- Reproducibility (repro/): checklist in config/checklist.yaml (bump `version` on change). Rules
+  decide first (rules.py, plus GitHub API facts: never clone in Phase 3), one LLM call for the rest,
+  quotes grounded like extraction; an LLM "present" whose quote is not confirmed is capped at
+  "partial". Score = weighted mean in Python; unknown / not_applicable are left out.
 - Tests use SQLite with foreign keys enforced (db.make_engine); the app uses Postgres.
 - Docling is not wired in yet (its models download from Hugging Face); it is an A1 ablation option.

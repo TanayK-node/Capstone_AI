@@ -1,4 +1,4 @@
-"""Stage runner: Parse -> Structure -> Extract -> Verify for one paper.
+"""Stage runner: Parse -> Structure -> Extract -> Verify -> Repro for one paper.
 
 Every stage is idempotent (CLAUDE.md rule 8): it deletes its previous output for the paper
 before writing, and records a Job row with what produced the result.
@@ -17,10 +17,13 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from app.config import Settings, get_settings
 from app.llm.client import LLMClient
-from app.models import BlockRow, ChunkRow, ExtractionRow, Job, Paper, ParseResult
+from app.models import BlockRow, ChunkRow, ExtractionRow, Job, Paper, ParseResult, ReproReport
 from app.pipeline.extract.extractor import extract_document
 from app.pipeline.ingest import storage
 from app.pipeline.parse import get_parser
+from app.pipeline.repro.analyzer import analyze
+from app.pipeline.repro.checklist import load_checklist
+from app.pipeline.repro.github import GitHubClient
 from app.pipeline.structure.sections import structure_document
 from app.pipeline.verify.grounding import ground, grounding_score
 from app.schemas.document import (
@@ -36,7 +39,8 @@ from app.schemas.extraction import PaperExtraction
 
 log = logging.getLogger("paperlens.pipeline")
 
-STAGES = ("parse", "structure", "extract", "verify")
+STAGES = ("parse", "structure", "extract", "verify", "repro")
+ANALYSIS_STAGES = ("extract", "verify", "repro")
 # Stages after these are "analysis": if one fails the paper is still usable ("partial").
 CORE_STAGES = ("parse", "structure")
 
@@ -264,6 +268,68 @@ def run_verify(
         }
 
 
+def make_github(settings: Settings) -> GitHubClient | None:
+    if not settings.repro.github_check:
+        return None
+    token = settings.github_token.get_secret_value() if settings.github_token else None
+    return GitHubClient(token or None, timeout_s=settings.repro.github_timeout_s)
+
+
+def run_repro(
+    session: Session, settings: Settings, paper: Paper, doc: ParsedDocument, llm: LLMClient | None
+) -> None:
+    with stage_job(session, paper.id, "repro") as job:
+        row = session.get(ExtractionRow, paper.id)
+        if row is None:
+            raise RuntimeError("no extraction to score: run extract and verify first")
+        extraction = PaperExtraction.model_validate(row.data)
+        checklist = load_checklist()
+        github = make_github(settings)
+        try:
+            run = analyze(
+                doc,
+                extraction,
+                checklist,
+                client=llm if llm is not None and llm.providers else None,
+                github=github,
+                pdf_path=storage.pdf_path(settings, paper.id),
+                max_chars=settings.repro.max_context_chars,
+            )
+        finally:
+            if github is not None:
+                github.close()
+        card = run.scorecard
+        session.merge(
+            ReproReport(
+                paper_id=paper.id,
+                score=card.score,
+                data=card.model_dump(mode="json"),
+                checklist_version=checklist.version,
+                provider=run.provider,
+                model=run.model,
+                prompt_version=run.prompt_version,
+                created_at=datetime.now(UTC),
+            )
+        )
+        job.provider, job.model, job.prompt_version = run.provider, run.model, run.prompt_version
+        statuses: dict[str, int] = {}
+        for item in card.items:
+            statuses[item.status] = statuses.get(item.status, 0) + 1
+        job.detail = {
+            "score": card.score,
+            "checklist_version": checklist.version,
+            "statuses": statuses,
+            "by_source": {
+                src: sum(1 for i in card.items if i.source == src)
+                for src in ("rule", "extraction", "repo", "llm")
+            },
+            "llm_items": run.llm_items,
+            "llm_calls": run.llm_calls,
+            "repo": card.repo.url if card.repo else None,
+            "warnings": run.warnings,
+        }
+
+
 def process_paper(
     paper_id: str,
     *,
@@ -304,13 +370,13 @@ def process_paper(
 
         # Analysis stages: a failure keeps the parsed paper usable ("partial"), never blank.
         errors: list[str] = []
-        if any(st in stages for st in ("extract", "verify")):
+        if any(st in stages for st in ANALYSIS_STAGES):
             doc = load_document(session, paper_id) or doc  # now with section roles
-        for name, fn in (("extract", run_extract), ("verify", run_verify)):
+        for name, fn in (("extract", run_extract), ("verify", run_verify), ("repro", run_repro)):
             if name not in stages:
                 continue
-            if name == "verify" and errors:
-                break  # nothing fresh to verify
+            if errors:
+                break  # later stages build on the failed one
             try:
                 fn(session, settings, paper, doc, client)
             except Exception as exc:

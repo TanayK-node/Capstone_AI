@@ -13,6 +13,7 @@ import re
 import unicodedata
 
 from app.schemas.extraction import Dataset, Hyperparameter, Item, PaperExtraction
+from app.schemas.repro import Scorecard
 
 FORMATS = {
     "json": ("application/json", "json"),
@@ -43,15 +44,19 @@ SECTIONS: list[tuple[str, str]] = [
 ]
 
 
-def render(extraction: PaperExtraction, fmt: str) -> str:
+def render(extraction: PaperExtraction, fmt: str, scorecard: Scorecard | None = None) -> str:
     if fmt == "json":
-        return json.dumps(extraction.model_dump(mode="json"), indent=2, ensure_ascii=False)
+        data = extraction.model_dump(mode="json")
+        if scorecard is not None:
+            data["reproducibility"] = scorecard.model_dump(mode="json")
+        return json.dumps(data, indent=2, ensure_ascii=False)
     if fmt == "md":
-        return to_markdown(extraction)
+        md = to_markdown(extraction)
+        return md + "\n" + scorecard_markdown(scorecard) if scorecard is not None else md
     if fmt == "bib":
         return to_bibtex(extraction)
     if fmt == "csv":
-        return to_csv(extraction)
+        return to_csv(extraction, scorecard)
     raise ValueError(f"unknown export format {fmt!r}")
 
 
@@ -97,7 +102,39 @@ def to_markdown(extraction: PaperExtraction) -> str:
     return "\n".join(out).rstrip() + "\n"
 
 
-def to_csv(extraction: PaperExtraction) -> str:
+STATUS_LABELS = {
+    "present": "present",
+    "partial": "partial",
+    "missing": "MISSING",
+    "not_applicable": "n/a",
+    "unknown": "unknown",
+}
+
+
+def scorecard_markdown(card: Scorecard) -> str:
+    score = "n/a" if card.score is None else f"{card.score:.0f}/100"
+    out = [f"## Reproducibility: {score}", ""]
+    for g in card.groups:
+        gs = "n/a" if g.score is None else f"{round(100 * g.score)}%"
+        out.append(f"- **{g.label}**: {gs}")
+    out.append("")
+    for g in card.groups:
+        out += [f"### {g.label}", ""]
+        for item in (i for i in card.items if i.group == g.id):
+            out.append(f"- [{STATUS_LABELS[item.status]}] {item.description} ({item.source})")
+            if item.note:
+                out.append(f"  - {item.note}")
+            for ev in item.evidence:
+                out.append(f"  > p. {ev.page}: \u201c{ev.quote}\u201d _[{ev.grounding_status}]_")
+        out.append("")
+    if card.questions:
+        out += ["### Questions for the authors", ""]
+        out += [f"{n}. {q}" for n, q in enumerate(card.questions, 1)]
+        out.append("")
+    return "\n".join(out).rstrip() + "\n"
+
+
+def to_csv(extraction: PaperExtraction, scorecard: Scorecard | None = None) -> str:
     buf = io.StringIO()
     writer = csv.writer(buf, lineterminator="\n")
     writer.writerow(
@@ -115,6 +152,22 @@ def to_csv(extraction: PaperExtraction) -> str:
                 ev.page if ev else "",
                 ev.chunk_id if ev else "",
                 ev.quote if ev else "",
+            ]
+        )
+    # Checklist rows: field "checklist:<group>", value = description, status in place of
+    # the grounding status.
+    for ci in scorecard.items if scorecard is not None else []:
+        ev = ci.evidence[0] if ci.evidence else None
+        writer.writerow(
+            [
+                f"checklist:{ci.group}",
+                ci.id,
+                ci.description,
+                "",
+                ci.status,
+                ev.page if ev else "",
+                ev.chunk_id if ev else "",
+                ev.quote if ev else ci.note,
             ]
         )
     return buf.getvalue()

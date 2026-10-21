@@ -19,19 +19,19 @@ from sqlalchemy.orm import Session
 
 from app.config import Settings, get_settings
 from app.db import get_sessionmaker
-from app.models import BlockRow, ExtractionRow, Paper, ParseResult
+from app.models import BlockRow, ExtractionRow, Paper, ParseResult, ReproReport
 from app.pipeline import dispatch, export
 from app.pipeline.ingest import storage
 from app.pipeline.ingest.resolver import InputError
 from app.pipeline.ingest.service import IngestResult, ingest_link, ingest_pdf_bytes
 from app.pipeline.ingest.sources import FetchError, NoOpenAccessPdfError
 from app.pipeline.ingest.validate import InvalidPdfError
-from app.pipeline.runner import STAGES, stage_statuses
+from app.pipeline.runner import ANALYSIS_STAGES, STAGES, stage_statuses
 from app.schemas.extraction import PaperExtraction
+from app.schemas.repro import Scorecard
 
 router = APIRouter(prefix="/api/papers", tags=["papers"])
 
-ANALYSIS_STAGES = ("extract", "verify")
 FINAL_STATUSES = {"ready", "partial", "failed"}
 EVENT_POLL_SECONDS = 0.5
 EVENT_TIMEOUT_SECONDS = 15 * 60
@@ -102,7 +102,7 @@ class ExtractionResponse(BaseModel):
 
 
 class RerunRequest(BaseModel):
-    stages: list[Literal["parse", "structure", "extract", "verify"]] | None = None
+    stages: list[Literal["parse", "structure", "extract", "verify", "repro"]] | None = None
 
 
 # ------------------------------------------------------------------ helpers
@@ -308,12 +308,43 @@ def export_paper(
 ) -> Response:
     row = _load_extraction(session, paper_id)
     media_type, ext = export.FORMATS[format]
-    body = export.render(PaperExtraction.model_validate(row.data), format)
+    repro = session.get(ReproReport, paper_id)
+    card = Scorecard.model_validate(repro.data) if repro is not None else None
+    body = export.render(PaperExtraction.model_validate(row.data), format, card)
     name = f"paperlens-{paper_id[:12]}.{ext}"
     return Response(
         body,
         media_type=media_type,
         headers={"Content-Disposition": f'attachment; filename="{name}"'},
+    )
+
+
+class ReproResponse(BaseModel):
+    paper_id: str
+    score: float | None
+    checklist_version: int
+    provider: str | None
+    model: str | None
+    prompt_version: str | None
+    created_at: datetime
+    scorecard: dict[str, Any]  # Scorecard
+
+
+@router.get("/{paper_id}/reproducibility", response_model=ReproResponse)
+def get_reproducibility(paper_id: str, session: Session = Depends(get_session)) -> ReproResponse:
+    _paper_or_404(session, paper_id)
+    row = session.get(ReproReport, paper_id)
+    if row is None:
+        raise HTTPException(404, "no reproducibility scorecard yet for this paper")
+    return ReproResponse(
+        paper_id=paper_id,
+        score=row.score,
+        checklist_version=row.checklist_version,
+        provider=row.provider,
+        model=row.model,
+        prompt_version=row.prompt_version,
+        created_at=row.created_at,
+        scorecard=row.data,
     )
 
 

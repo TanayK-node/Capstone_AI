@@ -35,6 +35,7 @@ def client(
         update={
             "app": settings.app.model_copy(update={"data_dir": tmp_path / "data"}),
             "parsing": settings.parsing.model_copy(update={"parser": "pymupdf"}),
+            "repro": settings.repro.model_copy(update={"github_check": False}),  # no network
         }
     )
 
@@ -84,6 +85,7 @@ def test_upload_runs_pipeline_and_serves_results(client: TestClient) -> None:
         "structure": "done",
         "extract": "done",
         "verify": "done",
+        "repro": "done",
     }
     assert detail["stages"]["parse"]["provider"] == "pymupdf"
     assert detail["parse"]["block_counts"]["table"] == 1
@@ -106,6 +108,11 @@ def test_upload_runs_pipeline_and_serves_results(client: TestClient) -> None:
     assert items and all(i["evidence"] for i in items)
     ev = data["contributions"][0]["evidence"][0]
     assert ev["grounding_status"] == "verified" and ev["boxes"]
+
+    repro = client.get(f"/api/papers/{pid}/reproducibility").json()
+    assert repro["checklist_version"] == 2 and 0 < repro["score"] < 100
+    items = {i["id"]: i for i in repro["scorecard"]["items"]}
+    assert items["hardware"]["status"] == "present" and items["hardware"]["evidence"]
 
 
 def test_exports(client: TestClient) -> None:

@@ -19,6 +19,11 @@ const STAGES: { key: string; title: string; what: string }[] = [
     title: "Verify",
     what: "find each quote in the paper, check it supports the item",
   },
+  {
+    key: "repro",
+    title: "Reproducibility",
+    what: "checklist: rules and GitHub first, Gemini for the rest; score",
+  },
 ];
 
 const BAR_COLORS: Record<string, string> = {
@@ -27,6 +32,7 @@ const BAR_COLORS: Record<string, string> = {
   structure: "#7c3aed",
   extract: "#059669",
   verify: "#d97706",
+  repro: "#db2777",
 };
 
 type GroupRun = {
@@ -238,6 +244,27 @@ function StageDetail({ stageKey, detail }: { stageKey: string; detail: Record<st
               {g.name}: {g.error}
             </p>
           ))}
+      </div>
+    );
+  }
+  if (stageKey === "repro") {
+    const statuses = (d.statuses ?? {}) as Record<string, number>;
+    const sources = (d.by_source ?? {}) as Record<string, number>;
+    return (
+      <div className="mt-2 text-[11px]">
+        <div className="flex flex-wrap gap-1.5">
+          <Stat label="score" value={typeof d.score === "number" ? Math.round(d.score) : null} />
+          {Object.entries(statuses).map(([k, v]) => (
+            <Stat key={k} label={k} value={v} />
+          ))}
+        </div>
+        <div className="mt-1 flex flex-wrap gap-1.5">
+          <Stat label="decided by rules" value={(sources.rule ?? 0) + (sources.extraction ?? 0)} />
+          <Stat label="by GitHub" value={sources.repo} />
+          <Stat label="by Gemini" value={sources.llm} />
+          <Stat label="Gemini calls" value={d.llm_calls} />
+        </div>
+        <Warnings items={d.warnings} />
       </div>
     );
   }

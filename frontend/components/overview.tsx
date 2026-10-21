@@ -228,7 +228,7 @@ function ItemRow({
   );
 }
 
-function EvidenceChip({
+export function EvidenceChip({
   evidence,
   active,
   onClick,

@@ -1,7 +1,11 @@
-# Reproducibility checklist (SCOPE.md §6). Used by the M6 analyzer in Phase 3.
+# Reproducibility checklist (SCOPE.md §6). Used by the M6 analyzer (backend/app/pipeline/repro/).
 # rule: name of a deterministic check in backend/app/pipeline/repro/rules.py (null = LLM only).
-# Weights are relative; groups Code and Experimental setup weigh most.
-version: 1
+#   A rule either decides the item (with evidence) or returns "inconclusive", and only then
+#   is the item sent to the LLM (SCOPE.md F5). repo_* rules read the GitHub API, never clone.
+# weight: relative weight inside the group; groups Code and Experimental setup weigh most.
+# question: asked of the authors when the item is missing or partial.
+# Bump `version` on any change: scorecards store the version they were scored with.
+version: 2
 groups:
   code: { label: Code, weight: 0.25 }
   data: { label: Data, weight: 0.20 }
@@ -10,28 +14,133 @@ groups:
   stats: { label: Statistical reporting, weight: 0.20 }
 
 items:
-  - { id: code_url, group: code, weight: 2, rule: code_url_present, description: "The paper links to source code." }
-  - { id: repo_reachable, group: code, weight: 1, rule: repo_reachable, description: "The linked repository exists and can be cloned." }
-  - { id: license, group: code, weight: 1, rule: repo_license, description: "The repository has an open-source license." }
-  - { id: dependency_file, group: code, weight: 1, rule: repo_dependency_file, description: "The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile)." }
-  - { id: run_instructions, group: code, weight: 1, rule: repo_run_instructions, description: "The README explains how to train and evaluate." }
-  - { id: pretrained_weights, group: code, weight: 1, rule: null, description: "Trained model weights or checkpoints are released." }
+  - id: code_url
+    group: code
+    weight: 2
+    rule: code_url_present
+    description: "The paper links to source code."
+    question: "Is the code for this paper available, and where?"
+  - id: repo_reachable
+    group: code
+    weight: 1
+    rule: repo_reachable
+    description: "The linked repository exists and can be cloned."
+    question: "The linked repository could not be reached. Has it moved?"
+  - id: license
+    group: code
+    weight: 1
+    rule: repo_license
+    description: "The repository has an open-source license."
+    question: "Under which license may the code be reused?"
+  - id: dependency_file
+    group: code
+    weight: 1
+    rule: repo_dependency_file
+    description: "The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile)."
+    question: "Which library versions are needed to run the code?"
+  - id: run_instructions
+    group: code
+    weight: 1
+    rule: repo_run_instructions
+    description: "The README explains how to train and evaluate."
+    question: "What are the exact commands to train and evaluate the models?"
+  - id: pretrained_weights
+    group: code
+    weight: 1
+    rule: repo_weights
+    description: "Trained model weights or checkpoints are released."
+    question: "Will the trained checkpoints be released?"
 
-  - { id: datasets_named, group: data, weight: 2, rule: null, description: "Every dataset used is named." }
-  - { id: datasets_access, group: data, weight: 1, rule: dataset_links, description: "Datasets are public, or access to them is described." }
-  - { id: preprocessing, group: data, weight: 1, rule: null, description: "Data preprocessing and filtering steps are described." }
-  - { id: splits, group: data, weight: 1, rule: null, description: "Train / validation / test splits are specified." }
+  - id: datasets_named
+    group: data
+    weight: 2
+    rule: null
+    description: "Every dataset used is named."
+    question: "Which datasets (and versions) were used for each experiment?"
+  - id: datasets_access
+    group: data
+    weight: 1
+    rule: dataset_links
+    description: "Datasets are public, or access to them is described."
+    question: "How can the datasets be obtained?"
+  - id: preprocessing
+    group: data
+    weight: 1
+    rule: null
+    description: "Data preprocessing and filtering steps are described."
+    question: "How was the data preprocessed, filtered and tokenised?"
+  - id: splits
+    group: data
+    weight: 1
+    rule: null
+    description: "Train / validation / test splits are specified."
+    question: "Which train / validation / test splits were used, and how were they made?"
 
-  - { id: hyperparameters_all, group: setup, weight: 2, rule: null, description: "Hyperparameters are given for the proposed method and the baselines." }
-  - { id: hp_search, group: setup, weight: 1, rule: null, description: "The hyperparameter search (ranges, method, budget) is described." }
-  - { id: training_details, group: setup, weight: 1, rule: training_terms, description: "Optimizer, learning-rate schedule and number of epochs or steps are stated." }
-  - { id: eval_protocol, group: setup, weight: 1, rule: null, description: "The evaluation protocol and metrics are defined." }
+  - id: hyperparameters_all
+    group: setup
+    weight: 2
+    rule: null
+    description: "Hyperparameters are given for the proposed method and the baselines."
+    question: "What hyperparameters were used for the proposed method and for each baseline?"
+  - id: hp_search
+    group: setup
+    weight: 1
+    rule: null
+    description: "The hyperparameter search (ranges, method, budget) is described."
+    question: "How were the hyperparameters chosen (search ranges, method, budget)?"
+  - id: training_details
+    group: setup
+    weight: 1
+    rule: training_terms
+    description: "Optimizer, learning-rate schedule and number of epochs or steps are stated."
+    question: "Which optimizer, learning-rate schedule and number of epochs or steps were used?"
+  - id: eval_protocol
+    group: setup
+    weight: 1
+    rule: null
+    description: "The evaluation protocol and metrics are defined."
+    question: "How exactly were the models evaluated (metrics, checkpoints, test procedure)?"
 
-  - { id: hardware, group: compute, weight: 1, rule: gpu_models, description: "The hardware used (GPU/TPU type and count) is stated." }
-  - { id: training_time, group: compute, weight: 1, rule: compute_hours, description: "Training time or GPU hours are reported." }
-  - { id: memory, group: compute, weight: 1, rule: null, description: "Memory requirements are reported." }
+  - id: hardware
+    group: compute
+    weight: 1
+    rule: gpu_models
+    description: "The hardware used (GPU/TPU type and count) is stated."
+    question: "Which hardware (GPU/TPU type and count) was used?"
+  - id: training_time
+    group: compute
+    weight: 1
+    rule: compute_hours
+    description: "Training time or GPU hours are reported."
+    question: "How long did training take (wall-clock time or GPU hours)?"
+  - id: memory
+    group: compute
+    weight: 1
+    rule: null
+    description: "Memory requirements are reported."
+    question: "How much GPU memory does training and inference need?"
 
-  - { id: runs_seeds, group: stats, weight: 1, rule: seed_terms, description: "The number of runs or random seeds is reported." }
-  - { id: error_bars, group: stats, weight: 1, rule: error_bars, description: "Results include error bars, standard deviations or confidence intervals." }
-  - { id: significance, group: stats, weight: 1, rule: null, description: "Statistical significance testing is reported." }
-  - { id: baselines_rerun, group: stats, weight: 1, rule: null, description: "The paper states whether baseline numbers were re-run or copied from prior work." }
+  - id: runs_seeds
+    group: stats
+    weight: 1
+    rule: seed_terms
+    description: "The number of runs or random seeds is reported."
+    question: "How many runs or random seeds are the reported results based on?"
+  - id: error_bars
+    group: stats
+    weight: 1
+    rule: error_bars
+    description: "Results include error bars, standard deviations or confidence intervals."
+    question: "What is the variance of the results across runs?"
+  - id: significance
+    group: stats
+    weight: 1
+    rule: null
+    description: "Statistical significance testing is reported."
+    question: "Are the improvements statistically significant?"
+  - id: baselines_rerun
+    group: stats
+    weight: 1
+    rule: null
+    description: "The paper states whether baseline numbers were re-run or copied from prior work."
+    question: "Were the baseline numbers re-run or copied from prior work?"
