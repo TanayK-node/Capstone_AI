@@ -1,0 +1,86 @@
+# One-command start: `docker compose up --build`
+# UI http://localhost:3000 · API http://localhost:8000/docs · GROBID http://localhost:8070
+#
+# Ollama: by default the containers use Ollama running natively on your laptop (best for
+# GPU access). To run it in a container instead: `docker compose --profile ollama up` and set
+# PAPERLENS_LLM__OLLAMA__BASE_URL_DOCKER=http://ollama:11434 in .env.
+
+x-backend: &backend
+  build: ./backend
+  env_file:
+    - path: .env
+      required: false
+  environment:
+    PAPERLENS_DATABASE_URL: postgresql+psycopg://paperlens:paperlens@postgres:5432/paperlens
+    PAPERLENS_REDIS_URL: redis://redis:6379/0
+    PAPERLENS_GROBID_URL: http://grobid:8070
+    PAPERLENS_LLM__OLLAMA__BASE_URL: ${PAPERLENS_LLM__OLLAMA__BASE_URL_DOCKER:-http://host.docker.internal:11434}
+    PAPERLENS_APP__DATA_DIR: /data
+  volumes:
+    - ./config:/app/config:ro
+    - paper_data:/data
+  extra_hosts:
+    - "host.docker.internal:host-gateway"
+  depends_on:
+    postgres:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: paperlens
+      POSTGRES_PASSWORD: paperlens
+      POSTGRES_DB: paperlens
+    ports: ["5432:5432"]
+    volumes: [pg_data:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U paperlens -d paperlens"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  grobid:
+    # CRF-only image: smaller and CPU-friendly. Takes ~30 s to start.
+    image: lfoppiano/grobid:0.8.1
+    ports: ["8070:8070"]
+
+  api:
+    <<: *backend
+    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    ports: ["8000:8000"]
+
+  worker:
+    <<: *backend
+    # concurrency=1: the in-process rate limiter must see every LLM call (app/llm/ratelimit.py).
+    command: celery -A app.workers.celery_app worker --loglevel=INFO --concurrency=1
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:8000
+    ports: ["3000:3000"]
+    depends_on: [api]
+
+  ollama:
+    image: ollama/ollama:latest
+    profiles: [ollama]
+    ports: ["11434:11434"]
+    volumes: [ollama_models:/root/.ollama]
+
+volumes:
+  pg_data:
+  paper_data:
+  ollama_models:

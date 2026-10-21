@@ -1,0 +1,74 @@
+# PaperLens runtime configuration.
+# Every model name, rate limit and feature flag lives here (CLAUDE.md rule 1).
+# Any key can be overridden by an env var: PAPERLENS_<SECTION>__<KEY>, e.g.
+#   PAPERLENS_LLM__PRIMARY=ollama
+#   PAPERLENS_LLM__GEMINI__MODELS__EXTRACTION=gemini-2.5-flash
+# Secrets (GEMINI_API_KEY, GITHUB_TOKEN) come from the environment / .env only.
+
+app:
+  env: dev
+  log_level: INFO
+  data_dir: ./data            # uploaded PDFs, parser outputs
+
+database_url: postgresql+psycopg://paperlens:paperlens@localhost:5432/paperlens
+redis_url: redis://localhost:6379/0
+grobid_url: http://localhost:8070
+
+llm:
+  # Provider tried first. Set to "ollama" for fully offline mode.
+  primary: gemini
+  # Provider used when the primary keeps failing (429s, quota, outage). null disables fallback.
+  fallback: ollama
+  # Consecutive failed calls on the primary before switching every call to the fallback.
+  fallback_after_failures: 3
+  # How long to stay on the fallback before trying the primary again.
+  fallback_cooldown_s: 300
+  request_timeout_s: 120
+  # Bump to invalidate every cached LLM response at once.
+  cache_version: 1
+
+  retry:
+    max_attempts: 4           # per provider, for 429 / 5xx / timeouts
+    base_delay_s: 2.0
+    max_delay_s: 30.0
+    jitter: 0.5               # +/- fraction of the delay
+
+  gemini:
+    # Roles map pipeline needs to concrete model IDs. Check the current free-tier lineup
+    # with `uv run python -m app.llm.check --list-models` and update here, never in code.
+    models:
+      extraction: gemini-2.5-flash
+      small: gemini-2.5-flash-lite
+      vision: gemini-2.5-flash
+    # Free-tier limits per model. These change without notice: re-check Google's
+    # rate-limit page and set them a little below the published numbers.
+    rate_limits:
+      gemini-2.5-flash:      { rpm: 9,  rpd: 240 }
+      gemini-2.5-flash-lite: { rpm: 14, rpd: 950 }
+    default_rate_limit: { rpm: 5, rpd: 100 }
+
+  ollama:
+    base_url: http://localhost:11434
+    models:
+      extraction: qwen3:8b
+      small: qwen3:4b
+      vision: qwen2.5vl:7b
+    # Local models have no quota; the limiter only stops us flooding the laptop.
+    rate_limits: {}
+    default_rate_limit: { rpm: 60, rpd: null }
+    num_ctx: 8192             # matches the <= 8k token section-group budget
+
+  # Thinking off for extraction; turned on per call for claims and critique.
+  thinking_default: false
+
+embeddings:
+  model: BAAI/bge-small-en-v1.5
+  device: cpu
+
+features:
+  latex_source: true
+  code_check: true
+  claims: true
+  chat: true
+  citation_graph: true
+  chart_to_data: false        # Tier 3 stretch
