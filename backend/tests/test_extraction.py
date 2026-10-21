@@ -123,3 +123,23 @@ def test_failed_group_is_retried_and_parallel_order_is_stable(settings: Settings
     assert closing.status == "done" and closing.attempts == 2
     # Same items and ids whether the calls ran one by one or concurrently.
     assert run.extraction == serial.extraction
+
+
+def test_quoted_table_row_is_located_and_highlights_that_row() -> None:
+    """The prompt shows tables as "cell | cell" rows, so the model quotes rows that way."""
+    import pymupdf
+
+    from app.pipeline.verify.grounding import span_boxes
+
+    doc = fixture_doc()
+    blocks = {b.id: b for b in doc.blocks}
+    table = doc.tables[0]
+    quote = "Switch | 25.0 ± 0.3 | 27.4 ± 0.2 | 72"
+    match = locate(quote, table.id, blocks)
+    assert match is not None and match.block.id == table.id
+    with pymupdf.open(PDF) as pdf:
+        boxes = span_boxes(match, pdf, quote)
+    assert len(boxes) == 1 and table.bbox is not None
+    row = boxes[0]
+    assert table.bbox.y0 <= row.y0 < row.y1 <= table.bbox.y1
+    assert row.y1 - row.y0 < (table.bbox.y1 - table.bbox.y0) / 3  # one row, not the table

@@ -236,7 +236,7 @@ def tei_to_document(
     meta = DocumentMetadata()
     title_el = root.find(".//t:teiHeader/t:fileDesc/t:titleStmt/t:title", NS)
     if title_el is not None and text_of(title_el):
-        meta.title = text_of(title_el)
+        meta.title = clean_title(text_of(title_el))
         builder.add("title", meta.title, parse_coords(title_el.get("coords")), path=[])
     for author in root.iterfind(".//t:sourceDesc/t:biblStruct/t:analytic/t:author", NS):
         pers = author.find("t:persName", NS)
@@ -328,3 +328,20 @@ def _reference(bib: etree._Element) -> Reference:
         elif idno.get("type") == "arXiv":
             ref.arxiv_id = clean(idno.text).removeprefix("arXiv:")
     return ref
+
+
+# Front-page notices GROBID sometimes merges into the title ("Provided proper attribution is
+# provided, Google hereby grants permission ... works. Attention Is All You Need").
+_NOTICE = re.compile(
+    r"permission|copyright|licen[cs]e|attribution|preprint|under review|accepted (at|to)|"
+    r"proceedings|conference|workshop|©",
+    re.IGNORECASE,
+)
+
+
+def clean_title(title: str) -> str:
+    """Drop leading sentences that are notices, keeping the real title after them."""
+    parts = re.split(r"(?<=[.!?])\s+(?=[A-Z0-9])", title.strip())
+    while len(parts) > 1 and _NOTICE.search(parts[0]):
+        parts = parts[1:]
+    return " ".join(parts)

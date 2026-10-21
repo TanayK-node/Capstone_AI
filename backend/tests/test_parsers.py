@@ -110,3 +110,18 @@ def test_pymupdf_parser_two_column_reading_order() -> None:
     assert order.index("3 Results") < order.index("4 Conclusion")
     authors = next(b for b in doc.blocks if b.text == "Mei Lin, Tomas Varga")
     assert authors.section_path == []  # front matter, not abstract
+
+
+def test_notice_merged_into_title_is_dropped() -> None:
+    from app.pipeline.parse.tei import clean_title
+
+    merged = (
+        "Provided proper attribution is provided, Google hereby grants permission to reproduce "
+        "the tables and figures in this paper solely for use in journalistic or scholarly "
+        "works. Attention Is All You Need"
+    )
+    assert clean_title(merged) == "Attention Is All You Need"
+    assert clean_title("BERT: Pre-training of Deep Bidirectional Transformers") == (
+        "BERT: Pre-training of Deep Bidirectional Transformers"
+    )
+    assert clean_title("Mr. Smith Goes to Washington") == "Mr. Smith Goes to Washington"

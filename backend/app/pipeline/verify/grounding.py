@@ -71,8 +71,15 @@ class _Match:
     score: float
 
 
+def _table_rows(block: Block) -> list[str]:
+    """Caption, then one line per grid row with cells joined by " | " exactly as the
+    extraction prompt shows tables (extract/groups.render_block), so a quoted row matches."""
+    grid = block.table.grid() if block.table else []
+    return [normalize(block.text), *(normalize(" | ".join(r)) for r in grid)]
+
+
 def _match_in(quote: str, block: Block) -> _Match | None:
-    text = normalize(block.text if block.type != "table" else _table_text(block))
+    text = " ".join(_table_rows(block)) if block.type == "table" else normalize(block.text)
     if not text:
         return None
     if len(quote) > len(text) * 1.2:  # quote longer than the block: compare the other way
@@ -82,11 +89,6 @@ def _match_in(quote: str, block: Block) -> _Match | None:
     if al is None:
         return None
     return _Match(block, al.dest_start, al.dest_end, al.score)
-
-
-def _table_text(block: Block) -> str:
-    grid = block.table.grid() if block.table else []
-    return block.text + " " + " ".join(" ".join(r) for r in grid)
 
 
 def locate(quote: str, cited: str, blocks: dict[str, Block]) -> _Match | None:
@@ -110,6 +112,10 @@ def locate(quote: str, cited: str, blocks: dict[str, Block]) -> _Match | None:
 def span_boxes(match: _Match, pdf: pymupdf.Document | None, quote: str) -> list[Box]:
     """Boxes of the sentences the matched span covers; PDF text search as a fallback."""
     block = match.block
+    if block.type == "table" and pdf is not None:
+        rows = _row_boxes(match, pdf)
+        if rows:
+            return rows
     if block.sentences and any(s.boxes for s in block.sentences):
         boxes: list[Box] = []
         pos = 0
@@ -132,6 +138,57 @@ def span_boxes(match: _Match, pdf: pymupdf.Document | None, quote: str) -> list[
             if hits:
                 return [Box(page=block.page, x0=r.x0, y0=r.y0, x1=r.x1, y1=r.y1) for r in hits]
     return list(block.boxes)
+
+
+def _row_boxes(match: _Match, pdf: pymupdf.Document) -> list[Box]:
+    """Boxes of the grid rows a table quote covers: the row's first cell is searched inside
+    the table's box on the page, and the hit's line spans the table's width. The caption
+    (piece 0) and rows that cannot be found fall back to the whole table (caller)."""
+    block = match.block
+    if block.bbox is None or not block.table or not 1 <= block.bbox.page <= pdf.page_count:
+        return []
+    table = block.bbox
+    page = pdf[table.page - 1]
+    clip = pymupdf.Rect(table.x0 - 2, table.y0 - 2, table.x1 + 2, table.y1 + 2)
+    grid = block.table.grid()
+    boxes: list[Box] = []
+    pos = 0
+    for i, piece in enumerate(_table_rows(block)):
+        start, end = pos, pos + len(piece)
+        pos = end + 1
+        if i == 0 or not (end > match.start and start < match.end):
+            continue
+        row = grid[i - 1]
+        cells = [c for c in row if c.strip()]
+        if not cells:
+            continue
+        hits = [h for h in _line_hits(page, cells[0], clip) if _row_on_line(page, h, cells, clip)]
+        # The same first cell can repeat ("MoCo" twice): take the hit matching its rank.
+        rank = sum(1 for r in grid[: i - 1] if next((c for c in r if c.strip()), "") == cells[0])
+        if hits:
+            hit = hits[min(rank, len(hits) - 1)]
+            boxes.append(
+                Box(page=table.page, x0=table.x0, y0=hit.y0 - 1, x1=table.x1, y1=hit.y1 + 1)
+            )
+    return boxes
+
+
+def _line_hits(page: pymupdf.Page, text: str, clip: pymupdf.Rect) -> list[pymupdf.Rect]:
+    # PDF text search can return a few-point-wide "hit" on an unrelated glyph; a real
+    # match is at least ~1.5 pt per character wide.
+    hits = [h for h in page.search_for(text, clip=clip) if h.width >= 1.5 * len(text.strip())]
+    return sorted(hits, key=lambda r: (r.y0, r.x0))
+
+
+def _row_on_line(
+    page: pymupdf.Page, hit: pymupdf.Rect, cells: list[str], clip: pymupdf.Rect
+) -> bool:
+    """Is another cell of the row also on this line? Guards against a first cell ("24",
+    "ResNet-50") that occurs in many rows."""
+    if len(cells) < 2:
+        return True
+    line = pymupdf.Rect(clip.x0, hit.y0 - 2, clip.x1, hit.y1 + 2)
+    return any(page.search_for(c, clip=line) for c in cells[1:3])
 
 
 def ground(
