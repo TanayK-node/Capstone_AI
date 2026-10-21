@@ -32,5 +32,14 @@ See SCOPE.md for the full scope, architecture and phase plan.
 - Frontend (from `frontend/`): `pnpm install`, `pnpm dev`, `pnpm lint`, `pnpm build`
 - Everything: `docker compose up --build` from the repo root
 
+- Phase 1 exit check: `uv run python -m app.pipeline.check_parse` (needs GROBID; downloads 10 arXiv papers)
+
 ## Current phase
-Phase 0 (skeleton). Do not start Phase 1 until `docker compose up` works and `pytest -m live` passes against Gemini.
+Phase 1 (ingest, parse, structure). Do not start Phase 2 until `check_parse` reports PASS
+(10 arXiv papers parse without errors, tables on >= 8) on a machine that can reach arXiv.
+
+## Notes
+- Coordinates everywhere are PDF points, origin top-left, pages 1-indexed (schemas/document.py).
+- Table grids come from tables.reconstruct_table (PDF word positions), not from GROBID's own grid.
+- Tests use SQLite with foreign keys enforced (db.make_engine); the app uses Postgres.
+- Docling is not wired in yet (its models download from Hugging Face); it is an A1 ablation option.

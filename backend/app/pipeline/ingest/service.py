@@ -60,6 +60,7 @@ def ingest_pdf_bytes(
         page_count=info.page_count,
     )
     session.add(paper)
+    session.flush()  # paper row first: jobs.paper_id is a foreign key
     session.add(
         Job(
             paper_id=paper.id,

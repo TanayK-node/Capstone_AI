@@ -14,14 +14,14 @@ function Dot({ ok }: { ok: boolean }) {
 
 export function ProviderBadge({ llm }: { llm: Health["llm"] }) {
   const local = llm.active === "ollama";
+  const style =
+    llm.active === null
+      ? "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
+      : local
+        ? "bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200"
+        : "bg-sky-100 text-sky-900 dark:bg-sky-900/40 dark:text-sky-200";
   return (
-    <span
-      className={`rounded-full px-3 py-1 text-xs font-medium ${
-        local
-          ? "bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200"
-          : "bg-sky-100 text-sky-900 dark:bg-sky-900/40 dark:text-sky-200"
-      }`}
-    >
+    <span className={`rounded-full px-3 py-1 text-xs font-medium ${style}`}>
       {llm.active === null ? "No LLM provider" : local ? "Running on local model" : "Gemini"}
     </span>
   );

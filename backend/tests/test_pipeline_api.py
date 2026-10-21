@@ -6,10 +6,10 @@ from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
-from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app.config import Settings, get_settings
+from app.db import make_engine
 from app.models import Base
 from app.pipeline import dispatch, runner
 
@@ -20,9 +20,7 @@ FIXTURES = Path(__file__).parent / "fixtures"
 def client(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, settings: Settings
 ) -> Iterator[TestClient]:
-    engine = create_engine(
-        f"sqlite:///{tmp_path / 'db.sqlite'}", connect_args={"check_same_thread": False}
-    )
+    engine = make_engine(f"sqlite:///{tmp_path / 'db.sqlite'}")  # foreign keys enforced
     Base.metadata.create_all(engine)
     factory = sessionmaker(bind=engine, expire_on_commit=False)
     test_settings = settings.model_copy(
