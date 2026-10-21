@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main" coords="1,108.62,59.90,394.47,22.45">Contrastive Pretraining for Natural Language Inference</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Mei</forename><surname>Lin</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Tomas</forename><surname>Varga</surname></persName>
+						</author>
+						<title level="a" type="main" coords="1,108.62,59.90,394.47,22.45">Contrastive Pretraining for Natural Language Inference</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">CE2BC411CADCE5FB99F90A94045A0137</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.1" ident="GROBID" when="2026-10-21T06:25+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p coords="1,88.00,148.55,174.82,13.96;1,88.00,160.43,174.72,13.96;1,88.00,172.30,174.78,13.96;1,88.00,184.18,156.67,13.96"><s coords="1,88.00,148.55,174.82,13.96;1,88.00,160.43,174.72,13.96;1,88.00,172.30,174.78,13.96;1,88.00,184.18,156.67,13.96">We pretrain a sentence encoder with a contrastive objective and fine-tune it on MNLI, where it reaches 88.0% matched accuracy, 1.9 points above RoBERTa.</s></p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<facsimile>
+		<surface n="1" ulx="0.0" uly="0.0" lrx="612.0" lry="792.0"/>
+		<surface n="2" ulx="0.0" uly="0.0" lrx="612.0" lry="792.0"/>
+	</facsimile>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1" coords="1,64.00,205.49,79.30,17.22">Introduction</head><p coords="1,64.00,230.29,222.70,14.69;1,64.00,242.79,222.70,14.69"><s coords="1,64.00,230.29,222.70,14.69;1,64.00,242.79,222.70,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s></p><p coords="1,64.00,255.29,222.70,14.69;1,64.00,267.79,222.67,14.69;1,64.00,280.29,222.66,14.69;1,64.00,292.79,222.67,14.69;1,64.00,305.29,222.70,14.69;1,64.00,317.79,222.70,14.69"><s coords="1,64.00,255.29,222.70,14.69;1,64.00,267.79,222.67,14.69;1,64.00,280.29,222.66,14.69;1,64.00,292.79,222.67,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s><s coords="1,64.00,305.29,222.70,14.69;1,64.00,317.79,222.70,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s></p><p coords="1,64.00,330.29,222.70,14.69;1,64.00,342.79,222.67,14.69;1,64.00,355.29,222.66,14.69;1,64.00,367.79,222.67,14.69;1,64.00,380.29,222.70,14.69;1,64.00,392.79,222.70,14.69"><s coords="1,64.00,330.29,222.70,14.69;1,64.00,342.79,222.67,14.69;1,64.00,355.29,222.66,14.69;1,64.00,367.79,222.67,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s><s coords="1,64.00,380.29,222.70,14.69;1,64.00,392.79,222.70,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s></p><p coords="1,64.00,405.29,222.70,14.69;1,64.00,417.79,222.67,14.69;1,64.00,430.29,222.66,14.69;1,64.00,442.79,222.67,14.69;1,64.00,455.29,222.70,14.69;1,64.00,467.79,222.70,14.69"><s coords="1,64.00,405.29,222.70,14.69;1,64.00,417.79,222.67,14.69;1,64.00,430.29,222.66,14.69;1,64.00,442.79,222.67,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s><s coords="1,64.00,455.29,222.70,14.69;1,64.00,467.79,222.70,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s></p><p coords="1,64.00,480.29,222.70,14.69;1,64.00,492.79,222.67,14.69;1,64.00,505.29,222.66,14.69;1,64.00,517.79,202.23,14.69"><s coords="1,64.00,480.29,222.70,14.69;1,64.00,492.79,222.67,14.69;1,64.00,505.29,222.66,14.69;1,64.00,517.79,202.23,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2" coords="1,64.00,539.86,62.86,17.22">Approach</head><p coords="1,64.00,564.67,222.70,14.69;1,64.00,577.17,222.70,14.69"><s coords="1,64.00,564.67,222.70,14.69;1,64.00,577.17,222.70,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s></p><p coords="1,64.00,589.67,222.70,14.69;1,64.00,602.17,222.67,14.69;1,64.00,614.67,222.66,14.69;1,64.00,627.17,222.67,14.69;1,64.00,639.67,222.70,14.69;1,64.00,652.17,222.70,14.69"><s coords="1,64.00,589.67,222.70,14.69;1,64.00,602.17,222.67,14.69;1,64.00,614.67,222.66,14.69;1,64.00,627.17,222.67,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s><s coords="1,64.00,639.67,222.70,14.69;1,64.00,652.17,222.70,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s></p><p coords="1,64.00,664.67,222.70,14.69;1,64.00,677.17,222.67,14.69;1,64.00,689.67,222.66,14.69;1,64.00,702.17,222.67,14.69;1,64.00,714.67,222.70,14.69;1,325.00,114.54,222.70,14.69"><s coords="1,64.00,664.67,222.70,14.69;1,64.00,677.17,222.67,14.69;1,64.00,689.67,222.66,14.69;1,64.00,702.17,222.67,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s><s coords="1,64.00,714.67,222.70,14.69;1,325.00,114.54,222.70,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s></p><p coords="1,325.00,127.04,222.70,14.69;1,325.00,139.54,222.67,14.69;1,325.00,152.04,222.66,14.69;1,325.00,164.54,202.23,14.69"><s coords="1,325.00,127.04,222.70,14.69;1,325.00,139.54,222.67,14.69;1,325.00,152.04,222.66,14.69;1,325.00,164.54,202.23,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3" coords="1,325.00,186.61,49.75,17.22">Results</head><p coords="1,325.00,211.42,222.70,14.69;1,325.00,223.92,222.70,14.69"><s coords="1,325.00,211.42,222.70,14.69;1,325.00,223.92,222.70,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s></p><p coords="1,325.00,236.42,222.70,14.69;1,325.00,248.92,222.67,14.69;1,325.00,261.42,222.66,14.69;1,325.00,273.92,222.67,14.69;1,325.00,286.42,222.70,14.69;1,325.00,298.92,222.70,14.69"><s coords="1,325.00,236.42,222.70,14.69;1,325.00,248.92,222.67,14.69;1,325.00,261.42,222.66,14.69;1,325.00,273.92,222.67,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s><s coords="1,325.00,286.42,222.70,14.69;1,325.00,298.92,222.70,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s></p><p coords="1,325.00,311.42,222.70,14.69;1,325.00,323.92,222.67,14.69;1,325.00,336.42,222.66,14.69;1,325.00,348.92,202.23,14.69"><s coords="1,325.00,311.42,222.70,14.69;1,325.00,323.92,222.67,14.69;1,325.00,336.42,222.66,14.69;1,325.00,348.92,202.23,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head coords="1,339.48,370.28,26.59,13.47">Model</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head coords="1,395.44,370.28,18.05,13.47;1,396.93,381.53,15.10,13.47;1,441.82,370.28,10.31,13.47">Acc. (%) F1</head><p coords="1,340.38,397.39,19.82,13.22;1,325.00,483.87,222.70,14.69;1,325.00,496.37,222.70,14.69"><s coords="1,340.38,397.39,19.82,13.22;1,325.00,483.87,222.70,14.69;1,325.00,496.37,222.70,14.69">BERT Recent work has shown that careful design of the training objective matters as much as model size.</s></p><p coords="1,325.00,508.87,222.70,14.69;1,325.00,521.37,222.67,14.69;1,325.00,533.87,222.66,14.69;1,325.00,546.37,222.67,14.69"><s coords="1,325.00,508.87,222.70,14.69;1,325.00,521.37,222.67,14.69;1,325.00,533.87,222.66,14.69;1,325.00,546.37,222.67,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s></p><p coords="1,325.00,558.87,222.70,14.69;1,325.00,571.37,222.70,14.69"><s coords="1,325.00,558.87,222.70,14.69;1,325.00,571.37,222.70,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s></p><p coords="1,325.00,583.87,222.70,14.69;1,325.00,596.37,222.67,14.69;1,325.00,608.87,222.66,14.69;1,325.00,621.37,222.67,14.69"><s coords="1,325.00,583.87,222.70,14.69;1,325.00,596.37,222.67,14.69;1,325.00,608.87,222.66,14.69;1,325.00,621.37,222.67,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s></p><p coords="1,325.00,633.87,222.70,14.69;1,325.00,646.37,222.70,14.69"><s coords="1,325.00,633.87,222.70,14.69;1,325.00,646.37,222.70,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s></p><p coords="1,325.00,658.87,222.70,14.69;1,325.00,671.37,222.67,14.69;1,325.00,683.87,222.66,14.69;1,325.00,696.37,202.23,14.69"><s coords="1,325.00,658.87,222.70,14.69;1,325.00,671.37,222.67,14.69;1,325.00,683.87,222.66,14.69;1,325.00,696.37,202.23,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s></p><p coords="2,64.00,51.24,222.70,14.69;2,64.00,63.74,222.70,14.69"><s coords="2,64.00,51.24,222.70,14.69;2,64.00,63.74,222.70,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s></p><p coords="2,64.00,76.24,222.70,14.69;2,64.00,88.74,222.67,14.69;2,64.00,101.24,222.66,14.69;2,64.00,113.74,222.67,14.69;2,64.00,126.24,222.70,14.69;2,64.00,138.74,222.70,14.69"><s coords="2,64.00,76.24,222.70,14.69;2,64.00,88.74,222.67,14.69;2,64.00,101.24,222.66,14.69;2,64.00,113.74,222.67,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s><s coords="2,64.00,126.24,222.70,14.69;2,64.00,138.74,222.70,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s></p><p coords="2,64.00,151.24,222.70,14.69;2,64.00,163.74,222.67,14.69;2,64.00,176.24,222.66,14.69;2,64.00,188.74,202.23,14.69"><s coords="2,64.00,151.24,222.70,14.69;2,64.00,163.74,222.67,14.69;2,64.00,176.24,222.66,14.69;2,64.00,188.74,202.23,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s></p></div><figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0" coords="1,334.17,397.39,199.09,78.72"><head>Table 2 :</head><label>2</label><figDesc><div><p><s coords="1,374.32,462.89,158.93,13.22">Accuracy on the MNLI matched dev set.</s></p></div></figDesc><table coords="1,334.17,397.39,124.77,56.41"><row><cell>-base</cell><cell>84.6</cell><cell>0.812</cell></row><row><cell>RoBERTa</cell><cell>86.1</cell><cell>0.829</cell></row><row><cell>Ours</cell><cell>88.0</cell><cell>0.851</cell></row></table></figure>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct coords="2,64.00,234.53,222.64,12.49;2,76.00,245.15,210.73,12.49;2,76.00,255.78,148.18,12.49" xml:id="b0">
+	<analytic>
+		<title level="a" type="main" coords="2,76.00,245.15,210.73,12.49;2,76.00,255.78,101.81,12.49">BERT: Pre-training of deep bidirectional transformers for language understanding</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Devlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Toutanova</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m" coords="2,194.41,255.78,24.81,12.49">NAACL</title>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Devlin, J., Chang, M., Lee, K., and Toutanova, K. 2019. BERT: Pre-training of deep bidirectional transformers for language understanding. In NAACL.</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -64,6 +64,24 @@ llm:
   # Thinking off for extraction; turned on per call for claims and critique.
   thinking_default: false
 
+ingest:
+  max_mb: 50
+  max_pages: 100
+  allow_scanned: false        # PDFs without a text layer are rejected (OCR is a non-goal)
+  fetch_latex_source: true    # store arXiv LaTeX sources for later table/equation alignment
+  download_timeout_s: 60
+  # Unpaywall (open-access PDFs for DOIs) requires a contact email; DOI lookups without it
+  # fall back to Semantic Scholar only. Set PAPERLENS_INGEST__CONTACT_EMAIL in .env.
+  contact_email: null
+
+parsing:
+  parser: auto                # auto = GROBID, falling back to PyMuPDF if GROBID is down
+  grobid_timeout_s: 180
+
+pipeline:
+  # true = run stages in the API process (no Redis/Celery needed); handy on Windows.
+  eager: false
+
 embeddings:
   model: BAAI/bge-small-en-v1.5
   device: cpu

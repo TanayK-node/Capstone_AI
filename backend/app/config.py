@@ -85,6 +85,24 @@ class LLMSection(BaseModel):
     thinking_default: bool = False
 
 
+class IngestSection(BaseModel):
+    max_mb: int = 50
+    max_pages: int = 100
+    allow_scanned: bool = False
+    fetch_latex_source: bool = True
+    download_timeout_s: float = 60.0
+    contact_email: str | None = None
+
+
+class ParsingSection(BaseModel):
+    parser: Literal["auto", "grobid", "pymupdf"] = "auto"
+    grobid_timeout_s: float = 180.0
+
+
+class PipelineSection(BaseModel):
+    eager: bool = False
+
+
 class EmbeddingsSection(BaseModel):
     model: str = "BAAI/bge-small-en-v1.5"
     device: str = "cpu"
@@ -103,6 +121,9 @@ class Settings(BaseSettings):
     redis_url: str = "redis://localhost:6379/0"
     grobid_url: str = "http://localhost:8070"
     llm: LLMSection
+    ingest: IngestSection = Field(default_factory=IngestSection)
+    parsing: ParsingSection = Field(default_factory=ParsingSection)
+    pipeline: PipelineSection = Field(default_factory=PipelineSection)
     embeddings: EmbeddingsSection = Field(default_factory=EmbeddingsSection)
     features: dict[str, bool] = Field(default_factory=dict)
 

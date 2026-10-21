@@ -1,0 +1,12 @@
+{# version: 1 #}
+You label the sections of a research paper with their rhetorical role.
+
+Allowed roles: {{ roles | join(", ") }}.
+Use "method" for sections that describe the proposed approach, model or algorithm, and
+"experiments" for setup, datasets and training details. Use "other" only if nothing fits.
+
+Sections (index, heading, first words):
+{% for s in sections -%}
+{{ s.index }}. {{ s.heading }} :: {{ s.snippet }}
+{% endfor %}
+Return JSON: {"sections": [{"index": <int>, "role": <role>}, ...]} with one entry per section.

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main" coords="1,121.42,59.90,368.82,22.45">Sparse Routing Improves Low-Resource Translation</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Asha</forename><surname>Rao</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Institute of Language Technology</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Daniel</forename><surname>Okafor</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="institution">City University</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main" coords="1,121.42,59.90,368.82,22.45">Sparse Routing Improves Low-Resource Translation</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="MD5">29D8E4FE2674F05864A5861B2C69FA39</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.8.1" ident="GROBID" when="2026-10-21T06:25+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p coords="1,88.00,143.05,435.38,13.96;1,88.00,154.93,435.45,13.96;1,88.00,166.80,427.55,13.96;1,88.00,143.05,435.38,13.96;1,88.00,154.93,435.45,13.96;1,88.00,166.80,249.01,13.96;1,511.04,166.80,4.51,13.96"><s coords="1,88.00,143.05,403.56,13.96">We introduce SparseRoute, a mixture-of-experts layer that routes each token to a single expert.</s><s coords="1,494.65,143.05,28.73,13.96;1,88.00,154.93,435.45,13.96;1,88.00,166.80,164.19,13.96">On the FLORES-200 benchmark SparseRoute improves BLEU by 2.1 points over a dense Transformer baseline while using 30% fewer training FLOPs.</s><s coords="1,254.96,166.80,82.05,13.96;1,511.04,166.80,4.51,13.96">Code is available at <ref type="url" target="https://github.com/example/sparseroute">https://github.com/example/sparseroute</ref>.</s></p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<facsimile>
+		<surface n="1" ulx="0.0" uly="0.0" lrx="612.0" lry="792.0"/>
+		<surface n="2" ulx="0.0" uly="0.0" lrx="612.0" lry="792.0"/>
+	</facsimile>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1" coords="1,64.00,188.11,79.30,17.22">Introduction</head><p coords="1,64.00,212.92,483.38,14.69;1,64.00,225.42,483.37,14.69;1,64.00,237.92,483.29,14.69;1,64.00,250.42,483.29,14.69;1,64.00,262.92,483.35,14.69;1,64.00,275.42,483.29,14.69;1,64.00,287.92,483.25,14.69;1,64.00,300.42,483.29,14.69;1,64.00,312.92,60.31,14.69"><s coords="1,64.00,212.92,464.67,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s><s coords="1,533.17,212.92,14.21,14.69;1,64.00,225.42,483.37,14.69;1,64.00,237.92,352.08,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s><s coords="1,419.62,237.92,127.67,14.69;1,64.00,250.42,331.85,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s><s coords="1,400.64,250.42,146.65,14.69;1,64.00,262.92,483.35,14.69;1,64.00,275.42,211.19,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s><s coords="1,279.39,275.42,267.90,14.69;1,64.00,287.92,188.13,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s><s coords="1,256.39,287.92,290.86,14.69;1,64.00,300.42,483.29,14.69;1,64.00,312.92,60.31,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s></p><p coords="1,64.00,335.42,483.21,14.69;1,64.00,347.92,483.36,14.69;1,64.00,360.42,55.14,14.69"><s coords="1,64.00,335.42,142.19,14.69">Our contributions are threefold.</s><s coords="1,209.43,335.42,337.78,14.69">First, we propose a routing rule that needs no auxiliary load-balancing loss.</s><s coords="1,64.00,347.92,324.06,14.69">Second, we evaluate it on FLORES-200 and WMT 2014 English-German.</s><s coords="1,391.44,347.92,155.92,14.69;1,64.00,360.42,55.14,14.69">Third, we release code and trained checkpoints.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2" coords="1,64.00,382.49,84.75,17.22">Related Work</head><p coords="1,64.00,407.29,483.38,14.69;1,64.00,419.79,483.37,14.69;1,64.00,432.29,483.29,14.69;1,64.00,444.79,483.29,14.69;1,64.00,457.29,483.35,14.69;1,64.00,469.79,483.29,14.69;1,64.00,482.29,483.25,14.69;1,64.00,494.79,483.29,14.69;1,64.00,507.29,483.28,14.69;1,64.00,519.79,483.37,14.69;1,64.00,532.29,381.15,14.69"><s coords="1,64.00,407.29,464.67,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s><s coords="1,533.17,407.29,14.21,14.69;1,64.00,419.79,483.37,14.69;1,64.00,432.29,352.08,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s><s coords="1,419.62,432.29,127.67,14.69;1,64.00,444.79,331.85,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s><s coords="1,400.64,444.79,146.65,14.69;1,64.00,457.29,483.35,14.69;1,64.00,469.79,211.19,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s><s coords="1,279.39,469.79,267.90,14.69;1,64.00,482.29,188.13,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s><s coords="1,256.39,482.29,290.86,14.69;1,64.00,494.79,483.29,14.69;1,64.00,507.29,60.63,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s><s coords="1,127.71,507.29,419.57,14.69;1,64.00,519.79,19.30,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s><s coords="1,87.64,519.79,459.73,14.69;1,64.00,532.29,381.15,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3" coords="1,64.00,554.36,51.74,17.22">Method</head><p coords="1,64.00,579.17,483.26,14.69;1,64.00,591.67,205.34,14.69"><s coords="1,64.00,579.17,483.26,14.69;1,64.00,591.67,205.34,14.69">Each token representation x is sent to the expert with the highest router score, and the layer output is the expert output scaled by the router probability:</s></p><formula xml:id="formula_0" coords="1,213.24,610.18,185.44,16.22">y = p k (x) E k (x), k = argmax i W r x (1)</formula><p coords="1,64.00,632.67,483.38,14.69;1,64.00,645.17,483.37,14.69;1,64.00,657.67,483.29,14.69;1,64.00,670.17,483.29,14.69;1,64.00,682.67,483.35,14.69;1,64.00,695.17,483.29,14.69;1,64.00,707.67,483.25,14.69;1,64.00,720.17,483.29,14.69;2,64.00,51.24,60.31,14.69"><s coords="1,64.00,632.67,464.67,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s><s coords="1,533.17,632.67,14.21,14.69;1,64.00,645.17,483.37,14.69;1,64.00,657.67,352.08,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s><s coords="1,419.62,657.67,127.67,14.69;1,64.00,670.17,331.85,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s><s coords="1,400.64,670.17,146.65,14.69;1,64.00,682.67,483.35,14.69;1,64.00,695.17,211.19,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s><s coords="1,279.39,695.17,267.90,14.69;1,64.00,707.67,188.13,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s><s coords="1,256.39,707.67,290.86,14.69;1,64.00,720.17,483.29,14.69;2,64.00,51.24,60.31,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1" coords="2,64.00,71.59,97.76,15.72">Training details</head><p coords="2,64.00,94.87,483.20,14.69;2,64.00,107.37,303.55,14.69"><s coords="2,64.00,94.87,483.20,14.69;2,64.00,107.37,125.24,14.69">We train with Adam using a learning rate of 3e-4, batch size 256 and 50k steps on 8 NVIDIA A100 GPUs, which takes about 36 hours.</s><s coords="2,192.16,107.37,66.04,14.69">Dropout is 0.1.</s><s coords="2,261.12,107.37,106.43,14.69">We use 3 random seeds.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4" coords="2,64.00,129.44,78.14,17.22">Experiments</head><p coords="2,64.00,154.24,483.38,14.69;2,64.00,166.74,483.37,14.69;2,64.00,179.24,483.29,14.69;2,64.00,191.74,483.29,14.69;2,64.00,204.24,483.35,14.69;2,64.00,216.74,202.23,14.69"><s coords="2,64.00,154.24,464.67,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s><s coords="2,533.17,154.24,14.21,14.69;2,64.00,166.74,483.37,14.69;2,64.00,179.24,352.08,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s><s coords="2,419.62,179.24,127.67,14.69;2,64.00,191.74,331.85,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s><s coords="2,400.64,191.74,146.65,14.69;2,64.00,204.24,483.35,14.69;2,64.00,216.74,202.23,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1" coords="2,64.00,326.44,92.10,15.72">Ablation study</head><p coords="2,64.00,349.72,483.38,14.69;2,64.00,362.22,483.37,14.69;2,64.00,374.72,483.29,14.69;2,64.00,387.22,483.29,14.69;2,64.00,399.72,483.35,14.69;2,64.00,412.22,202.23,14.69"><s coords="2,64.00,349.72,464.67,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s><s coords="2,533.17,349.72,14.21,14.69;2,64.00,362.22,483.37,14.69;2,64.00,374.72,352.08,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s><s coords="2,419.62,374.72,127.67,14.69;2,64.00,387.22,331.85,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s><s coords="2,400.64,387.22,146.65,14.69;2,64.00,399.72,483.35,14.69;2,64.00,412.22,202.23,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5" coords="2,64.00,434.29,72.35,17.22">Limitations</head><p coords="2,64.00,459.09,362.76,14.69"><s coords="2,64.00,459.09,129.93,14.69">We only evaluate translation.</s><s coords="2,196.85,459.09,229.91,14.69">Routing may behave differently on long documents.</s></p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6" coords="2,64.00,481.16,70.85,17.22">Conclusion</head><p coords="2,64.00,505.97,483.38,14.69;2,64.00,518.47,483.37,14.69;2,64.00,530.97,483.29,14.69;2,64.00,543.47,483.29,14.69;2,64.00,555.97,483.35,14.69;2,64.00,568.47,202.23,14.69"><s coords="2,64.00,505.97,464.67,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s><s coords="2,533.17,505.97,14.21,14.69;2,64.00,518.47,483.37,14.69;2,64.00,530.97,352.08,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s><s coords="2,419.62,530.97,127.67,14.69;2,64.00,543.47,331.85,14.69">Recent work has shown that careful design of the training objective matters as much as model size.</s><s coords="2,400.64,543.47,146.65,14.69;2,64.00,555.97,483.35,14.69;2,64.00,568.47,202.23,14.69">We study this question under a controlled compute budget and report results averaged over several random seeds so that differences can be attributed to the method rather than to noise.</s></p></div><figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0" coords="2,70.00,238.51,348.59,82.33"><head>Table 1 :</head><label>1</label><figDesc><div><p><s coords="2,227.93,307.62,190.66,13.22">Test BLEU averaged over 3 seeds (mean ± std).</s></p></div></figDesc><table coords="2,70.00,238.51,319.24,59.82"><row><cell>Method</cell><cell cols="3">FLORES-200 BLEU WMT14 En-De BLEU FLOPs (%)</cell></row><row><cell>Transformer</cell><cell>24.3 ± 0.2</cell><cell>27.1 ± 0.1</cell><cell>100</cell></row><row><cell>Switch</cell><cell>25.0 ± 0.3</cell><cell>27.4 ± 0.2</cell><cell>72</cell></row><row><cell>SparseRoute (ours)</cell><cell>26.4 ± 0.2</cell><cell>27.9 ± 0.1</cell><cell>70</cell></row></table></figure>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct coords="2,64.00,614.25,483.32,12.49;2,76.00,624.88,32.31,12.49" xml:id="b0">
+	<analytic>
+		<title level="a" type="main" coords="2,263.89,614.25,96.16,12.49">Attention is all you need</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Vaswani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Shazeer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Parmar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m" coords="2,379.38,614.25,167.93,12.49;2,76.00,624.88,28.27,12.49">Advances in Neural Information Processing Systems</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Vaswani, A., Shazeer, N., Parmar, N., et al. 2017. Attention is all you need. In Advances in Neural Information Processing Systems.</note>
+</biblStruct>
+
+<biblStruct coords="2,64.00,644.00,483.34,12.49;2,76.00,654.63,180.95,12.49" xml:id="b1">
+	<analytic>
+		<title level="a" type="main" coords="2,231.08,644.00,316.27,12.49;2,76.00,654.63,27.97,12.49">Switch transformers: Scaling to trillion parameter models with simple and efficient sparsity</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Fedus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Zoph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Shazeer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j" coords="2,109.95,654.63,142.99,12.49">Journal of Machine Learning Research</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">Fedus, W., Zoph, B., and Shazeer, N. 2022. Switch transformers: Scaling to trillion parameter models with simple and efficient sparsity. Journal of Machine Learning Research.</note>
+</biblStruct>
+
+<biblStruct coords="2,64.00,673.75,410.46,12.49" xml:id="b2">
+	<monogr>
+		<author>
+			<persName><surname>Nllb Team</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2207.04672</idno>
+		<title level="m" coords="2,136.37,673.75,261.85,12.49">No language left behind: Scaling human-centered machine translation</title>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+	<note type="raw_reference">NLLB Team. 2022. No language left behind: Scaling human-centered machine translation. arXiv:2207.04672.</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>
