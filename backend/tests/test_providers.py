@@ -25,15 +25,20 @@ REQ = ProviderRequest(model="m", prompt="hi", system="sys", json_schema={"type":
 
 
 class FakeModels:
+    """outcome: a response, an exception, or a callable(config) returning/raising either."""
+
     def __init__(self, outcome: Any) -> None:
         self.outcome = outcome
         self.kwargs: dict[str, Any] = {}
+        self.configs: list[Any] = []
 
     def generate_content(self, **kwargs: Any) -> Any:
         self.kwargs = kwargs
-        if isinstance(self.outcome, Exception):
-            raise self.outcome
-        return self.outcome
+        self.configs.append(kwargs["config"])
+        outcome = self.outcome(kwargs["config"]) if callable(self.outcome) else self.outcome
+        if isinstance(outcome, Exception):
+            raise outcome
+        return outcome
 
 
 def gemini_with(outcome: Any) -> tuple[GeminiProvider, FakeModels]:
@@ -65,6 +70,50 @@ def test_gemini_thinking_on_leaves_budget_unset() -> None:
 
 def api_error(code: int, body: dict[str, Any] | None = None) -> genai_errors.APIError:
     return genai_errors.APIError(code, body or {"error": {"message": f"err {code}"}})
+
+
+OK_RESPONSE = SimpleNamespace(text="ok", usage_metadata=None, candidates=[])
+
+
+def test_gemini_switches_to_thinking_level_when_budget_is_rejected() -> None:
+    """Gemini 3.x rejects thinking_budget=0 with a 400; retry with thinking_level=MINIMAL."""
+
+    def outcome(config: Any) -> Any:
+        if config.thinking_config is not None and config.thinking_config.thinking_budget == 0:
+            return api_error(400, {"error": {"message": "Request contains an invalid argument."}})
+        return OK_RESPONSE
+
+    provider, models = gemini_with(outcome)
+    assert provider.generate(REQ).text == "ok"
+    assert models.configs[-1].thinking_config.thinking_level == "MINIMAL"
+    # The working mode is remembered: the next call goes straight to thinking_level.
+    models.configs.clear()
+    provider.generate(REQ)
+    assert len(models.configs) == 1
+
+
+def test_gemini_drops_thinking_config_when_both_are_rejected() -> None:
+    def outcome(config: Any) -> Any:
+        if config.thinking_config is not None:
+            return api_error(400)
+        return OK_RESPONSE
+
+    provider, models = gemini_with(outcome)
+    assert provider.generate(REQ).text == "ok"
+    assert len(models.configs) == 3
+
+
+def test_gemini_400_unrelated_to_thinking_still_raises_with_details() -> None:
+    body = {
+        "error": {
+            "message": "Request contains an invalid argument.",
+            "details": [{"fieldViolations": [{"field": "contents", "description": "empty"}]}],
+        }
+    }
+    provider, models = gemini_with(api_error(400, body))
+    with pytest.raises(LLMError, match=r"contents: empty"):
+        provider.generate(REQ)
+    assert len(models.configs) == 3  # tried every thinking mode first
 
 
 @pytest.mark.parametrize(

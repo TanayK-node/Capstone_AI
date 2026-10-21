@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from typing import Any
+from typing import Any, Literal
 
 import httpx
 from google import genai
@@ -34,9 +34,26 @@ def _retry_after(response_json: Any) -> float | None:
     return None
 
 
+def _detail_text(response_json: Any) -> str:
+    """Field violations etc. from the error body; a bare "invalid argument" says nothing."""
+    try:
+        details = response_json["error"]["details"]
+    except (KeyError, TypeError):
+        return ""
+    parts: list[str] = []
+    for detail in details if isinstance(details, list) else []:
+        if not isinstance(detail, dict):
+            continue
+        for v in detail.get("fieldViolations", []) or []:
+            parts.append(f"{v.get('field', '?')}: {v.get('description', '')}")
+        if "reason" in detail:
+            parts.append(str(detail["reason"]))
+    return f" [{'; '.join(parts)}]" if parts else ""
+
+
 def map_api_error(exc: genai_errors.APIError) -> LLMError:
     code = exc.code
-    msg = f"gemini HTTP {code}: {exc.message or exc}"
+    msg = f"gemini HTTP {code}: {exc.message or exc}{_detail_text(exc.details)}"
     if code == 429:
         return RateLimitedError(msg, retry_after_s=_retry_after(exc.details))
     if code in (401, 403):
@@ -44,6 +61,12 @@ def map_api_error(exc: genai_errors.APIError) -> LLMError:
     if code >= 500 or code == 408:
         return TransientError(msg)
     return LLMError(msg)
+
+
+# Ways to switch thinking off, tried in order. Gemini 2.5 takes thinking_budget=0; Gemini 3.x
+# uses thinking_level instead and can reject a budget of 0; "default" sends no thinking config.
+ThinkingOffMode = Literal["budget", "level", "default"]
+_THINKING_OFF_MODES: tuple[ThinkingOffMode, ...] = ("budget", "level", "default")
 
 
 class GeminiProvider:
@@ -56,8 +79,12 @@ class GeminiProvider:
             api_key=api_key,
             http_options=types.HttpOptions(timeout=int(timeout_s * 1000)),
         )
+        # Per model: the first thinking-off mode it accepted (or the one to try next).
+        self._off_mode: dict[str, int] = {}
 
-    def _config(self, request: ProviderRequest) -> types.GenerateContentConfig:
+    def _config(
+        self, request: ProviderRequest, off_mode: ThinkingOffMode = "budget"
+    ) -> types.GenerateContentConfig:
         config = types.GenerateContentConfig(
             temperature=request.temperature,
             system_instruction=request.system,
@@ -66,19 +93,45 @@ class GeminiProvider:
             config.response_mime_type = "application/json"
             config.response_json_schema = request.json_schema
         if not request.thinking:
-            # Budget 0 turns thinking off on Flash / Flash-Lite (CLAUDE.md: off by default).
-            config.thinking_config = types.ThinkingConfig(thinking_budget=0)
+            # Thinking off by default (CLAUDE.md); how depends on the model generation.
+            if off_mode == "budget":
+                config.thinking_config = types.ThinkingConfig(thinking_budget=0)
+            elif off_mode == "level":
+                config.thinking_config = types.ThinkingConfig(
+                    thinking_level=types.ThinkingLevel.MINIMAL
+                )
         return config
 
-    def generate(self, request: ProviderRequest) -> ProviderResponse:
+    def _send(self, request: ProviderRequest, off_mode: ThinkingOffMode) -> Any:
         try:
-            response = self._client.models.generate_content(
-                model=request.model, contents=request.prompt, config=self._config(request)
+            return self._client.models.generate_content(
+                model=request.model,
+                contents=request.prompt,
+                config=self._config(request, off_mode),
             )
         except genai_errors.APIError as exc:
             raise map_api_error(exc) from exc
         except (httpx.TimeoutException, httpx.TransportError) as exc:
             raise TransientError(f"gemini transport error: {exc}") from exc
+
+    def generate(self, request: ProviderRequest) -> ProviderResponse:
+        if request.thinking:
+            response = self._send(request, "default")
+        else:
+            idx = self._off_mode.get(request.model, 0)
+            while True:
+                try:
+                    response = self._send(request, _THINKING_OFF_MODES[idx])
+                    break
+                except LLMError as exc:
+                    # A 400 here is usually the thinking config; try the next way to turn it off.
+                    is_400 = isinstance(exc.__cause__, genai_errors.APIError) and (
+                        exc.__cause__.code == 400
+                    )
+                    if not is_400 or idx == len(_THINKING_OFF_MODES) - 1:
+                        raise
+                    idx += 1
+            self._off_mode[request.model] = idx
 
         text = response.text
         if not text:
