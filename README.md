@@ -18,19 +18,11 @@ docker compose up --build
 - API docs: http://localhost:8000/docs · health: http://localhost:8000/api/health
 - GROBID: http://localhost:8070
 
-### Local model (offline mode / fallback)
+### LLM provider
 
-Install [Ollama](https://ollama.com) on your laptop and pull the models named in
-`config/config.yaml`:
-
-```bash
-ollama pull qwen3:8b      # extraction (needs ~16 GB RAM or 8 GB VRAM)
-ollama pull qwen3:4b      # small calls; use it for extraction too on weaker laptops
-```
-
-The containers reach it at `host.docker.internal:11434`. For fully offline mode set
-`PAPERLENS_LLM__PRIMARY=ollama` in `.env`. Without a Gemini key, every call goes to Ollama
-and the UI shows "Running on local model".
+PaperLens runs on the Gemini API free tier only. The Ollama provider is still in the code but
+switched off (`llm.fallback: null` in `config/config.yaml`). Without `GEMINI_API_KEY` the
+health page shows "No LLM provider".
 
 ## Development without Docker
 
@@ -39,7 +31,7 @@ and the UI shows "Running on local model".
 cd backend
 uv sync
 uv run pytest                       # unit tests, no network
-uv run pytest -m live               # real Gemini + Ollama calls (Phase 0 exit criterion)
+uv run pytest -m live               # real Gemini calls (Phase 0 exit criterion)
 uv run python -m app.llm.check      # one toy call per provider
 uv run python -m app.llm.check --list-models
 uv run ruff check . && uv run ruff format --check . && uv run mypy app tests
@@ -79,7 +71,7 @@ result.meta         # provider, model, prompt_version, cached, tokens, latency, 
 
 Every call is cached in Postgres (`llm_cache`), rate-limited per model (RPM and RPD from
 config), retried with backoff on 429/5xx, and moved to Ollama when Gemini keeps failing or its
-daily quota is spent. Invalid JSON gets one repair re-ask, then raises `LLMValidationError`.
+daily quota is spent (only if a fallback is configured). Invalid JSON gets one repair re-ask, then raises `LLMValidationError`.
 
 ## Privacy
 

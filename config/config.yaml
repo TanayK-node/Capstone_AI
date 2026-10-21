@@ -15,10 +15,11 @@ redis_url: redis://localhost:6379/0
 grobid_url: http://localhost:8070
 
 llm:
-  # Provider tried first. Set to "ollama" for fully offline mode.
+  # Provider tried first. The project runs on Gemini only; "ollama" is kept as an option.
   primary: gemini
-  # Provider used when the primary keeps failing (429s, quota, outage). null disables fallback.
-  fallback: ollama
+  # Provider used when the primary keeps failing (429s, quota, outage). null = no fallback.
+  # Set to "ollama" to re-enable the local Qwen fallback.
+  fallback: null
   # Consecutive failed calls on the primary before switching every call to the fallback.
   fallback_after_failures: 3
   # How long to stay on the fallback before trying the primary again.

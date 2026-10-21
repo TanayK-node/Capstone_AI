@@ -5,7 +5,8 @@ See SCOPE.md for the full scope, architecture and phase plan.
 ## Stack
 - Backend: Python 3.11, FastAPI, Pydantic v2, SQLAlchemy 2 + Alembic, Celery + Redis, PostgreSQL 16 + pgvector
 - Parsing: GROBID (docker), Docling, PyMuPDF; optional Nougat/Marker
-- LLM: google-genai SDK (Gemini free tier) and Ollama (Qwen) behind llm/client.py; model names ONLY from config
+- LLM: google-genai SDK (Gemini free tier) behind llm/client.py; model names ONLY from config.
+  The Ollama provider still exists but is off (`llm.fallback: null`); the team decided not to use a local model.
 - Retrieval: sentence-transformers (local), rank_bm25, optional cross-encoder reranker
 - Frontend: Next.js (App Router) + TypeScript + Tailwind + shadcn/ui, react-pdf / PDF.js, TanStack Query
 - Tooling: uv or poetry, ruff, mypy, pytest; pnpm, eslint, prettier
@@ -25,11 +26,11 @@ See SCOPE.md for the full scope, architecture and phase plan.
 
 ## Commands
 - Backend (from `backend/`): `uv sync`, `uv run pytest`, `uv run ruff check .`, `uv run ruff format --check .`, `uv run mypy app`
-- Live provider tests: `uv run pytest -m live` (needs GEMINI_API_KEY and/or a running Ollama)
+- Live provider tests: `uv run pytest -m live` (needs GEMINI_API_KEY in the repo-root .env)
 - Provider smoke check: `uv run python -m app.llm.check`
 - Migrations: `uv run alembic upgrade head`
 - Frontend (from `frontend/`): `pnpm install`, `pnpm dev`, `pnpm lint`, `pnpm build`
 - Everything: `docker compose up --build` from the repo root
 
 ## Current phase
-Phase 0 (skeleton). Do not start Phase 1 until `docker compose up` works and `pytest -m live` passes against both providers.
+Phase 0 (skeleton). Do not start Phase 1 until `docker compose up` works and `pytest -m live` passes against Gemini.

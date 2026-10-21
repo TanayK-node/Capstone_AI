@@ -436,11 +436,13 @@ def build_client(
             providers["gemini"] = GeminiProvider(
                 settings.gemini_api_key.get_secret_value(), settings.llm.request_timeout_s
             )
-        providers["ollama"] = OllamaProvider(
-            settings.llm.ollama.base_url,
-            num_ctx=settings.llm.ollama.num_ctx,
-            timeout_s=settings.llm.request_timeout_s,
-        )
+        # Only wire Ollama when config actually uses it (primary or fallback).
+        if "ollama" in (settings.llm.primary, settings.llm.fallback):
+            providers["ollama"] = OllamaProvider(
+                settings.llm.ollama.base_url,
+                num_ctx=settings.llm.ollama.num_ctx,
+                timeout_s=settings.llm.request_timeout_s,
+            )
     return LLMClient(settings, providers, cache)
 
 

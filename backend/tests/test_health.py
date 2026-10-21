@@ -26,7 +26,9 @@ def test_health_reports_services_and_llm_without_raising(
     assert body["services"]["redis"]["ok"] is False
     assert body["status"] == "degraded"
     assert body["llm"]["primary"] == "gemini"
-    assert "ollama" in body["llm"]["configured"]
+    # Gemini-only config and no key in tests: nothing is configured, and health still answers.
+    assert body["llm"]["configured"] == []
+    assert body["llm"]["active"] is None
     get_settings.cache_clear()
     get_engine.cache_clear()
     get_llm_client.cache_clear()

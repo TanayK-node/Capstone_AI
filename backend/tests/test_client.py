@@ -34,6 +34,14 @@ def make_client(
     )
 
 
+@pytest.fixture
+def fb_settings(settings: Settings) -> Settings:
+    """Config with the (optional) Ollama fallback switched on, to test fallback behaviour."""
+    return settings.model_copy(
+        update={"llm": settings.llm.model_copy(update={"fallback": "ollama"})}
+    )
+
+
 def toy_prompt() -> prompts.RenderedPrompt:
     return prompts.render("toy_extract", text=TOY_TEXT)
 
@@ -104,25 +112,25 @@ def test_429_backs_off_then_succeeds(settings: Settings, clock: FakeClock) -> No
 
 
 def test_falls_back_to_ollama_when_gemini_keeps_failing(
-    settings: Settings, clock: FakeClock
+    fb_settings: Settings, clock: FakeClock
 ) -> None:
     gemini = FakeProvider("gemini", [RateLimitedError("429")])
     ollama = FakeProvider("ollama", [GOOD])
-    client = make_client(settings, clock, gemini, ollama)
+    client = make_client(fb_settings, clock, gemini, ollama)
     result = client.generate_json(toy_prompt(), ToyExtraction)
     assert result.meta.provider == "ollama"
     assert result.meta.fell_back
-    assert result.meta.model == settings.llm.ollama.models.extraction
-    assert len(gemini.calls) == settings.llm.retry.max_attempts
+    assert result.meta.model == fb_settings.llm.ollama.models.extraction
+    assert len(gemini.calls) == fb_settings.llm.retry.max_attempts
 
 
 def test_sticky_fallback_after_n_failed_calls_then_recovers(
-    settings: Settings, clock: FakeClock
+    fb_settings: Settings, clock: FakeClock
 ) -> None:
     gemini = FakeProvider("gemini", [TransientError("503")])
     ollama = FakeProvider("ollama", [GOOD])
-    client = make_client(settings, clock, gemini, ollama)
-    n = settings.llm.fallback_after_failures
+    client = make_client(fb_settings, clock, gemini, ollama)
+    n = fb_settings.llm.fallback_after_failures
     for i in range(n):
         client.generate_text(f"q{i}")
     assert client.status()["degraded"] is True
@@ -130,28 +138,28 @@ def test_sticky_fallback_after_n_failed_calls_then_recovers(
     client.generate_text("next")
     assert len(gemini.calls) == calls_before  # primary skipped during cooldown
 
-    clock.now += settings.llm.fallback_cooldown_s + 1
+    clock.now += fb_settings.llm.fallback_cooldown_s + 1
     gemini.script = ["back"]
     gemini.calls.clear()
     assert client.generate_text("later").meta.provider == "gemini"
     assert client.status()["degraded"] is False
 
 
-def test_quota_exhaustion_switches_immediately(settings: Settings, clock: FakeClock) -> None:
+def test_quota_exhaustion_switches_immediately(fb_settings: Settings, clock: FakeClock) -> None:
     gemini = FakeProvider("gemini", [QuotaExhaustedError("rpd")])
     ollama = FakeProvider("ollama", ["ok"])
-    client = make_client(settings, clock, gemini, ollama)
+    client = make_client(fb_settings, clock, gemini, ollama)
     client.generate_text("q")
     assert client.status()["active"] == "ollama"
     assert len(gemini.calls) == 1  # quota errors are not retried
 
 
 def test_all_providers_failing_raises_with_both_errors(
-    settings: Settings, clock: FakeClock
+    fb_settings: Settings, clock: FakeClock
 ) -> None:
     gemini = FakeProvider("gemini", [ProviderUnavailableError("bad key")])
     ollama = FakeProvider("ollama", [ProviderUnavailableError("not running")])
-    client = make_client(settings, clock, gemini, ollama)
+    client = make_client(fb_settings, clock, gemini, ollama)
     with pytest.raises(AllProvidersFailedError) as info:
         client.generate_text("q")
     assert set(info.value.errors) == {"gemini", "ollama"}
@@ -167,21 +175,33 @@ def test_offline_mode_uses_only_ollama(settings: Settings, clock: FakeClock) -> 
     assert client.status()["degraded"] is False
 
 
-def test_missing_gemini_key_goes_straight_to_ollama(settings: Settings, clock: FakeClock) -> None:
-    client = make_client(settings, clock, None, FakeProvider("ollama", [GOOD]))
+def test_missing_gemini_key_goes_straight_to_ollama(
+    fb_settings: Settings, clock: FakeClock
+) -> None:
+    client = make_client(fb_settings, clock, None, FakeProvider("ollama", [GOOD]))
     result = client.generate_json(toy_prompt(), ToyExtraction)
     assert result.meta.provider == "ollama"
     assert client.status()["degraded"] is True  # UI shows "running on local model"
 
 
 def test_cached_primary_answer_is_used_even_in_fallback(
-    settings: Settings, clock: FakeClock
+    fb_settings: Settings, clock: FakeClock
 ) -> None:
     gemini = FakeProvider("gemini", [GOOD])
     ollama = FakeProvider("ollama", [GOOD])
-    client = make_client(settings, clock, gemini, ollama)
+    client = make_client(fb_settings, clock, gemini, ollama)
     client.generate_json(toy_prompt(), ToyExtraction)
     client._fallback_until = clock.now + 100  # force fallback mode
     again = client.generate_json(toy_prompt(), ToyExtraction)
     assert again.meta.cached and again.meta.provider == "gemini"
     assert ollama.calls == []
+
+
+def test_default_config_has_no_fallback(settings: Settings, clock: FakeClock) -> None:
+    """Gemini-only setup: a failing Gemini call raises instead of trying Ollama."""
+    assert settings.llm.fallback is None
+    gemini = FakeProvider("gemini", [ProviderUnavailableError("bad key")])
+    client = make_client(settings, clock, gemini, None)
+    with pytest.raises(AllProvidersFailedError) as info:
+        client.generate_text("q")
+    assert set(info.value.errors) == {"gemini"}
