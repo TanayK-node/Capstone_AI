@@ -40,7 +40,7 @@ def _env() -> Environment:
 
 
 def prompt_version(name: str) -> str:
-    source = (PROMPTS_DIR / f"{name}.jinja").read_text()
+    source = (PROMPTS_DIR / f"{name}.jinja").read_text(encoding="utf-8")
     match = _VERSION_RE.search(source)
     if match is None:
         raise ValueError(f"prompt {name!r} has no '{{# version: N #}}' header")

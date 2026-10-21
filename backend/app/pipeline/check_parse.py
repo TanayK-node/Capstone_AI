@@ -84,6 +84,9 @@ def main() -> int:
     ap.add_argument("--parser", choices=["grobid", "pymupdf", "auto"], default="grobid")
     ap.add_argument("--pdf-dir", type=Path, help="parse local PDFs instead of downloading")
     args = ap.parse_args()
+    # A cp1252 Windows console must not crash on a non-Latin character in an error message.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(errors="replace")
 
     settings = get_settings()
     out_dir = Path(settings.app.data_dir) / "phase1_check"
@@ -139,8 +142,11 @@ def main() -> int:
         f"\nparsed without errors: {len(ok)}/{total}   "
         f"tables detected (with a grid): {len(with_tables)}/{total}"
     )
-    (out_dir / "report.json").write_text(json.dumps(results, indent=2, default=str))
-    (out_dir / "report.md").write_text("\n".join(md))
+    # Explicit UTF-8: Windows defaults to cp1252, which can't encode symbols in table cells.
+    (out_dir / "report.json").write_text(
+        json.dumps(results, indent=2, default=str, ensure_ascii=False), encoding="utf-8"
+    )
+    (out_dir / "report.md").write_text("\n".join(md), encoding="utf-8")
     print(f"report: {out_dir / 'report.md'}")
     passed = len(ok) == total and len(with_tables) >= 0.8 * total
     print("PHASE 1 EXIT CRITERION:", "PASS" if passed else "FAIL")
