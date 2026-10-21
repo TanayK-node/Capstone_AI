@@ -9,9 +9,15 @@ import httpx
 import pymupdf
 
 from app.pipeline.parse.base import ParseError
-from app.pipeline.parse.tables import grid_problem, reconstruct_table
+from app.pipeline.parse.tables import (
+    caption_label,
+    grid_problem,
+    locate_caption,
+    numeric_share,
+    reconstruct_table,
+)
 from app.pipeline.parse.tei import tei_to_document
-from app.schemas.document import Block, Box, ParsedDocument, TableData
+from app.schemas.document import Box, ParsedDocument, TableData
 
 # Element types GROBID should attach coordinates to.
 TEI_COORDINATES = ["title", "head", "p", "s", "figure", "formula", "biblStruct", "note"]
@@ -62,56 +68,104 @@ class GrobidParser:
         return parse_with_tei(pdf_path, tei, parser_version=self.version())
 
 
+# Unlabelled GROBID "tables" are often equations or paragraphs; keep their grid only if it is
+# mostly numbers.
+MIN_NUMERIC_SHARE_UNLABELLED = 0.3
+
+
 def parse_with_tei(pdf_path: Path, tei: bytes, parser_version: str = "unknown") -> ParsedDocument:
-    """Two passes: locate and rebuild tables, then re-read the TEI ignoring text inside them."""
+    """Two passes: locate and rebuild tables, then re-read the TEI ignoring text inside them.
+
+    Tables are located by their own caption ("Table 3:"), since GROBID's table box is often on
+    the wrong spot or even the wrong page; its box is only a hint.
+    """
     first = tei_to_document(tei, parser_version)
-    rebuilt: dict[int, tuple[Block, Box]] = {}  # index among table blocks -> (table, region)
+    rebuilt: dict[int, tuple[TableData, Box]] = {}  # index among table blocks -> (grid, region)
+    notes: dict[int, str] = {}
+    seen: dict[tuple[int, int, int], str] = {}  # rebuilt region -> table name (dedupe)
     with pymupdf.open(pdf_path) as pdf:
         for i, block in enumerate(first.tables):
-            if block.bbox is None or block.page > pdf.page_count:
+            name = block.label or block.id
+            hint = (
+                pymupdf.Rect(block.bbox.x0, block.bbox.y0, block.bbox.x1, block.bbox.y1)
+                if block.bbox
+                else None
+            )
+            label = block.label or caption_label(block.text)  # GROBID misses "TableB.5."
+            located = locate_caption(pdf, label, block.page, hint)
+            if located is not None:
+                page_no, caption_rect = located
+                region = hint if (hint is not None and page_no == block.page) else caption_rect
+            elif hint is not None and block.page <= pdf.page_count:
+                page_no, caption_rect, region = block.page, None, hint
+            else:
                 continue
-            page = pdf[block.page - 1]
-            b = block.bbox
             caption = block.table.caption if block.table else ""
             result = reconstruct_table(
-                page, pymupdf.Rect(b.x0, b.y0, b.x1, b.y1), caption=caption, label=block.label
+                pdf[page_no - 1],
+                region,
+                caption=caption,
+                label=block.label,
+                caption_rect=caption_rect,
             )
             if result is None:
                 continue
             table, used = result
-            region = Box(page=block.page, x0=used.x0, y0=used.y0, x1=used.x1, y1=used.y1)
-            rebuilt[i] = (block.model_copy(update={"table": table}), region)
+            if label is None and numeric_share(table) < MIN_NUMERIC_SHARE_UNLABELLED:
+                continue
+            key = (page_no, round(used.y0), round(used.x0))
+            if key in seen:
+                notes[i] = f"same table as {seen[key]}"
+                continue
+            seen[key] = name
+            rebuilt[i] = (table, Box(page=page_no, x0=used.x0, y0=used.y0, x1=used.x1, y1=used.y1))
 
-    regions = [r for _, r in rebuilt.values()]
+    # Unlabelled blocks that overlap a labelled table are pieces of it, not tables of their own.
+    labelled = [rebuilt[i][1] for i, b in enumerate(first.tables) if i in rebuilt and b.label]
+    for i, block in enumerate(first.tables):
+        if i in rebuilt and not block.label and rebuilt[i][0].label is None:
+            piece = rebuilt[i][1]
+            if any(_overlap(piece, other) > 0.3 for other in labelled):
+                notes[i] = "part of another table"
+                del rebuilt[i]
+    regions: list[Box] = [r for _, r in rebuilt.values()]
     doc = tei_to_document(tei, parser_version, exclude=regions)
     if regions:
         with pymupdf.open(pdf_path) as pdf:
             _strip_table_fragments(doc, regions, pdf)
     for i, block in enumerate(doc.tables):
-        if i not in rebuilt:
-            name = block.label or block.id
-            problem = grid_problem(block.table) if block.table else "no grid"
-            if problem is None:
-                doc.warnings.append(f"{name}: kept GROBID's table grid")
-            else:
-                # A wrong grid is worse than none (claims are checked against these cells).
-                caption = block.table.caption if block.table else ""
-                block.table = TableData(label=block.label, caption=caption)
-                doc.warnings.append(f"{name}: no reliable grid ({problem})")
+        name = block.label or block.id
+        if i in rebuilt:
+            block.table, found = rebuilt[i]
+            # Point the block at the rows we found (GROBID's box may be elsewhere).
+            block.page, block.bbox, block.boxes = found.page, found, [found]
             continue
-        table_block, region = rebuilt[i]
-        block.table = table_block.table
-        # Highlight the whole table (GROBID's box often misses the header rows).
-        merged = Box(
-            page=region.page,
-            x0=min(region.x0, block.bbox.x0) if block.bbox else region.x0,
-            y0=min(region.y0, block.bbox.y0) if block.bbox else region.y0,
-            x1=max(region.x1, block.bbox.x1) if block.bbox else region.x1,
-            y1=max(region.y1, block.bbox.y1) if block.bbox else region.y1,
-        )
-        block.bbox = merged
-        block.boxes = [merged]
+        caption = block.table.caption if block.table else ""
+        problem = notes.get(i) or (grid_problem(block.table) if block.table else "no grid")
+        if (
+            problem is None
+            and block.table is not None
+            and block.label is None
+            and numeric_share(block.table) < MIN_NUMERIC_SHARE_UNLABELLED
+        ):
+            problem = "mostly text"
+        if problem is None:
+            doc.warnings.append(f"{name}: kept GROBID's table grid")
+        else:
+            # A wrong grid is worse than none (claims are checked against these cells).
+            block.table = TableData(label=block.label, caption=caption)
+            doc.warnings.append(f"{name}: no reliable grid ({problem})")
     return doc
+
+
+def _overlap(a: Box, b: Box) -> float:
+    """Intersection area as a share of the smaller box."""
+    if a.page != b.page:
+        return 0.0
+    w = min(a.x1, b.x1) - max(a.x0, b.x0)
+    h = min(a.y1, b.y1) - max(a.y0, b.y0)
+    smaller = min(a.area, b.area)
+    return w * h / smaller if w > 0 and h > 0 and smaller > 0 else 0.0
 
 
 def _inside(box: Box, region: Box) -> bool:

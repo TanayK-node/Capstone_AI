@@ -41,5 +41,9 @@ Phase 1 (ingest, parse, structure). Do not start Phase 2 until `check_parse` rep
 ## Notes
 - Coordinates everywhere are PDF points, origin top-left, pages 1-indexed (schemas/document.py).
 - Table grids come from tables.reconstruct_table (PDF word positions), not from GROBID's own grid.
+  Tables are located by their own caption ("Table 3:"), since GROBID's table box is often wrong
+  or on the wrong page. A grid that fails grid_problem() is dropped: no grid beats a wrong grid.
+- When changing table code, re-run it on real papers, not only the synthetic tests:
+  `uv run python -m app.pipeline.check_parse --pdf-dir <pdfs>` and read report.md.
 - Tests use SQLite with foreign keys enforced (db.make_engine); the app uses Postgres.
 - Docling is not wired in yet (its models download from Hugging Face); it is an A1 ablation option.
