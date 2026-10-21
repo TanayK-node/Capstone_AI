@@ -46,6 +46,7 @@ extend-immutable-calls = ["fastapi.Depends", "fastapi.File", "fastapi.Form", "fa
 
 [tool.ruff.lint.per-file-ignores]
 "tests/fixtures/make_fixtures.py" = ["E501"]  # HTML fixture content
+"app/pipeline/parse/tables.py" = ["RUF001", "RUF002", "RUF003"]  # matches unicode dashes/signs
 
 [tool.ruff.lint.isort]
 # The migrations folder is named alembic/; make sure the library still sorts as third-party.

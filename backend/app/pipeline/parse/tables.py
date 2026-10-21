@@ -1,14 +1,8 @@
 """Table reconstruction and normalization (M2).
 
 GROBID is good at *finding* tables but loses structure (merged header cells, dropped rows), so
-we rebuild the grid ourselves from PyMuPDF word positions inside the table region:
-
-  1. grow the region up to the table's top rule (GROBID boxes often miss the header) and drop
-     caption lines;
-  2. cluster words into lines by vertical centre;
-  3. find column boundaries from whitespace gaps in the numeric (data) lines;
-  4. merge wrapped lines ("BERT-" / "base") into the row above;
-  5. mark bold cells from the font, and parse numbers (CLAUDE.md rule 4: Python parses numbers).
+we rebuild each grid from PyMuPDF word positions; see the step list above reconstruct_table.
+Numbers are parsed here, in Python (CLAUDE.md rule 4).
 """
 
 from __future__ import annotations
@@ -16,6 +10,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 from itertools import pairwise
+from typing import Any
 
 import pymupdf
 
@@ -40,11 +35,22 @@ class ParsedNumber:
     is_percent: bool = False
 
 
+_SCI_RE = re.compile(
+    rf"^\s*(?P<mant>{_NUM})\s*(?:\u00b7|\u00d7|x|\*)\s*10\^(?P<exp>[-+]?\d+)\s*[*\u2020\u2021]*\s*$"
+)
+
+
 def parse_number(text: str) -> ParsedNumber | None:
-    """Parse a table cell like '24.3 ± 0.2', '84.6%', '-0.5', '1,234', '88.0*', '3e-4'."""
+    """Parse a table cell like '24.3 ± 0.2', '84.6%', '-0.5', '1,234', '88.0*', '3e-4',
+    or '2.3 · 10^19' (superscripts are written with ^ by the table extractor)."""
     t = text.translate(_MINUS).replace("\u2009", " ").strip()  # thin space
     if not t or not any(c.isdigit() for c in t):
         return None
+    if sci := _SCI_RE.match(t):
+        try:
+            return ParsedNumber(value=float(sci.group("mant")) * 10 ** int(sci.group("exp")))
+        except ValueError:
+            return None
     m = _NUMBER_RE.match(t)
     if m is None or not re.search(r"\d", m.group("value") or ""):
         return None
@@ -83,9 +89,28 @@ def normalize_table(table: TableData) -> TableData:
 
 
 # ------------------------------------------------------------------ reconstruction
+#
+# Steps, for one table whose rough region comes from GROBID (or the PyMuPDF parser):
+#   1. pick the text column: on two-column pages a table lives in one column unless its own
+#      caption spans the page; reading only that column keeps the other column's prose out;
+#   2. read whole words (with font size, boldness) from the column around the region, cluster
+#      them into lines, and mark superscripts ("10^20");
+#   3. classify lines (own caption, other caption, caption continuation, prose, row) and cut
+#      the lines into segments at captions, prose and large vertical gaps;
+#   4. choose the segment next to the table's own caption (or overlapping the region);
+#   5. find columns from whitespace aligned across most data rows (a few spanning cells can't
+#      merge columns), assign cells, merge wrapped lines, detect bold;
+#   6. reject the result if it looks like prose (grid_problem); no grid beats a wrong grid.
 
-_CAPTION_RE = re.compile(r"^\s*(Table|Tab\.|TABLE)\s*[A-Z]?\d+", re.IGNORECASE)
-MIN_COL_GAP = 5.0  # points; inter-word spaces are ~2-3 pt, LaTeX tabcolsep gives ~12 pt
+_TABLE_CAPTION_RE = re.compile(
+    r"^\s*(?:Table|Tab\.|TABLE)\s*(?P<num>[A-Z]?\.?\d+(?:\.\d+)?)\s*[:.|]?", re.IGNORECASE
+)
+_FIGURE_CAPTION_RE = re.compile(r"^\s*(?:Figure|Fig\.|FIGURE)\s*[A-Z]?\.?\d+", re.IGNORECASE)
+MIN_COL_GAP = 4.0  # points; inter-word spaces are ~2-3 pt, LaTeX tabcolsep gives ~12 pt
+NUM_COL_GAP = 1.0  # two numbers side by side are separate cells even when tightly packed
+PROSE_GAP = 8.0  # justified prose stretches spaces, but not this far
+_DASHES = {"-", "–", "—", "−"}  # "-" cells are empty values, still a column
+_OPERATORS = {"·", "×", "x", "±", "/", "+", "="}
 
 
 @dataclass
@@ -96,15 +121,25 @@ class _Word:
     y1: float
     text: str
     bold: bool = False
+    size: float = 0.0
 
     @property
     def yc(self) -> float:
         return (self.y0 + self.y1) / 2
 
+    @property
+    def h(self) -> float:
+        return self.y1 - self.y0
+
+
+def _is_num(text: str) -> bool:
+    return text in _DASHES or parse_number(text) is not None
+
 
 @dataclass
 class _Line:
     words: list[_Word] = field(default_factory=list)
+    kind: str = "row"  # row | prose | caption_own | caption_other | caption_cont
 
     @property
     def y0(self) -> float:
@@ -115,109 +150,456 @@ class _Line:
         return max(w.y1 for w in self.words)
 
     @property
+    def x0(self) -> float:
+        return min(w.x0 for w in self.words)
+
+    @property
+    def x1(self) -> float:
+        return max(w.x1 for w in self.words)
+
+    @property
     def text(self) -> str:
         return " ".join(w.text for w in self.words)
 
     def groups(self, min_gap: float = MIN_COL_GAP) -> int:
-        ws = sorted(self.words, key=lambda w: w.x0)
-        return 1 + sum(1 for a, b in pairwise(ws) if b.x0 - a.x1 >= min_gap)
+        return 1 + sum(1 for a, b in pairwise(self.words) if b.x0 - a.x1 >= min_gap)
+
+    @property
+    def size(self) -> float:
+        sizes = sorted(w.size for w in self.words)
+        return sizes[len(sizes) // 2]
+
+    @property
+    def n_numeric(self) -> int:
+        return sum(1 for w in self.words if _is_num(w.text))
 
     def has_number(self) -> bool:
         return any(parse_number(w.text) is not None for w in self.words)
 
+    def is_data(self) -> bool:
+        return self.n_numeric >= 2 or (self.n_numeric >= 1 and self.groups() >= 2)
 
-def _bold_rects(page: pymupdf.Page, clip: pymupdf.Rect) -> list[pymupdf.Rect]:
-    rects: list[pymupdf.Rect] = []
+
+def _cut(a: _Word, b: _Word) -> bool:
+    """Is there a cell boundary between adjacent words a and b of one line?"""
+    gap = b.x0 - a.x1
+    if gap >= MIN_COL_GAP:
+        return True
+    if gap >= NUM_COL_GAP and _is_num(a.text) and _is_num(b.text):
+        return True
+    # "label 84.6" with a tight gap; but not "1.0 · 10^20" or "24.3 ± 0.2".
+    return gap >= 3.0 and _is_num(b.text) and a.text not in _OPERATORS and b.text not in _DASHES
+
+
+def _cells(line: _Line) -> list[list[_Word]]:
+    cells: list[list[_Word]] = []
+    for w in line.words:
+        if cells and not _cut(cells[-1][-1], w):
+            cells[-1].append(w)
+        else:
+            cells.append([w])
+    return cells
+
+
+def _join_words(words: list[_Word]) -> str:
+    text = ""
+    for w in words:
+        if not text:
+            text = w.text
+        elif text.endswith("-") and w.text[:1].islower():
+            text += w.text  # de-hyphenate "multi-" / "crop"
+        else:
+            text += " " + w.text
+    return text
+
+
+# ---- step 1: which text column
+
+
+def _page_lines(
+    page: pymupdf.Page, clip: pymupdf.Rect | None = None
+) -> list[tuple[pymupdf.Rect, str]]:
+    out: list[tuple[pymupdf.Rect, str]] = []
     for block in page.get_text("dict", clip=clip)["blocks"]:
         for line in block.get("lines", []):
-            for span in line["spans"]:
-                font = span["font"].lower()
-                # flags bit 4 = bold; LaTeX bold fonts are CMBX / *-Bold / *Medium.
-                if span["flags"] & 16 or "bold" in font or "cmbx" in font or "medi" in font:
-                    rects.append(pymupdf.Rect(span["bbox"]))
-    return rects
+            text = "".join(s["text"] for s in line["spans"]).strip()
+            if text:
+                out.append((pymupdf.Rect(line["bbox"]), text))
+    return out
+
+
+def _is_two_column(page: pymupdf.Page) -> bool:
+    width = page.rect.width
+    long_lines = [r for r, t in _page_lines(page) if len(t) > 30]
+    if len(long_lines) < 10:
+        return False
+    narrow = sum(1 for r in long_lines if r.width < 0.5 * width)
+    return narrow > 0.5 * len(long_lines)
+
+
+def _caption_number(label: str | None) -> str | None:
+    if not label:
+        return None
+    m = re.search(r"([A-Z]?\.?\d+(?:\.\d+)?)\s*$", label)
+    return m.group(1).lstrip(".") if m else None
+
+
+def _find_own_caption(
+    page: pymupdf.Page, number: str | None, region: pymupdf.Rect
+) -> pymupdf.Rect | None:
+    """The caption line "Table <number>..." closest to the region (within 200 pt)."""
+    if number is None:
+        return None
+    best: tuple[float, pymupdf.Rect] | None = None
+    for rect, text in _page_lines(page):
+        m = _TABLE_CAPTION_RE.match(text)
+        if not m or m.group("num").replace(".", "") != number.replace(".", ""):
+            continue
+        dist = max(0.0, region.y0 - rect.y1, rect.y0 - region.y1)
+        if dist <= 200 and (best is None or dist < best[0]):
+            best = (dist, rect)
+    return best[1] if best else None
+
+
+def _column_bounds(
+    page: pymupdf.Page, region: pymupdf.Rect, caption: pymupdf.Rect | None
+) -> tuple[float, float]:
+    width = page.rect.width
+    if not _is_two_column(page):
+        return 0.0, width
+    mid = width / 2
+    anchor = caption if caption is not None else region
+    if anchor.width > 0.55 * width:  # full-width table (or caption) on a two-column page
+        return 0.0, width
+    centre = (anchor.x0 + anchor.x1) / 2
+    return (0.0, mid + 4) if centre < mid else (mid - 4, width)
+
+
+# ---- step 2: words and lines
+
+
+def _make_word(chars: list[dict[str, Any]], bold: bool, size: float) -> _Word:
+    return _Word(
+        min(c["bbox"][0] for c in chars),
+        min(c["bbox"][1] for c in chars),
+        max(c["bbox"][2] for c in chars),
+        max(c["bbox"][3] for c in chars),
+        "".join(c["c"] for c in chars),
+        bold,
+        size,
+    )
 
 
 def _words(page: pymupdf.Page, clip: pymupdf.Rect) -> list[_Word]:
-    bold = _bold_rects(page, clip)
-    out: list[_Word] = []
-    for x0, y0, x1, y1, text, *_ in page.get_text("words", clip=clip):
-        cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
-        is_bold = any(r.contains(pymupdf.Point(cx, cy)) for r in bold)
-        out.append(_Word(x0, y0, x1, y1, text, is_bold))
-    return out
+    """Whole words from rawdict characters, keeping font size and boldness."""
+    words: list[_Word] = []
+    for block in page.get_text("rawdict", clip=clip)["blocks"]:
+        for line in block.get("lines", []):
+            for span in line["spans"]:
+                font = span["font"].lower()
+                bold = bool(span["flags"] & 16) or any(k in font for k in ("bold", "cmbx", "medi"))
+                size = float(span["size"])
+                current: list[dict[str, Any]] = []
+                for ch in span["chars"]:
+                    # Break at spaces, and at gaps where the PDF positions words without one.
+                    gap_break = current and ch["bbox"][0] - current[-1]["bbox"][2] > 0.3 * size
+                    if ch["c"].isspace() or gap_break:
+                        if current:
+                            words.append(_make_word(current, bold, size))
+                        current = []
+                    if not ch["c"].isspace():
+                        current.append(ch)
+                if current:
+                    words.append(_make_word(current, bold, size))
+    return words
 
 
 def _cluster_lines(words: list[_Word]) -> list[_Line]:
     lines: list[_Line] = []
     for w in sorted(words, key=lambda w: w.yc):
-        if lines:
-            last = lines[-1]
-            height = last.y1 - last.y0
-            if abs(w.yc - sum(x.yc for x in last.words) / len(last.words)) < 0.35 * height:
-                last.words.append(w)
-                continue
-        lines.append(_Line([w]))
+        best: _Line | None = None
+        best_overlap = 0.0
+        for line in lines[-4:]:
+            overlap = min(w.y1, line.y1) - max(w.y0, line.y0)
+            need = 0.4 * min(w.h, line.y1 - line.y0)
+            if overlap >= need and overlap > best_overlap:
+                best, best_overlap = line, overlap
+        if best is None:
+            lines.append(_Line([w]))
+        else:
+            best.words.append(w)
     for line in lines:
         line.words.sort(key=lambda w: w.x0)
-    return lines
+        _merge_scripts(line)
+    return sorted(lines, key=lambda ln: ln.y0)
 
 
-def _top_rule(page: pymupdf.Page, region: pymupdf.Rect, reach: float = 60.0) -> float | None:
-    """Top of the table's ruling just above the region, or None.
+def _merge_scripts(line: _Line) -> None:
+    """Attach superscripts ("10" + "20" -> "10^20") and subscripts / split spans to the word
+    they belong to."""
+    merged: list[_Word] = []
+    for w in line.words:
+        prev = merged[-1] if merged else None
+        if prev is not None and w.x0 - prev.x1 < 1.0:
+            smaller = w.size < 0.85 * prev.size
+            if smaller and w.yc < prev.yc - 0.15 * prev.h:
+                joiner = "^"
+            elif smaller or w.x0 - prev.x1 < 0.3:
+                joiner = ""
+            else:
+                merged.append(w)
+                continue
+            merged[-1] = _Word(
+                prev.x0,
+                min(prev.y0, w.y0),
+                max(prev.x1, w.x1),
+                max(prev.y1, w.y1),
+                prev.text + joiner + w.text,
+                prev.bold or w.bold,
+                prev.size,
+            )
+        else:
+            merged.append(w)
+    line.words = merged
 
-    Walks upward through drawings that sit inside the region's x-span: cell borders of ruled
-    tables chain together (gap <= 3 pt), and a wide booktabs \\toprule may sit one header
-    line above the region (gap <= 20 pt).
-    """
-    cands: list[pymupdf.Rect] = []
+
+# ---- steps 3-4: classify, segment, choose
+
+
+def _classify(lines: list[_Line], number: str | None, col_width: float) -> None:
+    prev: _Line | None = None
+    for line in lines:
+        text = line.text
+        m = _TABLE_CAPTION_RE.match(text)
+        if m:
+            own = number is not None and m.group("num").replace(".", "") == number.replace(".", "")
+            line.kind = "caption_own" if own else "caption_other"
+        elif _FIGURE_CAPTION_RE.match(text):
+            line.kind = "caption_other"
+        elif (
+            prev is not None
+            and prev.kind.startswith("caption")
+            and line.groups(PROSE_GAP) == 1
+            and line.n_numeric <= 1
+            and abs(line.size - prev.size) < 0.5
+            and line.y0 - prev.y1 < 0.35 * (line.y1 - line.y0)
+        ):
+            line.kind = "caption_cont"  # wrapped caption text: same size, tightly spaced
+        elif (
+            len(line.words) >= 7
+            and line.groups(PROSE_GAP) == 1
+            and line.n_numeric <= 1
+            and line.x1 - line.x0 >= 0.5 * col_width
+        ):
+            line.kind = "prose"
+        prev = line
+
+
+def _segments(lines: list[_Line]) -> list[list[_Line]]:
+    heights = sorted(ln.y1 - ln.y0 for ln in lines) or [10.0]
+    max_gap = 1.5 * heights[len(heights) // 2]
+    segs: list[list[_Line]] = []
+    current: list[_Line] = []
+    for line in lines:
+        if line.kind != "row":
+            if current:
+                segs.append(current)
+            current = []
+            continue
+        if current and line.y0 - current[-1].y1 > max_gap:
+            segs.append(current)
+            current = []
+        current.append(line)
+    if current:
+        segs.append(current)
+    return segs
+
+
+def _choose_segment(
+    lines: list[_Line], segs: list[list[_Line]], region: pymupdf.Rect
+) -> list[_Line] | None:
+    def data_lines(seg: list[_Line]) -> int:
+        return sum(1 for ln in seg if ln.is_data())
+
+    def overlap(seg: list[_Line]) -> float:
+        return max(0.0, min(seg[-1].y1, region.y1) - max(seg[0].y0, region.y0))
+
+    index = {id(ln): i for i, ln in enumerate(lines)}
+    seg_of = {id(ln): seg for seg in segs for ln in seg}
+    own = [i for i, ln in enumerate(lines) if ln.kind == "caption_own"]
+    if own:
+        start = own[0]
+        end = start
+        while end + 1 < len(lines) and lines[end + 1].kind == "caption_cont":
+            end += 1
+        above = seg_of.get(id(lines[start - 1])) if start > 0 else None
+        below = seg_of.get(id(lines[end + 1])) if end + 1 < len(lines) else None
+        cands = [s for s in (above, below) if s is not None and data_lines(s) > 0]
+        if len(cands) == 2 and above is not None and below is not None:
+            # Caption convention: a segment that sits against another table's caption on its
+            # far side belongs to that table.
+            before_above = index[id(above[0])] - 1
+            after_below = index[id(below[-1])] + 1
+            if before_above >= 0 and lines[before_above].kind == "caption_other":
+                return below
+            if after_below < len(lines) and lines[after_below].kind == "caption_other":
+                return above
+            return max(cands, key=lambda s: (data_lines(s), overlap(s)))
+        if cands:
+            return cands[0]
+    best = max(segs, key=lambda s: (overlap(s) > 0, data_lines(s) > 0, overlap(s)), default=None)
+    if best is None or overlap(best) <= 0 or data_lines(best) == 0:
+        return None
+    return best
+
+
+def _horizontal_rules(page: pymupdf.Page, clip: pymupdf.Rect) -> list[pymupdf.Rect]:
+    rules: list[pymupdf.Rect] = []
     for drawing in page.get_drawings():
         r = pymupdf.Rect(drawing["rect"])
-        inside_x = r.x0 >= region.x0 - 15 and r.x1 <= region.x1 + 15
-        if inside_x and region.y0 - reach <= r.y0 <= region.y1:
-            cands.append(r)
-    top = region.y0
-    changed = True
-    while changed:
-        changed = False
-        for r in cands:
-            max_gap = 20.0 if r.width >= 0.5 * region.width else 3.0
-            if r.y0 < top - 0.5 and r.y1 >= top - max_gap:
-                top = r.y0
-                changed = True
-    return top if top < region.y0 - 0.5 else None
+        if r.height <= 2.0 and r.width >= 20 and r.intersects(clip):
+            rules.append(r)
+    return rules
 
 
-def _column_spans(lines: list[_Line]) -> list[tuple[float, float]]:
-    """Merge word x-intervals of data lines; gaps >= MIN_COL_GAP separate columns."""
-    data = [ln for ln in lines if ln.has_number()] or lines
-    intervals = sorted((w.x0, w.x1) for ln in data for w in ln.words)
-    spans: list[list[float]] = []
-    for x0, x1 in intervals:
-        if spans and x0 - spans[-1][1] < MIN_COL_GAP:
-            spans[-1][1] = max(spans[-1][1], x1)
+def _trim_leading_text(seg: list[_Line], rules: list[pymupdf.Rect]) -> list[_Line]:
+    """Drop body-text lines glued onto the top of the table (e.g. a paragraph's last line).
+
+    A leading line goes if it has no numbers and no column structure, and either sits above
+    the table's top rule, or reads like a sentence fragment.
+    """
+    first_data = next((i for i, ln in enumerate(seg) if ln.is_data()), None)
+    if first_data is None:
+        return seg
+    width = max(ln.x1 for ln in seg) - min(ln.x0 for ln in seg)
+    top_rules = [
+        r.y0
+        for r in rules
+        if r.width >= 0.4 * width and seg[0].y0 - 3 <= r.y0 <= seg[first_data].y0
+    ]
+    top = min(top_rules) if top_rules else None
+    start = 0
+    while start < first_data:
+        line = seg[start]
+        plain = not line.has_number() and line.groups() == 1
+        above_rule = top is not None and line.y1 <= top + 1
+        sentence = len(line.words) >= 4 and line.text.rstrip()[-1:] in ".,;"
+        if plain and (above_rule or sentence):
+            start += 1
         else:
-            spans.append([x0, x1])
-    return [(a, b) for a, b in spans]
+            break
+    return seg[start:]
 
 
-def _assign_col(word: _Word, spans: list[tuple[float, float]]) -> int:
-    def overlap(span: tuple[float, float]) -> float:
-        return min(word.x1, span[1]) - max(word.x0, span[0])
+# ---- step 5: columns
 
-    best = max(range(len(spans)), key=lambda i: overlap(spans[i]))
-    if overlap(spans[best]) > 0:
+
+def _column_spans(seg: list[_Line]) -> list[tuple[float, float]]:
+    data = [ln for ln in seg if ln.is_data()]
+    if len(data) < 2:
+        data = [ln for ln in seg if ln.groups() >= 2] or seg
+    cell_spans = [[(c[0].x0, c[-1].x1) for c in _cells(ln)] for ln in data]
+    x_min = min(a for line_spans in cell_spans for a, _ in line_spans)
+    x_max = max(b for line_spans in cell_spans for _, b in line_spans)
+    step = 0.25
+    n = int((x_max - x_min) / step) + 2
+    cover = [0] * n
+    for line_spans in cell_spans:
+        for a, b in line_spans:
+            for i in range(int((a - x_min) / step), int((b - x_min) / step) + 1):
+                cover[i] += 1
+    # Blocks: separated by positions no data cell covers.
+    blocks: list[tuple[int, int]] = []
+    i = 0
+    while i < n:
+        if cover[i] == 0:
+            i += 1
+            continue
+        j = i
+        while j + 1 < n and cover[j + 1] > 0:
+            j += 1
+        blocks.append((i, j))
+        i = j + 1
+    # Inside a block, split at weak points: positions few lines cover, flanked by columns most
+    # lines cover (one long cell bridging two real columns).
+    tol = max(1, int(0.2 * len(data)))
+    dense = max(2, int(0.5 * len(data)))
+    spans: list[tuple[float, float]] = []
+    for a, b in blocks:
+        cuts: list[int] = []
+        k = a
+        while k <= b:
+            if cover[k] <= tol:
+                m = k
+                while m + 1 <= b and cover[m + 1] <= tol:
+                    m += 1
+                left = max(cover[a:k], default=0)
+                right = max(cover[m + 1 : b + 1], default=0)
+                if left >= dense and right >= dense:
+                    cuts.append((k + m) // 2)
+                k = m + 1
+            else:
+                k += 1
+        edges = [a, *cuts, b]
+        for lo, hi in pairwise(edges):
+            spans.append((x_min + lo * step, x_min + hi * step))
+    return spans
+
+
+def _assign(x0: float, x1: float, spans: list[tuple[float, float]]) -> int:
+    def ov(span: tuple[float, float]) -> float:
+        return min(x1, span[1]) - max(x0, span[0])
+
+    best = max(range(len(spans)), key=lambda i: ov(spans[i]))
+    if ov(spans[best]) > 0:
         return best
-    xc = (word.x0 + word.x1) / 2  # header word over a gap: nearest column centre
+    xc = (x0 + x1) / 2
     return min(range(len(spans)), key=lambda i: abs((spans[i][0] + spans[i][1]) / 2 - xc))
 
 
-def _join(a: str, b: str) -> str:
-    if not a:
-        return b
-    if not b:
-        return a
-    return a + b if a.endswith("-") else f"{a} {b}"
+def _is_label_line(line: _Line, spans: list[tuple[float, float]]) -> bool:
+    """Section label row ("Methods using other architectures:"): text from column 0 on."""
+    return (
+        not line.has_number() and line.groups() == 1 and _assign(line.x0, line.x0 + 1, spans) == 0
+    )
+
+
+def _row_cells(line: _Line, spans: list[tuple[float, float]]) -> list[list[_Word]]:
+    row: list[list[_Word]] = [[] for _ in spans]
+    if _is_label_line(line, spans):
+        row[0] = list(line.words)
+        return row
+    for cell in _cells(line):
+        cols = {_assign(w.x0, w.x1, spans) for w in cell}
+        if not line.is_data() and len(cols) > 1:
+            # Header cell spread over several columns ("EM F1 EM F1"): place word by word.
+            for w in cell:
+                row[_assign(w.x0, w.x1, spans)].append(w)
+        else:
+            row[_assign(cell[0].x0, cell[-1].x1, spans)].extend(cell)
+    return row
+
+
+def _cell_bold(words: list[_Word]) -> bool:
+    """Bold if its numbers are bold ("±" is often set in a regular font), else all words."""
+    numbers = [w for w in words if _is_num(w.text)]
+    return bool(words) and all(w.bold for w in (numbers or words))
+
+
+# ---- step 6: sanity
+
+
+def grid_problem(table: TableData) -> str | None:
+    """Why this grid should not be trusted, or None if it looks like a real table."""
+    if table.n_rows < 2 or table.n_cols < 2:
+        return "too small"
+    filled = [c for c in table.cells if c.text.strip()]
+    if not filled:
+        return "empty"
+    prose = sum(1 for c in filled if len(c.text.split()) >= 8)
+    if prose / len(filled) > 0.15:
+        return "looks like running text"
+    return None
 
 
 def reconstruct_table(
@@ -225,67 +607,55 @@ def reconstruct_table(
 ) -> tuple[TableData, pymupdf.Rect] | None:
     """Rebuild a table grid from word positions.
 
-    Returns the table and the region its rows actually occupy (header included, caption
-    excluded), or None if no plausible grid is found.
+    Returns the table and the region its rows occupy (header included, caption excluded), or
+    None if no trustworthy grid is found.
     """
     region = pymupdf.Rect(region) & page.rect
-    top = _top_rule(page, region)
-    clip = pymupdf.Rect(
-        region.x0 - 4, (top if top is not None else region.y0) - 1, region.x1 + 4, region.y1 + 1
-    )
+    number = _caption_number(label)
+    own_caption = _find_own_caption(page, number, region)
+    col_x0, col_x1 = _column_bounds(page, region, own_caption)
+    y0, y1 = region.y0 - 90, region.y1 + 90
+    if own_caption is not None:
+        y0, y1 = min(y0, own_caption.y0 - 5), max(y1, own_caption.y1 + 5)
+    clip = pymupdf.Rect(col_x0, max(0.0, y0), col_x1, min(page.rect.height, y1))
+
     lines = _cluster_lines(_words(page, clip))
-
-    # Drop the caption and its continuation lines (single-group lines right after it).
-    keep: list[_Line] = []
-    in_caption = False
-    for line in lines:
-        if _CAPTION_RE.match(line.text):
-            in_caption = True
-            continue
-        if in_caption and line.groups() <= 1 and not line.has_number():
-            continue
-        in_caption = False
-        keep.append(line)
-    lines = keep
-    if len(lines) < 2:
+    if not lines:
         return None
+    _classify(lines, number, col_x1 - col_x0)
+    seg = _choose_segment(lines, _segments(lines), region)
+    if seg is None:
+        return None
+    seg = _trim_leading_text(seg, _horizontal_rules(page, clip))
 
-    spans = _column_spans(lines)
+    spans = _column_spans(seg)
     if len(spans) < 2:
         return None
-
-    used = pymupdf.Rect(
-        min(w.x0 for ln in lines for w in ln.words),
-        lines[0].y0,
-        max(w.x1 for ln in lines for w in ln.words),
-        lines[-1].y1,
-    )
-    rows: list[list[str]] = []
-    bold: list[list[bool]] = []
+    rows: list[list[list[_Word]]] = []
     prev: _Line | None = None
-    for line in lines:
-        cells = ["" for _ in spans]
-        cell_bold = [False for _ in spans]
-        for w in line.words:
-            c = _assign_col(w, spans)
-            cells[c] = _join(cells[c], w.text)
-            cell_bold[c] = cell_bold[c] or w.bold
+    for line in seg:
+        cells = _row_cells(line, spans)
         filled = sum(1 for c in cells if c)
-        # Wrapped line: no numbers, fills under half the columns, and sits tight under the
-        # previous line. Merge it into the previous row instead of starting a new one.
+        # Wrapped line: no numbers, fills under half the columns, tight under the previous line.
+        # A section label starts its own row; only its own wrapped lines merge into it. A
+        # lowercase start or a hyphen at the end of the line above means a wrapped cell
+        # ("BERT-" / "base"), not a new label.
+        continues = prev is not None and (
+            line.text[:1].islower() or prev.words[0].text.endswith("-")
+        )
+        label_line = _is_label_line(line, spans) and not continues
         wrapped = (
             prev is not None
             and rows
             and not line.has_number()
             and filled < max(2, len(spans) / 2)
             and line.y0 - prev.y1 < 0.6 * (line.y1 - line.y0)
+            and (not label_line or _is_label_line(prev, spans))
         )
         if wrapped:
-            rows[-1] = [_join(a, b) for a, b in zip(rows[-1], cells, strict=True)]
-            bold[-1] = [a or b for a, b in zip(bold[-1], cell_bold, strict=True)]
+            rows[-1] = [a + b for a, b in zip(rows[-1], cells, strict=True)]
         else:
             rows.append(cells)
-            bold.append(cell_bold)
         prev = line
 
     table = TableData(
@@ -294,12 +664,21 @@ def reconstruct_table(
         n_rows=len(rows),
         n_cols=len(spans),
         cells=[
-            TableCell(text=text, row=r, col=c, is_bold=bold[r][c])
+            TableCell(
+                text=_join_words(words),
+                row=r,
+                col=c,
+                is_bold=_cell_bold(words),
+            )
             for r, row in enumerate(rows)
-            for c, text in enumerate(row)
+            for c, words in enumerate(row)
         ],
     )
-    return normalize_table(table), used
+    normalize_table(table)
+    if grid_problem(table) is not None:
+        return None
+    used = pymupdf.Rect(min(ln.x0 for ln in seg), seg[0].y0, max(ln.x1 for ln in seg), seg[-1].y1)
+    return table, used
 
 
 def table_from_rows(

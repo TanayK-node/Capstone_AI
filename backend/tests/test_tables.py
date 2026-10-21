@@ -4,6 +4,7 @@ import pymupdf
 import pytest
 
 from app.pipeline.parse.tables import (
+    grid_problem,
     normalize_table,
     parse_number,
     reconstruct_table,
@@ -88,3 +89,12 @@ def test_reconstructs_ruled_table_header_and_wrapped_cell() -> None:
         ["Ours", "88.0", "0.851"],
     ]
     assert used.y0 < region.y0  # region grew upward to include the header
+
+
+def test_grid_problem_flags_running_text() -> None:
+    prose = "this sentence is clearly running text from the body of the paper"
+    bad = table_from_rows([["Model", "Score"], [prose, "1"], ["x", prose]])
+    assert grid_problem(bad) == "looks like running text"
+    good = table_from_rows([["Model", "Score"], ["Ours", "88.0"]])
+    assert grid_problem(good) is None
+    assert grid_problem(table_from_rows([["only one row"]])) == "too small"

@@ -9,9 +9,9 @@ import httpx
 import pymupdf
 
 from app.pipeline.parse.base import ParseError
-from app.pipeline.parse.tables import reconstruct_table
+from app.pipeline.parse.tables import grid_problem, reconstruct_table
 from app.pipeline.parse.tei import tei_to_document
-from app.schemas.document import Block, Box, ParsedDocument
+from app.schemas.document import Block, Box, ParsedDocument, TableData
 
 # Element types GROBID should attach coordinates to.
 TEI_COORDINATES = ["title", "head", "p", "s", "figure", "formula", "biblStruct", "note"]
@@ -89,7 +89,15 @@ def parse_with_tei(pdf_path: Path, tei: bytes, parser_version: str = "unknown") 
             _strip_table_fragments(doc, regions, pdf)
     for i, block in enumerate(doc.tables):
         if i not in rebuilt:
-            doc.warnings.append(f"{block.label or block.id}: kept GROBID's table grid")
+            name = block.label or block.id
+            problem = grid_problem(block.table) if block.table else "no grid"
+            if problem is None:
+                doc.warnings.append(f"{name}: kept GROBID's table grid")
+            else:
+                # A wrong grid is worse than none (claims are checked against these cells).
+                caption = block.table.caption if block.table else ""
+                block.table = TableData(label=block.label, caption=caption)
+                doc.warnings.append(f"{name}: no reliable grid ({problem})")
             continue
         table_block, region = rebuilt[i]
         block.table = table_block.table
