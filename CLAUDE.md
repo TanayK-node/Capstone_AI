@@ -61,5 +61,8 @@ Phase 2 passed: check_extract 10/10 on the reference papers with gemini-3.5-flas
   decide first (rules.py, plus GitHub API facts: never clone in Phase 3), one LLM call for the rest,
   quotes grounded like extraction; an LLM "present" whose quote is not confirmed is capped at
   "partial". Score = weighted mean in Python; unknown / not_applicable are left out.
+  Conventions from the team's gold set (eval/gold/repro_gold.csv, 10 papers): a regex mention
+  is a "candidate", not "present" (coverage of the main experiments is judged by the LLM;
+  without it, "partial"); with no repository linked, repo items are not_applicable.
 - Tests use SQLite with foreign keys enforced (db.make_engine); the app uses Postgres.
 - Docling is not wired in yet (its models download from Hugging Face); it is an A1 ablation option.

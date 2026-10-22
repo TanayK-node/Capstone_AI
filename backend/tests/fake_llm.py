@@ -5,7 +5,9 @@ sentence from the tagged paragraphs in the prompt ("[b0012] ..."), so grounding 
 it. Field-specific keywords pick sensible sentences. Verification: every item is "yes".
 An optional invented quote lets tests check that hallucinated evidence is caught.
 Reproducibility checklist: items with a keyword below are "present" with a quoted sentence,
-the rest "missing"; `repro_invented` makes one item cite a sentence that is not in the paper.
+items the prompt lists rule "pattern match" sentences for are "partial" quoting the first
+match (a careful model: one mention is not full coverage); the rest "missing".
+`repro_invented` makes one item cite a sentence that is not in the paper.
 """
 
 from __future__ import annotations
@@ -92,8 +94,22 @@ class FakePaperProvider:
     ) -> list[dict[str, str]]:
         section = request.prompt.split("Checklist items:")[1].split("Paper text:")[0]
         ids = re.findall(r"^- (\w+): ", section, re.M)
+        matches: dict[str, tuple[str, str]] = {}
+        current = ""
+        for line in section.splitlines():
+            if m := re.match(r"^- (\w+): ", line):
+                current = m.group(1)
+            elif (m := re.match(r"^\s+pattern match[^:]*: \[(\w+)\] (.+)$", line)) and current:
+                matches.setdefault(current, (m.group(1), m.group(2)))
         answers = []
         for item_id in ids:
+            if item_id in matches and item_id != self.repro_invented:
+                bid, quote = matches[item_id]
+                answers.append(
+                    {"id": item_id, "status": "partial", "quote": quote, "chunk_id": bid,
+                     "note": "mentioned for one setting"}
+                )  # fmt: skip
+                continue
             key = REPRO_KEYWORDS.get(item_id)
             hit = next(
                 ((bid, s) for bid, t in paragraphs for s in _SENT.split(t) if key and key in s),

@@ -5,7 +5,9 @@
 # weight: relative weight inside the group; groups Code and Experimental setup weigh most.
 # question: asked of the authors when the item is missing or partial.
 # Bump `version` on any change: scorecards store the version they were scored with.
-version: 2
+# v3: compute and statistics items say "for the main experiments", matching how the team
+#     annotated the gold set (eval/gold): one passing mention is "partial".
+version: 3
 groups:
   code: { label: Code, weight: 0.25 }
   data: { label: Data, weight: 0.20 }
@@ -105,13 +107,13 @@ items:
     group: compute
     weight: 1
     rule: gpu_models
-    description: "The hardware used (GPU/TPU type and count) is stated."
+    description: "The hardware used for the main experiments (GPU/TPU type and count) is stated."
     question: "Which hardware (GPU/TPU type and count) was used?"
   - id: training_time
     group: compute
     weight: 1
     rule: compute_hours
-    description: "Training time or GPU hours are reported."
+    description: "Training time or GPU hours are reported for the main models."
     question: "How long did training take (wall-clock time or GPU hours)?"
   - id: memory
     group: compute
@@ -124,13 +126,13 @@ items:
     group: stats
     weight: 1
     rule: seed_terms
-    description: "The number of runs or random seeds is reported."
+    description: "The number of runs or random seeds behind the main results is reported."
     question: "How many runs or random seeds are the reported results based on?"
   - id: error_bars
     group: stats
     weight: 1
     rule: error_bars
-    description: "Results include error bars, standard deviations or confidence intervals."
+    description: "The main results include error bars, standard deviations or confidence intervals."
     question: "What is the variance of the results across runs?"
   - id: significance
     group: stats

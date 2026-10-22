@@ -3,6 +3,11 @@
 A rule either decides an item, with the sentence(s) that show it, or returns "inconclusive"
 and the item goes to the LLM. Rules prefer "inconclusive" over "missing" when the absence of
 a regex hit proves little (a paper can describe its hardware without naming a GPU model).
+
+"candidate": the rule found mentions but cannot judge coverage. A sentence naming one GPU or
+one training time proves the item is mentioned, not that it is reported for the main
+experiments (the team's gold annotations mark most such papers "partial"). The matches go to
+the LLM as candidate evidence; without an LLM they count as "partial", never "present".
 Rules named in config/checklist.yaml must exist in RULES (checked by a test).
 """
 
@@ -13,12 +18,14 @@ from collections.abc import Callable, Sequence
 from dataclasses import dataclass, field
 from typing import Literal
 
-from app.pipeline.extract.hints import Hint, find_hints
+from app.pipeline.extract.hints import Hint, find_hints, sentences_of
 from app.schemas.document import Block, ParsedDocument
 from app.schemas.extraction import Evidence, Item, PaperExtraction
 from app.schemas.repro import ItemSource, RepoInfo
 
-RuleStatus = Literal["present", "partial", "missing", "unknown", "inconclusive"]
+RuleStatus = Literal[
+    "present", "partial", "missing", "not_applicable", "unknown", "inconclusive", "candidate"
+]
 
 
 @dataclass
@@ -97,20 +104,44 @@ def _kind(ctx: RuleContext, kind: str) -> list[Hint]:
 # ------------------------------------------------------------------ code
 
 
+_ANY_URL = re.compile(r"https?://\S+|www\.\S+|\b[\w-]+(\.[\w-]+)+/~\S+")
+_RELEASE = re.compile(
+    r"\b(code|implementation|models?|weights|checkpoints|project page|available|release[ds]?)\b",
+    re.I,
+)
+
+
+def _body_sentences(ctx: RuleContext) -> list[tuple[Block, str]]:
+    out: list[tuple[Block, str]] = []
+    for block in ctx.doc.blocks:
+        if block.type not in ("paragraph", "footnote", "caption") or block.role == "references":
+            continue
+        out += [(block, s) for s in sentences_of(block)]
+    return out
+
+
 def code_url_present(ctx: RuleContext) -> RuleResult:
     urls = ctx.extraction.code_urls
-    if not urls:
-        return RuleResult(
-            "missing", "No repository link (GitHub, GitLab, Hugging Face) in the text."
-        )
-    return RuleResult("present", urls[0].value, _item_evidence(urls) or list(urls[0].evidence))
+    if urls:
+        evidence = _item_evidence(urls) or list(urls[0].evidence)
+        return RuleResult("present", urls[0].value, evidence)
+    # A project page or model download, but no code repository (VGG): partial.
+    for block, sentence in _body_sentences(ctx):
+        if _ANY_URL.search(sentence) and _RELEASE.search(sentence):
+            ev = Evidence(chunk_id=block.id, page=block.page, quote=sentence[:400])
+            note = "Links a project page or release, not a code repository."
+            return RuleResult("partial", note, [ev])
+    return RuleResult("missing", "No repository link (GitHub, GitLab, Hugging Face) in the text.")
 
 
 def _repo_state(ctx: RuleContext) -> RuleResult | None:
     """Shared outcome for repo_* rules when there is no repository to look at."""
     repo = ctx.repo
     if repo is None:
-        return RuleResult("missing", "No repository is linked from the paper.", source="repo")
+        # Not "missing": the absent link is already scored by code_url; counting it again on
+        # every repository item would punish one omission five times (team convention).
+        note = "No repository is linked from the paper."
+        return RuleResult("not_applicable", note, source="repo")
     if repo.reachable is None:
         # The reason (e.g. GitHub API rate limit) is shown once with the repository.
         return RuleResult(
@@ -207,11 +238,28 @@ _WEIGHTS = re.compile(
 )
 
 
+_PAPER_RELEASE = re.compile(
+    r"\b(releas\w*|publicly available|made available|available (at|from|online)|download\w*)\b"
+    r".{0,80}\b(models?|weights|checkpoints|networks?)\b|"
+    r"\b(models?|weights|checkpoints|networks?)\b.{0,60}\b(are|is|have been) "
+    r"(now )?(publicly )?(available|released)\b",
+    re.I,
+)
+
+
+_CODE_WORD = re.compile(r"\b(code|implementation|toolbox|library)\b", re.I)
+
+
 def repo_weights(ctx: RuleContext) -> RuleResult:
-    """Weights mentioned in the README decide it; otherwise the paper text may say
-    "we release our models", which the LLM checks."""
+    """Weights mentioned in the README decide it, then a release sentence in the paper
+    ("we released our two best-performing models", VGG); otherwise the LLM reads the text."""
     if ctx.repo and ctx.repo.reachable and (m := _WEIGHTS.search(ctx.repo.readme_excerpt)):
         return RuleResult("present", f"README mentions “{m.group(0)}”.", source="repo")
+    for block, sentence in _body_sentences(ctx):
+        # "The code we used to train ... our models is available" releases code, not weights.
+        if _PAPER_RELEASE.search(sentence) and not _CODE_WORD.search(sentence):
+            ev = Evidence(chunk_id=block.id, page=block.page, quote=sentence[:400])
+            return RuleResult("present", "The paper states trained models are released.", [ev])
     return INCONCLUSIVE
 
 
@@ -259,7 +307,7 @@ _DEVICE_MODEL = re.compile(
 def gpu_models(ctx: RuleContext) -> RuleResult:
     hits = [h for h in _kind(ctx, "hardware") if _DEVICE_MODEL.search(h.sentence)]
     if hits:
-        return RuleResult("present", "A GPU/TPU model is named.", _hint_evidence(ctx, hits))
+        return RuleResult("candidate", "A GPU/TPU model is named.", _hint_evidence(ctx, hits))
     return INCONCLUSIVE  # "trained on 8 GPUs" names no model; the LLM judges partial/missing
 
 
@@ -269,7 +317,7 @@ _TRAINING_CONTEXT = re.compile(r"train|GPU|TPU|pre-?train|fine-?tun|took|takes",
 def compute_hours(ctx: RuleContext) -> RuleResult:
     hits = [h for h in _kind(ctx, "compute_time") if _TRAINING_CONTEXT.search(h.sentence)]
     if hits:
-        return RuleResult("present", "Training time is reported.", _hint_evidence(ctx, hits))
+        return RuleResult("candidate", "A training time is mentioned.", _hint_evidence(ctx, hits))
     return INCONCLUSIVE
 
 
@@ -286,7 +334,7 @@ def seed_terms(ctx: RuleContext) -> RuleResult:
     hits.sort(key=lambda h: "seed" not in h.sentence.lower())
     if hits:
         return RuleResult(
-            "present", "Number of runs or seeds is mentioned.", _hint_evidence(ctx, hits)
+            "candidate", "Number of runs or seeds is mentioned.", _hint_evidence(ctx, hits)
         )
     return INCONCLUSIVE
 
@@ -304,7 +352,7 @@ def error_bars(ctx: RuleContext) -> RuleResult:
         if any(c.std is not None for c in cells) or "±" in block.text:
             quote = block.text.split(". ")[0][:300] or block.label or block.id
             ev = Evidence(chunk_id=block.id, page=block.page, quote=quote)
-            return RuleResult("present", f"{block.label or 'A table'} reports ± spreads.", [ev])
+            return RuleResult("candidate", f"{block.label or 'A table'} reports ± spreads.", [ev])
     body = [b for b in ctx.doc.blocks if b.type in ("paragraph", "caption", "footnote")]
     for block in body:
         if (block.role or "") == "references":
@@ -312,7 +360,7 @@ def error_bars(ctx: RuleContext) -> RuleResult:
         if m := _SPREAD_TEXT.search(block.text):
             sentence = _sentence_around(block, m.start())
             ev = Evidence(chunk_id=block.id, page=block.page, quote=sentence)
-            return RuleResult("present", "Spread (std / CI / error bars) is reported.", [ev])
+            return RuleResult("candidate", "Spread (std / CI / error bars) is mentioned.", [ev])
     return INCONCLUSIVE
 
 

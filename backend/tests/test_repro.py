@@ -136,11 +136,16 @@ def test_analyzer_on_fixture_paper(settings: Settings) -> None:
     run = run_fixture(settings, provider, gh)
     items = {i.id: i for i in run.scorecard.items}
 
-    # Rules decide from the paper text, with grounded (highlightable) evidence.
-    for item_id in ("training_details", "hardware", "training_time", "runs_seeds", "error_bars"):
-        assert items[item_id].status == "present" and items[item_id].source == "rule", item_id
-        ev = items[item_id].evidence[0]
-        assert ev.grounding_status == "verified" and ev.boxes, item_id
+    # A decisive rule settles the item from the paper text, with grounded evidence.
+    assert items["training_details"].status == "present"
+    assert items["training_details"].source == "rule"
+    ev = items["training_details"].evidence[0]
+    assert ev.grounding_status == "verified" and ev.boxes
+    # Mention-only rules (one GPU named, one training time) leave the coverage call to the
+    # LLM, which sees their sentences as candidates; the fake answers "partial" from them.
+    for item_id in ("hardware", "training_time", "runs_seeds", "error_bars"):
+        assert items[item_id].source == "llm" and items[item_id].status == "partial", item_id
+        assert items[item_id].evidence[0].grounding_status in ("verified", "partial"), item_id
     assert items["code_url"].status == "present"
     assert items["datasets_access"].source == "extraction"
     # Repository facts come from the (mocked) GitHub API.
@@ -153,7 +158,8 @@ def test_analyzer_on_fixture_paper(settings: Settings) -> None:
     checklist_calls = [c for c in provider.calls if "Checklist items:" in c.prompt]
     assert len(checklist_calls) == 1
     asked = checklist_calls[0].prompt.split("Checklist items:")[1].split("Paper text:")[0]
-    assert "- datasets_named:" in asked and "- hardware:" not in asked
+    assert "- datasets_named:" in asked and "- training_details:" not in asked
+    assert "- hardware:" in asked and "pattern match" in asked and "A100" in asked
     assert items["datasets_named"].source == "llm"
     assert items["datasets_named"].evidence[0].grounding_status == "verified"
     assert items["memory"].status == "missing" and items["memory"].question
@@ -192,7 +198,7 @@ def test_scorecard_in_exports(settings: Settings, fmt: str) -> None:
     if fmt == "md":
         assert "## Reproducibility:" in body and "Questions for the authors" in body
     elif fmt == "json":
-        assert json.loads(body)["reproducibility"]["checklist_version"] == 2
+        assert json.loads(body)["reproducibility"]["checklist_version"] == load_checklist().version
     else:
         assert "checklist:compute,hardware" in body
 
@@ -239,3 +245,51 @@ def test_gold_sheet_round_trip_and_agreement(tmp_path) -> None:  # type: ignore[
     bad.write_text("paper_id,item_id,status\np1,code_url,maybe\n", encoding="utf-8")
     with pytest.raises(ValueError, match="unknown status"):
         load_gold(bad)
+
+
+def test_without_llm_candidates_count_as_partial_not_present(settings: Settings) -> None:
+    doc = fixture_doc()
+    extraction = extract_document(doc, llm(settings, FakePaperProvider())).extraction
+    run = analyze(doc, extraction, load_checklist(), client=None, github=None)
+    items = {i.id: i for i in run.scorecard.items}
+    assert items["hardware"].status == "partial" and items["hardware"].source == "rule"
+    assert "A100" in items["hardware"].evidence[0].quote
+    assert items["memory"].status == "unknown"  # no rule, no LLM: undecided, not scored
+
+
+def _doc(*texts: str):  # type: ignore[no-untyped-def]
+    from app.schemas.document import Block, PageInfo, ParsedDocument, Sentence
+
+    blocks = [
+        Block(id=f"b{i}", type="paragraph", order=i, page=1, bbox=None, text=t,
+              sentences=[Sentence(text=t)], role="introduction")
+        for i, t in enumerate(texts)
+    ]  # fmt: skip
+    return ParsedDocument(
+        parser="test", parser_version="0", pages=[PageInfo(number=1, width=1, height=1)],
+        blocks=blocks,
+    )  # fmt: skip
+
+
+def test_no_repository_conventions() -> None:
+    """Gold-set conventions: repo items are N/A without a repo; a project page with models
+    is partial code; a release sentence in the paper counts for pretrained weights."""
+    from app.pipeline.repro.rules import RuleContext
+    from app.schemas.extraction import PaperExtraction
+
+    vgg = _doc(
+        "We released our two best-performing models to facilitate further research.",
+        "Models are at http://www.robots.ox.ac.uk/~vgg/research/very_deep/ for public use.",
+    )
+    ctx = RuleContext.build(vgg, PaperExtraction(), None)
+    assert RULES["code_url_present"](ctx).status == "partial"
+    assert RULES["repo_license"](ctx).status == "not_applicable"
+    assert RULES["repo_weights"](ctx).status == "present"
+
+    code_only = _doc("The code we used to train and evaluate our models is available online.")
+    ctx = RuleContext.build(code_only, PaperExtraction(), None)
+    assert RULES["repo_weights"](ctx).status == "inconclusive"  # code, not weights
+
+    plain = RuleContext.build(_doc("We train a network."), PaperExtraction(), None)
+    assert RULES["code_url_present"](plain).status == "missing"
+    assert RULES["repo_weights"](plain).status == "inconclusive"

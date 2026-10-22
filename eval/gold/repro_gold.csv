@@ -1,211 +1,211 @@
 paper_id,item_id,group,description,status,page,note
-1706.03762,code_url,code,The paper links to source code.,,,
-1706.03762,repo_reachable,code,The linked repository exists and can be cloned.,,,
-1706.03762,license,code,The repository has an open-source license.,,,
-1706.03762,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",,,
-1706.03762,run_instructions,code,The README explains how to train and evaluate.,,,
-1706.03762,pretrained_weights,code,Trained model weights or checkpoints are released.,,,
-1706.03762,datasets_named,data,Every dataset used is named.,,,
-1706.03762,datasets_access,data,"Datasets are public, or access to them is described.",,,
-1706.03762,preprocessing,data,Data preprocessing and filtering steps are described.,,,
-1706.03762,splits,data,Train / validation / test splits are specified.,,,
-1706.03762,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,,,
-1706.03762,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",,,
-1706.03762,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",,,
-1706.03762,eval_protocol,setup,The evaluation protocol and metrics are defined.,,,
-1706.03762,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,,,
-1706.03762,training_time,compute,Training time or GPU hours are reported.,,,
-1706.03762,memory,compute,Memory requirements are reported.,,,
-1706.03762,runs_seeds,stats,The number of runs or random seeds is reported.,,,
-1706.03762,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",,,
-1706.03762,significance,stats,Statistical significance testing is reported.,,,
-1706.03762,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,,,
-1810.04805,code_url,code,The paper links to source code.,,,
-1810.04805,repo_reachable,code,The linked repository exists and can be cloned.,,,
-1810.04805,license,code,The repository has an open-source license.,,,
-1810.04805,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",,,
-1810.04805,run_instructions,code,The README explains how to train and evaluate.,,,
-1810.04805,pretrained_weights,code,Trained model weights or checkpoints are released.,,,
-1810.04805,datasets_named,data,Every dataset used is named.,,,
-1810.04805,datasets_access,data,"Datasets are public, or access to them is described.",,,
-1810.04805,preprocessing,data,Data preprocessing and filtering steps are described.,,,
-1810.04805,splits,data,Train / validation / test splits are specified.,,,
-1810.04805,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,,,
-1810.04805,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",,,
-1810.04805,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",,,
-1810.04805,eval_protocol,setup,The evaluation protocol and metrics are defined.,,,
-1810.04805,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,,,
-1810.04805,training_time,compute,Training time or GPU hours are reported.,,,
-1810.04805,memory,compute,Memory requirements are reported.,,,
-1810.04805,runs_seeds,stats,The number of runs or random seeds is reported.,,,
-1810.04805,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",,,
-1810.04805,significance,stats,Statistical significance testing is reported.,,,
-1810.04805,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,,,
-1512.03385,code_url,code,The paper links to source code.,,,
-1512.03385,repo_reachable,code,The linked repository exists and can be cloned.,,,
-1512.03385,license,code,The repository has an open-source license.,,,
-1512.03385,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",,,
-1512.03385,run_instructions,code,The README explains how to train and evaluate.,,,
-1512.03385,pretrained_weights,code,Trained model weights or checkpoints are released.,,,
-1512.03385,datasets_named,data,Every dataset used is named.,,,
-1512.03385,datasets_access,data,"Datasets are public, or access to them is described.",,,
-1512.03385,preprocessing,data,Data preprocessing and filtering steps are described.,,,
-1512.03385,splits,data,Train / validation / test splits are specified.,,,
-1512.03385,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,,,
-1512.03385,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",,,
-1512.03385,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",,,
-1512.03385,eval_protocol,setup,The evaluation protocol and metrics are defined.,,,
-1512.03385,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,,,
-1512.03385,training_time,compute,Training time or GPU hours are reported.,,,
-1512.03385,memory,compute,Memory requirements are reported.,,,
-1512.03385,runs_seeds,stats,The number of runs or random seeds is reported.,,,
-1512.03385,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",,,
-1512.03385,significance,stats,Statistical significance testing is reported.,,,
-1512.03385,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,,,
-2010.11929,code_url,code,The paper links to source code.,,,
-2010.11929,repo_reachable,code,The linked repository exists and can be cloned.,,,
-2010.11929,license,code,The repository has an open-source license.,,,
-2010.11929,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",,,
-2010.11929,run_instructions,code,The README explains how to train and evaluate.,,,
-2010.11929,pretrained_weights,code,Trained model weights or checkpoints are released.,,,
-2010.11929,datasets_named,data,Every dataset used is named.,,,
-2010.11929,datasets_access,data,"Datasets are public, or access to them is described.",,,
-2010.11929,preprocessing,data,Data preprocessing and filtering steps are described.,,,
-2010.11929,splits,data,Train / validation / test splits are specified.,,,
-2010.11929,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,,,
-2010.11929,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",,,
-2010.11929,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",,,
-2010.11929,eval_protocol,setup,The evaluation protocol and metrics are defined.,,,
-2010.11929,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,,,
-2010.11929,training_time,compute,Training time or GPU hours are reported.,,,
-2010.11929,memory,compute,Memory requirements are reported.,,,
-2010.11929,runs_seeds,stats,The number of runs or random seeds is reported.,,,
-2010.11929,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",,,
-2010.11929,significance,stats,Statistical significance testing is reported.,,,
-2010.11929,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,,,
-1907.11692,code_url,code,The paper links to source code.,,,
-1907.11692,repo_reachable,code,The linked repository exists and can be cloned.,,,
-1907.11692,license,code,The repository has an open-source license.,,,
-1907.11692,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",,,
-1907.11692,run_instructions,code,The README explains how to train and evaluate.,,,
-1907.11692,pretrained_weights,code,Trained model weights or checkpoints are released.,,,
-1907.11692,datasets_named,data,Every dataset used is named.,,,
-1907.11692,datasets_access,data,"Datasets are public, or access to them is described.",,,
-1907.11692,preprocessing,data,Data preprocessing and filtering steps are described.,,,
-1907.11692,splits,data,Train / validation / test splits are specified.,,,
-1907.11692,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,,,
-1907.11692,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",,,
-1907.11692,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",,,
-1907.11692,eval_protocol,setup,The evaluation protocol and metrics are defined.,,,
-1907.11692,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,,,
-1907.11692,training_time,compute,Training time or GPU hours are reported.,,,
-1907.11692,memory,compute,Memory requirements are reported.,,,
-1907.11692,runs_seeds,stats,The number of runs or random seeds is reported.,,,
-1907.11692,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",,,
-1907.11692,significance,stats,Statistical significance testing is reported.,,,
-1907.11692,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,,,
-2106.09685,code_url,code,The paper links to source code.,,,
-2106.09685,repo_reachable,code,The linked repository exists and can be cloned.,,,
-2106.09685,license,code,The repository has an open-source license.,,,
-2106.09685,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",,,
-2106.09685,run_instructions,code,The README explains how to train and evaluate.,,,
-2106.09685,pretrained_weights,code,Trained model weights or checkpoints are released.,,,
-2106.09685,datasets_named,data,Every dataset used is named.,,,
-2106.09685,datasets_access,data,"Datasets are public, or access to them is described.",,,
-2106.09685,preprocessing,data,Data preprocessing and filtering steps are described.,,,
-2106.09685,splits,data,Train / validation / test splits are specified.,,,
-2106.09685,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,,,
-2106.09685,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",,,
-2106.09685,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",,,
-2106.09685,eval_protocol,setup,The evaluation protocol and metrics are defined.,,,
-2106.09685,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,,,
-2106.09685,training_time,compute,Training time or GPU hours are reported.,,,
-2106.09685,memory,compute,Memory requirements are reported.,,,
-2106.09685,runs_seeds,stats,The number of runs or random seeds is reported.,,,
-2106.09685,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",,,
-2106.09685,significance,stats,Statistical significance testing is reported.,,,
-2106.09685,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,,,
-1409.0473,code_url,code,The paper links to source code.,,,
-1409.0473,repo_reachable,code,The linked repository exists and can be cloned.,,,
-1409.0473,license,code,The repository has an open-source license.,,,
-1409.0473,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",,,
-1409.0473,run_instructions,code,The README explains how to train and evaluate.,,,
-1409.0473,pretrained_weights,code,Trained model weights or checkpoints are released.,,,
-1409.0473,datasets_named,data,Every dataset used is named.,,,
-1409.0473,datasets_access,data,"Datasets are public, or access to them is described.",,,
-1409.0473,preprocessing,data,Data preprocessing and filtering steps are described.,,,
-1409.0473,splits,data,Train / validation / test splits are specified.,,,
-1409.0473,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,,,
-1409.0473,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",,,
-1409.0473,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",,,
-1409.0473,eval_protocol,setup,The evaluation protocol and metrics are defined.,,,
-1409.0473,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,,,
-1409.0473,training_time,compute,Training time or GPU hours are reported.,,,
-1409.0473,memory,compute,Memory requirements are reported.,,,
-1409.0473,runs_seeds,stats,The number of runs or random seeds is reported.,,,
-1409.0473,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",,,
-1409.0473,significance,stats,Statistical significance testing is reported.,,,
-1409.0473,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,,,
-1409.1556,code_url,code,The paper links to source code.,,,
-1409.1556,repo_reachable,code,The linked repository exists and can be cloned.,,,
-1409.1556,license,code,The repository has an open-source license.,,,
-1409.1556,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",,,
-1409.1556,run_instructions,code,The README explains how to train and evaluate.,,,
-1409.1556,pretrained_weights,code,Trained model weights or checkpoints are released.,,,
-1409.1556,datasets_named,data,Every dataset used is named.,,,
-1409.1556,datasets_access,data,"Datasets are public, or access to them is described.",,,
-1409.1556,preprocessing,data,Data preprocessing and filtering steps are described.,,,
-1409.1556,splits,data,Train / validation / test splits are specified.,,,
-1409.1556,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,,,
-1409.1556,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",,,
-1409.1556,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",,,
-1409.1556,eval_protocol,setup,The evaluation protocol and metrics are defined.,,,
-1409.1556,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,,,
-1409.1556,training_time,compute,Training time or GPU hours are reported.,,,
-1409.1556,memory,compute,Memory requirements are reported.,,,
-1409.1556,runs_seeds,stats,The number of runs or random seeds is reported.,,,
-1409.1556,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",,,
-1409.1556,significance,stats,Statistical significance testing is reported.,,,
-1409.1556,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,,,
-2002.05709,code_url,code,The paper links to source code.,,,
-2002.05709,repo_reachable,code,The linked repository exists and can be cloned.,,,
-2002.05709,license,code,The repository has an open-source license.,,,
-2002.05709,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",,,
-2002.05709,run_instructions,code,The README explains how to train and evaluate.,,,
-2002.05709,pretrained_weights,code,Trained model weights or checkpoints are released.,,,
-2002.05709,datasets_named,data,Every dataset used is named.,,,
-2002.05709,datasets_access,data,"Datasets are public, or access to them is described.",,,
-2002.05709,preprocessing,data,Data preprocessing and filtering steps are described.,,,
-2002.05709,splits,data,Train / validation / test splits are specified.,,,
-2002.05709,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,,,
-2002.05709,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",,,
-2002.05709,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",,,
-2002.05709,eval_protocol,setup,The evaluation protocol and metrics are defined.,,,
-2002.05709,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,,,
-2002.05709,training_time,compute,Training time or GPU hours are reported.,,,
-2002.05709,memory,compute,Memory requirements are reported.,,,
-2002.05709,runs_seeds,stats,The number of runs or random seeds is reported.,,,
-2002.05709,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",,,
-2002.05709,significance,stats,Statistical significance testing is reported.,,,
-2002.05709,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,,,
-1910.01108,code_url,code,The paper links to source code.,,,
-1910.01108,repo_reachable,code,The linked repository exists and can be cloned.,,,
-1910.01108,license,code,The repository has an open-source license.,,,
-1910.01108,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",,,
-1910.01108,run_instructions,code,The README explains how to train and evaluate.,,,
-1910.01108,pretrained_weights,code,Trained model weights or checkpoints are released.,,,
-1910.01108,datasets_named,data,Every dataset used is named.,,,
-1910.01108,datasets_access,data,"Datasets are public, or access to them is described.",,,
-1910.01108,preprocessing,data,Data preprocessing and filtering steps are described.,,,
-1910.01108,splits,data,Train / validation / test splits are specified.,,,
-1910.01108,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,,,
-1910.01108,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",,,
-1910.01108,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",,,
-1910.01108,eval_protocol,setup,The evaluation protocol and metrics are defined.,,,
-1910.01108,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,,,
-1910.01108,training_time,compute,Training time or GPU hours are reported.,,,
-1910.01108,memory,compute,Memory requirements are reported.,,,
-1910.01108,runs_seeds,stats,The number of runs or random seeds is reported.,,,
-1910.01108,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",,,
-1910.01108,significance,stats,Statistical significance testing is reported.,,,
-1910.01108,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,,,
+1706.03762,code_url,code,The paper links to source code.,present,1,"Paper mentions code at GitHub, but the PDF link is generic/incomplete in extracted text."
+1706.03762,repo_reachable,code,The linked repository exists and can be cloned.,present,10,Clearly reported in the paper or linked project materials.
+1706.03762,license,code,The repository has an open-source license.,partial,10,"Some relevant information is reported, but coverage is incomplete or not explicit enough for full reproducibility."
+1706.03762,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",present,10,Clearly reported in the paper or linked project materials.
+1706.03762,run_instructions,code,The README explains how to train and evaluate.,present,10,Clearly reported in the paper or linked project materials.
+1706.03762,pretrained_weights,code,Trained model weights or checkpoints are released.,partial,10,"Some relevant information is reported, but coverage is incomplete or not explicit enough for full reproducibility."
+1706.03762,datasets_named,data,Every dataset used is named.,present,1,Clearly reported in the paper or linked project materials.
+1706.03762,datasets_access,data,"Datasets are public, or access to them is described.",present,10,Clearly reported in the paper or linked project materials.
+1706.03762,preprocessing,data,Data preprocessing and filtering steps are described.,partial,,"Some relevant information is reported, but coverage is incomplete or not explicit enough for full reproducibility."
+1706.03762,splits,data,Train / validation / test splits are specified.,present,8,Clearly reported in the paper or linked project materials.
+1706.03762,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,present,7,Clearly reported in the paper or linked project materials.
+1706.03762,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",partial,10,"Some relevant information is reported, but coverage is incomplete or not explicit enough for full reproducibility."
+1706.03762,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",present,7,Clearly reported in the paper or linked project materials.
+1706.03762,eval_protocol,setup,The evaluation protocol and metrics are defined.,present,1,Clearly reported in the paper or linked project materials.
+1706.03762,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,present,1,Reported in the experimental details/results section.
+1706.03762,training_time,compute,Training time or GPU hours are reported.,partial,1,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+1706.03762,memory,compute,Memory requirements are reported.,missing,,No explicit report located for this item.
+1706.03762,runs_seeds,stats,The number of runs or random seeds is reported.,missing,,No explicit report located for this item.
+1706.03762,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",missing,,No explicit report located for this item.
+1706.03762,significance,stats,Statistical significance testing is reported.,missing,,No explicit report located for this item.
+1706.03762,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,partial,,"Baseline comparisons are present, but whether all baseline figures were rerun or copied is not consistently explicit."
+1810.04805,code_url,code,The paper links to source code.,present,12,Paper links to Tensor2Tensor implementation.
+1810.04805,repo_reachable,code,The linked repository exists and can be cloned.,present,12,Clearly reported in the paper or linked project materials.
+1810.04805,license,code,The repository has an open-source license.,present,12,Clearly reported in the paper or linked project materials.
+1810.04805,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",present,12,Clearly reported in the paper or linked project materials.
+1810.04805,run_instructions,code,The README explains how to train and evaluate.,present,12,Clearly reported in the paper or linked project materials.
+1810.04805,pretrained_weights,code,Trained model weights or checkpoints are released.,present,12,Clearly reported in the paper or linked project materials.
+1810.04805,datasets_named,data,Every dataset used is named.,present,1,Clearly reported in the paper or linked project materials.
+1810.04805,datasets_access,data,"Datasets are public, or access to them is described.",present,2,Clearly reported in the paper or linked project materials.
+1810.04805,preprocessing,data,Data preprocessing and filtering steps are described.,present,6,Clearly reported in the paper or linked project materials.
+1810.04805,splits,data,Train / validation / test splits are specified.,present,8,Clearly reported in the paper or linked project materials.
+1810.04805,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,present,3,Clearly reported in the paper or linked project materials.
+1810.04805,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",present,1,Clearly reported in the paper or linked project materials.
+1810.04805,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",present,6,Clearly reported in the paper or linked project materials.
+1810.04805,eval_protocol,setup,The evaluation protocol and metrics are defined.,present,1,Clearly reported in the paper or linked project materials.
+1810.04805,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,partial,1,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+1810.04805,training_time,compute,Training time or GPU hours are reported.,partial,5,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+1810.04805,memory,compute,Memory requirements are reported.,missing,,No explicit report located for this item.
+1810.04805,runs_seeds,stats,The number of runs or random seeds is reported.,partial,7,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+1810.04805,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",missing,,No explicit report located for this item.
+1810.04805,significance,stats,Statistical significance testing is reported.,missing,,No explicit report located for this item.
+1810.04805,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,partial,,"Baseline comparisons are present, but whether all baseline figures were rerun or copied is not consistently explicit."
+1512.03385,code_url,code,The paper links to source code.,missing,,No direct source-code link identified in the paper.
+1512.03385,repo_reachable,code,The linked repository exists and can be cloned.,not_applicable,,Not applicable under the checklist definition for this paper.
+1512.03385,license,code,The repository has an open-source license.,not_applicable,,Not applicable under the checklist definition for this paper.
+1512.03385,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",not_applicable,,Not applicable under the checklist definition for this paper.
+1512.03385,run_instructions,code,The README explains how to train and evaluate.,not_applicable,,Not applicable under the checklist definition for this paper.
+1512.03385,pretrained_weights,code,Trained model weights or checkpoints are released.,partial,12,"Some relevant information is reported, but coverage is incomplete or not explicit enough for full reproducibility."
+1512.03385,datasets_named,data,Every dataset used is named.,present,1,Clearly reported in the paper or linked project materials.
+1512.03385,datasets_access,data,"Datasets are public, or access to them is described.",present,11,Clearly reported in the paper or linked project materials.
+1512.03385,preprocessing,data,Data preprocessing and filtering steps are described.,present,4,Clearly reported in the paper or linked project materials.
+1512.03385,splits,data,Train / validation / test splits are specified.,present,1,Clearly reported in the paper or linked project materials.
+1512.03385,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,present,4,Clearly reported in the paper or linked project materials.
+1512.03385,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",partial,10,"Some relevant information is reported, but coverage is incomplete or not explicit enough for full reproducibility."
+1512.03385,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",present,4,Clearly reported in the paper or linked project materials.
+1512.03385,eval_protocol,setup,The evaluation protocol and metrics are defined.,present,1,Clearly reported in the paper or linked project materials.
+1512.03385,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,partial,2,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+1512.03385,training_time,compute,Training time or GPU hours are reported.,partial,4,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+1512.03385,memory,compute,Memory requirements are reported.,missing,,No explicit report located for this item.
+1512.03385,runs_seeds,stats,The number of runs or random seeds is reported.,missing,,No explicit report located for this item.
+1512.03385,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",partial,7,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+1512.03385,significance,stats,Statistical significance testing is reported.,missing,,No explicit report located for this item.
+1512.03385,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,partial,4,"Baseline comparisons are present, but whether all baseline figures were rerun or copied is not consistently explicit."
+2010.11929,code_url,code,The paper links to source code.,present,20,Paper links to implementation and pretrained models.
+2010.11929,repo_reachable,code,The linked repository exists and can be cloned.,present,20,Clearly reported in the paper or linked project materials.
+2010.11929,license,code,The repository has an open-source license.,present,20,Clearly reported in the paper or linked project materials.
+2010.11929,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",present,20,Clearly reported in the paper or linked project materials.
+2010.11929,run_instructions,code,The README explains how to train and evaluate.,present,20,Clearly reported in the paper or linked project materials.
+2010.11929,pretrained_weights,code,Trained model weights or checkpoints are released.,present,20,Clearly reported in the paper or linked project materials.
+2010.11929,datasets_named,data,Every dataset used is named.,present,1,Clearly reported in the paper or linked project materials.
+2010.11929,datasets_access,data,"Datasets are public, or access to them is described.",present,1,Clearly reported in the paper or linked project materials.
+2010.11929,preprocessing,data,Data preprocessing and filtering steps are described.,present,9,Clearly reported in the paper or linked project materials.
+2010.11929,splits,data,Train / validation / test splits are specified.,present,4,Clearly reported in the paper or linked project materials.
+2010.11929,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,present,5,Clearly reported in the paper or linked project materials.
+2010.11929,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",present,1,Clearly reported in the paper or linked project materials.
+2010.11929,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",present,5,Clearly reported in the paper or linked project materials.
+2010.11929,eval_protocol,setup,The evaluation protocol and metrics are defined.,present,2,Clearly reported in the paper or linked project materials.
+2010.11929,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,present,1,Reported in the experimental details/results section.
+2010.11929,training_time,compute,Training time or GPU hours are reported.,partial,5,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+2010.11929,memory,compute,Memory requirements are reported.,missing,,No explicit report located for this item.
+2010.11929,runs_seeds,stats,The number of runs or random seeds is reported.,partial,6,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+2010.11929,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",partial,6,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+2010.11929,significance,stats,Statistical significance testing is reported.,missing,,No explicit report located for this item.
+2010.11929,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,partial,16,"Baseline comparisons are present, but whether all baseline figures were rerun or copied is not consistently explicit."
+1907.11692,code_url,code,The paper links to source code.,present,10,Paper links to fairseq.
+1907.11692,repo_reachable,code,The linked repository exists and can be cloned.,present,10,Clearly reported in the paper or linked project materials.
+1907.11692,license,code,The repository has an open-source license.,present,10,Clearly reported in the paper or linked project materials.
+1907.11692,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",present,10,Clearly reported in the paper or linked project materials.
+1907.11692,run_instructions,code,The README explains how to train and evaluate.,present,10,Clearly reported in the paper or linked project materials.
+1907.11692,pretrained_weights,code,Trained model weights or checkpoints are released.,present,10,Clearly reported in the paper or linked project materials.
+1907.11692,datasets_named,data,Every dataset used is named.,present,1,Clearly reported in the paper or linked project materials.
+1907.11692,datasets_access,data,"Datasets are public, or access to them is described.",present,1,Clearly reported in the paper or linked project materials.
+1907.11692,preprocessing,data,Data preprocessing and filtering steps are described.,present,2,Clearly reported in the paper or linked project materials.
+1907.11692,splits,data,Train / validation / test splits are specified.,present,1,Clearly reported in the paper or linked project materials.
+1907.11692,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,present,1,Clearly reported in the paper or linked project materials.
+1907.11692,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",present,1,Clearly reported in the paper or linked project materials.
+1907.11692,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",present,2,Clearly reported in the paper or linked project materials.
+1907.11692,eval_protocol,setup,The evaluation protocol and metrics are defined.,present,4,Clearly reported in the paper or linked project materials.
+1907.11692,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,present,3,Reported in the experimental details/results section.
+1907.11692,training_time,compute,Training time or GPU hours are reported.,partial,1,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+1907.11692,memory,compute,Memory requirements are reported.,missing,,No explicit report located for this item.
+1907.11692,runs_seeds,stats,The number of runs or random seeds is reported.,present,4,Reported in the experimental details/results section.
+1907.11692,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",missing,,No explicit report located for this item.
+1907.11692,significance,stats,Statistical significance testing is reported.,missing,,No explicit report located for this item.
+1907.11692,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,present,3,Paper explicitly describes rerunning/reproducing baseline results.
+2106.09685,code_url,code,The paper links to source code.,present,18,Paper links to Microsoft LoRA repository.
+2106.09685,repo_reachable,code,The linked repository exists and can be cloned.,present,1,Clearly reported in the paper or linked project materials.
+2106.09685,license,code,The repository has an open-source license.,present,1,Clearly reported in the paper or linked project materials.
+2106.09685,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",present,1,Clearly reported in the paper or linked project materials.
+2106.09685,run_instructions,code,The README explains how to train and evaluate.,present,1,Clearly reported in the paper or linked project materials.
+2106.09685,pretrained_weights,code,Trained model weights or checkpoints are released.,present,1,Clearly reported in the paper or linked project materials.
+2106.09685,datasets_named,data,Every dataset used is named.,present,1,Clearly reported in the paper or linked project materials.
+2106.09685,datasets_access,data,"Datasets are public, or access to them is described.",present,13,Clearly reported in the paper or linked project materials.
+2106.09685,preprocessing,data,Data preprocessing and filtering steps are described.,partial,,"Some relevant information is reported, but coverage is incomplete or not explicit enough for full reproducibility."
+2106.09685,splits,data,Train / validation / test splits are specified.,present,18,Clearly reported in the paper or linked project materials.
+2106.09685,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,present,3,Clearly reported in the paper or linked project materials.
+2106.09685,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",present,1,Clearly reported in the paper or linked project materials.
+2106.09685,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",present,1,Clearly reported in the paper or linked project materials.
+2106.09685,eval_protocol,setup,The evaluation protocol and metrics are defined.,present,6,Clearly reported in the paper or linked project materials.
+2106.09685,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,present,1,Reported in the experimental details/results section.
+2106.09685,training_time,compute,Training time or GPU hours are reported.,partial,,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+2106.09685,memory,compute,Memory requirements are reported.,partial,9,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+2106.09685,runs_seeds,stats,The number of runs or random seeds is reported.,present,6,Reported in the experimental details/results section.
+2106.09685,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",present,4,Reported in the experimental details/results section.
+2106.09685,significance,stats,Statistical significance testing is reported.,missing,,No explicit report located for this item.
+2106.09685,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,partial,,"Baseline comparisons are present, but whether all baseline figures were rerun or copied is not consistently explicit."
+1409.0473,code_url,code,The paper links to source code.,present,15,Paper points to GroundHog implementation.
+1409.0473,repo_reachable,code,The linked repository exists and can be cloned.,present,15,Clearly reported in the paper or linked project materials.
+1409.0473,license,code,The repository has an open-source license.,partial,15,"Some relevant information is reported, but coverage is incomplete or not explicit enough for full reproducibility."
+1409.0473,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",partial,15,"Some relevant information is reported, but coverage is incomplete or not explicit enough for full reproducibility."
+1409.0473,run_instructions,code,The README explains how to train and evaluate.,partial,15,"Some relevant information is reported, but coverage is incomplete or not explicit enough for full reproducibility."
+1409.0473,pretrained_weights,code,Trained model weights or checkpoints are released.,missing,,Not located in the paper or supplied linked materials during this review.
+1409.0473,datasets_named,data,Every dataset used is named.,present,1,Clearly reported in the paper or linked project materials.
+1409.0473,datasets_access,data,"Datasets are public, or access to them is described.",present,4,Clearly reported in the paper or linked project materials.
+1409.0473,preprocessing,data,Data preprocessing and filtering steps are described.,present,5,Clearly reported in the paper or linked project materials.
+1409.0473,splits,data,Train / validation / test splits are specified.,present,5,Clearly reported in the paper or linked project materials.
+1409.0473,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,partial,11,"Some relevant information is reported, but coverage is incomplete or not explicit enough for full reproducibility."
+1409.0473,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",missing,,Not located in the paper or supplied linked materials during this review.
+1409.0473,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",present,11,Clearly reported in the paper or linked project materials.
+1409.0473,eval_protocol,setup,The evaluation protocol and metrics are defined.,present,5,Clearly reported in the paper or linked project materials.
+1409.0473,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,partial,1,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+1409.0473,training_time,compute,Training time or GPU hours are reported.,partial,5,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+1409.0473,memory,compute,Memory requirements are reported.,missing,,No explicit report located for this item.
+1409.0473,runs_seeds,stats,The number of runs or random seeds is reported.,missing,,No explicit report located for this item.
+1409.0473,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",missing,,No explicit report located for this item.
+1409.0473,significance,stats,Statistical significance testing is reported.,missing,,No explicit report located for this item.
+1409.0473,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,partial,2,"Baseline comparisons are present, but whether all baseline figures were rerun or copied is not consistently explicit."
+1409.1556,code_url,code,The paper links to source code.,partial,5,"Paper provides a project page/model resources, but a direct source-code repository link is not clear."
+1409.1556,repo_reachable,code,The linked repository exists and can be cloned.,not_applicable,,Not applicable under the checklist definition for this paper.
+1409.1556,license,code,The repository has an open-source license.,not_applicable,,Not applicable under the checklist definition for this paper.
+1409.1556,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",not_applicable,,Not applicable under the checklist definition for this paper.
+1409.1556,run_instructions,code,The README explains how to train and evaluate.,partial,5,"Some relevant information is reported, but coverage is incomplete or not explicit enough for full reproducibility."
+1409.1556,pretrained_weights,code,Trained model weights or checkpoints are released.,present,5,Clearly reported in the paper or linked project materials.
+1409.1556,datasets_named,data,Every dataset used is named.,present,1,Clearly reported in the paper or linked project materials.
+1409.1556,datasets_access,data,"Datasets are public, or access to them is described.",present,1,Clearly reported in the paper or linked project materials.
+1409.1556,preprocessing,data,Data preprocessing and filtering steps are described.,present,4,Clearly reported in the paper or linked project materials.
+1409.1556,splits,data,Train / validation / test splits are specified.,present,2,Clearly reported in the paper or linked project materials.
+1409.1556,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,present,4,Clearly reported in the paper or linked project materials.
+1409.1556,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",partial,1,"Some relevant information is reported, but coverage is incomplete or not explicit enough for full reproducibility."
+1409.1556,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",present,4,Clearly reported in the paper or linked project materials.
+1409.1556,eval_protocol,setup,The evaluation protocol and metrics are defined.,present,1,Clearly reported in the paper or linked project materials.
+1409.1556,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,partial,1,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+1409.1556,training_time,compute,Training time or GPU hours are reported.,partial,6,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+1409.1556,memory,compute,Memory requirements are reported.,missing,,No explicit report located for this item.
+1409.1556,runs_seeds,stats,The number of runs or random seeds is reported.,missing,,No explicit report located for this item.
+1409.1556,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",partial,12,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+1409.1556,significance,stats,Statistical significance testing is reported.,missing,,No explicit report located for this item.
+1409.1556,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,partial,,"Baseline comparisons are present, but whether all baseline figures were rerun or copied is not consistently explicit."
+2002.05709,code_url,code,The paper links to source code.,present,20,Paper links to the Google Research SimCLR repository.
+2002.05709,repo_reachable,code,The linked repository exists and can be cloned.,present,19,Clearly reported in the paper or linked project materials.
+2002.05709,license,code,The repository has an open-source license.,present,19,Clearly reported in the paper or linked project materials.
+2002.05709,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",present,19,Clearly reported in the paper or linked project materials.
+2002.05709,run_instructions,code,The README explains how to train and evaluate.,present,19,Clearly reported in the paper or linked project materials.
+2002.05709,pretrained_weights,code,Trained model weights or checkpoints are released.,present,19,Clearly reported in the paper or linked project materials.
+2002.05709,datasets_named,data,Every dataset used is named.,present,1,Clearly reported in the paper or linked project materials.
+2002.05709,datasets_access,data,"Datasets are public, or access to them is described.",present,1,Clearly reported in the paper or linked project materials.
+2002.05709,preprocessing,data,Data preprocessing and filtering steps are described.,present,1,Clearly reported in the paper or linked project materials.
+2002.05709,splits,data,Train / validation / test splits are specified.,present,8,Clearly reported in the paper or linked project materials.
+2002.05709,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,present,1,Clearly reported in the paper or linked project materials.
+2002.05709,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",present,6,Clearly reported in the paper or linked project materials.
+2002.05709,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",present,1,Clearly reported in the paper or linked project materials.
+2002.05709,eval_protocol,setup,The evaluation protocol and metrics are defined.,present,1,Clearly reported in the paper or linked project materials.
+2002.05709,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,partial,2,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+2002.05709,training_time,compute,Training time or GPU hours are reported.,partial,3,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+2002.05709,memory,compute,Memory requirements are reported.,missing,,No explicit report located for this item.
+2002.05709,runs_seeds,stats,The number of runs or random seeds is reported.,present,18,Reported in the experimental details/results section.
+2002.05709,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",present,18,Reported in the experimental details/results section.
+2002.05709,significance,stats,Statistical significance testing is reported.,missing,,No explicit report located for this item.
+2002.05709,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,partial,1,"Baseline comparisons are present, but whether all baseline figures were rerun or copied is not consistently explicit."
+1910.01108,code_url,code,The paper links to source code.,present,4,Paper links to Hugging Face Transformers.
+1910.01108,repo_reachable,code,The linked repository exists and can be cloned.,present,4,Clearly reported in the paper or linked project materials.
+1910.01108,license,code,The repository has an open-source license.,present,4,Clearly reported in the paper or linked project materials.
+1910.01108,dependency_file,code,"The repository lists dependencies (requirements.txt, environment.yml, pyproject.toml, Dockerfile).",present,4,Clearly reported in the paper or linked project materials.
+1910.01108,run_instructions,code,The README explains how to train and evaluate.,present,4,Clearly reported in the paper or linked project materials.
+1910.01108,pretrained_weights,code,Trained model weights or checkpoints are released.,present,4,Clearly reported in the paper or linked project materials.
+1910.01108,datasets_named,data,Every dataset used is named.,present,3,Clearly reported in the paper or linked project materials.
+1910.01108,datasets_access,data,"Datasets are public, or access to them is described.",partial,,"Some relevant information is reported, but coverage is incomplete or not explicit enough for full reproducibility."
+1910.01108,preprocessing,data,Data preprocessing and filtering steps are described.,present,4,Clearly reported in the paper or linked project materials.
+1910.01108,splits,data,Train / validation / test splits are specified.,present,2,Clearly reported in the paper or linked project materials.
+1910.01108,hyperparameters_all,setup,Hyperparameters are given for the proposed method and the baselines.,partial,2,"Some relevant information is reported, but coverage is incomplete or not explicit enough for full reproducibility."
+1910.01108,hp_search,setup,"The hyperparameter search (ranges, method, budget) is described.",partial,3,"Some relevant information is reported, but coverage is incomplete or not explicit enough for full reproducibility."
+1910.01108,training_details,setup,"Optimizer, learning-rate schedule and number of epochs or steps are stated.",partial,,"Some relevant information is reported, but coverage is incomplete or not explicit enough for full reproducibility."
+1910.01108,eval_protocol,setup,The evaluation protocol and metrics are defined.,present,3,Clearly reported in the paper or linked project materials.
+1910.01108,hardware,compute,The hardware used (GPU/TPU type and count) is stated.,partial,2,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+1910.01108,training_time,compute,Training time or GPU hours are reported.,partial,2,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+1910.01108,memory,compute,Memory requirements are reported.,missing,,No explicit report located for this item.
+1910.01108,runs_seeds,stats,The number of runs or random seeds is reported.,partial,3,Only some relevant compute/statistical details are given; the checklist criterion is not fully met.
+1910.01108,error_bars,stats,"Results include error bars, standard deviations or confidence intervals.",missing,,No explicit report located for this item.
+1910.01108,significance,stats,Statistical significance testing is reported.,missing,,No explicit report located for this item.
+1910.01108,baselines_rerun,stats,The paper states whether baseline numbers were re-run or copied from prior work.,partial,3,"Baseline comparisons are present, but whether all baseline figures were rerun or copied is not consistently explicit."

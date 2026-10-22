@@ -110,9 +110,9 @@ def test_upload_runs_pipeline_and_serves_results(client: TestClient) -> None:
     assert ev["grounding_status"] == "verified" and ev["boxes"]
 
     repro = client.get(f"/api/papers/{pid}/reproducibility").json()
-    assert repro["checklist_version"] == 2 and 0 < repro["score"] < 100
+    assert repro["checklist_version"] >= 3 and 0 < repro["score"] < 100
     items = {i["id"]: i for i in repro["scorecard"]["items"]}
-    assert items["hardware"]["status"] == "present" and items["hardware"]["evidence"]
+    assert items["hardware"]["status"] == "partial" and items["hardware"]["evidence"]
 
 
 def test_exports(client: TestClient) -> None:

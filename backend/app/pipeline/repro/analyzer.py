@@ -1,8 +1,10 @@
 """Reproducibility analyzer (M6): rules -> repository check -> LLM for the rest -> score.
 
-1. Each checklist item with a rule is decided by it, unless the rule is inconclusive.
-2. Inconclusive and rule-less items go to the LLM in ONE call over the experiment sections,
-   tables and appendix; it returns a status plus a verbatim quote per item.
+1. Each checklist item with a rule is decided by it, unless the rule is inconclusive or only
+   found candidate mentions (rules.py "candidate": a mention is not full coverage).
+2. Inconclusive, candidate and rule-less items go to the LLM in ONE call over the experiment
+   sections, tables and appendix, with the candidate sentences listed; it returns a status
+   plus a verbatim quote per item. Without an answer, a candidate counts as "partial".
 3. Every quote is grounded like Phase 2 extraction (verify/grounding.py). An LLM "present"
    whose quote is not found in the paper, or does not support the item, is capped at
    "partial" with a note: a hallucinated quote must not earn full marks.
@@ -63,10 +65,13 @@ def analyze(
     repo = _inspect_repo(extraction, github)
     ctx = RuleContext.build(doc, extraction, repo)
     items: dict[str, ItemResult] = {}
+    candidates: dict[str, RuleResult] = {}
     for ci in checklist.items:
         result = RULES[ci.rule](ctx) if ci.rule else RuleResult("inconclusive")
         item = ItemResult(id=ci.id, group=ci.group, description=ci.description, weight=ci.weight)
-        if result.status != "inconclusive":
+        if result.status == "candidate":
+            candidates[ci.id] = result  # stays open for the LLM
+        elif result.status != "inconclusive":
             item.status, item.note, item.source = result.status, result.note, result.source
             item.evidence = result.evidence
         items[ci.id] = item
@@ -74,9 +79,10 @@ def analyze(
     run = ReproRun(Scorecard(checklist_version=checklist.version, score=None, groups=[], items=[]))
     open_items = [items[ci.id] for ci in checklist.items if items[ci.id].source == "none"]
     if open_items and client is not None:
-        _ask_llm(open_items, doc, extraction, client, max_chars, run)
+        _ask_llm(open_items, candidates, doc, extraction, client, max_chars, run)
     elif open_items:
         run.warnings.append("no LLM available: items without a decisive rule are unknown")
+        _fallback_to_candidates(open_items, candidates)
 
     _ground(list(items.values()), doc, client, pdf_path, run)
     card = run.scorecard
@@ -140,8 +146,22 @@ def _extracted_summary(extraction: PaperExtraction) -> list[str]:
     return lines
 
 
+def _fallback_to_candidates(
+    open_items: list[ItemResult], candidates: dict[str, RuleResult]
+) -> None:
+    """No LLM verdict: a rule's mention counts as "partial" (mentioned, coverage unjudged)."""
+    for item in open_items:
+        cand = candidates.get(item.id)
+        if cand is None or item.status != "unknown":
+            continue
+        item.status, item.source = "partial", "rule"
+        item.note = f"{cand.note} Coverage not judged (no LLM answer)."
+        item.evidence = cand.evidence
+
+
 def _ask_llm(
     open_items: list[ItemResult],
+    candidates: dict[str, RuleResult],
     doc: ParsedDocument,
     extraction: PaperExtraction,
     client: LLMClient,
@@ -150,7 +170,16 @@ def _ask_llm(
 ) -> None:
     prompt = prompts.render(
         "repro_checklist",
-        items=[{"id": i.id, "description": i.description} for i in open_items],
+        items=[
+            {
+                "id": i.id,
+                "description": i.description,
+                "matches": [f"[{e.chunk_id}] {e.quote}" for e in candidates[i.id].evidence]
+                if i.id in candidates
+                else [],
+            }
+            for i in open_items
+        ],
         extracted=_extracted_summary(extraction),
         text=context_text(doc, max_chars),
     )
@@ -162,6 +191,7 @@ def _ask_llm(
         run.warnings.append(f"checklist LLM call failed: {type(exc).__name__}: {exc}")
         for item in open_items:
             item.note = "LLM call failed; not decided"
+        _fallback_to_candidates(open_items, candidates)
         return
     run.llm_calls += 0 if result.meta.cached else 1
     run.provider, run.model = result.meta.provider, result.meta.model
@@ -169,16 +199,19 @@ def _ask_llm(
     answers = {a.id.strip(): a for a in result.value.items}
     for item in open_items:
         answer = answers.get(item.id)
-        item.source = "llm"
         if answer is None:
             item.note = "The LLM gave no answer for this item."
+            _fallback_to_candidates([item], candidates)
             continue
+        item.source = "llm"
         item.status = answer.status
         item.note = answer.note.strip()
         quote = answer.quote.strip()
         if quote and answer.status in ("present", "partial"):
             chunk = answer.chunk_id.strip().strip("[]")
             item.evidence = [Evidence(chunk_id=chunk, page=pages.get(chunk, 1), quote=quote)]
+        elif answer.status in ("present", "partial") and item.id in candidates:
+            item.evidence = candidates[item.id].evidence  # the rule's sentences back it
 
 
 def _ground(
