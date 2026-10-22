@@ -248,6 +248,61 @@ export type ResultsTable = {
   proposed_names: string[];
 };
 
+// ---- claims (mirrors app/schemas/claims.py)
+
+export type Verdict =
+  "supported" | "contradicted" | "unsupported" | "weakly_supported" | "unverifiable";
+
+export type CheckedCell = {
+  table_id: string;
+  table_label: string | null;
+  row: number;
+  col: number;
+  row_label: string;
+  column: string;
+  text: string;
+  value: number;
+  role: "method" | "baseline";
+};
+
+export type ClaimCheck = {
+  id: string;
+  text: string;
+  evidence: Evidence[];
+  kind: "score" | "improvement" | "factor" | "qualitative";
+  method: string;
+  baseline: string;
+  dataset: string;
+  metric: string;
+  comparator: string;
+  direction: string;
+  claimed_value: number | null;
+  claimed_delta: number | null;
+  delta_unit: string;
+  table_value: number | null;
+  baseline_value: number | null;
+  recomputed_delta: number | null;
+  recomputed_relative: number | null;
+  recomputed_factor: number | null;
+  verdict: Verdict;
+  explanation: string;
+  checked_cells: CheckedCell[];
+};
+
+export type ClaimsResponse = {
+  paper_id: string;
+  provider: string | null;
+  model: string | null;
+  prompt_version: string | null;
+  created_at: string;
+  report: {
+    tolerance: number;
+    claims: ClaimCheck[];
+    counts: Partial<Record<Verdict, number>>;
+    warnings: string[];
+  };
+};
+
 // ---- reproducibility (mirrors app/schemas/repro.py)
 
 export type ItemStatus = "present" | "partial" | "missing" | "not_applicable" | "unknown";
@@ -334,6 +389,7 @@ export const getReproducibility = (id: string) =>
   request<ReproResponse>(`/api/papers/${id}/reproducibility`);
 export const getTables = (id: string) => request<ResultsTable[]>(`/api/papers/${id}/tables`);
 export const tablesCsvUrl = (id: string) => `${API_URL}/api/papers/${id}/tables?format=csv`;
+export const getClaims = (id: string) => request<ClaimsResponse>(`/api/papers/${id}/claims`);
 export const exportUrl = (id: string, format: ExportFormat) =>
   `${API_URL}/api/papers/${id}/export?format=${format}`;
 /** Server-sent events: `stage` per stage status change, `status`, then `done`. */

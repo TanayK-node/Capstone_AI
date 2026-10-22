@@ -1,0 +1,28 @@
+{# version: 1 #}
+Below are claims made in a research paper. For each numbered claim, fill in the fields.
+Copy names and numbers exactly as they are written in the claim; never compute, convert or
+round anything (another program checks the numbers against the paper's tables).
+
+- kind:
+  - "score": the paper's method reaches a value ("achieves 28.4 BLEU on WMT 2014 En-De").
+  - "improvement": a method beats another by an amount ("improves accuracy by 4.2% over X",
+    "outperforms the previous best by over 2 BLEU").
+  - "factor": N times fewer / faster / smaller ("reduces trainable parameters by 10,000 times").
+  - "qualitative": no number to check ("achieves state-of-the-art results").
+- method: the method the claim is about; "" if it is the paper's own method ("our model").
+- baseline: what it is compared with, as written ("the previous best", "BERT-large"), or "".
+- dataset: dataset, benchmark or task, as written, or "".
+- metric: the metric, as written (BLEU, top-1 accuracy, F1, perplexity, ...), or "".
+- value: for kind "score", the value exactly as written ("28.4", "76.5%"); otherwise "".
+- delta: for "improvement" or "factor", the amount as written ("2", "4.2%", "10,000"); else "".
+- delta_unit: "points" (absolute), "percent" (written with %), "times" (a factor), or "".
+- comparator: "at_least" for "over" / "more than" / "at least"; "at_most" for "up to";
+  "approx" for "about" / "around" / "roughly"; otherwise "exact".
+- direction: "lower" if the method's number is lower than the baseline's (less error, fewer
+  parameters, faster), "higher" if higher, "" if not a comparison.
+
+If a claim contains several numbers, describe the main one. Return one entry per claim id.
+
+{% for c in claims -%}
+{{ c.id }}. {{ c.text }}
+{% endfor %}

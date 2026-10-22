@@ -24,6 +24,11 @@ const STAGES: { key: string; title: string; what: string }[] = [
     title: "Reproducibility",
     what: "checklist: rules and GitHub first, Gemini for the rest; score",
   },
+  {
+    key: "claims",
+    title: "Claims",
+    what: "Gemini reads each claim; Python recomputes it from the tables",
+  },
 ];
 
 const BAR_COLORS: Record<string, string> = {
@@ -33,6 +38,7 @@ const BAR_COLORS: Record<string, string> = {
   extract: "#059669",
   verify: "#d97706",
   repro: "#db2777",
+  claims: "#0891b2",
 };
 
 type GroupRun = {
@@ -244,6 +250,22 @@ function StageDetail({ stageKey, detail }: { stageKey: string; detail: Record<st
               {g.name}: {g.error}
             </p>
           ))}
+      </div>
+    );
+  }
+  if (stageKey === "claims") {
+    const verdicts = (d.verdicts ?? {}) as Record<string, number>;
+    return (
+      <div className="mt-2 text-[11px]">
+        <div className="flex flex-wrap gap-1.5">
+          <Stat label="claims" value={d.claims} />
+          {Object.entries(verdicts).map(([k, v]) => (
+            <Stat key={k} label={k.replace("_", " ")} value={v} />
+          ))}
+          <Stat label="results tables" value={d.tables} />
+          <Stat label="Gemini calls" value={d.llm_calls} />
+        </div>
+        <Warnings items={d.warnings} />
       </div>
     );
   }

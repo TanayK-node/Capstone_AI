@@ -86,6 +86,7 @@ def test_upload_runs_pipeline_and_serves_results(client: TestClient) -> None:
         "extract": "done",
         "verify": "done",
         "repro": "done",
+        "claims": "done",
     }
     assert detail["stages"]["parse"]["provider"] == "pymupdf"
     assert detail["parse"]["block_counts"]["table"] == 1
@@ -118,6 +119,12 @@ def test_upload_runs_pipeline_and_serves_results(client: TestClient) -> None:
     csv_tables = client.get(f"/api/papers/{pid}/tables?format=csv").text
     assert "SparseRoute (ours),26.4 ± 0.2" in csv_tables
     assert any(r["is_proposed"] for r in data["results"])
+
+    report = client.get(f"/api/papers/{pid}/claims").json()["report"]
+    claim = next(c for c in report["claims"] if c["kind"] == "improvement")
+    assert claim["verdict"] == "supported", claim["explanation"]
+    assert claim["recomputed_delta"] == 2.1  # 26.4 - 24.3, computed in Python
+    assert {c["row_label"] for c in claim["checked_cells"]} == {"SparseRoute (ours)", "Transformer"}
 
     repro = client.get(f"/api/papers/{pid}/reproducibility").json()
     assert repro["checklist_version"] >= 3 and 0 < repro["score"] < 100

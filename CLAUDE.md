@@ -72,5 +72,9 @@ Phase 2 passed: check_extract 10/10 on the reference papers with gemini-3.5-flas
   header is reliable; a spanning upper label is only a guessed `group` (periodic leaf headers
   split spans; text right under a label means a wrapped header, not a span). Best values use
   the header's direction (error/loss/params: lower is better), else the caption's.
+- Claims (claims/, M8): the LLM only copies a claim's fields and numbers as written; Python
+  matches table cells, recomputes deltas / factors and gives the verdict (tolerance in config).
+  "contradicted" needs exactly one unambiguous cell; ambiguous misses are "unsupported", so a
+  table the parser missed never makes a paper look wrong.
 - Tests use SQLite with foreign keys enforced (db.make_engine); the app uses Postgres.
 - Docling is not wired in yet (its models download from Hugging Face); it is an A1 ablation option.

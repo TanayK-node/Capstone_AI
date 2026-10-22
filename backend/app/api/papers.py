@@ -19,7 +19,7 @@ from sqlalchemy.orm import Session
 
 from app.config import Settings, get_settings
 from app.db import get_sessionmaker
-from app.models import BlockRow, ExtractionRow, Paper, ParseResult, ReproReport
+from app.models import BlockRow, ClaimReportRow, ExtractionRow, Paper, ParseResult, ReproReport
 from app.pipeline import dispatch, export
 from app.pipeline.ingest import storage
 from app.pipeline.ingest.resolver import InputError
@@ -104,7 +104,9 @@ class ExtractionResponse(BaseModel):
 
 
 class RerunRequest(BaseModel):
-    stages: list[Literal["parse", "structure", "extract", "verify", "repro"]] | None = None
+    stages: list[Literal["parse", "structure", "extract", "verify", "repro", "claims"]] | None = (
+        None
+    )
 
 
 # ------------------------------------------------------------------ helpers
@@ -373,6 +375,23 @@ def get_tables(
             "Content-Disposition": f'attachment; filename="paperlens-{paper_id[:12]}-tables.csv"'
         },
     )
+
+
+@router.get("/{paper_id}/claims")
+def get_claims(paper_id: str, session: Session = Depends(get_session)) -> dict[str, Any]:
+    """Claim verdicts (M8): each claim, the cells it was checked against, recomputed numbers."""
+    _paper_or_404(session, paper_id)
+    row = session.get(ClaimReportRow, paper_id)
+    if row is None:
+        raise HTTPException(404, "no claim report yet for this paper")
+    return {
+        "paper_id": paper_id,
+        "provider": row.provider,
+        "model": row.model,
+        "prompt_version": row.prompt_version,
+        "created_at": row.created_at,
+        "report": row.data,
+    }
 
 
 def _snapshot(paper_id: str) -> tuple[str, str | None, dict[str, dict[str, Any]]] | None:

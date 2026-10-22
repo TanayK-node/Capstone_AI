@@ -118,6 +118,10 @@ class ReproSection(BaseModel):
     max_context_chars: int = 48_000  # paper text sent with the checklist LLM call
 
 
+class ClaimsSection(BaseModel):
+    tolerance: float = 0.15  # absolute, for recomputed values and deltas (SCOPE.md F8)
+
+
 class EmbeddingsSection(BaseModel):
     model: str = "BAAI/bge-small-en-v1.5"
     device: str = "cpu"
@@ -141,6 +145,7 @@ class Settings(BaseSettings):
     pipeline: PipelineSection = Field(default_factory=PipelineSection)
     extraction: ExtractionSection = Field(default_factory=ExtractionSection)
     repro: ReproSection = Field(default_factory=ReproSection)
+    claims: ClaimsSection = Field(default_factory=ClaimsSection)
     embeddings: EmbeddingsSection = Field(default_factory=EmbeddingsSection)
     features: dict[str, bool] = Field(default_factory=dict)
 

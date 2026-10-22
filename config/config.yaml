@@ -111,6 +111,11 @@ repro:
   # Paper text (experiments, tables, appendix) sent with the one checklist LLM call.
   max_context_chars: 48000
 
+claims:
+  # Claims are checked against the results tables in Python. A recomputed value or delta
+  # within this absolute tolerance of the claimed one counts as supported (SCOPE.md F8).
+  tolerance: 0.15
+
 embeddings:
   model: BAAI/bge-small-en-v1.5
   device: cpu

@@ -58,6 +58,8 @@ class FakePaperProvider:
                 json.dumps({"verdicts": [{"id": i, "verdict": "yes"} for i in ids]})
             )
         paragraphs = _TAGGED.findall(request.prompt)
+        if fields == ["claims"] and "Below are claims" in request.prompt:
+            return ProviderResponse(json.dumps({"claims": self._claims(request.prompt)}))
         if fields == ["items"]:
             return ProviderResponse(json.dumps({"items": self._checklist(request, paragraphs)}))
         out: dict[str, Any] = {}
@@ -127,6 +129,26 @@ class FakePaperProvider:
                  "note": "stated"}
             )  # fmt: skip
         return answers
+
+    def _claims(self, prompt: str) -> list[dict[str, str | int]]:
+        """Read "N. claim" lines with a few patterns, as a model would fill the fields."""
+        out: list[dict[str, str | int]] = []
+        for num, text in re.findall(r"^(\d+)\. (.+)$", prompt, re.M):
+            claim: dict[str, str | int] = {
+                "id": int(num), "kind": "qualitative", "method": "", "baseline": "",
+                "dataset": "", "metric": "", "value": "", "delta": "", "delta_unit": "",
+                "comparator": "exact", "direction": "",
+            }  # fmt: skip
+            if m := re.search(r"on the ([\w-]+) benchmark", text):
+                claim["dataset"] = m.group(1)
+            if m := re.search(r"improves (\w+) by ([\d.]+) points over an? (?:dense )?(\w+)", text):
+                claim |= {"kind": "improvement", "metric": m.group(1), "delta": m.group(2),
+                          "delta_unit": "points", "baseline": m.group(3),
+                          "direction": "higher"}  # fmt: skip
+            elif m := re.search(r"(?:achieves|reaches) ([\d.]+) (\w+)", text):
+                claim |= {"kind": "score", "value": m.group(1), "metric": m.group(2)}
+            out.append(claim)
+        return out
 
     def list_models(self) -> list[str]:
         return ["fake"]

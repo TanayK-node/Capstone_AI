@@ -17,7 +17,17 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from app.config import Settings, get_settings
 from app.llm.client import LLMClient
-from app.models import BlockRow, ChunkRow, ExtractionRow, Job, Paper, ParseResult, ReproReport
+from app.models import (
+    BlockRow,
+    ChunkRow,
+    ClaimReportRow,
+    ExtractionRow,
+    Job,
+    Paper,
+    ParseResult,
+    ReproReport,
+)
+from app.pipeline.claims.service import check_claims
 from app.pipeline.extract.extractor import extract_document
 from app.pipeline.ingest import storage
 from app.pipeline.parse import get_parser
@@ -40,8 +50,8 @@ from app.schemas.extraction import PaperExtraction
 
 log = logging.getLogger("paperlens.pipeline")
 
-STAGES = ("parse", "structure", "extract", "verify", "repro")
-ANALYSIS_STAGES = ("extract", "verify", "repro")
+STAGES = ("parse", "structure", "extract", "verify", "repro", "claims")
+ANALYSIS_STAGES = ("extract", "verify", "repro", "claims")
 # Stages after these are "analysis": if one fails the paper is still usable ("partial").
 CORE_STAGES = ("parse", "structure")
 
@@ -334,6 +344,37 @@ def run_repro(
         }
 
 
+def run_claims(
+    session: Session, settings: Settings, paper: Paper, doc: ParsedDocument, llm: LLMClient | None
+) -> None:
+    with stage_job(session, paper.id, "claims") as job:
+        row = session.get(ExtractionRow, paper.id)
+        if row is None:
+            raise RuntimeError("no extraction: run extract first")
+        extraction = PaperExtraction.model_validate(row.data)
+        tables = build_results(doc, extraction)
+        client = llm if llm is not None and llm.providers else None
+        run = check_claims(extraction, tables, client, settings.claims.tolerance)
+        session.merge(
+            ClaimReportRow(
+                paper_id=paper.id,
+                data=run.report.model_dump(mode="json"),
+                provider=run.provider,
+                model=run.model,
+                prompt_version=run.prompt_version,
+                created_at=datetime.now(UTC),
+            )
+        )
+        job.provider, job.model, job.prompt_version = run.provider, run.model, run.prompt_version
+        job.detail = {
+            "claims": len(run.report.claims),
+            "verdicts": run.report.counts,
+            "tables": len(tables),
+            "llm_calls": run.llm_calls,
+            "warnings": run.warnings,
+        }
+
+
 def process_paper(
     paper_id: str,
     *,
@@ -376,7 +417,13 @@ def process_paper(
         errors: list[str] = []
         if any(st in stages for st in ANALYSIS_STAGES):
             doc = load_document(session, paper_id) or doc  # now with section roles
-        for name, fn in (("extract", run_extract), ("verify", run_verify), ("repro", run_repro)):
+        analysis = (
+            ("extract", run_extract),
+            ("verify", run_verify),
+            ("repro", run_repro),
+            ("claims", run_claims),
+        )
+        for name, fn in analysis:
             if name not in stages:
                 continue
             if errors:

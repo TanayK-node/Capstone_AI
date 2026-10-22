@@ -7,6 +7,7 @@ import { useEffect, useMemo, useState } from "react";
 import {
   eventsUrl,
   getBlocks,
+  getClaims,
   getExtraction,
   getPaper,
   getReproducibility,
@@ -19,6 +20,7 @@ import {
 import { BLOCK_COLORS, BLOCK_TYPES, ROLE_LABELS } from "@/lib/blocks";
 import { GROUNDING_COLORS, Overview, type EvidenceTarget } from "./overview";
 import { PipelineView } from "./pipeline-view";
+import { ClaimsView } from "./claims-view";
 import { ReproView } from "./repro-view";
 import { ResultsView } from "./results-view";
 import type { Highlight } from "./pdf/pdf-viewer";
@@ -30,10 +32,19 @@ const PdfViewer = dynamic(() => import("./pdf/pdf-viewer"), {
   loading: () => <p className="p-4 text-sm text-zinc-500">Loading viewer…</p>,
 });
 
-const STAGES = ["ingest", "parse", "structure", "extract", "verify", "repro"] as const;
+const STAGES = ["ingest", "parse", "structure", "extract", "verify", "repro", "claims"] as const;
 const ACTIVE = ["queued", "processing"];
-type Tab = "pipeline" | "overview" | "reproducibility" | "results" | "structure" | "block";
-const TABS: Tab[] = ["pipeline", "overview", "reproducibility", "results", "structure", "block"];
+type Tab =
+  "pipeline" | "overview" | "reproducibility" | "claims" | "results" | "structure" | "block";
+const TABS: Tab[] = [
+  "pipeline",
+  "overview",
+  "reproducibility",
+  "claims",
+  "results",
+  "structure",
+  "block",
+];
 
 export function Workspace() {
   const { id } = useParams<{ id: string }>();
@@ -73,6 +84,11 @@ export function Workspace() {
     queryKey: ["repro", id, stages?.repro?.finished_at],
     queryFn: () => getReproducibility(id),
     enabled: stages?.repro?.status === "done",
+  });
+  const claims = useQuery({
+    queryKey: ["claims", id, stages?.claims?.finished_at],
+    queryFn: () => getClaims(id),
+    enabled: stages?.claims?.status === "done",
   });
   // Rebuilt from the parse; the extraction (when there is one) names the paper's method.
   const results = useQuery({
@@ -243,6 +259,25 @@ export function Workspace() {
                 </p>
               ))}
             {tab === "structure" && <Structure paper={p} byId={byId} onSelect={select} />}
+            {tab === "claims" &&
+              (claims.data ? (
+                <ClaimsView
+                  claims={claims.data}
+                  activeKey={highlight?.key ?? null}
+                  onEvidence={setEvidence}
+                  onShowTable={showTable}
+                />
+              ) : (
+                <p className="text-zinc-500">
+                  {claims.error
+                    ? `Could not load the claims: ${claims.error.message}`
+                    : stages?.claims?.status === "failed"
+                      ? "Claim checking failed (see the Pipeline tab)."
+                      : ACTIVE.includes(p.status)
+                        ? "Checking claims… they appear here when done."
+                        : "No claim report yet. Re-run the analysis to create one."}
+                </p>
+              ))}
             {tab === "results" &&
               (results.data ? (
                 <ResultsView paperId={id} tables={results.data} onShowTable={showTable} />
@@ -288,7 +323,7 @@ function Header({
         <div className="flex gap-2">
           {paper.stages.structure?.status === "done" && (
             <button
-              onClick={() => onRerun(["extract", "verify", "repro"])}
+              onClick={() => onRerun(["extract", "verify", "repro", "claims"])}
               disabled={busy}
               className="rounded-lg border border-zinc-300 px-3 py-1.5 text-xs disabled:opacity-40 dark:border-zinc-700"
             >
