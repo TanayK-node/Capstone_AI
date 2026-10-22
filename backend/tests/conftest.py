@@ -17,6 +17,8 @@ def settings(monkeypatch: pytest.MonkeyPatch) -> Settings:
         monkeypatch.delenv(var, raising=False)
     # Never download the embedding model in tests; tests that need vectors use FakeEmbedder.
     monkeypatch.setenv("PAPERLENS_EMBEDDINGS__ENABLED", "false")
+    # Nor call Semantic Scholar: context tests inject a fake transport.
+    monkeypatch.setenv("PAPERLENS_CONTEXT__SEMANTIC_SCHOLAR", "false")
     return Settings(_env_file=None)
 
 

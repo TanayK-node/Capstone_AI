@@ -1,0 +1,40 @@
+{# version: 1 #}
+Position a research paper against the work it builds on. Use only what is given below: the
+paper's abstract and contributions, the paper's own paragraphs that cite these references
+(each starts with an id in brackets), and each reference's title and abstract (marked R1, R2..).
+
+Return:
+- "summary": 2-4 sentences on what is new in this paper relative to these references. Say
+  only what the paper's text supports; do not praise it.
+- "positions": for each reference the paper's text says something about, one entry:
+  - "ref": its marker (R1, R2, ...), exactly as given;
+  - "relation": "extends" (builds on it), "uses" (uses it as a component, dataset or tool),
+    "compares_to" (reports results against it) or "differs_from" (says it does something else);
+  - "statement": one sentence on how this paper relates to it;
+  - "quote": ONE sentence copied character-for-character from the paper's paragraphs below
+    that supports the statement, or "" if they do not say;
+  - "chunk_id": the id in brackets of the paragraph the quote comes from.
+Leave out references the paper's text says nothing about. Do not invent markers, and in
+"summary" and "statement" name references by title, not by marker.
+
+Paper: {{ title }}
+
+Abstract:
+{{ abstract or "(not available)" }}
+
+Contributions (as extracted):
+{% for c in contributions -%}
+- {{ c }}
+{% else -%}
+(not available)
+{% endfor %}
+
+References:
+{% for r in references -%}
+[{{ r.marker }}] {{ r.title }}{% if r.year %} ({{ r.year }}){% endif %}
+{{ r.abstract }}
+
+{% endfor -%}
+
+The paper's paragraphs that cite them:
+{{ text }}

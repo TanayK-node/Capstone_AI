@@ -90,3 +90,12 @@ def test_follow_up_is_searched_with_the_previous_question(settings: Settings) ->
 def test_off_topic_question_is_refused_without_calling_the_llm(settings: Settings) -> None:
     out, provider = ask(settings, "{}", "Who won the football world cup?")
     assert not out.answered and out.answer == NOT_FOUND and provider.calls == []
+
+
+def test_word_forms_meet_in_keyword_search() -> None:
+    forms = "problems problem optimizes optimized optimizing losses loss studies study"
+    assert tokenize(forms) == ["problem"] * 2 + ["optimiz"] * 3 + ["loss"] * 2 + ["study"] * 2
+    assert tokenize("lr 1e-4 BLEU-4 v1.1") == ["lr", "1e-4", "bleu-4", "v1.1"]  # left alone
+    texts = ["These problems remain open.", "We train for 3 days.", "Results are in Table 2."]
+    index = PaperIndex([Passage(f"c{i}", t, 1, "Intro") for i, t in enumerate(texts)], None)
+    assert [h.passage.chunk_id for h in index.search("What problem is addressed?", None)] == ["c0"]

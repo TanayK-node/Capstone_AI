@@ -24,6 +24,7 @@ from app.models import (
     BlockRow,
     ClaimReportRow,
     CodeReportRow,
+    ContextReportRow,
     ExtractionRow,
     MathReportRow,
     Paper,
@@ -118,7 +119,7 @@ class ExtractionResponse(BaseModel):
 
 
 StageName = Literal[
-    "parse", "structure", "index", "extract", "verify", "repro", "claims", "code", "math"
+    "parse", "structure", "index", "extract", "verify", "repro", "claims", "code", "math", "context"
 ]
 
 
@@ -461,6 +462,17 @@ def get_glossary(paper_id: str, session: Session = Depends(get_session)) -> dict
     row = session.get(MathReportRow, paper_id)
     if row is None:
         raise HTTPException(404, "no glossary yet for this paper")
+    return {"paper_id": paper_id, "model": row.model, "prompt_version": row.prompt_version,
+            "created_at": row.created_at, "report": row.data}  # fmt: skip
+
+
+@router.get("/{paper_id}/graph")
+def get_graph(paper_id: str, session: Session = Depends(get_session)) -> dict[str, Any]:
+    """Citation graph and novelty positioning (M12)."""
+    _paper_or_404(session, paper_id)
+    row = session.get(ContextReportRow, paper_id)
+    if row is None:
+        raise HTTPException(404, "no citation graph yet for this paper")
     return {"paper_id": paper_id, "model": row.model, "prompt_version": row.prompt_version,
             "created_at": row.created_at, "report": row.data}  # fmt: skip
 

@@ -44,6 +44,11 @@ const STAGES: { key: string; title: string; what: string }[] = [
     title: "Math",
     what: "equations from the LaTeX source (else the PDF); Gemini glossary, quotes grounded",
   },
+  {
+    key: "context",
+    title: "Context",
+    what: "references and citing papers (Semantic Scholar, else the PDF); Gemini novelty",
+  },
 ];
 
 const BAR_COLORS: Record<string, string> = {
@@ -57,6 +62,7 @@ const BAR_COLORS: Record<string, string> = {
   code: "#4f46e5",
   index: "#0d9488",
   math: "#ca8a04",
+  context: "#475569",
 };
 
 type GroupRun = {
@@ -289,6 +295,20 @@ function StageDetail({ stageKey, detail }: { stageKey: string; detail: Record<st
           <Stat label="source" value={d.latex ? "LaTeX" : "PDF"} />
           <Stat label="symbols" value={d.symbols} />
           <Stat label="grounded" value={d.grounded} />
+          <Stat label="Gemini calls" value={d.llm_calls} />
+        </div>
+        <Warnings items={d.warnings} />
+      </div>
+    );
+  if (stageKey === "context")
+    return (
+      <div className="mt-2 text-[11px]">
+        <div className="flex flex-wrap gap-1.5">
+          <Stat label="source" value={d.source === "pdf" ? "PDF only" : "Semantic Scholar"} />
+          <Stat label="references" value={d.references} />
+          <Stat label="cited in text" value={d.cited_in_text} />
+          <Stat label="citing papers" value={d.citations} />
+          <Stat label="novelty relations" value={d.novelty_positions} />
           <Stat label="Gemini calls" value={d.llm_calls} />
         </div>
         <Warnings items={d.warnings} />

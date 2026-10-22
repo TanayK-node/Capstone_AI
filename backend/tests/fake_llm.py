@@ -64,6 +64,8 @@ class FakePaperProvider:
         paragraphs = _TAGGED.findall(request.prompt)
         if fields == ["symbols"]:
             return ProviderResponse(json.dumps({"symbols": self._glossary(request.prompt)}))
+        if fields == ["summary", "positions"]:
+            return ProviderResponse(json.dumps(self._novelty(paragraphs)))
         if fields == ["answerable", "answer"]:
             return ProviderResponse(json.dumps(self._chat(request.prompt)))
         if fields == ["claims"] and "Below are claims" in request.prompt:
@@ -141,6 +143,19 @@ class FakePaperProvider:
                  "note": "stated"}
             )  # fmt: skip
         return answers
+
+    def _novelty(self, paragraphs: list[tuple[str, str]]) -> dict[str, Any]:
+        """R1 from a real citing sentence, R2 with an invented quote, R99 does not exist."""
+        positions = []
+        if paragraphs:
+            bid, text = paragraphs[0]
+            positions.append({"ref": "R1", "relation": "extends", "statement": "Builds on R1.",
+                              "quote": _SENT.split(text)[0], "chunk_id": bid})  # fmt: skip
+        positions.append({"ref": "R2", "relation": "compares_to", "statement": "Beats R2.",
+                          "quote": "We beat everyone.", "chunk_id": "b0001"})  # fmt: skip
+        positions.append({"ref": "R99", "relation": "uses", "statement": "Invented.",
+                          "quote": "", "chunk_id": ""})  # fmt: skip
+        return {"summary": "The paper extends prior attention work.", "positions": positions}
 
     def _glossary(self, prompt: str) -> list[dict[str, str]]:
         """Define 'x' from the sentence that introduces it, plus one invented symbol."""

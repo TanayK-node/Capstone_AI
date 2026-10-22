@@ -23,6 +23,7 @@ from app.models import (
     ChunkRow,
     ClaimReportRow,
     CodeReportRow,
+    ContextReportRow,
     ExtractionRow,
     Job,
     MathReportRow,
@@ -32,6 +33,8 @@ from app.models import (
 )
 from app.pipeline.claims.service import check_claims
 from app.pipeline.code_check.service import check_code
+from app.pipeline.context.graph import build_report as build_context
+from app.pipeline.context.s2 import S2Client
 from app.pipeline.extract.extractor import extract_document
 from app.pipeline.ingest import storage
 from app.pipeline.math.glossary import build_report
@@ -57,8 +60,19 @@ from app.schemas.extraction import PaperExtraction
 
 log = logging.getLogger("paperlens.pipeline")
 
-STAGES = ("parse", "structure", "index", "extract", "verify", "repro", "claims", "code", "math")
-ANALYSIS_STAGES = ("index", "extract", "verify", "repro", "claims", "code", "math")
+STAGES = (
+    "parse",
+    "structure",
+    "index",
+    "extract",
+    "verify",
+    "repro",
+    "claims",
+    "code",
+    "math",
+    "context",
+)
+ANALYSIS_STAGES = ("index", "extract", "verify", "repro", "claims", "code", "math", "context")
 # What each analysis stage reads: when one of these failed in this run, the stage is skipped.
 NEEDS: dict[str, set[str]] = {
     "verify": {"extract"},
@@ -394,6 +408,63 @@ def run_math(
         }
 
 
+def make_s2(settings: Settings) -> S2Client | None:
+    cfg = settings.context
+    if not cfg.semantic_scholar:
+        return None
+    key = settings.s2_api_key.get_secret_value() if settings.s2_api_key else None
+    return S2Client(key or None, timeout_s=cfg.timeout_s, retries=cfg.retries)
+
+
+def run_context(
+    session: Session, settings: Settings, paper: Paper, doc: ParsedDocument, llm: LLMClient | None
+) -> None:
+    """Citation graph and novelty positioning (M12). Uses the extraction's contributions when
+    there is one, but does not need it (the abstract is enough)."""
+    with stage_job(session, paper.id, "context") as job:
+        row = session.get(ExtractionRow, paper.id)
+        extraction = PaperExtraction.model_validate(row.data) if row is not None else None
+        s2 = make_s2(settings)
+        cfg = settings.context
+        try:
+            run = build_context(
+                doc,
+                {**(paper.meta or {}), "title": paper.title or (paper.meta or {}).get("title")},
+                s2=s2,
+                client=llm if llm is not None and llm.providers else None,
+                extraction=extraction,
+                pdf_path=storage.pdf_path(settings, paper.id),
+                top_references=cfg.top_references,
+                top_citations=cfg.top_citations,
+                novelty_references=cfg.novelty_references,
+                citations_fetched=cfg.citations_fetched,
+            )
+        finally:
+            if s2 is not None:
+                s2.close()
+        report = run.report
+        session.merge(
+            ContextReportRow(
+                paper_id=paper.id,
+                data=report.model_dump(mode="json"),
+                provider=run.provider,
+                model=run.model,
+                prompt_version=run.prompt_version,
+                created_at=datetime.now(UTC),
+            )
+        )
+        job.provider, job.model, job.prompt_version = run.provider, run.model, run.prompt_version
+        job.detail = {
+            "source": report.source,
+            "references": report.reference_count,
+            "cited_in_text": sum(1 for n in report.references if n.mentions),
+            "citations": report.citation_count,
+            "novelty_positions": len(report.novelty.positions) if report.novelty else 0,
+            "llm_calls": run.llm_calls,
+            "warnings": run.warnings,
+        }
+
+
 def run_index(
     session: Session, settings: Settings, paper: Paper, doc: ParsedDocument, llm: LLMClient | None
 ) -> None:
@@ -544,6 +615,7 @@ def process_paper(
             ("claims", run_claims),
             ("code", run_code),
             ("math", run_math),
+            ("context", run_context),
         )
         failed: set[str] = set()
         for name, fn in analysis:

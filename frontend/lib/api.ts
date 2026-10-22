@@ -410,6 +410,54 @@ export type GlossaryResponse = {
   report: MathReport;
 };
 
+// ---- context (mirrors app/schemas/context.py)
+
+export type Relation = "extends" | "uses" | "compares_to" | "differs_from";
+
+export type GraphNode = {
+  id: string;
+  kind: "paper" | "reference" | "citation";
+  title: string;
+  year: number | null;
+  venue: string | null;
+  authors: string[];
+  citation_count: number | null;
+  influential: boolean;
+  mentions: number;
+  ref_id: string | null;
+  url: string | null;
+  evidence: Evidence[];
+};
+
+export type ContextReport = {
+  source: "semantic_scholar" | "pdf";
+  paper: GraphNode;
+  references: GraphNode[];
+  citations: GraphNode[];
+  reference_count: number;
+  citation_count: number | null;
+  influential_citation_count: number | null;
+  novelty: {
+    summary: string;
+    positions: {
+      node: string;
+      title: string;
+      relation: Relation;
+      statement: string;
+      evidence: Evidence[];
+    }[];
+  } | null;
+  warnings: string[];
+};
+
+export type GraphResponse = {
+  paper_id: string;
+  model: string | null;
+  prompt_version: string | null;
+  created_at: string;
+  report: ContextReport;
+};
+
 // ---- reproducibility (mirrors app/schemas/repro.py)
 
 export type ItemStatus = "present" | "partial" | "missing" | "not_applicable" | "unknown";
@@ -505,6 +553,7 @@ export const confirmRepo = (id: string, url: string) =>
     body: JSON.stringify({ url }),
   });
 export const getGlossary = (id: string) => request<GlossaryResponse>(`/api/papers/${id}/glossary`);
+export const getGraph = (id: string) => request<GraphResponse>(`/api/papers/${id}/graph`);
 export const askPaper = (id: string, question: string, history: ChatTurn[]) =>
   request<ChatAnswer>(`/api/papers/${id}/chat`, {
     method: "POST",

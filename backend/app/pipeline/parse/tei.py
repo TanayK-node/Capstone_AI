@@ -68,8 +68,17 @@ def parse_coords(value: str | None) -> list[Box]:
     return boxes
 
 
+def _cites(s: etree._Element) -> list[str]:
+    """Reference ids of the in-text citations GROBID resolved (<ref type="bibr" target="#b12">)."""
+    targets = (r.get("target") or "" for r in s.iter(_q("ref")) if r.get("type") == "bibr")
+    return list(dict.fromkeys(t.lstrip("#") for t in targets if t.startswith("#")))
+
+
 def _sentences(p: etree._Element) -> list[Sentence]:
-    return [Sentence(text=text_of(s), boxes=parse_coords(s.get("coords"))) for s in p.iter(_q("s"))]
+    return [
+        Sentence(text=text_of(s), boxes=parse_coords(s.get("coords")), cites=_cites(s))
+        for s in p.iter(_q("s"))
+    ]
 
 
 def _mostly_inside(boxes: list[Box], regions: list[Box], threshold: float = 0.6) -> bool:

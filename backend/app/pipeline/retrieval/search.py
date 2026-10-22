@@ -25,8 +25,26 @@ _STOP = {
 }  # fmt: skip
 
 
+def _stem(t: str) -> str:
+    """Light suffix stripping (like Porter's first step), so "problem" finds "problems" and
+    "optimizes" / "optimized" / "optimizing" meet. Numbers and short tokens are left alone."""
+    if len(t) <= 4 or not t.isalpha():
+        return t
+    if t.endswith("sses"):
+        t = t[:-2]
+    elif t.endswith("ies"):
+        t = t[:-3] + "y"
+    elif t.endswith("s") and not t.endswith(("ss", "us", "is")):
+        t = t[:-1]
+    elif t.endswith("ing") and len(t) >= 6:
+        t = t[:-3]
+    elif t.endswith("ed") and len(t) >= 5:
+        t = t[:-2]
+    return t[:-1] if t.endswith("e") and len(t) > 4 else t
+
+
 def tokenize(text: str) -> list[str]:
-    return [t for t in _TOKEN.findall(text.lower()) if t not in _STOP]
+    return [_stem(t) for t in _TOKEN.findall(text.lower()) if t not in _STOP]
 
 
 @dataclass

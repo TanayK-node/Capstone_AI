@@ -101,7 +101,7 @@ class SourceFetcher:
         pdf_url = f"https://arxiv.org/pdf/{arxiv_id}"
         paper = FetchedPaper("arxiv", arxiv_id, self.download_pdf(pdf_url), pdf_url, meta)
         if self.cfg.fetch_latex_source:
-            paper.latex_source = self._arxiv_source(arxiv_id)
+            paper.latex_source = self.arxiv_source(arxiv_id)
         return paper
 
     def arxiv_metadata(self, arxiv_id: str) -> dict[str, Any]:
@@ -111,7 +111,7 @@ class SourceFetcher:
             return {"arxiv_id": arxiv_id}
         return parse_arxiv_atom(resp.content, arxiv_id)
 
-    def _arxiv_source(self, arxiv_id: str) -> bytes | None:
+    def arxiv_source(self, arxiv_id: str) -> bytes | None:
         """The e-print tarball (gzip). Not every paper has LaTeX source; failures are fine."""
         try:
             resp = self.http.get(f"https://arxiv.org/e-print/{arxiv_id}")

@@ -143,6 +143,16 @@ class ChatSection(BaseModel):
     history_turns: int = 4  # earlier question/answer pairs sent with a follow-up
 
 
+class ContextSection(BaseModel):
+    semantic_scholar: bool = True  # False = graph from the paper's own reference list only
+    timeout_s: float = 20.0
+    retries: int = 3  # on HTTP 429 / 5xx; the shared unauthenticated pool is busy
+    top_references: int = 20
+    top_citations: int = 20
+    citations_fetched: int = 1000  # S2 cannot sort citations; the top ones are picked from these
+    novelty_references: int = 10  # reference abstracts given to the novelty call
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_prefix="PAPERLENS_",
@@ -165,6 +175,7 @@ class Settings(BaseSettings):
     code_check: CodeCheckSection = Field(default_factory=CodeCheckSection)
     chat: ChatSection = Field(default_factory=ChatSection)
     embeddings: EmbeddingsSection = Field(default_factory=EmbeddingsSection)
+    context: ContextSection = Field(default_factory=ContextSection)
     features: dict[str, bool] = Field(default_factory=dict)
 
     # Secrets: read from the conventional unprefixed names as well.
@@ -176,6 +187,10 @@ class Settings(BaseSettings):
     )
     github_token: SecretStr | None = Field(
         default=None, validation_alias=AliasChoices("GITHUB_TOKEN", "PAPERLENS_GITHUB_TOKEN")
+    )
+    # Optional: a Semantic Scholar key gets a dedicated rate limit instead of the shared pool.
+    s2_api_key: SecretStr | None = Field(
+        default=None, validation_alias=AliasChoices("S2_API_KEY", "PAPERLENS_S2_API_KEY")
     )
 
     @classmethod

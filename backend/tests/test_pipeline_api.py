@@ -108,6 +108,7 @@ def test_upload_runs_pipeline_and_serves_results(client: TestClient) -> None:
         "claims": "done",
         "code": "done",
         "math": "done",
+        "context": "done",
     }
     assert detail["stages"]["parse"]["provider"] == "pymupdf"
     assert detail["parse"]["block_counts"]["table"] == 1
@@ -146,6 +147,12 @@ def test_upload_runs_pipeline_and_serves_results(client: TestClient) -> None:
     assert claim["verdict"] == "supported", claim["explanation"]
     assert claim["recomputed_delta"] == 2.1  # 26.4 - 24.3, computed in Python
     assert {c["row_label"] for c in claim["checked_cells"]} == {"SparseRoute (ours)", "Transformer"}
+
+    glossary = client.get(f"/api/papers/{pid}/glossary").json()["report"]
+    assert glossary["equations"] and glossary["symbols"][0]["symbol"] == "x"
+    graph = client.get(f"/api/papers/{pid}/graph").json()["report"]
+    assert graph["source"] == "pdf" and len(graph["references"]) == 3  # S2 is off in tests
+    assert graph["paper"]["title"] == "Sparse Routing Improves Low-Resource Translation"
 
     code = client.get(f"/api/papers/{pid}/code").json()["report"]
     assert code["status"] == "ok" and code["sandbox"] == "process"
@@ -199,6 +206,7 @@ def test_without_llm_the_paper_is_partial(client: TestClient) -> None:
         "index": "done",  # keyword index needs no LLM
         "extract": "failed",
         "math": "done",  # equations without the LLM; the glossary is skipped with a warning
+        "context": "done",  # the reference graph needs no LLM
     }
     assert client.get(f"/api/papers/{pid}/extraction").status_code == 404
 

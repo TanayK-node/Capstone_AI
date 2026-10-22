@@ -43,6 +43,23 @@ Gemini free-tier hiccups are absorbed in three layers: retries with backoff (2+4
 then the configured backup model (`llm.gemini.overload_fallback`), then one more try of a
 failed section group after `extraction.retry_failed_after_s`.
 
+## Chat, math and context (Phase 5)
+
+- **Chat** tab: ask about the paper; answers come only from its passages and cite them
+  ([P1] chips that highlight the passage in the PDF); if the paper does not say, it says so.
+  Search is keyword + meaning (a small local embedding model, downloaded once) or keyword
+  only when `embeddings.enabled: false`.
+- **Math** tab: the equations, rendered with KaTeX from the paper's LaTeX source when it came
+  from arXiv (else the PDF text), and a notation table (symbol, meaning, the sentence that
+  defines it). Click a numbered equation to find it in the PDF.
+- **Context** tab: a citation graph (the references the paper cites most on the left, the
+  influential papers citing it on the right) and a novelty summary that quotes the paper.
+  Citing papers and abstracts come from Semantic Scholar (`S2_API_KEY` in `.env` is optional);
+  without it the graph uses the PDF's own reference list.
+
+Exit check: `uv run python -m app.pipeline.check_phase5` (5 math-heavy arXiv papers; needs
+GROBID and Gemini).
+
 ## Code, claims and results (Phase 4)
 
 - **Results** tab: every results table with typed values, the best value per column and the

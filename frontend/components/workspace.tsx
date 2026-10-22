@@ -12,6 +12,7 @@ import {
   confirmRepo,
   getExtraction,
   getGlossary,
+  getGraph,
   getPaper,
   getReproducibility,
   getTables,
@@ -25,6 +26,7 @@ import { GROUNDING_COLORS, Overview, type EvidenceTarget } from "./overview";
 import { PipelineView } from "./pipeline-view";
 import { ChatView } from "./chat-view";
 import { ClaimsView } from "./claims-view";
+import { ContextView } from "./context-view";
 import { CodeView } from "./code-view";
 import { MathView } from "./math-view";
 import { ReproView } from "./repro-view";
@@ -49,6 +51,7 @@ const STAGES = [
   "claims",
   "code",
   "math",
+  "context",
 ] as const;
 const ACTIVE = ["queued", "processing"];
 const TABS = [
@@ -59,6 +62,7 @@ const TABS = [
   "claims",
   "code",
   "math",
+  "context",
   "results",
   "structure",
   "block",
@@ -118,6 +122,11 @@ export function Workspace() {
     queryKey: ["glossary", id, stages?.math?.finished_at],
     queryFn: () => getGlossary(id),
     enabled: stages?.math?.status === "done",
+  });
+  const graph = useQuery({
+    queryKey: ["graph", id, stages?.context?.finished_at],
+    queryFn: () => getGraph(id),
+    enabled: stages?.context?.status === "done",
   });
   const confirm = useMutation({
     mutationFn: (url: string) => confirmRepo(id, url),
@@ -362,6 +371,24 @@ export function Workspace() {
                         : "No glossary yet. Re-run the analysis to create one."}
                 </p>
               ))}
+            {tab === "context" &&
+              (graph.data ? (
+                <ContextView
+                  report={graph.data.report}
+                  activeKey={highlight?.key ?? null}
+                  onEvidence={setEvidence}
+                />
+              ) : (
+                <p className="text-zinc-500">
+                  {graph.error
+                    ? `Could not load the citation graph: ${graph.error.message}`
+                    : stages?.context?.status === "failed"
+                      ? "The context stage failed (see the Pipeline tab)."
+                      : ACTIVE.includes(p.status)
+                        ? "Building the citation graph… it appears here when done."
+                        : "No citation graph yet. Re-run the analysis to create one."}
+                </p>
+              ))}
             {tab === "results" &&
               (results.data ? (
                 <ResultsView paperId={id} tables={results.data} onShowTable={showTable} />
@@ -408,7 +435,16 @@ function Header({
           {paper.stages.structure?.status === "done" && (
             <button
               onClick={() =>
-                onRerun(["index", "extract", "verify", "repro", "claims", "code", "math"])
+                onRerun([
+                  "index",
+                  "extract",
+                  "verify",
+                  "repro",
+                  "claims",
+                  "code",
+                  "math",
+                  "context",
+                ])
               }
               disabled={busy}
               className="rounded-lg border border-zinc-300 px-3 py-1.5 text-xs disabled:opacity-40 dark:border-zinc-700"

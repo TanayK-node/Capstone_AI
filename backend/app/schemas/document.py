@@ -57,6 +57,7 @@ class Box(BaseModel):
 class Sentence(BaseModel):
     text: str
     boxes: list[Box] = Field(default_factory=list)
+    cites: list[str] = Field(default_factory=list)  # Reference ids cited here ("b12"), M12
 
 
 class TableCell(BaseModel):

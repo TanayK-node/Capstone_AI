@@ -144,6 +144,19 @@ chat:
   min_cosine: 0.45    # no shared word and nothing this close in meaning: "not in the paper"
   history_turns: 4    # earlier turns sent along with a follow-up question
 
+context:
+  # Citation graph and novelty positioning (M12). Semantic Scholar's Graph API gives
+  # references, citing papers and abstracts; S2_API_KEY in .env is optional (without it the
+  # shared, often busy pool is used). Unreachable: the graph is built from the paper's own
+  # reference list and in-text citations, and there is no novelty summary.
+  semantic_scholar: true
+  timeout_s: 20
+  retries: 3
+  top_references: 20
+  top_citations: 20
+  citations_fetched: 1000
+  novelty_references: 10
+
 features:
   latex_source: true
   code_check: true

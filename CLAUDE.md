@@ -40,8 +40,14 @@ See SCOPE.md for the full scope, architecture and phase plan.
 - Phase 4 exit check: `uv run python -m app.pipeline.check_code --pdf-dir <pdfs>` (repo discovery
   vs eval/gold/code_repos.csv; `--no-llm` for discovery only; the comparison needs Gemini + git)
 - Sandbox image for the code scan: `docker build -t paperlens-sandbox sandbox/`
+- Phase 5 exit check: `uv run python -m app.pipeline.check_phase5` (needs GROBID + GEMINI_API_KEY;
+  downloads 5 math-heavy arXiv papers and their LaTeX source; about 6 Gemini calls per paper)
 
 ## Current phase
+Phase 5 (chat, math, context: M11 grounded chat, M10 equations + glossary, M12 citation graph +
+novelty; Chat, Math, Context tabs). Exit: chat answers cite pages; glossary built for 5
+math-heavy papers; graph renders. Built; check_phase5 not yet run with Gemini (the sandbox
+reaches neither arXiv nor Semantic Scholar: only the fallbacks were exercised there).
 Phase 4 (code and claims: M7 code check, M8 claim verifier, M9 results tables; Code, Claims,
 Results tabs). Exit: correct repo found for >= 80% of papers that have code; at least one real
 paper-code mismatch demonstrated. Built. Discovery: 8/8 papers with code (offline). Mismatch:
@@ -89,5 +95,18 @@ Phase 2 passed: check_extract 10/10 on the reference papers with gemini-3.5-flas
   container, or a limited subprocess where Docker is unavailable (recorded in the report).
   Assignments under "if not is_training" are skipped (inference overrides). Comparison through
   compare.SYNONYMS; "match" = the paper's value appears somewhere, other values listed in a note.
+- Chat (chat/, retrieval/, M11): passages = paragraph chunks; BM25 (light stemming) + local
+  fastembed vectors fused by RRF; nothing relevant -> refuse without an LLM call. Passages are
+  labelled [P1].. in the prompt; Python drops invented markers and refuses an uncited answer.
+- Math (math/, M10): the arXiv e-print is read in memory (only .tex members, size caps, never
+  extracted or compiled); \input followed; LaTeX numbering rules give "(3)", which matches
+  the PDF equation block for highlighting. KaTeX gets the paper's own macros. The glossary is
+  one LLM call; each symbol's quote is grounded (unfound = "unlocated", kept).
+- Context (context/, M12): GROBID's resolved in-text citations are stored per sentence
+  (Sentence.cites; older parses need "Re-run all"), so key references = cited most in the
+  text, with the citing sentences as evidence. Semantic Scholar (optional S2_API_KEY) adds
+  counts, influential flags, citing papers and abstracts; unreachable -> PDF-only graph and
+  no novelty. Novelty = one LLM call over the abstracts of the 10 references cited most in
+  the text; each relation quotes the paper and is grounded.
 - Tests use SQLite with foreign keys enforced (db.make_engine); the app uses Postgres.
 - Docling is not wired in yet (its models download from Hugging Face); it is an A1 ablation option.
