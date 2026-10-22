@@ -11,6 +11,7 @@ import {
   getCode,
   confirmRepo,
   getExtraction,
+  getGlossary,
   getPaper,
   getReproducibility,
   getTables,
@@ -25,6 +26,7 @@ import { PipelineView } from "./pipeline-view";
 import { ChatView } from "./chat-view";
 import { ClaimsView } from "./claims-view";
 import { CodeView } from "./code-view";
+import { MathView } from "./math-view";
 import { ReproView } from "./repro-view";
 import { ResultsView } from "./results-view";
 import type { Highlight } from "./pdf/pdf-viewer";
@@ -46,6 +48,7 @@ const STAGES = [
   "repro",
   "claims",
   "code",
+  "math",
 ] as const;
 const ACTIVE = ["queued", "processing"];
 const TABS = [
@@ -55,6 +58,7 @@ const TABS = [
   "reproducibility",
   "claims",
   "code",
+  "math",
   "results",
   "structure",
   "block",
@@ -109,6 +113,11 @@ export function Workspace() {
     queryKey: ["code", id, stages?.code?.finished_at],
     queryFn: () => getCode(id),
     enabled: stages?.code?.status === "done",
+  });
+  const glossary = useQuery({
+    queryKey: ["glossary", id, stages?.math?.finished_at],
+    queryFn: () => getGlossary(id),
+    enabled: stages?.math?.status === "done",
   });
   const confirm = useMutation({
     mutationFn: (url: string) => confirmRepo(id, url),
@@ -335,6 +344,24 @@ export function Workspace() {
             {confirm.isError && tab === "code" && (
               <p className="mt-2 text-xs text-red-600">{confirm.error.message}</p>
             )}
+            {tab === "math" &&
+              (glossary.data ? (
+                <MathView
+                  report={glossary.data.report}
+                  activeKey={highlight?.key ?? null}
+                  onEvidence={setEvidence}
+                />
+              ) : (
+                <p className="text-zinc-500">
+                  {glossary.error
+                    ? `Could not load the glossary: ${glossary.error.message}`
+                    : stages?.math?.status === "failed"
+                      ? "The math stage failed (see the Pipeline tab)."
+                      : ACTIVE.includes(p.status)
+                        ? "Reading equations… they appear here when done."
+                        : "No glossary yet. Re-run the analysis to create one."}
+                </p>
+              ))}
             {tab === "results" &&
               (results.data ? (
                 <ResultsView paperId={id} tables={results.data} onShowTable={showTable} />
@@ -380,7 +407,9 @@ function Header({
         <div className="flex gap-2">
           {paper.stages.structure?.status === "done" && (
             <button
-              onClick={() => onRerun(["extract", "verify", "repro", "claims", "code"])}
+              onClick={() =>
+                onRerun(["index", "extract", "verify", "repro", "claims", "code", "math"])
+              }
               disabled={busy}
               className="rounded-lg border border-zinc-300 px-3 py-1.5 text-xs disabled:opacity-40 dark:border-zinc-700"
             >

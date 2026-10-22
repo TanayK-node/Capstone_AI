@@ -39,6 +39,11 @@ const STAGES: { key: string; title: string; what: string }[] = [
     title: "Code",
     what: "find the repo, clone it, scan it statically (never run), compare with the paper",
   },
+  {
+    key: "math",
+    title: "Math",
+    what: "equations from the LaTeX source (else the PDF); Gemini glossary, quotes grounded",
+  },
 ];
 
 const BAR_COLORS: Record<string, string> = {
@@ -51,6 +56,7 @@ const BAR_COLORS: Record<string, string> = {
   claims: "#0891b2",
   code: "#4f46e5",
   index: "#0d9488",
+  math: "#ca8a04",
 };
 
 type GroupRun = {
@@ -271,6 +277,19 @@ function StageDetail({ stageKey, detail }: { stageKey: string; detail: Record<st
         <div className="flex flex-wrap gap-1.5">
           <Stat label="passages" value={d.passages} />
           <Stat label="search" value={d.mode === "hybrid" ? "keyword + meaning" : "keyword only"} />
+        </div>
+        <Warnings items={d.warnings} />
+      </div>
+    );
+  if (stageKey === "math")
+    return (
+      <div className="mt-2 text-[11px]">
+        <div className="flex flex-wrap gap-1.5">
+          <Stat label="equations" value={d.equations} />
+          <Stat label="source" value={d.latex ? "LaTeX" : "PDF"} />
+          <Stat label="symbols" value={d.symbols} />
+          <Stat label="grounded" value={d.grounded} />
+          <Stat label="Gemini calls" value={d.llm_calls} />
         </div>
         <Warnings items={d.warnings} />
       </div>

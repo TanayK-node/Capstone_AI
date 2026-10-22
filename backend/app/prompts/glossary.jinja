@@ -1,0 +1,24 @@
+{# version: 1 #}
+Build the notation glossary of a research paper: every mathematical symbol the method uses,
+with what it denotes. Use only the text and equations below. Every paragraph starts with an
+id in brackets.
+
+For each symbol return:
+- "symbol": the symbol as it appears in the equations' LaTeX (e.g. "d_k", "\alpha",
+  "W^Q_i", "\mathcal{L}"), or as written in the text if there is no LaTeX.
+- "meaning": what it denotes, in a few words ("dimension of the keys").
+- "quote": ONE sentence copied character-for-character from the text that defines or
+  explains it.
+- "chunk_id": the id in brackets of the paragraph the quote comes from.
+
+Include symbols, not words: skip ordinary function names (softmax, max, log) unless the paper
+defines them. List each symbol once. If the text does not say what a symbol means, leave it
+out rather than guessing.
+
+Equations:
+{% for eq in equations -%}
+{{ eq.number or "(unnumbered)" }} {{ eq.body }}
+{% endfor %}
+
+Text:
+{{ text }}

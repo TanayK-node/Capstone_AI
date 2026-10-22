@@ -25,6 +25,7 @@ from app.models import (
     ClaimReportRow,
     CodeReportRow,
     ExtractionRow,
+    MathReportRow,
     Paper,
     ParseResult,
     ReproReport,
@@ -116,11 +117,13 @@ class ExtractionResponse(BaseModel):
     data: dict[str, Any]  # PaperExtraction
 
 
+StageName = Literal[
+    "parse", "structure", "index", "extract", "verify", "repro", "claims", "code", "math"
+]
+
+
 class RerunRequest(BaseModel):
-    stages: (
-        list[Literal["parse", "structure", "index", "extract", "verify", "repro", "claims", "code"]]
-        | None
-    ) = None
+    stages: list[StageName] | None = None
 
 
 class ConfirmRepoRequest(BaseModel):
@@ -449,6 +452,17 @@ def confirm_repo(
         duplicate=True,
         dispatched_to=dispatch.enqueue(settings, paper.id, ("code",)),
     )
+
+
+@router.get("/{paper_id}/glossary")
+def get_glossary(paper_id: str, session: Session = Depends(get_session)) -> dict[str, Any]:
+    """Equations and notation glossary (M10)."""
+    _paper_or_404(session, paper_id)
+    row = session.get(MathReportRow, paper_id)
+    if row is None:
+        raise HTTPException(404, "no glossary yet for this paper")
+    return {"paper_id": paper_id, "model": row.model, "prompt_version": row.prompt_version,
+            "created_at": row.created_at, "report": row.data}  # fmt: skip
 
 
 @router.post("/{paper_id}/chat", response_model=ChatAnswer)

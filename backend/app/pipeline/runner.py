@@ -25,6 +25,7 @@ from app.models import (
     CodeReportRow,
     ExtractionRow,
     Job,
+    MathReportRow,
     Paper,
     ParseResult,
     ReproReport,
@@ -33,6 +34,7 @@ from app.pipeline.claims.service import check_claims
 from app.pipeline.code_check.service import check_code
 from app.pipeline.extract.extractor import extract_document
 from app.pipeline.ingest import storage
+from app.pipeline.math.glossary import build_report
 from app.pipeline.parse import get_parser
 from app.pipeline.repro.analyzer import analyze
 from app.pipeline.repro.checklist import load_checklist
@@ -55,8 +57,8 @@ from app.schemas.extraction import PaperExtraction
 
 log = logging.getLogger("paperlens.pipeline")
 
-STAGES = ("parse", "structure", "index", "extract", "verify", "repro", "claims", "code")
-ANALYSIS_STAGES = ("index", "extract", "verify", "repro", "claims", "code")
+STAGES = ("parse", "structure", "index", "extract", "verify", "repro", "claims", "code", "math")
+ANALYSIS_STAGES = ("index", "extract", "verify", "repro", "claims", "code", "math")
 # What each analysis stage reads: when one of these failed in this run, the stage is skipped.
 NEEDS: dict[str, set[str]] = {
     "verify": {"extract"},
@@ -356,6 +358,42 @@ def run_repro(
         }
 
 
+def run_math(
+    session: Session, settings: Settings, paper: Paper, doc: ParsedDocument, llm: LLMClient | None
+) -> None:
+    """Equations (LaTeX source when ingest stored one) and the notation glossary (M10)."""
+    with stage_job(session, paper.id, "math") as job:
+        latex_path = storage.paper_dir(settings, paper.id) / "source.tar.gz"
+        latex = latex_path.read_bytes() if latex_path.exists() else None
+        client = llm if llm is not None and llm.providers else None
+        run = build_report(
+            doc, client, latex_blob=latex, pdf_path=storage.pdf_path(settings, paper.id)
+        )
+        session.merge(
+            MathReportRow(
+                paper_id=paper.id,
+                data=run.report.model_dump(mode="json"),
+                provider=run.provider,
+                model=run.model,
+                prompt_version=run.prompt_version,
+                created_at=datetime.now(UTC),
+            )
+        )
+        job.provider, job.model, job.prompt_version = run.provider, run.model, run.prompt_version
+        job.detail = {
+            "equations": len(run.report.equations),
+            "latex": run.report.latex_available,
+            "symbols": len(run.report.symbols),
+            "grounded": sum(
+                1
+                for s in run.report.symbols
+                if any(e.grounding_status == "verified" for e in s.evidence)
+            ),
+            "llm_calls": run.llm_calls,
+            "warnings": run.warnings,
+        }
+
+
 def run_index(
     session: Session, settings: Settings, paper: Paper, doc: ParsedDocument, llm: LLMClient | None
 ) -> None:
@@ -505,6 +543,7 @@ def process_paper(
             ("repro", run_repro),
             ("claims", run_claims),
             ("code", run_code),
+            ("math", run_math),
         )
         failed: set[str] = set()
         for name, fn in analysis:

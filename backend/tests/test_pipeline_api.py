@@ -107,6 +107,7 @@ def test_upload_runs_pipeline_and_serves_results(client: TestClient) -> None:
         "repro": "done",
         "claims": "done",
         "code": "done",
+        "math": "done",
     }
     assert detail["stages"]["parse"]["provider"] == "pymupdf"
     assert detail["parse"]["block_counts"]["table"] == 1
@@ -197,6 +198,7 @@ def test_without_llm_the_paper_is_partial(client: TestClient) -> None:
         "structure": "done",
         "index": "done",  # keyword index needs no LLM
         "extract": "failed",
+        "math": "done",  # equations without the LLM; the glossary is skipped with a warning
     }
     assert client.get(f"/api/papers/{pid}/extraction").status_code == 404
 

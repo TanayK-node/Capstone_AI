@@ -62,6 +62,8 @@ class FakePaperProvider:
                 json.dumps({"verdicts": [{"id": i, "verdict": "yes"} for i in ids]})
             )
         paragraphs = _TAGGED.findall(request.prompt)
+        if fields == ["symbols"]:
+            return ProviderResponse(json.dumps({"symbols": self._glossary(request.prompt)}))
         if fields == ["answerable", "answer"]:
             return ProviderResponse(json.dumps(self._chat(request.prompt)))
         if fields == ["claims"] and "Below are claims" in request.prompt:
@@ -139,6 +141,19 @@ class FakePaperProvider:
                  "note": "stated"}
             )  # fmt: skip
         return answers
+
+    def _glossary(self, prompt: str) -> list[dict[str, str]]:
+        """Define 'x' from the sentence that introduces it, plus one invented symbol."""
+        out = []
+        for bid, text in _TAGGED.findall(prompt):
+            hit = next((s for s in _SENT.split(text) if "representation x" in s), None)
+            if hit:
+                out.append({"symbol": "x", "meaning": "token representation", "quote": hit,
+                            "chunk_id": bid})  # fmt: skip
+                break
+        out.append({"symbol": "\\zeta", "meaning": "invented", "quote": "Zeta is defined here.",
+                    "chunk_id": "b0001"})  # fmt: skip
+        return out
 
     def _chat(self, prompt: str) -> dict[str, object]:
         """Answer from the first passage, citing it, as a grounded model would."""

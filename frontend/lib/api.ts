@@ -374,6 +374,42 @@ export type ChatAnswer = {
   prompt_version: string | null;
 };
 
+// ---- math (mirrors app/schemas/math.py)
+
+export type Equation = {
+  id: string;
+  number: string | null;
+  latex: string | null;
+  text: string;
+  block_id: string | null;
+  page: number | null;
+  boxes: Box[];
+  source: "latex" | "pdf";
+};
+
+export type MathSymbol = {
+  symbol: string;
+  meaning: string;
+  evidence: Evidence[];
+  equations: string[];
+};
+
+export type MathReport = {
+  latex_available: boolean;
+  equations: Equation[];
+  symbols: MathSymbol[];
+  macros: Record<string, string>;
+  warnings: string[];
+};
+
+export type GlossaryResponse = {
+  paper_id: string;
+  model: string | null;
+  prompt_version: string | null;
+  created_at: string;
+  report: MathReport;
+};
+
 // ---- reproducibility (mirrors app/schemas/repro.py)
 
 export type ItemStatus = "present" | "partial" | "missing" | "not_applicable" | "unknown";
@@ -468,6 +504,7 @@ export const confirmRepo = (id: string, url: string) =>
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ url }),
   });
+export const getGlossary = (id: string) => request<GlossaryResponse>(`/api/papers/${id}/glossary`);
 export const askPaper = (id: string, question: string, history: ChatTurn[]) =>
   request<ChatAnswer>(`/api/papers/${id}/chat`, {
     method: "POST",
