@@ -186,6 +186,7 @@ def _markdown(name: str, report: CodeReport) -> list[str]:
     repo = report.candidates[0].url if report.candidates else "-"
     out = [f"## {name}: {repo}\n", f"status {report.status}, commit {report.commit}, "
            f"sandbox {report.sandbox}, {report.files_scanned} files\n"]  # fmt: skip
+    out += [f"⚠ {w}\n" for w in report.warnings]  # e.g. why a clone failed
     out += ["| status | hyperparameter | paper | code (file:line, kind) |", "|---|---|---|---|"]
     for c in report.comparisons:
         if c.status == "only_in_code":

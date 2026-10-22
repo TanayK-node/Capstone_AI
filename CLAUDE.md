@@ -53,6 +53,9 @@ Results tabs). Exit: correct repo found for >= 80% of papers that have code; at 
 paper-code mismatch demonstrated. Built. Discovery: 8/8 papers with code (offline). Mismatch:
 BERT pre-training lr 1e-4 / batch 256 / 1M steps vs run_pretraining.py defaults 5e-05 / 32 /
 100000 (shown with the paper's sentences; the full check_code run needs Gemini).
+Phase 4 ACCEPTED by the team (Oct 2026) on repo discovery: finding and showing the repo link is
+enough; cloning is optional / future work. On the team's Windows run every clone failed
+(clone_failed for all 8 repos; the reason is now printed in phase4_check/report.md).
 Phase 3: ACCEPTED by the team below target (Oct 2026): check_repro 158/210 = 75% agreement,
 kappa 0.57 (target 80% / 0.6), after per-item guidance (checklist v4, prompt v3; first run 65%).
 Known gaps if it is revisited: training_time (team marks all 10 partial; LLM says present),
