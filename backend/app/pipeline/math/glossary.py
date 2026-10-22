@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import logging
 import re
+import unicodedata
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -23,7 +24,7 @@ from app.llm.client import LLMClient
 from app.llm.errors import LLMError
 from app.pipeline.extract.groups import render_block
 from app.pipeline.math.latex import equations as latex_equations
-from app.pipeline.math.latex import flatten, macros, read_sources
+from app.pipeline.math.latex import expand_simple_macros, flatten, macros, read_sources
 from app.pipeline.verify.grounding import attach_location
 from app.schemas.document import ParsedDocument
 from app.schemas.extraction import Evidence
@@ -33,6 +34,7 @@ log = logging.getLogger("paperlens.math")
 TEXT_ROLES = {"method", "background", "introduction", "experiments", "appendix"}
 MAX_TEXT_CHARS = 30_000
 MAX_EQUATIONS = 80
+MAX_SYMBOLS = 30  # the prompt asks for at most this many; a longer list is cut
 MIN_PDF_CHARS = 8
 
 
@@ -59,6 +61,7 @@ def build_equations(
     if latex_blob:
         text = flatten(read_sources(latex_blob))
         found = latex_equations(text) if text else []
+        defs = macros(text) if found else {}
         if found:
             eqs: list[Equation] = []
             for i, eq in enumerate(found[:MAX_EQUATIONS], 1):
@@ -68,7 +71,7 @@ def build_equations(
                     Equation(
                         id=f"eq{i}",
                         number=f"({eq.number})" if eq.number else None,
-                        latex=eq.latex,
+                        latex=expand_simple_macros(eq.latex, defs),
                         text=block.text if block else "",
                         block_id=block.id if block else None,
                         page=block.page if block else None,
@@ -76,7 +79,7 @@ def build_equations(
                         source="latex",
                     )
                 )
-            return eqs, macros(text)
+            return eqs, defs
     # GROBID also marks inline fragments ("√ d k") as formulas: an unnumbered block with
     # almost no letters or digits is one of those, not a display equation.
     kept = [b for b in blocks if b.label or len(re.findall(r"\w", b.text)) >= MIN_PDF_CHARS]
@@ -121,6 +124,29 @@ _UNESCAPE = str.maketrans({"\t": "\\t", "\b": "\\b", "\f": "\\f", "\r": "\\r", "
 
 def fix_latex(text: str) -> str:
     return text.translate(_UNESCAPE)
+
+
+_LATEX_CMD = re.compile(r"\\(?:mathbf|mathrm|mathcal|boldsymbol|bm|text|mathit|operatorname)\s*")
+
+
+_GREEK = {
+    name: unicodedata.lookup(f"GREEK {case} LETTER {name.upper().replace('LAMBDA', 'LAMDA')}")
+    for name in ("alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta",
+                 "iota", "kappa", "lambda", "mu", "nu", "xi", "pi", "rho", "sigma", "tau",
+                 "phi", "chi", "psi", "omega")
+    for case in ("SMALL",)
+} | {
+    name: unicodedata.lookup(f"GREEK CAPITAL LETTER {name.upper().replace('LAMBDA', 'LAMDA')}")
+    for name in ("Gamma", "Delta", "Theta", "Lambda", "Xi", "Pi", "Sigma", "Phi", "Psi", "Omega")
+}  # fmt: skip
+
+
+def plain_quote(quote: str) -> str:
+    """A quote with its LaTeX math flattened the way PDF text reads: "$\\mathbf{x}^{(i)}$" ->
+    "x(i)", "\\alpha" -> the Greek letter."""
+    text = _LATEX_CMD.sub("", quote.replace("$", ""))
+    text = re.sub(r"\\([A-Za-z]+)", lambda m: _GREEK.get(m.group(1), m.group(1)), text)
+    return re.sub(r"\s+", " ", re.sub(r"[{}^_]", "", text)).strip()
 
 
 def _symbol_key(symbol: str) -> str:
@@ -172,7 +198,7 @@ def _symbols(
     symbols: list[Symbol] = []
     seen: set[str] = set()
     try:
-        for s in out.symbols:
+        for s in out.symbols[:MAX_SYMBOLS]:
             s.symbol = fix_latex(s.symbol)
             key = _symbol_key(s.symbol)
             if not key or key in seen or not s.meaning.strip():
@@ -184,6 +210,13 @@ def _symbols(
                 ev = Evidence(chunk_id=chunk, page=pages.get(chunk, 1), quote=s.quote.strip())
                 if attach_location(ev, blocks, pdf):
                     ev.grounding_status = "verified"  # the defining sentence is in the paper
+                elif (plain := plain_quote(ev.quote)) != ev.quote:
+                    # The model wrote the sentence's math as LaTeX ("$\\mathbf{x}^{(i)}$");
+                    # the PDF text has it plain ("x (i)"). Try that before giving up.
+                    retry = ev.model_copy(update={"quote": plain})
+                    if attach_location(retry, blocks, pdf):
+                        ev = retry
+                        ev.grounding_status = "verified"
                 evidence.append(ev)
             used_in = [e.id for e in eqs if key in _symbol_key(e.latex or e.text)]
             symbols.append(Symbol(symbol=s.symbol.strip(), meaning=s.meaning.strip(),

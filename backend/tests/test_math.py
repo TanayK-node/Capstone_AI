@@ -132,3 +132,17 @@ def test_main_file_is_the_paper_not_the_template() -> None:
     text = flatten(files)
     assert "Sample." not in text
     assert [(e.latex, e.number) for e in equations(text)] == [("a = b", "1"), ("c = d", "2")]
+
+
+def test_paper_shorthands_are_written_out_and_latex_quotes_flattened() -> None:
+    from app.pipeline.math.glossary import plain_quote
+    from app.pipeline.math.latex import expand_simple_macros
+
+    defs = {r"\bx": r"\mathbf{x}", r"\bphi": r"\boldsymbol{\phi}", r"\gPhi": r"g_{\bphi}",
+            r"\LB": r"\mathcal{L}(#1)", r"\beq": r"\begin{equation}"}  # fmt: skip
+    assert expand_simple_macros(r"\gPhi(\bx) + \bxi + \LB{a}", defs) == (
+        r"g_{\boldsymbol{\phi}}(\mathbf{x}) + \bxi + \LB{a}"  # \bxi is not \bx; #1 kept
+    )
+    assert plain_quote(r"where $\mathbf{x}^{(i)}$ is a datapoint and $\alpha$ a rate") == (
+        "where x(i) is a datapoint and \u03b1 a rate"
+    )

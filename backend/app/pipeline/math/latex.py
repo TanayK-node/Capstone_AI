@@ -196,3 +196,20 @@ def equations(text: str) -> list[LatexEquation]:
             found.append((m.start(), LatexEquation(_LABEL.sub("", inner), None)))
     found.sort(key=lambda x: x[0])
     return [eq for _, eq in found]
+
+
+def expand_simple_macros(latex: str, defs: dict[str, str], passes: int = 3) -> str:
+    """The paper's argument-free shorthands (\\bx -> \\mathbf{x}) written out, so the glossary
+    model sees, and copies, standard LaTeX. Macros with arguments are left to KaTeX."""
+    simple = {k: v for k, v in defs.items() if "#" not in v and not _ENV_ALIAS.fullmatch(v)}
+    if not simple:
+        return latex
+    pattern = re.compile(
+        "|".join(re.escape(k) for k in sorted(simple, key=len, reverse=True)) + r"(?![A-Za-z])"
+    )
+    for _ in range(passes):  # shorthands defined with other shorthands
+        expanded = pattern.sub(lambda m: simple[m.group(0)], latex)
+        if expanded == latex:
+            break
+        latex = expanded
+    return latex
