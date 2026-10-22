@@ -10,6 +10,7 @@ import {
   getExtraction,
   getPaper,
   getReproducibility,
+  getTables,
   pdfUrl,
   rerunPaper,
   type Block,
@@ -19,6 +20,7 @@ import { BLOCK_COLORS, BLOCK_TYPES, ROLE_LABELS } from "@/lib/blocks";
 import { GROUNDING_COLORS, Overview, type EvidenceTarget } from "./overview";
 import { PipelineView } from "./pipeline-view";
 import { ReproView } from "./repro-view";
+import { ResultsView } from "./results-view";
 import type { Highlight } from "./pdf/pdf-viewer";
 import { StatusBadge } from "./status-badge";
 import { TableView } from "./table-view";
@@ -30,8 +32,8 @@ const PdfViewer = dynamic(() => import("./pdf/pdf-viewer"), {
 
 const STAGES = ["ingest", "parse", "structure", "extract", "verify", "repro"] as const;
 const ACTIVE = ["queued", "processing"];
-type Tab = "pipeline" | "overview" | "reproducibility" | "structure" | "tables" | "block";
-const TABS: Tab[] = ["pipeline", "overview", "reproducibility", "structure", "tables", "block"];
+type Tab = "pipeline" | "overview" | "reproducibility" | "results" | "structure" | "block";
+const TABS: Tab[] = ["pipeline", "overview", "reproducibility", "results", "structure", "block"];
 
 export function Workspace() {
   const { id } = useParams<{ id: string }>();
@@ -72,6 +74,12 @@ export function Workspace() {
     queryFn: () => getReproducibility(id),
     enabled: stages?.repro?.status === "done",
   });
+  // Rebuilt from the parse; the extraction (when there is one) names the paper's method.
+  const results = useQuery({
+    queryKey: ["tables", id, stages?.structure?.finished_at, stages?.extract?.finished_at],
+    queryFn: () => getTables(id),
+    enabled: structured,
+  });
   const rerun = useMutation({
     mutationFn: (only?: string[]) => rerunPaper(id, only),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["paper", id] }),
@@ -96,10 +104,27 @@ export function Workspace() {
     () => new Map((blocks.data?.blocks ?? []).map((b) => [b.id, b])),
     [blocks.data],
   );
-  const tables = (blocks.data?.blocks ?? []).filter((b) => b.type === "table");
   const select = (blockId: string) => {
     setSelected(blockId);
     setTab("block");
+  };
+
+  // Show a whole table in the PDF (Results tab): highlighted like evidence, block boxes.
+  const showTable = (tableId: string) => {
+    const block = byId.get(tableId);
+    setEvidence({
+      itemId: `table:${tableId}`,
+      index: 0,
+      evidence: {
+        chunk_id: tableId,
+        page: block?.page ?? 1,
+        bbox: null,
+        boxes: [],
+        quote: block?.text ?? "",
+        grounding_status: "verified",
+        match_score: null,
+      },
+    });
   };
 
   // Evidence located in the paper has its own sentence boxes. An unlocated quote has none,
@@ -163,7 +188,7 @@ export function Workspace() {
             setVisible={setVisible}
             counts={p.parse?.block_counts ?? {}}
           />
-          <nav className="flex gap-1 border-b border-zinc-200 px-3 dark:border-zinc-800">
+          <nav className="flex gap-1 overflow-x-auto whitespace-nowrap border-b border-zinc-200 px-3 dark:border-zinc-800">
             {TABS.map((t) => (
               <button
                 key={t}
@@ -174,7 +199,7 @@ export function Workspace() {
                     : "text-zinc-500"
                 }`}
               >
-                {t === "tables" ? `Tables (${tables.length})` : t}
+                {t === "results" && results.data ? `Results (${results.data.length})` : t}
               </button>
             ))}
           </nav>
@@ -218,27 +243,17 @@ export function Workspace() {
                 </p>
               ))}
             {tab === "structure" && <Structure paper={p} byId={byId} onSelect={select} />}
-            {tab === "tables" &&
-              (tables.length ? (
-                <div className="space-y-6">
-                  {tables.map((t) => (
-                    <div key={t.id} className="space-y-2">
-                      <button
-                        onClick={() => select(t.id)}
-                        className="text-left font-medium hover:underline"
-                      >
-                        {t.text}
-                      </button>
-                      {t.table ? (
-                        <TableView table={t.table} />
-                      ) : (
-                        <p className="text-zinc-500">No grid</p>
-                      )}
-                    </div>
-                  ))}
-                </div>
+            {tab === "results" &&
+              (results.data ? (
+                <ResultsView paperId={id} tables={results.data} onShowTable={showTable} />
               ) : (
-                <p className="text-zinc-500">No tables detected.</p>
+                <p className="text-zinc-500">
+                  {results.error
+                    ? `Could not load the tables: ${results.error.message}`
+                    : structured
+                      ? "Loading tables…"
+                      : "Tables appear here once parsing finishes."}
+                </p>
               ))}
             {tab === "block" && (
               <BlockInspector block={selected ? byId.get(selected) : undefined} />

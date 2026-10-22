@@ -39,8 +39,12 @@ See SCOPE.md for the full scope, architecture and phase plan.
   annotations in eval/gold/repro_gold.csv; see eval/gold/README.md)
 
 ## Current phase
-Phase 3 (reproducibility: M6 analyzer, checklist YAML, Reproducibility tab).
-Exit: scorecard for the first 10 gold papers; team spot-checks agree on >= 80% of items.
+Phase 4 (code and claims: M7 code check, M8 claim verifier, M9 results tables; Code, Claims,
+Results tabs). Exit: correct repo found for >= 80% of papers that have code; at least one real
+paper-code mismatch demonstrated.
+Phase 3: built, exit check PENDING (the team chose to move on). Run
+`check_repro --pdf-dir <pdfs>` with a Gemini key; target >= 80% agreement with
+eval/gold/repro_gold.csv. Offline (rules only) it agreed 81% on the 54 items decidable there.
 Phase 2 passed: check_extract 10/10 on the reference papers with gemini-3.5-flash-lite,
 15-50 s per paper (limit 180 s) (Oct 2026). Phase 1 passed: check_parse 10/10.
 
@@ -64,5 +68,9 @@ Phase 2 passed: check_extract 10/10 on the reference papers with gemini-3.5-flas
   Conventions from the team's gold set (eval/gold/repro_gold.csv, 10 papers): a regex mention
   is a "candidate", not "present" (coverage of the main experiments is judged by the LLM;
   without it, "partial"); with no repository linked, repo items are not_applicable.
+- Results tables (results/builder.py, M9): built from the parse, no LLM. A column's own
+  header is reliable; a spanning upper label is only a guessed `group` (periodic leaf headers
+  split spans; text right under a label means a wrapped header, not a span). Best values use
+  the header's direction (error/loss/params: lower is better), else the caption's.
 - Tests use SQLite with foreign keys enforced (db.make_engine); the app uses Postgres.
 - Docling is not wired in yet (its models download from Hugging Face); it is an A1 ablation option.

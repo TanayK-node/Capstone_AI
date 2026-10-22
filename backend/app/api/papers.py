@@ -26,9 +26,11 @@ from app.pipeline.ingest.resolver import InputError
 from app.pipeline.ingest.service import IngestResult, ingest_link, ingest_pdf_bytes
 from app.pipeline.ingest.sources import FetchError, NoOpenAccessPdfError
 from app.pipeline.ingest.validate import InvalidPdfError
-from app.pipeline.runner import ANALYSIS_STAGES, STAGES, stage_statuses
+from app.pipeline.results.builder import build_results
+from app.pipeline.runner import ANALYSIS_STAGES, STAGES, load_document, stage_statuses
 from app.schemas.extraction import PaperExtraction
 from app.schemas.repro import Scorecard
+from app.schemas.results import ResultsTable
 
 router = APIRouter(prefix="/api/papers", tags=["papers"])
 
@@ -345,6 +347,31 @@ def get_reproducibility(paper_id: str, session: Session = Depends(get_session)) 
         prompt_version=row.prompt_version,
         created_at=row.created_at,
         scorecard=row.data,
+    )
+
+
+@router.get("/{paper_id}/tables", response_model=None)
+def get_tables(
+    paper_id: str,
+    format: Literal["json", "csv"] = Query("json"),
+    session: Session = Depends(get_session),
+) -> list[ResultsTable] | Response:
+    """Results tables (M9), rebuilt from the parse; labelled with the extraction if any."""
+    _paper_or_404(session, paper_id)
+    doc = load_document(session, paper_id)
+    if doc is None:
+        raise HTTPException(404, "the paper has not been parsed yet")
+    row = session.get(ExtractionRow, paper_id)
+    extraction = PaperExtraction.model_validate(row.data) if row is not None else None
+    tables = build_results(doc, extraction)
+    if format == "json":
+        return tables
+    return Response(
+        export.tables_csv(tables),
+        media_type="text/csv; charset=utf-8",
+        headers={
+            "Content-Disposition": f'attachment; filename="paperlens-{paper_id[:12]}-tables.csv"'
+        },
     )
 
 

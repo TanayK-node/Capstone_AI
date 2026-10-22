@@ -109,6 +109,16 @@ def test_upload_runs_pipeline_and_serves_results(client: TestClient) -> None:
     ev = data["contributions"][0]["evidence"][0]
     assert ev["grounding_status"] == "verified" and ev["boxes"]
 
+    tables = client.get(f"/api/papers/{pid}/tables").json()
+    assert len(tables) == 1
+    rows = {r["label"]: r for r in tables[0]["rows"]}
+    assert rows["SparseRoute (ours)"]["is_proposed"] and not rows["Switch"]["is_proposed"]
+    best = [c["text"] for r in tables[0]["rows"] for c in r["cells"] if c["is_best"]]
+    assert "26.4 ± 0.2" in best and "70" in best  # highest BLEU, lowest FLOPs
+    csv_tables = client.get(f"/api/papers/{pid}/tables?format=csv").text
+    assert "SparseRoute (ours),26.4 ± 0.2" in csv_tables
+    assert any(r["is_proposed"] for r in data["results"])
+
     repro = client.get(f"/api/papers/{pid}/reproducibility").json()
     assert repro["checklist_version"] >= 3 and 0 < repro["score"] < 100
     items = {i["id"]: i for i in repro["scorecard"]["items"]}

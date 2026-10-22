@@ -210,6 +210,44 @@ export type ExtractionResponse = {
 
 export type ExportFormat = "json" | "md" | "bib" | "csv";
 
+// ---- results tables (mirrors app/schemas/results.py)
+
+export type ResultColumn = {
+  index: number;
+  header: string;
+  group: string;
+  numeric: boolean;
+  higher_is_better: boolean | null;
+};
+
+export type ResultCell = {
+  col: number;
+  text: string;
+  value: number | null;
+  std: number | null;
+  is_percent: boolean;
+  is_bold: boolean;
+  is_best: boolean;
+};
+
+export type ResultRow = {
+  index: number;
+  label: string;
+  group: string;
+  is_proposed: boolean;
+  cells: ResultCell[];
+};
+
+export type ResultsTable = {
+  table_id: string;
+  label: string | null;
+  caption: string;
+  page: number;
+  columns: ResultColumn[];
+  rows: ResultRow[];
+  proposed_names: string[];
+};
+
 // ---- reproducibility (mirrors app/schemas/repro.py)
 
 export type ItemStatus = "present" | "partial" | "missing" | "not_applicable" | "unknown";
@@ -294,6 +332,8 @@ export const getExtraction = (id: string) =>
   request<ExtractionResponse>(`/api/papers/${id}/extraction`);
 export const getReproducibility = (id: string) =>
   request<ReproResponse>(`/api/papers/${id}/reproducibility`);
+export const getTables = (id: string) => request<ResultsTable[]>(`/api/papers/${id}/tables`);
+export const tablesCsvUrl = (id: string) => `${API_URL}/api/papers/${id}/tables?format=csv`;
 export const exportUrl = (id: string, format: ExportFormat) =>
   `${API_URL}/api/papers/${id}/export?format=${format}`;
 /** Server-sent events: `stage` per stage status change, `status`, then `done`. */

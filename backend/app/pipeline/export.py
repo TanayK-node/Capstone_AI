@@ -14,6 +14,7 @@ import unicodedata
 
 from app.schemas.extraction import Dataset, Hyperparameter, Item, PaperExtraction
 from app.schemas.repro import Scorecard
+from app.schemas.results import ResultsTable
 
 FORMATS = {
     "json": ("application/json", "json"),
@@ -134,6 +135,22 @@ def scorecard_markdown(card: Scorecard) -> str:
     return "\n".join(out).rstrip() + "\n"
 
 
+def tables_csv(tables: list[ResultsTable]) -> str:
+    """Every results table, one block after another: a title row, the header row, the rows.
+    Values are written as they appear in the paper (the cell text), plus a parsed column."""
+    buf = io.StringIO()
+    writer = csv.writer(buf, lineterminator="\n")
+    for t in tables:
+        writer.writerow([f"{t.label or t.table_id} (page {t.page})", t.caption])
+        writer.writerow(["method", *(c.header or c.group for c in t.columns if c.numeric)])
+        numeric = [c.index for c in t.columns if c.numeric]
+        for row in t.rows:
+            by_col = {c.col: c for c in row.cells}
+            writer.writerow([row.label, *(by_col[i].text if i in by_col else "" for i in numeric)])
+        writer.writerow([])
+    return buf.getvalue()
+
+
 def to_csv(extraction: PaperExtraction, scorecard: Scorecard | None = None) -> str:
     buf = io.StringIO()
     writer = csv.writer(buf, lineterminator="\n")
@@ -153,6 +170,14 @@ def to_csv(extraction: PaperExtraction, scorecard: Scorecard | None = None) -> s
                 ev.chunk_id if ev else "",
                 ev.quote if ev else "",
             ]
+        )
+    # Results-table numbers (M9): field "results", value "method | dataset | metric = value".
+    for r in extraction.results:
+        label = f"{r.method} | {r.dataset} | {r.metric} = {r.value:g}"
+        if r.std is not None:
+            label += f" ± {r.std:g}"
+        writer.writerow(
+            ["results", f"{r.table_id}:{r.cell[0]},{r.cell[1]}", label, "", "", "", r.table_id, ""]
         )
     # Checklist rows: field "checklist:<group>", value = description, status in place of
     # the grounding status.

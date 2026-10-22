@@ -123,7 +123,7 @@ class Hyperparameter(Item):
 
 
 class ResultEntry(BaseModel):
-    """Filled from parsed tables in Phase 4 (M9)."""
+    """One number of a results table (results/builder.py), filled in the extract stage."""
 
     method: str
     dataset: str
@@ -131,6 +131,7 @@ class ResultEntry(BaseModel):
     value: float
     std: float | None = None
     is_proposed: bool = False
+    is_best: bool = False  # best in its column (direction from the header), computed in Python
     table_id: str
     cell: tuple[int, int]
 

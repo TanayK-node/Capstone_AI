@@ -24,6 +24,7 @@ from app.pipeline.parse import get_parser
 from app.pipeline.repro.analyzer import analyze
 from app.pipeline.repro.checklist import load_checklist
 from app.pipeline.repro.github import GitHubClient
+from app.pipeline.results.builder import build_results, result_entries
 from app.pipeline.structure.sections import structure_document
 from app.pipeline.verify.grounding import ground, grounding_score
 from app.schemas.document import (
@@ -220,10 +221,13 @@ def run_extract(
             "groups": [g.__dict__ for g in run.groups],
             "llm_calls": run.calls,
             "items": len(run.extraction.all_items()),
+            "result_values": len(run.extraction.results),
         }
         if run.all_failed:
             errors = "; ".join(f"{g.name}: {g.error}" for g in run.groups if g.error)
             raise RuntimeError(f"every extraction call failed ({errors})")
+        # Results tables are deterministic (M9); stored with the extraction they label.
+        run.extraction.results = result_entries(build_results(doc, run.extraction), run.extraction)
         done = [g for g in run.groups if g.status == "done"]
         job.provider = done[0].provider if done else None
         # Several models when a group fell back to the overload backup (e.g. Flash-Lite).
