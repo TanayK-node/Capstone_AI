@@ -38,6 +38,8 @@ from app.pipeline.repro.analyzer import analyze
 from app.pipeline.repro.checklist import load_checklist
 from app.pipeline.repro.github import GitHubClient
 from app.pipeline.results.builder import build_results, proposed_names, result_entries
+from app.pipeline.retrieval.embedder import get_embedder
+from app.pipeline.retrieval.store import build_vectors, load_passages
 from app.pipeline.structure.sections import structure_document
 from app.pipeline.verify.grounding import ground, grounding_score
 from app.schemas.document import (
@@ -53,8 +55,8 @@ from app.schemas.extraction import PaperExtraction
 
 log = logging.getLogger("paperlens.pipeline")
 
-STAGES = ("parse", "structure", "extract", "verify", "repro", "claims", "code")
-ANALYSIS_STAGES = ("extract", "verify", "repro", "claims", "code")
+STAGES = ("parse", "structure", "index", "extract", "verify", "repro", "claims", "code")
+ANALYSIS_STAGES = ("index", "extract", "verify", "repro", "claims", "code")
 # What each analysis stage reads: when one of these failed in this run, the stage is skipped.
 NEEDS: dict[str, set[str]] = {
     "verify": {"extract"},
@@ -354,6 +356,26 @@ def run_repro(
         }
 
 
+def run_index(
+    session: Session, settings: Settings, paper: Paper, doc: ParsedDocument, llm: LLMClient | None
+) -> None:
+    """Embed the paper's passages for chat (M11). No LLM. Without an embedding model chat
+    still works on keyword (BM25) search, so this stage never fails for that reason."""
+    with stage_job(session, paper.id, "index") as job:
+        embedder = get_embedder(settings)
+        if embedder is None:
+            job.provider = "bm25"
+            job.detail = {
+                "passages": len(load_passages(session, paper.id)),
+                "mode": "bm25",
+                "warnings": ["embedding model unavailable or disabled: keyword search only"],
+            }
+            return
+        count = build_vectors(session, paper.id, embedder)
+        job.provider, job.model = "fastembed", embedder.model_name
+        job.detail = {"passages": count, "mode": "hybrid"}
+
+
 def run_claims(
     session: Session, settings: Settings, paper: Paper, doc: ParsedDocument, llm: LLMClient | None
 ) -> None:
@@ -477,6 +499,7 @@ def process_paper(
         if any(st in stages for st in ANALYSIS_STAGES):
             doc = load_document(session, paper_id) or doc  # now with section roles
         analysis = (
+            ("index", run_index),
             ("extract", run_extract),
             ("verify", run_verify),
             ("repro", run_repro),

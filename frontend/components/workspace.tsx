@@ -22,6 +22,7 @@ import {
 import { BLOCK_COLORS, BLOCK_TYPES, ROLE_LABELS } from "@/lib/blocks";
 import { GROUNDING_COLORS, Overview, type EvidenceTarget } from "./overview";
 import { PipelineView } from "./pipeline-view";
+import { ChatView } from "./chat-view";
 import { ClaimsView } from "./claims-view";
 import { CodeView } from "./code-view";
 import { ReproView } from "./repro-view";
@@ -39,6 +40,7 @@ const STAGES = [
   "ingest",
   "parse",
   "structure",
+  "index",
   "extract",
   "verify",
   "repro",
@@ -49,6 +51,7 @@ const ACTIVE = ["queued", "processing"];
 const TABS = [
   "pipeline",
   "overview",
+  "chat",
   "reproducibility",
   "claims",
   "code",
@@ -298,6 +301,16 @@ export function Workspace() {
                         ? "Checking claims… they appear here when done."
                         : "No claim report yet. Re-run the analysis to create one."}
                 </p>
+              ))}
+            {tab === "chat" &&
+              (structured ? (
+                <ChatView
+                  paperId={id}
+                  activeKey={highlight?.key ?? null}
+                  onEvidence={setEvidence}
+                />
+              ) : (
+                <p className="text-zinc-500">Chat opens once the paper is parsed.</p>
               ))}
             {tab === "code" &&
               (code.data ? (

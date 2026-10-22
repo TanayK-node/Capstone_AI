@@ -50,6 +50,12 @@ def client(
         return clone_mod.clone(fixed, dest, **{**kw, "allow_file_protocol": True})
 
     monkeypatch.setattr("app.pipeline.code_check.service.clone", local_clone)
+    # Chat: the fake LLM, and a deterministic embedder instead of downloading the model.
+    from tests.conftest import FakeEmbedder
+
+    monkeypatch.setattr("app.llm.get_llm_client", lambda: llm)
+    monkeypatch.setattr("app.pipeline.runner.get_embedder", lambda s: FakeEmbedder())
+    monkeypatch.setattr("app.api.papers.get_embedder", lambda s: FakeEmbedder())
 
     clock = FakeClock()
     llm = LLMClient(test_settings, {"gemini": FakePaperProvider()}, MemoryCache(), clock=clock,
@@ -95,6 +101,7 @@ def test_upload_runs_pipeline_and_serves_results(client: TestClient) -> None:
         "ingest": "done",
         "parse": "done",
         "structure": "done",
+        "index": "done",
         "extract": "done",
         "verify": "done",
         "repro": "done",
@@ -184,7 +191,13 @@ def test_without_llm_the_paper_is_partial(client: TestClient) -> None:
     assert detail["status"] == "partial"
     assert "GEMINI_API_KEY" in detail["error"]
     stages = {s: v["status"] for s, v in detail["stages"].items()}
-    assert stages == {"ingest": "done", "parse": "done", "structure": "done", "extract": "failed"}
+    assert stages == {
+        "ingest": "done",
+        "parse": "done",
+        "structure": "done",
+        "index": "done",  # keyword index needs no LLM
+        "extract": "failed",
+    }
     assert client.get(f"/api/papers/{pid}/extraction").status_code == 404
 
     # Re-uploading once a key is set retries only the analysis stages.
@@ -232,3 +245,23 @@ def test_scanned_pdf_rejected(client: TestClient) -> None:
 
 def test_unknown_paper_404(client: TestClient) -> None:
     assert client.get("/api/papers/" + "0" * 64).status_code == 404
+
+
+def test_chat_answers_with_citations_or_refuses(client: TestClient) -> None:
+    pid = upload(client, "paper_single.pdf")["paper_id"]
+    detail = client.get(f"/api/papers/{pid}").json()
+    assert detail["stages"]["index"]["detail"]["mode"] == "hybrid"
+
+    resp = client.post(
+        f"/api/papers/{pid}/chat",
+        json={"question": "What learning rate and optimizer do they use?"},
+    ).json()
+    assert resp["answered"] and resp["retrieval"] == "hybrid"
+    assert "Adam" in resp["answer"] and "[P99]" not in resp["answer"]  # invented marker dropped
+    cite = resp["citations"][0]
+    assert cite["marker"] == "P1" and cite["page"] >= 1 and cite["boxes"]
+
+    off_topic = client.post(
+        f"/api/papers/{pid}/chat", json={"question": "Who won the football world cup?"}
+    ).json()
+    assert off_topic["answered"] is False and off_topic["retrieved"] == []

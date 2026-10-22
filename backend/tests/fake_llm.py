@@ -62,6 +62,8 @@ class FakePaperProvider:
                 json.dumps({"verdicts": [{"id": i, "verdict": "yes"} for i in ids]})
             )
         paragraphs = _TAGGED.findall(request.prompt)
+        if fields == ["answerable", "answer"]:
+            return ProviderResponse(json.dumps(self._chat(request.prompt)))
         if fields == ["claims"] and "Below are claims" in request.prompt:
             return ProviderResponse(json.dumps({"claims": self._claims(request.prompt)}))
         if fields == ["items"]:
@@ -137,6 +139,14 @@ class FakePaperProvider:
                  "note": "stated"}
             )  # fmt: skip
         return answers
+
+    def _chat(self, prompt: str) -> dict[str, object]:
+        """Answer from the first passage, citing it, as a grounded model would."""
+        first = re.search(r"^\[(P\d+)\] \([^)]*\) (.+?)$", prompt, re.M)
+        if first is None:
+            return {"answerable": False, "answer": "The passages do not say."}
+        sentence = _SENT.split(first.group(2))[0]
+        return {"answerable": True, "answer": f"{sentence} [{first.group(1)}] [P99]"}
 
     def _claims(self, prompt: str) -> list[dict[str, str | int]]:
         """Read "N. claim" lines with a few patterns, as a model would fill the fields."""

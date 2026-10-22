@@ -130,8 +130,17 @@ class CodeCheckSection(BaseModel):
 
 
 class EmbeddingsSection(BaseModel):
+    enabled: bool = True  # False = BM25 only (no model download)
     model: str = "BAAI/bge-small-en-v1.5"
     device: str = "cpu"
+    threads: int | None = None  # ONNX Runtime threads; None = all cores
+
+
+class ChatSection(BaseModel):
+    top_k: int = 5  # passages given to the LLM
+    candidates: int = 20  # per retriever, before fusion
+    min_cosine: float = 0.45  # below this (and no shared word) the question is off-topic
+    history_turns: int = 4  # earlier question/answer pairs sent with a follow-up
 
 
 class Settings(BaseSettings):
@@ -154,6 +163,7 @@ class Settings(BaseSettings):
     repro: ReproSection = Field(default_factory=ReproSection)
     claims: ClaimsSection = Field(default_factory=ClaimsSection)
     code_check: CodeCheckSection = Field(default_factory=CodeCheckSection)
+    chat: ChatSection = Field(default_factory=ChatSection)
     embeddings: EmbeddingsSection = Field(default_factory=EmbeddingsSection)
     features: dict[str, bool] = Field(default_factory=dict)
 

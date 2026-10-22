@@ -131,8 +131,18 @@ code_check:
   search_github: true
 
 embeddings:
+  # Local passage embeddings for chat retrieval (M11), run with fastembed (ONNX, no PyTorch).
+  # The model downloads once from Hugging Face into <data_dir>/models (~130 MB).
+  # enabled: false = keyword (BM25) search only.
+  enabled: true
   model: BAAI/bge-small-en-v1.5
   device: cpu
+
+chat:
+  top_k: 5            # passages sent to Gemini with a question
+  candidates: 20      # per retriever (BM25, embeddings) before fusing the two rankings
+  min_cosine: 0.45    # no shared word and nothing this close in meaning: "not in the paper"
+  history_turns: 4    # earlier turns sent along with a follow-up question
 
 features:
   latex_source: true

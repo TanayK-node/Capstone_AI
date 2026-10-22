@@ -6,7 +6,7 @@ import uuid
 from datetime import UTC, datetime
 from typing import Any
 
-from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Integer, String, Text
+from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Integer, LargeBinary, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.models.base import Base
@@ -174,3 +174,18 @@ class CodeReportRow(Base):
     status: Mapped[str] = mapped_column(String(32))
     data: Mapped[dict[str, Any]] = mapped_column(JSONType)  # CodeReport
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+
+class ChunkVector(Base):
+    """Passage embedding for chat retrieval (M11). Stored as float32 bytes: a paper has at most
+    a few hundred passages, scored in numpy, so pgvector is not needed (and SQLite tests work)."""
+
+    __tablename__ = "chunk_vectors"
+
+    paper_id: Mapped[str] = mapped_column(
+        ForeignKey("papers.id", ondelete="CASCADE"), primary_key=True
+    )
+    chunk_id: Mapped[str] = mapped_column(String(48), primary_key=True)
+    model: Mapped[str] = mapped_column(String(128))
+    dim: Mapped[int] = mapped_column(Integer)
+    vector: Mapped[bytes] = mapped_column(LargeBinary)

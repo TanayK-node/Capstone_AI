@@ -350,6 +350,30 @@ export type CodeReport = {
 
 export type CodeResponse = { paper_id: string; created_at: string; report: CodeReport };
 
+// ---- chat (mirrors app/schemas/chat.py)
+
+export type ChatTurn = { role: "user" | "assistant"; content: string };
+
+export type Citation = {
+  marker: string;
+  chunk_id: string;
+  page: number;
+  section: string;
+  text: string;
+  boxes: Box[];
+};
+
+export type ChatAnswer = {
+  answer: string;
+  answered: boolean;
+  citations: Citation[];
+  retrieved: { chunk_id: string; page: number; section: string; score: number }[];
+  retrieval: "hybrid" | "bm25";
+  provider: string | null;
+  model: string | null;
+  prompt_version: string | null;
+};
+
 // ---- reproducibility (mirrors app/schemas/repro.py)
 
 export type ItemStatus = "present" | "partial" | "missing" | "not_applicable" | "unknown";
@@ -443,6 +467,12 @@ export const confirmRepo = (id: string, url: string) =>
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ url }),
+  });
+export const askPaper = (id: string, question: string, history: ChatTurn[]) =>
+  request<ChatAnswer>(`/api/papers/${id}/chat`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ question, history }),
   });
 export const exportUrl = (id: string, format: ExportFormat) =>
   `${API_URL}/api/papers/${id}/export?format=${format}`;

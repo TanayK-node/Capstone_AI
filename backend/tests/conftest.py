@@ -15,7 +15,28 @@ def settings(monkeypatch: pytest.MonkeyPatch) -> Settings:
     """Settings from the real config.yaml, isolated from the developer's env/.env."""
     for var in ("GEMINI_API_KEY", "GOOGLE_API_KEY", "PAPERLENS_LLM__PRIMARY"):
         monkeypatch.delenv(var, raising=False)
+    # Never download the embedding model in tests; tests that need vectors use FakeEmbedder.
+    monkeypatch.setenv("PAPERLENS_EMBEDDINGS__ENABLED", "false")
     return Settings(_env_file=None)
+
+
+class FakeEmbedder:
+    """Deterministic bag-of-words hashing into 256 dims: shared words -> similar vectors."""
+
+    model_name = "fake-embedder"
+
+    def embed(self, texts: list[str], *, query: bool = False):  # type: ignore[no-untyped-def]
+        import re
+        import zlib
+
+        import numpy as np
+
+        out = np.zeros((len(texts), 256), dtype=np.float32)
+        for i, text in enumerate(texts):
+            for word in re.findall(r"[a-z0-9]+", text.lower()):
+                out[i, zlib.crc32(word.encode()) % 256] += 1.0
+        norms = np.linalg.norm(out, axis=1, keepdims=True)
+        return out / np.maximum(norms, 1e-12)
 
 
 class FakeClock:

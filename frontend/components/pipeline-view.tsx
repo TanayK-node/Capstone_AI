@@ -13,6 +13,11 @@ const STAGES: { key: string; title: string; what: string }[] = [
     title: "Structure",
     what: "section roles, section/paragraph/sentence chunks",
   },
+  {
+    key: "index",
+    title: "Index",
+    what: "embed passages locally for chat search (keyword search if no model)",
+  },
   { key: "extract", title: "Extract", what: "one Gemini call per section group: items + quotes" },
   {
     key: "verify",
@@ -45,6 +50,7 @@ const BAR_COLORS: Record<string, string> = {
   repro: "#db2777",
   claims: "#0891b2",
   code: "#4f46e5",
+  index: "#0d9488",
 };
 
 type GroupRun = {
@@ -259,6 +265,16 @@ function StageDetail({ stageKey, detail }: { stageKey: string; detail: Record<st
       </div>
     );
   }
+  if (stageKey === "index")
+    return (
+      <div className="mt-2 text-[11px]">
+        <div className="flex flex-wrap gap-1.5">
+          <Stat label="passages" value={d.passages} />
+          <Stat label="search" value={d.mode === "hybrid" ? "keyword + meaning" : "keyword only"} />
+        </div>
+        <Warnings items={d.warnings} />
+      </div>
+    );
   if (stageKey === "code") {
     const comparisons = (d.comparisons ?? {}) as Record<string, number>;
     const repo = typeof d.repo === "string" ? d.repo.replace(/^https?:\/\//, "") : null;

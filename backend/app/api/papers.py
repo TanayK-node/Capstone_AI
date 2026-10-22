@@ -30,13 +30,17 @@ from app.models import (
     ReproReport,
 )
 from app.pipeline import dispatch, export
+from app.pipeline.chat.service import answer as chat_answer
 from app.pipeline.ingest import storage
 from app.pipeline.ingest.resolver import InputError
 from app.pipeline.ingest.service import IngestResult, ingest_link, ingest_pdf_bytes
 from app.pipeline.ingest.sources import FetchError, NoOpenAccessPdfError
 from app.pipeline.ingest.validate import InvalidPdfError
 from app.pipeline.results.builder import build_results
+from app.pipeline.retrieval.embedder import get_embedder
+from app.pipeline.retrieval.store import load_index
 from app.pipeline.runner import ANALYSIS_STAGES, STAGES, load_document, stage_statuses
+from app.schemas.chat import ChatAnswer, ChatRequest
 from app.schemas.extraction import PaperExtraction
 from app.schemas.repro import Scorecard
 from app.schemas.results import ResultsTable
@@ -114,7 +118,8 @@ class ExtractionResponse(BaseModel):
 
 class RerunRequest(BaseModel):
     stages: (
-        list[Literal["parse", "structure", "extract", "verify", "repro", "claims", "code"]] | None
+        list[Literal["parse", "structure", "index", "extract", "verify", "repro", "claims", "code"]]
+        | None
     ) = None
 
 
@@ -444,6 +449,27 @@ def confirm_repo(
         duplicate=True,
         dispatched_to=dispatch.enqueue(settings, paper.id, ("code",)),
     )
+
+
+@router.post("/{paper_id}/chat", response_model=ChatAnswer)
+def chat(
+    paper_id: str,
+    body: ChatRequest,
+    session: Session = Depends(get_session),
+    settings: Settings = Depends(get_settings),
+) -> ChatAnswer:
+    """Grounded Q&A (M11): the answer cites the paper's passages, or refuses."""
+    from app.llm import get_llm_client
+
+    _paper_or_404(session, paper_id)
+    llm = get_llm_client()
+    if not llm.providers:
+        raise HTTPException(503, "no LLM provider configured: set GEMINI_API_KEY in .env")
+    embedder = get_embedder(settings)
+    index = load_index(session, paper_id, embedder)
+    if not index.passages:
+        raise HTTPException(409, "the paper has not been parsed yet")
+    return chat_answer(body, index, embedder, llm, settings)
 
 
 def _snapshot(paper_id: str) -> tuple[str, str | None, dict[str, dict[str, Any]]] | None:
