@@ -5,9 +5,14 @@
 # weight: relative weight inside the group; groups Code and Experimental setup weigh most.
 # question: asked of the authors when the item is missing or partial.
 # Bump `version` on any change: scorecards store the version they were scored with.
-# v3: compute and statistics items say "for the main experiments", matching how the team
-#     annotated the gold set (eval/gold): one passing mention is "partial".
-version: 3
+# guidance: how to tell present / partial / missing for this item; shown to the LLM. Written
+#   from how the team annotated the gold set (eval/gold/repro_gold.csv).
+# v3: compute and statistics items say "for the main experiments": one mention is "partial".
+# v4: per-item guidance instead of one "lean partial" rule. The team marks setup and data
+#     items present when stated for the main experiments (not necessarily exhaustively), and
+#     compute / statistics items partial unless they cover the main models (3rd-run agreement
+#     65% traced to this). hyperparameters_all no longer requires the baselines' values.
+version: 4
 groups:
   code: { label: Code, weight: 0.25 }
   data: { label: Data, weight: 0.20 }
@@ -52,6 +57,7 @@ items:
     rule: repo_weights
     description: "Trained model weights or checkpoints are released."
     question: "Will the trained checkpoints be released?"
+    guidance: "present: the paper or README says trained models / checkpoints are released. partial: only some models, or 'will be released'."
 
   - id: datasets_named
     group: data
@@ -59,49 +65,57 @@ items:
     rule: null
     description: "Every dataset used is named."
     question: "Which datasets (and versions) were used for each experiment?"
+    guidance: "present: the datasets of the main experiments are named (benchmark names count, e.g. 'WMT 2014 English-German', 'GLUE'). partial: some are only described ('a large web corpus')."
   - id: datasets_access
     group: data
     weight: 1
     rule: dataset_links
     description: "Datasets are public, or access to them is described."
     question: "How can the datasets be obtained?"
+    guidance: "present: public benchmarks, or the paper says how to get the data. partial: some data is private or no longer available."
   - id: preprocessing
     group: data
     weight: 1
     rule: null
     description: "Data preprocessing and filtering steps are described."
     question: "How was the data preprocessed, filtered and tokenised?"
+    guidance: "present: the main preprocessing is described (tokenisation, filtering, augmentation, resizing). It need not list every step. partial: only a passing mention."
   - id: splits
     group: data
     weight: 1
     rule: null
     description: "Train / validation / test splits are specified."
     question: "Which train / validation / test splits were used, and how were they made?"
+    guidance: "present: the paper names the train / dev / test sets it uses, including standard benchmark splits ('newstest2014', 'the ImageNet validation set', 'GLUE dev sets'). partial: splits for only some experiments."
 
   - id: hyperparameters_all
     group: setup
     weight: 2
     rule: null
-    description: "Hyperparameters are given for the proposed method and the baselines."
+    description: "Hyperparameters are given for the proposed method."
     question: "What hyperparameters were used for the proposed method and for each baseline?"
+    guidance: "present: the proposed method's main hyperparameters are given (learning rate, batch size, training length, optimizer); baselines' values are not required. partial: only some of them."
   - id: hp_search
     group: setup
     weight: 1
     rule: null
     description: "The hyperparameter search (ranges, method, budget) is described."
     question: "How were the hyperparameters chosen (search ranges, method, budget)?"
+    guidance: "present: the paper states the values or ranges it searched ('we select the learning rate from {5e-5, 3e-5, 2e-5} on the dev set'). partial: it says hyperparameters were tuned but not over what. missing: nothing about how they were chosen."
   - id: training_details
     group: setup
     weight: 1
     rule: training_terms
     description: "Optimizer, learning-rate schedule and number of epochs or steps are stated."
     question: "Which optimizer, learning-rate schedule and number of epochs or steps were used?"
+    guidance: "present: optimizer, learning-rate schedule and training length are given for the main models. partial: some of them."
   - id: eval_protocol
     group: setup
     weight: 1
     rule: null
     description: "The evaluation protocol and metrics are defined."
     question: "How exactly were the models evaluated (metrics, checkpoints, test procedure)?"
+    guidance: "present: the metrics and the evaluation sets of the main results are stated. partial: one of them is unclear."
 
   - id: hardware
     group: compute
@@ -109,18 +123,21 @@ items:
     rule: gpu_models
     description: "The hardware used for the main experiments (GPU/TPU type and count) is stated."
     question: "Which hardware (GPU/TPU type and count) was used?"
+    guidance: "present: GPU / TPU type AND count for the main experiments. partial: type or count only, or for only some experiments (e.g. a speed benchmark)."
   - id: training_time
     group: compute
     weight: 1
     rule: compute_hours
     description: "Training time or GPU hours are reported for the main models."
     question: "How long did training take (wall-clock time or GPU hours)?"
+    guidance: "present: training time or GPU hours for every main model. partial: for one model or only roughly ('a few days'). Most papers are partial."
   - id: memory
     group: compute
     weight: 1
     rule: null
     description: "Memory requirements are reported."
     question: "How much GPU memory does training and inference need?"
+    guidance: "present: memory needs stated (GPU memory, model size in GB). partial: only indirectly (e.g. a batch size that fits a GPU)."
 
   - id: runs_seeds
     group: stats
@@ -128,21 +145,25 @@ items:
     rule: seed_terms
     description: "The number of runs or random seeds behind the main results is reported."
     question: "How many runs or random seeds are the reported results based on?"
+    guidance: "present: the number of runs / seeds behind the main results. partial: for some results only."
   - id: error_bars
     group: stats
     weight: 1
     rule: error_bars
     description: "The main results include error bars, standard deviations or confidence intervals."
     question: "What is the variance of the results across runs?"
+    guidance: "present: standard deviations / confidence intervals for the main results. partial: for some tables only."
   - id: significance
     group: stats
     weight: 1
     rule: null
     description: "Statistical significance testing is reported."
     question: "Are the improvements statistically significant?"
+    guidance: "present: a significance test is reported. missing otherwise (error bars alone are not a test)."
   - id: baselines_rerun
     group: stats
     weight: 1
     rule: null
     description: "The paper states whether baseline numbers were re-run or copied from prior work."
     question: "Were the baseline numbers re-run or copied from prior work?"
+    guidance: "present: for every baseline the paper says whether its numbers were re-run or copied. partial: baselines are compared but this is said for only some or none of them. not_applicable: no baselines."

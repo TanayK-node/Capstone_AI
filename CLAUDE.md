@@ -47,9 +47,10 @@ Results tabs). Exit: correct repo found for >= 80% of papers that have code; at 
 paper-code mismatch demonstrated. Built. Discovery: 8/8 papers with code (offline). Mismatch:
 BERT pre-training lr 1e-4 / batch 256 / 1M steps vs run_pretraining.py defaults 5e-05 / 32 /
 100000 (shown with the paper's sentences; the full check_code run needs Gemini).
-Phase 3: built, exit check PENDING (the team chose to move on). Run
-`check_repro --pdf-dir <pdfs>` with a Gemini key; target >= 80% agreement with
-eval/gold/repro_gold.csv. Offline (rules only) it agreed 81% on the 54 items decidable there.
+Phase 3: exit check FAILED on its first full run (Oct 2026): 136/210 = 65%, kappa 0.44
+(target 80%). Cause: one global "lean partial" prompt rule; the team marks setup / data items
+present when stated for the main experiments. Fixed with per-item guidance (checklist v4,
+prompt repro_checklist v3) and "a pattern match is never missing". Re-run `check_repro`.
 Phase 2 passed: check_extract 10/10 on the reference papers with gemini-3.5-flash-lite,
 15-50 s per paper (limit 180 s) (Oct 2026). Phase 1 passed: check_parse 10/10.
 

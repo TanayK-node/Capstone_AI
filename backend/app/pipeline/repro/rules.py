@@ -219,8 +219,11 @@ def repo_run_instructions(ctx: RuleContext) -> RuleResult:
     if not readme.strip():
         return RuleResult("missing", "The repository has no README.", source="repo")
     headings = " ".join(_HEADING.findall(readme)).lower()
-    train = bool(_TRAIN_CMD.search(readme)) or "train" in headings
-    evaluate = bool(_EVAL_CMD.search(readme)) or bool(re.search(r"eval|test|infer", headings))
+    # Shell commands continue over lines ("python run_classifier.py \" ... "--do_eval=true"):
+    # join them so a command's flags are matched with it (BERT's README).
+    joined = re.sub(r"\\\s*\n\s*", " ", readme)
+    train = bool(_TRAIN_CMD.search(joined)) or "train" in headings
+    evaluate = bool(_EVAL_CMD.search(joined)) or bool(re.search(r"eval|test|infer", headings))
     if train and evaluate:
         return RuleResult(
             "present", "README shows training and evaluation commands.", source="repo"

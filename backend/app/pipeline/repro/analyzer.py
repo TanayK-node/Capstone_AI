@@ -79,7 +79,8 @@ def analyze(
     run = ReproRun(Scorecard(checklist_version=checklist.version, score=None, groups=[], items=[]))
     open_items = [items[ci.id] for ci in checklist.items if items[ci.id].source == "none"]
     if open_items and client is not None:
-        _ask_llm(open_items, candidates, doc, extraction, client, max_chars, run)
+        guidance = {ci.id: ci.guidance for ci in checklist.items}
+        _ask_llm(open_items, candidates, guidance, doc, extraction, client, max_chars, run)
     elif open_items:
         run.warnings.append("no LLM available: items without a decisive rule are unknown")
         _fallback_to_candidates(open_items, candidates)
@@ -162,6 +163,7 @@ def _fallback_to_candidates(
 def _ask_llm(
     open_items: list[ItemResult],
     candidates: dict[str, RuleResult],
+    guidance: dict[str, str],
     doc: ParsedDocument,
     extraction: PaperExtraction,
     client: LLMClient,
@@ -174,6 +176,7 @@ def _ask_llm(
             {
                 "id": i.id,
                 "description": i.description,
+                "guidance": guidance.get(i.id, ""),
                 "matches": [f"[{e.chunk_id}] {e.quote}" for e in candidates[i.id].evidence]
                 if i.id in candidates
                 else [],
@@ -197,6 +200,13 @@ def _ask_llm(
     run.provider, run.model = result.meta.provider, result.meta.model
     pages = {b.id: b.page for b in doc.blocks}
     answers = {a.id.strip(): a for a in result.value.items}
+    # A rule's pattern match proves the item is mentioned: never "missing" (the sentence may
+    # sit outside the text the LLM was given, e.g. DistilBERT's "8 16GB V100 GPUs").
+    for item_id, out in answers.items():
+        if item_id in candidates and out.status in ("missing", "not_applicable"):
+            out.status = "partial"
+            out.quote, out.chunk_id = "", ""
+            out.note = f"{candidates[item_id].note} (the LLM missed it; pattern match)"
     for item in open_items:
         answer = answers.get(item.id)
         if answer is None:

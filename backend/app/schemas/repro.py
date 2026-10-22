@@ -35,6 +35,7 @@ class ChecklistItem(BaseModel):
     rule: str | None = None
     description: str
     question: str = ""
+    guidance: str = ""  # what present / partial means for this item (shown to the LLM)
 
 
 class Checklist(BaseModel):

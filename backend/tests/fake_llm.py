@@ -42,11 +42,15 @@ class FakePaperProvider:
     name = "gemini"
 
     def __init__(
-        self, invented_quote_for: str | None = None, repro_invented: str | None = None
+        self,
+        invented_quote_for: str | None = None,
+        repro_invented: str | None = None,
+        repro_ignores_matches: bool = False,  # a model that answers "missing" regardless
     ) -> None:
         self.calls: list[ProviderRequest] = []
         self.invented_quote_for = invented_quote_for
         self.repro_invented = repro_invented
+        self.repro_ignores_matches = repro_ignores_matches
 
     def generate(self, request: ProviderRequest) -> ProviderResponse:
         self.calls.append(request)
@@ -105,7 +109,11 @@ class FakePaperProvider:
                 matches.setdefault(current, (m.group(1), m.group(2)))
         answers = []
         for item_id in ids:
-            if item_id in matches and item_id != self.repro_invented:
+            if (
+                item_id in matches
+                and item_id != self.repro_invented
+                and not self.repro_ignores_matches
+            ):
                 bid, quote = matches[item_id]
                 answers.append(
                     {"id": item_id, "status": "partial", "quote": quote, "chunk_id": bid,

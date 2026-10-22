@@ -293,3 +293,27 @@ def test_no_repository_conventions() -> None:
     plain = RuleContext.build(_doc("We train a network."), PaperExtraction(), None)
     assert RULES["code_url_present"](plain).status == "missing"
     assert RULES["repo_weights"](plain).status == "inconclusive"
+
+
+def test_guidance_reaches_the_prompt_and_matches_are_never_missing(settings: Settings) -> None:
+    provider = FakePaperProvider(repro_ignores_matches=True)
+    run = run_fixture(settings, provider, None)
+    prompt = next(c.prompt for c in provider.calls if "Checklist items:" in c.prompt)
+    assert "guidance: present: GPU / TPU type AND count" in prompt
+    hardware = next(i for i in run.scorecard.items if i.id == "hardware")
+    # The model said "missing", but a rule found "8 NVIDIA A100 GPUs": at least partial.
+    assert hardware.status == "partial" and "A100" in hardware.evidence[0].quote
+
+
+def test_readme_commands_continued_over_lines_count() -> None:
+    from app.pipeline.repro.rules import RuleContext
+    from app.schemas.extraction import PaperExtraction
+    from app.schemas.repro import RepoInfo
+
+    readme = (
+        "## Sentence classification\n```shell\npython run_classifier.py \\\n"
+        "  --task_name=MRPC \\\n  --do_train=true \\\n  --do_eval=true\n```\n"
+    )
+    repo = RepoInfo(url="u", host="github.com", reachable=True, readme_excerpt=readme)
+    ctx = RuleContext.build(_doc("x"), PaperExtraction(), repo)
+    assert RULES["repo_run_instructions"](ctx).status == "present"
