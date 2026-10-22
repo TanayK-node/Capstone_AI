@@ -21,6 +21,8 @@ from app.pipeline.retrieval.search import PaperIndex
 from app.schemas.chat import ChatAnswer, ChatOut, ChatRequest, Citation, Retrieved
 
 _MARKER = re.compile(r"\[(P\d+)\]")
+# Models often group markers: "[P1, P3]" or "[P1][P3]"; they are split into "[P1] [P3]".
+_GROUP = re.compile(r"\[\s*(P\d+(?:\s*[,;]\s*P\d+)+)\s*\]")
 NOT_FOUND = "I could not find this in the paper."
 
 
@@ -53,7 +55,13 @@ def answer(
     if not hits:
         return ChatAnswer(answer=NOT_FOUND, answered=False, retrieval=mode)
 
-    markers = {f"P{i}": h.passage for i, h in enumerate(hits, 1)}
+    passages = [h.passage for h in hits]
+    # Broad questions ("what problem does it solve?") match the abstract poorly by keywords,
+    # yet it answers them best: it always goes along, after the retrieved passages.
+    abstract = next((p for p in index.passages if p.role == "abstract"), None)
+    if abstract is not None and abstract not in passages:
+        passages.append(abstract)
+    markers = {f"P{i}": p for i, p in enumerate(passages, 1)}
     prompt = prompts.render(
         "chat_answer",
         question=request.question,
@@ -72,6 +80,9 @@ def answer(
         return base
     base.provider, base.model = result.meta.provider, result.meta.model
     out = result.value
+    out.answer = _GROUP.sub(
+        lambda m: " ".join(f"[{x.strip()}]" for x in re.split(r"[,;]", m.group(1))), out.answer
+    )
 
     cited = [m for m in dict.fromkeys(_MARKER.findall(out.answer)) if m in markers]
     # Remove markers the model invented: they point at nothing the reader can check.

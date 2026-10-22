@@ -33,7 +33,8 @@ class S2Client:
         api_key: str | None = None,
         *,
         timeout_s: float = 20.0,
-        retries: int = 3,
+        retries: int = 5,
+        min_interval_s: float = 1.1,
         transport: httpx.BaseTransport | None = None,
         sleep: Callable[[float], None] = time.sleep,
     ) -> None:
@@ -44,6 +45,10 @@ class S2Client:
             base_url=API, headers=headers, timeout=timeout_s, transport=transport
         )
         self.retries = retries
+        # The shared (keyless) pool allows about one request per second for everyone, so
+        # requests are spaced out; with a key the limit is per key.
+        self.min_interval_s = min_interval_s
+        self._last = 0.0
         self._sleep = sleep
 
     def close(self) -> None:
@@ -52,6 +57,10 @@ class S2Client:
     def _get(self, path: str, params: dict[str, Any]) -> dict[str, Any] | None:
         """JSON body, None on 404; S2Error when the API stays unavailable."""
         for attempt in range(self.retries + 1):
+            wait = self._last + self.min_interval_s - time.monotonic()
+            if wait > 0:
+                self._sleep(wait)
+            self._last = time.monotonic()
             try:
                 resp = self._http.get(path, params=params)
             except httpx.HTTPError as exc:
@@ -64,8 +73,8 @@ class S2Client:
             if resp.status_code == 429 or resp.status_code >= 500:
                 if attempt == self.retries:
                     raise S2Error(f"Semantic Scholar HTTP {resp.status_code} (busy; try later)")
-                wait = resp.headers.get("Retry-After", "")
-                self._sleep(float(wait) if wait.isdigit() else 2.0 ** (attempt + 1))
+                after = resp.headers.get("Retry-After", "")
+                self._sleep(float(after) if after.isdigit() else min(30.0, 2.0 ** (attempt + 1)))
                 continue
             if resp.status_code != 200:
                 raise S2Error(f"Semantic Scholar HTTP {resp.status_code}")

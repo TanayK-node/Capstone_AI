@@ -114,6 +114,15 @@ def glossary_text(doc: ParsedDocument) -> str:
     return "\n\n".join(parts)
 
 
+# A model that writes LaTeX into JSON unescaped turns "\theta" into TAB + "heta" and "\beta"
+# into BACKSPACE + "eta"; control characters never belong in a symbol, so they are undone.
+_UNESCAPE = str.maketrans({"\t": "\\t", "\b": "\\b", "\f": "\\f", "\r": "\\r", "\n": "\\n"})
+
+
+def fix_latex(text: str) -> str:
+    return text.translate(_UNESCAPE)
+
+
 def _symbol_key(symbol: str) -> str:
     return re.sub(r"\s+|[{}]", "", symbol)
 
@@ -164,6 +173,7 @@ def _symbols(
     seen: set[str] = set()
     try:
         for s in out.symbols:
+            s.symbol = fix_latex(s.symbol)
             key = _symbol_key(s.symbol)
             if not key or key in seen or not s.meaning.strip():
                 continue

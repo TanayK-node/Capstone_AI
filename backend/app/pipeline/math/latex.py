@@ -70,10 +70,15 @@ def strip_comments(text: str) -> str:
 
 
 def flatten(files: dict[str, str]) -> str:
-    """The main file with \\input / \\include replaced by the files they name."""
-    main = next((n for n, t in files.items() if "\\documentclass" in t), None)
-    if main is None:
-        return ""
+    """The main file with \\input / \\include replaced by the files they name.
+    Submissions often carry a template or sample paper too (iclr2015.tex next to the paper):
+    of the files with \\documentclass, the longest after expansion is the paper."""
+    mains = [n for n, t in files.items() if "\\documentclass" in strip_comments(t)]
+    with_body = [n for n in mains if "\\begin{document}" in files[n]]
+    return max((_expand(files, n) for n in with_body or mains), key=len, default="")
+
+
+def _expand(files: dict[str, str], main: str) -> str:
     by_stem = {n.removesuffix(".tex"): n for n in files}
     seen: set[str] = set()
 
@@ -131,9 +136,22 @@ def macros(text: str) -> dict[str, str]:
     return {k: v for k, v in out.items() if len(v) < 500}
 
 
+_ENV_ALIAS = re.compile(r"\s*\\(?:begin|end)\{[A-Za-z]+\*?\}\s*")
+
+
+def expand_env_aliases(text: str) -> str:
+    """Shorthands like \\newcommand{\\beq}{\\begin{equation}} replaced by what they stand for,
+    so the equations written with them are found."""
+    for name, body in macros(text).items():
+        if _ENV_ALIAS.fullmatch(body):
+            env = body.strip()
+            text = re.sub(re.escape(name) + r"(?![A-Za-z])", lambda _m: env, text)  # noqa: B023
+    return text
+
+
 def equations(text: str) -> list[LatexEquation]:
     """Display equations in document order, with the numbers LaTeX would print."""
-    body = text.split("\\begin{document}", 1)[-1]
+    body = expand_env_aliases(text).split("\\begin{document}", 1)[-1]
     found: list[tuple[int, LatexEquation]] = []
     counter = 0
     covered: list[tuple[int, int]] = []

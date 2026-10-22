@@ -73,5 +73,8 @@ class ContextReport(BaseModel):
     reference_count: int = 0  # all references (S2, else the PDF's list)
     citation_count: int | None = None
     influential_citation_count: int | None = None
+    # S2 cannot sort citing papers: they are picked from the most recent ones it returns, and
+    # for a much-cited paper that is only a sample (citations_scanned < citation_count).
+    citations_scanned: int = 0
     novelty: Novelty | None = None
     warnings: list[str] = Field(default_factory=list)

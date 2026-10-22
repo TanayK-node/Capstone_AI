@@ -121,6 +121,8 @@ def test_notice_merged_into_title_is_dropped() -> None:
         "works. Attention Is All You Need"
     )
     assert clean_title(merged) == "Attention Is All You Need"
+    adam = "Published as a conference paper at ICLR 2015 ADAM: A METHOD FOR STOCHASTIC OPTIMIZATION"
+    assert clean_title(adam) == "ADAM: A METHOD FOR STOCHASTIC OPTIMIZATION"
     assert clean_title("BERT: Pre-training of Deep Bidirectional Transformers") == (
         "BERT: Pre-training of Deep Bidirectional Transformers"
     )

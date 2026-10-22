@@ -151,7 +151,8 @@ context:
   # reference list and in-text citations, and there is no novelty summary.
   semantic_scholar: true
   timeout_s: 20
-  retries: 3
+  retries: 5            # on "busy" (HTTP 429): waits 2, 4, 8, 16, 30 s
+  min_interval_s: 1.1   # between requests; the keyless pool allows about 1 per second
   top_references: 20
   top_citations: 20
   citations_fetched: 1000

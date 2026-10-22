@@ -12,6 +12,13 @@ from app.schemas.chat import ChatRequest, ChatTurn
 from tests.conftest import FakeClock, FakeEmbedder
 
 PASSAGES = [
+    Passage(
+        "c0",
+        "Sparse routing makes low-resource translation cheaper.",
+        1,
+        "Abstract",
+        role="abstract",
+    ),
     Passage("c1", "We train with Adam using a learning rate of 3e-4 for 50k steps.", 4, "Setup"),
     Passage("c2", "Training took about 36 hours on 8 NVIDIA A100 GPUs.", 4, "Setup"),
     Passage("c3", "On FLORES-200 the model improves BLEU by 2.1 points.", 5, "Results"),
@@ -99,3 +106,12 @@ def test_word_forms_meet_in_keyword_search() -> None:
     texts = ["These problems remain open.", "We train for 3 days.", "Results are in Table 2."]
     index = PaperIndex([Passage(f"c{i}", t, 1, "Intro") for i, t in enumerate(texts)], None)
     assert [h.passage.chunk_id for h in index.search("What problem is addressed?", None)] == ["c0"]
+
+
+def test_grouped_markers_are_split_and_the_abstract_always_goes_along(settings: Settings) -> None:
+    reply = '{"answerable": true, "answer": "Adam, 3e-4, on 8 A100s [P1, P2]; see [P3;P9]."}'
+    out, provider = ask(settings, reply, "Which optimizer and GPUs?")
+    assert out.answered and "[P1] [P2]" in out.answer and "[P9]" not in out.answer
+    assert {c.chunk_id for c in out.citations} >= {"c1", "c2"}
+    prompt = provider.calls[0].prompt
+    assert "Sparse routing makes low-resource translation cheaper." in prompt  # the abstract

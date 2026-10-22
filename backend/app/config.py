@@ -146,7 +146,8 @@ class ChatSection(BaseModel):
 class ContextSection(BaseModel):
     semantic_scholar: bool = True  # False = graph from the paper's own reference list only
     timeout_s: float = 20.0
-    retries: int = 3  # on HTTP 429 / 5xx; the shared unauthenticated pool is busy
+    retries: int = 5  # on HTTP 429 / 5xx (backoff 2, 4, 8, 16, 30 s); the shared pool is busy
+    min_interval_s: float = 1.1  # between requests (keyless limit: about 1 per second)
     top_references: int = 20
     top_citations: int = 20
     citations_fetched: int = 1000  # S2 cannot sort citations; the top ones are picked from these

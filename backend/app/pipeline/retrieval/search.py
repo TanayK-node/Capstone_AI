@@ -54,6 +54,7 @@ class Passage:
     page: int
     section: str
     boxes: list[dict[str, float]] = field(default_factory=list)
+    role: str | None = None  # section role ("abstract", "method", ...)
 
 
 @dataclass

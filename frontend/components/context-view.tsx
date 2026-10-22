@@ -223,7 +223,11 @@ export function ContextView({
       />
       {report.citations.length > 0 && (
         <NodeList
-          title="Cited by"
+          title={
+            (report.citation_count ?? 0) > report.citations_scanned
+              ? `Cited by: picked from the ${report.citations_scanned} most recent of ${fmtCount(report.citation_count)} citing papers`
+              : "Cited by"
+          }
           nodes={report.citations}
           selected={selected}
           onSelect={setSelected}

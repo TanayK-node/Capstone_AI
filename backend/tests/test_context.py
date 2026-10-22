@@ -133,3 +133,11 @@ def test_graph_without_semantic_scholar(settings: Settings) -> None:
     assert r.references[0].url == "https://arxiv.org/abs/1706.03762v7"
     assert any("no novelty summary" in w for w in run.warnings)
     json.dumps(r.model_dump(mode="json"))  # storable
+
+
+def test_s2_spaces_requests_out() -> None:
+    waits: list[float] = []
+    s2 = S2Client(transport=httpx.MockTransport(lambda r: httpx.Response(404)),
+                  sleep=waits.append, min_interval_s=5.0)  # fmt: skip
+    s2.find(arxiv_id="1", doi="2", s2_id=None, title=None)
+    assert len(waits) == 1 and 4.0 < waits[0] <= 5.0  # the second request waited

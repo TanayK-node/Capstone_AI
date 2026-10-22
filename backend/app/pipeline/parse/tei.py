@@ -348,9 +348,17 @@ _NOTICE = re.compile(
 )
 
 
+# Running headers without a full stop: "Published as a conference paper at ICLR 2015 ADAM: ..."
+_VENUE_HEADER = re.compile(
+    r"^(?:published|accepted|under review|to appear)\b[^.:]{0,80}?\b(?:19|20)\d{2}\s+",
+    re.IGNORECASE,
+)
+
+
 def clean_title(title: str) -> str:
     """Drop leading sentences that are notices, keeping the real title after them."""
-    parts = re.split(r"(?<=[.!?])\s+(?=[A-Z0-9])", title.strip())
+    title = _VENUE_HEADER.sub("", title.strip()) or title.strip()
+    parts = re.split(r"(?<=[.!?])\s+(?=[A-Z0-9])", title)
     while len(parts) > 1 and _NOTICE.search(parts[0]):
         parts = parts[1:]
     return " ".join(parts)

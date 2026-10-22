@@ -27,6 +27,7 @@ def load_passages(session: Session, paper_id: str) -> list[Passage]:
             page=r.page,
             section=" > ".join(r.section_path[-2:]),
             boxes=r.boxes,
+            role=r.role,
         )
         for r in rows
         if (r.role or "") not in SKIP_ROLES and r.text.strip()

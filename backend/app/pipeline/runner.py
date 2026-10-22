@@ -413,7 +413,9 @@ def make_s2(settings: Settings) -> S2Client | None:
     if not cfg.semantic_scholar:
         return None
     key = settings.s2_api_key.get_secret_value() if settings.s2_api_key else None
-    return S2Client(key or None, timeout_s=cfg.timeout_s, retries=cfg.retries)
+    return S2Client(
+        key or None, timeout_s=cfg.timeout_s, retries=cfg.retries, min_interval_s=cfg.min_interval_s
+    )
 
 
 def run_context(

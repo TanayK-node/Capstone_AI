@@ -68,7 +68,7 @@ def passages(doc: ParsedDocument) -> list[Passage]:
     """The chat passages, straight from the parse (the app reads them from the database)."""
     return [
         Passage(chunk_id=b.id, text=b.text, page=b.page, section=" > ".join(b.section_path[-2:]),
-                boxes=[x.model_dump() for x in b.boxes])
+                boxes=[x.model_dump() for x in b.boxes], role=b.role)
         for b in doc.blocks
         if b.type == "paragraph" and (b.role or "") not in SKIP_ROLES and b.text.strip()
     ]  # fmt: skip
@@ -232,7 +232,11 @@ def _markdown(name: str, title: str, math: Any, replies: Any, ctx: Any) -> list[
     md += [f"- {r.title} ({r.year or '?'}): cited {r.mentions}x in the text"
            for r in ctx.references[:8]]  # fmt: skip
     if ctx.citations:
-        md += ["", "Cited by:"] + [f"- {c.title} ({c.year or '?'})" for c in ctx.citations[:5]]
+        sample = (f" (from the {ctx.citations_scanned} most recent of {ctx.citation_count})"
+                  if (ctx.citation_count or 0) > ctx.citations_scanned else "")  # fmt: skip
+        md += ["", f"Cited by{sample}:"] + [
+            f"- {c.title} ({c.year or '?'})" for c in ctx.citations[:5]
+        ]
     if ctx.novelty:
         md += ["", f"Novelty: {ctx.novelty.summary}", ""]
         for p in ctx.novelty.positions:

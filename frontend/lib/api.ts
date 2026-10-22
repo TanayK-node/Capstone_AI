@@ -437,6 +437,7 @@ export type ContextReport = {
   reference_count: number;
   citation_count: number | null;
   influential_citation_count: number | null;
+  citations_scanned: number;
   novelty: {
     summary: string;
     positions: {

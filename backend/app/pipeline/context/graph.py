@@ -219,6 +219,7 @@ def build_report(
         reference_count=max(len(refs), int((found or {}).get("referenceCount") or 0)),
         citation_count=(found or {}).get("citationCount"),
         influential_citation_count=(found or {}).get("influentialCitationCount"),
+        citations_scanned=len(s2_cites),
     )
     run = ContextRun(report, warnings=warnings)
 

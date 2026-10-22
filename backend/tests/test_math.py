@@ -113,3 +113,22 @@ def test_pdf_equations_drop_inline_fragments() -> None:
     report = build_report(doc, None, latex_blob=None, pdf_path=None).report
     assert [e.text for e in report.equations] == ["y = softmax(x W + b)"]
     assert report.equations[0].number == "(1)" and report.equations[0].source == "pdf"
+
+
+def test_symbols_damaged_by_json_escapes_are_restored() -> None:
+    from app.pipeline.math.glossary import fix_latex
+
+    assert fix_latex("p_\theta \bar\\alpha \beta_t \nabla") == r"p_\theta \bar\alpha \beta_t \nabla"
+
+
+def test_main_file_is_the_paper_not_the_template() -> None:
+    template = "\\documentclass{article}\n\\begin{document}Sample.\\end{document}"
+    paper = (
+        "\\documentclass{article}\n\\newcommand{\\beq}{\\begin{equation}}\n"
+        "\\newcommand{\\eeq}{\\end{equation}}\n\\begin{document}\n"
+        "\\beq a = b \\eeq\n\\input{body}\n\\end{document}"
+    )
+    files = {"iclr2015.tex": template, "adam.tex": paper, "body.tex": "\\beq c = d \\eeq"}
+    text = flatten(files)
+    assert "Sample." not in text
+    assert [(e.latex, e.number) for e in equations(text)] == [("a = b", "1"), ("c = d", "2")]
