@@ -160,3 +160,17 @@ class ClaimReportRow(Base):
     model: Mapped[str | None] = mapped_column(String(128), nullable=True)
     prompt_version: Mapped[str | None] = mapped_column(String(256), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+
+class CodeReportRow(Base):
+    """Latest paper-code comparison for a paper (SCOPE.md §6 code_reports)."""
+
+    __tablename__ = "code_reports"
+
+    paper_id: Mapped[str] = mapped_column(
+        ForeignKey("papers.id", ondelete="CASCADE"), primary_key=True
+    )
+    repo_url: Mapped[str | None] = mapped_column(String(512), nullable=True)
+    status: Mapped[str] = mapped_column(String(32))
+    data: Mapped[dict[str, Any]] = mapped_column(JSONType)  # CodeReport
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)

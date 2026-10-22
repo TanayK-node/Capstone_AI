@@ -37,11 +37,16 @@ See SCOPE.md for the full scope, architecture and phase plan.
   about 6 Gemini calls per paper; `--limit 3` to save quota)
 - Phase 3 exit check: `uv run python -m app.pipeline.check_repro --pdf-dir <pdfs>` (needs the team's
   annotations in eval/gold/repro_gold.csv; see eval/gold/README.md)
+- Phase 4 exit check: `uv run python -m app.pipeline.check_code --pdf-dir <pdfs>` (repo discovery
+  vs eval/gold/code_repos.csv; `--no-llm` for discovery only; the comparison needs Gemini + git)
+- Sandbox image for the code scan: `docker build -t paperlens-sandbox sandbox/`
 
 ## Current phase
 Phase 4 (code and claims: M7 code check, M8 claim verifier, M9 results tables; Code, Claims,
 Results tabs). Exit: correct repo found for >= 80% of papers that have code; at least one real
-paper-code mismatch demonstrated.
+paper-code mismatch demonstrated. Built. Discovery: 8/8 papers with code (offline). Mismatch:
+BERT pre-training lr 1e-4 / batch 256 / 1M steps vs run_pretraining.py defaults 5e-05 / 32 /
+100000 (shown with the paper's sentences; the full check_code run needs Gemini).
 Phase 3: built, exit check PENDING (the team chose to move on). Run
 `check_repro --pdf-dir <pdfs>` with a Gemini key; target >= 80% agreement with
 eval/gold/repro_gold.csv. Offline (rules only) it agreed 81% on the 54 items decidable there.
@@ -76,5 +81,11 @@ Phase 2 passed: check_extract 10/10 on the reference papers with gemini-3.5-flas
   matches table cells, recomputes deltas / factors and gives the verdict (tolerance in config).
   "contradicted" needs exactly one unambiguous cell; ambiguous misses are "unsupported", so a
   table the parser missed never makes a paper look wrong.
+- Code check (code_check/, M7): no LLM. Repo links ranked from the paper text (own vs "based on
+  the ... library"), shallow clone with hooks/symlinks/local protocols off and a size cap, then
+  scanner.py (standalone, parse-only: ast / yaml / json / toml / README flags) in the sandbox
+  container, or a limited subprocess where Docker is unavailable (recorded in the report).
+  Assignments under "if not is_training" are skipped (inference overrides). Comparison through
+  compare.SYNONYMS; "match" = the paper's value appears somewhere, other values listed in a note.
 - Tests use SQLite with foreign keys enforced (db.make_engine); the app uses Postgres.
 - Docling is not wired in yet (its models download from Hugging Face); it is an A1 ablation option.

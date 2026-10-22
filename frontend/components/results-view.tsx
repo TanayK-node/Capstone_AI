@@ -162,10 +162,12 @@ function Cell({
 }) {
   return (
     <td className={`px-1.5 py-0.5 ${className}`} title={title}>
+      {/* Sized to its text so labels and "88.5±1.1" are never cut off. */}
       <input
         value={value}
+        size={Math.max(3, value.length)}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full min-w-12 bg-transparent text-inherit outline-none focus:ring-1 focus:ring-sky-400"
+        className="bg-transparent text-inherit outline-none focus:ring-1 focus:ring-sky-400"
         style={{ textAlign: "inherit" }}
       />
     </td>

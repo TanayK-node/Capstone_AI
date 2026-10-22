@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import re
 import time
 from collections.abc import AsyncIterator, Iterator
 from datetime import datetime
@@ -19,7 +20,15 @@ from sqlalchemy.orm import Session
 
 from app.config import Settings, get_settings
 from app.db import get_sessionmaker
-from app.models import BlockRow, ClaimReportRow, ExtractionRow, Paper, ParseResult, ReproReport
+from app.models import (
+    BlockRow,
+    ClaimReportRow,
+    CodeReportRow,
+    ExtractionRow,
+    Paper,
+    ParseResult,
+    ReproReport,
+)
 from app.pipeline import dispatch, export
 from app.pipeline.ingest import storage
 from app.pipeline.ingest.resolver import InputError
@@ -104,9 +113,13 @@ class ExtractionResponse(BaseModel):
 
 
 class RerunRequest(BaseModel):
-    stages: list[Literal["parse", "structure", "extract", "verify", "repro", "claims"]] | None = (
-        None
-    )
+    stages: (
+        list[Literal["parse", "structure", "extract", "verify", "repro", "claims", "code"]] | None
+    ) = None
+
+
+class ConfirmRepoRequest(BaseModel):
+    url: str
 
 
 # ------------------------------------------------------------------ helpers
@@ -392,6 +405,45 @@ def get_claims(paper_id: str, session: Session = Depends(get_session)) -> dict[s
         "created_at": row.created_at,
         "report": row.data,
     }
+
+
+@router.get("/{paper_id}/code")
+def get_code(paper_id: str, session: Session = Depends(get_session)) -> dict[str, Any]:
+    """Paper-code consistency (M7): repository, health card, paper vs code rows."""
+    _paper_or_404(session, paper_id)
+    row = session.get(CodeReportRow, paper_id)
+    if row is None:
+        raise HTTPException(404, "no code report yet for this paper")
+    return {"paper_id": paper_id, "created_at": row.created_at, "report": row.data}
+
+
+_REPO_URL = re.compile(
+    r"^https://(github\.com|gitlab\.com|bitbucket\.org|huggingface\.co)/[\w.-]+/[\w.-]+(/.*)?$"
+)
+
+
+@router.post("/{paper_id}/code/confirm", response_model=CreatePaperResponse)
+def confirm_repo(
+    paper_id: str,
+    body: ConfirmRepoRequest,
+    session: Session = Depends(get_session),
+    settings: Settings = Depends(get_settings),
+) -> CreatePaperResponse:
+    """The user confirms the suggested repository or gives the right one; re-runs the code
+    stage with it (SCOPE.md §7)."""
+    paper = _paper_or_404(session, paper_id)
+    url = body.url.strip()
+    if not _REPO_URL.match(url):
+        raise HTTPException(422, "give an https link to a GitHub / GitLab / Bitbucket repository")
+    paper.meta = {**(paper.meta or {}), "code_repo": url}
+    paper.status = "queued"
+    session.commit()
+    return CreatePaperResponse(
+        paper_id=paper.id,
+        status=paper.status,
+        duplicate=True,
+        dispatched_to=dispatch.enqueue(settings, paper.id, ("code",)),
+    )
 
 
 def _snapshot(paper_id: str) -> tuple[str, str | None, dict[str, dict[str, Any]]] | None:

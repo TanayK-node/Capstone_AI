@@ -122,6 +122,13 @@ class ClaimsSection(BaseModel):
     tolerance: float = 0.15  # absolute, for recomputed values and deltas (SCOPE.md F8)
 
 
+class CodeCheckSection(BaseModel):
+    sandbox: Literal["auto", "docker", "process"] = "auto"
+    clone_timeout_s: float = 60.0
+    max_repo_mb: float = 200.0
+    search_github: bool = True
+
+
 class EmbeddingsSection(BaseModel):
     model: str = "BAAI/bge-small-en-v1.5"
     device: str = "cpu"
@@ -146,6 +153,7 @@ class Settings(BaseSettings):
     extraction: ExtractionSection = Field(default_factory=ExtractionSection)
     repro: ReproSection = Field(default_factory=ReproSection)
     claims: ClaimsSection = Field(default_factory=ClaimsSection)
+    code_check: CodeCheckSection = Field(default_factory=CodeCheckSection)
     embeddings: EmbeddingsSection = Field(default_factory=EmbeddingsSection)
     features: dict[str, bool] = Field(default_factory=dict)
 

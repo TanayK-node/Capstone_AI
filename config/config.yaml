@@ -116,6 +116,20 @@ claims:
   # within this absolute tolerance of the claimed one counts as supported (SCOPE.md F8).
   tolerance: 0.15
 
+code_check:
+  # Paper-code consistency (M7). Repositories are shallow-cloned with git hooks off and
+  # scanned statically; nothing from them is ever run (CLAUDE.md rule 6).
+  # sandbox: docker = the paperlens-sandbox image, no network, read-only
+  #          (build it once: docker build -t paperlens-sandbox sandbox/)
+  #          process = a separate, resource-limited Python process (used inside compose,
+  #          where the worker cannot start containers)
+  #          auto = docker when the image exists, else process
+  sandbox: auto
+  clone_timeout_s: 60
+  max_repo_mb: 200
+  # Search GitHub by title when the paper links no repository (needs confirmation).
+  search_github: true
+
 embeddings:
   model: BAAI/bge-small-en-v1.5
   device: cpu

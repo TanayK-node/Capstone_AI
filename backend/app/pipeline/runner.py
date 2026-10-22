@@ -10,6 +10,7 @@ import logging
 from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from datetime import UTC, datetime
+from pathlib import Path
 from typing import Any
 
 from sqlalchemy import delete, select
@@ -21,6 +22,7 @@ from app.models import (
     BlockRow,
     ChunkRow,
     ClaimReportRow,
+    CodeReportRow,
     ExtractionRow,
     Job,
     Paper,
@@ -28,13 +30,14 @@ from app.models import (
     ReproReport,
 )
 from app.pipeline.claims.service import check_claims
+from app.pipeline.code_check.service import check_code
 from app.pipeline.extract.extractor import extract_document
 from app.pipeline.ingest import storage
 from app.pipeline.parse import get_parser
 from app.pipeline.repro.analyzer import analyze
 from app.pipeline.repro.checklist import load_checklist
 from app.pipeline.repro.github import GitHubClient
-from app.pipeline.results.builder import build_results, result_entries
+from app.pipeline.results.builder import build_results, proposed_names, result_entries
 from app.pipeline.structure.sections import structure_document
 from app.pipeline.verify.grounding import ground, grounding_score
 from app.schemas.document import (
@@ -50,8 +53,15 @@ from app.schemas.extraction import PaperExtraction
 
 log = logging.getLogger("paperlens.pipeline")
 
-STAGES = ("parse", "structure", "extract", "verify", "repro", "claims")
-ANALYSIS_STAGES = ("extract", "verify", "repro", "claims")
+STAGES = ("parse", "structure", "extract", "verify", "repro", "claims", "code")
+ANALYSIS_STAGES = ("extract", "verify", "repro", "claims", "code")
+# What each analysis stage reads: when one of these failed in this run, the stage is skipped.
+NEEDS: dict[str, set[str]] = {
+    "verify": {"extract"},
+    "repro": {"extract", "verify"},
+    "claims": {"extract"},
+    "code": {"extract"},
+}
 # Stages after these are "analysis": if one fails the paper is still usable ("partial").
 CORE_STAGES = ("parse", "structure")
 
@@ -375,6 +385,55 @@ def run_claims(
         }
 
 
+def run_code(
+    session: Session, settings: Settings, paper: Paper, doc: ParsedDocument, llm: LLMClient | None
+) -> None:
+    """Paper-code consistency (M7). No LLM: discovery, clone, static scan, comparison."""
+    with stage_job(session, paper.id, "code") as job:
+        row = session.get(ExtractionRow, paper.id)
+        if row is None:
+            raise RuntimeError("no extraction: run extract first")
+        extraction = PaperExtraction.model_validate(row.data)
+        cfg = settings.code_check
+        github = make_github(settings)
+        try:
+            report = check_code(
+                extraction,
+                Path(settings.app.data_dir) / "code" / paper.id,
+                method_names=proposed_names(doc, extraction),
+                github=github,
+                user_repo=(paper.meta or {}).get("code_repo"),
+                sandbox=cfg.sandbox,
+                clone_timeout_s=cfg.clone_timeout_s,
+                max_repo_mb=cfg.max_repo_mb,
+                search=cfg.search_github,
+            )
+        finally:
+            if github is not None:
+                github.close()
+        session.merge(
+            CodeReportRow(
+                paper_id=paper.id,
+                repo_url=report.candidates[0].url if report.candidates else None,
+                status=report.status,
+                data=report.model_dump(mode="json"),
+                created_at=datetime.now(UTC),
+            )
+        )
+        job.provider = report.sandbox
+        job.model = report.commit[:12] if report.commit else None
+        job.detail = {
+            "status": report.status,
+            "repo": report.candidates[0].url if report.candidates else None,
+            "confidence": report.candidates[0].confidence if report.candidates else None,
+            "files_scanned": report.files_scanned,
+            "params_found": report.params_found,
+            "comparisons": report.counts,
+            "sandbox": report.sandbox,
+            "warnings": report.warnings,
+        }
+
+
 def process_paper(
     paper_id: str,
     *,
@@ -422,18 +481,21 @@ def process_paper(
             ("verify", run_verify),
             ("repro", run_repro),
             ("claims", run_claims),
+            ("code", run_code),
         )
+        failed: set[str] = set()
         for name, fn in analysis:
             if name not in stages:
                 continue
-            if errors:
-                break  # later stages build on the failed one
+            if failed & NEEDS.get(name, set()):
+                continue  # it builds on a stage that just failed
             try:
                 fn(session, settings, paper, doc, client)
             except Exception as exc:
                 log.warning("%s failed for %s: %s", name, paper_id, exc)
                 paper = session.merge(paper)
                 errors.append(f"{name}: {type(exc).__name__}: {exc}")
+                failed.add(name)
         paper.status = "partial" if errors else "ready"
         paper.error = "; ".join(errors) or None
         session.commit()

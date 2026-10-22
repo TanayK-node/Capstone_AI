@@ -36,8 +36,20 @@ def client(
             "app": settings.app.model_copy(update={"data_dir": tmp_path / "data"}),
             "parsing": settings.parsing.model_copy(update={"parser": "pymupdf"}),
             "repro": settings.repro.model_copy(update={"github_check": False}),  # no network
+            "code_check": settings.code_check.model_copy(update={"sandbox": "process"}),
         }
     )
+    # The fixture paper links github.com/example/sparseroute: clone a local repo instead.
+    from app.pipeline.code_check import clone as clone_mod
+    from tests.code_fixture import make_repo
+
+    local = make_repo(tmp_path)
+
+    def local_clone(candidate, dest, **kw):  # type: ignore[no-untyped-def]
+        fixed = candidate.model_copy(update={"url": f"file://{local}", "subdir": None})
+        return clone_mod.clone(fixed, dest, **{**kw, "allow_file_protocol": True})
+
+    monkeypatch.setattr("app.pipeline.code_check.service.clone", local_clone)
 
     clock = FakeClock()
     llm = LLMClient(test_settings, {"gemini": FakePaperProvider()}, MemoryCache(), clock=clock,
@@ -87,6 +99,7 @@ def test_upload_runs_pipeline_and_serves_results(client: TestClient) -> None:
         "verify": "done",
         "repro": "done",
         "claims": "done",
+        "code": "done",
     }
     assert detail["stages"]["parse"]["provider"] == "pymupdf"
     assert detail["parse"]["block_counts"]["table"] == 1
@@ -125,6 +138,14 @@ def test_upload_runs_pipeline_and_serves_results(client: TestClient) -> None:
     assert claim["verdict"] == "supported", claim["explanation"]
     assert claim["recomputed_delta"] == 2.1  # 26.4 - 24.3, computed in Python
     assert {c["row_label"] for c in claim["checked_cells"]} == {"SparseRoute (ours)", "Transformer"}
+
+    code = client.get(f"/api/papers/{pid}/code").json()["report"]
+    assert code["status"] == "ok" and code["sandbox"] == "process"
+    rows = {r["canonical"]: r for r in code["comparisons"]}
+    assert rows["learning_rate"]["status"] == "match"  # README command uses 3e-4
+    assert "0.001" in rows["learning_rate"]["note"] or "1e-3" in rows["learning_rate"]["note"]
+    assert rows["dropout"]["status"] == "only_in_code"
+    assert not Path("/tmp/PAPERLENS_EXECUTED").exists()  # the repo's code never ran
 
     repro = client.get(f"/api/papers/{pid}/reproducibility").json()
     assert repro["checklist_version"] >= 3 and 0 < repro["score"] < 100

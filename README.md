@@ -43,6 +43,27 @@ Gemini free-tier hiccups are absorbed in three layers: retries with backoff (2+4
 then the configured backup model (`llm.gemini.overload_fallback`), then one more try of a
 failed section group after `extraction.retry_failed_after_s`.
 
+## Code, claims and results (Phase 4)
+
+- **Results** tab: every results table with typed values, the best value per column and the
+  paper's own method highlighted; cells can be corrected and downloaded as CSV.
+- **Claims** tab: Gemini reads each headline claim ("improves BLEU by 2.1 over X"); Python
+  finds the table cells, recomputes the numbers and says supported / contradicted /
+  unsupported / weakly supported / unverifiable.
+- **Code** tab: finds the paper's repository, clones it (shallow, git hooks off) and reads
+  configs, argparse / absl flags, function defaults and README commands, without ever
+  running anything, then lists match / mismatch / not in code / not in paper per
+  hyperparameter. Uncertain repository matches ask you to confirm.
+
+For the strongest isolation, build the sandbox image once:
+`docker build -t paperlens-sandbox sandbox/`. Running the backend natively, the scan then
+runs in a container with no network and a read-only file system. Inside `docker compose`
+the worker cannot start containers, so it uses a resource-limited subprocess instead (the
+scan only parses files either way; the Code tab says which was used).
+
+Exit check: `uv run python -m app.pipeline.check_code --pdf-dir <pdfs>` (expected repositories
+in `eval/gold/code_repos.csv`).
+
 ## Reproducibility scorecard (Phase 3)
 
 The **Reproducibility** tab scores each paper 0-100 against the 21-item checklist in

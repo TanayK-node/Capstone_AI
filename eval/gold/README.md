@@ -1,5 +1,11 @@
 # Gold annotations
 
+## `code_repos.csv`: the official repository of each paper (Phase 4 exit)
+
+One row per paper: `repo_url` is the authors' repository linked in the paper, or empty when
+the paper links none. `check_code` compares PaperLens' choice with it (target: correct for
+>= 80% of the papers that have code). Please check the rows against the papers.
+
 ## `repro_gold.csv`: reproducibility checklist (Phase 3 exit, SCOPE.md §8)
 
 One row per paper x checklist item (10 papers x 21 items). Fill in two columns:

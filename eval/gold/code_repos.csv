@@ -1,0 +1,11 @@
+paper_id,repo_url,note
+1409.0473,https://github.com/lisa-groundhog/GroundHog,linked in the paper
+1409.1556,,no code repository; a project page with the trained models
+1512.03385,,no code repository linked in the paper
+1706.03762,https://github.com/tensorflow/tensor2tensor,linked in the paper
+1810.04805,https://github.com/google-research/bert,linked in the paper
+1907.11692,https://github.com/pytorch/fairseq,linked in the paper (now facebookresearch/fairseq)
+1910.01108,https://github.com/huggingface/transformers,linked in the paper (examples/distillation)
+2002.05709,https://github.com/google-research/simclr,linked in the paper
+2010.11929,https://github.com/google-research/vision_transformer,linked in the paper
+2106.09685,https://github.com/microsoft/LoRA,linked in the paper

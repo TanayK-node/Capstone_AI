@@ -29,6 +29,11 @@ const STAGES: { key: string; title: string; what: string }[] = [
     title: "Claims",
     what: "Gemini reads each claim; Python recomputes it from the tables",
   },
+  {
+    key: "code",
+    title: "Code",
+    what: "find the repo, clone it, scan it statically (never run), compare with the paper",
+  },
 ];
 
 const BAR_COLORS: Record<string, string> = {
@@ -39,6 +44,7 @@ const BAR_COLORS: Record<string, string> = {
   verify: "#d97706",
   repro: "#db2777",
   claims: "#0891b2",
+  code: "#4f46e5",
 };
 
 type GroupRun = {
@@ -250,6 +256,25 @@ function StageDetail({ stageKey, detail }: { stageKey: string; detail: Record<st
               {g.name}: {g.error}
             </p>
           ))}
+      </div>
+    );
+  }
+  if (stageKey === "code") {
+    const comparisons = (d.comparisons ?? {}) as Record<string, number>;
+    const repo = typeof d.repo === "string" ? d.repo.replace(/^https?:\/\//, "") : null;
+    return (
+      <div className="mt-2 text-[11px]">
+        <div className="flex flex-wrap gap-1.5">
+          <Stat label="status" value={d.status} />
+          <Stat label="repo" value={repo} />
+          <Stat label="files" value={d.files_scanned} />
+          <Stat label="values" value={d.params_found} />
+          {Object.entries(comparisons).map(([k, v]) => (
+            <Stat key={k} label={k.replaceAll("_", " ")} value={v} />
+          ))}
+          <Stat label="sandbox" value={d.sandbox} />
+        </div>
+        <Warnings items={d.warnings} />
       </div>
     );
   }

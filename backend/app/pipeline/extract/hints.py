@@ -70,6 +70,8 @@ def find_code_urls(blocks: list[Block]) -> list[tuple[str, Block, str]]:
         text = re.sub(r"(https?://\S+)\s+(?=[\w\-]+/)", r"\1", block.text)
         for match in URL_RE.finditer(text):
             url = match.group(0).rstrip(".,;)")
+            # A sentence glued on by the PDF text: ".../axial-deeplab.In our experiments".
+            url = re.sub(r"\.[A-Z][a-z]*$", "", url)
             key = url.lower().removesuffix("/")
             if key in seen:
                 continue

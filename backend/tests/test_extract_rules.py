@@ -15,6 +15,8 @@ from app.schemas.document import Block, PageInfo, ParsedDocument, Sentence
         ("1M", 1e6),
         ("2 × 10^-4", 2e-4),  # noqa: RUF001
         ("256", 256.0),
+        ("10 -6", 1e-6),  # SimCLR's "weight decay of 10 -6" as the PDF text has it
+        ("10^-4", 1e-4),
         ("1,024", 1024.0),
         ("−0.5", -0.5),  # noqa: RUF001 - unicode minus on purpose
         ("{0.01, 0.03}", None),

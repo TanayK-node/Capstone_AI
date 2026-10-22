@@ -97,6 +97,27 @@ class GitHubClient:
             info.error = f"GitHub API unreachable: {type(exc).__name__}"
         return info
 
+    def search_repositories(self, query: str) -> list[dict[str, object]]:
+        """GitHub repository search (M7 discovery fallback). Empty on any failure."""
+        try:
+            resp = self._http.get("/search/repositories", params={"q": query, "per_page": 5})
+            if resp.status_code == 200:
+                return list(resp.json().get("items", []))
+        except httpx.HTTPError as exc:
+            log.warning("github search failed: %s", exc)
+        return []
+
+    def reproduce_issues(self, owner: str, name: str) -> int | None:
+        """Open issues mentioning reproduction (SCOPE.md F7 health card)."""
+        q = f"repo:{owner}/{name} reproduc in:title,body type:issue state:open"
+        try:
+            resp = self._http.get("/search/issues", params={"q": q, "per_page": 1})
+            if resp.status_code == 200:
+                return int(resp.json().get("total_count", 0))
+        except (httpx.HTTPError, ValueError):
+            pass
+        return None
+
 
 def _message(resp: httpx.Response) -> str:
     try:

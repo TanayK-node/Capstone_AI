@@ -8,6 +8,8 @@ import {
   eventsUrl,
   getBlocks,
   getClaims,
+  getCode,
+  confirmRepo,
   getExtraction,
   getPaper,
   getReproducibility,
@@ -21,6 +23,7 @@ import { BLOCK_COLORS, BLOCK_TYPES, ROLE_LABELS } from "@/lib/blocks";
 import { GROUNDING_COLORS, Overview, type EvidenceTarget } from "./overview";
 import { PipelineView } from "./pipeline-view";
 import { ClaimsView } from "./claims-view";
+import { CodeView } from "./code-view";
 import { ReproView } from "./repro-view";
 import { ResultsView } from "./results-view";
 import type { Highlight } from "./pdf/pdf-viewer";
@@ -32,19 +35,28 @@ const PdfViewer = dynamic(() => import("./pdf/pdf-viewer"), {
   loading: () => <p className="p-4 text-sm text-zinc-500">Loading viewer…</p>,
 });
 
-const STAGES = ["ingest", "parse", "structure", "extract", "verify", "repro", "claims"] as const;
+const STAGES = [
+  "ingest",
+  "parse",
+  "structure",
+  "extract",
+  "verify",
+  "repro",
+  "claims",
+  "code",
+] as const;
 const ACTIVE = ["queued", "processing"];
-type Tab =
-  "pipeline" | "overview" | "reproducibility" | "claims" | "results" | "structure" | "block";
-const TABS: Tab[] = [
+const TABS = [
   "pipeline",
   "overview",
   "reproducibility",
   "claims",
+  "code",
   "results",
   "structure",
   "block",
-];
+] as const;
+type Tab = (typeof TABS)[number];
 
 export function Workspace() {
   const { id } = useParams<{ id: string }>();
@@ -89,6 +101,15 @@ export function Workspace() {
     queryKey: ["claims", id, stages?.claims?.finished_at],
     queryFn: () => getClaims(id),
     enabled: stages?.claims?.status === "done",
+  });
+  const code = useQuery({
+    queryKey: ["code", id, stages?.code?.finished_at],
+    queryFn: () => getCode(id),
+    enabled: stages?.code?.status === "done",
+  });
+  const confirm = useMutation({
+    mutationFn: (url: string) => confirmRepo(id, url),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["paper", id] }),
   });
   // Rebuilt from the parse; the extraction (when there is one) names the paper's method.
   const results = useQuery({
@@ -278,6 +299,29 @@ export function Workspace() {
                         : "No claim report yet. Re-run the analysis to create one."}
                 </p>
               ))}
+            {tab === "code" &&
+              (code.data ? (
+                <CodeView
+                  report={code.data.report}
+                  activeKey={highlight?.key ?? null}
+                  onEvidence={setEvidence}
+                  onConfirm={(url) => confirm.mutate(url)}
+                  confirming={confirm.isPending}
+                />
+              ) : (
+                <p className="text-zinc-500">
+                  {code.error
+                    ? `Could not load the code report: ${code.error.message}`
+                    : stages?.code?.status === "failed"
+                      ? "The code check failed (see the Pipeline tab)."
+                      : ACTIVE.includes(p.status)
+                        ? "Checking the code… the comparison appears here when done."
+                        : "No code report yet. Re-run the analysis to create one."}
+                </p>
+              ))}
+            {confirm.isError && tab === "code" && (
+              <p className="mt-2 text-xs text-red-600">{confirm.error.message}</p>
+            )}
             {tab === "results" &&
               (results.data ? (
                 <ResultsView paperId={id} tables={results.data} onShowTable={showTable} />
@@ -323,7 +367,7 @@ function Header({
         <div className="flex gap-2">
           {paper.stages.structure?.status === "done" && (
             <button
-              onClick={() => onRerun(["extract", "verify", "repro", "claims"])}
+              onClick={() => onRerun(["extract", "verify", "repro", "claims", "code"])}
               disabled={busy}
               className="rounded-lg border border-zinc-300 px-3 py-1.5 text-xs disabled:opacity-40 dark:border-zinc-700"
             >

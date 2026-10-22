@@ -303,6 +303,53 @@ export type ClaimsResponse = {
   };
 };
 
+// ---- code check (mirrors app/schemas/code.py)
+
+export type RepoCandidate = {
+  url: string;
+  source: "paper" | "github_search" | "user";
+  confidence: number;
+  reason: string;
+  subdir: string | null;
+};
+
+export type CodeParam = {
+  name: string;
+  canonical: string | null;
+  value: string;
+  value_norm: number | null;
+  file: string;
+  line: number | null;
+  kind: string;
+};
+
+export type Comparison = {
+  canonical: string;
+  status: "match" | "mismatch" | "only_in_paper" | "only_in_code";
+  paper_name: string;
+  paper_value: string;
+  paper_scope: string;
+  paper_evidence: Evidence[];
+  code_values: CodeParam[];
+  note: string;
+};
+
+export type CodeReport = {
+  status: "ok" | "no_repo" | "needs_confirmation" | "clone_failed" | "too_large" | "scan_failed";
+  repo: RepoInfo | null;
+  candidates: RepoCandidate[];
+  commit: string | null;
+  sandbox: string | null;
+  files_scanned: number;
+  params_found: number;
+  comparisons: Comparison[];
+  counts: Record<string, number>;
+  reproduce_issues: number | null;
+  warnings: string[];
+};
+
+export type CodeResponse = { paper_id: string; created_at: string; report: CodeReport };
+
 // ---- reproducibility (mirrors app/schemas/repro.py)
 
 export type ItemStatus = "present" | "partial" | "missing" | "not_applicable" | "unknown";
@@ -390,6 +437,13 @@ export const getReproducibility = (id: string) =>
 export const getTables = (id: string) => request<ResultsTable[]>(`/api/papers/${id}/tables`);
 export const tablesCsvUrl = (id: string) => `${API_URL}/api/papers/${id}/tables?format=csv`;
 export const getClaims = (id: string) => request<ClaimsResponse>(`/api/papers/${id}/claims`);
+export const getCode = (id: string) => request<CodeResponse>(`/api/papers/${id}/code`);
+export const confirmRepo = (id: string, url: string) =>
+  request<CreatePaperResponse>(`/api/papers/${id}/code/confirm`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url }),
+  });
 export const exportUrl = (id: string, format: ExportFormat) =>
   `${API_URL}/api/papers/${id}/export?format=${format}`;
 /** Server-sent events: `stage` per stage status change, `status`, then `done`. */

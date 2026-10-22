@@ -11,6 +11,8 @@ from app.pipeline.parse.tables import parse_number
 _SUFFIX = {"k": 1e3, "K": 1e3, "m": 1e6, "M": 1e6, "b": 1e9, "B": 1e9}
 _SCALED = re.compile(r"^\s*([-+]?\d+(?:\.\d+)?)\s*([kKmMbB])\s*$")
 _TIMES_TEN = re.compile(r"^\s*([-+]?\d+(?:\.\d+)?)\s*[×x*]\s*10\s*\^?\s*([-+−]?\d+)\s*$")
+# A bare power of ten as PDFs flatten it: "10^-6", "10 -6", "10−6" (= 1e-6).
+_POWER_TEN = re.compile(r"^\s*10\s*\^?\s*([-−]\d+)\s*$")
 
 
 def normalize_value(raw: str) -> float | None:
@@ -22,6 +24,8 @@ def normalize_value(raw: str) -> float | None:
         return float(m.group(1)) * float(_SUFFIX[m.group(2)])
     if m := _TIMES_TEN.match(text):
         return float(m.group(1)) * 10.0 ** int(m.group(2).replace("−", "-"))
+    if m := _POWER_TEN.match(text):
+        return 10.0 ** int(m.group(1).replace("−", "-"))
     num = parse_number(text)
     return float(num.value) if num else None
 
