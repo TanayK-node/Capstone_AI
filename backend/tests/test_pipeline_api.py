@@ -292,3 +292,18 @@ def test_chat_answers_with_citations_or_refuses(client: TestClient) -> None:
         f"/api/papers/{pid}/chat", json={"question": "Who won the football world cup?"}
     ).json()
     assert off_topic["answered"] is False and off_topic["retrieved"] == []
+
+
+def test_compare_two_papers(client: TestClient) -> None:
+    a = upload(client, "paper_single.pdf")["paper_id"]
+    b = upload(client, "paper_twocol.pdf")["paper_id"]
+    comp = client.get("/api/compare", params={"ids": [a, b]})
+    assert comp.status_code == 200, comp.text
+    data = comp.json()
+    assert [p["id"] for p in data["papers"]] == [a, b]
+    assert data["rows"] and all(len(r["cells"]) == 2 for r in data["rows"])
+    csv_resp = client.get("/api/compare", params={"ids": [a, b], "format": "csv"})
+    assert csv_resp.headers["content-type"].startswith("text/csv")
+    assert csv_resp.text.splitlines()[0].startswith("group,item,")
+    assert client.get("/api/compare", params={"ids": [a]}).status_code == 422
+    assert client.get("/api/compare", params={"ids": [a, "nope"]}).status_code == 409

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { HealthPanel } from "@/components/health-panel";
 import { PaperList } from "@/components/paper-list";
 import { UploadCard } from "@/components/upload-card";
@@ -13,7 +14,15 @@ export default function Home() {
       </header>
       <UploadCard />
       <section className="space-y-3">
-        <h2 className="text-lg font-semibold">Library</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold">Library</h2>
+          <Link
+            href="/compare"
+            className="rounded border border-zinc-300 px-2 py-1 text-sm hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
+          >
+            Compare papers
+          </Link>
+        </div>
         <PaperList />
       </section>
       <HealthPanel />

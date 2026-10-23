@@ -539,6 +539,31 @@ export type ReproResponse = {
   scorecard: Scorecard;
 };
 
+// ---- multi-paper comparison (mirrors app/schemas/compare.py)
+
+export type ComparedPaper = { id: string; title: string; year: string | null; method: string[] };
+export type MatrixCell = { values: string[]; pages: number[] };
+export type MatrixRow = { group: string; label: string; cells: MatrixCell[]; shared: boolean };
+export type SharedResultCell = {
+  method: string;
+  text: string;
+  value: number | null;
+  is_best: boolean;
+  table: string | null;
+  page: number | null;
+};
+export type SharedResult = {
+  label: string;
+  higher_is_better: boolean | null;
+  cells: SharedResultCell[];
+};
+export type PaperComparison = {
+  papers: ComparedPaper[];
+  rows: MatrixRow[];
+  results: SharedResult[];
+  warnings: string[];
+};
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${API_URL}${path}`, { cache: "no-store", ...init });
   if (!res.ok) {
@@ -592,6 +617,11 @@ export const askPaper = (id: string, question: string, history: ChatTurn[]) =>
   });
 export const exportUrl = (id: string, format: ExportFormat) =>
   `${API_URL}/api/papers/${id}/export?format=${format}`;
+const compareQuery = (ids: string[]) => ids.map((i) => `ids=${encodeURIComponent(i)}`).join("&");
+export const getComparison = (ids: string[]) =>
+  request<PaperComparison>(`/api/compare?${compareQuery(ids)}`);
+export const comparisonCsvUrl = (ids: string[]) =>
+  `${API_URL}/api/compare?${compareQuery(ids)}&format=csv`;
 /** Server-sent events: `stage` per stage status change, `status`, then `done`. */
 export const eventsUrl = (id: string) => `${API_URL}/api/papers/${id}/events`;
 

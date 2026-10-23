@@ -5,7 +5,7 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import health, papers
+from app.api import compare, health, papers
 from app.config import get_settings
 
 
@@ -21,6 +21,7 @@ def create_app() -> FastAPI:
     )
     app.include_router(health.router)
     app.include_router(papers.router)
+    app.include_router(compare.router)
     return app
 
 
