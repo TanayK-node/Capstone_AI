@@ -1,0 +1,55 @@
+2104.08821,task,,sentence embedding learning,sentence embeddings|universal sentence embeddings,1,
+2104.08821,task,,semantic textual similarity,STS,1,
+2104.08821,task,,transfer tasks,sentence classification transfer tasks,2,SentEval
+2104.08821,datasets,,STS12,STS 2012,6,
+2104.08821,datasets,,STS13,STS 2013,6,
+2104.08821,datasets,,STS14,STS 2014,6,
+2104.08821,datasets,,STS15,STS 2015,6,
+2104.08821,datasets,,STS16,STS 2016,6,
+2104.08821,datasets,,STS-B,STS Benchmark,6,
+2104.08821,datasets,,SICK-R,SICK-Relatedness|SICK,6,
+2104.08821,datasets,,English Wikipedia,Wikipedia,3,10^6 sampled sentences for unsupervised SimCSE
+2104.08821,datasets,,SNLI,Stanford NLI,4,
+2104.08821,datasets,,MNLI,MultiNLI,4,
+2104.08821,datasets,,QQP,Quora question pairs,4,supervised data comparison (Table 4)
+2104.08821,datasets,,Flickr30k,,4,supervised data comparison (Table 4)
+2104.08821,datasets,,ParaNMT,,4,supervised data comparison (Table 4)
+2104.08821,datasets,,MR,movie reviews,15,transfer task
+2104.08821,datasets,,CR,customer reviews,15,transfer task
+2104.08821,datasets,,SUBJ,,15,transfer task
+2104.08821,datasets,,MPQA,,15,transfer task
+2104.08821,datasets,,SST-2,SST,15,transfer task
+2104.08821,datasets,,TREC,,15,transfer task
+2104.08821,datasets,,MRPC,,15,transfer task
+2104.08821,baselines,,GloVe embeddings (avg.),GloVe|average GloVe embeddings,7,
+2104.08821,baselines,,BERT first-last avg.,BERTbase (first-last avg.)|BERT,7,
+2104.08821,baselines,,BERT-flow,,7,
+2104.08821,baselines,,BERT-whitening,,7,
+2104.08821,baselines,,IS-BERT,,7,
+2104.08821,baselines,,CT-BERT,,7,
+2104.08821,baselines,,RoBERTa first-last avg.,RoBERTa,7,
+2104.08821,baselines,,RoBERTa-whitening,,7,
+2104.08821,baselines,,DeCLUTR-RoBERTa,DeCLUTR,7,
+2104.08821,baselines,,InferSent,InferSent-GloVe,7,
+2104.08821,baselines,,Universal Sentence Encoder,USE,7,
+2104.08821,baselines,,SBERT,Sentence-BERT,7,
+2104.08821,baselines,,SBERT-flow,,7,
+2104.08821,baselines,,SBERT-whitening,,7,
+2104.08821,baselines,,CT-SBERT,,7,
+2104.08821,baselines,,SRoBERTa,,7,
+2104.08821,baselines,,SRoBERTa-whitening,,7,
+2104.08821,metrics,,Spearman's correlation,Spearman correlation|Spearman's,7,STS
+2104.08821,metrics,,accuracy,transfer accuracy,16,transfer tasks
+2104.08821,hyperparameters,epochs,3,,13,supervised SimCSE
+2104.08821,hyperparameters,epochs,1,one epoch,13,unsupervised SimCSE
+2104.08821,hyperparameters,eval_interval,250,every 250 training steps,13,
+2104.08821,hyperparameters,batch_size,64,,13,grid search; unsup BERT base and large
+2104.08821,hyperparameters,batch_size,128,,13,grid search
+2104.08821,hyperparameters,batch_size,256,,13,grid search
+2104.08821,hyperparameters,batch_size,512,,13,grid search; unsup RoBERTa and supervised
+2104.08821,hyperparameters,learning_rate,1e-5,,13,grid search; Table A.1
+2104.08821,hyperparameters,learning_rate,3e-5,,13,grid search; Table A.1; also p3
+2104.08821,hyperparameters,learning_rate,5e-5,,13,grid search; supervised base
+2104.08821,hyperparameters,dropout,0.1,p = 0.1|dropout probability,4,default dropout from Transformers
+2104.08821,hyperparameters,temperature,0.05,τ = 0.05,15,
+2104.08821,code_urls,,https://github.com/princeton-nlp/SimCSE,github.com/princeton-nlp/SimCSE,1,

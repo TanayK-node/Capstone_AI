@@ -1,0 +1,41 @@
+1506.01497,task,,object detection,real-time object detection,1,
+1506.01497,task,,region proposal generation,region proposals|object proposals,1,
+1506.01497,datasets,,PASCAL VOC 2007,VOC 2007|PASCAL VOC,7,
+1506.01497,datasets,,PASCAL VOC 2012,VOC 2012|PASCAL VOC,7,
+1506.01497,datasets,,MS COCO,COCO|Microsoft COCO,10,
+1506.01497,datasets,,ImageNet,ImageNet pre-training,5,pre-trained networks
+1506.01497,baselines,,Selective Search,SS|SS + Fast R-CNN,7,
+1506.01497,baselines,,EdgeBoxes,EB,7,
+1506.01497,baselines,,Fast R-CNN,,10,
+1506.01497,baselines,,OverFeat one-stage detection,OverFeat|one-stage Fast R-CNN,10,
+1506.01497,metrics,,mAP,mean Average Precision|mAP@0.5|mAP@[.5 .95],7,
+1506.01497,metrics,,recall,Recall-to-IoU|recall vs. IoU,9,
+1506.01497,metrics,,running time,frame rate|fps|timing,8,
+1506.01497,hyperparameters,optimizer,SGD,stochastic gradient descent,5,
+1506.01497,hyperparameters,anchors_per_image,256,anchors per mini-batch,5,
+1506.01497,hyperparameters,learning_rate,0.001,,5,PASCAL VOC first 60k mini-batches
+1506.01497,hyperparameters,learning_rate,0.0001,,5,PASCAL VOC next 20k
+1506.01497,hyperparameters,train_steps,60k,mini-batches,5,PASCAL VOC
+1506.01497,hyperparameters,train_steps,20k,mini-batches,5,PASCAL VOC
+1506.01497,hyperparameters,momentum,0.9,,5,
+1506.01497,hyperparameters,weight_decay,0.0005,,5,
+1506.01497,hyperparameters,init_std,0.01,standard deviation,5,new layers
+1506.01497,hyperparameters,image_size,600,s|shorter side,6,
+1506.01497,hyperparameters,anchor_scales,"128², 256², 512²",3 scales,6,
+1506.01497,hyperparameters,anchor_ratios,"1:1, 1:2, 2:1",3 aspect ratios,6,
+1506.01497,hyperparameters,nms_threshold,0.7,IoU threshold for NMS,7,
+1506.01497,hyperparameters,num_proposals,2000,proposals,7,train-time
+1506.01497,hyperparameters,num_proposals,300,proposals,7,test-time
+1506.01497,hyperparameters,loss_weight_lambda,10,λ,9,
+1506.01497,hyperparameters,batch_size,8,effective mini-batch size,10,COCO RPN
+1506.01497,hyperparameters,batch_size,16,effective mini-batch size,10,COCO Fast R-CNN
+1506.01497,hyperparameters,learning_rate,0.003,,10,COCO first 240k iterations
+1506.01497,hyperparameters,learning_rate,0.0003,,10,COCO next 80k
+1506.01497,hyperparameters,train_steps,240k,iterations,10,COCO
+1506.01497,hyperparameters,train_steps,80k,iterations,10,COCO
+1506.01497,hyperparameters,anchor_scales,"64², 128², 256², 512²",4 scales,10,COCO
+1506.01497,hyperparameters,stride,16,total stride,6,
+1506.01497,compute,,K40 GPU,K40,8,timing
+1506.01497,compute,,8-GPU implementation,8 GPUs,10,COCO training
+1506.01497,code_urls,,https://github.com/shaoqingren/faster_rcnn,,2,MATLAB
+1506.01497,code_urls,,https://github.com/rbgirshick/py-faster-rcnn,,2,Python

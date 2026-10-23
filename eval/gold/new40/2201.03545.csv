@@ -1,0 +1,81 @@
+2201.03545,task,,image classification,ImageNet classification,6,
+2201.03545,task,,object detection,COCO detection,8,
+2201.03545,task,,instance segmentation,,8,
+2201.03545,task,,semantic segmentation,ADE20K segmentation,8,
+2201.03545,task,,robustness evaluation,robustness|out-of-domain generalization,10,
+2201.03545,datasets,,ImageNet-1K,ImageNet,6,
+2201.03545,datasets,,ImageNet-22K,ImageNet,6,pre-training
+2201.03545,datasets,,COCO,,8,
+2201.03545,datasets,,ADE20K,,8,
+2201.03545,datasets,,ImageNet-A,,10,robustness
+2201.03545,datasets,,ImageNet-R,,10,robustness
+2201.03545,datasets,,ImageNet-Sketch,SK,10,robustness
+2201.03545,datasets,,ImageNet-C,ImageNet-C̄,10,robustness
+2201.03545,baselines,,Swin Transformer,Swin-T|Swin-S|Swin-B|Swin-L,7,
+2201.03545,baselines,,DeiT,DeiT-S|DeiT-B,7,
+2201.03545,baselines,,RegNetY,RegNet|RegNetY-16G,7,
+2201.03545,baselines,,EfficientNet,EffNet|EffNet-B7,7,
+2201.03545,baselines,,EfficientNetV2,EffNetV2-L|EffNetV2-XL,7,
+2201.03545,baselines,,ViT,ViT-B/16|ViT-L/16|ViT-S,7,
+2201.03545,baselines,,BiT ResNet,R-101x3|R-152x4,7,
+2201.03545,baselines,,ResNet-50,ResNet|ResNet-200,8,
+2201.03545,baselines,,ResNeXt-101,X101-32|X101-64,8,
+2201.03545,metrics,,top-1 accuracy,ImageNet top-1 acc.|accuracy,7,
+2201.03545,metrics,,box AP,APbox,8,
+2201.03545,metrics,,mask AP,APmask,8,
+2201.03545,metrics,,mIoU,,8,
+2201.03545,metrics,,throughput,image/s|FPS,7,
+2201.03545,metrics,,FLOPs,,7,
+2201.03545,metrics,,mean corruption error,mCE|corruption error,10,
+2201.03545,metrics,,training memory,peak memory,8,
+2201.03545,hyperparameters,optimizer,AdamW,,9,
+2201.03545,hyperparameters,learning_rate,4e-3,base learning rate,9,pre-training
+2201.03545,hyperparameters,weight_decay,0.05,,9,pre-training
+2201.03545,hyperparameters,adam_beta1,0.9,β1,9,
+2201.03545,hyperparameters,adam_beta2,0.999,β2,9,
+2201.03545,hyperparameters,batch_size,4096,,9,pre-training
+2201.03545,hyperparameters,epochs,300,training epochs,9,ImageNet-1K
+2201.03545,hyperparameters,epochs,90,training epochs,9,ImageNet-22K
+2201.03545,hyperparameters,lr_schedule,cosine decay,,9,
+2201.03545,hyperparameters,warmup_epochs,20,,9,ImageNet-1K
+2201.03545,hyperparameters,warmup_epochs,5,,9,ImageNet-22K
+2201.03545,hyperparameters,warmup_epochs,50,,9,isotropic ConvNeXt
+2201.03545,hyperparameters,randaugment,"(9, 0.5)",randaugment,9,
+2201.03545,hyperparameters,mixup,0.8,,9,pre-training
+2201.03545,hyperparameters,cutmix,1.0,,9,pre-training
+2201.03545,hyperparameters,random_erasing,0.25,,9,
+2201.03545,hyperparameters,label_smoothing,0.1,,9,
+2201.03545,hyperparameters,drop_path,0.1/0.4/0.5/0.5,stochastic depth,9,ImageNet-1K T/S/B/L
+2201.03545,hyperparameters,drop_path,0.0/0.0/0.1/0.1/0.2,stochastic depth,9,ImageNet-22K T/S/B/L/XL
+2201.03545,hyperparameters,layer_scale_init,1e-6,layer scale,9,
+2201.03545,hyperparameters,ema_decay,0.9999,EMA,9,ImageNet-1K
+2201.03545,hyperparameters,weight_init,trunc. normal (0.2),truncated normal,9,
+2201.03545,hyperparameters,learning_rate,5e-5,base learning rate,10,fine-tuning
+2201.03545,hyperparameters,weight_decay,1e-8,,10,fine-tuning
+2201.03545,hyperparameters,batch_size,512,,10,fine-tuning
+2201.03545,hyperparameters,epochs,30,training epochs,10,fine-tuning
+2201.03545,hyperparameters,layerwise_lr_decay,0.7,layer-wise lr decay,10,ImageNet-1K pre-trained fine-tuning
+2201.03545,hyperparameters,layerwise_lr_decay,0.8,layer-wise lr decay,10,ImageNet-22K pre-trained fine-tuning
+2201.03545,hyperparameters,head_init_scale,0.001,,10,fine-tuning
+2201.03545,hyperparameters,learning_rate,1e-4,,10,COCO and ADE20K sweep
+2201.03545,hyperparameters,learning_rate,2e-4,,10,COCO sweep
+2201.03545,hyperparameters,learning_rate,8e-5,,10,ADE20K sweep
+2201.03545,hyperparameters,train_steps,160K,iterations,8,ADE20K
+2201.03545,hyperparameters,batch_size,16,,8,ADE20K
+2201.03545,hyperparameters,kernel_size,7,7×7 depthwise conv,5,
+2201.03545,hyperparameters,hidden_size,"(96, 192, 384, 768)",C|channels,6,ConvNeXt-T and S
+2201.03545,hyperparameters,hidden_size,"(128, 256, 512, 1024)",C|channels,6,ConvNeXt-B
+2201.03545,hyperparameters,hidden_size,"(192, 384, 768, 1536)",C|channels,6,ConvNeXt-L
+2201.03545,hyperparameters,hidden_size,"(256, 512, 1024, 2048)",C|channels,6,ConvNeXt-XL
+2201.03545,hyperparameters,num_blocks,"(3, 3, 9, 3)",B|blocks,6,ConvNeXt-T
+2201.03545,hyperparameters,num_blocks,"(3, 3, 27, 3)",B|blocks,6,ConvNeXt-S/B/L/XL
+2201.03545,hyperparameters,image_size,224,2242,7,
+2201.03545,hyperparameters,image_size,384,3842,7,
+2201.03545,hyperparameters,model_size,29M,params,7,ConvNeXt-T
+2201.03545,hyperparameters,model_size,50M,params,7,ConvNeXt-S
+2201.03545,hyperparameters,model_size,89M,params,7,ConvNeXt-B
+2201.03545,hyperparameters,model_size,198M,params,7,ConvNeXt-L
+2201.03545,hyperparameters,model_size,350M,params,7,ConvNeXt-XL
+2201.03545,compute,,V100 GPU,V100,7,throughput
+2201.03545,compute,,A100 GPU,A100,8,FPS and throughput comparisons
+2201.03545,code_urls,,https://github.com/facebookresearch/ConvNeXt,,1,
