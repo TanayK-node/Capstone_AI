@@ -53,13 +53,9 @@ scorer + run_eval, baseline run phase2_flash_lite: core-field F1 0.72, hyperpara
 coverage 43%, numeric accuracy 100%, verified evidence 80%, hallucination 10%. Weakest:
 task recall 0.32, hyperparameter recall 0.36 (appendix tables and model dimensions missed).
 Next: ablations (cheap first: A1, A3, A4, A6, A7), Qasper subset, dashboard.
-Phase 5 (chat, math, context: M11 grounded chat, M10 equations + glossary, M12 citation graph +
-novelty; Chat, Math, Context tabs). Exit: chat answers cite pages; glossary built for 5
-math-heavy papers; graph renders. ACCEPTED by the team (Oct 2026), re-run pending: second
-check_phase5 run had chat 5/5, graph 5/5, glossary 3/5 (VAE: model copied the paper's own
-macros, 2/48 quotes found; DDPM: 65k-char runaway output). Fixed in glossary@2 (macros written
-out, plain-text quotes, <= 30 symbols, LaTeX-flattened quote retry); not yet re-run.
-Semantic Scholar answered 429 for most papers without S2_API_KEY.
+Phase 5 PASSED (Oct 2026): check_phase5 5/5 with glossary@2 (every glossary symbol verified,
+chat cites pages, off-topic refused, graph renders). Semantic Scholar mostly 429 without
+S2_API_KEY (PDF-only graph, no novelty) for 4/5 papers.
 Phase 4 (code and claims: M7 code check, M8 claim verifier, M9 results tables; Code, Claims,
 Results tabs). Exit: correct repo found for >= 80% of papers that have code; at least one real
 paper-code mismatch demonstrated. Built. Discovery: 8/8 papers with code (offline). Mismatch:
