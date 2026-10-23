@@ -1,0 +1,87 @@
+2312.00752,task,,sequence modeling,linear-time sequence modeling|selective state spaces,1,
+2312.00752,task,,language modeling,autoregressive language modeling,11,
+2312.00752,task,,DNA modeling,genomics,12,
+2312.00752,task,,audio modeling and generation,audio waveform modeling|speech generation,14,
+2312.00752,task,,selective copying,Selective Copying task,5,synthetic
+2312.00752,task,,induction heads,Induction Heads task,5,synthetic
+2312.00752,datasets,,The Pile,Pile,11,
+2312.00752,datasets,,LAMBADA,,12,
+2312.00752,datasets,,HellaSwag,,12,
+2312.00752,datasets,,PIQA,,12,
+2312.00752,datasets,,ARC-easy,Arc-E,12,
+2312.00752,datasets,,ARC-challenge,Arc-C,12,
+2312.00752,datasets,,WinoGrande,,12,
+2312.00752,datasets,,HG38,human genome,12,
+2312.00752,datasets,,Great Apes DNA classification,species classification|Synthetic Species Classification,13,
+2312.00752,datasets,,YouTubeMix,,14,
+2312.00752,datasets,,SC09,,14,
+2312.00752,baselines,,Transformer,GPT3 architecture,11,
+2312.00752,baselines,,Transformer++,,11,
+2312.00752,baselines,,H3,H3++|Hybrid H3,4,
+2312.00752,baselines,,Hyena,,4,
+2312.00752,baselines,,RetNet,,4,
+2312.00752,baselines,,RWKV,,4,
+2312.00752,baselines,,S4,,10,synthetics
+2312.00752,baselines,,Pythia,,12,
+2312.00752,baselines,,GPT-Neo,,12,
+2312.00752,baselines,,OPT,,12,
+2312.00752,baselines,,HyenaDNA,,12,
+2312.00752,baselines,,SaShiMi,Sashimi,14,
+2312.00752,baselines,,SampleRNN,,15,
+2312.00752,baselines,,WaveNet,,15,
+2312.00752,baselines,,WaveGAN,,15,
+2312.00752,baselines,,DiffWave,,15,
+2312.00752,baselines,,multi-head attention,MHA-Abs|MHA-RoPE|MHA-xPos,10,induction heads
+2312.00752,metrics,,perplexity,,11,
+2312.00752,metrics,,accuracy,normalized accuracy,12,
+2312.00752,metrics,,bits per byte,BPB,14,
+2312.00752,metrics,,NLL,negative log-likelihood,15,
+2312.00752,metrics,,FID,,15,
+2312.00752,metrics,,IS,,15,
+2312.00752,metrics,,mIS,,15,
+2312.00752,metrics,,AM,,15,
+2312.00752,metrics,,throughput,inference throughput,15,
+2312.00752,hyperparameters,expansion_factor,2,𝐸= 2,7,
+2312.00752,hyperparameters,state_dim,16,𝑁= 16,15,
+2312.00752,hyperparameters,num_layers,2,2 layer models,29,synthetic tasks
+2312.00752,hyperparameters,hidden_size,64,𝐷= 64,29,selective copying
+2312.00752,hyperparameters,vocab_size,16,vocab size of 16,29,synthetic tasks
+2312.00752,hyperparameters,max_seq_length,4096,length 4096,29,selective copying
+2312.00752,hyperparameters,train_steps,400K,400K steps,29,selective copying
+2312.00752,hyperparameters,learning_rate,0.0001,1e-4,29,selective copying; Great Apes fine-tuning
+2312.00752,hyperparameters,batch_size,64,,29,selective copying; species fine-tuning
+2312.00752,hyperparameters,batch_size,8,,29,induction heads
+2312.00752,hyperparameters,optimizer,AdamW,,29,language modeling
+2312.00752,hyperparameters,learning_rate,2e-4,2𝑒−4,29,induction heads; 1.3B scaling
+2312.00752,hyperparameters,learning_rate,1e-3,1𝑒−3,29,induction heads Mamba
+2312.00752,hyperparameters,num_layers,12,n_layers,30,125M
+2312.00752,hyperparameters,num_layers,24,n_layers,30,350M / 760M / 1.3B
+2312.00752,hyperparameters,hidden_size,768,d_model,30,125M
+2312.00752,hyperparameters,hidden_size,1024,d_model,30,350M
+2312.00752,hyperparameters,hidden_size,1536,d_model,30,760M
+2312.00752,hyperparameters,hidden_size,2048,d_model,30,1.3B
+2312.00752,hyperparameters,train_steps,4800,,30,125M
+2312.00752,hyperparameters,train_steps,13500,,30,350M
+2312.00752,hyperparameters,train_steps,29000,,30,760M
+2312.00752,hyperparameters,train_steps,50000,,30,1.3B
+2312.00752,hyperparameters,learning_rate,6e-4,,30,125M
+2312.00752,hyperparameters,learning_rate,3e-4,,30,350M
+2312.00752,hyperparameters,learning_rate,2.5e-4,,30,760M
+2312.00752,hyperparameters,batch_size,0.5M tokens,0.5M,30,scaling laws
+2312.00752,hyperparameters,batch_size,1M tokens,1M,31,1.3B downstream
+2312.00752,hyperparameters,grad_clip,1.0,gradient clip value 1.0,30,
+2312.00752,hyperparameters,weight_decay,0.1,,30,
+2312.00752,hyperparameters,dropout,0,no dropout,30,
+2312.00752,hyperparameters,lr_schedule,linear warmup with cosine decay,cosine decay,30,
+2312.00752,hyperparameters,adam_beta1,0.9,𝛽= (.9|.95),30,
+2312.00752,hyperparameters,adam_beta2,0.95,.95,30,improved recipe
+2312.00752,hyperparameters,train_tokens,300B,300B tokens,12,downstream models
+2312.00752,hyperparameters,tokenizer,GPT-NeoX,GPT-NeoX tokenizer,31,downstream; GPT2 tokenizer for scaling laws
+2312.00752,hyperparameters,learning_rate,8e-3,0.008,33,Mamba DNA pretraining
+2312.00752,hyperparameters,batch_size,1024,global batch size of 1024,13,DNA scaling
+2312.00752,hyperparameters,train_steps,20K,20𝐾 gradient steps,13,DNA sequence length scaling
+2312.00752,hyperparameters,num_layers,6,6 layers,13,DNA sequence length scaling
+2312.00752,hyperparameters,hidden_size,128,width 128,13,DNA sequence length scaling
+2312.00752,hyperparameters,epochs,10,,33,Great Apes fine-tuning
+2312.00752,compute,,A100 GPUs,A100,2,
+2312.00752,code_urls,,https://github.com/state-spaces/mamba,github.com/state-spaces/mamba,2,

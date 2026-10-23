@@ -1,0 +1,89 @@
+2212.04356,task,,speech recognition,automatic speech recognition|ASR,1,
+2212.04356,task,,speech translation,X→en translation,2,
+2212.04356,task,,language identification,,8,
+2212.04356,task,,long-form transcription,,9,
+2212.04356,datasets,,Whisper training data,680000 hours|680k hours,1,weakly supervised web audio
+2212.04356,datasets,,LibriSpeech,LibriSpeech Clean|LibriSpeech Other|test-clean,5,
+2212.04356,datasets,,TED-LIUM 3,TED-LIUM3|TED-LIUM,3,
+2212.04356,datasets,,Artie,,6,
+2212.04356,datasets,,Common Voice,,6,
+2212.04356,datasets,,Fleurs,,6,
+2212.04356,datasets,,CHiME6,,6,
+2212.04356,datasets,,VoxPopuli,,6,
+2212.04356,datasets,,CORAAL,,6,
+2212.04356,datasets,,AMI IHM,,6,
+2212.04356,datasets,,AMI SDM1,,6,
+2212.04356,datasets,,Switchboard,,6,
+2212.04356,datasets,,CallHome,,6,
+2212.04356,datasets,,WSJ,,6,
+2212.04356,datasets,,Multilingual LibriSpeech,MLS,6,
+2212.04356,datasets,,CoVoST2,,8,
+2212.04356,datasets,,Meanwhile,,9,long-form
+2212.04356,datasets,,Rev16,,9,long-form
+2212.04356,datasets,,Kincaid46,,9,long-form
+2212.04356,datasets,,Earnings-21,,9,long-form
+2212.04356,datasets,,Earnings-22,,9,long-form
+2212.04356,baselines,,wav2vec 2.0,wav2vec 2.0 Large (no LM),6,
+2212.04356,baselines,,supervised LibriSpeech models,,6,
+2212.04356,baselines,,XLS-R,,6,
+2212.04356,baselines,,mSLAM,mSLAM-CTC,6,
+2212.04356,baselines,,Maestro,,7,
+2212.04356,baselines,,XMEF-X,,8,
+2212.04356,baselines,,w2v-bert-51,,8,
+2212.04356,baselines,,NVIDIA STT,NVIDIA STT models,8,
+2212.04356,baselines,,commercial ASR systems,commercial ASR,10,
+2212.04356,baselines,,human transcribers,professional human transcribers,10,
+2212.04356,metrics,,WER,word error rate,5,
+2212.04356,metrics,,BLEU,,7,
+2212.04356,metrics,,accuracy,language identification accuracy,8,
+2212.04356,metrics,,effective robustness,,6,
+2212.04356,hyperparameters,num_layers,4,Layers,5,Tiny
+2212.04356,hyperparameters,num_layers,6,,5,Base
+2212.04356,hyperparameters,num_layers,12,,5,Small
+2212.04356,hyperparameters,num_layers,24,,5,Medium
+2212.04356,hyperparameters,num_layers,32,,5,Large
+2212.04356,hyperparameters,hidden_size,384,Width,5,Tiny
+2212.04356,hyperparameters,hidden_size,512,,5,Base
+2212.04356,hyperparameters,hidden_size,768,,5,Small
+2212.04356,hyperparameters,hidden_size,1024,,5,Medium
+2212.04356,hyperparameters,hidden_size,1280,,5,Large
+2212.04356,hyperparameters,num_heads,6,Heads,5,Tiny
+2212.04356,hyperparameters,num_heads,8,,5,Base
+2212.04356,hyperparameters,num_heads,12,,5,Small
+2212.04356,hyperparameters,num_heads,16,,5,Medium
+2212.04356,hyperparameters,num_heads,20,,5,Large
+2212.04356,hyperparameters,model_size,39M,,5,Tiny
+2212.04356,hyperparameters,model_size,74M,,5,Base
+2212.04356,hyperparameters,model_size,244M,,5,Small
+2212.04356,hyperparameters,model_size,769M,,5,Medium
+2212.04356,hyperparameters,model_size,1550M,1.55B,5,Large
+2212.04356,hyperparameters,sample_rate,16000 Hz,"16,000 Hz",3,
+2212.04356,hyperparameters,num_mel_channels,80,80-channel log-magnitude Mel spectrogram,3,
+2212.04356,hyperparameters,window_size,25 ms,25-millisecond windows,3,
+2212.04356,hyperparameters,stride,10 ms,stride of 10 milliseconds,3,
+2212.04356,hyperparameters,segment_length,30 seconds,30-second segments,2,
+2212.04356,hyperparameters,tokenizer,byte-level BPE,GPT-2 BPE,3,
+2212.04356,hyperparameters,train_steps,1048576,2^20 updates,28,
+2212.04356,hyperparameters,batch_size,256,256 segments,28,
+2212.04356,hyperparameters,warmup_steps,2048,2048 updates,28,
+2212.04356,hyperparameters,grad_clip,1.0,Max grad norm,28,
+2212.04356,hyperparameters,optimizer,AdamW,,28,
+2212.04356,hyperparameters,adam_beta1,0.9,β1,28,
+2212.04356,hyperparameters,adam_beta2,0.98,β2,28,
+2212.04356,hyperparameters,adam_epsilon,1e-6,10−6,28,
+2212.04356,hyperparameters,weight_decay,0.1,,28,
+2212.04356,hyperparameters,initialization,Gaussian Fan-In,,28,
+2212.04356,hyperparameters,lr_schedule,linear decay,Linear Decay,28,
+2212.04356,hyperparameters,precision,FP16,dynamic loss scaling,4,
+2212.04356,hyperparameters,train_steps,655360,,28,Large V2
+2212.04356,hyperparameters,batch_size,1024,,28,Large V2
+2212.04356,hyperparameters,bpe_dropout,0.1,BPE Dropout,28,Large V2
+2212.04356,hyperparameters,drop_path,0.1,Stochastic Depth,28,Large V2
+2212.04356,hyperparameters,specaugment,LibriSpeech Basic,SpecAugment Policy,28,Large V2
+2212.04356,hyperparameters,learning_rate,1.5e-3,1.5 × 10−3,28,Tiny
+2212.04356,hyperparameters,learning_rate,1e-3,1 × 10−3,28,Base
+2212.04356,hyperparameters,learning_rate,5e-4,5 × 10−4,28,Small
+2212.04356,hyperparameters,learning_rate,2.5e-4,2.5 × 10−4,28,Medium
+2212.04356,hyperparameters,learning_rate,1.75e-4,1.75 × 10−4,28,Large
+2212.04356,hyperparameters,learning_rate,2.0e-4,2.0 × 10−4,28,Large V2
+2212.04356,code_urls,,https://github.com/openai/whisper,github.com/openai/whisper,2,
