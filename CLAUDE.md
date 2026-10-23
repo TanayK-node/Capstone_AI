@@ -48,7 +48,7 @@ See SCOPE.md for the full scope, architecture and phase plan.
 ## Current phase
 Phase 7 (polish): Word report per paper (docx export), reviewer mode (F15, Review tab),
 multi-paper matrix (F14, /compare), grouped workspace tabs, demo script (docs/DEMO.md).
-Project report draft still to write. Phase 6 ACCEPTED (Oct 2026) with these pending:
+Project report draft: docs/REPORT.md (+ .docx via pandoc; [TEAM] parts open). Phase 6 ACCEPTED (Oct 2026) with these pending:
 Qasper (100 questions), A2, A4, A5 (Flash vs Flash-Lite), A7, full A3, A6 dense/hybrid,
 LaTeX/Docling parser arms, eval dashboard, team spot-check of 2-3 gold papers.
 Phase 6 numbers (eval/results/summary.md): core F1 0.72, hp coverage 43%, numeric accuracy
