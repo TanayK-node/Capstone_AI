@@ -1,0 +1,38 @@
+2210.03629,task,,synergizing reasoning and acting in language models,reasoning and acting|ReAct prompting,1,
+2210.03629,task,,multi-hop question answering,question answering,3,
+2210.03629,task,,fact verification,,3,
+2210.03629,task,,interactive decision making,text-based game|webpage navigation,1,
+2210.03629,datasets,,HotpotQA,HotPotQA,3,
+2210.03629,datasets,,FEVER,Fever,3,
+2210.03629,datasets,,ALFWorld,AlfWorld,3,
+2210.03629,datasets,,WebShop,Webshop,3,
+2210.03629,baselines,,Standard prompting,Standard,5,
+2210.03629,baselines,,Chain-of-thought prompting,CoT,5,
+2210.03629,baselines,,CoT-SC,self-consistency,5,
+2210.03629,baselines,,Act-only,Act|acting-only prompt,5,
+2210.03629,baselines,,BUTLER,BUTLERg,7,ALFWorld imitation learning
+2210.03629,baselines,,IL,imitation learning,7,WebShop
+2210.03629,baselines,,IL+RL,imitation + reinforcement learning,8,WebShop
+2210.03629,baselines,,ReAct-IM,Inner Monologue|IM-style prompting,8,ALFWorld
+2210.03629,metrics,,exact match,EM,5,HotpotQA
+2210.03629,metrics,,accuracy,Acc,5,FEVER
+2210.03629,metrics,,success rate,,7,ALFWorld and WebShop
+2210.03629,metrics,,average score,score,7,WebShop
+2210.03629,hyperparameters,model_size,540B,PaLM-540B,3,prompted model
+2210.03629,hyperparameters,num_exemplars,6,6 cases,4,HotpotQA
+2210.03629,hyperparameters,num_exemplars,3,3 cases,4,FEVER
+2210.03629,hyperparameters,num_samples,21,21 CoT trajectories,5,CoT-SC
+2210.03629,hyperparameters,temperature,0.7,decoding temperature 0.7,5,CoT-SC
+2210.03629,hyperparameters,max_steps,7,7 steps,5,HotpotQA
+2210.03629,hyperparameters,max_steps,5,5 steps,5,FEVER
+2210.03629,hyperparameters,num_trajectories,3000,"3,000 trajectories",5,fine-tuning data
+2210.03629,hyperparameters,num_exemplars,2,2 annotated trajectories,7,ALFWorld
+2210.03629,hyperparameters,num_exemplars,1,one-shot,8,WebShop
+2210.03629,hyperparameters,decoding,greedy decoding,greedy,8,
+2210.03629,hyperparameters,batch_size,64,,15,fine-tuning
+2210.03629,hyperparameters,train_steps,4000,"4, 000 steps",15,ReAct and Act fine-tuning
+2210.03629,hyperparameters,train_steps,2000,"2, 000 steps",15,PaLM-8B Standard and CoT
+2210.03629,hyperparameters,train_steps,1000,"1, 000 steps",15,PaLM-62B Standard and CoT
+2210.03629,hyperparameters,model_size,8B,PaLM-8B,5,fine-tuned
+2210.03629,hyperparameters,model_size,62B,PaLM-62B,5,fine-tuned
+2210.03629,code_urls,,https://react-lm.github.io/,react-lm.github.io,1,project page with code
