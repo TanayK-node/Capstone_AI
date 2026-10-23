@@ -7,6 +7,7 @@ Two-column IEEE conference paper (`IEEEtran`) on PaperLens.
 | `paperlens.tex` | the paper |
 | `refs.bib` | references (venues checked against publisher pages, Oct 2026) |
 | `figs/` | charts (from `eval/results/`) and screenshots of the app |
+| `make_figs.py` | redraws the charts from `eval/results/` |
 | `paperlens.pdf` | compiled version |
 | `IEEEtran.cls`, `IEEEtran.bst` | IEEE class and bibliography style, for offline builds |
 | `paperlens-latex.zip` | everything above in one file (upload to Overleaf: New project → Upload project) |
@@ -20,6 +21,9 @@ pdflatex paperlens && bibtex paperlens && pdflatex paperlens && pdflatex paperle
 Before submission (search for `TEAM` in `paperlens.tex`): author names and affiliation,
 the acknowledgement, and the outcome of the gold-set spot-check (Threats to validity).
 
-Figures: the charts come from `eval/results/` (run `phase2_flash_lite`). The screenshots
-show the app with the real Gemini output of that run, loaded from
+Figures: the charts come from `eval/results/` (50-paper run `collect_flash_lite`, earlier
+10-paper run `phase2_flash_lite` for A3, A1 on the 10 reference PDFs) and the hand audit
+`eval/gold/audit_v2.csv`; `python docs/paper/make_figs.py` redraws fields, papers, A3 and
+errors after `run_eval` (`fig_a1.pdf` was drawn from the A1 table). The screenshots show the
+app with the real Gemini output of the 10-paper run, loaded from
 `eval/runs/phase2_flash_lite/report.md` and re-grounded on the parse.
