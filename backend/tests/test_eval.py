@@ -108,3 +108,27 @@ def test_predictions_from_extraction_json() -> None:
         "1e-4",
         "no evidence",
     )
+
+
+def test_a3_policies_filter_by_evidence() -> None:
+    from app.eval.ablations import a3, core_scores
+
+    gold = [GoldItem("p", "datasets", "SQuAD"), GoldItem("p", "datasets", "GLUE")]
+    preds = [PredItem("p", "datasets", "SQuAD", status="verified"),
+             PredItem("p", "datasets", "GLUE", status="unlocated"),
+             PredItem("p", "datasets", "MadeUp", status="unsupported")]  # fmt: skip
+    reps = a3(gold, preds)
+    keep_all, located, *_, verified = reps.values()
+    assert core_scores(keep_all)[1] == 1.0 and core_scores(verified)[1] == 0.5
+    assert located.hallucination_rate == 0.5  # SQuAD verified, MadeUp unsupported
+    assert verified.hallucination_rate == 0.0
+
+
+def test_gold_found_in_parsed_text() -> None:
+    from app.eval.ablations import _found_in
+
+    texts = ["We train with a learning rate of 3e-4 for 50k steps.",
+             "Results on WMT 2014 English-German."]  # fmt: skip
+    assert _found_in(texts, GoldItem("p", "hyperparameters", "0.0003", name="learning_rate"))
+    assert not _found_in(texts, GoldItem("p", "hyperparameters", "1e-4", name="learning_rate"))
+    assert _found_in(texts, GoldItem("p", "datasets", "WMT 2014 English-German"))

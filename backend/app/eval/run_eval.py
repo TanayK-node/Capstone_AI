@@ -2,12 +2,16 @@
 
     uv run python -m app.eval.run_eval                 # every run in eval/runs/
     uv run python -m app.eval.run_eval --runs phase2_flash_lite
+    uv run python -m app.eval.run_eval --pdf-dir <the 10 PDFs>   # + parser / retrieval ablations
 
 A run is a directory eval/runs/<name>/ holding PaperLens' output for the gold papers: a
 check_extract report.md, or extractions/<paper id>.json. Ablations are runs too (one
 directory per setting), so they land in the same tables. Writes eval/results/:
-summary.md (headline table, one row per run), by_field.csv, by_paper.csv and
-errors_<run>.md (what each run missed or got wrong, for the error analysis).
+summary.md (headline table, one row per run), by_field.csv, by_paper.csv,
+errors_<run>.md (what each run missed or got wrong, for the error analysis) and
+ablations.md (A3 for every run; A1 parser and A6 retrieval when --pdf-dir is given: GROBID
+from --tei-dir if given, else the live GROBID server; dense / hybrid retrieval when the local
+embedding model is available).
 """
 
 from __future__ import annotations
@@ -15,11 +19,14 @@ from __future__ import annotations
 import argparse
 import csv
 import sys
+from collections.abc import Callable
 from pathlib import Path
 
-from app.config import REPO_ROOT
-from app.eval.data import SCORED_FIELDS, load_gold, load_predictions
+from app.config import REPO_ROOT, get_settings
+from app.eval import ablations
+from app.eval.data import SCORED_FIELDS, GoldItem, load_gold, load_predictions
 from app.eval.extraction import CORE_FIELDS, ExtractionReport, evaluate
+from app.schemas.document import ParsedDocument
 
 EVAL_DIR = REPO_ROOT / "eval"
 TARGET_F1 = 0.80  # SCOPE.md success criteria: field F1 >= 0.80 for core fields
@@ -114,6 +121,8 @@ def main() -> int:
     ap.add_argument("--runs", nargs="*", help="run names under eval/runs/ (default: all)")
     ap.add_argument("--gold", type=Path, default=EVAL_DIR / "gold" / "extraction_gold.csv")
     ap.add_argument("--out", type=Path, default=EVAL_DIR / "results")
+    ap.add_argument("--pdf-dir", type=Path, help="the gold papers' PDFs (<arxiv id>.pdf): A1, A6")
+    ap.add_argument("--tei-dir", type=Path, help="cached GROBID TEI (<arxiv id>.tei.xml) for A1/A6")
     args = ap.parse_args()
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(errors="replace")
@@ -157,8 +166,114 @@ def main() -> int:
               f"{_pct(rep.hp_coverage)}, numeric accuracy {_pct(rep.numeric_accuracy)}, "
               f"verified evidence {_pct(grounded(rep))}, hallucination "
               f"{_pct(rep.hallucination_rate)}")  # fmt: skip
+    md = ablations_md(results, gold, args.pdf_dir, args.tei_dir)
+    (args.out / "ablations.md").write_text(md, encoding="utf-8")
     print(f"tables: {args.out}")
     return 0
+
+
+PENDING = [
+    ("A2", "extraction granularity (whole paper / section groups / per field)", "Gemini runs"),
+    ("A4", "rule hints (LLM only vs regex hints + LLM)", "Gemini runs"),
+    ("A5", "model (Gemini Flash vs Flash-Lite)", "a check_extract run with Flash"),
+    ("A7", "claim verification (LLM verdict vs Python recomputation)", "Gemini runs + claim gold"),
+    ("A3 full", "extraction without asking for quotes", "Gemini runs"),
+    ("Qasper", "grounded QA benchmark, 100 questions", "Gemini runs"),
+]
+
+
+def ablations_md(results: dict[str, ExtractionReport], gold: list[GoldItem],
+                 pdf_dir: Path | None, tei_dir: Path | None) -> str:  # fmt: skip
+    out = ["# Ablations", "", "## A3: evidence policy (post-hoc, same extraction)", "",
+           "Items kept under each policy, scored on the core fields (micro over all papers).",
+           ""]  # fmt: skip
+    runs_dir = EVAL_DIR / "runs"
+    for name in results:
+        src = predictions_path(runs_dir / name)
+        if src is None:
+            continue
+        preds = load_predictions(src)
+        out += [f"### {name}", "",
+                "| policy | items kept | precision | recall | F1 | hallucination rate |",
+                "|---|---|---|---|---|---|"]  # fmt: skip
+        for policy, rep in ablations.a3(gold, preds).items():
+            kept = sum(rep.status_counts.values())
+            p, r, f1 = ablations.core_scores(rep)
+            out.append(f"| {policy} | {kept} | {_num(p)} | {_num(r)} | {_num(f1)} | "
+                       f"{_pct(rep.hallucination_rate)} |")  # fmt: skip
+        out.append("")
+    if pdf_dir is None:
+        out += ["A1 and A6 not run: pass --pdf-dir (and --tei-dir) to run them.", ""]
+    else:
+        out += a1_a6_md(gold, pdf_dir, tei_dir)
+    out += ["## Pending (need Gemini quota; run later)", "", "| ablation | what | needs |",
+            "|---|---|---|"]  # fmt: skip
+    out += [f"| {a} | {what} | {needs} |" for a, what, needs in PENDING]
+    return "\n".join(out) + "\n"
+
+
+def a1_a6_md(gold: list[GoldItem], pdf_dir: Path, tei_dir: Path | None) -> list[str]:
+    from app.pipeline.parse import get_parser
+    from app.pipeline.parse.grobid import GrobidParser, parse_with_tei
+    from app.pipeline.retrieval.embedder import get_embedder
+
+    settings = get_settings()
+    ids = sorted({g.paper_id for g in gold})
+    pdfs = {i: pdf_dir / f"{i}.pdf" for i in ids if (pdf_dir / f"{i}.pdf").exists()}
+    out = ["## A1: parser", ""]
+    parsers: dict[str, Callable[[Path], ParsedDocument]] = {}
+    if tei_dir is not None:
+        parsers["GROBID (cached TEI)"] = lambda p: parse_with_tei(
+            p, (tei_dir / f"{p.stem}.tei.xml").read_bytes()
+        )
+    else:
+        grobid = get_parser(settings, "grobid")
+        if isinstance(grobid, GrobidParser) and grobid.is_alive():
+            parsers["GROBID"] = grobid.parse
+        else:
+            out.append("GROBID not reachable and no --tei-dir: GROBID arm skipped.")
+    parsers["PyMuPDF only"] = get_parser(settings, "pymupdf").parse
+    parsed = {name: ablations.parse_all(fn, pdfs) for name, fn in parsers.items()}
+    stats = [ablations.parse_stats(name, docs, gold) for name, docs in parsed.items()]
+    out += ["| parser | papers | s/paper | sections | paragraphs | tables | tables with grid | "
+            "references | equations | gold items in parsed text |",
+            "|---|---|---|---|---|---|---|---|---|---|"]  # fmt: skip
+    for st in stats:
+        secs = "cached" if "cached" in st.parser else f"{st.seconds / max(st.papers, 1):.1f}"
+        out.append(f"| {st.parser} | {st.papers} | {secs} | {st.sections} | {st.paragraphs} | "
+                   f"{st.tables} | {st.tables_with_grid} | {st.references} | {st.equations} | "
+                   f"{_pct(st.gold_in_text / st.gold if st.gold else None)} |")  # fmt: skip
+    fields = sorted({f for st in stats for f in st.by_field})
+    out += ["", "Gold items still findable in the parsed text, by field:", "",
+            "| parser | " + " | ".join(fields) + " |", "|---|" + "---|" * len(fields)]  # fmt: skip
+    for st in stats:
+        cells = [_pct(st.by_field[f][0] / st.by_field[f][1]) if f in st.by_field else "-"
+                 for f in fields]  # fmt: skip
+        out.append(f"| {st.parser} | " + " | ".join(cells) + " |")
+    out += ["", "LaTeX-source and Docling arms: pending (LaTeX needs the arXiv e-prints; Docling "
+            "is not wired in).", ""]  # fmt: skip
+
+    embedder = get_embedder(settings)
+    first = next(iter(parsed.values()))
+    docs = {pid: doc for pid, (doc, _) in first.items()}
+    scores = ablations.retrieval(docs, gold, embedder)
+    out += ["## A6: retrieval for chat", "",
+            f"Questions built from the gold set (field questions and one per hyperparameter); "
+            f"recall@{ablations.K} = gold items whose answer is in the top {ablations.K} "
+            f"passages. Parse: {next(iter(parsed))}.", "",
+            "| retrieval | items | recall@5 | " + " | ".join(ablations.QUESTIONS)
+            + " | hyperparameters |",
+            "|---|---|---|" + "---|" * (len(ablations.QUESTIONS) + 1)]  # fmt: skip
+    for s in scores:
+        cells = [_pct(s.by_field[f][0] / s.by_field[f][1]) if f in s.by_field else "-"
+                 for f in [*ablations.QUESTIONS, "hyperparameters"]]  # fmt: skip
+        out.append(f"| {s.mode} | {s.items} | {_pct(s.recall)} | " + " | ".join(cells) + " |")
+    if embedder is None:
+        out.append("")
+        out.append("Dense and hybrid: pending (the embedding model was not available; run with "
+                   "embeddings enabled on a machine that can download it).")  # fmt: skip
+    out.append("")
+    return out
 
 
 if __name__ == "__main__":

@@ -52,7 +52,14 @@ LLM-annotated at the team's request, adjudicated once; eval/ANNOTATION_GUIDE.md)
 scorer + run_eval, baseline run phase2_flash_lite: core-field F1 0.72, hyperparameter
 coverage 43%, numeric accuracy 100%, verified evidence 80%, hallucination 10%. Weakest:
 task recall 0.32, hyperparameter recall 0.36 (appendix tables and model dimensions missed).
-Next: ablations (cheap first: A1, A3, A4, A6, A7), Qasper subset, dashboard.
+Cheap ablations done (run_eval --pdf-dir --tei-dir writes eval/results/ablations.md):
+A3 post-hoc evidence policy (requiring a found quote: hallucination 10% -> 0%, precision
+0.97 -> 0.96, recall 0.54 -> 0.43); A1 GROBID vs PyMuPDF (gold values in parsed text 89% vs
+93%; GROBID keeps sections, references, equations); A6 BM25 recall@5 47%.
+Phase 6 ACCEPTED by the team with these PENDING (need Gemini quota / the user's laptop):
+Qasper (100 questions), A5 Flash vs Flash-Lite, A2, A4, A7, full A3, A6 dense/hybrid (needs
+the embedding model download), LaTeX/Docling parser arms, evaluation dashboard page, and a
+team spot-check of 2-3 gold papers.
 Phase 5 PASSED (Oct 2026): check_phase5 5/5 with glossary@2 (every glossary symbol verified,
 chat cites pages, off-topic refused, graph renders). Semantic Scholar mostly 429 without
 S2_API_KEY (PDF-only graph, no novelty) for 4/5 papers.
