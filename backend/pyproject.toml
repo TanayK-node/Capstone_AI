@@ -54,6 +54,8 @@ extend-immutable-calls = ["fastapi.Depends", "fastapi.File", "fastapi.Form", "fa
 "app/pipeline/verify/grounding.py" = ["RUF001", "RUF002", "RUF003"]
 "app/pipeline/code_check/compare.py" = ["RUF001", "RUF002", "RUF003"]  # β, ε, α, τ in paper names
 "app/pipeline/extract/normalize.py" = ["RUF001", "RUF002", "RUF003"]
+"app/eval/match.py" = ["RUF001", "RUF002", "RUF003"]  # unicode signs in paper values
+"tests/test_eval.py" = ["RUF001"]
 
 [tool.ruff.lint.isort]
 # The migrations folder is named alembic/; make sure the library still sorts as third-party.

@@ -11,7 +11,8 @@ not trip Gemini's per-minute limit or its 503 "high demand" responses.
 
 Needs GROBID and GEMINI_API_KEY. Runs parse -> structure -> extract -> verify in-process, with
 a fresh in-memory LLM cache so the timing is real (about 6 LLM calls per paper). Writes
-report.json and report.md (every paper's Overview, as the Markdown export) to
+report.json, report.md (every paper's Overview, as the Markdown export) and extractions/<id>.json
+(for app.eval.run_eval) to
 <data_dir>/phase2_check/.
 """
 
@@ -105,6 +106,12 @@ def main() -> int:
             row |= _summarize(run, verify, timer.total)
             row["stage_seconds"] = timer.stages
             md += [f"## {name}\n", export.to_markdown(run.extraction), ""]
+            # The full extraction, for the Phase 6 evaluation (app.eval.run_eval).
+            ex_dir = out_dir / "extractions"
+            ex_dir.mkdir(exist_ok=True)
+            (ex_dir / f"{name.replace('/', '_')}.json").write_text(
+                run.extraction.model_dump_json(indent=1), encoding="utf-8"
+            )
         except Exception as exc:
             row |= {"ok": False, "error": f"{type(exc).__name__}: {exc}"}
             row["trace"] = traceback.format_exc(limit=3)

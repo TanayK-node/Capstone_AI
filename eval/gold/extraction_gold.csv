@@ -1,0 +1,470 @@
+paper_id,field,name,value,aliases,page,note
+1409.0473,task,,neural machine translation,machine translation|English-to-French translation|English-French translation,1,
+1409.0473,datasets,,WMT'14 English-French,WMT 14|WMT '14|ACL WMT '14|WMT14|news-test-2014|newstest2014,4,parallel corpora reduced to 348M words; test news-test-2014
+1409.0473,baselines,,RNN Encoder-Decoder,RNNencdec|RNNenc|Cho et al. 2014a|encoder-decoder,4,
+1409.0473,baselines,,Moses,phrase-based system|phrase-based translation system|conventional phrase-based,5,
+1409.0473,metrics,,BLEU,BLEU score,5,
+1409.0473,hyperparameters,hidden_size,1000,hidden units,5,encoder/decoder hidden units
+1409.0473,hyperparameters,embedding_size,620,word embedding dimensionality,14,
+1409.0473,hyperparameters,maxout_size,500,maxout hidden layer,14,
+1409.0473,hyperparameters,optimizer,Adadelta,SGD with Adadelta|minibatch SGD,5,
+1409.0473,hyperparameters,batch_size,80,minibatch,5,sentences
+1409.0473,hyperparameters,adam_epsilon,1e-6,epsilon|Adadelta epsilon,14,Adadelta epsilon
+1409.0473,hyperparameters,rho,0.95,Adadelta rho,14,
+1409.0473,hyperparameters,max_grad_norm,1,gradient norm threshold,15,
+1409.0473,hyperparameters,vocab_size,30000,shortlist,5,most frequent words per language
+1409.0473,hyperparameters,max_seq_length,50,max sentence length,5,also 30 (RNNsearch-30)
+1409.0473,compute,,NVIDIA TITAN Black and Quadro K6000 GPUs,GPU|TITAN BLACK|Quadro K-6000,14,
+1409.0473,compute,,training time about 5 days per model,5 days|111 hours|252 hours,5,
+1409.0473,code_urls,,https://github.com/lisa-groundhog/GroundHog,,4,
+1409.1556,task,,large-scale image classification,image classification|image recognition|ILSVRC classification,1,
+1409.1556,task,,object localisation,localization|localisation,10,ILSVRC localisation (appendix A)
+1409.1556,datasets,,ILSVRC-2012 (ImageNet),ImageNet|ILSVRC|ILSVRC-2014|ILSVRC 2012,5,
+1409.1556,datasets,,PASCAL VOC-2007,VOC-2007|VOC 2007,12,
+1409.1556,datasets,,PASCAL VOC-2012,VOC-2012|VOC 2012,12,also VOC-2012 action classification
+1409.1556,datasets,,Caltech-101,Caltech 101,13,
+1409.1556,datasets,,Caltech-256,Caltech 256,13,
+1409.1556,baselines,,GoogLeNet,Szegedy et al. 2014,8,
+1409.1556,baselines,,MSRA,He et al. 2014|SPP|spatial pyramid pooling,8,
+1409.1556,baselines,,Clarifai,,8,
+1409.1556,baselines,,Zeiler & Fergus,Zeiler and Fergus|ZFNet,8,
+1409.1556,baselines,,OverFeat,Sermanet et al. 2014,8,
+1409.1556,baselines,,Krizhevsky et al. 2012,AlexNet|Krizhevsky,8,
+1409.1556,baselines,,Chatfield et al. 2014,Chatfield,12,
+1409.1556,baselines,,Wei et al. 2014,Wei,12,
+1409.1556,baselines,,Oquab et al. 2014,Oquab,14,VOC action
+1409.1556,baselines,,Gkioxari et al. 2014,Gkioxari,14,VOC action
+1409.1556,baselines,,Hoai 2014,Hoai,14,VOC action
+1409.1556,metrics,,top-1 error,top-1 val. error|top-1,5,
+1409.1556,metrics,,top-5 error,top-5 val. error|top-5 test error|top-5,5,
+1409.1556,metrics,,localisation error,localization error|top-5 localisation error,11,
+1409.1556,metrics,,mean average precision,mAP|mean AP,12,
+1409.1556,metrics,,mean class recall,,13,
+1409.1556,hyperparameters,optimizer,mini-batch gradient descent with momentum,SGD with momentum|SGD|momentum,4,
+1409.1556,hyperparameters,batch_size,256,,4,
+1409.1556,hyperparameters,momentum,0.9,,4,
+1409.1556,hyperparameters,weight_decay,5e-4,L2 penalty,4,
+1409.1556,hyperparameters,dropout,0.5,dropout ratio,4,first two FC layers
+1409.1556,hyperparameters,learning_rate,1e-2,initial learning rate,4,decreased x10 three times; 1e-3 for S=384 nets
+1409.1556,hyperparameters,train_steps,370000,iterations|370K,4,
+1409.1556,hyperparameters,epochs,74,,4,
+1409.1556,hyperparameters,image_size,224,crop size|input size,4,224x224 crops
+1409.1556,compute,,4 NVIDIA Titan Black GPUs,Titan Black|four GPUs,5,
+1409.1556,compute,,training time 2-3 weeks per net,2-3 weeks|2–3 weeks,5,
+1409.1556,code_urls,,http://www.robots.ox.ac.uk/~vgg/research/very_deep/,robots.ox.ac.uk/~vgg/research/very_deep,1,released models page
+1512.03385,task,,image classification,image recognition|ImageNet classification|ILSVRC classification,1,
+1512.03385,task,,object detection,detection,8,
+1512.03385,task,,object localization,localization|localisation,12,
+1512.03385,datasets,,ImageNet 2012 classification,ImageNet|ILSVRC|ILSVRC 2015|ILSVRC 2012,4,
+1512.03385,datasets,,CIFAR-10,CIFAR 10,7,
+1512.03385,datasets,,PASCAL VOC 2007,VOC 2007|VOC 07,8,
+1512.03385,datasets,,PASCAL VOC 2012,VOC 2012|VOC 12,8,
+1512.03385,datasets,,MS COCO,COCO|Microsoft COCO,8,
+1512.03385,datasets,,ImageNet detection (DET),ImageNet DET|ImageNet detection,11,
+1512.03385,baselines,,plain networks,plain net|plain-18|plain-34|plain counterparts,4,own non-residual baselines
+1512.03385,baselines,,VGG,VGG-16|VGG-19|VGG nets,6,
+1512.03385,baselines,,GoogLeNet,,6,
+1512.03385,baselines,,PReLU-net,PReLU,6,
+1512.03385,baselines,,BN-inception,batch normalization inception|BN-Inception,6,
+1512.03385,baselines,,Maxout,maxout networks,7,CIFAR-10
+1512.03385,baselines,,NIN,network in network,7,CIFAR-10
+1512.03385,baselines,,DSN,deeply-supervised nets,7,CIFAR-10
+1512.03385,baselines,,FitNet,FitNets,7,CIFAR-10
+1512.03385,baselines,,Highway networks,Highway,7,CIFAR-10
+1512.03385,baselines,,OverFeat,,12,localization
+1512.03385,metrics,,top-1 error,top-1 err|top-1,4,
+1512.03385,metrics,,top-5 error,top-5 err|top-5,4,
+1512.03385,metrics,,classification error,error rate|test error|error (%),7,CIFAR-10
+1512.03385,metrics,,mAP,"mean average precision|mAP@.5|mAP@[.5 .95]|mAP@[.5,.95]",8,
+1512.03385,metrics,,localization error,top-5 localization error|LOC error,12,
+1512.03385,hyperparameters,optimizer,SGD,stochastic gradient descent|SGD with momentum,4,
+1512.03385,hyperparameters,batch_size,256,mini-batch size,4,ImageNet
+1512.03385,hyperparameters,learning_rate,0.1,,4,divided by 10 on plateau
+1512.03385,hyperparameters,train_steps,600000,60 × 10^4 iterations|60x10^4|iterations,4,ImageNet
+1512.03385,hyperparameters,weight_decay,0.0001,,4,
+1512.03385,hyperparameters,momentum,0.9,,4,
+1512.03385,hyperparameters,image_size,224,crop|224x224,4,
+1512.03385,hyperparameters,batch_size,128,,7,CIFAR-10
+1512.03385,hyperparameters,train_steps,64000,64k iterations,7,CIFAR-10
+1512.03385,hyperparameters,learning_rate,0.01,warm-up learning rate,7,CIFAR-10 ResNet-110 warm-up
+1512.03385,compute,,two GPUs,2 GPUs,7,CIFAR-10 training
+1512.03385,compute,,8 GPUs,8-GPU implementation,10,COCO detection
+1706.03762,task,,machine translation,neural machine translation|English-to-German translation|English-to-French translation|translation,1,
+1706.03762,task,,English constituency parsing,constituency parsing|parsing,9,
+1706.03762,datasets,,WMT 2014 English-German,WMT 2014 EN-DE|WMT14 English-German|WMT 2014 English-to-German|newstest2014|newstest2013,7,
+1706.03762,datasets,,WMT 2014 English-French,WMT 2014 EN-FR|WMT14 English-French|WMT 2014 English-to-French,7,
+1706.03762,datasets,,Penn Treebank WSJ,Wall Street Journal|WSJ|Penn Treebank|WSJ Section 23,9,
+1706.03762,datasets,,BerkeleyParser high-confidence corpora,semi-supervised corpus|17M sentences,9,semi-supervised parsing data
+1706.03762,baselines,,ByteNet,,8,
+1706.03762,baselines,,Deep-Att + PosUnk,Deep-Att,8,
+1706.03762,baselines,,GNMT + RL,GNMT|Google's neural machine translation,8,
+1706.03762,baselines,,ConvS2S,convolutional sequence to sequence,8,
+1706.03762,baselines,,MoE,mixture of experts|sparsely-gated mixture-of-experts,8,
+1706.03762,baselines,,Vinyals & Kaiser et al. 2014,Grammar as a foreign language|Vinyals,10,parsing
+1706.03762,baselines,,Petrov et al. 2006,BerkeleyParser|Berkeley parser|Petrov,10,parsing
+1706.03762,baselines,,Zhu et al. 2013,Zhu,10,parsing
+1706.03762,baselines,,Dyer et al. 2016,Recurrent Neural Network Grammar|RNN Grammar|Dyer,10,parsing
+1706.03762,baselines,,Huang & Harper 2009,Huang and Harper,10,parsing
+1706.03762,baselines,,McClosky et al. 2006,McClosky,10,parsing
+1706.03762,baselines,,Luong et al. 2015,multi-task sequence to sequence|Luong,10,parsing
+1706.03762,metrics,,BLEU,BLEU score,8,
+1706.03762,metrics,,perplexity,PPL,9,
+1706.03762,metrics,,F1,WSJ 23 F1|F1 score,10,parsing
+1706.03762,metrics,,training cost (FLOPs),FLOPs|training cost,8,
+1706.03762,hyperparameters,optimizer,Adam,,7,
+1706.03762,hyperparameters,adam_beta1,0.9,β1,7,
+1706.03762,hyperparameters,adam_beta2,0.98,β2,7,
+1706.03762,hyperparameters,adam_epsilon,1e-9,ε|epsilon,7,
+1706.03762,hyperparameters,warmup_steps,4000,,7,
+1706.03762,hyperparameters,train_steps,100000,100K|100k steps,7,base model
+1706.03762,hyperparameters,train_steps,300000,300K,7,big model
+1706.03762,hyperparameters,dropout,0.1,Pdrop|residual dropout,8,base; big EN-DE 0.3
+1706.03762,hyperparameters,dropout,0.3,Pdrop,9,big model
+1706.03762,hyperparameters,label_smoothing,0.1,ϵls,8,
+1706.03762,hyperparameters,batch_size,25000 tokens,25000 source tokens|25000,7,per batch source and target tokens
+1706.03762,hyperparameters,hidden_size,512,dmodel|d_model,3,base; big 1024
+1706.03762,hyperparameters,hidden_size,1024,dmodel,9,big model
+1706.03762,hyperparameters,num_layers,6,N|layers,3,
+1706.03762,hyperparameters,num_heads,8,h|heads,5,base; big 16
+1706.03762,hyperparameters,num_heads,16,h,9,big model
+1706.03762,hyperparameters,ffn_size,2048,dff|d_ff,5,base; big 4096
+1706.03762,hyperparameters,ffn_size,4096,dff,9,big model
+1706.03762,hyperparameters,beam_size,4,beam search,8,
+1706.03762,hyperparameters,length_penalty,0.6,α|alpha,8,
+1706.03762,hyperparameters,vocab_size,37000,byte-pair encoding vocabulary|BPE,7,EN-DE; EN-FR 32000 word-piece
+1706.03762,hyperparameters,vocab_size,32000,word-piece vocabulary,7,EN-FR
+1706.03762,compute,,8 NVIDIA P100 GPUs,P100|eight GPUs,7,
+1706.03762,compute,,12 hours (base) / 3.5 days (big) training,12 hours|3.5 days,7,
+1706.03762,code_urls,,https://github.com/tensorflow/tensor2tensor,,10,
+1810.04805,task,,language representation pre-training,pre-training|language model pre-training|language understanding|natural language understanding,1,
+1810.04805,task,,question answering,QA|SQuAD,1,
+1810.04805,task,,natural language inference,NLI|language inference|entailment,1,
+1810.04805,task,,named entity recognition,NER,9,
+1810.04805,task,,commonsense inference,grounded commonsense inference|SWAG,7,
+1810.04805,datasets,,BooksCorpus,Books Corpus,5,pre-training
+1810.04805,datasets,,English Wikipedia,Wikipedia,5,pre-training
+1810.04805,datasets,,GLUE,GLUE benchmark|MNLI|MultiNLI|QQP|QNLI|SST-2|CoLA|STS-B|MRPC|RTE|WNLI,5,suite counted once; members are aliases
+1810.04805,datasets,,SQuAD v1.1,SQuAD 1.1|SQuAD,6,
+1810.04805,datasets,,SQuAD v2.0,SQuAD 2.0,7,
+1810.04805,datasets,,SWAG,Situations With Adversarial Generations,7,
+1810.04805,datasets,,CoNLL-2003 NER,CoNLL-2003|CoNLL 2003,9,
+1810.04805,datasets,,TriviaQA,,6,data augmentation for SQuAD
+1810.04805,baselines,,OpenAI GPT,GPT|Radford et al. 2018,6,
+1810.04805,baselines,,ELMo,BiLSTM+ELMo+Attn|Peters et al. 2018a,6,
+1810.04805,baselines,,Pre-OpenAI SOTA,previous state of the art,6,
+1810.04805,baselines,,BiDAF+ELMo,BiDAF,7,
+1810.04805,baselines,,R.M. Reader,Reinforced Mnemonic Reader,7,
+1810.04805,baselines,,nlnet,,7,
+1810.04805,baselines,,QANet,,7,
+1810.04805,baselines,,MIR-MRC (F-Net),MIR-MRC|F-Net,7,
+1810.04805,baselines,,unet,U-Net,7,
+1810.04805,baselines,,SLQA+,SLQA,7,
+1810.04805,baselines,,ESIM+ELMo,ESIM,7,
+1810.04805,baselines,,ESIM+GloVe,,7,
+1810.04805,baselines,,CVT,cross-view training,9,
+1810.04805,baselines,,CSE,contextual string embeddings,9,
+1810.04805,metrics,,accuracy,Acc,6,
+1810.04805,metrics,,F1,F1 score,6,
+1810.04805,metrics,,exact match,EM,7,
+1810.04805,metrics,,Spearman correlation,Spearman,6,STS-B
+1810.04805,metrics,,GLUE score,GLUE average|Average,6,
+1810.04805,metrics,,perplexity,ppl|LM perplexity|masked LM perplexity,9,
+1810.04805,hyperparameters,optimizer,Adam,,13,
+1810.04805,hyperparameters,learning_rate,1e-4,,13,pre-training
+1810.04805,hyperparameters,adam_beta1,0.9,β1,13,
+1810.04805,hyperparameters,adam_beta2,0.999,β2,13,
+1810.04805,hyperparameters,weight_decay,0.01,L2 weight decay,13,
+1810.04805,hyperparameters,warmup_steps,10000,,13,
+1810.04805,hyperparameters,dropout,0.1,,13,
+1810.04805,hyperparameters,batch_size,256,256 sequences,13,pre-training
+1810.04805,hyperparameters,train_steps,1000000,"1M steps|1,000,000 steps",13,pre-training
+1810.04805,hyperparameters,epochs,40,approximately 40 epochs,13,pre-training
+1810.04805,hyperparameters,max_seq_length,512,sequence length,13,128 for 90% of steps
+1810.04805,hyperparameters,max_seq_length,128,,13,first 90% of steps
+1810.04805,hyperparameters,mask_prob,0.15,masking rate|15%,4,
+1810.04805,hyperparameters,num_layers,12,L,3,BASE; LARGE 24
+1810.04805,hyperparameters,num_layers,24,L,3,LARGE
+1810.04805,hyperparameters,hidden_size,768,H,3,BASE
+1810.04805,hyperparameters,hidden_size,1024,H,3,LARGE
+1810.04805,hyperparameters,num_heads,12,A,3,BASE
+1810.04805,hyperparameters,num_heads,16,A,3,LARGE
+1810.04805,hyperparameters,ffn_size,3072,feed-forward size|4H,3,BASE
+1810.04805,hyperparameters,ffn_size,4096,,3,LARGE
+1810.04805,hyperparameters,vocab_size,30000,WordPiece vocabulary,4,
+1810.04805,hyperparameters,batch_size,32,,6,fine-tuning GLUE / SQuAD v1.1
+1810.04805,hyperparameters,batch_size,48,,7,SQuAD v2.0
+1810.04805,hyperparameters,batch_size,16,,7,SWAG
+1810.04805,hyperparameters,epochs,3,,6,fine-tuning
+1810.04805,hyperparameters,epochs,2,,7,SQuAD v2.0
+1810.04805,hyperparameters,learning_rate,5e-5,,6,fine-tuning
+1810.04805,hyperparameters,learning_rate,4e-5,,6,GLUE grid
+1810.04805,hyperparameters,learning_rate,3e-5,,6,GLUE grid
+1810.04805,hyperparameters,learning_rate,2e-5,,6,GLUE grid / SWAG
+1810.04805,compute,,Cloud TPUs (4 for BASE / 16 for LARGE),Cloud TPU|TPU chips|16 TPU chips|64 TPU chips,13,
+1810.04805,compute,,pre-training took 4 days,4 days,13,
+1810.04805,compute,,fine-tuning at most 1 hour on a single Cloud TPU,1 hour|single Cloud TPU,5,
+1810.04805,code_urls,,https://github.com/google-research/bert,,2,
+1907.11692,task,,language model pretraining,pretraining|BERT pretraining|masked language model pretraining|language understanding,1,replication study of BERT pretraining
+1907.11692,task,,question answering,reading comprehension|SQuAD|RACE,3,
+1907.11692,task,,natural language understanding,GLUE|sentence classification,3,
+1907.11692,datasets,,BookCorpus,BOOKCORPUS|Books Corpus,3,
+1907.11692,datasets,,English Wikipedia,Wikipedia|WIKIPEDIA,3,
+1907.11692,datasets,,CC-News,CC-NEWS|CommonCrawl News,3,
+1907.11692,datasets,,OpenWebText,OPENWEBTEXT,3,
+1907.11692,datasets,,Stories,STORIES,3,
+1907.11692,datasets,,GLUE,GLUE benchmark|MNLI|QNLI|QQP|RTE|SST|SST-2|MRPC|CoLA|STS|STS-B|WNLI,3,suite counted once
+1907.11692,datasets,,SQuAD,SQuAD v1.1|SQuAD v2.0|SQuAD 1.1|SQuAD 2.0,3,
+1907.11692,datasets,,RACE,ReAding Comprehension from Examinations,4,
+1907.11692,baselines,,BERT,BERT_LARGE|BERTLARGE|BERT_BASE|BERTBASE,5,
+1907.11692,baselines,,XLNet,XLNet_LARGE|XLNetLARGE|XLNetBASE,5,
+1907.11692,baselines,,ALICE,,8,GLUE leaderboard
+1907.11692,baselines,,MT-DNN,,8,GLUE leaderboard
+1907.11692,baselines,,XLNet + SG-Net Verifier,SG-Net,9,SQuAD leaderboard
+1907.11692,metrics,,accuracy,Acc,4,
+1907.11692,metrics,,F1,F1 score,4,
+1907.11692,metrics,,exact match,EM,9,
+1907.11692,metrics,,perplexity,ppl,6,
+1907.11692,metrics,,GLUE score,GLUE average|Avg,8,
+1907.11692,hyperparameters,optimizer,Adam,,2,
+1907.11692,hyperparameters,adam_beta1,0.9,β1,13,
+1907.11692,hyperparameters,adam_beta2,0.98,β2,13,RoBERTa (BERT used 0.999)
+1907.11692,hyperparameters,adam_epsilon,1e-6,Adam ε|epsilon,13,
+1907.11692,hyperparameters,weight_decay,0.01,,13,pretraining
+1907.11692,hyperparameters,dropout,0.1,,13,
+1907.11692,hyperparameters,attention_dropout,0.1,,13,
+1907.11692,hyperparameters,warmup_steps,30000,30k,13,LARGE; BASE 24k
+1907.11692,hyperparameters,warmup_steps,24000,24k,13,BASE
+1907.11692,hyperparameters,learning_rate,4e-4,peak learning rate,13,LARGE; BASE 6e-4
+1907.11692,hyperparameters,learning_rate,6e-4,,13,BASE
+1907.11692,hyperparameters,batch_size,8000,8k|8K sequences,13,
+1907.11692,hyperparameters,train_steps,500000,500k|500K steps,13,also 100K/300K in Table 4
+1907.11692,hyperparameters,max_grad_norm,0.0,gradient clipping,13,
+1907.11692,hyperparameters,max_seq_length,512,T,3,
+1907.11692,hyperparameters,num_layers,24,,13,LARGE; BASE 12
+1907.11692,hyperparameters,hidden_size,1024,,13,LARGE; BASE 768
+1907.11692,hyperparameters,num_heads,16,,13,LARGE; BASE 12
+1907.11692,hyperparameters,ffn_size,4096,FFN inner hidden size,13,LARGE; BASE 3072
+1907.11692,hyperparameters,vocab_size,50000,50K|byte-level BPE,6,
+1907.11692,hyperparameters,learning_rate,1e-5,,13,fine-tuning RACE / GLUE grid
+1907.11692,hyperparameters,learning_rate,1.5e-5,,13,SQuAD fine-tuning
+1907.11692,hyperparameters,batch_size,16,,13,RACE / GLUE
+1907.11692,hyperparameters,batch_size,48,,13,SQuAD
+1907.11692,hyperparameters,epochs,10,max epochs,7,GLUE fine-tuning
+1907.11692,hyperparameters,warmup_ratio,0.06,6%,7,fine-tuning
+1907.11692,compute,,DGX-1 machines with 8 x 32GB NVIDIA V100 GPUs,V100|DGX-1,3,
+1907.11692,compute,,1024 V100 GPUs for approximately one day,1024 V100 GPUs|one day,7,
+1907.11692,code_urls,,https://github.com/pytorch/fairseq,,1,
+1910.01108,task,,knowledge distillation of a pre-trained language model,knowledge distillation|model compression|distillation|language model pre-training|language representation,1,
+1910.01108,task,,natural language understanding,GLUE|language understanding,3,
+1910.01108,task,,sentiment classification,IMDb sentiment classification|text classification|classification,3,
+1910.01108,task,,question answering,SQuAD,3,
+1910.01108,datasets,,English Wikipedia,Wikipedia,3,pre-training corpus
+1910.01108,datasets,,Toronto Book Corpus,BookCorpus|Book Corpus,3,pre-training corpus
+1910.01108,datasets,,GLUE,GLUE benchmark|CoLA|MNLI|MRPC|QNLI|QQP|RTE|SST-2|STS-B|WNLI,3,suite counted once
+1910.01108,datasets,,IMDb,IMDb sentiment,3,
+1910.01108,datasets,,SQuAD v1.1,SQuAD 1.1|SQuAD,3,
+1910.01108,baselines,,BERT-base,BERT|BERT base,3,teacher
+1910.01108,baselines,,ELMo,ELMo encoder followed by two BiLSTMs|ELMo baseline,3,
+1910.01108,metrics,,GLUE macro-score,macro-score|GLUE score,3,
+1910.01108,metrics,,accuracy,test accuracy|acc,3,
+1910.01108,metrics,,exact match,EM,3,
+1910.01108,metrics,,F1,F1 score,3,
+1910.01108,metrics,,inference time,Inf. time|inference speed,3,
+1910.01108,metrics,,number of parameters,# param.|parameters,3,
+1910.01108,hyperparameters,batch_size,4000,4K examples per batch|up to 4K,3,via gradient accumulation
+1910.01108,hyperparameters,num_layers,6,number of layers reduced by a factor of 2,2,half of BERT-base's 12
+1910.01108,hyperparameters,temperature,T,softmax-temperature,2,value not stated
+1910.01108,compute,,8 x 16GB V100 GPUs,V100|8 GPUs,3,
+1910.01108,compute,,approximately 90 hours of training,90 hours,3,
+1910.01108,code_urls,,https://github.com/huggingface/transformers,huggingface/transformers,2,
+1910.01108,code_urls,,https://github.com/huggingface/swift-coreml-transformers,swift-coreml-transformers,4,on-device demo
+2002.05709,task,,self-supervised visual representation learning,contrastive learning of visual representations|contrastive learning|representation learning|self-supervised learning|unsupervised representation learning,1,
+2002.05709,task,,semi-supervised learning,semi-supervised image classification|learning with few labels,1,
+2002.05709,task,,transfer learning,transfer learning image classification,2,
+2002.05709,task,,image classification,ImageNet classification|linear evaluation,1,
+2002.05709,datasets,,ImageNet ILSVRC-2012,ImageNet|ILSVRC-2012|ILSVRC-12,3,
+2002.05709,datasets,,CIFAR-10,CIFAR10,3,
+2002.05709,datasets,,CIFAR-100,CIFAR100,8,transfer
+2002.05709,datasets,,Food-101,Food,8,transfer
+2002.05709,datasets,,Birdsnap,,8,transfer
+2002.05709,datasets,,SUN397,,8,transfer
+2002.05709,datasets,,Stanford Cars,Cars,8,transfer
+2002.05709,datasets,,FGVC Aircraft,Aircraft,8,transfer
+2002.05709,datasets,,PASCAL VOC 2007,VOC2007|VOC 2007,8,transfer
+2002.05709,datasets,,Describable Textures Dataset,DTD,8,transfer
+2002.05709,datasets,,Oxford-IIIT Pets,Pets,8,transfer
+2002.05709,datasets,,Caltech-101,Caltech 101,8,transfer
+2002.05709,datasets,,Oxford 102 Flowers,Flowers,8,transfer
+2002.05709,baselines,,supervised ResNet-50,supervised baseline|supervised,1,
+2002.05709,baselines,,Local Aggregation,Local Agg.|LA,7,
+2002.05709,baselines,,MoCo,,7,
+2002.05709,baselines,,PIRL,,7,
+2002.05709,baselines,,CPC v2,CPCv2|CPC,7,
+2002.05709,baselines,,Rotation,rotation prediction,7,
+2002.05709,baselines,,BigBiGAN,,7,
+2002.05709,baselines,,AMDIM,,7,
+2002.05709,baselines,,CMC,contrastive multiview coding,7,
+2002.05709,baselines,,InstDisc,instance discrimination,7,
+2002.05709,baselines,,Pseudo-label,,7,semi-supervised
+2002.05709,baselines,,VAT+Entropy Min.,VAT,7,semi-supervised
+2002.05709,baselines,,UDA,UDA (w. RandAug),7,semi-supervised
+2002.05709,baselines,,FixMatch,FixMatch (w. RandAug),7,semi-supervised
+2002.05709,baselines,,S4L,S4L (Rot+VAT+En. M.),7,semi-supervised
+2002.05709,baselines,,random initialization,Random init,8,transfer
+2002.05709,metrics,,top-1 accuracy,top-1|Top 1,1,
+2002.05709,metrics,,top-5 accuracy,top-5|Top 5,1,
+2002.05709,metrics,,mean per-class accuracy,,16,transfer
+2002.05709,metrics,,mAP (11-point),mAP|mean average precision,16,VOC 2007
+2002.05709,hyperparameters,optimizer,LARS,LARS optimizer,3,
+2002.05709,hyperparameters,learning_rate,4.8,0.3 × BatchSize/256,3,
+2002.05709,hyperparameters,weight_decay,1e-6,10−6,3,
+2002.05709,hyperparameters,batch_size,4096,,3,default; up to 8192 (and 32K)
+2002.05709,hyperparameters,batch_size,8192,,3,
+2002.05709,hyperparameters,epochs,100,,3,default for ablations
+2002.05709,hyperparameters,epochs,1000,,7,best models
+2002.05709,hyperparameters,warmup_epochs,10,linear warmup,3,
+2002.05709,hyperparameters,temperature,0.5,τ,7,also 0.1
+2002.05709,hyperparameters,temperature,0.1,τ,7,Table 5 best at batch 4096
+2002.05709,hyperparameters,projection_dim,128,128-dimensional latent space,3,
+2002.05709,hyperparameters,image_size,224,224x224,12,
+2002.05709,hyperparameters,optimizer,Nesterov momentum,SGD with Nesterov momentum,15,fine-tuning
+2002.05709,hyperparameters,momentum,0.9,,15,fine-tuning
+2002.05709,hyperparameters,learning_rate,0.8,0.05×BatchSize/256,15,fine-tuning
+2002.05709,hyperparameters,learning_rate,1.6,0.1 × BatchSize/256,15,linear evaluation
+2002.05709,hyperparameters,epochs,60,,15,fine-tuning 1% labels
+2002.05709,hyperparameters,epochs,30,,15,fine-tuning 10% labels
+2002.05709,hyperparameters,epochs,90,,15,linear evaluation
+2002.05709,hyperparameters,train_steps,20000,"20,000 steps",17,transfer fine-tuning
+2002.05709,hyperparameters,batch_size,256,,17,transfer fine-tuning
+2002.05709,compute,,Cloud TPUs (32 to 128 cores),TPU|TPU v3|128 TPU v3 cores,3,
+2002.05709,compute,,about 1.5 hours for ResNet-50 at batch 4096 for 100 epochs on 128 TPU v3 cores,1.5 hours,3,
+2002.05709,code_urls,,https://github.com/google-research/simclr,,1,
+2010.11929,task,,image classification,image recognition|image recognition at scale,1,
+2010.11929,task,,transfer learning,transfer to image recognition benchmarks|pre-training and fine-tuning,1,
+2010.11929,datasets,,ImageNet,ILSVRC-2012|ImageNet-1k|ImageNet ReaL,4,
+2010.11929,datasets,,ImageNet-21k,ImageNet 21k,4,
+2010.11929,datasets,,JFT-300M,JFT,4,
+2010.11929,datasets,,CIFAR-10,CIFAR10,4,
+2010.11929,datasets,,CIFAR-100,CIFAR100,4,
+2010.11929,datasets,,Oxford-IIIT Pets,Pets,4,
+2010.11929,datasets,,Oxford Flowers-102,Flowers-102|Flowers,4,
+2010.11929,datasets,,VTAB,VTAB-1k|VTAB (19 tasks)|Visual Task Adaptation Benchmark,5,suite counted once
+2010.11929,baselines,,BiT-L,Big Transfer|BiT|ResNet152x4|ResNet (BiT),5,
+2010.11929,baselines,,Noisy Student,EfficientNet-L2,5,
+2010.11929,baselines,,VIVI-Ex-100%,VIVI,6,VTAB
+2010.11929,baselines,,S4L,,6,VTAB
+2010.11929,baselines,,hybrid models,hybrid|R50+ViT,7,ResNet+ViT hybrids in the scaling study
+2010.11929,metrics,,top-1 accuracy,accuracy|Top1 accuracy|fine-tuning accuracy,5,
+2010.11929,metrics,,few-shot linear accuracy,linear 5-shot|few-shot accuracy|linear few-shot,5,
+2010.11929,metrics,,VTAB score,VTAB,6,
+2010.11929,metrics,,TPUv3-core-days,pre-training compute|exaFLOPs,5,
+2010.11929,hyperparameters,optimizer,Adam,,5,pre-training
+2010.11929,hyperparameters,adam_beta1,0.9,β1,5,
+2010.11929,hyperparameters,adam_beta2,0.999,β2,5,
+2010.11929,hyperparameters,batch_size,4096,,5,pre-training
+2010.11929,hyperparameters,weight_decay,0.1,,5,JFT pre-training
+2010.11929,hyperparameters,warmup_steps,10000,10k steps,13,
+2010.11929,hyperparameters,learning_rate,8e-4,8 · 10−4|base LR,13,ViT-B JFT
+2010.11929,hyperparameters,learning_rate,4e-4,4 · 10−4,13,ViT-L/16 JFT
+2010.11929,hyperparameters,learning_rate,3e-4,3 · 10−4,13,ViT-H/14 JFT
+2010.11929,hyperparameters,epochs,7,,13,JFT pre-training (also 14)
+2010.11929,hyperparameters,epochs,14,,13,JFT pre-training ViT-H/14
+2010.11929,hyperparameters,dropout,0.1,,13,ImageNet / ImageNet-21k; 0.0 on JFT
+2010.11929,hyperparameters,image_size,224,training resolution,13,
+2010.11929,hyperparameters,image_size,384,fine-tuning resolution,14,
+2010.11929,hyperparameters,optimizer,SGD with momentum,SGD,5,fine-tuning
+2010.11929,hyperparameters,momentum,0.9,,13,fine-tuning
+2010.11929,hyperparameters,batch_size,512,,5,fine-tuning
+2010.11929,hyperparameters,max_grad_norm,1,global norm 1|gradient clipping,14,
+2010.11929,hyperparameters,num_layers,12,Layers,5,ViT-Base; Large 24; Huge 32
+2010.11929,hyperparameters,num_layers,24,,5,ViT-Large
+2010.11929,hyperparameters,num_layers,32,,5,ViT-Huge
+2010.11929,hyperparameters,hidden_size,768,Hidden size D,5,ViT-Base
+2010.11929,hyperparameters,hidden_size,1024,,5,ViT-Large
+2010.11929,hyperparameters,hidden_size,1280,,5,ViT-Huge
+2010.11929,hyperparameters,ffn_size,3072,MLP size,5,ViT-Base
+2010.11929,hyperparameters,num_heads,12,Heads,5,ViT-Base; Large/Huge 16
+2010.11929,hyperparameters,num_heads,16,,5,ViT-Large / Huge
+2010.11929,hyperparameters,patch_size,16,16x16 patches|ViT-L/16,5,also 14 and 32
+2010.11929,compute,,TPUv3 hardware (2.5k TPUv3-core-days for ViT-H/14),TPUv3|TPU v3|TPUv3-core-days,5,
+2010.11929,compute,,ViT-L/16 on ImageNet-21k trainable on a cloud TPUv3 with 8 cores in about 30 days,30 days|8 cores,6,
+2010.11929,code_urls,,https://github.com/google-research/vision_transformer,,1,
+2106.09685,task,,parameter-efficient adaptation of large language models,model adaptation|parameter-efficient fine-tuning|low-rank adaptation|fine-tuning|adaptation of pre-trained language models|efficient adaptation,1,
+2106.09685,task,,natural language understanding,NLU|GLUE,5,
+2106.09685,task,,natural language generation,NLG|data-to-text generation|data-to-text,5,
+2106.09685,task,,NL to SQL,NL2SQL|natural language to SQL|text-to-SQL|WikiSQL,2,
+2106.09685,task,,summarization,conversation summarization|dialogue summarization|abstractive summarization,2,
+2106.09685,datasets,,GLUE,GLUE benchmark|MNLI|MultiNLI|MNLI-m|SST-2|MRPC|CoLA|QNLI|QQP|RTE|STS-B,5,suite counted once
+2106.09685,datasets,,E2E NLG Challenge,E2E,7,
+2106.09685,datasets,,WebNLG,,7,
+2106.09685,datasets,,DART,,7,
+2106.09685,datasets,,WikiSQL,,5,
+2106.09685,datasets,,SAMSum,,5,
+2106.09685,baselines,,full fine-tuning,Fine-Tuning|FT|Fine-Tune,5,
+2106.09685,baselines,,FTTop2,fine-tuning last two layers,5,
+2106.09685,baselines,,BitFit,bias-only,6,
+2106.09685,baselines,,prefix-embedding tuning,PreEmbed|PrefixEmbed,6,
+2106.09685,baselines,,prefix-layer tuning,PreLayer|PrefixLayer|prefix tuning|Prefix-Tuning|Li & Liang 2021,6,
+2106.09685,baselines,,AdapterH,Adapter tuning|Houlsby et al. 2019|adapter layers|adapters,6,
+2106.09685,baselines,,AdapterL,Lin et al. 2020,6,
+2106.09685,baselines,,AdapterP,Pfeiffer et al. 2021|AdptP,6,
+2106.09685,baselines,,AdapterDrop,AdapterD|AdptD,6,
+2106.09685,metrics,,accuracy,Acc.|validation accuracy,6,
+2106.09685,metrics,,Matthew's correlation,Matthews correlation|MCC,6,CoLA
+2106.09685,metrics,,Pearson correlation,Pearson,6,STS-B
+2106.09685,metrics,,BLEU,,7,
+2106.09685,metrics,,NIST,,7,
+2106.09685,metrics,,METEOR,MET,7,
+2106.09685,metrics,,ROUGE-L,ROUGE|Rouge-1/2/L|R1/R2/RL,7,
+2106.09685,metrics,,CIDEr,,7,
+2106.09685,metrics,,TER,,21,DART / WebNLG
+2106.09685,metrics,,number of trainable parameters,# Trainable Parameters|trainable parameters,6,
+2106.09685,metrics,,inference latency,latency,4,
+2106.09685,hyperparameters,optimizer,AdamW,Adam,18,
+2106.09685,hyperparameters,lora_rank,8,rq = rv = 8|r,19,RoBERTa / DeBERTa / GPT-3 37.7M budget
+2106.09685,hyperparameters,lora_rank,4,rq = rv = 4,20,GPT-2
+2106.09685,hyperparameters,lora_rank,1,,20,GPT-3 4.7M budget
+2106.09685,hyperparameters,lora_alpha,8,LoRA α,19,RoBERTa base / DeBERTa
+2106.09685,hyperparameters,lora_alpha,16,LoRA α,19,RoBERTa large
+2106.09685,hyperparameters,lora_alpha,32,LoRA α,20,GPT-2
+2106.09685,hyperparameters,warmup_ratio,0.06,,19,RoBERTa; DeBERTa 0.1
+2106.09685,hyperparameters,warmup_ratio,0.1,,20,DeBERTa
+2106.09685,hyperparameters,learning_rate,5e-4,5E-04,19,RoBERTa base grid (4e-4 / 5e-4)
+2106.09685,hyperparameters,learning_rate,4e-4,4E-04,19,
+2106.09685,hyperparameters,learning_rate,3e-4,3E-04,19,RoBERTa large grid
+2106.09685,hyperparameters,learning_rate,2e-4,2E-04|0.0002,20,GPT-2 / GPT-3 LoRA
+2106.09685,hyperparameters,learning_rate,1e-4,1E-04,20,DeBERTa
+2106.09685,hyperparameters,batch_size,16,,19,RoBERTa base (also 32)
+2106.09685,hyperparameters,batch_size,32,,19,
+2106.09685,hyperparameters,batch_size,4,,19,RoBERTa large
+2106.09685,hyperparameters,batch_size,8,,20,GPT-2 / DeBERTa
+2106.09685,hyperparameters,batch_size,128,,19,GPT-3
+2106.09685,hyperparameters,epochs,5,,19,GPT-2
+2106.09685,hyperparameters,epochs,2,,19,GPT-3
+2106.09685,hyperparameters,epochs,30,,19,RoBERTa base MNLI (per task 25-80)
+2106.09685,hyperparameters,weight_decay,0.1,,19,GPT-3
+2106.09685,hyperparameters,weight_decay,0.01,,20,GPT-2 E2E / WebNLG
+2106.09685,hyperparameters,dropout,0.1,dropout prob,20,GPT-2
+2106.09685,hyperparameters,label_smoothing,0.1,label smooth,20,GPT-2
+2106.09685,hyperparameters,warmup_steps,500,,20,GPT-2
+2106.09685,hyperparameters,max_seq_length,512,Max Seq. Len.,19,RoBERTa (128 in the restricted setup)
+2106.09685,hyperparameters,max_seq_length,128,,19,
+2106.09685,hyperparameters,beam_size,10,,20,GPT-2 inference
+2106.09685,hyperparameters,length_penalty,0.9,,20,E2E (0.8 WebNLG/DART)
+2106.09685,compute,,NVIDIA Tesla V100 GPUs,V100,5,all experiments
+2106.09685,compute,,NVIDIA Quadro RTX8000 (latency measurements),Quadro RTX8000|RTX8000,4,
+2106.09685,code_urls,,https://github.com/microsoft/LoRA,microsoft/LoRA,1,
+1409.1556,hyperparameters,learning_rate,1e-3,,4,S=384 nets and localisation fine-tuning (added in adjudication)
+1512.03385,hyperparameters,dropout,0,none|no dropout,4,"""We do not use dropout"" (added in adjudication)"
+1512.03385,hyperparameters,batch_size,8,RPN mini-batch,10,COCO detection RPN step (added in adjudication)
+1512.03385,hyperparameters,batch_size,16,Fast R-CNN mini-batch,10,COCO detection Fast R-CNN step (added in adjudication)
+1512.03385,hyperparameters,learning_rate,0.001,,10,COCO detection (added in adjudication)
+1512.03385,hyperparameters,learning_rate,0.0001,,10,COCO detection (added in adjudication)
+1706.03762,hyperparameters,beam_size,21,,10,constituency parsing (added in adjudication)
+1706.03762,hyperparameters,length_penalty,0.3,α|alpha,10,constituency parsing (added in adjudication)
+1907.11692,hyperparameters,train_steps,100000,100K,7,Table 4 (added in adjudication)
+1907.11692,hyperparameters,train_steps,300000,300K,7,Table 4 (added in adjudication)
+1910.01108,hyperparameters,batch_size,1,,4,inference timing (added in adjudication)
+1910.01108,compute,,Intel Xeon E5-2690 v3 CPU,CPU|Intel Xeon,4,inference timing (added in adjudication)
+1910.01108,compute,,iPhone 7 Plus,smartphone,4,on-device study (added in adjudication)
+2010.11929,hyperparameters,polyak_averaging,0.9999,Polyak averaging factor|Polyak & Juditsky averaging|Polyak averaging,5,ImageNet fine-tuning (added in adjudication)
