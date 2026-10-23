@@ -1,0 +1,85 @@
+2103.14030,task,,image classification,ImageNet classification,5,
+2103.14030,task,,object detection,COCO object detection,5,
+2103.14030,task,,instance segmentation,,6,
+2103.14030,task,,semantic segmentation,ADE20K segmentation,5,
+2103.14030,datasets,,ImageNet-1K,ImageNet,5,
+2103.14030,datasets,,ImageNet-22K,ImageNet,6,pre-training
+2103.14030,datasets,,COCO 2017,COCO,6,
+2103.14030,datasets,,ADE20K,,7,
+2103.14030,baselines,,RegNetY,RegNet|RegNetY-4G|RegNetY-8G|RegNetY-16G,6,
+2103.14030,baselines,,EfficientNet,EffNet|EffNet-B3|EffNet-B7,6,
+2103.14030,baselines,,ViT,ViT-B/16|ViT-L/16,6,
+2103.14030,baselines,,DeiT,DeiT-S|DeiT-B,6,
+2103.14030,baselines,,BiT ResNet,R-101x3|R-152x4,6,
+2103.14030,baselines,,ResNet-50,R-50|R50,7,
+2103.14030,baselines,,ResNeXt-101,X101-32|X101-64|ResNeXt101-64x4d,7,
+2103.14030,baselines,,RepPointsV2,,7,
+2103.14030,baselines,,GCNet,,7,
+2103.14030,baselines,,RelationNet++,,7,
+2103.14030,baselines,,SpineNet-190,SpineNet,7,
+2103.14030,baselines,,ResNeSt-200,ResNeSt,7,
+2103.14030,baselines,,EfficientDet-D7,EfficientDet,7,
+2103.14030,baselines,,DetectoRS,,7,
+2103.14030,baselines,,YOLOv4 P7,YOLOv4,7,
+2103.14030,baselines,,Copy-paste,,7,
+2103.14030,baselines,,DANet,,7,
+2103.14030,baselines,,DeepLabv3+,DLab.v3+,7,
+2103.14030,baselines,,ACNet,,7,
+2103.14030,baselines,,DNL,,7,
+2103.14030,baselines,,OCRNet,,7,
+2103.14030,baselines,,UperNet ResNet-101,UperNet,7,
+2103.14030,baselines,,SETR,,7,
+2103.14030,baselines,,MLP-Mixer,MLP-Mixer-B/16,11,
+2103.14030,baselines,,ResMLP,ResMLP-S24|ResMLP-B24,11,
+2103.14030,metrics,,top-1 accuracy,ImageNet top-1 acc.|top-1,5,
+2103.14030,metrics,,top-5 accuracy,top-5,8,
+2103.14030,metrics,,box AP,APbox|AP,7,
+2103.14030,metrics,,mask AP,APmask,7,
+2103.14030,metrics,,mIoU,,7,
+2103.14030,metrics,,throughput,images/s|FPS,6,
+2103.14030,metrics,,FLOPs,,6,
+2103.14030,metrics,,parameters,#param.,6,
+2103.14030,hyperparameters,optimizer,AdamW,,5,
+2103.14030,hyperparameters,epochs,300,,5,ImageNet-1K from scratch
+2103.14030,hyperparameters,lr_schedule,cosine decay,cosine,5,ImageNet-1K
+2103.14030,hyperparameters,warmup_epochs,20,linear warm-up,5,ImageNet-1K
+2103.14030,hyperparameters,batch_size,1024,,5,ImageNet-1K and 22K fine-tuning
+2103.14030,hyperparameters,learning_rate,0.001,initial learning rate,5,ImageNet-1K and 22K pre-training
+2103.14030,hyperparameters,weight_decay,0.05,,6,ImageNet-1K and COCO
+2103.14030,hyperparameters,max_grad_norm,1,gradient clipping,9,
+2103.14030,hyperparameters,drop_path,0.2,stochastic depth,9,Swin-T; COCO and ADE20K
+2103.14030,hyperparameters,drop_path,0.3,stochastic depth,9,Swin-S
+2103.14030,hyperparameters,drop_path,0.5,stochastic depth,9,Swin-B
+2103.14030,hyperparameters,drop_path,0.1,stochastic depth,9,higher-resolution fine-tuning
+2103.14030,hyperparameters,epochs,30,,6,fine-tuning
+2103.14030,hyperparameters,learning_rate,1e-5,10−5|constant learning rate,6,fine-tuning
+2103.14030,hyperparameters,weight_decay,1e-8,10−8,6,fine-tuning
+2103.14030,hyperparameters,epochs,90,,6,ImageNet-22K pre-training
+2103.14030,hyperparameters,lr_schedule,linear decay,,6,ImageNet-22K and ADE20K
+2103.14030,hyperparameters,warmup_epochs,5,,6,ImageNet-22K
+2103.14030,hyperparameters,batch_size,4096,,6,ImageNet-22K pre-training
+2103.14030,hyperparameters,weight_decay,0.01,,6,ImageNet-22K and ADE20K
+2103.14030,hyperparameters,learning_rate,0.0001,initial learning rate,6,COCO
+2103.14030,hyperparameters,batch_size,16,,6,COCO; ADE20K (8 GPUs × 2)
+2103.14030,hyperparameters,epochs,36,3x schedule,6,COCO ablation
+2103.14030,hyperparameters,epochs,72,6x schedule,6,COCO system-level
+2103.14030,hyperparameters,learning_rate,6e-5,6 × 10−5,10,ADE20K
+2103.14030,hyperparameters,warmup_steps,1500,iterations,10,ADE20K
+2103.14030,hyperparameters,train_steps,160K,iterations,10,ADE20K
+2103.14030,hyperparameters,image_size,224,2242,9,
+2103.14030,hyperparameters,image_size,384,3842,9,
+2103.14030,hyperparameters,image_size,512,512×512,10,ADE20K Swin-T/S
+2103.14030,hyperparameters,image_size,640,640×640,10,ADE20K Swin-B/L
+2103.14030,hyperparameters,window_size,7,7×7,10,
+2103.14030,hyperparameters,hidden_size,96,C|dim,10,Swin-T and Swin-S
+2103.14030,hyperparameters,hidden_size,128,C|dim,10,Swin-B
+2103.14030,hyperparameters,hidden_size,192,C|dim,10,Swin-L
+2103.14030,hyperparameters,layer_numbers,"{2, 2, 6, 2}",layers,10,Swin-T
+2103.14030,hyperparameters,layer_numbers,"{2, 2, 18, 2}",layers,10,Swin-S/B/L
+2103.14030,hyperparameters,model_size,29M,#param.,6,Swin-T
+2103.14030,hyperparameters,model_size,50M,#param.,6,Swin-S
+2103.14030,hyperparameters,model_size,88M,#param.,6,Swin-B
+2103.14030,hyperparameters,model_size,197M,#param.,6,Swin-L
+2103.14030,compute,,V100 GPU,V100,6,throughput measurement
+2103.14030,compute,,8 GPUs,,10,ADE20K training
+2103.14030,code_urls,,https://github.com/microsoft/Swin-Transformer,,1,

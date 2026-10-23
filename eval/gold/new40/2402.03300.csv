@@ -1,0 +1,85 @@
+2402.03300,task,,mathematical reasoning,math problem solving|mathematical problem solving,1,
+2402.03300,task,,tool-integrated mathematical reasoning,program-aided reasoning|tool use,9,
+2402.03300,task,,formal theorem proving,informal-to-formal proving|autoformalization,9,
+2402.03300,task,,language understanding and code generation,natural language understanding|code,9,
+2402.03300,datasets,,DeepSeekMath Corpus,120B math tokens|Common Crawl,5,
+2402.03300,datasets,,OpenWebMath,,4,
+2402.03300,datasets,,MathPile,,6,
+2402.03300,datasets,,Proof-Pile-2,,6,
+2402.03300,datasets,,AlgebraicStack,,6,
+2402.03300,datasets,,ArXiv-RedPajama,arXiv,17,
+2402.03300,datasets,,GSM8K,,8,
+2402.03300,datasets,,MATH,,8,
+2402.03300,datasets,,OCW Courses,OCW,6,
+2402.03300,datasets,,SAT,,6,
+2402.03300,datasets,,MMLU-STEM,MMLU STEM,6,
+2402.03300,datasets,,CMATH,,8,
+2402.03300,datasets,,Gaokao-MathCloze,Gaokao MathCloze,6,
+2402.03300,datasets,,Gaokao-MathQA,Gaokao MathQA,6,
+2402.03300,datasets,,MGSM-zh,,12,
+2402.03300,datasets,,miniF2F,miniF2F-valid|miniF2F-test,9,
+2402.03300,datasets,,MMLU,,9,
+2402.03300,datasets,,BIG-Bench Hard,BBH,9,
+2402.03300,datasets,,HumanEval,,9,
+2402.03300,datasets,,MBPP,,9,
+2402.03300,datasets,,MathInstruct,,10,SFT data
+2402.03300,datasets,,Lila-OOD,,10,SFT data
+2402.03300,baselines,,Minerva,Minerva 7B|Minerva 62B|Minerva 540B,8,
+2402.03300,baselines,,Mistral 7B,Mistral,8,
+2402.03300,baselines,,Llemma,Llemma 7B|Llemma 34B,8,
+2402.03300,baselines,,CodeLlama,CodeLlama 7B|CodeLlama 34B,9,
+2402.03300,baselines,,DeepSeek-Coder-Base-v1.5,,9,
+2402.03300,baselines,,GPT-4,,12,
+2402.03300,baselines,,GPT-4 Code Interpreter,,12,
+2402.03300,baselines,,GPT-3.5,,12,
+2402.03300,baselines,,Gemini Ultra,,12,
+2402.03300,baselines,,Gemini Pro,,12,
+2402.03300,baselines,,Inflection-2,,12,
+2402.03300,baselines,,Grok-1,,12,
+2402.03300,baselines,,Baichuan-3,,12,
+2402.03300,baselines,,GLM-4,,12,
+2402.03300,baselines,,InternLM2-Math,InternLM2-Math 20B,12,
+2402.03300,baselines,,Qwen 72B,Qwen,12,
+2402.03300,baselines,,Math-Shepherd-Mistral 7B,Math-Shepherd,12,
+2402.03300,baselines,,WizardMath,WizardMath-v1.1|WizardMath-v1.0,12,
+2402.03300,baselines,,DeepSeek-LLM-Chat 67B,DeepSeek-LLM-Chat,12,
+2402.03300,baselines,,MetaMath 70B,MetaMath,12,
+2402.03300,baselines,,SeaLLM-v2 7B,SeaLLM-v2,12,
+2402.03300,baselines,,ChatGLM3 6B,ChatGLM3,12,
+2402.03300,baselines,,ToRA 34B,ToRA,12,
+2402.03300,baselines,,MAmmoTH 70B,MAmmoTH,12,
+2402.03300,baselines,,PPO,Proximal Policy Optimization,11,
+2402.03300,metrics,,accuracy,top-1 accuracy|Top1,12,
+2402.03300,metrics,,majority voting accuracy,maj@64|majority votes,12,
+2402.03300,metrics,,Pass@1,pass@1,9,code
+2402.03300,metrics,,Pass@K,Maj@K,19,RL analysis
+2402.03300,hyperparameters,optimizer,AdamW,,6,
+2402.03300,hyperparameters,adam_beta1,0.9,β1,6,
+2402.03300,hyperparameters,adam_beta2,0.95,β2,6,
+2402.03300,hyperparameters,weight_decay,0.1,,6,
+2402.03300,hyperparameters,warmup_steps,2000,,6,
+2402.03300,hyperparameters,lr_schedule,multi-step,,6,
+2402.03300,hyperparameters,learning_rate,5.3e-4,maximum learning rate,6,1.3B corpus experiments
+2402.03300,hyperparameters,batch_size,4M tokens,,6,1.3B corpus experiments
+2402.03300,hyperparameters,max_seq_length,4K,context length|4096,6,
+2402.03300,hyperparameters,train_tokens,150B,,6,1.3B corpus experiments
+2402.03300,hyperparameters,model_size,1.3B,,6,corpus experiments
+2402.03300,hyperparameters,model_size,7B,,8,DeepSeekMath
+2402.03300,hyperparameters,train_tokens,500B,,8,DeepSeekMath-Base 7B
+2402.03300,hyperparameters,learning_rate,4.2e-4,maximum learning rate,8,DeepSeekMath-Base 7B
+2402.03300,hyperparameters,batch_size,10M tokens,,8,DeepSeekMath-Base 7B
+2402.03300,hyperparameters,train_steps,500,steps,10,DeepSeekMath-Instruct
+2402.03300,hyperparameters,batch_size,256,,10,DeepSeekMath-Instruct
+2402.03300,hyperparameters,learning_rate,5e-5,constant learning rate,10,DeepSeekMath-Instruct
+2402.03300,hyperparameters,learning_rate,2e-5,,15,reward model
+2402.03300,hyperparameters,learning_rate,1e-6,,15,GRPO policy model
+2402.03300,hyperparameters,kl_coef,0.04,KL coefficient,15,GRPO
+2402.03300,hyperparameters,group_size,64,outputs per question,15,GRPO
+2402.03300,hyperparameters,max_length,1024,,15,GRPO
+2402.03300,hyperparameters,batch_size,1024,training batch size,15,GRPO
+2402.03300,hyperparameters,replay_ratio,10%,historical data,15,iterative reward model
+2402.03300,hyperparameters,fasttext_dim,256,vector dimension,4,fastText classifier
+2402.03300,hyperparameters,learning_rate,0.1,,4,fastText classifier
+2402.03300,hyperparameters,epochs,3,training epochs,5,fastText classifier
+2402.03300,hyperparameters,vocab_size,100K,,6,tokenizer
+2402.03300,code_urls,,https://github.com/deepseek-ai/DeepSeek-Math,,1,

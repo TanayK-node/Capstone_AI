@@ -1,0 +1,79 @@
+2305.14314,task,,instruction finetuning,instruction tuning|efficient finetuning|parameter-efficient finetuning,1,
+2305.14314,task,,chatbot evaluation,chatbot|dialogue|chatbot performance,7,
+2305.14314,task,,natural language understanding,MMLU|language understanding,6,
+2305.14314,task,,language modeling with quantized models,quantization|zero-shot evaluation|perplexity,6,4-bit data types
+2305.14314,datasets,,GLUE,,6,
+2305.14314,datasets,,Super-NaturalInstructions,TKInstruct|Super-Natural Instructions,6,
+2305.14314,datasets,,MMLU,Massively Multitask Language Understanding,6,
+2305.14314,datasets,,FLAN v2,Flan v2,6,
+2305.14314,datasets,,Alpaca,Stanford Alpaca,6,
+2305.14314,datasets,,OASST1,OpenAssistant|Open Assistant dataset|OA benchmark,8,
+2305.14314,datasets,,HH-RLHF,Anthropic HH,8,
+2305.14314,datasets,,Self-Instruct,,8,
+2305.14314,datasets,,Unnatural Instructions,Unnatural Instruct,8,
+2305.14314,datasets,,Chip2,OIG Laion,8,
+2305.14314,datasets,,Longform,LongForm,8,
+2305.14314,datasets,,Vicuna benchmark,Vicuna prompts,9,80 prompts
+2305.14314,datasets,,Pile Common Crawl,Pile,7,perplexity
+2305.14314,datasets,,Winogrande,,6,zero-shot
+2305.14314,datasets,,HellaSwag,,6,zero-shot
+2305.14314,datasets,,PiQA,,6,zero-shot
+2305.14314,datasets,,Arc-Easy,ARC,6,zero-shot
+2305.14314,datasets,,Arc-Challenge,ARC,6,zero-shot
+2305.14314,datasets,,CrowS,CrowS-Pairs,13,bias evaluation
+2305.14314,baselines,,16-bit full finetuning,full finetuning|BF16,6,
+2305.14314,baselines,,16-bit LoRA,LoRA BF16|LoRA,6,
+2305.14314,baselines,,QLoRA Int8 and FP4,Int8|FP4|Float4|Int4,7,data type comparison
+2305.14314,baselines,,GPT-4,,8,
+2305.14314,baselines,,ChatGPT,GPT-3.5-turbo,8,
+2305.14314,baselines,,Bard,,8,
+2305.14314,baselines,,Vicuna,Vicuna 13B,8,
+2305.14314,baselines,,Open Assistant,Open Assistant 33B,8,
+2305.14314,baselines,,LLaMA no tuning,LLaMA,8,
+2305.14314,metrics,,MMLU 5-shot accuracy,accuracy|5-shot test accuracy,8,
+2305.14314,metrics,,Elo rating,Elo,9,
+2305.14314,metrics,,relative score to ChatGPT,score relative to ChatGPT|Vicuna benchmark score,9,
+2305.14314,metrics,,RougeL,ROUGE-L,7,
+2305.14314,metrics,,perplexity,PPL|mean perplexity,7,
+2305.14314,metrics,,zero-shot accuracy,mean zero-shot accuracy,6,
+2305.14314,metrics,,memory footprint,memory|GB,10,
+2305.14314,hyperparameters,quantization,NF4,4-bit NormalFloat|NormalFloat4,23,with double quantization
+2305.14314,hyperparameters,compute_dtype,bf16,bfloat16,23,
+2305.14314,hyperparameters,lora_rank,64,LoRA r,23,chatbot; T5 xl/xxl
+2305.14314,hyperparameters,lora_alpha,16,α,23,chatbot
+2305.14314,hyperparameters,lora_alpha,64,α,22,Super-NaturalInstructions
+2305.14314,hyperparameters,lora_rank,16,LoRA r,22,small/medium/large T5
+2305.14314,hyperparameters,adam_beta2,0.999,Adam beta2,23,
+2305.14314,hyperparameters,max_grad_norm,0.3,,23,
+2305.14314,hyperparameters,lora_dropout,0.1,,23,models up to 13B
+2305.14314,hyperparameters,lora_dropout,0.05,,22,33B and 65B; also small models per A.1
+2305.14314,hyperparameters,lr_schedule,constant,,23,
+2305.14314,hyperparameters,batch_size,16,,23,7B and 13B; OASST1
+2305.14314,hyperparameters,batch_size,32,,23,33B
+2305.14314,hyperparameters,batch_size,64,,23,65B
+2305.14314,hyperparameters,learning_rate,2e-4,LR,23,7B and 13B
+2305.14314,hyperparameters,learning_rate,1e-4,LR,23,33B and 65B
+2305.14314,hyperparameters,train_steps,10000,steps,23,7B/13B
+2305.14314,hyperparameters,train_steps,1875,steps,23,OASST1
+2305.14314,hyperparameters,train_steps,4000,steps,23,Longform 7B/13B
+2305.14314,hyperparameters,train_steps,5000,steps,23,33B
+2305.14314,hyperparameters,train_steps,2343,steps,23,Longform 33B/65B
+2305.14314,hyperparameters,train_steps,2500,steps,23,65B
+2305.14314,hyperparameters,max_source_length,384,source length,23,
+2305.14314,hyperparameters,max_source_length,512,source length,23,Longform
+2305.14314,hyperparameters,max_target_length,128,target length,23,
+2305.14314,hyperparameters,max_target_length,512,target length,23,OASST1
+2305.14314,hyperparameters,max_target_length,768,target length,23,HH-RLHF
+2305.14314,hyperparameters,max_target_length,1024,target length,23,Longform
+2305.14314,hyperparameters,top_p,0.9,nucleus sampling,8,
+2305.14314,hyperparameters,temperature,0.7,,8,
+2305.14314,hyperparameters,elo_k,32,K,9,Elo
+2305.14314,hyperparameters,elo_initial,1000,,9,Elo start score
+2305.14314,hyperparameters,model_size,7B,,8,LLaMA
+2305.14314,hyperparameters,model_size,13B,,8,LLaMA
+2305.14314,hyperparameters,model_size,33B,,8,LLaMA
+2305.14314,hyperparameters,model_size,65B,,8,LLaMA
+2305.14314,compute,,single 48GB GPU,48GB GPU,1,65B finetuning
+2305.14314,compute,,24 GB consumer GPU in under 12 hours,24 GB|12 hours,10,Guanaco 33B
+2305.14314,code_urls,,https://github.com/artidoro/qlora,,1,
+2305.14314,code_urls,,https://github.com/TimDettmers/bitsandbytes,bitsandbytes,1,
