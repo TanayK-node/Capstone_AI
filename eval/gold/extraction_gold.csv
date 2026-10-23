@@ -468,3 +468,2330 @@ paper_id,field,name,value,aliases,page,note
 1910.01108,compute,,Intel Xeon E5-2690 v3 CPU,CPU|Intel Xeon,4,inference timing (added in adjudication)
 1910.01108,compute,,iPhone 7 Plus,smartphone,4,on-device study (added in adjudication)
 2010.11929,hyperparameters,polyak_averaging,0.9999,Polyak averaging factor|Polyak & Juditsky averaging|Polyak averaging,5,ImageNet fine-tuning (added in adjudication)
+1502.03167,task,,image classification,ImageNet classification,6,
+1502.03167,task,,digit classification,MNIST digit classification|handwritten digit classification,5,
+1502.03167,datasets,,ImageNet,ILSVRC 2012|LSVRC2012|ImageNet LSVRC 2012|ImageNet Large Scale Visual Recognition Competition,6,
+1502.03167,datasets,,MNIST,,5,
+1502.03167,baselines,,Inception,GoogLeNet|Inception without Batch Normalization,6,
+1502.03167,baselines,,GoogLeNet ensemble,,8,
+1502.03167,baselines,,Deep Image low-res,Deep Image,8,
+1502.03167,baselines,,Deep Image high-res,Deep Image,8,
+1502.03167,baselines,,Deep Image ensemble,Deep Image,7,
+1502.03167,baselines,,He et al. 2015 ensemble,He et al.|PReLU ensemble,7,
+1502.03167,metrics,,top-1 accuracy,validation accuracy @1|validation accuracy|single crop validation accuracy,6,
+1502.03167,metrics,,top-5 error,top-5 validation error,7,
+1502.03167,metrics,,top-1 error,,8,
+1502.03167,metrics,,training steps to reach accuracy,steps to 72.2%|number of training steps,7,
+1502.03167,metrics,,test accuracy,fraction of correct predictions,6,MNIST
+1502.03167,hyperparameters,num_layers,3,hidden layers,6,MNIST network
+1502.03167,hyperparameters,hidden_size,100,activations,6,MNIST network
+1502.03167,hyperparameters,train_steps,50000,,6,MNIST
+1502.03167,hyperparameters,batch_size,60,mini-batch,6,MNIST
+1502.03167,hyperparameters,optimizer,SGD with momentum,Stochastic Gradient Descent with momentum,6,ImageNet
+1502.03167,hyperparameters,batch_size,32,mini-batch size,6,ImageNet
+1502.03167,hyperparameters,learning_rate,0.0015,initial learning rate,7,Inception and BN-Baseline
+1502.03167,hyperparameters,learning_rate,0.0075,initial learning rate,7,BN-x5
+1502.03167,hyperparameters,learning_rate,0.045,initial learning rate,7,BN-x30
+1502.03167,hyperparameters,dropout,0.4,40%|Dropout probability,7,original Inception
+1502.03167,hyperparameters,dropout,0.05,5%,7,ensemble members
+1502.03167,hyperparameters,dropout,0.1,10%,7,ensemble members
+1502.03167,hyperparameters,model_size,13.6M,13.6 · 106 parameters,6,
+1502.03167,hyperparameters,train_steps,6000000,6 · 106,7,BN-x30 and ensemble members
+1502.03167,hyperparameters,ensemble_size,6,networks,7,
+1502.03167,hyperparameters,image_size,224,resolution,8,
+1502.03167,hyperparameters,test_crops,144,crops,8,multicrop and ensemble
+1502.03167,hyperparameters,depth_multiplier,8,separable convolution,10,first convolutional layer
+1505.04597,task,,neuronal structure segmentation in electron microscopy,segmentation of neuronal structures|EM segmentation|biomedical image segmentation|image segmentation,1,
+1505.04597,task,,cell segmentation in light microscopy,cell segmentation|biomedical image segmentation,1,
+1505.04597,datasets,,ISBI 2012 EM segmentation challenge,EM segmentation challenge|ISBI 2012|Drosophila VNC|serial section transmission electron microscopy,6,30 training images 512x512
+1505.04597,datasets,,PhC-U373,ISBI cell tracking challenge|PhC U373|Glioblastoma-astrocytoma U373,7,ISBI cell tracking challenge 2015
+1505.04597,datasets,,DIC-HeLa,DIC HeLa|HeLa cells|ISBI cell tracking challenge,7,ISBI cell tracking challenge 2015
+1505.04597,baselines,,Ciresan et al. sliding-window convolutional network,Ciresan et al.|IDSIA|sliding-window convolutional network|sliding window,6,
+1505.04597,baselines,,DIVE-SCI,,6,
+1505.04597,baselines,,DIVE,,6,
+1505.04597,baselines,,IDSIA-SCI,,6,
+1505.04597,baselines,,IMCB-SG,,7,
+1505.04597,baselines,,KTH-SE,,7,
+1505.04597,baselines,,HOUS-US,,7,
+1505.04597,metrics,,warping error,,6,
+1505.04597,metrics,,Rand error,rand error,6,
+1505.04597,metrics,,pixel error,,6,
+1505.04597,metrics,,IOU,intersection over union|IoU,7,
+1505.04597,hyperparameters,optimizer,SGD,stochastic gradient descent,4,
+1505.04597,hyperparameters,batch_size,1,single image,4,
+1505.04597,hyperparameters,momentum,0.99,,4,
+1505.04597,hyperparameters,num_layers,23,convolutional layers,4,
+1505.04597,hyperparameters,loss_weight_w0,10,w0,5,border weight map
+1505.04597,hyperparameters,loss_weight_sigma,5,σ|sigma,5,pixels
+1505.04597,hyperparameters,augmentation_displacement_std,10,standard deviation,6,elastic deformation in pixels on a 3x3 grid
+1505.04597,hyperparameters,test_time_augmentation,7,rotated versions,6,EM challenge
+1505.04597,compute,,NVidia Titan GPU (6 GB),Titan GPU|NVidia Titan,8,
+1505.04597,compute,,10 hours training,10 hours,8,
+1505.04597,code_urls,,http://lmb.informatik.uni-freiburg.de/people/ronneber/u-net,,1,
+1506.01497,task,,object detection,real-time object detection,1,
+1506.01497,task,,region proposal generation,region proposals|object proposals,1,
+1506.01497,datasets,,PASCAL VOC 2007,VOC 2007|PASCAL VOC,7,
+1506.01497,datasets,,PASCAL VOC 2012,VOC 2012|PASCAL VOC,7,
+1506.01497,datasets,,MS COCO,COCO|Microsoft COCO,10,
+1506.01497,datasets,,ImageNet,ImageNet pre-training,5,pre-trained networks
+1506.01497,baselines,,Selective Search,SS|SS + Fast R-CNN,7,
+1506.01497,baselines,,EdgeBoxes,EB,7,
+1506.01497,baselines,,Fast R-CNN,,10,
+1506.01497,baselines,,OverFeat one-stage detection,OverFeat|one-stage Fast R-CNN,10,
+1506.01497,metrics,,mAP,mean Average Precision|mAP@0.5|mAP@[.5 .95],7,
+1506.01497,metrics,,recall,Recall-to-IoU|recall vs. IoU,9,
+1506.01497,metrics,,running time,frame rate|fps|timing,8,
+1506.01497,hyperparameters,optimizer,SGD,stochastic gradient descent,5,
+1506.01497,hyperparameters,anchors_per_image,256,anchors per mini-batch,5,
+1506.01497,hyperparameters,learning_rate,0.001,,5,PASCAL VOC first 60k mini-batches
+1506.01497,hyperparameters,learning_rate,0.0001,,5,PASCAL VOC next 20k
+1506.01497,hyperparameters,train_steps,60k,mini-batches,5,PASCAL VOC
+1506.01497,hyperparameters,train_steps,20k,mini-batches,5,PASCAL VOC
+1506.01497,hyperparameters,momentum,0.9,,5,
+1506.01497,hyperparameters,weight_decay,0.0005,,5,
+1506.01497,hyperparameters,init_std,0.01,standard deviation,5,new layers
+1506.01497,hyperparameters,image_size,600,s|shorter side,6,
+1506.01497,hyperparameters,anchor_scales,"128², 256², 512²",3 scales,6,
+1506.01497,hyperparameters,anchor_ratios,"1:1, 1:2, 2:1",3 aspect ratios,6,
+1506.01497,hyperparameters,nms_threshold,0.7,IoU threshold for NMS,7,
+1506.01497,hyperparameters,num_proposals,2000,proposals,7,train-time
+1506.01497,hyperparameters,num_proposals,300,proposals,7,test-time
+1506.01497,hyperparameters,loss_weight_lambda,10,λ,9,
+1506.01497,hyperparameters,batch_size,8,effective mini-batch size,10,COCO RPN
+1506.01497,hyperparameters,batch_size,16,effective mini-batch size,10,COCO Fast R-CNN
+1506.01497,hyperparameters,learning_rate,0.003,,10,COCO first 240k iterations
+1506.01497,hyperparameters,learning_rate,0.0003,,10,COCO next 80k
+1506.01497,hyperparameters,train_steps,240k,iterations,10,COCO
+1506.01497,hyperparameters,train_steps,80k,iterations,10,COCO
+1506.01497,hyperparameters,anchor_scales,"64², 128², 256², 512²",4 scales,10,COCO
+1506.01497,hyperparameters,stride,16,total stride,6,
+1506.01497,compute,,K40 GPU,K40,8,timing
+1506.01497,compute,,8-GPU implementation,8 GPUs,10,COCO training
+1506.01497,code_urls,,https://github.com/shaoqingren/faster_rcnn,,2,MATLAB
+1506.01497,code_urls,,https://github.com/rbgirshick/py-faster-rcnn,,2,Python
+1609.02907,task,,semi-supervised node classification,node classification|semi-supervised classification|document classification in citation networks,5,
+1609.02907,task,,semi-supervised entity classification in a knowledge graph,entity classification|NELL,5,
+1609.02907,datasets,,Citeseer,CiteSeer,5,
+1609.02907,datasets,,Cora,,5,
+1609.02907,datasets,,Pubmed,PubMed,5,
+1609.02907,datasets,,NELL,,5,knowledge graph
+1609.02907,datasets,,random graphs,simulated random graphs,6,training time experiments
+1609.02907,baselines,,manifold regularization,ManiReg,6,
+1609.02907,baselines,,semi-supervised embedding,SemiEmb,6,
+1609.02907,baselines,,label propagation,LP,6,
+1609.02907,baselines,,DeepWalk,,6,
+1609.02907,baselines,,iterative classification algorithm,ICA,6,
+1609.02907,baselines,,Planetoid,,6,
+1609.02907,baselines,,Chebyshev filter,Chebyshev|Chebyshev polynomials,7,propagation-model comparison
+1609.02907,baselines,,multi-layer perceptron,MLP,7,propagation-model comparison
+1609.02907,metrics,,classification accuracy,accuracy|prediction accuracy,7,
+1609.02907,metrics,,wall-clock training time,training time|time per epoch,7,
+1609.02907,hyperparameters,num_layers,2,two-layer GCN,6,
+1609.02907,hyperparameters,epochs,200,training iterations,6,
+1609.02907,hyperparameters,optimizer,Adam,,6,
+1609.02907,hyperparameters,learning_rate,0.01,,6,
+1609.02907,hyperparameters,early_stopping_patience,10,window size,6,epochs
+1609.02907,hyperparameters,dropout,0.5,dropout rate,7,citation networks
+1609.02907,hyperparameters,dropout,0.1,dropout rate,7,NELL
+1609.02907,hyperparameters,weight_decay,5e-4,L2 regularization,7,citation networks
+1609.02907,hyperparameters,weight_decay,1e-5,L2 regularization,7,NELL
+1609.02907,hyperparameters,hidden_size,16,hidden units,7,citation networks
+1609.02907,hyperparameters,hidden_size,64,hidden units,7,NELL
+1609.02907,hyperparameters,hidden_size,32,hidden layer size,6,random graphs
+1609.02907,hyperparameters,epochs,400,,14,model-depth experiments
+1609.02907,hyperparameters,epochs,300,training iterations,12,karate club
+1609.02907,hyperparameters,hidden_size,4,hidden layer dimensionality,12,karate club
+1609.02907,compute,,16-core Intel Xeon CPU E5-2640 v3,Intel Xeon E5-2640 v3|Xeon CPU,8,
+1609.02907,compute,,GeForce GTX TITAN X,GTX TITAN X|TITAN X,8,
+1609.02907,code_urls,,https://github.com/tkipf/gcn,,4,
+1706.06083,task,,adversarial robustness,adversarially robust classification|robustness to adversarial examples|adversarial training,1,
+1706.06083,task,,image classification,classification,9,
+1706.06083,datasets,,MNIST,,9,
+1706.06083,datasets,,CIFAR10,CIFAR-10,9,
+1706.06083,baselines,,standard training,natural training|naturally trained network|Anat,11,
+1706.06083,baselines,,FGSM adversarial training,FGSM training,11,
+1706.06083,metrics,,accuracy,adversarial accuracy|natural accuracy,11,
+1706.06083,metrics,,cross-entropy loss,adversarial loss|loss value,12,
+1706.06083,hyperparameters,epsilon,0.3,ε,11,MNIST l∞ perturbation
+1706.06083,hyperparameters,epsilon,8,ε,12,CIFAR10 l∞ perturbation
+1706.06083,hyperparameters,pgd_steps,40,iterations,11,MNIST
+1706.06083,hyperparameters,pgd_step_size,0.01,step size,11,MNIST
+1706.06083,hyperparameters,pgd_steps,7,steps,12,CIFAR10 training
+1706.06083,hyperparameters,pgd_step_size,2,step size,12,CIFAR10
+1706.06083,hyperparameters,pgd_steps,20,steps,12,CIFAR10 hardest adversary
+1706.06083,hyperparameters,pgd_steps,100,steps,12,evaluation for different ε
+1706.06083,hyperparameters,num_restarts,20,restarts,13,MNIST evaluation
+1706.06083,hyperparameters,cw_confidence,50,κ,11,CW+
+1706.06083,hyperparameters,conv_filters,32 and 64,filters,11,MNIST network
+1706.06083,hyperparameters,hidden_size,1024,fully connected layer,11,MNIST network
+1706.06083,hyperparameters,width_multiplier,10,wider layers by a factor of 10,9,CIFAR10 ResNet
+1706.06083,hyperparameters,resnet_filters,"(16, 160, 320, 640)",filters,9,CIFAR10 wide ResNet
+1706.06083,hyperparameters,num_residual_units,5,residual units,9,CIFAR10
+1706.06083,hyperparameters,hidden_size,64,fully connected hidden layer,9,MNIST capacity study initial network
+1706.06083,hyperparameters,dba_steps,2000,Decision Boundary Attack steps,14,
+1706.06083,code_urls,,https://github.com/MadryLab/mnist_challenge,,1,
+1706.06083,code_urls,,https://github.com/MadryLab/cifar10_challenge,,1,
+1707.06347,task,,continuous control,simulated robotic locomotion|robotic locomotion|reinforcement learning,1,
+1707.06347,task,,Atari game playing,Atari|game playing,1,
+1707.06347,datasets,,OpenAI Gym MuJoCo tasks,MuJoCo|OpenAI Gym|HalfCheetah|Hopper|InvertedDoublePendulum|InvertedPendulum|Reacher|Swimmer|Walker2d,6,7 environments v1
+1707.06347,datasets,,Roboschool humanoid tasks,Roboschool|RoboschoolHumanoid|RoboschoolHumanoidFlagrun|RoboschoolHumanoidFlagrunHarder,7,
+1707.06347,datasets,,Arcade Learning Environment,Atari|ALE|Atari games|49 Atari games,8,
+1707.06347,baselines,,TRPO,trust region policy optimization,6,
+1707.06347,baselines,,cross-entropy method,CEM,6,
+1707.06347,baselines,,vanilla policy gradient with adaptive stepsize,vanilla PG|Vanilla PG Adaptive,6,
+1707.06347,baselines,,A2C,advantage actor critic|A3C,7,
+1707.06347,baselines,,A2C with trust region,A2C + Trust Region,7,
+1707.06347,baselines,,ACER,,8,
+1707.06347,metrics,,average normalized score,normalized score,6,
+1707.06347,metrics,,average total reward,episode reward|average reward per episode|mean final score,6,
+1707.06347,metrics,,number of games won,games won,8,Atari
+1707.06347,hyperparameters,optimizer,Adam,,5,
+1707.06347,hyperparameters,horizon,2048,T,10,MuJoCo
+1707.06347,hyperparameters,learning_rate,3e-4,Adam stepsize,10,MuJoCo
+1707.06347,hyperparameters,epochs,10,num. epochs,10,MuJoCo
+1707.06347,hyperparameters,batch_size,64,minibatch size,10,MuJoCo
+1707.06347,hyperparameters,gamma,0.99,discount|γ,10,all
+1707.06347,hyperparameters,gae_lambda,0.95,GAE parameter|λ,10,all
+1707.06347,hyperparameters,clip_epsilon,0.2,ϵ|clipping parameter,7,MuJoCo comparison
+1707.06347,hyperparameters,clip_epsilon,0.3,ϵ,6,searched
+1707.06347,hyperparameters,kl_target,0.003,dtarg,6,searched
+1707.06347,hyperparameters,kl_target,0.01,dtarg,6,searched
+1707.06347,hyperparameters,kl_target,0.03,dtarg,6,searched
+1707.06347,hyperparameters,kl_beta,0.3,β,6,searched
+1707.06347,hyperparameters,kl_beta,1,β,6,searched; initial β
+1707.06347,hyperparameters,kl_beta,3,β,6,searched
+1707.06347,hyperparameters,kl_beta,10,β,6,searched
+1707.06347,hyperparameters,hidden_size,64,hidden units,6,MuJoCo policy MLP
+1707.06347,hyperparameters,num_layers,2,hidden layers,6,MuJoCo policy MLP
+1707.06347,hyperparameters,train_steps,1000000,one million timesteps|1M,6,MuJoCo
+1707.06347,hyperparameters,horizon,512,T,10,Roboschool
+1707.06347,hyperparameters,epochs,15,num. epochs,10,Roboschool
+1707.06347,hyperparameters,batch_size,4096,minibatch size,10,Roboschool
+1707.06347,hyperparameters,num_actors,32,actors,10,Roboschool locomotion
+1707.06347,hyperparameters,num_actors,128,actors,10,Roboschool flagrun
+1707.06347,hyperparameters,horizon,128,T,10,Atari
+1707.06347,hyperparameters,learning_rate,2.5e-4,Adam stepsize,10,Atari (times annealed α)
+1707.06347,hyperparameters,epochs,3,num. epochs,10,Atari
+1707.06347,hyperparameters,batch_size,256,32 × 8|minibatch size,10,Atari
+1707.06347,hyperparameters,num_actors,8,actors,10,Atari
+1707.06347,hyperparameters,clip_epsilon,0.1,ϵ|clipping parameter,10,Atari (times annealed α); also searched on MuJoCo
+1707.06347,hyperparameters,value_coef,1,c1|VF coeff,10,Atari
+1707.06347,hyperparameters,entropy_coef,0.01,c2|entropy coeff,10,Atari
+1707.06347,hyperparameters,train_steps,10M timesteps,40M frames|10M,12,Atari
+1710.10903,task,,transductive node classification,node classification|semi-supervised node classification|transductive learning,5,citation networks
+1710.10903,task,,inductive node classification,node classification|inductive learning|protein-protein interaction,5,PPI multi-label
+1710.10903,datasets,,Cora,,6,
+1710.10903,datasets,,Citeseer,CiteSeer,6,
+1710.10903,datasets,,Pubmed,PubMed,6,
+1710.10903,datasets,,PPI,protein-protein interaction|protein-protein interaction dataset,6,
+1710.10903,baselines,,label propagation,LP,6,
+1710.10903,baselines,,semi-supervised embedding,SemiEmb,6,
+1710.10903,baselines,,manifold regularization,ManiReg,6,
+1710.10903,baselines,,DeepWalk,,6,
+1710.10903,baselines,,iterative classification algorithm,ICA,6,
+1710.10903,baselines,,Planetoid,,6,
+1710.10903,baselines,,GCN,graph convolutional networks|GCN-64,6,
+1710.10903,baselines,,Chebyshev,Chebyshev filters|ChebNet,6,
+1710.10903,baselines,,MoNet,,6,
+1710.10903,baselines,,GraphSAGE-GCN,GraphSAGE,6,
+1710.10903,baselines,,GraphSAGE-mean,GraphSAGE,6,
+1710.10903,baselines,,GraphSAGE-LSTM,GraphSAGE,7,
+1710.10903,baselines,,GraphSAGE-pool,GraphSAGE,7,
+1710.10903,baselines,,MLP,multilayer perceptron,7,
+1710.10903,baselines,,Random,,8,PPI
+1710.10903,metrics,,accuracy,classification accuracy|mean classification accuracy,7,
+1710.10903,metrics,,micro-averaged F1,micro-F1|F1,7,PPI
+1710.10903,hyperparameters,num_layers,2,two-layer,7,transductive
+1710.10903,hyperparameters,num_layers,3,three-layer,7,inductive
+1710.10903,hyperparameters,num_heads,8,K|attention heads,7,transductive first layer
+1710.10903,hyperparameters,num_heads,4,K|attention heads,7,inductive first two layers
+1710.10903,hyperparameters,num_heads,6,K|output attention heads,7,inductive output layer
+1710.10903,hyperparameters,hidden_size,8,F′|features per head,7,transductive (64 total)
+1710.10903,hyperparameters,hidden_size,256,F′|features per head,7,inductive (1024 total)
+1710.10903,hyperparameters,weight_decay,0.0005,L2 regularization|λ,7,Cora and Citeseer
+1710.10903,hyperparameters,weight_decay,0.001,L2 regularization|λ,7,Pubmed
+1710.10903,hyperparameters,dropout,0.6,p,7,transductive
+1710.10903,hyperparameters,batch_size,2,graphs,7,inductive
+1710.10903,hyperparameters,optimizer,Adam,,7,
+1710.10903,hyperparameters,learning_rate,0.01,initial learning rate,7,Pubmed
+1710.10903,hyperparameters,learning_rate,0.005,initial learning rate,7,other datasets
+1710.10903,hyperparameters,early_stopping_patience,100,patience,7,epochs
+1710.10903,code_urls,,https://github.com/PetarV-/GAT,,7,
+1711.05101,task,,image classification,image recognition,1,
+1711.05101,datasets,,CIFAR-10,CIFAR10,5,
+1711.05101,datasets,,ImageNet32x32,downsampled ImageNet|ImageNet 32x32,5,
+1711.05101,baselines,,Adam with L2 regularization,Adam|standard Adam,5,
+1711.05101,baselines,,SGD with momentum and L2 regularization,SGD|SGD with momentum,6,
+1711.05101,metrics,,top-1 test error,test error|top-1 error,6,
+1711.05101,metrics,,top-5 test error,top-5 error,8,ImageNet32x32
+1711.05101,metrics,,training loss,cross-entropy loss|training loss,7,
+1711.05101,hyperparameters,optimizer,AdamW,Adam with decoupled weight decay|SGDW,3,
+1711.05101,hyperparameters,batch_size,128,,5,
+1711.05101,hyperparameters,epochs,100,,5,
+1711.05101,hyperparameters,epochs,1800,,7,long runs
+1711.05101,hyperparameters,learning_rate,0.001,α,7,initial learning rate for long runs
+1711.05101,hyperparameters,adam_beta1,0.9,β1,3,
+1711.05101,hyperparameters,adam_beta2,0.999,β2,3,
+1711.05101,hyperparameters,adam_epsilon,1e-8,ϵ|epsilon,3,
+1711.05101,hyperparameters,lr_schedule,cosine annealing,cosine,6,
+1711.05101,hyperparameters,lr_drop_epochs,30,step-drop,5,drops at epochs 30 60 80
+1711.05101,hyperparameters,lr_drop_epochs,60,step-drop,5,
+1711.05101,hyperparameters,lr_drop_epochs,80,step-drop,5,
+1711.05101,hyperparameters,weight_decay,0.025,normalized weight decay|λnorm,14,normalized weight decay
+1711.05101,hyperparameters,weight_decay,0.05,normalized weight decay|λnorm,14,normalized weight decay
+1711.05101,hyperparameters,restart_period,100,T0|Ti=0,13,warm restarts example setting
+1711.05101,hyperparameters,restart_mult,2,Tmult,13,warm restarts example setting
+1711.05101,hyperparameters,num_layers,26,depth,5,26 2x64d ResNet
+1711.05101,hyperparameters,hidden_size,64,width,5,26 2x64d ResNet
+1711.05101,hyperparameters,hidden_size,96,width,5,26 2x96d ResNet
+1711.05101,hyperparameters,model_size,11.6M,parameters,5,26 2x64d ResNet
+1711.05101,hyperparameters,model_size,25.6M,parameters,5,26 2x96d ResNet
+1711.05101,code_urls,,https://github.com/loshchil/AdamW-and-SGDW,,1,
+1801.01290,task,,continuous control,deep reinforcement learning|reinforcement learning|continuous control tasks,6,
+1801.01290,datasets,,OpenAI Gym MuJoCo tasks,OpenAI gym|MuJoCo|Hopper-v1|Walker2d-v1|HalfCheetah-v1|Ant-v1|Humanoid-v1,6,
+1801.01290,datasets,,Humanoid (rllab),rllab|rllab Humanoid,6,
+1801.01290,baselines,,DDPG,deep deterministic policy gradient,6,
+1801.01290,baselines,,PPO,proximal policy optimization,6,
+1801.01290,baselines,,soft Q-learning,SQL,6,
+1801.01290,baselines,,TD3,twin delayed deep deterministic policy gradient,6,
+1801.01290,baselines,,Trust-PCL,trust region path consistency learning,6,appendix E
+1801.01290,metrics,,average return,total average return|return,7,
+1801.01290,hyperparameters,optimizer,Adam,,13,
+1801.01290,hyperparameters,learning_rate,3e-4,3 · 10−4,13,
+1801.01290,hyperparameters,gamma,0.99,discount|γ,13,
+1801.01290,hyperparameters,replay_buffer_size,1e6,106|replay buffer size,13,
+1801.01290,hyperparameters,num_layers,2,hidden layers,13,all networks
+1801.01290,hyperparameters,hidden_size,256,hidden units per layer,13,
+1801.01290,hyperparameters,batch_size,256,samples per minibatch,13,
+1801.01290,hyperparameters,target_smoothing_tau,0.005,τ|target smoothing coefficient,13,SAC
+1801.01290,hyperparameters,target_smoothing_tau,1,τ,13,SAC hard target update
+1801.01290,hyperparameters,target_update_interval,1,,13,SAC
+1801.01290,hyperparameters,target_update_interval,1000,,13,SAC hard target update
+1801.01290,hyperparameters,gradient_steps,1,,13,SAC; hard-update humanoids
+1801.01290,hyperparameters,gradient_steps,4,,13,hard target update except humanoids
+1801.01290,hyperparameters,reward_scale,5,,13,Hopper Walker2d HalfCheetah Ant
+1801.01290,hyperparameters,reward_scale,20,,13,Humanoid-v1
+1801.01290,hyperparameters,reward_scale,10,,13,Humanoid (rllab); also Fig. 3 sweep
+1801.01290,hyperparameters,reward_scale,1,,8,sensitivity sweep (Fig. 3)
+1801.01290,hyperparameters,reward_scale,3,,8,sensitivity sweep (Fig. 3)
+1801.01290,hyperparameters,reward_scale,30,,8,sensitivity sweep (Fig. 3)
+1801.01290,hyperparameters,reward_scale,100,,8,sensitivity sweep (Fig. 3)
+1801.01290,hyperparameters,target_smoothing_tau,0.0001,τ,8,sensitivity sweep (Fig. 3)
+1801.01290,hyperparameters,target_smoothing_tau,0.001,τ,8,sensitivity sweep (Fig. 3)
+1801.01290,hyperparameters,target_smoothing_tau,0.01,τ,8,sensitivity sweep (Fig. 3)
+1801.01290,hyperparameters,target_smoothing_tau,0.1,τ,8,sensitivity sweep (Fig. 3)
+1801.01290,code_urls,,https://github.com/haarnoja/sac,github.com/haarnoja/sac,6,
+1803.03635,task,,neural network pruning,pruning|finding sparse trainable networks,1,
+1803.03635,task,,image classification,,3,
+1803.03635,datasets,,MNIST,,3,
+1803.03635,datasets,,CIFAR10,CIFAR-10,2,
+1803.03635,baselines,,randomly reinitialized networks,random reinitialization|reinitialized,3,
+1803.03635,baselines,,randomly sampled sparse networks,random sparse networks|random pruning,2,
+1803.03635,baselines,,one-shot pruning,,2,
+1803.03635,baselines,,unpruned network,original network|dense network,3,
+1803.03635,metrics,,test accuracy,accuracy,2,
+1803.03635,metrics,,early-stopping iteration,iteration of early-stopping,1,
+1803.03635,hyperparameters,architecture,Lenet-300-100,Lenet,3,MNIST
+1803.03635,hyperparameters,architecture,Conv-2,,3,CIFAR10
+1803.03635,hyperparameters,architecture,Conv-4,,3,CIFAR10
+1803.03635,hyperparameters,architecture,Conv-6,,3,CIFAR10
+1803.03635,hyperparameters,architecture,Resnet-18,ResNet-18,3,CIFAR10
+1803.03635,hyperparameters,architecture,VGG-19,,3,CIFAR10
+1803.03635,hyperparameters,train_steps,50K,50K iterations,3,Lenet
+1803.03635,hyperparameters,train_steps,20K,,3,Conv-2
+1803.03635,hyperparameters,train_steps,25K,,3,Conv-4
+1803.03635,hyperparameters,train_steps,30K,,3,Conv-6 and Resnet-18
+1803.03635,hyperparameters,train_steps,112K,,3,VGG-19
+1803.03635,hyperparameters,batch_size,60,,3,Lenet and Conv-2/4/6
+1803.03635,hyperparameters,batch_size,128,,3,Resnet-18
+1803.03635,hyperparameters,batch_size,64,,3,VGG-19
+1803.03635,hyperparameters,optimizer,Adam,,3,Lenet and Conv-2/4/6
+1803.03635,hyperparameters,optimizer,SGD with momentum,SGD|Momentum 0.9,3,Resnet-18 and VGG-19
+1803.03635,hyperparameters,learning_rate,1.2e-3,Adam 1.2e-3,3,Lenet
+1803.03635,hyperparameters,learning_rate,2e-4,Adam 2e-4,3,Conv-2
+1803.03635,hyperparameters,learning_rate,3e-4,Adam 3e-4,3,Conv-4 and Conv-6
+1803.03635,hyperparameters,learning_rate,0.1,SGD 0.1-0.01-0.001,3,Resnet-18 and VGG-19 schedule
+1803.03635,hyperparameters,learning_rate,0.01,,3,
+1803.03635,hyperparameters,learning_rate,0.001,,3,
+1803.03635,hyperparameters,learning_rate,0.03,rate 0.03,8,Resnet-18 with warmup
+1803.03635,hyperparameters,momentum,0.9,,3,
+1803.03635,hyperparameters,pruning_rate,20%,fc20%,3,fully-connected layers
+1803.03635,hyperparameters,pruning_rate,10%,conv10%,3,Conv-2 and Conv-4 conv layers
+1803.03635,hyperparameters,pruning_rate,15%,conv15%,3,Conv-6 conv layers
+1803.03635,hyperparameters,pruning_rate,0%,fc0%,3,Resnet-18 and VGG-19 output layer
+1803.03635,hyperparameters,initialization,Gaussian Glorot,Glorot,3,
+1803.03635,hyperparameters,hidden_size,300,"300, 100, 10",3,Lenet FC layers
+1803.03635,hyperparameters,hidden_size,100,,3,Lenet FC layers
+1803.03635,hyperparameters,hidden_size,256,"256, 256, 10",3,Conv-2/4/6 FC layers
+1803.03635,hyperparameters,dropout,0.5,dropout rate of 0.5,6,
+1803.03635,hyperparameters,warmup_steps,10000,k = 10000|warmup 10K,8,VGG-19
+1803.03635,hyperparameters,warmup_steps,20000,warmup 20K,8,Resnet-18
+1910.10683,task,,transfer learning for NLP,text-to-text transfer learning|unified text-to-text framework,1,
+1910.10683,task,,machine translation,translation,7,
+1910.10683,task,,question answering,,7,
+1910.10683,task,,abstractive summarization,summarization,7,
+1910.10683,task,,text classification,,7,
+1910.10683,datasets,,C4,Colossal Clean Crawled Corpus,7,pre-training
+1910.10683,datasets,,GLUE,,7,
+1910.10683,datasets,,SuperGLUE,,7,
+1910.10683,datasets,,CNN/Daily Mail,CNN/DM|CNNDM,8,
+1910.10683,datasets,,SQuAD,,8,
+1910.10683,datasets,,WMT English to German,WMT En-De|WMT EnDe,8,
+1910.10683,datasets,,WMT English to French,WMT En-Fr|WMT EnFr,8,
+1910.10683,datasets,,WMT English to Romanian,WMT En-Ro|WMT EnRo,8,
+1910.10683,datasets,,DPR,Definite Pronoun Resolution,8,added to SuperGLUE mixture
+1910.10683,datasets,,Unfiltered C4,,25,pre-training data ablation
+1910.10683,datasets,,RealNews-like,,26,pre-training data ablation
+1910.10683,datasets,,WebText-like,,26,pre-training data ablation
+1910.10683,datasets,,Wikipedia,,26,pre-training data ablation
+1910.10683,datasets,,Wikipedia + Toronto Books Corpus,Wikipedia + TBC|TBC,26,pre-training data ablation
+1910.10683,datasets,,CoLA,,7,GLUE/SuperGLUE task
+1910.10683,datasets,,SST-2,,7,GLUE/SuperGLUE task
+1910.10683,datasets,,MRPC,,7,GLUE/SuperGLUE task
+1910.10683,datasets,,STS-B,,7,GLUE/SuperGLUE task
+1910.10683,datasets,,QQP,,7,GLUE/SuperGLUE task
+1910.10683,datasets,,MNLI,,7,GLUE/SuperGLUE task
+1910.10683,datasets,,QNLI,,7,GLUE/SuperGLUE task
+1910.10683,datasets,,RTE,,7,GLUE/SuperGLUE task
+1910.10683,datasets,,CB,,7,GLUE/SuperGLUE task
+1910.10683,datasets,,WNLI,,7,GLUE/SuperGLUE task
+1910.10683,datasets,,WSC,,7,GLUE/SuperGLUE task
+1910.10683,datasets,,COPA,,7,GLUE/SuperGLUE task
+1910.10683,datasets,,WiC,,7,GLUE/SuperGLUE task
+1910.10683,datasets,,MultiRC,,7,GLUE/SuperGLUE task
+1910.10683,datasets,,ReCoRD,,7,GLUE/SuperGLUE task
+1910.10683,datasets,,BoolQ,,7,GLUE/SuperGLUE task
+1910.10683,baselines,,previous state of the art,Previous best,39,Table 14 first row
+1910.10683,baselines,,ALBERT,Lan et al. 2019,38,
+1910.10683,baselines,,RoBERTa,Liu et al. 2019c,39,Table 14 source
+1910.10683,baselines,,FreeLB,Zhu et al. 2019,39,Table 14 source
+1910.10683,baselines,,XLM,Lample and Conneau 2019,39,Table 14 source
+1910.10683,baselines,,UniLM,Dong et al. 2019,39,Table 14 source
+1910.10683,baselines,,back-translation,Edunov et al. 2018,39,Table 14 source
+1910.10683,baselines,,BERT-base,BERTBASE,14,
+1910.10683,metrics,,GLUE average score,GLUE|average score,14,
+1910.10683,metrics,,SuperGLUE average score,SGLUE,14,
+1910.10683,metrics,,BLEU,SacreBLEU,14,
+1910.10683,metrics,,ROUGE-2-F,ROUGE-2,14,
+1910.10683,metrics,,ROUGE-1,ROUGE-1-F,39,
+1910.10683,metrics,,ROUGE-L,ROUGE-L-F,39,
+1910.10683,metrics,,exact match,EM,14,
+1910.10683,metrics,,F1,,39,
+1910.10683,metrics,,accuracy,,39,
+1910.10683,metrics,,Matthews correlation,Matthew's,39,CoLA
+1910.10683,metrics,,Pearson correlation,Pearson,39,STS-B
+1910.10683,metrics,,Spearman correlation,Spearman,39,STS-B
+1910.10683,hyperparameters,num_layers,12,12 blocks,11,baseline encoder and decoder each
+1910.10683,hyperparameters,ffn_size,3072,dff = 3072,11,baseline
+1910.10683,hyperparameters,head_dim,64,dkv = 64,11,baseline
+1910.10683,hyperparameters,num_heads,12,12 heads,11,baseline
+1910.10683,hyperparameters,hidden_size,768,dmodel = 768,11,baseline
+1910.10683,hyperparameters,model_size,220M,220 million parameters,11,baseline / T5-Base
+1910.10683,hyperparameters,dropout,0.1,,11,
+1910.10683,hyperparameters,optimizer,AdaFactor,Adafactor,11,
+1910.10683,hyperparameters,train_steps,524288,2^19,11,baseline pre-training
+1910.10683,hyperparameters,max_seq_length,512,maximum sequence length,11,
+1910.10683,hyperparameters,batch_size,128,128 sequences,11,baseline pre-training and fine-tuning
+1910.10683,hyperparameters,tokens_per_batch,65536,2^16,12,
+1910.10683,hyperparameters,lr_schedule,inverse square root,,12,pre-training
+1910.10683,hyperparameters,warmup_steps,10000,10^4,12,
+1910.10683,hyperparameters,learning_rate,0.01,,12,pre-training during warm-up
+1910.10683,hyperparameters,train_steps,262144,2^18,12,fine-tuning
+1910.10683,hyperparameters,learning_rate,0.001,,12,fine-tuning constant
+1910.10683,hyperparameters,checkpoint_interval,5000,"every 5,000 steps",12,
+1910.10683,hyperparameters,vocab_size,32000,"32,000 wordpieces",12,SentencePiece
+1910.10683,hyperparameters,pretrain_tokens,34B,2^35 tokens,12,baseline
+1910.10683,hyperparameters,corruption_rate,0.15,15%,23,span corruption
+1910.10683,hyperparameters,mean_span_length,3,,36,final T5 objective
+1910.10683,hyperparameters,train_steps,1000000,1 million steps,36,final T5 pre-training
+1910.10683,hyperparameters,batch_size,2048,2^11 sequences,36,final T5 pre-training
+1910.10683,hyperparameters,pretrain_tokens,1T,1 trillion tokens,36,final T5
+1910.10683,hyperparameters,hidden_size,512,dmodel = 512,36,T5-Small
+1910.10683,hyperparameters,ffn_size,2048,"dff = 2,048",36,T5-Small
+1910.10683,hyperparameters,num_heads,8,8-headed,36,T5-Small
+1910.10683,hyperparameters,num_layers,6,,36,T5-Small
+1910.10683,hyperparameters,model_size,60M,60 million parameters,36,T5-Small
+1910.10683,hyperparameters,hidden_size,1024,"dmodel = 1,024",36,T5-Large / 3B / 11B
+1910.10683,hyperparameters,ffn_size,4096,"dff = 4,096",36,T5-Large
+1910.10683,hyperparameters,num_heads,16,16-headed,36,T5-Large
+1910.10683,hyperparameters,num_layers,24,,36,T5-Large / 3B / 11B
+1910.10683,hyperparameters,model_size,770M,770 million parameters,36,T5-Large
+1910.10683,hyperparameters,head_dim,128,dkv = 128,37,T5-3B / 11B
+1910.10683,hyperparameters,ffn_size,16384,"dff = 16,384",37,T5-3B
+1910.10683,hyperparameters,num_heads,32,32-headed,37,T5-3B
+1910.10683,hyperparameters,model_size,3B,2.8 billion|3 billion,37,T5-3B
+1910.10683,hyperparameters,ffn_size,65536,"dff = 65,536",37,T5-11B
+1910.10683,hyperparameters,num_heads,128,128-headed,37,T5-11B
+1910.10683,hyperparameters,model_size,11B,11 billion parameters,37,T5-11B
+1910.10683,hyperparameters,batch_size,8,8 length-512 sequences,37,low-resource GLUE/SuperGLUE fine-tuning
+1910.10683,hyperparameters,checkpoint_interval,1000,"every 1,000 steps",37,
+1910.10683,hyperparameters,beam_size,4,beam width,38,
+1910.10683,hyperparameters,length_penalty,0.6,α = 0.6,38,WMT and CNN/DM
+1910.10683,compute,,TPU v3,Cloud TPU Pods|1024 TPU v3 chips,5,
+1910.10683,code_urls,,https://github.com/google-research/text-to-text-transfer-transformer,github.com/google-research/text-to-text-transfer-transformer,1,
+2001.08361,task,,language modeling,autoregressive language modeling|neural language models,1,
+2001.08361,task,,scaling laws,empirical scaling laws|scaling of language model performance,1,
+2001.08361,datasets,,WebText2,WebText,6,
+2001.08361,datasets,,Books Corpus,BookCorpus,7,evaluation
+2001.08361,datasets,,Common Crawl,,7,evaluation
+2001.08361,datasets,,English Wikipedia,Wikipedia,7,evaluation
+2001.08361,datasets,,Internet Books,,7,evaluation
+2001.08361,baselines,,LSTM,LSTMs,6,
+2001.08361,baselines,,Universal Transformer,recurrent Transformers,6,
+2001.08361,metrics,,cross-entropy loss,test loss|loss in nats|L,6,
+2001.08361,metrics,,compute (PF-days),PF-days|compute,6,
+2001.08361,metrics,,critical batch size,Bcrit,6,
+2001.08361,hyperparameters,vocab_size,50257,nvocab,6,
+2001.08361,hyperparameters,max_seq_length,1024,nctx|context,6,
+2001.08361,hyperparameters,optimizer,Adam,,7,
+2001.08361,hyperparameters,optimizer,Adafactor,,7,models above 1B parameters
+2001.08361,hyperparameters,train_steps,2.5 × 10^5,250000|2.5 × 105,7,
+2001.08361,hyperparameters,batch_size,512,512 sequences|2^19 tokens|219,7,
+2001.08361,hyperparameters,warmup_steps,3000,linear warmup,7,
+2001.08361,hyperparameters,lr_schedule,cosine decay to zero,cosine,7,
+2001.08361,hyperparameters,model_size,768 to 1.5 billion,non-embedding parameters,7,range studied
+2001.08361,hyperparameters,dataset_size,22 million to 23 billion tokens,,7,range studied
+2001.08361,hyperparameters,model_shape,"(36, 1280)","(nlayer, nembd)",9,data-scaling experiments
+2001.08361,hyperparameters,dropout,0.1,10% dropout,11,added in adjudication
+2003.10555,task,,language representation pre-training,pre-training text encoders|pre-training,1,
+2003.10555,task,,natural language understanding,GLUE|language understanding,4,
+2003.10555,task,,question answering,SQuAD|extractive question answering,4,
+2003.10555,datasets,,GLUE,General Language Understanding Evaluation|CoLA|SST|MRPC|STS|QQP|MNLI|QNLI|RTE|WNLI,4,
+2003.10555,datasets,,SQuAD 1.1,SQuAD|SQuAD v1.1,4,
+2003.10555,datasets,,SQuAD 2.0,SQuAD|SQuAD v2.0,4,
+2003.10555,datasets,,Wikipedia and BooksCorpus,Wikipedia|BooksCorpus|BERT data|3.3 Billion tokens,4,pre-training
+2003.10555,datasets,,XLNet pre-training data,ClueWeb|CommonCrawl|Gigaword|33B tokens,4,ELECTRA-Large pre-training
+2003.10555,baselines,,BERT,BERT-Small|BERT-Base|BERT-Large,6,
+2003.10555,baselines,,ELMo,,6,
+2003.10555,baselines,,GPT,,6,
+2003.10555,baselines,,RoBERTa,RoBERTa-100K|RoBERTa-500K,7,
+2003.10555,baselines,,XLNet,XLNet-Base,7,
+2003.10555,baselines,,ALBERT,,7,
+2003.10555,baselines,,SpanBERT,,8,
+2003.10555,baselines,,TinyBERT,,15,
+2003.10555,baselines,,MobileBERT,,15,
+2003.10555,metrics,,GLUE score,average GLUE score|Avg.|GLUE,4,
+2003.10555,metrics,,Spearman correlation,,4,STS
+2003.10555,metrics,,Matthews correlation,,4,CoLA
+2003.10555,metrics,,accuracy,,4,other GLUE tasks
+2003.10555,metrics,,Exact Match,EM,4,SQuAD
+2003.10555,metrics,,F1,F1 score,4,SQuAD
+2003.10555,metrics,,pre-training FLOPs,train FLOPs|compute,6,
+2003.10555,hyperparameters,num_layers,12,layers,14,Small and Base
+2003.10555,hyperparameters,num_layers,24,layers,14,Large
+2003.10555,hyperparameters,hidden_size,256,,14,Small
+2003.10555,hyperparameters,hidden_size,768,,14,Base
+2003.10555,hyperparameters,hidden_size,1024,,14,Large
+2003.10555,hyperparameters,ffn_size,1024,FFN inner hidden size,14,Small
+2003.10555,hyperparameters,ffn_size,3072,FFN inner hidden size,14,Base
+2003.10555,hyperparameters,ffn_size,4096,FFN inner hidden size,14,Large
+2003.10555,hyperparameters,num_heads,4,attention heads,14,Small
+2003.10555,hyperparameters,num_heads,12,attention heads,14,Base
+2003.10555,hyperparameters,num_heads,16,attention heads,14,Large
+2003.10555,hyperparameters,embedding_size,128,,14,Small
+2003.10555,hyperparameters,generator_size,1/4,generator size multiplier,14,Small and Large
+2003.10555,hyperparameters,generator_size,1/3,generator size multiplier,14,Base
+2003.10555,hyperparameters,mask_prob,15%,mask percent|0.15,14,Small and Base
+2003.10555,hyperparameters,mask_prob,25%,mask percent|0.25,14,Large
+2003.10555,hyperparameters,warmup_steps,10000,,14,pre-training
+2003.10555,hyperparameters,learning_rate,5e-4,,14,Small pre-training
+2003.10555,hyperparameters,learning_rate,2e-4,,14,Base and Large pre-training
+2003.10555,hyperparameters,adam_epsilon,1e-6,Adam ϵ,14,
+2003.10555,hyperparameters,adam_beta1,0.9,Adam β1,14,
+2003.10555,hyperparameters,adam_beta2,0.999,Adam β2,14,
+2003.10555,hyperparameters,dropout,0.1,,14,
+2003.10555,hyperparameters,attention_dropout,0.1,,14,
+2003.10555,hyperparameters,weight_decay,0.01,,14,pre-training
+2003.10555,hyperparameters,batch_size,128,,14,Small pre-training
+2003.10555,hyperparameters,batch_size,256,,14,Base pre-training
+2003.10555,hyperparameters,batch_size,2048,,14,Large pre-training
+2003.10555,hyperparameters,train_steps,1M,1000000,14,ELECTRA-Small
+2003.10555,hyperparameters,train_steps,766K,766000,14,ELECTRA-Base
+2003.10555,hyperparameters,train_steps,400K,400000,14,ELECTRA-Large
+2003.10555,hyperparameters,train_steps,1.75M,1750000,14,ELECTRA-1.75M
+2003.10555,hyperparameters,train_steps,4e6,4M,15,ELECTRA-Base++ and Small++
+2003.10555,hyperparameters,max_seq_length,128,sequence length,6,Small
+2003.10555,hyperparameters,max_seq_length,512,sequence length,6,Base and Large; Small++
+2003.10555,hyperparameters,disc_loss_weight,50,λ,13,
+2003.10555,hyperparameters,learning_rate,3e-4,,14,Small fine-tuning
+2003.10555,hyperparameters,learning_rate,1e-4,,14,Base fine-tuning
+2003.10555,hyperparameters,learning_rate,5e-5,,14,Large fine-tuning
+2003.10555,hyperparameters,learning_rate,2e-5,,13,RTE test-set fine-tuning
+2003.10555,hyperparameters,layerwise_lr_decay,0.8,layerwise LR decay,14,Base and Small fine-tuning
+2003.10555,hyperparameters,layerwise_lr_decay,0.9,layerwise LR decay,14,Large fine-tuning
+2003.10555,hyperparameters,warmup_ratio,0.1,warmup fraction,14,fine-tuning
+2003.10555,hyperparameters,weight_decay,0,,14,fine-tuning
+2003.10555,hyperparameters,batch_size,32,,14,fine-tuning
+2003.10555,hyperparameters,epochs,10,train epochs,14,RTE and STS
+2003.10555,hyperparameters,epochs,2,train epochs,14,SQuAD
+2003.10555,hyperparameters,epochs,3,train epochs,14,other tasks
+2003.10555,hyperparameters,lr_schedule,linear,learning rate decay,14,
+2003.10555,compute,,1 V100 GPU (4 days),V100|4d on 1 V100 GPU,6,ELECTRA-Small
+2003.10555,compute,,16 TPUv3s (4 days),TPUv3|4d on 16 TPUv3s,6,ELECTRA-Base
+2003.10555,code_urls,,https://github.com/google-research/electra,,2,
+2003.10555,hyperparameters,train_steps,1.5M,1.5M steps,6,BERT-Small at equal FLOPs; added in adjudication
+2003.10555,hyperparameters,train_steps,500k,500k steps,4,ablation models; added in adjudication
+2005.11401,task,,open-domain question answering,open-domain QA|question answering,4,
+2005.11401,task,,abstractive question answering,abstractive QA|MS-MARCO NLG,4,
+2005.11401,task,,Jeopardy question generation,question generation,5,
+2005.11401,task,,fact verification,FEVER|claim verification,5,
+2005.11401,datasets,,Natural Questions,NQ,4,
+2005.11401,datasets,,TriviaQA,TQA|TQA Wiki,4,
+2005.11401,datasets,,WebQuestions,WQ,4,
+2005.11401,datasets,,CuratedTrec,CT,4,
+2005.11401,datasets,,MS MARCO,MSMARCO NLG task v2.1|MS-MARCO|Open MS-MARCO,4,
+2005.11401,datasets,,SearchQA Jeopardy questions,Jeopardy|SearchQA|Jeopardy Question Generation,5,
+2005.11401,datasets,,FEVER,FEVER-3-way|FEVER-2-way,5,
+2005.11401,datasets,,Wikipedia December 2018 dump,Wikipedia|21M documents,4,non-parametric memory
+2005.11401,datasets,,Wikipedia December 2016 dump,DrQA Wikipedia dump,7,index hot-swapping
+2005.11401,baselines,,T5-11B,T5|closed-book T5,6,
+2005.11401,baselines,,T5-11B+SSM,T5 + SSM|salient span masking,6,
+2005.11401,baselines,,REALM,,6,
+2005.11401,baselines,,DPR,dense passage retrieval,6,
+2005.11401,baselines,,BART,BART-large,6,
+2005.11401,baselines,,Thorne and Vlachos (RoBERTa),Thorne and Vlachos|RoBERTa,7,FEVER-2
+2005.11401,baselines,,state-of-the-art pipeline models,SotA,6,MS-MARCO and FEVER-3 SotA
+2005.11401,baselines,,BM25 retriever,BM25|RAG-BM25,7,ablation retriever
+2005.11401,baselines,,T5-large,,19,parameters comparison
+2005.11401,metrics,,Exact Match,EM,4,
+2005.11401,metrics,,BLEU-1,B-1|Bleu,6,
+2005.11401,metrics,,Q-BLEU-1,QB-1|Q-BLEU,5,
+2005.11401,metrics,,ROUGE-L,R-L|Rouge-L,6,
+2005.11401,metrics,,label accuracy,accuracy,5,FEVER
+2005.11401,metrics,,human evaluation of factuality and specificity,factuality|specificity|human assessments,5,
+2005.11401,metrics,,distinct tri-gram ratio,generation diversity|distinct n-grams,7,
+2005.11401,metrics,,answer recall @ K,retrieval recall,8,
+2005.11401,hyperparameters,optimizer,Adam,,4,
+2005.11401,hyperparameters,top_k,5,k|retrieved documents,4,training
+2005.11401,hyperparameters,top_k,10,k|retrieved documents,4,training; MS-MARCO and Jeopardy test
+2005.11401,hyperparameters,top_k,15,retrieved documents,17,RAG-Token open-domain QA test
+2005.11401,hyperparameters,top_k,50,retrieved documents,17,RAG-Sequence open-domain QA test
+2005.11401,hyperparameters,beam_size,4,beam size of four,17,generation tasks
+2005.11401,hyperparameters,chunk_size,100,100-word chunks,4,Wikipedia documents
+2005.11401,hyperparameters,model_size,626M,trainable parameters,18,
+2005.11401,hyperparameters,model_size,400M,BART-large,3,generator
+2005.11401,hyperparameters,model_size,110M,BERT-base,18,each DPR encoder
+2005.11401,compute,,8 NVIDIA V100 GPUs (32GB),V100|8 V100,17,
+2005.11401,compute,,100 GB CPU memory for the index,100 GB|36GB,17,
+2005.11401,code_urls,,https://github.com/huggingface/transformers/blob/master/examples/rag/,huggingface transformers rag|https://github.com/huggingface/transformers,2,
+2005.11401,code_urls,,https://huggingface.co/rag/,,2,demo
+2005.11401,task,,knowledge-intensive NLP tasks,knowledge-intensive tasks,1,added in adjudication
+2006.11477,task,,speech recognition,automatic speech recognition|ASR|low-resource speech recognition,1,
+2006.11477,task,,phoneme recognition,TIMIT phoneme recognition,4,
+2006.11477,task,,self-supervised speech representation learning,self-supervised learning of speech representations|pre-training,1,
+2006.11477,datasets,,Librispeech,LS-960|Librispeech 960h|train-clean-100,4,
+2006.11477,datasets,,LibriVox,LV-60k,4,53.2k hours unlabeled
+2006.11477,datasets,,Libri-light,train-10h|train-1h|train-10min,4,low-resource labeled splits
+2006.11477,datasets,,TIMIT,,4,
+2006.11477,datasets,,Librispeech LM corpus,LM corpus,5,language model training
+2006.11477,baselines,,Discrete BERT,,6,
+2006.11477,baselines,,iterative pseudo-labeling,Iter. pseudo-labeling,6,
+2006.11477,baselines,,Hybrid DNN/HMM,,6,
+2006.11477,baselines,,TTS data augmentation,TTS data augm.,6,
+2006.11477,baselines,,Noisy student,iterative self-training,6,
+2006.11477,baselines,,CTC Transformer,CTC Transf|CTC Transf. + PL,7,
+2006.11477,baselines,,S2S Transformer,S2S Transf.|S2S Transf. + PL,7,
+2006.11477,baselines,,Transformer Transducer,Transf. Transducer,7,
+2006.11477,baselines,,ContextNet,,7,
+2006.11477,baselines,,Conformer,,7,
+2006.11477,baselines,,LARGE from scratch,supervised training from scratch,7,
+2006.11477,baselines,,CNN + TD-filterbanks,,8,TIMIT
+2006.11477,baselines,,PASE+,,8,TIMIT
+2006.11477,baselines,,Li-GRU + fMLLR,,8,TIMIT
+2006.11477,baselines,,wav2vec,,8,TIMIT
+2006.11477,baselines,,vq-wav2vec,,8,TIMIT
+2006.11477,metrics,,word error rate,WER,5,
+2006.11477,metrics,,phoneme error rate,PER,8,
+2006.11477,hyperparameters,mask_prob,0.065,p|masking probability,4,pre-training
+2006.11477,hyperparameters,mask_length,10,M,4,
+2006.11477,hyperparameters,mask_prob,0.075,p,8,ablation pre-training; 10 min and 1 hour fine-tuning
+2006.11477,hyperparameters,num_layers,12,transformer blocks,4,BASE
+2006.11477,hyperparameters,num_layers,24,transformer blocks,4,LARGE
+2006.11477,hyperparameters,hidden_size,768,model dimension,4,BASE
+2006.11477,hyperparameters,hidden_size,1024,model dimension,4,LARGE
+2006.11477,hyperparameters,ffn_size,3072,inner dimension,4,BASE
+2006.11477,hyperparameters,ffn_size,4096,inner dimension,4,LARGE
+2006.11477,hyperparameters,num_heads,8,attention heads,4,BASE
+2006.11477,hyperparameters,num_heads,16,attention heads,4,LARGE
+2006.11477,hyperparameters,encoder_channels,512,channels,4,feature encoder
+2006.11477,hyperparameters,dropout,0.1,,4,
+2006.11477,hyperparameters,layer_drop,0.05,LayerDrop,4,BASE
+2006.11477,hyperparameters,layer_drop,0.2,LayerDrop,4,LARGE pre-training
+2006.11477,hyperparameters,layer_drop,0.1,LayerDrop,13,LARGE fine-tuning
+2006.11477,hyperparameters,optimizer,Adam,,5,
+2006.11477,hyperparameters,warmup_ratio,0.08,8%,5,pre-training
+2006.11477,hyperparameters,learning_rate,5e-4,peak,5,BASE pre-training
+2006.11477,hyperparameters,learning_rate,3e-4,peak,5,LARGE pre-training
+2006.11477,hyperparameters,train_steps,250k,updates,5,LARGE
+2006.11477,hyperparameters,train_steps,400k,updates,5,BASE
+2006.11477,hyperparameters,train_steps,600k,updates,5,LARGE on LV-60k
+2006.11477,hyperparameters,diversity_loss_weight,0.1,α,5,
+2006.11477,hyperparameters,codebook_groups,2,G,5,
+2006.11477,hyperparameters,codebook_entries,320,V,5,
+2006.11477,hyperparameters,gumbel_temperature_min,0.5,τ,5,BASE
+2006.11477,hyperparameters,gumbel_temperature_min,0.1,τ,5,LARGE
+2006.11477,hyperparameters,temperature,0.1,κ|contrastive temperature,5,
+2006.11477,hyperparameters,num_distractors,100,K|distractors,5,
+2006.11477,hyperparameters,learning_rate,2e-5,,5,Libri-light fine-tuning
+2006.11477,hyperparameters,learning_rate,3e-5,,5,Libri-light fine-tuning
+2006.11477,hyperparameters,learning_rate,1e-4,,5,BASE fine-tuning on 960h
+2006.11477,hyperparameters,lr_schedule,tri-state,tri-state rate schedule,5,fine-tuning
+2006.11477,hyperparameters,freeze_updates,10k,10k updates,5,only output classifier trained
+2006.11477,hyperparameters,beam_size,50,beam,5,4-gram LM model selection; Transformer LM tuning
+2006.11477,hyperparameters,beam_size,500,beam,5,4-gram LM tuning; Transformer LM test
+2006.11477,hyperparameters,beam_size,1500,beam,5,n-gram LM test
+2006.11477,hyperparameters,lm_weight,2,LM weight,5,model selection
+2006.11477,hyperparameters,word_insertion_penalty,-1,,5,model selection
+2006.11477,hyperparameters,channel_mask_prob,0.008,,13,10 min and 100 hours
+2006.11477,hyperparameters,channel_mask_prob,0.004,,13,1 hour and 10 hours
+2006.11477,hyperparameters,channel_mask_prob,0.0016,,13,960 hours
+2006.11477,hyperparameters,channel_mask_prob,0.012,,13,TIMIT
+2006.11477,hyperparameters,mask_prob,0.05,timestep mask prob,13,100 and 960 hours fine-tuning
+2006.11477,hyperparameters,train_steps,12k,updates,13,10 min fine-tuning
+2006.11477,hyperparameters,train_steps,13k,updates,13,1 hour fine-tuning
+2006.11477,hyperparameters,train_steps,20k,updates,13,10 hours fine-tuning
+2006.11477,hyperparameters,train_steps,50k,updates,13,100 hours fine-tuning
+2006.11477,hyperparameters,train_steps,320k,updates,13,960 hours fine-tuning
+2006.11477,hyperparameters,train_steps,40k,updates,13,TIMIT fine-tuning
+2006.11477,hyperparameters,model_size,95M,parameters,6,BASE
+2006.11477,hyperparameters,model_size,317M,parameters,6,LARGE
+2006.11477,compute,,64 V100 GPUs for 1.6 days,V100|64 V100 GPUs,4,BASE pre-training
+2006.11477,compute,,128 V100 GPUs for 2.3 / 5.2 days,128 V100 GPUs,4,LARGE pre-training
+2006.11477,compute,,8 / 24 GPUs fine-tuning,8 GPUs|24 GPUs,5,
+2006.11477,code_urls,,https://github.com/pytorch/fairseq,fairseq,1,
+2103.14030,task,,image classification,ImageNet classification,5,
+2103.14030,task,,object detection,COCO object detection,5,
+2103.14030,task,,instance segmentation,,6,
+2103.14030,task,,semantic segmentation,ADE20K segmentation,5,
+2103.14030,datasets,,ImageNet-1K,ImageNet,5,
+2103.14030,datasets,,ImageNet-22K,ImageNet,6,pre-training
+2103.14030,datasets,,COCO 2017,COCO,6,
+2103.14030,datasets,,ADE20K,,7,
+2103.14030,baselines,,RegNetY,RegNet|RegNetY-4G|RegNetY-8G|RegNetY-16G,6,
+2103.14030,baselines,,EfficientNet,EffNet|EffNet-B3|EffNet-B7,6,
+2103.14030,baselines,,ViT,ViT-B/16|ViT-L/16,6,
+2103.14030,baselines,,DeiT,DeiT-S|DeiT-B,6,
+2103.14030,baselines,,BiT ResNet,R-101x3|R-152x4,6,
+2103.14030,baselines,,ResNet-50,R-50|R50,7,
+2103.14030,baselines,,ResNeXt-101,X101-32|X101-64|ResNeXt101-64x4d,7,
+2103.14030,baselines,,RepPointsV2,,7,
+2103.14030,baselines,,GCNet,,7,
+2103.14030,baselines,,RelationNet++,,7,
+2103.14030,baselines,,SpineNet-190,SpineNet,7,
+2103.14030,baselines,,ResNeSt-200,ResNeSt,7,
+2103.14030,baselines,,EfficientDet-D7,EfficientDet,7,
+2103.14030,baselines,,DetectoRS,,7,
+2103.14030,baselines,,YOLOv4 P7,YOLOv4,7,
+2103.14030,baselines,,Copy-paste,,7,
+2103.14030,baselines,,DANet,,7,
+2103.14030,baselines,,DeepLabv3+,DLab.v3+,7,
+2103.14030,baselines,,ACNet,,7,
+2103.14030,baselines,,DNL,,7,
+2103.14030,baselines,,OCRNet,,7,
+2103.14030,baselines,,UperNet ResNet-101,UperNet,7,
+2103.14030,baselines,,SETR,,7,
+2103.14030,baselines,,MLP-Mixer,MLP-Mixer-B/16,11,
+2103.14030,baselines,,ResMLP,ResMLP-S24|ResMLP-B24,11,
+2103.14030,metrics,,top-1 accuracy,ImageNet top-1 acc.|top-1,5,
+2103.14030,metrics,,top-5 accuracy,top-5,8,
+2103.14030,metrics,,box AP,APbox|AP,7,
+2103.14030,metrics,,mask AP,APmask,7,
+2103.14030,metrics,,mIoU,,7,
+2103.14030,metrics,,throughput,images/s|FPS,6,
+2103.14030,metrics,,FLOPs,,6,
+2103.14030,metrics,,parameters,#param.,6,
+2103.14030,hyperparameters,optimizer,AdamW,,5,
+2103.14030,hyperparameters,epochs,300,,5,ImageNet-1K from scratch
+2103.14030,hyperparameters,lr_schedule,cosine decay,cosine,5,ImageNet-1K
+2103.14030,hyperparameters,warmup_epochs,20,linear warm-up,5,ImageNet-1K
+2103.14030,hyperparameters,batch_size,1024,,5,ImageNet-1K and 22K fine-tuning
+2103.14030,hyperparameters,learning_rate,0.001,initial learning rate,5,ImageNet-1K and 22K pre-training
+2103.14030,hyperparameters,weight_decay,0.05,,6,ImageNet-1K and COCO
+2103.14030,hyperparameters,max_grad_norm,1,gradient clipping,9,
+2103.14030,hyperparameters,drop_path,0.2,stochastic depth,9,Swin-T; COCO and ADE20K
+2103.14030,hyperparameters,drop_path,0.3,stochastic depth,9,Swin-S
+2103.14030,hyperparameters,drop_path,0.5,stochastic depth,9,Swin-B
+2103.14030,hyperparameters,drop_path,0.1,stochastic depth,9,higher-resolution fine-tuning
+2103.14030,hyperparameters,epochs,30,,6,fine-tuning
+2103.14030,hyperparameters,learning_rate,1e-5,10−5|constant learning rate,6,fine-tuning
+2103.14030,hyperparameters,weight_decay,1e-8,10−8,6,fine-tuning
+2103.14030,hyperparameters,epochs,90,,6,ImageNet-22K pre-training
+2103.14030,hyperparameters,lr_schedule,linear decay,,6,ImageNet-22K and ADE20K
+2103.14030,hyperparameters,warmup_epochs,5,,6,ImageNet-22K
+2103.14030,hyperparameters,batch_size,4096,,6,ImageNet-22K pre-training
+2103.14030,hyperparameters,weight_decay,0.01,,6,ImageNet-22K and ADE20K
+2103.14030,hyperparameters,learning_rate,0.0001,initial learning rate,6,COCO
+2103.14030,hyperparameters,batch_size,16,,6,COCO; ADE20K (8 GPUs × 2)
+2103.14030,hyperparameters,epochs,36,3x schedule,6,COCO ablation
+2103.14030,hyperparameters,epochs,72,6x schedule,6,COCO system-level
+2103.14030,hyperparameters,learning_rate,6e-5,6 × 10−5,10,ADE20K
+2103.14030,hyperparameters,warmup_steps,1500,iterations,10,ADE20K
+2103.14030,hyperparameters,train_steps,160K,iterations,10,ADE20K
+2103.14030,hyperparameters,image_size,224,2242,9,
+2103.14030,hyperparameters,image_size,384,3842,9,
+2103.14030,hyperparameters,image_size,512,512×512,10,ADE20K Swin-T/S
+2103.14030,hyperparameters,image_size,640,640×640,10,ADE20K Swin-B/L
+2103.14030,hyperparameters,window_size,7,7×7,10,
+2103.14030,hyperparameters,hidden_size,96,C|dim,10,Swin-T and Swin-S
+2103.14030,hyperparameters,hidden_size,128,C|dim,10,Swin-B
+2103.14030,hyperparameters,hidden_size,192,C|dim,10,Swin-L
+2103.14030,hyperparameters,layer_numbers,"{2, 2, 6, 2}",layers,10,Swin-T
+2103.14030,hyperparameters,layer_numbers,"{2, 2, 18, 2}",layers,10,Swin-S/B/L
+2103.14030,hyperparameters,model_size,29M,#param.,6,Swin-T
+2103.14030,hyperparameters,model_size,50M,#param.,6,Swin-S
+2103.14030,hyperparameters,model_size,88M,#param.,6,Swin-B
+2103.14030,hyperparameters,model_size,197M,#param.,6,Swin-L
+2103.14030,compute,,V100 GPU,V100,6,throughput measurement
+2103.14030,compute,,8 GPUs,,10,ADE20K training
+2103.14030,code_urls,,https://github.com/microsoft/Swin-Transformer,,1,
+2103.14030,baselines,,Performer,,8,efficient attention comparison; added in adjudication
+2104.08821,task,,sentence embedding learning,sentence embeddings|universal sentence embeddings,1,
+2104.08821,task,,semantic textual similarity,STS,1,
+2104.08821,task,,transfer tasks,sentence classification transfer tasks,2,SentEval
+2104.08821,datasets,,STS12,STS 2012,6,
+2104.08821,datasets,,STS13,STS 2013,6,
+2104.08821,datasets,,STS14,STS 2014,6,
+2104.08821,datasets,,STS15,STS 2015,6,
+2104.08821,datasets,,STS16,STS 2016,6,
+2104.08821,datasets,,STS-B,STS Benchmark,6,
+2104.08821,datasets,,SICK-R,SICK-Relatedness|SICK,6,
+2104.08821,datasets,,English Wikipedia,Wikipedia,3,10^6 sampled sentences for unsupervised SimCSE
+2104.08821,datasets,,SNLI,Stanford NLI,4,
+2104.08821,datasets,,MNLI,MultiNLI,4,
+2104.08821,datasets,,QQP,Quora question pairs,4,supervised data comparison (Table 4)
+2104.08821,datasets,,Flickr30k,,4,supervised data comparison (Table 4)
+2104.08821,datasets,,ParaNMT,,4,supervised data comparison (Table 4)
+2104.08821,datasets,,MR,movie reviews,15,transfer task
+2104.08821,datasets,,CR,customer reviews,15,transfer task
+2104.08821,datasets,,SUBJ,,15,transfer task
+2104.08821,datasets,,MPQA,,15,transfer task
+2104.08821,datasets,,SST-2,SST,15,transfer task
+2104.08821,datasets,,TREC,,15,transfer task
+2104.08821,datasets,,MRPC,,15,transfer task
+2104.08821,baselines,,GloVe embeddings (avg.),GloVe|average GloVe embeddings,7,
+2104.08821,baselines,,BERT first-last avg.,BERTbase (first-last avg.)|BERT,7,
+2104.08821,baselines,,BERT-flow,,7,
+2104.08821,baselines,,BERT-whitening,,7,
+2104.08821,baselines,,IS-BERT,,7,
+2104.08821,baselines,,CT-BERT,,7,
+2104.08821,baselines,,RoBERTa first-last avg.,RoBERTa,7,
+2104.08821,baselines,,RoBERTa-whitening,,7,
+2104.08821,baselines,,DeCLUTR-RoBERTa,DeCLUTR,7,
+2104.08821,baselines,,InferSent,InferSent-GloVe,7,
+2104.08821,baselines,,Universal Sentence Encoder,USE,7,
+2104.08821,baselines,,SBERT,Sentence-BERT,7,
+2104.08821,baselines,,SBERT-flow,,7,
+2104.08821,baselines,,SBERT-whitening,,7,
+2104.08821,baselines,,CT-SBERT,,7,
+2104.08821,baselines,,SRoBERTa,,7,
+2104.08821,baselines,,SRoBERTa-whitening,,7,
+2104.08821,metrics,,Spearman's correlation,Spearman correlation|Spearman's,7,STS
+2104.08821,metrics,,accuracy,transfer accuracy,16,transfer tasks
+2104.08821,hyperparameters,epochs,3,,13,supervised SimCSE
+2104.08821,hyperparameters,epochs,1,one epoch,13,unsupervised SimCSE
+2104.08821,hyperparameters,eval_interval,250,every 250 training steps,13,
+2104.08821,hyperparameters,batch_size,64,,13,grid search; unsup BERT base and large
+2104.08821,hyperparameters,batch_size,128,,13,grid search
+2104.08821,hyperparameters,batch_size,256,,13,grid search
+2104.08821,hyperparameters,batch_size,512,,13,grid search; unsup RoBERTa and supervised
+2104.08821,hyperparameters,learning_rate,1e-5,,13,grid search; Table A.1
+2104.08821,hyperparameters,learning_rate,3e-5,,13,grid search; Table A.1; also p3
+2104.08821,hyperparameters,learning_rate,5e-5,,13,grid search; supervised base
+2104.08821,hyperparameters,dropout,0.1,p = 0.1|dropout probability,4,default dropout from Transformers
+2104.08821,hyperparameters,temperature,0.05,τ = 0.05,15,
+2104.08821,code_urls,,https://github.com/princeton-nlp/SimCSE,github.com/princeton-nlp/SimCSE,1,
+2104.08821,datasets,,ANLI,,5,added in adjudication
+2111.06377,task,,self-supervised visual representation learning,self-supervised learning|masked image modeling|visual pre-training,1,
+2111.06377,task,,image classification,ImageNet classification,6,
+2111.06377,task,,object detection,COCO detection,8,
+2111.06377,task,,instance segmentation,COCO segmentation,8,
+2111.06377,task,,semantic segmentation,ADE20K segmentation,8,
+2111.06377,datasets,,ImageNet-1K,IN1K|ImageNet,4,
+2111.06377,datasets,,COCO,,8,
+2111.06377,datasets,,ADE20K,,8,
+2111.06377,datasets,,iNaturalist 2017,iNat 2017|iNaturalist,8,
+2111.06377,datasets,,iNaturalist 2018,iNat 2018|iNaturalist,8,
+2111.06377,datasets,,iNaturalist 2019,iNat 2019|iNaturalist,8,
+2111.06377,datasets,,Places205,Places,8,
+2111.06377,datasets,,Places365,Places,8,
+2111.06377,datasets,,ImageNet-C,IN-Corruption|IN-C,12,robustness
+2111.06377,datasets,,ImageNet-A,IN-Adversarial|IN-A,12,robustness
+2111.06377,datasets,,ImageNet-R,IN-Rendition,12,robustness
+2111.06377,datasets,,ImageNet-Sketch,IN-Sketch,12,robustness
+2111.06377,baselines,,DINO,,7,
+2111.06377,baselines,,MoCo v3,,7,
+2111.06377,baselines,,BEiT,,7,
+2111.06377,baselines,,supervised pre-training,supervised|training from scratch|supervised ViT,7,
+2111.06377,baselines,,iGPT,iGPT-L|iGPT-XL,12,linear probing
+2111.06377,metrics,,top-1 accuracy,fine-tuning accuracy|accuracy,4,
+2111.06377,metrics,,linear probing accuracy,linear probing|lin,4,
+2111.06377,metrics,,box AP,APbox|AP,8,
+2111.06377,metrics,,mask AP,APmask,8,
+2111.06377,metrics,,mIoU,,8,ADE20K
+2111.06377,metrics,,mean corruption error,mCE,12,IN-C
+2111.06377,metrics,,wall-clock training time,training time|hours,5,
+2111.06377,hyperparameters,mask_ratio,75%,masking ratio|0.75,4,
+2111.06377,hyperparameters,decoder_depth,8,decoder blocks,5,
+2111.06377,hyperparameters,decoder_width,512,decoder width|512-d,5,
+2111.06377,hyperparameters,epochs,800,pre-training epochs,5,ablations
+2111.06377,hyperparameters,epochs,1600,pre-training epochs,7,final models
+2111.06377,hyperparameters,optimizer,AdamW,,11,pre-training and fine-tuning
+2111.06377,hyperparameters,learning_rate,1.5e-4,base learning rate,11,pre-training
+2111.06377,hyperparameters,weight_decay,0.05,,11,pre-training and fine-tuning
+2111.06377,hyperparameters,adam_beta2,0.95,β2,11,pre-training and supervised scratch
+2111.06377,hyperparameters,adam_beta1,0.9,β1,11,
+2111.06377,hyperparameters,batch_size,4096,,11,pre-training and supervised scratch
+2111.06377,hyperparameters,lr_schedule,cosine decay,cosine,11,
+2111.06377,hyperparameters,warmup_epochs,40,,11,pre-training
+2111.06377,hyperparameters,learning_rate,1e-3,base learning rate,11,fine-tuning
+2111.06377,hyperparameters,adam_beta2,0.999,β2,11,fine-tuning
+2111.06377,hyperparameters,layerwise_lr_decay,0.75,layer-wise lr decay,11,fine-tuning
+2111.06377,hyperparameters,batch_size,1024,,11,fine-tuning
+2111.06377,hyperparameters,warmup_epochs,5,,11,fine-tuning
+2111.06377,hyperparameters,epochs,100,training epochs,11,fine-tuning ViT-B; ADE20K
+2111.06377,hyperparameters,epochs,50,training epochs,11,fine-tuning ViT-L/H
+2111.06377,hyperparameters,randaugment,"(9, 0.5)",RandAug,11,
+2111.06377,hyperparameters,label_smoothing,0.1,,11,
+2111.06377,hyperparameters,mixup,0.8,,11,
+2111.06377,hyperparameters,cutmix,1.0,,11,
+2111.06377,hyperparameters,drop_path,0.1,,11,ViT-B/L fine-tuning; ViT-B scratch
+2111.06377,hyperparameters,drop_path,0.2,,11,ViT-H fine-tuning; L/H scratch
+2111.06377,hyperparameters,optimizer,LARS,,11,linear probing
+2111.06377,hyperparameters,learning_rate,0.1,base learning rate,11,linear probing
+2111.06377,hyperparameters,weight_decay,0,,11,linear probing
+2111.06377,hyperparameters,momentum,0.9,,11,linear probing
+2111.06377,hyperparameters,batch_size,16384,,11,linear probing
+2111.06377,hyperparameters,warmup_epochs,10,,11,linear probing
+2111.06377,hyperparameters,epochs,90,training epochs,11,linear probing
+2111.06377,hyperparameters,learning_rate,1e-4,base learning rate,12,supervised from scratch
+2111.06377,hyperparameters,weight_decay,0.3,,11,supervised from scratch
+2111.06377,hyperparameters,warmup_epochs,20,,12,supervised from scratch
+2111.06377,hyperparameters,epochs,300,training epochs,12,supervised ViT-B from scratch
+2111.06377,hyperparameters,epochs,200,training epochs,12,supervised ViT-L/H from scratch
+2111.06377,hyperparameters,ema_decay,0.9999,EMA|exponential moving average,12,supervised from scratch
+2111.06377,hyperparameters,batch_size,16,,12,ADE20K
+2111.06377,hyperparameters,image_size,224,,7,
+2111.06377,hyperparameters,image_size,448,,7,ViT-H448
+2111.06377,hyperparameters,model_size,304M,params,12,ViT-L
+2111.06377,hyperparameters,model_size,632M,params,12,ViT-H
+2111.06377,hyperparameters,model_size,86M,params,12,ViT-B
+2111.06377,compute,,128 TPU-v3 cores,TPU-v3,5,
+2111.06377,compute,,31 hours for 1600 epochs (ViT-L),31 hours,7,
+2112.10752,task,,high-resolution image synthesis,image synthesis|image generation,1,
+2112.10752,task,,unconditional image generation,unconditional image synthesis,1,
+2112.10752,task,,text-to-image synthesis,text-to-image,1,
+2112.10752,task,,class-conditional image synthesis,class-conditional,1,
+2112.10752,task,,super-resolution,,1,
+2112.10752,task,,image inpainting,inpainting,1,
+2112.10752,task,,layout-to-image synthesis,layout-to-image,2,
+2112.10752,task,,semantic synthesis,semantic image synthesis,7,
+2112.10752,datasets,,CelebA-HQ,CelebAHQ,5,
+2112.10752,datasets,,FFHQ,,5,
+2112.10752,datasets,,LSUN-Churches,LSUN Churches,5,
+2112.10752,datasets,,LSUN-Bedrooms,LSUN-Beds,5,
+2112.10752,datasets,,ImageNet,,5,
+2112.10752,datasets,,LAION-400M,LAION,7,
+2112.10752,datasets,,MS-COCO,COCO,6,
+2112.10752,datasets,,OpenImages,,7,
+2112.10752,datasets,,Places,,8,
+2112.10752,datasets,,Landscapes,landscape images,7,semantic synthesis
+2112.10752,datasets,,DIV2K,,1,figure only
+2112.10752,baselines,,DC-VAE,,6,
+2112.10752,baselines,,ImageBART,,6,
+2112.10752,baselines,,VQGAN+T.,VQGAN,6,
+2112.10752,baselines,,U-Net GAN,,6,
+2112.10752,baselines,,PGGAN,,6,
+2112.10752,baselines,,UDM,,6,
+2112.10752,baselines,,LSGM,,6,
+2112.10752,baselines,,StyleGAN,,6,
+2112.10752,baselines,,StyleGAN2,,6,
+2112.10752,baselines,,ProjectedGAN,,6,
+2112.10752,baselines,,DDPM,,6,
+2112.10752,baselines,,ADM,ADM-G,6,
+2112.10752,baselines,,CogView,,6,
+2112.10752,baselines,,LAFITE,,6,
+2112.10752,baselines,,GLIDE,,6,
+2112.10752,baselines,,Make-A-Scene,,6,
+2112.10752,baselines,,BigGan-deep,BigGAN-deep,7,
+2112.10752,baselines,,SR3,,8,
+2112.10752,baselines,,Pixel-DM,LDM-1|pixel-based diffusion,8,
+2112.10752,baselines,,LaMa,,9,
+2112.10752,baselines,,CoModGAN,,9,
+2112.10752,baselines,,RegionWise,,9,
+2112.10752,baselines,,DeepFill v2,,9,
+2112.10752,baselines,,EdgeConnect,,9,
+2112.10752,metrics,,FID,R-FID,5,
+2112.10752,metrics,,Precision,Prec.,5,
+2112.10752,metrics,,Recall,,5,
+2112.10752,metrics,,IS,Inception Score,6,
+2112.10752,metrics,,PSNR,,8,
+2112.10752,metrics,,SSIM,,8,
+2112.10752,metrics,,LPIPS,,9,
+2112.10752,metrics,,user study preference,User Study,8,
+2112.10752,hyperparameters,downsampling_factor,4,f = 4|LDM-4,5,
+2112.10752,hyperparameters,downsampling_factor,8,f = 8|LDM-8,5,
+2112.10752,hyperparameters,model_size,1.45B,1.45B parameter,7,text-to-image LDM-KL-8
+2112.10752,hyperparameters,model_size,400M,,7,class-conditional LDM-4
+2112.10752,hyperparameters,model_size,274M,Nparams,24,unconditional LDMs
+2112.10752,hyperparameters,diffusion_steps,1000,,24,
+2112.10752,hyperparameters,noise_schedule,linear,,24,
+2112.10752,hyperparameters,sampling_steps,200,200 DDIM steps,6,
+2112.10752,hyperparameters,sampling_steps,250,250 DDIM steps,6,
+2112.10752,hyperparameters,guidance_scale,10.0,s = 10.0,6,text-to-image samples
+2112.10752,hyperparameters,guidance_scale,1.5,s = 1.5,6,LDM-KL-8-G and LDM-4-G
+2112.10752,hyperparameters,ddim_eta,1.0,η = 1.0,6,
+2112.10752,hyperparameters,codebook_size,8192,|Z|,24,
+2112.10752,hyperparameters,channels,224,,24,
+2112.10752,hyperparameters,channels,192,,24,
+2112.10752,hyperparameters,channels,320,,25,text-to-image
+2112.10752,hyperparameters,depth,2,,24,
+2112.10752,hyperparameters,batch_size,48,,24,
+2112.10752,hyperparameters,batch_size,42,,24,FFHQ
+2112.10752,hyperparameters,batch_size,96,,24,LSUN-Churches
+2112.10752,hyperparameters,train_steps,410k,410k iterations,24,CelebA-HQ
+2112.10752,hyperparameters,train_steps,635k,,24,FFHQ
+2112.10752,hyperparameters,train_steps,500k,,24,LSUN-Churches
+2112.10752,hyperparameters,train_steps,1.9M,,24,LSUN-Bedrooms
+2112.10752,hyperparameters,learning_rate,9.6e-5,,24,CelebA-HQ and LSUN-Bedrooms
+2112.10752,hyperparameters,learning_rate,8.4e-5,,24,FFHQ
+2112.10752,hyperparameters,learning_rate,5.0e-5,5.e-5,24,LSUN-Churches
+2112.10752,hyperparameters,batch_size,680,,25,text-to-image
+2112.10752,hyperparameters,train_steps,390K,,25,text-to-image
+2112.10752,hyperparameters,learning_rate,1.0e-4,,25,text-to-image and class-conditional
+2112.10752,hyperparameters,batch_size,1200,,25,class-conditional ImageNet
+2112.10752,hyperparameters,train_steps,178K,,25,class-conditional ImageNet
+2112.10752,hyperparameters,num_heads,8,Number of Heads,25,text-to-image
+2112.10752,hyperparameters,hidden_size,1280,Embedding Dimension,25,text-to-image
+2112.10752,hyperparameters,dropout,0.1,,25,layout-to-image COCO
+2112.10752,compute,,single NVIDIA A100,A100,5,
+2112.10752,compute,,eight V100,8 V100,25,inpainting model
+2112.10752,code_urls,,https://github.com/CompVis/latent-diffusion,github.com/CompVis/latent-diffusion,1,
+2112.10752,baselines,,Image Regression,simple image regression model,8,super-resolution; added in adjudication
+2112.10752,hyperparameters,model_size,387M,387M parameters,8,big inpainting model; added in adjudication
+2201.03545,task,,image classification,ImageNet classification,6,
+2201.03545,task,,object detection,COCO detection,8,
+2201.03545,task,,instance segmentation,,8,
+2201.03545,task,,semantic segmentation,ADE20K segmentation,8,
+2201.03545,task,,robustness evaluation,robustness|out-of-domain generalization,10,
+2201.03545,datasets,,ImageNet-1K,ImageNet,6,
+2201.03545,datasets,,ImageNet-22K,ImageNet,6,pre-training
+2201.03545,datasets,,COCO,,8,
+2201.03545,datasets,,ADE20K,,8,
+2201.03545,datasets,,ImageNet-A,,10,robustness
+2201.03545,datasets,,ImageNet-R,,10,robustness
+2201.03545,datasets,,ImageNet-Sketch,SK,10,robustness
+2201.03545,datasets,,ImageNet-C,ImageNet-C̄,10,robustness
+2201.03545,baselines,,Swin Transformer,Swin-T|Swin-S|Swin-B|Swin-L,7,
+2201.03545,baselines,,DeiT,DeiT-S|DeiT-B,7,
+2201.03545,baselines,,RegNetY,RegNet|RegNetY-16G,7,
+2201.03545,baselines,,EfficientNet,EffNet|EffNet-B7,7,
+2201.03545,baselines,,EfficientNetV2,EffNetV2-L|EffNetV2-XL,7,
+2201.03545,baselines,,ViT,ViT-B/16|ViT-L/16|ViT-S,7,
+2201.03545,baselines,,BiT ResNet,R-101x3|R-152x4,7,
+2201.03545,baselines,,ResNet-50,ResNet|ResNet-200,8,
+2201.03545,baselines,,ResNeXt-101,X101-32|X101-64,8,
+2201.03545,metrics,,top-1 accuracy,ImageNet top-1 acc.|accuracy,7,
+2201.03545,metrics,,box AP,APbox,8,
+2201.03545,metrics,,mask AP,APmask,8,
+2201.03545,metrics,,mIoU,,8,
+2201.03545,metrics,,throughput,image/s|FPS,7,
+2201.03545,metrics,,FLOPs,,7,
+2201.03545,metrics,,mean corruption error,mCE|corruption error,10,
+2201.03545,metrics,,training memory,peak memory,8,
+2201.03545,hyperparameters,optimizer,AdamW,,9,
+2201.03545,hyperparameters,learning_rate,4e-3,base learning rate,9,pre-training
+2201.03545,hyperparameters,weight_decay,0.05,,9,pre-training
+2201.03545,hyperparameters,adam_beta1,0.9,β1,9,
+2201.03545,hyperparameters,adam_beta2,0.999,β2,9,
+2201.03545,hyperparameters,batch_size,4096,,9,pre-training
+2201.03545,hyperparameters,epochs,300,training epochs,9,ImageNet-1K
+2201.03545,hyperparameters,epochs,90,training epochs,9,ImageNet-22K
+2201.03545,hyperparameters,lr_schedule,cosine decay,,9,
+2201.03545,hyperparameters,warmup_epochs,20,,9,ImageNet-1K
+2201.03545,hyperparameters,warmup_epochs,5,,9,ImageNet-22K
+2201.03545,hyperparameters,warmup_epochs,50,,9,isotropic ConvNeXt
+2201.03545,hyperparameters,randaugment,"(9, 0.5)",randaugment,9,
+2201.03545,hyperparameters,mixup,0.8,,9,pre-training
+2201.03545,hyperparameters,cutmix,1.0,,9,pre-training
+2201.03545,hyperparameters,random_erasing,0.25,,9,
+2201.03545,hyperparameters,label_smoothing,0.1,,9,
+2201.03545,hyperparameters,drop_path,0.1/0.4/0.5/0.5,stochastic depth,9,ImageNet-1K T/S/B/L
+2201.03545,hyperparameters,drop_path,0.0/0.0/0.1/0.1/0.2,stochastic depth,9,ImageNet-22K T/S/B/L/XL
+2201.03545,hyperparameters,layer_scale_init,1e-6,layer scale,9,
+2201.03545,hyperparameters,ema_decay,0.9999,EMA,9,ImageNet-1K
+2201.03545,hyperparameters,weight_init,trunc. normal (0.2),truncated normal,9,
+2201.03545,hyperparameters,learning_rate,5e-5,base learning rate,10,fine-tuning
+2201.03545,hyperparameters,weight_decay,1e-8,,10,fine-tuning
+2201.03545,hyperparameters,batch_size,512,,10,fine-tuning
+2201.03545,hyperparameters,epochs,30,training epochs,10,fine-tuning
+2201.03545,hyperparameters,layerwise_lr_decay,0.7,layer-wise lr decay,10,ImageNet-1K pre-trained fine-tuning
+2201.03545,hyperparameters,layerwise_lr_decay,0.8,layer-wise lr decay,10,ImageNet-22K pre-trained fine-tuning
+2201.03545,hyperparameters,head_init_scale,0.001,,10,fine-tuning
+2201.03545,hyperparameters,learning_rate,1e-4,,10,COCO and ADE20K sweep
+2201.03545,hyperparameters,learning_rate,2e-4,,10,COCO sweep
+2201.03545,hyperparameters,learning_rate,8e-5,,10,ADE20K sweep
+2201.03545,hyperparameters,train_steps,160K,iterations,8,ADE20K
+2201.03545,hyperparameters,batch_size,16,,8,ADE20K
+2201.03545,hyperparameters,kernel_size,7,7×7 depthwise conv,5,
+2201.03545,hyperparameters,hidden_size,"(96, 192, 384, 768)",C|channels,6,ConvNeXt-T and S
+2201.03545,hyperparameters,hidden_size,"(128, 256, 512, 1024)",C|channels,6,ConvNeXt-B
+2201.03545,hyperparameters,hidden_size,"(192, 384, 768, 1536)",C|channels,6,ConvNeXt-L
+2201.03545,hyperparameters,hidden_size,"(256, 512, 1024, 2048)",C|channels,6,ConvNeXt-XL
+2201.03545,hyperparameters,num_blocks,"(3, 3, 9, 3)",B|blocks,6,ConvNeXt-T
+2201.03545,hyperparameters,num_blocks,"(3, 3, 27, 3)",B|blocks,6,ConvNeXt-S/B/L/XL
+2201.03545,hyperparameters,image_size,224,2242,7,
+2201.03545,hyperparameters,image_size,384,3842,7,
+2201.03545,hyperparameters,model_size,29M,params,7,ConvNeXt-T
+2201.03545,hyperparameters,model_size,50M,params,7,ConvNeXt-S
+2201.03545,hyperparameters,model_size,89M,params,7,ConvNeXt-B
+2201.03545,hyperparameters,model_size,198M,params,7,ConvNeXt-L
+2201.03545,hyperparameters,model_size,350M,params,7,ConvNeXt-XL
+2201.03545,compute,,V100 GPU,V100,7,throughput
+2201.03545,compute,,A100 GPU,A100,8,FPS and throughput comparisons
+2201.03545,code_urls,,https://github.com/facebookresearch/ConvNeXt,,1,
+2201.11903,task,,chain-of-thought prompting,chain of thought prompting|eliciting reasoning,1,
+2201.11903,task,,arithmetic reasoning,math word problems,2,
+2201.11903,task,,commonsense reasoning,,2,
+2201.11903,task,,symbolic reasoning,symbolic manipulation,2,
+2201.11903,datasets,,GSM8K,,3,
+2201.11903,datasets,,SVAMP,,3,
+2201.11903,datasets,,ASDiv,,3,
+2201.11903,datasets,,AQuA,,3,
+2201.11903,datasets,,MAWPS,,3,
+2201.11903,datasets,,CSQA,CommonsenseQA,7,
+2201.11903,datasets,,StrategyQA,,7,
+2201.11903,datasets,,Date Understanding,BIG-bench Date Understanding,7,
+2201.11903,datasets,,Sports Understanding,BIG-bench Sports Understanding,7,
+2201.11903,datasets,,SayCan,,7,
+2201.11903,datasets,,Last Letter Concatenation,last letter concatenation,4,symbolic
+2201.11903,datasets,,Coin Flip,coin flip,4,symbolic
+2201.11903,baselines,,standard prompting,standard few-shot prompting,2,
+2201.11903,baselines,,finetuned GPT-3 with verifier,Finetuned GPT-3 175B|prior best,2,
+2201.11903,baselines,,equation only,equation only prompting,5,ablation
+2201.11903,baselines,,variable compute only,,6,ablation
+2201.11903,baselines,,reasoning after answer,chain of thought after answer,6,ablation
+2201.11903,baselines,,GPT-3,InstructGPT|text-davinci-002,4,evaluated model
+2201.11903,baselines,,LaMDA,,4,evaluated model
+2201.11903,baselines,,PaLM,,4,evaluated model
+2201.11903,baselines,,UL2 20B,UL2,4,evaluated model
+2201.11903,baselines,,Codex,code-davinci-002,4,evaluated model
+2201.11903,metrics,,solve rate,solve rate (%),5,math word problems
+2201.11903,metrics,,accuracy,,6,
+2201.11903,hyperparameters,num_exemplars,8,eight few-shot exemplars,3,math word problems
+2201.11903,hyperparameters,num_exemplars,4,four exemplars,4,AQuA
+2201.11903,hyperparameters,num_exemplars,6,six examples,7,SayCan
+2201.11903,hyperparameters,decoding,greedy decoding,greedy,4,
+2201.11903,hyperparameters,model_size,540B,PaLM 540B,1,largest model
+2201.11903,hyperparameters,model_size,137B,LaMDA 137B,4,
+2201.11903,hyperparameters,model_size,175B,GPT-3 175B,4,
+2203.15556,task,,compute-optimal training of large language models,compute-optimal scaling|optimal model size and number of tokens,1,
+2203.15556,task,,language modelling,language modeling,10,
+2203.15556,task,,reading comprehension,,10,
+2203.15556,task,,question answering,closed-book question answering,10,
+2203.15556,task,,common sense reasoning,common sense,10,
+2203.15556,datasets,,MassiveText,,9,training data
+2203.15556,datasets,,The Pile,Pile,10,
+2203.15556,datasets,,WikiText-103,Wikitext103,10,
+2203.15556,datasets,,RACE,RACE-m|RACE-h,10,
+2203.15556,datasets,,LAMBADA,,10,
+2203.15556,datasets,,Natural Questions,,10,
+2203.15556,datasets,,TriviaQA,,10,
+2203.15556,datasets,,TruthfulQA,,10,
+2203.15556,datasets,,HellaSwag,,10,
+2203.15556,datasets,,Winogrande,WinoGrande,10,
+2203.15556,datasets,,PIQA,,10,
+2203.15556,datasets,,SIQA,,10,
+2203.15556,datasets,,BoolQ,,10,
+2203.15556,datasets,,MMLU,Massive Multitask Language Understanding,10,
+2203.15556,datasets,,BIG-bench,,10,
+2203.15556,datasets,,Winogender,,14,
+2203.15556,datasets,,C4,,8,IsoFLOP reproduction
+2203.15556,datasets,,GitHub,,8,IsoFLOP reproduction
+2203.15556,baselines,,Gopher,Gopher (280B),1,
+2203.15556,baselines,,GPT-3,GPT-3 (175B),1,
+2203.15556,baselines,,Jurassic-1,Jurassic-1 (178B)|Jurassic,1,
+2203.15556,baselines,,Megatron-Turing NLG,MT-NLG 530B|MT-NLG,1,
+2203.15556,baselines,,Kaplan et al. (2020) scaling laws,Kaplan et al.,1,scaling-law comparison
+2203.15556,metrics,,accuracy,5-shot accuracy|0-shot accuracy,11,
+2203.15556,metrics,,bits-per-byte,bpb,10,The Pile
+2203.15556,metrics,,perplexity,,10,WikiText-103
+2203.15556,metrics,,exact match,,13,closed-book QA
+2203.15556,metrics,,training loss,final pre-training loss|loss,2,scaling analysis
+2203.15556,hyperparameters,model_size,70B,70B parameters,1,Chinchilla
+2203.15556,hyperparameters,train_tokens,1.4T,1.4 trillion tokens|1.4 Trillion,2,Chinchilla
+2203.15556,hyperparameters,num_layers,80,Layers,9,Chinchilla and Gopher
+2203.15556,hyperparameters,num_heads,64,Number Heads,9,Chinchilla
+2203.15556,hyperparameters,head_dim,128,Key/Value Size,9,
+2203.15556,hyperparameters,hidden_size,8192,"8,192|dmodel",9,Chinchilla
+2203.15556,hyperparameters,learning_rate,1e-4,1 × 10−4|Max LR,9,Chinchilla
+2203.15556,hyperparameters,batch_size,1.5M,1.5M →3M,9,Chinchilla tokens; doubled midway
+2203.15556,hyperparameters,batch_size,3M,,9,Chinchilla after doubling
+2203.15556,hyperparameters,ffn_size,4 × dmodel,feed-forward size,9,
+2203.15556,hyperparameters,optimizer,AdamW,,9,
+2203.15556,hyperparameters,lr_schedule,cosine,cosine cycle,5,decays 10x over the training horizon
+2203.15556,hyperparameters,precision,bfloat16,,9,float32 copy of weights in optimiser
+2203.15556,hyperparameters,tokenizer,SentencePiece,,9,no NFKC normalisation
+2203.15556,hyperparameters,num_heads,128,,9,Gopher 280B
+2203.15556,hyperparameters,hidden_size,16384,"16,384",9,Gopher 280B
+2203.15556,hyperparameters,learning_rate,4e-5,4 × 10−5,9,Gopher 280B
+2203.15556,hyperparameters,batch_size,6M,3M →6M,9,Gopher 280B
+2203.15556,compute,,TPUv3/TPUv4,TPUv3|TPUv4,9,
+2203.15556,compute,,5.76 × 10^23 FLOPs,5.76 × 1023,5,Gopher compute budget
+2203.15556,metrics,,toxicity score,Perspective API toxicity|sample toxicity,14,added in adjudication
+2205.14135,task,,efficient exact attention,IO-aware attention|fast and memory-efficient exact attention,1,
+2205.14135,task,,language modeling,language modeling with long context,7,
+2205.14135,task,,long document classification,long-document classification,7,
+2205.14135,task,,long-range sequence modeling,long-range arena,7,
+2205.14135,datasets,,Wikipedia,,7,BERT-large pre-training
+2205.14135,datasets,,OpenWebText,Openwebtext,7,
+2205.14135,datasets,,Long Range Arena,LRA,7,
+2205.14135,datasets,,ListOps,,8,LRA task
+2205.14135,datasets,,Text,,8,LRA task
+2205.14135,datasets,,Retrieval,,8,LRA task
+2205.14135,datasets,,Image,,8,LRA task
+2205.14135,datasets,,Pathfinder,,8,LRA task
+2205.14135,datasets,,MIMIC-III,MIMIC,8,
+2205.14135,datasets,,ECtHR,,8,
+2205.14135,datasets,,Path-X,,9,
+2205.14135,datasets,,Path-256,,9,
+2205.14135,baselines,,Nvidia MLPerf 1.1,MLPerf 1.1,7,BERT training speed record
+2205.14135,baselines,,Huggingface,HuggingFace,7,GPT-2 implementation
+2205.14135,baselines,,Megatron-LM,Megatron,7,GPT-2 implementation
+2205.14135,baselines,,Transformer,standard attention,8,LRA
+2205.14135,baselines,,Linformer,,8,
+2205.14135,baselines,,Linear Attention,,8,
+2205.14135,baselines,,Performer,,8,
+2205.14135,baselines,,Local Attention,,8,
+2205.14135,baselines,,Reformer,,8,
+2205.14135,baselines,,Smyrf,SMYRF,8,
+2205.14135,baselines,,PyTorch attention,PyTorch,2,attention runtime
+2205.14135,metrics,,wall-clock training time,training time|speedup,7,
+2205.14135,metrics,,perplexity,ppl,8,
+2205.14135,metrics,,accuracy,,8,
+2205.14135,metrics,,micro F1,micro-F1|F1,9,long document classification
+2205.14135,metrics,,runtime,,9,attention benchmarks
+2205.14135,metrics,,memory footprint,memory,9,
+2205.14135,hyperparameters,optimizer,LAMB,,26,BERT-large
+2205.14135,hyperparameters,learning_rate,3.75e-3,,26,BERT-large
+2205.14135,hyperparameters,batch_size,448,,26,BERT-large
+2205.14135,hyperparameters,train_steps,7100,,26,BERT-large at most
+2205.14135,hyperparameters,precision,FP16,Apex AMP,26,BERT-large
+2205.14135,hyperparameters,max_seq_length,512,seq. length 512,1,BERT-large
+2205.14135,hyperparameters,batch_size,512,effective batch size of 512,26,GPT-2
+2205.14135,hyperparameters,optimizer,AdamW,,26,GPT-2
+2205.14135,hyperparameters,learning_rate,6e-4,,26,GPT-2 small
+2205.14135,hyperparameters,learning_rate,1.5e-4,,26,GPT-2 medium
+2205.14135,hyperparameters,weight_decay,0.1,,26,GPT-2
+2205.14135,hyperparameters,train_steps,400K,400K steps,26,GPT-2
+2205.14135,hyperparameters,precision,mixed-precision,PyTorch AMP,26,GPT-2
+2205.14135,hyperparameters,tokenizer,GPT-2 BPE,BPE,26,
+2205.14135,hyperparameters,max_seq_length,1024,1K|context length 1K,1,GPT-2
+2205.14135,hyperparameters,max_seq_length,4096,4K|context length 4K,8,GPT-2 long context
+2205.14135,hyperparameters,max_seq_length,16384,16K,1,Path-X
+2205.14135,hyperparameters,max_seq_length,65536,64K,1,Path-256
+2205.14135,hyperparameters,head_dim,64,head dim. 64,6,benchmark
+2205.14135,hyperparameters,num_heads,16,16 heads,6,benchmark
+2205.14135,hyperparameters,batch_size,64,,6,benchmark
+2205.14135,compute,,8×A100-80GB GPUs,8×A100,26,BERT-large
+2205.14135,compute,,8×A100-40GB GPUs,,26,GPT-2
+2205.14135,compute,,A100 GPU with 40 GB HBM,one A100 GPU,9,benchmarks
+2205.14135,code_urls,,https://github.com/HazyResearch/flash-attention,github.com/HazyResearch/flash-attention,3,
+2210.02747,task,,unconditional image generation,generative modeling|image generation|density estimation,7,
+2210.02747,task,,image super-resolution,conditional image generation|super-resolution|upsampling,9,64×64 to 256×256
+2210.02747,datasets,,CIFAR-10,CIFAR10,7,
+2210.02747,datasets,,ImageNet 32×32,ImageNet-32|ImageNet,7,
+2210.02747,datasets,,ImageNet 64×64,ImageNet-64|ImageNet,7,
+2210.02747,datasets,,ImageNet 128×128,ImageNet-128|ImageNet,8,
+2210.02747,datasets,,2D checkerboard,checkerboard,9,toy example
+2210.02747,baselines,,DDPM,noise matching,8,
+2210.02747,baselines,,Score Matching,SM|score matching w/ diffusion,8,
+2210.02747,baselines,,ScoreFlow,Score Flow|SF,8,
+2210.02747,baselines,,MGAN,,8,
+2210.02747,baselines,,PacGAN2,,8,
+2210.02747,baselines,,Logo-GAN-AE,,8,
+2210.02747,baselines,,Self-cond. GAN,self-conditioned GAN,8,
+2210.02747,baselines,,Uncond. BigGAN,BigGAN,8,
+2210.02747,baselines,,PGMGAN,,8,
+2210.02747,baselines,,SR3,,9,super-resolution
+2210.02747,baselines,,Regression,,9,super-resolution
+2210.02747,metrics,,negative log-likelihood (bits per dimension),NLL|BPD|bits per dimension,8,
+2210.02747,metrics,,FID,Frechet Inception Distance,8,
+2210.02747,metrics,,NFE,number of function evaluations,8,
+2210.02747,metrics,,Inception Score,IS,9,
+2210.02747,metrics,,PSNR,,9,
+2210.02747,metrics,,SSIM,,9,
+2210.02747,hyperparameters,optimizer,Adam,,20,
+2210.02747,hyperparameters,adam_beta1,0.9,β1,20,
+2210.02747,hyperparameters,adam_beta2,0.999,β2,20,
+2210.02747,hyperparameters,weight_decay,0.0,,20,
+2210.02747,hyperparameters,adam_epsilon,1e-8,ϵ,20,
+2210.02747,hyperparameters,ode_tolerance,1e-5,atol|rtol|tolerance,7,dopri5
+2210.02747,hyperparameters,hidden_size,256,channels,20,CIFAR10 ImageNet-32 ImageNet-128
+2210.02747,hyperparameters,hidden_size,192,channels,20,ImageNet-64
+2210.02747,hyperparameters,depth,2,,20,CIFAR10
+2210.02747,hyperparameters,depth,3,,20,ImageNet
+2210.02747,hyperparameters,num_heads,4,heads,20,
+2210.02747,hyperparameters,head_channels,64,heads channels,20,
+2210.02747,hyperparameters,dropout,0.0,,20,
+2210.02747,hyperparameters,batch_size,256,effective batch size,20,CIFAR10
+2210.02747,hyperparameters,batch_size,1024,effective batch size,20,ImageNet-32
+2210.02747,hyperparameters,batch_size,2048,effective batch size,20,ImageNet-64
+2210.02747,hyperparameters,batch_size,1536,effective batch size|1.5k,20,ImageNet-128
+2210.02747,hyperparameters,epochs,1000,,20,CIFAR10
+2210.02747,hyperparameters,epochs,200,,20,ImageNet-32
+2210.02747,hyperparameters,epochs,250,,20,ImageNet-64
+2210.02747,hyperparameters,epochs,571,,20,ImageNet-128
+2210.02747,hyperparameters,train_steps,391k,iterations,20,CIFAR10
+2210.02747,hyperparameters,train_steps,250k,iterations,20,ImageNet-32
+2210.02747,hyperparameters,train_steps,157k,iterations,20,ImageNet-64
+2210.02747,hyperparameters,train_steps,500k,iterations,20,ImageNet-128
+2210.02747,hyperparameters,learning_rate,5e-4,,20,CIFAR10
+2210.02747,hyperparameters,learning_rate,1e-4,,20,ImageNet
+2210.02747,hyperparameters,lr_schedule,polynomial decay,,20,CIFAR10 ImageNet-32 ImageNet-128
+2210.02747,hyperparameters,lr_schedule,constant,,20,ImageNet-64
+2210.02747,hyperparameters,warmup_steps,45k,,20,CIFAR10
+2210.02747,hyperparameters,warmup_steps,20k,,20,ImageNet-32 and ImageNet-128
+2210.02747,hyperparameters,beta_min,0.1,βmin,20,diffusion path
+2210.02747,hyperparameters,beta_max,20,βmax,20,diffusion path
+2210.02747,hyperparameters,num_layers,5,MLP layers,19,2D example
+2210.02747,hyperparameters,hidden_size,512,neurons,19,2D example MLP
+2210.02747,hyperparameters,precision,16-bit mixed precision,mixed precision,20,ImageNet-64/128/256; 32-bit for CIFAR10 and ImageNet-32
+2210.02747,compute,,2 / 4 / 16 / 32 GPUs,GPUs,20,CIFAR10 / ImageNet-32 / 64 / 128
+2210.03629,task,,synergizing reasoning and acting in language models,reasoning and acting|ReAct prompting,1,
+2210.03629,task,,multi-hop question answering,question answering,3,
+2210.03629,task,,fact verification,,3,
+2210.03629,task,,interactive decision making,text-based game|webpage navigation,1,
+2210.03629,datasets,,HotpotQA,HotPotQA,3,
+2210.03629,datasets,,FEVER,Fever,3,
+2210.03629,datasets,,ALFWorld,AlfWorld,3,
+2210.03629,datasets,,WebShop,Webshop,3,
+2210.03629,baselines,,Standard prompting,Standard,5,
+2210.03629,baselines,,Chain-of-thought prompting,CoT,5,
+2210.03629,baselines,,CoT-SC,self-consistency,5,
+2210.03629,baselines,,Act-only,Act|acting-only prompt,5,
+2210.03629,baselines,,BUTLER,BUTLERg,7,ALFWorld imitation learning
+2210.03629,baselines,,IL,imitation learning,7,WebShop
+2210.03629,baselines,,IL+RL,imitation + reinforcement learning,8,WebShop
+2210.03629,baselines,,ReAct-IM,Inner Monologue|IM-style prompting,8,ALFWorld
+2210.03629,metrics,,exact match,EM,5,HotpotQA
+2210.03629,metrics,,accuracy,Acc,5,FEVER
+2210.03629,metrics,,success rate,,7,ALFWorld and WebShop
+2210.03629,metrics,,average score,score,7,WebShop
+2210.03629,hyperparameters,model_size,540B,PaLM-540B,3,prompted model
+2210.03629,hyperparameters,num_exemplars,6,6 cases,4,HotpotQA
+2210.03629,hyperparameters,num_exemplars,3,3 cases,4,FEVER
+2210.03629,hyperparameters,num_samples,21,21 CoT trajectories,5,CoT-SC
+2210.03629,hyperparameters,temperature,0.7,decoding temperature 0.7,5,CoT-SC
+2210.03629,hyperparameters,max_steps,7,7 steps,5,HotpotQA
+2210.03629,hyperparameters,max_steps,5,5 steps,5,FEVER
+2210.03629,hyperparameters,num_trajectories,3000,"3,000 trajectories",5,fine-tuning data
+2210.03629,hyperparameters,num_exemplars,2,2 annotated trajectories,7,ALFWorld
+2210.03629,hyperparameters,num_exemplars,1,one-shot,8,WebShop
+2210.03629,hyperparameters,decoding,greedy decoding,greedy,8,
+2210.03629,hyperparameters,batch_size,64,,15,fine-tuning
+2210.03629,hyperparameters,train_steps,4000,"4, 000 steps",15,ReAct and Act fine-tuning
+2210.03629,hyperparameters,train_steps,2000,"2, 000 steps",15,PaLM-8B Standard and CoT
+2210.03629,hyperparameters,train_steps,1000,"1, 000 steps",15,PaLM-62B Standard and CoT
+2210.03629,hyperparameters,model_size,8B,PaLM-8B,5,fine-tuned
+2210.03629,hyperparameters,model_size,62B,PaLM-62B,5,fine-tuned
+2210.03629,code_urls,,https://react-lm.github.io/,react-lm.github.io,1,project page with code
+2211.14730,task,,multivariate time series forecasting,long-term time series forecasting|time series forecasting,1,
+2211.14730,task,,self-supervised representation learning,masked self-supervised representation learning,1,
+2211.14730,task,,transfer learning,,7,
+2211.14730,datasets,,Weather,,6,
+2211.14730,datasets,,Traffic,,6,
+2211.14730,datasets,,Electricity,,6,
+2211.14730,datasets,,ILI,,6,
+2211.14730,datasets,,ETTh1,,6,
+2211.14730,datasets,,ETTh2,,6,
+2211.14730,datasets,,ETTm1,,6,
+2211.14730,datasets,,ETTm2,,6,
+2211.14730,baselines,,FEDformer,,6,
+2211.14730,baselines,,Autoformer,,6,
+2211.14730,baselines,,Informer,,6,
+2211.14730,baselines,,Pyraformer,,6,
+2211.14730,baselines,,LogTrans,,6,
+2211.14730,baselines,,DLinear,,6,
+2211.14730,baselines,,BTSF,,8,self-supervised
+2211.14730,baselines,,TS2Vec,,8,self-supervised
+2211.14730,baselines,,TNC,,8,self-supervised
+2211.14730,baselines,,TS-TCC,,8,self-supervised
+2211.14730,metrics,,MSE,,6,
+2211.14730,metrics,,MAE,,6,
+2211.14730,hyperparameters,patch_length,16,P = 16,2,
+2211.14730,hyperparameters,stride,8,S = 8,2,
+2211.14730,hyperparameters,lookback_window,336,L = 336,6,PatchTST/42
+2211.14730,hyperparameters,lookback_window,512,L = 512,6,PatchTST/64
+2211.14730,hyperparameters,num_patches,42,PatchTST/42,6,
+2211.14730,hyperparameters,num_patches,64,PatchTST/64,6,
+2211.14730,hyperparameters,prediction_length,96,T ∈{96; 192; 336; 720},6,
+2211.14730,hyperparameters,prediction_length,192,,6,
+2211.14730,hyperparameters,prediction_length,336,,6,
+2211.14730,hyperparameters,prediction_length,720,,6,
+2211.14730,hyperparameters,prediction_length,24,T ∈{24; 36; 48; 60},6,ILI
+2211.14730,hyperparameters,prediction_length,36,,6,ILI
+2211.14730,hyperparameters,prediction_length,48,,6,ILI
+2211.14730,hyperparameters,prediction_length,60,,6,ILI
+2211.14730,hyperparameters,mask_ratio,40%,40% of the patches,6,self-supervised
+2211.14730,hyperparameters,epochs,100,100 epochs,6,self-supervised pre-training
+2211.14730,hyperparameters,epochs,20,20 epochs,6,linear probing / fine-tuning
+2211.14730,hyperparameters,epochs,10,10 epochs,6,linear probing before fine-tuning
+2211.14730,hyperparameters,num_layers,3,3 encoder layers,14,
+2211.14730,hyperparameters,num_heads,16,H = 16,14,
+2211.14730,hyperparameters,hidden_size,128,D = 128,14,
+2211.14730,hyperparameters,ffn_size,256,F = 256,14,
+2211.14730,hyperparameters,num_heads,4,H = 4,14,ILI / ETTh1 / ETTh2
+2211.14730,hyperparameters,hidden_size,16,D = 16,14,ILI / ETTh1 / ETTh2
+2211.14730,hyperparameters,ffn_size,128,F = 128,14,ILI / ETTh1 / ETTh2
+2211.14730,hyperparameters,dropout,0.2,,14,
+2211.14730,hyperparameters,activation,GELU,,14,
+2211.14730,hyperparameters,normalization,BatchNorm,instance normalization,5,
+2211.14730,compute,,NVIDIA A40 48GB,A40,9,
+2211.14730,hyperparameters,patch_length,12,patch size is set to 12,6,self-supervised (non-overlapping)
+2212.04356,task,,speech recognition,automatic speech recognition|ASR,1,
+2212.04356,task,,speech translation,X→en translation,2,
+2212.04356,task,,language identification,,8,
+2212.04356,task,,long-form transcription,,9,
+2212.04356,datasets,,Whisper training data,680000 hours|680k hours,1,weakly supervised web audio
+2212.04356,datasets,,LibriSpeech,LibriSpeech Clean|LibriSpeech Other|test-clean,5,
+2212.04356,datasets,,TED-LIUM 3,TED-LIUM3|TED-LIUM,3,
+2212.04356,datasets,,Artie,,6,
+2212.04356,datasets,,Common Voice,,6,
+2212.04356,datasets,,Fleurs,,6,
+2212.04356,datasets,,CHiME6,,6,
+2212.04356,datasets,,VoxPopuli,,6,
+2212.04356,datasets,,CORAAL,,6,
+2212.04356,datasets,,AMI IHM,,6,
+2212.04356,datasets,,AMI SDM1,,6,
+2212.04356,datasets,,Switchboard,,6,
+2212.04356,datasets,,CallHome,,6,
+2212.04356,datasets,,WSJ,,6,
+2212.04356,datasets,,Multilingual LibriSpeech,MLS,6,
+2212.04356,datasets,,CoVoST2,,8,
+2212.04356,datasets,,Meanwhile,,9,long-form
+2212.04356,datasets,,Rev16,,9,long-form
+2212.04356,datasets,,Kincaid46,,9,long-form
+2212.04356,datasets,,Earnings-21,,9,long-form
+2212.04356,datasets,,Earnings-22,,9,long-form
+2212.04356,baselines,,wav2vec 2.0,wav2vec 2.0 Large (no LM),6,
+2212.04356,baselines,,supervised LibriSpeech models,,6,
+2212.04356,baselines,,XLS-R,,6,
+2212.04356,baselines,,mSLAM,mSLAM-CTC,6,
+2212.04356,baselines,,Maestro,,7,
+2212.04356,baselines,,XMEF-X,,8,
+2212.04356,baselines,,w2v-bert-51,,8,
+2212.04356,baselines,,NVIDIA STT,NVIDIA STT models,8,
+2212.04356,baselines,,commercial ASR systems,commercial ASR,10,
+2212.04356,baselines,,human transcribers,professional human transcribers,10,
+2212.04356,metrics,,WER,word error rate,5,
+2212.04356,metrics,,BLEU,,7,
+2212.04356,metrics,,accuracy,language identification accuracy,8,
+2212.04356,metrics,,effective robustness,,6,
+2212.04356,hyperparameters,num_layers,4,Layers,5,Tiny
+2212.04356,hyperparameters,num_layers,6,,5,Base
+2212.04356,hyperparameters,num_layers,12,,5,Small
+2212.04356,hyperparameters,num_layers,24,,5,Medium
+2212.04356,hyperparameters,num_layers,32,,5,Large
+2212.04356,hyperparameters,hidden_size,384,Width,5,Tiny
+2212.04356,hyperparameters,hidden_size,512,,5,Base
+2212.04356,hyperparameters,hidden_size,768,,5,Small
+2212.04356,hyperparameters,hidden_size,1024,,5,Medium
+2212.04356,hyperparameters,hidden_size,1280,,5,Large
+2212.04356,hyperparameters,num_heads,6,Heads,5,Tiny
+2212.04356,hyperparameters,num_heads,8,,5,Base
+2212.04356,hyperparameters,num_heads,12,,5,Small
+2212.04356,hyperparameters,num_heads,16,,5,Medium
+2212.04356,hyperparameters,num_heads,20,,5,Large
+2212.04356,hyperparameters,model_size,39M,,5,Tiny
+2212.04356,hyperparameters,model_size,74M,,5,Base
+2212.04356,hyperparameters,model_size,244M,,5,Small
+2212.04356,hyperparameters,model_size,769M,,5,Medium
+2212.04356,hyperparameters,model_size,1550M,1.55B,5,Large
+2212.04356,hyperparameters,sample_rate,16000 Hz,"16,000 Hz",3,
+2212.04356,hyperparameters,num_mel_channels,80,80-channel log-magnitude Mel spectrogram,3,
+2212.04356,hyperparameters,window_size,25 ms,25-millisecond windows,3,
+2212.04356,hyperparameters,stride,10 ms,stride of 10 milliseconds,3,
+2212.04356,hyperparameters,segment_length,30 seconds,30-second segments,2,
+2212.04356,hyperparameters,tokenizer,byte-level BPE,GPT-2 BPE,3,
+2212.04356,hyperparameters,train_steps,1048576,2^20 updates,28,
+2212.04356,hyperparameters,batch_size,256,256 segments,28,
+2212.04356,hyperparameters,warmup_steps,2048,2048 updates,28,
+2212.04356,hyperparameters,grad_clip,1.0,Max grad norm,28,
+2212.04356,hyperparameters,optimizer,AdamW,,28,
+2212.04356,hyperparameters,adam_beta1,0.9,β1,28,
+2212.04356,hyperparameters,adam_beta2,0.98,β2,28,
+2212.04356,hyperparameters,adam_epsilon,1e-6,10−6,28,
+2212.04356,hyperparameters,weight_decay,0.1,,28,
+2212.04356,hyperparameters,initialization,Gaussian Fan-In,,28,
+2212.04356,hyperparameters,lr_schedule,linear decay,Linear Decay,28,
+2212.04356,hyperparameters,precision,FP16,dynamic loss scaling,4,
+2212.04356,hyperparameters,train_steps,655360,,28,Large V2
+2212.04356,hyperparameters,batch_size,1024,,28,Large V2
+2212.04356,hyperparameters,bpe_dropout,0.1,BPE Dropout,28,Large V2
+2212.04356,hyperparameters,drop_path,0.1,Stochastic Depth,28,Large V2
+2212.04356,hyperparameters,specaugment,LibriSpeech Basic,SpecAugment Policy,28,Large V2
+2212.04356,hyperparameters,learning_rate,1.5e-3,1.5 × 10−3,28,Tiny
+2212.04356,hyperparameters,learning_rate,1e-3,1 × 10−3,28,Base
+2212.04356,hyperparameters,learning_rate,5e-4,5 × 10−4,28,Small
+2212.04356,hyperparameters,learning_rate,2.5e-4,2.5 × 10−4,28,Medium
+2212.04356,hyperparameters,learning_rate,1.75e-4,1.75 × 10−4,28,Large
+2212.04356,hyperparameters,learning_rate,2.0e-4,2.0 × 10−4,28,Large V2
+2212.04356,code_urls,,https://github.com/openai/whisper,github.com/openai/whisper,2,
+2212.04356,baselines,,VP-10K+FT,VP-10K + FT,7,added in adjudication
+2212.09748,task,,class-conditional image generation,image generation|generative modeling|diffusion models,5,
+2212.09748,datasets,,ImageNet 256×256,ImageNet|ImageNet 256x256,5,
+2212.09748,datasets,,ImageNet 512×512,ImageNet|ImageNet 512x512,5,
+2212.09748,baselines,,BigGAN-deep,BigGAN,9,
+2212.09748,baselines,,StyleGAN-XL,,9,
+2212.09748,baselines,,ADM,ADM-U|ADM-G,9,
+2212.09748,baselines,,CDM,,9,
+2212.09748,baselines,,LDM,LDM-8|LDM-4|LDM-8-G|LDM-4-G|latent diffusion,9,
+2212.09748,metrics,,FID,FID-50K|FID-10K|Fréchet Inception Distance,5,
+2212.09748,metrics,,sFID,,5,
+2212.09748,metrics,,Inception Score,IS,5,
+2212.09748,metrics,,Precision,,5,
+2212.09748,metrics,,Recall,,5,
+2212.09748,metrics,,Gflops,transformer Gflops|compute,8,
+2212.09748,hyperparameters,num_layers,12,layers N,5,DiT-S and DiT-B
+2212.09748,hyperparameters,num_layers,24,layers N,5,DiT-L
+2212.09748,hyperparameters,num_layers,28,layers N,5,DiT-XL
+2212.09748,hyperparameters,hidden_size,384,hidden size d,5,DiT-S
+2212.09748,hyperparameters,hidden_size,768,hidden size d,5,DiT-B
+2212.09748,hyperparameters,hidden_size,1024,hidden size d,5,DiT-L
+2212.09748,hyperparameters,hidden_size,1152,hidden size d,5,DiT-XL
+2212.09748,hyperparameters,num_heads,6,heads,5,DiT-S
+2212.09748,hyperparameters,num_heads,12,heads,5,DiT-B
+2212.09748,hyperparameters,num_heads,16,heads,5,DiT-L and DiT-XL
+2212.09748,hyperparameters,patch_size,2,p,8,
+2212.09748,hyperparameters,patch_size,4,p,8,
+2212.09748,hyperparameters,patch_size,8,p,8,
+2212.09748,hyperparameters,optimizer,AdamW,,5,
+2212.09748,hyperparameters,learning_rate,1e-4,1 × 10−4|constant learning rate,6,
+2212.09748,hyperparameters,weight_decay,0,no weight decay,6,
+2212.09748,hyperparameters,batch_size,256,,6,
+2212.09748,hyperparameters,ema_decay,0.9999,EMA,6,
+2212.09748,hyperparameters,diffusion_steps,1000,tmax,6,
+2212.09748,hyperparameters,beta_start,1e-4,linear variance schedule,6,
+2212.09748,hyperparameters,beta_end,2e-2,linear variance schedule|0.02,6,
+2212.09748,hyperparameters,vae_downsample,8,downsample factor,6,
+2212.09748,hyperparameters,sampling_steps,250,DDPM sampling steps,6,
+2212.09748,hyperparameters,train_steps,400K,training iterations,8,scaling study
+2212.09748,hyperparameters,train_steps,7M,steps,8,DiT-XL/2 256×256
+2212.09748,hyperparameters,train_steps,3M,iterations,9,DiT-XL/2 512×512
+2212.09748,hyperparameters,cfg_scale,1.25,classifier-free guidance|cfg,9,
+2212.09748,hyperparameters,cfg_scale,1.50,classifier-free guidance|cfg|1.5,9,
+2212.09748,hyperparameters,image_size,256,256 × 256,5,
+2212.09748,hyperparameters,image_size,512,512 × 512,5,
+2212.09748,compute,,TPU v3-256 pod,TPU-v3 pods|TPU v3,6,
+2302.13971,task,,language modeling,foundation language models|large language models,1,
+2302.13971,task,,common sense reasoning,commonsense reasoning,4,
+2302.13971,task,,closed-book question answering,question answering,5,
+2302.13971,task,,reading comprehension,,5,
+2302.13971,task,,mathematical reasoning,,5,
+2302.13971,task,,code generation,,5,
+2302.13971,datasets,,CommonCrawl,English CommonCrawl|CCNet,2,pre-training
+2302.13971,datasets,,C4,,2,pre-training
+2302.13971,datasets,,GitHub,Github,2,pre-training
+2302.13971,datasets,,Wikipedia,,2,pre-training
+2302.13971,datasets,,Books,Gutenberg and Books3|Gutenberg|Books3,2,pre-training
+2302.13971,datasets,,ArXiv,arXiv,2,pre-training
+2302.13971,datasets,,Stack Exchange,StackExchange,2,pre-training
+2302.13971,datasets,,BoolQ,,4,
+2302.13971,datasets,,PIQA,,4,
+2302.13971,datasets,,SIQA,,4,
+2302.13971,datasets,,HellaSwag,,4,
+2302.13971,datasets,,WinoGrande,,4,
+2302.13971,datasets,,ARC easy,ARC-e,4,
+2302.13971,datasets,,ARC challenge,ARC-c,4,
+2302.13971,datasets,,OpenBookQA,OBQA,4,
+2302.13971,datasets,,NaturalQuestions,Natural Questions,4,
+2302.13971,datasets,,TriviaQA,,5,
+2302.13971,datasets,,RACE,RACE-middle|RACE-high,5,
+2302.13971,datasets,,MATH,,5,
+2302.13971,datasets,,GSM8k,GSM8K,5,
+2302.13971,datasets,,HumanEval,,5,
+2302.13971,datasets,,MBPP,,5,
+2302.13971,datasets,,MMLU,Massive Multitask Language Understanding,6,
+2302.13971,datasets,,RealToxicityPrompts,,8,
+2302.13971,datasets,,CrowS-Pairs,,9,
+2302.13971,datasets,,WinoGender,,9,
+2302.13971,datasets,,TruthfulQA,,9,
+2302.13971,baselines,,GPT-3,,4,
+2302.13971,baselines,,Gopher,,4,
+2302.13971,baselines,,Chinchilla,Chinchilla-70B,4,
+2302.13971,baselines,,PaLM,PaLM-540B|PaLM-62B,4,
+2302.13971,baselines,,PaLM-cont,,4,
+2302.13971,baselines,,OPT,,4,
+2302.13971,baselines,,GPT-J,,4,
+2302.13971,baselines,,GPT-NeoX,GPT-NeoX-20B,4,
+2302.13971,baselines,,Minerva,,5,
+2302.13971,baselines,,LaMDA,LaMDA 137B,6,
+2302.13971,baselines,,OPT-IML,OPT-IML-Max,7,instruction-tuned comparison
+2302.13971,baselines,,Flan-T5-XXL,,7,instruction-tuned comparison
+2302.13971,baselines,,Flan-PaLM,Flan-PaLM-cont,7,instruction-tuned comparison
+2302.13971,metrics,,accuracy,zero-shot accuracy,4,
+2302.13971,metrics,,exact match,,4,NaturalQuestions and TriviaQA
+2302.13971,metrics,,maj1@k,,5,MATH and GSM8k
+2302.13971,metrics,,pass@1,pass@,6,HumanEval and MBPP
+2302.13971,metrics,,pass@100,,6,
+2302.13971,metrics,,pass@80,,6,
+2302.13971,metrics,,toxicity score,,8,RealToxicityPrompts
+2302.13971,metrics,,truthful and informative fraction,fraction of truthful answers,10,TruthfulQA
+2302.13971,hyperparameters,model_size,6.7B,7B|LLaMA-7B,3,
+2302.13971,hyperparameters,model_size,13.0B,13B|LLaMA-13B,3,
+2302.13971,hyperparameters,model_size,32.5B,33B|LLaMA-33B,3,
+2302.13971,hyperparameters,model_size,65.2B,65B|LLaMA-65B,3,
+2302.13971,hyperparameters,hidden_size,4096,dimension,3,7B
+2302.13971,hyperparameters,hidden_size,5120,dimension,3,13B
+2302.13971,hyperparameters,hidden_size,6656,dimension,3,33B
+2302.13971,hyperparameters,hidden_size,8192,dimension,3,65B
+2302.13971,hyperparameters,num_heads,32,n heads,3,7B
+2302.13971,hyperparameters,num_heads,40,n heads,3,13B
+2302.13971,hyperparameters,num_heads,52,n heads,3,33B
+2302.13971,hyperparameters,num_heads,64,n heads,3,65B
+2302.13971,hyperparameters,num_layers,32,n layers,3,7B
+2302.13971,hyperparameters,num_layers,40,n layers,3,13B
+2302.13971,hyperparameters,num_layers,60,n layers,3,33B
+2302.13971,hyperparameters,num_layers,80,n layers,3,65B
+2302.13971,hyperparameters,learning_rate,3.0e-4,3e-4,3,7B and 13B
+2302.13971,hyperparameters,learning_rate,1.5e-4,,3,33B and 65B
+2302.13971,hyperparameters,batch_size,4M,4M tokens,3,
+2302.13971,hyperparameters,train_tokens,1.0T,1T tokens,3,7B and 13B
+2302.13971,hyperparameters,train_tokens,1.4T,1.4T tokens,3,33B and 65B
+2302.13971,hyperparameters,optimizer,AdamW,,3,
+2302.13971,hyperparameters,adam_beta1,0.9,β1 = 0.9,3,
+2302.13971,hyperparameters,adam_beta2,0.95,β2 = 0.95,3,
+2302.13971,hyperparameters,lr_schedule,cosine,cosine learning rate schedule,3,final lr 10% of maximum
+2302.13971,hyperparameters,weight_decay,0.1,,3,
+2302.13971,hyperparameters,grad_clip,1.0,gradient clipping,3,
+2302.13971,hyperparameters,warmup_steps,2000,"2, 000 warmup steps",3,
+2302.13971,hyperparameters,activation,SwiGLU,,3,
+2302.13971,hyperparameters,normalization,RMSNorm,pre-normalization,3,
+2302.13971,hyperparameters,position_encoding,rotary,RoPE|rotary positional embeddings,3,
+2302.13971,hyperparameters,tokenizer,BPE,byte-pair encoding|SentencePiece,2,
+2302.13971,hyperparameters,temperature,0.1,,6,pass@1
+2302.13971,hyperparameters,temperature,0.8,,6,pass@100 and pass@80
+2302.13971,hyperparameters,num_samples,256,k = 256 samples,6,MATH maj1@k
+2302.13971,compute,,2048 A100 GPUs (80GB),A100 GPU with 80GB of RAM|2048 A100,4,
+2302.13971,compute,,21 days,approximately 21 days,4,65B on 1.4T tokens
+2302.13971,code_urls,,https://github.com/facebookresearch/llama,github.com/facebookresearch/llama,1,
+2302.13971,compute,,single V100 GPU,V100,5,inference; added in adjudication
+2303.15343,task,,language-image pre-training,image-text pre-training|sigmoid loss for language image pre-training,1,
+2303.15343,task,,zero-shot image classification,zero-shot transfer|0-shot classification,4,
+2303.15343,task,,image-text retrieval,cross-modal retrieval|zero-shot retrieval,4,
+2303.15343,datasets,,WebLI,,1,pre-training
+2303.15343,datasets,,LiT image-text dataset,LiT dataset,1,SigLiT pre-training
+2303.15343,datasets,,ImageNet,ImageNet-1k,4,
+2303.15343,datasets,,XM3600,,4,36-language retrieval
+2303.15343,datasets,,ObjectNet,,7,
+2303.15343,datasets,,ImageNet-v2,ImageNet v2,7,
+2303.15343,datasets,,ImageNet ReaL,ReaL,7,
+2303.15343,datasets,,MSCOCO,COCO,7,retrieval
+2303.15343,baselines,,softmax loss,softmax-based contrastive loss,2,
+2303.15343,baselines,,CLIP,CLIP (WebLI),5,
+2303.15343,baselines,,LiT,,1,
+2303.15343,baselines,,OpenCLIP,,8,
+2303.15343,baselines,,EVA-CLIP,,8,
+2303.15343,baselines,,CLIPA-v2,,8,
+2303.15343,baselines,,FLIP,,2,
+2303.15343,baselines,,ALIGN,,2,
+2303.15343,metrics,,zero-shot accuracy,0-shot accuracy|ImageNet 0-shot|accuracy,1,
+2303.15343,metrics,,recall@1,R@1|COCO R@1,6,retrieval
+2303.15343,hyperparameters,optimizer,ScalingViT-Adafactor,Adafactor,4,default
+2303.15343,hyperparameters,adam_beta1,0.9,β1 = 0.9,14,
+2303.15343,hyperparameters,adam_beta2,0.95,β2 = 0.95,14,
+2303.15343,hyperparameters,learning_rate,0.001,,14,SigLiT
+2303.15343,hyperparameters,warmup_examples,200M,first 200 M examples seen,14,SigLiT
+2303.15343,hyperparameters,lr_schedule,cosine,cosine learning rate schedule,14,
+2303.15343,hyperparameters,weight_decay,0.0001,,14,SigLiT
+2303.15343,hyperparameters,vocab_size,32000,32 k vocabulary,14,
+2303.15343,hyperparameters,max_seq_length,16,16 text tokens,14,
+2303.15343,hyperparameters,vocab_size,250000,250 k tokens,5,multilingual
+2303.15343,hyperparameters,image_size,288,288 × 288,14,SigLiT precomputed embeddings
+2303.15343,hyperparameters,image_size,224,224×224,5,SigLIP
+2303.15343,hyperparameters,optimizer,LION,Lion,6,SigLiT on four TPU-v4 chips
+2303.15343,hyperparameters,learning_rate,1e-4,1 × 10−4,6,LION peak
+2303.15343,hyperparameters,weight_decay,1e-7,1 × 10−7,6,LION
+2303.15343,hyperparameters,warmup_steps,6500,6.5k steps,6,LION
+2303.15343,hyperparameters,train_steps,65000,65 000 steps,6,LION
+2303.15343,hyperparameters,batch_size,32k,32 k,2,recommended
+2303.15343,hyperparameters,batch_size,1M,one million,1,largest SigLiT batch
+2303.15343,hyperparameters,batch_size,16k,16 k batch size,7,unlocked fine-tuning
+2303.15343,hyperparameters,temperature_init,log 10,t′,3,
+2303.15343,hyperparameters,bias_init,-10,−10,3,
+2303.15343,hyperparameters,lr_multiplier,0.1,0.1 learning rate multiplier,7,pre-trained image tower
+2303.15343,hyperparameters,backbone,ViT-B/16,B/16,5,SigLIP
+2303.15343,hyperparameters,backbone,ViT-g,ViT-g/14,4,SigLiT frozen image tower
+2303.15343,hyperparameters,backbone,So-400m,SoViT-400m,7,
+2303.15343,hyperparameters,train_examples,40B,40 billion examples,7,Table 3 models
+2303.15343,compute,,four TPUv4 chips,4 TPU-v4 chips,1,SigLiT
+2303.15343,compute,,16 TPU-v4 chips,,1,SigLIP
+2303.15343,compute,,32 TPUv4 chips,,2,
+2303.15343,code_urls,,https://github.com/google-research/big_vision,github.com/google-research/big_vision,1,
+2303.15343,datasets,,Oxford-IIIT Pet,Oxford-iiit pet,9,added in adjudication
+2303.15343,datasets,,CIFAR-100,Cifar100,9,added in adjudication
+2303.15343,hyperparameters,batch_size,20k,20 k batch size,6,SigLiT Large text tower; added in adjudication
+2303.15343,hyperparameters,train_steps,107k,107 k steps,6,SigLiT ViT-g/14; added in adjudication
+2303.15343,hyperparameters,train_examples,2.4B,2.4 B examples,7,unlocked fine-tuning; added in adjudication
+2304.02643,task,,promptable segmentation,segment anything|image segmentation,1,
+2304.02643,task,,zero-shot single point valid mask evaluation,interactive segmentation|point to mask,8,
+2304.02643,task,,edge detection,zero-shot edge detection,10,
+2304.02643,task,,object proposal generation,object proposals,10,
+2304.02643,task,,instance segmentation,zero-shot instance segmentation,10,
+2304.02643,task,,text-to-mask,,11,
+2304.02643,datasets,,SA-1B,Segment Anything 1B,1,
+2304.02643,datasets,,BSDS500,,10,
+2304.02643,datasets,,LVIS,LVIS v1,10,
+2304.02643,datasets,,COCO,,10,
+2304.02643,datasets,,MIAP,More Inclusive Annotations for People,8,fairness
+2304.02643,datasets,,ADE20K,,9,23-dataset suite
+2304.02643,datasets,,BBBC038v1,,9,23-dataset suite
+2304.02643,datasets,,Cityscapes,,9,23-dataset suite
+2304.02643,datasets,,DOORS,,9,23-dataset suite
+2304.02643,datasets,,DRAM,,9,23-dataset suite
+2304.02643,datasets,,EgoHOS,,9,23-dataset suite
+2304.02643,datasets,,GTEA,,9,23-dataset suite
+2304.02643,datasets,,Hypersim,,9,23-dataset suite
+2304.02643,datasets,,IBD,,9,23-dataset suite
+2304.02643,datasets,,iShape,,9,23-dataset suite
+2304.02643,datasets,,NDD20,,9,23-dataset suite
+2304.02643,datasets,,NDISPark,,9,23-dataset suite
+2304.02643,datasets,,OVIS,,9,23-dataset suite
+2304.02643,datasets,,PPDLS,,9,23-dataset suite
+2304.02643,datasets,,Plittersdorf,,9,23-dataset suite
+2304.02643,datasets,,STREETS,,9,23-dataset suite
+2304.02643,datasets,,TimberSeg,,9,23-dataset suite
+2304.02643,datasets,,TrashCan,,9,23-dataset suite
+2304.02643,datasets,,VISOR,,9,23-dataset suite
+2304.02643,datasets,,WoodScape,,9,23-dataset suite
+2304.02643,datasets,,PIDRay,,9,23-dataset suite
+2304.02643,datasets,,ZeroWaste-f,,9,23-dataset suite
+2304.02643,baselines,,RITM,,8,
+2304.02643,baselines,,SimpleClick,,9,
+2304.02643,baselines,,FocalClick,,9,
+2304.02643,baselines,,HED,,10,edge detection
+2304.02643,baselines,,Canny,,10,edge detection
+2304.02643,baselines,,Felz-Hutt,Felzenszwalb and Huttenlocher,10,edge detection
+2304.02643,baselines,,ViTDet-H,ViTDet,10,proposals and instance segmentation
+2304.02643,metrics,,mIoU,mean IoU,8,
+2304.02643,metrics,,mask quality rating,human rating|annotator rating,9,1 to 10
+2304.02643,metrics,,ODS,,10,edge detection
+2304.02643,metrics,,OIS,,10,edge detection
+2304.02643,metrics,,AP,,10,edge detection
+2304.02643,metrics,,R50,recall at 50% precision,10,edge detection
+2304.02643,metrics,,mask AR@1000,AR@1000,10,object proposals
+2304.02643,metrics,,mask AP,,10,instance segmentation
+2304.02643,hyperparameters,backbone,ViT-H,MAE pre-trained ViT-H,8,image encoder
+2304.02643,hyperparameters,image_size,1024,1024×1024,16,
+2304.02643,hyperparameters,hidden_size,256,embedding dimension of 256|256 channels,17,mask decoder
+2304.02643,hyperparameters,num_layers,2,two-layer decoder,17,mask decoder
+2304.02643,hyperparameters,num_heads,8,8 heads,17,mask decoder
+2304.02643,hyperparameters,loss_ratio,20:1,focal loss to dice loss,17,
+2304.02643,hyperparameters,num_iterations_per_mask,11,11 rounds|11 total iterations,17,interactive training
+2304.02643,hyperparameters,optimizer,AdamW,,17,
+2304.02643,hyperparameters,adam_beta1,0.9,β1 = 0.9,17,
+2304.02643,hyperparameters,adam_beta2,0.999,β2 = 0.999,17,
+2304.02643,hyperparameters,warmup_steps,250,250 iterations,17,linear warmup
+2304.02643,hyperparameters,lr_schedule,step-wise decay,step-wise learning rate decay,17,÷10 at 60k and 86666
+2304.02643,hyperparameters,learning_rate,8e-4,8e−4,17,ViT-H and ViT-B
+2304.02643,hyperparameters,train_steps,90000,90k iterations,17,
+2304.02643,hyperparameters,epochs,2,∼2 SA-1B epochs,17,
+2304.02643,hyperparameters,batch_size,256,256 images,17,
+2304.02643,hyperparameters,weight_decay,0.1,wd,17,
+2304.02643,hyperparameters,drop_path,0.4,dp,17,ViT-H and ViT-L
+2304.02643,hyperparameters,layer_decay,0.8,layer-wise learning rate decay,17,ViT-H and ViT-L
+2304.02643,hyperparameters,masks_per_gpu,64,64 randomly sampled masks per GPU,18,
+2304.02643,hyperparameters,train_steps,180000,180k iterations,18,ViT-B and ViT-L
+2304.02643,hyperparameters,batch_size,128,,18,ViT-B and ViT-L
+2304.02643,hyperparameters,learning_rate,4e-4,4e−4,18,ViT-L
+2304.02643,hyperparameters,layer_decay,0.6,ld = 0.6,18,ViT-B
+2304.02643,hyperparameters,drop_path,0.6,dp = 0.6,18,ViT-B
+2304.02643,compute,,256 A100 GPUs,256 GPUs,28,
+2304.02643,compute,,68 hours,,28,
+2304.02643,code_urls,,https://segment-anything.com,segment-anything.com,1,project page; model and dataset release
+2304.02643,hyperparameters,augmentation,large-scale jitter,scale range of [0.1; 2.0],18,first two data engine stages; added in adjudication
+2304.02643,hyperparameters,train_steps,120k,120k iterations,22,added in adjudication
+2304.02643,compute,,128 GPUs,,18,ViT-B and ViT-L; added in adjudication
+2304.07193,task,,self-supervised visual representation learning,learning robust visual features without supervision|visual features,1,
+2304.07193,task,,image classification,linear probing|classification,11,
+2304.07193,task,,semantic segmentation,segmentation,14,
+2304.07193,task,,monocular depth estimation,depth estimation,16,
+2304.07193,task,,instance retrieval,image retrieval,14,
+2304.07193,task,,video classification,action recognition,13,
+2304.07193,datasets,,LVD-142M,,4,curated pretraining data
+2304.07193,datasets,,ImageNet-1k,ImageNet|INet-1k,8,
+2304.07193,datasets,,ImageNet-22k,,8,
+2304.07193,datasets,,ImageNet-V2,,32,Table 18
+2304.07193,datasets,,ImageNet-ReaL,,32,Table 18
+2304.07193,datasets,,ImageNet-A,,32,Table 18
+2304.07193,datasets,,ImageNet-C,,32,Table 18
+2304.07193,datasets,,ImageNet-R,,32,Table 18
+2304.07193,datasets,,ImageNet-Sketch,,32,Table 18
+2304.07193,datasets,,Food-101,,32,Table 18
+2304.07193,datasets,,CIFAR-10,,32,Table 18
+2304.07193,datasets,,CIFAR-100,,32,Table 18
+2304.07193,datasets,,SUN397,,32,Table 18
+2304.07193,datasets,,StanfordCars,,32,Table 18
+2304.07193,datasets,,FGVC-Aircraft,,32,Table 18
+2304.07193,datasets,,VOC 2007,,32,Table 18
+2304.07193,datasets,,DTD,,32,Table 18
+2304.07193,datasets,,Oxford Pets,,32,Table 18
+2304.07193,datasets,,Caltech101,,32,Table 18
+2304.07193,datasets,,Flowers,,32,Table 18
+2304.07193,datasets,,CUB200,,32,Table 18
+2304.07193,datasets,,iNaturalist 2018,,32,Table 18
+2304.07193,datasets,,iNaturalist 2021,,32,Table 18
+2304.07193,datasets,,Places-205,,32,Table 18
+2304.07193,datasets,,UCF101,,32,Table 18
+2304.07193,datasets,,Kinetics-400,,32,Table 18
+2304.07193,datasets,,SSv2,,32,Table 18
+2304.07193,datasets,,GLD v2,,32,Table 18
+2304.07193,datasets,,R-Paris,,32,Table 18
+2304.07193,datasets,,R-Oxford,,32,Table 18
+2304.07193,datasets,,Met,,32,Table 18
+2304.07193,datasets,,Amstertime,,32,Table 18
+2304.07193,datasets,,ADE20k,,32,Table 18
+2304.07193,datasets,,Cityscapes,,32,Table 18
+2304.07193,datasets,,VOC 2012,,32,Table 18
+2304.07193,datasets,,Mapillary SLS,,32,Table 18
+2304.07193,datasets,,NYU-Depth V2,,32,Table 18
+2304.07193,datasets,,KITTI,,32,Table 18
+2304.07193,datasets,,SUN-RGBD,,32,Table 18
+2304.07193,datasets,,DollarStreet,,32,Table 18
+2304.07193,datasets,,Casual Conversations,,32,Table 18
+2304.07193,baselines,,iBOT,,11,
+2304.07193,baselines,,MAE,,11,
+2304.07193,baselines,,DINO,,11,
+2304.07193,baselines,,SEERv2,,11,
+2304.07193,baselines,,MSN,,11,
+2304.07193,baselines,,EsViT,,11,
+2304.07193,baselines,,Mugs,,11,
+2304.07193,baselines,,CLIP,,11,
+2304.07193,baselines,,OpenCLIP,OpenCLIP-G,11,
+2304.07193,baselines,,SWAG,,11,
+2304.07193,baselines,,EVA-CLIP,,11,
+2304.07193,metrics,,top-1 accuracy,Top-1|accuracy,7,
+2304.07193,metrics,,k-NN accuracy,k-NN,8,
+2304.07193,metrics,,mIoU,,9,segmentation
+2304.07193,metrics,,mAP,,9,retrieval
+2304.07193,metrics,,RMSE,,16,depth
+2304.07193,hyperparameters,train_steps,625000,625k iterations,31,
+2304.07193,hyperparameters,optimizer,AdamW,,31,
+2304.07193,hyperparameters,layerscale_init,1e-5,initial LayerScale value,31,
+2304.07193,hyperparameters,weight_decay,0.04,cosine schedule from 0.04 to 0.2,31,start
+2304.07193,hyperparameters,weight_decay,0.2,,31,end
+2304.07193,hyperparameters,warmup_steps,100000,100k iterations,31,
+2304.07193,hyperparameters,teacher_momentum,0.994,teacher momentum 0.994,31,cosine to 1
+2304.07193,hyperparameters,precision,float16,fp16,31,
+2304.07193,hyperparameters,drop_path,0,drop-rate,31,distilled models
+2304.07193,hyperparameters,drop_path,0.4,Stochastic Depth (rate=0.4),31,from scratch
+2304.07193,hyperparameters,learning_rate,1e-3,LR,31,distilled models
+2304.07193,hyperparameters,learning_rate,3.5e-4,LR,31,from scratch
+2304.07193,hyperparameters,batch_size,2048,,31,distilled models
+2304.07193,hyperparameters,batch_size,3072,3k,31,from scratch
+2304.07193,hyperparameters,hidden_size,384,embed dim,31,ViT-S/14
+2304.07193,hyperparameters,hidden_size,768,embed dim,31,ViT-B/14
+2304.07193,hyperparameters,hidden_size,1024,embed dim,31,ViT-L/14
+2304.07193,hyperparameters,hidden_size,1536,embedding dimension of 1536,31,ViT-g/14
+2304.07193,hyperparameters,num_heads,6,,31,ViT-S/14
+2304.07193,hyperparameters,num_heads,12,,31,ViT-B/14
+2304.07193,hyperparameters,num_heads,16,,31,ViT-L/14
+2304.07193,hyperparameters,num_heads,24,24 heads,31,ViT-g/14
+2304.07193,hyperparameters,num_layers,12,blocks,31,ViT-S/14
+2304.07193,hyperparameters,num_layers,18,blocks,31,ViT-B/14
+2304.07193,hyperparameters,num_layers,24,blocks,31,ViT-L/14
+2304.07193,hyperparameters,num_layers,40,blocks,31,ViT-g/14
+2304.07193,hyperparameters,activation,SwiGLU,,31,from scratch
+2304.07193,hyperparameters,patch_size,14,Patch size 14,8,
+2304.07193,hyperparameters,num_prototypes,128k,128k prototypes,8,
+2304.07193,hyperparameters,koleo_weight,0.1,,29,
+2304.07193,hyperparameters,sinkhorn_iterations,3,3 iterations,6,
+2304.07193,hyperparameters,image_size,224,resolution 224,6,global crops
+2304.07193,hyperparameters,image_size,98,resolution 98,6,local crops
+2304.07193,hyperparameters,image_size,518,518×518,6,high-resolution adaptation
+2304.07193,hyperparameters,train_steps,10000,10k iterations,31,high-resolution adaptation
+2304.07193,hyperparameters,model_size,1B,1B parameters,1,ViT-g
+2304.07193,hyperparameters,train_steps,12500,12500 iterations,31,linear probing
+2304.07193,compute,,A100 GPUs,A100-40GB,6,
+2304.07193,compute,,"22,016 GPU-hours",22016 GPU-hours,20,DINOv2-g
+2304.07193,compute,,20 nodes with 8 V100-32GB GPUs,V100-32GB,5,data curation
+2304.07193,code_urls,,https://github.com/facebookresearch/dinov2,github.com/facebookresearch/dinov2,6,
+2304.07193,datasets,,SUN3d,SUN3D,15,depth transfer; added in adjudication
+2304.08485,task,,multimodal instruction following,visual instruction following|multimodal chatbot|visual chat|instruction-following,5,
+2304.08485,task,,science question answering,multimodal reasoning|ScienceQA|visual reasoning,5,
+2304.08485,datasets,,CC-595K,CC3M|filtered CC3M|Conceptual Captions,5,pre-training (595K pairs)
+2304.08485,datasets,,LLaVA-Instruct-158K,158K instruction-following data|LLaVA-Instruct,5,fine-tuning
+2304.08485,datasets,,COCO,COCO images|COCO-Val-2014,3,instruction data source
+2304.08485,datasets,,LLaVA-Bench (COCO),LLaVA-Bench,7,30 images 90 questions
+2304.08485,datasets,,LLaVA-Bench (In-the-Wild),LLaVA-Bench,7,24 images 60 questions
+2304.08485,datasets,,ScienceQA,Science QA,5,
+2304.08485,baselines,,BLIP-2,,6,
+2304.08485,baselines,,OpenFlamingo,,6,
+2304.08485,baselines,,GPT-4,multimodal GPT-4|text-only GPT-4,6,
+2304.08485,baselines,,GPT-3.5,text-davinci-002,8,
+2304.08485,baselines,,GPT-3.5 w/ CoT,GPT-3.5 with chain-of-thought,8,
+2304.08485,baselines,,LLaMA-Adapter,,8,
+2304.08485,baselines,,MM-CoT,multimodal chain-of-thought|MM-CoT Base|MM-CoT Large,8,
+2304.08485,baselines,,Human,human performance,9,ScienceQA
+2304.08485,metrics,,relative score,GPT-4 judged relative score|overall score,6,
+2304.08485,metrics,,accuracy,ScienceQA accuracy,8,
+2304.08485,hyperparameters,epochs,1,,5,pre-training
+2304.08485,hyperparameters,learning_rate,2e-3,,5,pre-training
+2304.08485,hyperparameters,batch_size,128,,5,pre-training
+2304.08485,hyperparameters,epochs,3,,5,fine-tuning on LLaVA-Instruct-158K
+2304.08485,hyperparameters,learning_rate,2e-5,,5,fine-tuning
+2304.08485,hyperparameters,batch_size,32,,5,fine-tuning
+2304.08485,hyperparameters,epochs,12,,8,ScienceQA
+2304.08485,hyperparameters,optimizer,Adam,,20,
+2304.08485,hyperparameters,weight_decay,0,no weight decay,20,
+2304.08485,hyperparameters,lr_schedule,cosine,cosine learning rate,20,
+2304.08485,hyperparameters,warmup_ratio,0.03,3%,20,
+2304.08485,hyperparameters,precision,BF16,BF16 and TF32,20,
+2304.08485,hyperparameters,model_size,13B,,9,LLM; 7B in ablation
+2304.08485,hyperparameters,model_size,7B,,9,ablation
+2304.08485,hyperparameters,patch_size,14,ViT-L/14,4,CLIP vision encoder
+2304.08485,compute,,8 A100 GPUs,8× A100s|A100,5,
+2304.08485,compute,,4 hours pre-training / 10 hours fine-tuning,4 hours|10 hours,20,ScienceQA fine-tuning 4 hours
+2304.08485,code_urls,,https://llava-vl.github.io,llava-vl.github.io,1,project page with code
+2305.14314,task,,instruction finetuning,instruction tuning|efficient finetuning|parameter-efficient finetuning,1,
+2305.14314,task,,chatbot evaluation,chatbot|dialogue|chatbot performance,7,
+2305.14314,task,,natural language understanding,MMLU|language understanding,6,
+2305.14314,task,,language modeling with quantized models,quantization|zero-shot evaluation|perplexity,6,4-bit data types
+2305.14314,datasets,,GLUE,,6,
+2305.14314,datasets,,Super-NaturalInstructions,TKInstruct|Super-Natural Instructions,6,
+2305.14314,datasets,,MMLU,Massively Multitask Language Understanding,6,
+2305.14314,datasets,,FLAN v2,Flan v2,6,
+2305.14314,datasets,,Alpaca,Stanford Alpaca,6,
+2305.14314,datasets,,OASST1,OpenAssistant|Open Assistant dataset|OA benchmark,8,
+2305.14314,datasets,,HH-RLHF,Anthropic HH,8,
+2305.14314,datasets,,Self-Instruct,,8,
+2305.14314,datasets,,Unnatural Instructions,Unnatural Instruct,8,
+2305.14314,datasets,,Chip2,OIG Laion,8,
+2305.14314,datasets,,Longform,LongForm,8,
+2305.14314,datasets,,Vicuna benchmark,Vicuna prompts,9,80 prompts
+2305.14314,datasets,,Pile Common Crawl,Pile,7,perplexity
+2305.14314,datasets,,Winogrande,,6,zero-shot
+2305.14314,datasets,,HellaSwag,,6,zero-shot
+2305.14314,datasets,,PiQA,,6,zero-shot
+2305.14314,datasets,,Arc-Easy,ARC,6,zero-shot
+2305.14314,datasets,,Arc-Challenge,ARC,6,zero-shot
+2305.14314,datasets,,CrowS,CrowS-Pairs,13,bias evaluation
+2305.14314,baselines,,16-bit full finetuning,full finetuning|BF16,6,
+2305.14314,baselines,,16-bit LoRA,LoRA BF16|LoRA,6,
+2305.14314,baselines,,QLoRA Int8 and FP4,Int8|FP4|Float4|Int4,7,data type comparison
+2305.14314,baselines,,GPT-4,,8,
+2305.14314,baselines,,ChatGPT,GPT-3.5-turbo,8,
+2305.14314,baselines,,Bard,,8,
+2305.14314,baselines,,Vicuna,Vicuna 13B,8,
+2305.14314,baselines,,Open Assistant,Open Assistant 33B,8,
+2305.14314,baselines,,LLaMA no tuning,LLaMA,8,
+2305.14314,metrics,,MMLU 5-shot accuracy,accuracy|5-shot test accuracy,8,
+2305.14314,metrics,,Elo rating,Elo,9,
+2305.14314,metrics,,relative score to ChatGPT,score relative to ChatGPT|Vicuna benchmark score,9,
+2305.14314,metrics,,RougeL,ROUGE-L,7,
+2305.14314,metrics,,perplexity,PPL|mean perplexity,7,
+2305.14314,metrics,,zero-shot accuracy,mean zero-shot accuracy,6,
+2305.14314,metrics,,memory footprint,memory|GB,10,
+2305.14314,hyperparameters,quantization,NF4,4-bit NormalFloat|NormalFloat4,23,with double quantization
+2305.14314,hyperparameters,compute_dtype,bf16,bfloat16,23,
+2305.14314,hyperparameters,lora_rank,64,LoRA r,23,chatbot; T5 xl/xxl
+2305.14314,hyperparameters,lora_alpha,16,α,23,chatbot
+2305.14314,hyperparameters,lora_alpha,64,α,22,Super-NaturalInstructions
+2305.14314,hyperparameters,lora_rank,16,LoRA r,22,small/medium/large T5
+2305.14314,hyperparameters,adam_beta2,0.999,Adam beta2,23,
+2305.14314,hyperparameters,max_grad_norm,0.3,,23,
+2305.14314,hyperparameters,lora_dropout,0.1,,23,models up to 13B
+2305.14314,hyperparameters,lora_dropout,0.05,,22,33B and 65B; also small models per A.1
+2305.14314,hyperparameters,lr_schedule,constant,,23,
+2305.14314,hyperparameters,batch_size,16,,23,7B and 13B; OASST1
+2305.14314,hyperparameters,batch_size,32,,23,33B
+2305.14314,hyperparameters,batch_size,64,,23,65B
+2305.14314,hyperparameters,learning_rate,2e-4,LR,23,7B and 13B
+2305.14314,hyperparameters,learning_rate,1e-4,LR,23,33B and 65B
+2305.14314,hyperparameters,train_steps,10000,steps,23,7B/13B
+2305.14314,hyperparameters,train_steps,1875,steps,23,OASST1
+2305.14314,hyperparameters,train_steps,4000,steps,23,Longform 7B/13B
+2305.14314,hyperparameters,train_steps,5000,steps,23,33B
+2305.14314,hyperparameters,train_steps,2343,steps,23,Longform 33B/65B
+2305.14314,hyperparameters,train_steps,2500,steps,23,65B
+2305.14314,hyperparameters,max_source_length,384,source length,23,
+2305.14314,hyperparameters,max_source_length,512,source length,23,Longform
+2305.14314,hyperparameters,max_target_length,128,target length,23,
+2305.14314,hyperparameters,max_target_length,512,target length,23,OASST1
+2305.14314,hyperparameters,max_target_length,768,target length,23,HH-RLHF
+2305.14314,hyperparameters,max_target_length,1024,target length,23,Longform
+2305.14314,hyperparameters,top_p,0.9,nucleus sampling,8,
+2305.14314,hyperparameters,temperature,0.7,,8,
+2305.14314,hyperparameters,elo_k,32,K,9,Elo
+2305.14314,hyperparameters,elo_initial,1000,,9,Elo start score
+2305.14314,hyperparameters,model_size,7B,,8,LLaMA
+2305.14314,hyperparameters,model_size,13B,,8,LLaMA
+2305.14314,hyperparameters,model_size,33B,,8,LLaMA
+2305.14314,hyperparameters,model_size,65B,,8,LLaMA
+2305.14314,compute,,single 48GB GPU,48GB GPU,1,65B finetuning
+2305.14314,compute,,24 GB consumer GPU in under 12 hours,24 GB|12 hours,10,Guanaco 33B
+2305.14314,code_urls,,https://github.com/artidoro/qlora,,1,
+2305.14314,code_urls,,https://github.com/TimDettmers/bitsandbytes,bitsandbytes,1,
+2305.14314,hyperparameters,learning_rate,1e-6,,6,baseline search range; added in adjudication
+2305.14314,hyperparameters,learning_rate,5e-5,,6,baseline search range; added in adjudication
+2305.14314,hyperparameters,batch_size,8,,6,baseline search range; added in adjudication
+2305.14314,hyperparameters,batch_size,128,,6,baseline search range; added in adjudication
+2305.18290,task,,controlled sentiment generation,sentiment generation|controlled generation,7,
+2305.18290,task,,summarization,text summarization|TL;DR summarization,7,
+2305.18290,task,,single-turn dialogue,dialogue|response generation,7,
+2305.18290,task,,learning from human preferences,preference learning|RLHF|alignment,1,
+2305.18290,datasets,,IMDb,IMDB,7,
+2305.18290,datasets,,Reddit TL;DR,TL;DR|Reddit TL;DR summarization dataset,7,with human preferences from Stiennon et al.
+2305.18290,datasets,,Anthropic Helpful and Harmless,Anthropic HH|Anthropic-HH,7,
+2305.18290,datasets,,CNN/DailyMail,CNN DailyMail,9,out-of-distribution
+2305.18290,baselines,,PPO,RLHF with PPO|PPO-1,8,
+2305.18290,baselines,,PPO-GT,,8,oracle reward
+2305.18290,baselines,,SFT,supervised fine-tuning,8,
+2305.18290,baselines,,Preferred-FT,,8,
+2305.18290,baselines,,Unlikelihood,,8,
+2305.18290,baselines,,Best of N,Best of 128,8,
+2305.18290,baselines,,GPT-J zero-shot,GPT-J,8,summarization
+2305.18290,baselines,,Pythia-2.8B 2-shot,Pythia-2.8B|Pythia,8,dialogue
+2305.18290,metrics,,win rate,GPT-4 win rate|human win rate,7,
+2305.18290,metrics,,reward,average reward|reward-KL frontier,8,sentiment
+2305.18290,metrics,,KL divergence,KL|sequence-level KL,8,
+2305.18290,metrics,,agreement,human agreement|GPT-4 human agreement,10,
+2305.18290,hyperparameters,dpo_beta,0.1,β,20,default
+2305.18290,hyperparameters,dpo_beta,0.5,β,20,TL;DR summarization
+2305.18290,hyperparameters,dpo_beta,0.05,β,8,sentiment sweep
+2305.18290,hyperparameters,dpo_beta,1,β,8,sentiment sweep
+2305.18290,hyperparameters,dpo_beta,5,β,8,sentiment sweep
+2305.18290,hyperparameters,batch_size,64,,20,
+2305.18290,hyperparameters,optimizer,RMSprop,,20,
+2305.18290,hyperparameters,learning_rate,1e-6,,20,
+2305.18290,hyperparameters,warmup_steps,150,,20,
+2305.18290,hyperparameters,kl_target,3,target KL,8,PPO sweep
+2305.18290,hyperparameters,kl_target,6,target KL,8,PPO sweep
+2305.18290,hyperparameters,kl_target,9,target KL,8,PPO sweep
+2305.18290,hyperparameters,kl_target,12,target KL,8,PPO sweep
+2305.18290,hyperparameters,unlikelihood_alpha,0.05,α,8,unlikelihood sweep
+2305.18290,hyperparameters,unlikelihood_alpha,0.1,α,8,unlikelihood sweep
+2305.18290,hyperparameters,unlikelihood_alpha,0.5,α,8,unlikelihood sweep
+2305.18290,hyperparameters,unlikelihood_alpha,1,α,8,unlikelihood sweep
+2305.18290,hyperparameters,epochs,1,,20,IMDb SFT
+2305.18290,hyperparameters,epochs,3,,20,IMDb reward model
+2305.18290,hyperparameters,ppo_batch_size,1024,batch samples per PPO step,20,IMDb
+2305.18290,hyperparameters,num_samples,128,Best of 128|N,9,dialogue Best of N
+2305.18290,hyperparameters,temperature,0.25,sampling temperature,9,DPO human evaluation
+2305.18290,hyperparameters,base_model,GPT-2-large,gpt2-large,7,sentiment
+2305.18290,hyperparameters,base_model,GPT-J,,9,summarization SFT
+2305.18290,hyperparameters,base_model,Pythia-2.8B,,9,dialogue
+2305.18290,hyperparameters,temperature,0.0,sampling temperature,7,range in Figure 2/3; added in adjudication
+2305.18290,hyperparameters,temperature,1.0,sampling temperature,7,range in Figure 2/3; added in adjudication
+2309.16588,task,,image classification,linear probing classification|ImageNet classification,6,
+2309.16588,task,,semantic segmentation,segmentation,6,ADE20k linear probing
+2309.16588,task,,monocular depth estimation,depth estimation,6,NYUd
+2309.16588,task,,unsupervised object discovery,object discovery,7,LOST
+2309.16588,task,,zero-shot classification,zero-shot image classification,6,OpenCLIP
+2309.16588,datasets,,ImageNet-22k,ImageNet 22k|IN22k,6,pretraining
+2309.16588,datasets,,ImageNet-1k,ImageNet|IN1k,7,evaluation
+2309.16588,datasets,,ADE20k,ADE-20k|ADE20K,6,
+2309.16588,datasets,,NYUd,NYU Depth|NYUd v2,6,
+2309.16588,datasets,,PASCAL VOC 2007,VOC 2007|VOC2007,8,
+2309.16588,datasets,,PASCAL VOC 2012,VOC 2012,8,
+2309.16588,datasets,,COCO 20k,COCO,8,
+2309.16588,datasets,,Shutterstock image-text corpus,Shutterstock,6,OpenCLIP training
+2309.16588,datasets,,Places205,P205,5,linear probing of tokens
+2309.16588,datasets,,FGVC Aircraft,Aircraft|Airc.,5,
+2309.16588,datasets,,CIFAR-10,CF10,5,
+2309.16588,datasets,,CIFAR-100,CF100,5,
+2309.16588,datasets,,CUB,CUB-200,5,
+2309.16588,datasets,,Caltech101,Cal101|Caltech-101,5,
+2309.16588,datasets,,Stanford Cars,Cars,5,
+2309.16588,datasets,,DTD,Describable Textures,5,
+2309.16588,datasets,,Flowers,Flowers102|Flow.,5,
+2309.16588,datasets,,Food-101,Food,5,
+2309.16588,datasets,,Oxford Pets,Pets,5,
+2309.16588,datasets,,SUN397,SUN,5,
+2309.16588,datasets,,PASCAL VOC,VOC,5,classification probing
+2309.16588,baselines,,DeiT-III,DeiT III,6,without registers
+2309.16588,baselines,,OpenCLIP,,6,without registers
+2309.16588,baselines,,DINOv2,,6,without registers
+2309.16588,baselines,,DINO,,8,LOST reference
+2309.16588,metrics,,top-1 accuracy,top-1|accuracy,7,
+2309.16588,metrics,,mIoU,mean intersection over union,7,
+2309.16588,metrics,,RMSE,rmse,7,depth
+2309.16588,metrics,,CorLoc,corloc,8,object discovery
+2309.16588,metrics,,L2 error,reconstruction error,4,
+2309.16588,hyperparameters,num_registers,4,register tokens,7,used in all experiments
+2309.16588,hyperparameters,num_registers,1,,7,ablation
+2309.16588,hyperparameters,num_registers,2,,7,ablation
+2309.16588,hyperparameters,num_registers,8,,7,ablation
+2309.16588,hyperparameters,num_registers,16,,7,ablation
+2309.16588,hyperparameters,norm_threshold,150,cutoff|high-norm,3,outlier definition
+2309.16588,hyperparameters,patch_size,14,ViT-L/14,7,DINOv2
+2309.16588,hyperparameters,patch_size,16,ViT-B/16,6,OpenCLIP
+2310.06625,task,,multivariate time series forecasting,time series forecasting,1,
+2310.06625,datasets,,ECL,Electricity,5,
+2310.06625,datasets,,ETT,ETTh1|ETTh2|ETTm1|ETTm2,5,4 subsets
+2310.06625,datasets,,Exchange,,5,
+2310.06625,datasets,,Traffic,,5,
+2310.06625,datasets,,Weather,,5,
+2310.06625,datasets,,Solar-Energy,Solar,5,
+2310.06625,datasets,,PEMS,PEMS03|PEMS04|PEMS07|PEMS08,6,4 subsets
+2310.06625,datasets,,Market,,6,appendix
+2310.06625,baselines,,Autoformer,,6,
+2310.06625,baselines,,FEDformer,,6,
+2310.06625,baselines,,Stationary,,6,
+2310.06625,baselines,,Crossformer,,6,
+2310.06625,baselines,,PatchTST,,6,
+2310.06625,baselines,,DLinear,,6,
+2310.06625,baselines,,TiDE,,6,
+2310.06625,baselines,,RLinear,,6,
+2310.06625,baselines,,SCINet,,6,
+2310.06625,baselines,,TimesNet,,6,
+2310.06625,baselines,,Transformer,vanilla Transformer,6,inverted framework
+2310.06625,baselines,,Reformer,,6,inverted framework
+2310.06625,baselines,,Informer,,6,inverted framework
+2310.06625,baselines,,Flowformer,,6,inverted framework
+2310.06625,baselines,,Flashformer,FlashAttention,6,inverted framework
+2310.06625,metrics,,MSE,,6,
+2310.06625,metrics,,MAE,,6,
+2310.06625,hyperparameters,lookback_window,96,T = 96,6,
+2310.06625,hyperparameters,prediction_length,96,"S ∈{96, 192, 336, 720}",6,
+2310.06625,hyperparameters,prediction_length,192,,6,
+2310.06625,hyperparameters,prediction_length,336,,6,
+2310.06625,hyperparameters,prediction_length,720,,6,
+2310.06625,hyperparameters,prediction_length,12,"S ∈{12, 24, 36, 48}",6,PEMS
+2310.06625,hyperparameters,prediction_length,24,,6,PEMS
+2310.06625,hyperparameters,prediction_length,36,,6,PEMS
+2310.06625,hyperparameters,prediction_length,48,,6,PEMS
+2310.06625,hyperparameters,optimizer,Adam,ADAM,14,
+2310.06625,hyperparameters,learning_rate,1e-3,10−3,14,search space
+2310.06625,hyperparameters,learning_rate,5e-4,5×10−4,14,search space
+2310.06625,hyperparameters,learning_rate,1e-4,10−4,14,search space
+2310.06625,hyperparameters,loss,L2 loss,L2,14,
+2310.06625,hyperparameters,batch_size,32,,14,
+2310.06625,hyperparameters,epochs,10,,14,
+2310.06625,hyperparameters,num_layers,2,"L ∈{2, 3, 4}",14,
+2310.06625,hyperparameters,num_layers,3,,14,
+2310.06625,hyperparameters,num_layers,4,,14,
+2310.06625,hyperparameters,hidden_size,256,"D is set from {256, 512}",14,
+2310.06625,hyperparameters,hidden_size,512,,14,
+2310.06625,compute,,NVIDIA P100 16GB GPU,P100,14,
+2310.06625,code_urls,,https://github.com/thuml/iTransformer,github.com/thuml/iTransformer,1,
+2312.00752,task,,sequence modeling,linear-time sequence modeling|selective state spaces,1,
+2312.00752,task,,language modeling,autoregressive language modeling,11,
+2312.00752,task,,DNA modeling,genomics,12,
+2312.00752,task,,audio modeling and generation,audio waveform modeling|speech generation,14,
+2312.00752,task,,selective copying,Selective Copying task,5,synthetic
+2312.00752,task,,induction heads,Induction Heads task,5,synthetic
+2312.00752,datasets,,The Pile,Pile,11,
+2312.00752,datasets,,LAMBADA,,12,
+2312.00752,datasets,,HellaSwag,,12,
+2312.00752,datasets,,PIQA,,12,
+2312.00752,datasets,,ARC-easy,Arc-E,12,
+2312.00752,datasets,,ARC-challenge,Arc-C,12,
+2312.00752,datasets,,WinoGrande,,12,
+2312.00752,datasets,,HG38,human genome,12,
+2312.00752,datasets,,Great Apes DNA classification,species classification|Synthetic Species Classification,13,
+2312.00752,datasets,,YouTubeMix,,14,
+2312.00752,datasets,,SC09,,14,
+2312.00752,baselines,,Transformer,GPT3 architecture,11,
+2312.00752,baselines,,Transformer++,,11,
+2312.00752,baselines,,H3,H3++|Hybrid H3,4,
+2312.00752,baselines,,Hyena,,4,
+2312.00752,baselines,,RetNet,,4,
+2312.00752,baselines,,RWKV,,4,
+2312.00752,baselines,,S4,,10,synthetics
+2312.00752,baselines,,Pythia,,12,
+2312.00752,baselines,,GPT-Neo,,12,
+2312.00752,baselines,,OPT,,12,
+2312.00752,baselines,,HyenaDNA,,12,
+2312.00752,baselines,,SaShiMi,Sashimi,14,
+2312.00752,baselines,,SampleRNN,,15,
+2312.00752,baselines,,WaveNet,,15,
+2312.00752,baselines,,WaveGAN,,15,
+2312.00752,baselines,,DiffWave,,15,
+2312.00752,baselines,,multi-head attention,MHA-Abs|MHA-RoPE|MHA-xPos,10,induction heads
+2312.00752,metrics,,perplexity,,11,
+2312.00752,metrics,,accuracy,normalized accuracy,12,
+2312.00752,metrics,,bits per byte,BPB,14,
+2312.00752,metrics,,NLL,negative log-likelihood,15,
+2312.00752,metrics,,FID,,15,
+2312.00752,metrics,,IS,,15,
+2312.00752,metrics,,mIS,,15,
+2312.00752,metrics,,AM,,15,
+2312.00752,metrics,,throughput,inference throughput,15,
+2312.00752,hyperparameters,expansion_factor,2,𝐸= 2,7,
+2312.00752,hyperparameters,state_dim,16,𝑁= 16,15,
+2312.00752,hyperparameters,num_layers,2,2 layer models,29,synthetic tasks
+2312.00752,hyperparameters,hidden_size,64,𝐷= 64,29,selective copying
+2312.00752,hyperparameters,vocab_size,16,vocab size of 16,29,synthetic tasks
+2312.00752,hyperparameters,max_seq_length,4096,length 4096,29,selective copying
+2312.00752,hyperparameters,train_steps,400K,400K steps,29,selective copying
+2312.00752,hyperparameters,learning_rate,0.0001,1e-4,29,selective copying; Great Apes fine-tuning
+2312.00752,hyperparameters,batch_size,64,,29,selective copying; species fine-tuning
+2312.00752,hyperparameters,batch_size,8,,29,induction heads
+2312.00752,hyperparameters,optimizer,AdamW,,29,language modeling
+2312.00752,hyperparameters,learning_rate,2e-4,2𝑒−4,29,induction heads; 1.3B scaling
+2312.00752,hyperparameters,learning_rate,1e-3,1𝑒−3,29,induction heads Mamba
+2312.00752,hyperparameters,num_layers,12,n_layers,30,125M
+2312.00752,hyperparameters,num_layers,24,n_layers,30,350M / 760M / 1.3B
+2312.00752,hyperparameters,hidden_size,768,d_model,30,125M
+2312.00752,hyperparameters,hidden_size,1024,d_model,30,350M
+2312.00752,hyperparameters,hidden_size,1536,d_model,30,760M
+2312.00752,hyperparameters,hidden_size,2048,d_model,30,1.3B
+2312.00752,hyperparameters,train_steps,4800,,30,125M
+2312.00752,hyperparameters,train_steps,13500,,30,350M
+2312.00752,hyperparameters,train_steps,29000,,30,760M
+2312.00752,hyperparameters,train_steps,50000,,30,1.3B
+2312.00752,hyperparameters,learning_rate,6e-4,,30,125M
+2312.00752,hyperparameters,learning_rate,3e-4,,30,350M
+2312.00752,hyperparameters,learning_rate,2.5e-4,,30,760M
+2312.00752,hyperparameters,batch_size,0.5M tokens,0.5M,30,scaling laws
+2312.00752,hyperparameters,batch_size,1M tokens,1M,31,1.3B downstream
+2312.00752,hyperparameters,grad_clip,1.0,gradient clip value 1.0,30,
+2312.00752,hyperparameters,weight_decay,0.1,,30,
+2312.00752,hyperparameters,dropout,0,no dropout,30,
+2312.00752,hyperparameters,lr_schedule,linear warmup with cosine decay,cosine decay,30,
+2312.00752,hyperparameters,adam_beta1,0.9,𝛽= (.9|.95),30,
+2312.00752,hyperparameters,adam_beta2,0.95,.95,30,improved recipe
+2312.00752,hyperparameters,train_tokens,300B,300B tokens,12,downstream models
+2312.00752,hyperparameters,tokenizer,GPT-NeoX,GPT-NeoX tokenizer,31,downstream; GPT2 tokenizer for scaling laws
+2312.00752,hyperparameters,learning_rate,8e-3,0.008,33,Mamba DNA pretraining
+2312.00752,hyperparameters,batch_size,1024,global batch size of 1024,13,DNA scaling
+2312.00752,hyperparameters,train_steps,20K,20𝐾 gradient steps,13,DNA sequence length scaling
+2312.00752,hyperparameters,num_layers,6,6 layers,13,DNA sequence length scaling
+2312.00752,hyperparameters,hidden_size,128,width 128,13,DNA sequence length scaling
+2312.00752,hyperparameters,epochs,10,,33,Great Apes fine-tuning
+2312.00752,compute,,A100 GPUs,A100,2,
+2312.00752,code_urls,,https://github.com/state-spaces/mamba,github.com/state-spaces/mamba,2,
+2312.00752,hyperparameters,learning_rate,2e-3,,33,DNA sweep; added in adjudication
+2312.00752,hyperparameters,learning_rate,4e-3,,33,DNA sweep; added in adjudication
+2312.00752,hyperparameters,batch_size,16M tokens,2^24,33,DNA sequence-length scaling; added in adjudication
+2312.00752,hyperparameters,learning_rate,4e-5,,33,Hyena species fine-tuning; added in adjudication
+2402.03300,task,,mathematical reasoning,math problem solving|mathematical problem solving,1,
+2402.03300,task,,tool-integrated mathematical reasoning,program-aided reasoning|tool use,9,
+2402.03300,task,,formal theorem proving,informal-to-formal proving|autoformalization,9,
+2402.03300,task,,language understanding and code generation,natural language understanding|code,9,
+2402.03300,datasets,,DeepSeekMath Corpus,120B math tokens|Common Crawl,5,
+2402.03300,datasets,,OpenWebMath,,4,
+2402.03300,datasets,,MathPile,,6,
+2402.03300,datasets,,Proof-Pile-2,,6,
+2402.03300,datasets,,AlgebraicStack,,6,
+2402.03300,datasets,,ArXiv-RedPajama,arXiv,17,
+2402.03300,datasets,,GSM8K,,8,
+2402.03300,datasets,,MATH,,8,
+2402.03300,datasets,,OCW Courses,OCW,6,
+2402.03300,datasets,,SAT,,6,
+2402.03300,datasets,,MMLU-STEM,MMLU STEM,6,
+2402.03300,datasets,,CMATH,,8,
+2402.03300,datasets,,Gaokao-MathCloze,Gaokao MathCloze,6,
+2402.03300,datasets,,Gaokao-MathQA,Gaokao MathQA,6,
+2402.03300,datasets,,MGSM-zh,,12,
+2402.03300,datasets,,miniF2F,miniF2F-valid|miniF2F-test,9,
+2402.03300,datasets,,MMLU,,9,
+2402.03300,datasets,,BIG-Bench Hard,BBH,9,
+2402.03300,datasets,,HumanEval,,9,
+2402.03300,datasets,,MBPP,,9,
+2402.03300,datasets,,MathInstruct,,10,SFT data
+2402.03300,datasets,,Lila-OOD,,10,SFT data
+2402.03300,baselines,,Minerva,Minerva 7B|Minerva 62B|Minerva 540B,8,
+2402.03300,baselines,,Mistral 7B,Mistral,8,
+2402.03300,baselines,,Llemma,Llemma 7B|Llemma 34B,8,
+2402.03300,baselines,,CodeLlama,CodeLlama 7B|CodeLlama 34B,9,
+2402.03300,baselines,,DeepSeek-Coder-Base-v1.5,,9,
+2402.03300,baselines,,GPT-4,,12,
+2402.03300,baselines,,GPT-4 Code Interpreter,,12,
+2402.03300,baselines,,GPT-3.5,,12,
+2402.03300,baselines,,Gemini Ultra,,12,
+2402.03300,baselines,,Gemini Pro,,12,
+2402.03300,baselines,,Inflection-2,,12,
+2402.03300,baselines,,Grok-1,,12,
+2402.03300,baselines,,Baichuan-3,,12,
+2402.03300,baselines,,GLM-4,,12,
+2402.03300,baselines,,InternLM2-Math,InternLM2-Math 20B,12,
+2402.03300,baselines,,Qwen 72B,Qwen,12,
+2402.03300,baselines,,Math-Shepherd-Mistral 7B,Math-Shepherd,12,
+2402.03300,baselines,,WizardMath,WizardMath-v1.1|WizardMath-v1.0,12,
+2402.03300,baselines,,DeepSeek-LLM-Chat 67B,DeepSeek-LLM-Chat,12,
+2402.03300,baselines,,MetaMath 70B,MetaMath,12,
+2402.03300,baselines,,SeaLLM-v2 7B,SeaLLM-v2,12,
+2402.03300,baselines,,ChatGLM3 6B,ChatGLM3,12,
+2402.03300,baselines,,ToRA 34B,ToRA,12,
+2402.03300,baselines,,MAmmoTH 70B,MAmmoTH,12,
+2402.03300,baselines,,PPO,Proximal Policy Optimization,11,
+2402.03300,metrics,,accuracy,top-1 accuracy|Top1,12,
+2402.03300,metrics,,majority voting accuracy,maj@64|majority votes,12,
+2402.03300,metrics,,Pass@1,pass@1,9,code
+2402.03300,metrics,,Pass@K,Maj@K,19,RL analysis
+2402.03300,hyperparameters,optimizer,AdamW,,6,
+2402.03300,hyperparameters,adam_beta1,0.9,β1,6,
+2402.03300,hyperparameters,adam_beta2,0.95,β2,6,
+2402.03300,hyperparameters,weight_decay,0.1,,6,
+2402.03300,hyperparameters,warmup_steps,2000,,6,
+2402.03300,hyperparameters,lr_schedule,multi-step,,6,
+2402.03300,hyperparameters,learning_rate,5.3e-4,maximum learning rate,6,1.3B corpus experiments
+2402.03300,hyperparameters,batch_size,4M tokens,,6,1.3B corpus experiments
+2402.03300,hyperparameters,max_seq_length,4K,context length|4096,6,
+2402.03300,hyperparameters,train_tokens,150B,,6,1.3B corpus experiments
+2402.03300,hyperparameters,model_size,1.3B,,6,corpus experiments
+2402.03300,hyperparameters,model_size,7B,,8,DeepSeekMath
+2402.03300,hyperparameters,train_tokens,500B,,8,DeepSeekMath-Base 7B
+2402.03300,hyperparameters,learning_rate,4.2e-4,maximum learning rate,8,DeepSeekMath-Base 7B
+2402.03300,hyperparameters,batch_size,10M tokens,,8,DeepSeekMath-Base 7B
+2402.03300,hyperparameters,train_steps,500,steps,10,DeepSeekMath-Instruct
+2402.03300,hyperparameters,batch_size,256,,10,DeepSeekMath-Instruct
+2402.03300,hyperparameters,learning_rate,5e-5,constant learning rate,10,DeepSeekMath-Instruct
+2402.03300,hyperparameters,learning_rate,2e-5,,15,reward model
+2402.03300,hyperparameters,learning_rate,1e-6,,15,GRPO policy model
+2402.03300,hyperparameters,kl_coef,0.04,KL coefficient,15,GRPO
+2402.03300,hyperparameters,group_size,64,outputs per question,15,GRPO
+2402.03300,hyperparameters,max_length,1024,,15,GRPO
+2402.03300,hyperparameters,batch_size,1024,training batch size,15,GRPO
+2402.03300,hyperparameters,replay_ratio,10%,historical data,15,iterative reward model
+2402.03300,hyperparameters,fasttext_dim,256,vector dimension,4,fastText classifier
+2402.03300,hyperparameters,learning_rate,0.1,,4,fastText classifier
+2402.03300,hyperparameters,epochs,3,training epochs,5,fastText classifier
+2402.03300,hyperparameters,vocab_size,100K,,6,tokenizer
+2402.03300,code_urls,,https://github.com/deepseek-ai/DeepSeek-Math,,1,
+2402.03300,datasets,,GitHub,Github,8,training mixture; added in adjudication
+2404.19756,task,,function fitting,data fitting|regression,1,
+2404.19756,task,,PDE solving,solving partial differential equations,3,Poisson equation
+2404.19756,task,,symbolic regression,scientific discovery|symbolic formulas,13,
+2404.19756,task,,continual learning,,18,
+2404.19756,task,,knot invariant classification,signature classification|knot theory,22,
+2404.19756,datasets,,special functions,15 special functions,15,
+2404.19756,datasets,,Feynman dataset,Feynman_no_units,16,
+2404.19756,datasets,,Poisson equation,Poisson,18,PDE example
+2404.19756,datasets,,knot dataset,knot theory dataset,22,
+2404.19756,baselines,,MLP,MLPs|multi-layer perceptrons,1,
+2404.19756,baselines,,PINN,physics-informed neural networks|PINNs,18,
+2404.19756,baselines,,Deepmind's MLP,4-layer width-300 MLP,23,knot classification
+2404.19756,baselines,,human-constructed KAN,Human-constructued KAN,17,Feynman
+2404.19756,metrics,,RMSE,test RMSE|test loss,8,
+2404.19756,metrics,,L2 squared loss,L2 squared,18,PDE
+2404.19756,metrics,,H1 squared loss,H1 squared,18,PDE
+2404.19756,metrics,,accuracy,test accuracy,23,knot classification
+2404.19756,hyperparameters,spline_order,3,k = 3|cubic splines,7,
+2404.19756,hyperparameters,optimizer,LBFGS,,10,
+2404.19756,hyperparameters,grid_size,3,G = 3,10,initial grid
+2404.19756,hyperparameters,grid_size,1000,1000 grid points,10,final grid in grid-extension demo
+2404.19756,hyperparameters,grid_update_interval,200,every 200 LBFGS steps,10,
+2404.19756,hyperparameters,num_train_samples,1000,training samples are 1000,10,
+2404.19756,hyperparameters,train_steps,1800,1800 steps,14,KANs and MLPs
+2404.19756,hyperparameters,architecture,"[2, 5, 1]",KAN [2;5;1],9,
+2404.19756,hyperparameters,architecture,"[2, 1, 1]",KAN [2;1;1],9,
+2404.19756,hyperparameters,architecture,"[17, 1, 14]",,23,knot dataset
+2404.19756,hyperparameters,architecture,"[3, 1, 14]",,23,knot dataset three variables
+2404.19756,hyperparameters,regularization_lambda,1e-2,λ = 10−2,15,sparsification
+2404.19756,hyperparameters,regularization_lambda,1e-3,λ = 10−3,15,sparsification
+2404.19756,hyperparameters,mu,1,µ1 = µ2 = 1,11,
+2404.19756,hyperparameters,beta,3,β = 3,12,
+2404.19756,hyperparameters,mlp_depth,"{2,3,4,5,6}",depths,15,MLP baselines
+2404.19756,hyperparameters,activation,"{Tanh, ReLU, SiLU}",Tanh|ReLU|SiLU,17,MLP baselines
+2404.19756,code_urls,,https://github.com/KindXiaoming/pykan,github.com/KindXiaoming/pykan,3,
+2404.19756,task,,Anderson localization mobility edges,Anderson localization|mobility edge,26,physics application
+2404.19756,hyperparameters,prune_threshold,1e-2,θ = 10−2,12,
+2404.19756,datasets,,Mosaic model,MM,26,mobility edges
+2404.19756,datasets,,generalized Aubry-André model,GAAM,26,mobility edges
+2404.19756,datasets,,modified Aubry-André model,MAAM,26,mobility edges
+2404.19756,hyperparameters,interior_points,10000,ni,18,PDE; added in adjudication
+2404.19756,hyperparameters,boundary_points,800,nb,18,PDE; added in adjudication
+2404.19756,hyperparameters,pde_alpha,0.01,α,18,PDE; added in adjudication

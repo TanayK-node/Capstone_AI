@@ -7,7 +7,8 @@
 A run is a directory eval/runs/<name>/ holding PaperLens' output for the gold papers: a
 check_extract report.md, or extractions/<paper id>.json. Ablations are runs too (one
 directory per setting), so they land in the same tables. Writes eval/results/:
-summary.md (headline table, one row per run), by_field.csv, by_paper.csv,
+summary.md (headline table, one row per run; breakdown by paper set and research area
+from eval/papers.csv; every run on the papers they share), by_field.csv, by_paper.csv,
 errors_<run>.md (what each run missed or got wrong, for the error analysis) and
 ablations.md (A3 for every run; A1 parser and A6 retrieval when --pdf-dir is given: GROBID
 from --tei-dir if given, else the live GROBID server; dense / hybrid retrieval when the local
@@ -24,7 +25,7 @@ from pathlib import Path
 
 from app.config import REPO_ROOT, get_settings
 from app.eval import ablations
-from app.eval.data import SCORED_FIELDS, GoldItem, load_gold, load_predictions
+from app.eval.data import SCORED_FIELDS, GoldItem, PredItem, load_gold, load_predictions
 from app.eval.extraction import CORE_FIELDS, ExtractionReport, evaluate
 from app.schemas.document import ParsedDocument
 
@@ -93,6 +94,71 @@ def summary_md(results: dict[str, ExtractionReport], gold_papers: int) -> str:
     return "\n".join(out)
 
 
+def _headline_row(label: str, rep: ExtractionReport) -> str:
+    return (f"| {label} | {len(rep.papers)} | {_num(core_f1(rep))} | {_pct(rep.hp_coverage)} | "
+            f"{_pct(rep.numeric_accuracy)} | {_pct(grounded(rep))} | "
+            f"{_pct(rep.hallucination_rate)} |")  # fmt: skip
+
+
+def load_paper_groups(path: Path) -> dict[str, tuple[str, str]]:
+    """eval/papers.csv: arxiv id -> (set, area); empty when the list is missing."""
+    if not path.exists():
+        return {}
+    with path.open(encoding="utf-8", newline="") as f:
+        return {r["arxiv_id"]: (r["set"], r["area"]) for r in csv.DictReader(f)}
+
+
+def breakdown_md(gold: list[GoldItem], preds: dict[str, list[PredItem]],
+                 groups: dict[str, tuple[str, str]]) -> str:  # fmt: skip
+    """The headline metrics per paper set and research area, and on the papers every run
+    covers (a 50-paper run next to a 10-paper run is otherwise not a like-for-like row)."""
+    head = ["| group | papers | core-field F1 | hyperparameter coverage | numeric accuracy "
+            "| verified evidence | hallucination rate |",
+            "|---|---|---|---|---|---|---|"]  # fmt: skip
+    out = ["## Breakdown", ""]
+
+    def scored(ids: set[str], items: list[PredItem]) -> ExtractionReport:
+        return evaluate([g for g in gold if g.paper_id in ids],
+                        [p for p in items if p.paper_id in ids])  # fmt: skip
+
+    for name, items in preds.items():
+        covered = {p.paper_id for p in items} & {g.paper_id for g in gold}
+        if not groups or len(covered) < 2:
+            continue
+        out += [f"### {name}: by paper set and area", "", *head]
+        for i, key in enumerate(("set", "area")):
+            for label in sorted({groups[pid][i] for pid in covered if pid in groups}):
+                ids = {pid for pid in covered if groups.get(pid, ("", ""))[i] == label}
+                out.append(_headline_row(f"{key}: {label}", scored(ids, items)))
+        out.append("")
+    shared = set.intersection(*({p.paper_id for p in items} for items in preds.values()))
+    shared &= {g.paper_id for g in gold}
+    if len(preds) > 1 and shared:
+        out += [f"### Every run on the {len(shared)} papers they share", "", *head]
+        out += [_headline_row(name, scored(shared, items)) for name, items in preds.items()]
+        out.append("")
+    return "\n".join(out)
+
+
+def audit_md(paths: list[Path]) -> str:
+    """eval/gold/audit_*.csv: a person's (or the annotator's) reading of each extracted item
+    that matched no gold item. Shows how much of the precision gap is the strict matcher."""
+    out: list[str] = []
+    for path in paths:
+        with path.open(encoding="utf-8", newline="") as f:
+            rows = list(csv.DictReader(f))
+        cats = sorted({r["category"] for r in rows})
+        runs = ", ".join(sorted({r["run"] for r in rows}))
+        out += [f"## Not-in-gold audit: `{path.name}` ({runs}, {len(rows)} items)", "",
+                "| field | " + " | ".join(cats) + " |", "|---" * (len(cats) + 1) + "|"]  # fmt: skip
+        for fld in [*SCORED_FIELDS, "all"]:
+            sel = [r for r in rows if fld in ("all", r["field"])]
+            out.append(f"| {fld} | " + " | ".join(str(sum(r["category"] == c for r in sel))
+                                                   for c in cats) + " |")  # fmt: skip
+        out.append("")
+    return "\n".join(out)
+
+
 def errors_md(name: str, rep: ExtractionReport) -> str:
     out = [f"# Errors: {name}", "",
            "Missed = gold items no extracted item matched. Not in gold = extracted items "
@@ -131,20 +197,23 @@ def main() -> int:
     runs_dir = EVAL_DIR / "runs"
     names = args.runs or sorted(d.name for d in runs_dir.iterdir() if d.is_dir())
     results: dict[str, ExtractionReport] = {}
+    preds: dict[str, list[PredItem]] = {}
     for name in names:
         src = predictions_path(runs_dir / name)
         if src is None:
             print(f"{name}: no report.md or extractions/ found, skipped")
             continue
-        results[name] = evaluate(gold, load_predictions(src))
+        preds[name] = load_predictions(src)
+        results[name] = evaluate(gold, preds[name])
     if not results:
         print("nothing to evaluate")
         return 1
 
     args.out.mkdir(parents=True, exist_ok=True)
-    (args.out / "summary.md").write_text(
-        summary_md(results, len({g.paper_id for g in gold})), encoding="utf-8"
-    )
+    summary = summary_md(results, len({g.paper_id for g in gold}))
+    summary += "\n" + breakdown_md(gold, preds, load_paper_groups(EVAL_DIR / "papers.csv"))
+    summary += "\n" + audit_md(sorted(args.gold.parent.glob("audit_*.csv")))
+    (args.out / "summary.md").write_text(summary, encoding="utf-8")
     with (args.out / "by_field.csv").open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["run", "field", "gold", "extracted", "precision", "recall", "f1", "macro_f1"])

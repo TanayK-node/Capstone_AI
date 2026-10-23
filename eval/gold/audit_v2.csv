@@ -1,0 +1,247 @@
+run,paper_id,field,extracted,evidence,category
+collect_flash_lite,1502.03167,baselines,Inception network,verified,"correct, matcher missed"
+collect_flash_lite,1502.03167,compute,large-scale distributed architecture used for training,verified,out of scope
+collect_flash_lite,1505.04597,task,cell tracking,verified,out of scope
+collect_flash_lite,1505.04597,baselines,second-best algorithm (2015) on PhC-U373,verified,out of scope
+collect_flash_lite,1505.04597,hyperparameters,batch size = a single image,verified,"correct, matcher missed"
+collect_flash_lite,1505.04597,compute,GPU memory utilization optimized via large input tiles and a batch size of a single image.,verified,out of scope
+collect_flash_lite,1506.01497,hyperparameters,lambda = 10,verified,"correct, matcher missed"
+collect_flash_lite,1609.02907,hyperparameters,number of hidden units = 16,verified,"correct, matcher missed"
+collect_flash_lite,1609.02907,hyperparameters,number of hidden units = 64,verified,"correct, matcher missed"
+collect_flash_lite,1609.02907,hyperparameters,early stopping window size = 10,verified,"correct, matcher missed"
+collect_flash_lite,1609.02907,compute,GPU-based implementation using TensorFlow,verified,out of scope
+collect_flash_lite,1609.02907,code_urls,https://github.com/kimiyoung/planetoid,verified,out of scope
+collect_flash_lite,1706.06083,task,computer vision,partial,out of scope
+collect_flash_lite,1707.06347,datasets,continuous control benchmark,verified,out of scope
+collect_flash_lite,1707.06347,metrics,Mean performance,verified,out of scope
+collect_flash_lite,1707.06347,hyperparameters,epochs = K,verified,wrong
+collect_flash_lite,1707.06347,hyperparameters,ϵ = 0.1,verified,"correct, matcher missed"
+collect_flash_lite,1707.06347,hyperparameters,ϵ = 0.2,verified,"correct, matcher missed"
+collect_flash_lite,1707.06347,hyperparameters,ϵ = 0.3,verified,"correct, matcher missed"
+collect_flash_lite,1707.06347,hyperparameters,β = 1.,verified,"correct, matcher missed"
+collect_flash_lite,1707.06347,hyperparameters,β = 3.,verified,"correct, matcher missed"
+collect_flash_lite,1707.06347,hyperparameters,β = 10.,verified,"correct, matcher missed"
+collect_flash_lite,1707.06347,hyperparameters,β initialization = 1,verified,"correct, matcher missed"
+collect_flash_lite,1707.06347,code_urls,https://github.com/berkeleydeeprlcourse/homework/tree/master/hw4,verified,out of scope
+collect_flash_lite,1710.10903,baselines,GCNs,verified,"correct, matcher missed"
+collect_flash_lite,1710.10903,baselines,Chebyshev filters graph convolutional models,verified,"correct, matcher missed"
+collect_flash_lite,1710.10903,baselines,Per-node shared multilayer perceptron (MLP) classifier,verified,"correct, matcher missed"
+collect_flash_lite,1711.05101,datasets,WIDER FACE,verified,out of scope
+collect_flash_lite,1711.05101,baselines,Standard SGD with L2 regularization,verified,"correct, matcher missed"
+collect_flash_lite,1711.05101,metrics,Test set accuracy,verified,wrong
+collect_flash_lite,1711.05101,code_urls,https://github.com/xgastaldi/shake-shake,verified,out of scope
+collect_flash_lite,1711.05101,code_urls,https://github.com/pytorch/pytorch/pull/4429,verified,out of scope
+collect_flash_lite,1711.05101,code_urls,https://github.com/sgugger/Adam-experiments,verified,out of scope
+collect_flash_lite,1711.05101,code_urls,https://github.com/GLambard/AdamW_Keras,verified,out of scope
+collect_flash_lite,1711.05101,code_urls,https://github.com/Yagami123/Caffe-AdamW-AdamWR,verified,out of scope
+collect_flash_lite,1801.01290,datasets,OpenAI gym benchmark suite,partial,"correct, matcher missed"
+collect_flash_lite,1801.01290,datasets,rllab implementation of the Humanoid task,partial,"correct, matcher missed"
+collect_flash_lite,1803.03635,metrics,validation loss,verified,out of scope
+collect_flash_lite,1910.10683,hyperparameters,warm-up steps = 10 4,verified,"correct, matcher missed"
+collect_flash_lite,1910.10683,hyperparameters,"vocabulary size = 32,000",verified,"correct, matcher missed"
+collect_flash_lite,1910.10683,hyperparameters,token dropout percentage = 15%,verified,"correct, matcher missed"
+collect_flash_lite,1910.10683,code_urls,https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words,verified,out of scope
+collect_flash_lite,1910.10683,code_urls,https://github.com/jcpeterson/openwebtext13,verified,out of scope
+collect_flash_lite,1910.10683,code_urls,https://github.com/google-research/bert/blob/master/multilingual.md,verified,out of scope
+collect_flash_lite,2001.08361,baselines,LSTM models trained with the same dataset and context length,partial,"correct, matcher missed"
+collect_flash_lite,2001.08361,baselines,Recurrent Transformers that re-use parameters,verified,"correct, matcher missed"
+collect_flash_lite,2001.08361,hyperparameters,dropout = 10%,verified,gold omission (added)
+collect_flash_lite,2001.08361,hyperparameters,context length = 1024,verified,"correct, matcher missed"
+collect_flash_lite,2001.08361,hyperparameters,batch size = 2 19,verified,"correct, matcher missed"
+collect_flash_lite,2003.10555,hyperparameters,token embeddings = 128,verified,"correct, matcher missed"
+collect_flash_lite,2003.10555,hyperparameters,training steps = 1.5M,verified,gold omission (added)
+collect_flash_lite,2003.10555,hyperparameters,masked token percentage = 15%,verified,"correct, matcher missed"
+collect_flash_lite,2003.10555,hyperparameters,training steps = 500k,verified,gold omission (added)
+collect_flash_lite,2003.10555,compute,single GPU for small model training,verified,out of scope
+collect_flash_lite,2003.10555,compute,training time for ELMo,verified,out of scope
+collect_flash_lite,2003.10555,compute,training time for GPT,verified,out of scope
+collect_flash_lite,2003.10555,compute,training time for BERT-Small,verified,out of scope
+collect_flash_lite,2003.10555,compute,training time for BERT-Base,verified,out of scope
+collect_flash_lite,2003.10555,compute,training time for ELECTRA-Small,verified,out of scope
+collect_flash_lite,2003.10555,compute,training time for ELECTRA-Base,verified,out of scope
+collect_flash_lite,2005.11401,task,knowledge-intensive NLP tasks,verified,gold omission (added)
+collect_flash_lite,2005.11401,baselines,Extractive QA paradigm,verified,out of scope
+collect_flash_lite,2005.11401,baselines,Closed-Book QA approaches,verified,"correct, matcher missed"
+collect_flash_lite,2005.11401,baselines,BART model for comparison on Jeopardy,verified,"correct, matcher missed"
+collect_flash_lite,2005.11401,baselines,DPR QA system,verified,"correct, matcher missed"
+collect_flash_lite,2005.11401,metrics,Ratio of distinct ngrams to total ngrams,verified,"correct, matcher missed"
+collect_flash_lite,2005.11401,hyperparameters,beam size = four,verified,"correct, matcher missed"
+collect_flash_lite,2005.11401,compute,CPU memory required for FAISS index,verified,"correct, matcher missed"
+collect_flash_lite,2005.11401,code_urls,https://github.com/pytorch/fairseq,verified,out of scope
+collect_flash_lite,2006.11477,baselines,CTC Transformer supervised baseline,verified,"correct, matcher missed"
+collect_flash_lite,2006.11477,baselines,Sequence-to-sequence Transformer supervised baseline,verified,"correct, matcher missed"
+collect_flash_lite,2006.11477,baselines,PASE+ baseline for TIMIT,verified,"correct, matcher missed"
+collect_flash_lite,2006.11477,hyperparameters,quantization groups and codebook size = G = 2 and V = 320,verified,"correct, matcher missed"
+collect_flash_lite,2006.11477,hyperparameters,number of distractors = K = 100,verified,"correct, matcher missed"
+collect_flash_lite,2006.11477,hyperparameters,"model size = 12 transformer blocks, model dimension 768, inner dimension (FFN) 3,072 and 8 attention heads",verified,"correct, matcher missed"
+collect_flash_lite,2006.11477,hyperparameters,"model size = 24 transformer blocks with model dimension 1,024, inner dimension 4,096 and 16 attention heads",verified,"correct, matcher missed"
+collect_flash_lite,2006.11477,hyperparameters,masking probability = p = 0.075,verified,"correct, matcher missed"
+collect_flash_lite,2006.11477,code_urls,https://github.com/facebook/Ax,verified,out of scope
+collect_flash_lite,2103.14030,baselines,Improved HTC (denoted as HTC++),verified,out of scope
+collect_flash_lite,2103.14030,baselines,Performer,verified,gold omission (added)
+collect_flash_lite,2104.08821,datasets,ANLI,partial,gold omission (added)
+collect_flash_lite,2104.08821,baselines,Average BERT or RoBERTa embeddings,verified,"correct, matcher missed"
+collect_flash_lite,2104.08821,baselines,CT,verified,"correct, matcher missed"
+collect_flash_lite,2104.08821,baselines,SBERT/SRoBERTa,verified,"correct, matcher missed"
+collect_flash_lite,2104.08821,hyperparameters,epochs = one,verified,"correct, matcher missed"
+collect_flash_lite,2104.08821,code_urls,https://github.com/huggingface/,verified,out of scope
+collect_flash_lite,2104.08821,code_urls,https://github.com/facebookresearch/,verified,out of scope
+collect_flash_lite,2111.06377,task,computer vision,verified,out of scope
+collect_flash_lite,2111.06377,baselines,ViT-Large backbone used in ablation studies,verified,out of scope
+collect_flash_lite,2111.06377,baselines,BEiT masked image modeling method,verified,"correct, matcher missed"
+collect_flash_lite,2111.06377,baselines,DINO self-supervised method,partial,"correct, matcher missed"
+collect_flash_lite,2111.06377,baselines,Supervised training baseline,partial,"correct, matcher missed"
+collect_flash_lite,2111.06377,hyperparameters,pre-training length = 800 epochs,verified,"correct, matcher missed"
+collect_flash_lite,2111.06377,hyperparameters,pre-training length = 1600 epochs,verified,"correct, matcher missed"
+collect_flash_lite,2112.10752,baselines,Image Regression,verified,gold omission (added)
+collect_flash_lite,2112.10752,metrics,Fréchet Inception Distance,verified,"correct, matcher missed"
+collect_flash_lite,2112.10752,metrics,Peak Signal-to-Noise Ratio,verified,"correct, matcher missed"
+collect_flash_lite,2112.10752,metrics,Structural Similarity Index,verified,"correct, matcher missed"
+collect_flash_lite,2112.10752,metrics,Learned Perceptual Image Patch Similarity,verified,"correct, matcher missed"
+collect_flash_lite,2112.10752,hyperparameters,parameters = 1.45B,verified,"correct, matcher missed"
+collect_flash_lite,2112.10752,hyperparameters,parameters = 387M,verified,gold omission (added)
+collect_flash_lite,2112.10752,code_urls,https://github.com/lucidrains/x-transformers,verified,out of scope
+collect_flash_lite,2112.10752,code_urls,https://huggingface.co/transformers/model_doc/bert.html,verified,out of scope
+collect_flash_lite,2201.03545,metrics,AP,verified,"correct, matcher missed"
+collect_flash_lite,2201.11903,code_urls,https://github.com/google/BIG-bench/tree/main/bigbench/benchmark_tasks/strategyqa,verified,out of scope
+collect_flash_lite,2201.11903,code_urls,https://github.com/eladsegal/strategyqa,verified,out of scope
+collect_flash_lite,2201.11903,code_urls,https://github.com/eladsegal/strategyqa/blob/main/LICENSE,verified,out of scope
+collect_flash_lite,2203.15556,task,Training transformer language models under a given compute budget.,verified,"correct, matcher missed"
+collect_flash_lite,2203.15556,datasets,GitHub code,verified,"correct, matcher missed"
+collect_flash_lite,2203.15556,metrics,PerspectiveAPI toxicity score,verified,gold omission (added)
+collect_flash_lite,2203.15556,hyperparameters,maximum learning rate = 4 × 10^−^5,partial,"correct, matcher missed"
+collect_flash_lite,2203.15556,hyperparameters,maximum learning rate = 1 × 10^−^4,partial,"correct, matcher missed"
+collect_flash_lite,2203.15556,compute,Hardware used for training models,verified,out of scope
+collect_flash_lite,2205.14135,task,natural language processing,verified,out of scope
+collect_flash_lite,2205.14135,task,image classification,verified,out of scope
+collect_flash_lite,2205.14135,baselines,Rabe and Staats,verified,out of scope
+collect_flash_lite,2205.14135,baselines,Apex FMHA,verified,out of scope
+collect_flash_lite,2205.14135,hyperparameters,dropout = 0.1,verified,wrong
+collect_flash_lite,2205.14135,compute,8x A100 GPUs for BERT-large,verified,"correct, matcher missed"
+collect_flash_lite,2205.14135,compute,8x A100-80GB GPUs for training,verified,"correct, matcher missed"
+collect_flash_lite,2205.14135,compute,8x A100-40GB GPUs for GPT-2 training,verified,"correct, matcher missed"
+collect_flash_lite,2205.14135,code_urls,https://github.com/NVIDIA/apex/tree/master/apex/contrib/csrc/fmha,verified,out of scope
+collect_flash_lite,2210.02747,code_urls,https://github.com/tensorflow/gan,verified,out of scope
+collect_flash_lite,2210.02747,code_urls,https://github.com/openai/guided-diffusion,verified,out of scope
+collect_flash_lite,2210.03629,baselines,BUTLER imitation learning agent,verified,"correct, matcher missed"
+collect_flash_lite,2211.14730,metrics,Mean Squared Error,verified,"correct, matcher missed"
+collect_flash_lite,2211.14730,metrics,Mean Absolute Error,verified,"correct, matcher missed"
+collect_flash_lite,2211.14730,hyperparameters,input sequence length = 512,verified,"correct, matcher missed"
+collect_flash_lite,2211.14730,hyperparameters,patch size = 12,verified,"correct, matcher missed"
+collect_flash_lite,2211.14730,hyperparameters,masking ratio = 40%,verified,"correct, matcher missed"
+collect_flash_lite,2211.14730,code_urls,https://github.com/zhouhaoyi/ETDataset,verified,out of scope
+collect_flash_lite,2211.14730,code_urls,https://github.com/laiguokun/multivariate-time-series-data,verified,out of scope
+collect_flash_lite,2212.04356,baselines,VP-10K+FT,verified,gold omission (added)
+collect_flash_lite,2212.09748,task,image-level generative modeling,verified,"correct, matcher missed"
+collect_flash_lite,2212.09748,hyperparameters,weight decay = no weight decay,verified,"correct, matcher missed"
+collect_flash_lite,2302.13971,hyperparameters,learning rate = 3.0e^−^4,verified,"correct, matcher missed"
+collect_flash_lite,2302.13971,hyperparameters,tokens = 1.0T,verified,"correct, matcher missed"
+collect_flash_lite,2302.13971,hyperparameters,learning rate = 1.5e^−^4,verified,"correct, matcher missed"
+collect_flash_lite,2302.13971,compute,Single V100 GPU during inference,verified,gold omission (added)
+collect_flash_lite,2302.13971,compute,A100-80GB GPU power consumption for LLaMA-7B,verified,out of scope
+collect_flash_lite,2302.13971,compute,A100-80GB GPU power consumption for LLaMA-13B,verified,out of scope
+collect_flash_lite,2302.13971,compute,A100-80GB GPU power consumption for LLaMA-33B,verified,out of scope
+collect_flash_lite,2302.13971,compute,A100-80GB GPU power consumption for LLaMA-65B,verified,out of scope
+collect_flash_lite,2302.13971,code_urls,https://github.com/facebookresearch/xformers,verified,out of scope
+collect_flash_lite,2302.13971,code_urls,https://github.com/facebookresearch/metaseq/tree/main/projects/OPT/chronicles,verified,out of scope
+collect_flash_lite,2303.15343,datasets,C4,verified,out of scope
+collect_flash_lite,2303.15343,datasets,Oxford-iiit pet,verified,gold omission (added)
+collect_flash_lite,2303.15343,datasets,Cifar100,verified,gold omission (added)
+collect_flash_lite,2303.15343,baselines,CLIP baseline pre-trained on WebLI with standard softmax loss,verified,"correct, matcher missed"
+collect_flash_lite,2303.15343,metrics,Zero-shot retrieval results across 36 languages,verified,"correct, matcher missed"
+collect_flash_lite,2303.15343,hyperparameters,epochs/steps = 65 000 steps,verified,"correct, matcher missed"
+collect_flash_lite,2303.15343,hyperparameters,batch size = 20 k,verified,gold omission (added)
+collect_flash_lite,2303.15343,hyperparameters,epochs/steps = 107 k steps,verified,gold omission (added)
+collect_flash_lite,2303.15343,hyperparameters,epochs/steps = 2.4 B examples,verified,gold omission (added)
+collect_flash_lite,2303.15343,hyperparameters,learning rate = 100x smaller,verified,out of scope
+collect_flash_lite,2303.15343,hyperparameters,optimizer = β 2 = 0.95,verified,"correct, matcher missed"
+collect_flash_lite,2303.15343,hyperparameters,optimizer = ScalingViT-Adafactor with β 1 = 0.9 and β 2 = 0.95,verified,"correct, matcher missed"
+collect_flash_lite,2303.15343,hyperparameters,batch size = 16384,verified,"correct, matcher missed"
+collect_flash_lite,2303.15343,compute,32 TPU-v4 chips for two days for from-scratch SigLIP,verified,"correct, matcher missed"
+collect_flash_lite,2303.15343,compute,Comparison training cost of approximately 2500 TPUv3-days reported in [30],verified,out of scope
+collect_flash_lite,2303.15343,compute,Google Cloud TPUs used for training models developed in big vision codebase,verified,out of scope
+collect_flash_lite,2304.02643,datasets,Open Images V5,verified,out of scope
+collect_flash_lite,2304.02643,baselines,RITM interactive segmentation model,verified,"correct, matcher missed"
+collect_flash_lite,2304.02643,baselines,SimpleClick interactive segmentation model,verified,"correct, matcher missed"
+collect_flash_lite,2304.02643,baselines,FocalClick interactive segmentation model,verified,"correct, matcher missed"
+collect_flash_lite,2304.02643,baselines,ViTDet-H detector acting as proposal generator,verified,"correct, matcher missed"
+collect_flash_lite,2304.02643,baselines,HED deep learning edge detection method,verified,"correct, matcher missed"
+collect_flash_lite,2304.02643,metrics,Human evaluation score from 1 to 10,verified,"correct, matcher missed"
+collect_flash_lite,2304.02643,metrics,Average recall (AR) metric,verified,"correct, matcher missed"
+collect_flash_lite,2304.02643,hyperparameters,"optimizer = AdamW (β 1 = 0.9, β 2 = 0.999)",verified,"correct, matcher missed"
+collect_flash_lite,2304.02643,hyperparameters,learning rate = 8e -4,verified,"correct, matcher missed"
+collect_flash_lite,2304.02643,hyperparameters,model size = ViT-H,verified,"correct, matcher missed"
+collect_flash_lite,2304.02643,hyperparameters,learning rate = 8e -4 /4e -4,verified,"correct, matcher missed"
+collect_flash_lite,2304.02643,hyperparameters,data augmentation = largescale jitter,partial,gold omission (added)
+collect_flash_lite,2304.02643,hyperparameters,epochs/steps = 120k iterations,verified,gold omission (added)
+collect_flash_lite,2304.02643,compute,Training with up to 64 randomly sampled masks per GPU,verified,"correct, matcher missed"
+collect_flash_lite,2304.02643,compute,Training ViT-B and ViT-L distributed across 128 GPUs,partial,gold omission (added)
+collect_flash_lite,2304.02643,code_urls,https://github.com/serengil/retinaface,verified,out of scope
+collect_flash_lite,2304.02643,code_urls,https://github.com/facebookresearch/segment-anything,verified,wrong
+collect_flash_lite,2304.07193,datasets,Google Landmarks,verified,"correct, matcher missed"
+collect_flash_lite,2304.07193,datasets,uncurated web data,verified,out of scope
+collect_flash_lite,2304.07193,datasets,uncurated dataset,verified,out of scope
+collect_flash_lite,2304.07193,datasets,Oxford-M,unsupported,"correct, matcher missed"
+collect_flash_lite,2304.07193,datasets,Something-Something v2,verified,"correct, matcher missed"
+collect_flash_lite,2304.07193,datasets,NYUd,unsupported,"correct, matcher missed"
+collect_flash_lite,2304.07193,datasets,SUN3d,partial,gold omission (added)
+collect_flash_lite,2304.07193,hyperparameters,drop rate = 40%,verified,"correct, matcher missed"
+collect_flash_lite,2304.07193,hyperparameters,KoLeo regularizer weight = 0.1,verified,"correct, matcher missed"
+collect_flash_lite,2304.07193,compute,Compute cluster for LVD-142M dataset creation,verified,"correct, matcher missed"
+collect_flash_lite,2304.07193,compute,Hardware used for model training,verified,out of scope
+collect_flash_lite,2304.07193,compute,Segmentation training compute time and hardware,verified,out of scope
+collect_flash_lite,2304.07193,compute,GPU-hours and carbon emission for ViT-g pre-training,verified,"correct, matcher missed"
+collect_flash_lite,2304.07193,code_urls,https://github.com/facebookresearch/xformers,verified,out of scope
+collect_flash_lite,2304.08485,hyperparameters,weight decay = no weight decay,verified,"correct, matcher missed"
+collect_flash_lite,2304.08485,compute,Hardware used for training models,verified,out of scope
+collect_flash_lite,2304.08485,compute,Pre-training completion time,verified,"correct, matcher missed"
+collect_flash_lite,2304.08485,compute,Instruct-158K finetuning completion time,verified,"correct, matcher missed"
+collect_flash_lite,2304.08485,compute,ScienceQA finetuning completion time,verified,"correct, matcher missed"
+collect_flash_lite,2305.14314,datasets,OPT,verified,wrong
+collect_flash_lite,2305.14314,datasets,LLaMA,verified,wrong
+collect_flash_lite,2305.14314,datasets,BLOOM,verified,wrong
+collect_flash_lite,2305.14314,datasets,Pythia,verified,wrong
+collect_flash_lite,2305.14314,baselines,Vicuna chatbot system,verified,"correct, matcher missed"
+collect_flash_lite,2305.14314,baselines,Open Assistant chatbot system,verified,"correct, matcher missed"
+collect_flash_lite,2305.14314,baselines,Bard commercial chatbot system,verified,"correct, matcher missed"
+collect_flash_lite,2305.14314,hyperparameters,learning rate = 1e-6 to 5e-5,verified,gold omission (added)
+collect_flash_lite,2305.14314,hyperparameters,batch size = 8 to 128,verified,gold omission (added)
+collect_flash_lite,2305.14314,hyperparameters,"LoRA layers = {key+query, all attention layers, all FFN layers, all layers, attention + FFN output layers}",verified,out of scope
+collect_flash_lite,2305.18290,task,Sentiment modulation in language models,verified,"correct, matcher missed"
+collect_flash_lite,2305.18290,baselines,DPO,unsupported,wrong
+collect_flash_lite,2305.18290,metrics,TL;DR summarization win rates vs human-written summaries using GPT-4 as evaluator,verified,"correct, matcher missed"
+collect_flash_lite,2305.18290,hyperparameters,"β = {0.05, 0.1, 1, 5}",verified,"correct, matcher missed"
+collect_flash_lite,2305.18290,hyperparameters,sampling temperature = 0.0 to 1.0,verified,gold omission (added)
+collect_flash_lite,2305.18290,code_urls,https://huggingface.co/CarperAI/openai_summarize_tldr_sft,verified,out of scope
+collect_flash_lite,2305.18290,code_urls,https://huggingface.co/reciprocate/ppo_hh_pythia-6B,verified,out of scope
+collect_flash_lite,2305.18290,code_urls,https://github.com/CarperAI/trlx/tree/main/examples/hh,verified,out of scope
+collect_flash_lite,2309.16588,task,learning visual representations with Vision Transformers,verified,"correct, matcher missed"
+collect_flash_lite,2309.16588,code_urls,https://github.com/facebookresearch/deit,verified,out of scope
+collect_flash_lite,2309.16588,code_urls,https://github.com/mlfoundations/open_clip,verified,out of scope
+collect_flash_lite,2310.06625,hyperparameters,"number of Transformer blocks = {2, 3, 4}",verified,"correct, matcher missed"
+collect_flash_lite,2312.00752,task,audio modeling,verified,"correct, matcher missed"
+collect_flash_lite,2312.00752,task,genomics modeling,verified,"correct, matcher missed"
+collect_flash_lite,2312.00752,baselines,Transformer++ architecture,verified,"correct, matcher missed"
+collect_flash_lite,2312.00752,baselines,Pythia open source models,verified,"correct, matcher missed"
+collect_flash_lite,2312.00752,baselines,RWKV open source models,verified,"correct, matcher missed"
+collect_flash_lite,2312.00752,baselines,SaShiMi architecture for audio waveform modeling,verified,"correct, matcher missed"
+collect_flash_lite,2312.00752,hyperparameters,"learning rate = {1 -3, 2 -3, 4 -3, 8 -3}",verified,gold omission (added)
+collect_flash_lite,2312.00752,hyperparameters,learning rate = 2e-3,verified,gold omission (added)
+collect_flash_lite,2312.00752,hyperparameters,batch size = 2 24,verified,gold omission (added)
+collect_flash_lite,2312.00752,hyperparameters,learning rate = 4e -5,verified,gold omission (added)
+collect_flash_lite,2312.00752,hyperparameters,learning rate = 1e -4,verified,"correct, matcher missed"
+collect_flash_lite,2312.00752,compute,Machine with 8 GPUs,verified,out of scope
+collect_flash_lite,2402.03300,datasets,Github,verified,gold omission (added)
+collect_flash_lite,2402.03300,code_urls,https://github.com/InternLM/InternLM-Math,verified,out of scope
+collect_flash_lite,2402.03300,code_urls,https://github.com/openai/prm800k/issues/12,verified,out of scope
+collect_flash_lite,2404.19756,task,Small-scale AI and Science tasks including function fitting.,verified,"correct, matcher missed"
+collect_flash_lite,2404.19756,baselines,MLPs with different depths and widths,verified,"correct, matcher missed"
+collect_flash_lite,2404.19756,baselines,"MLPs with fixed width 5 or 100 and depths swept in {2, 3, 4, 5, 6}",verified,"correct, matcher missed"
+collect_flash_lite,2404.19756,metrics,Error in the L2 norm and energy (H1) norm,verified,"correct, matcher missed"
+collect_flash_lite,2404.19756,metrics,MSE,verified,wrong
+collect_flash_lite,2404.19756,metrics,Cross-entropy loss,verified,out of scope
+collect_flash_lite,2404.19756,hyperparameters,"grid points = {3, 5, 10, 20, 50, 100, 200, 500, 1000}",verified,"correct, matcher missed"
+collect_flash_lite,2404.19756,hyperparameters,sparsification lambda = 10 -2 or 10 -3,verified,"correct, matcher missed"
+collect_flash_lite,2404.19756,hyperparameters,interior points ni = 10000,verified,gold omission (added)
+collect_flash_lite,2404.19756,hyperparameters,boundary points nb = 800,verified,gold omission (added)
+collect_flash_lite,2404.19756,hyperparameters,alpha = 0.01,verified,gold omission (added)

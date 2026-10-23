@@ -18,8 +18,10 @@ The first version (10 papers, the Phase 1-3 reference set) was annotated by an L
 reading each paper's full text, page by page, at the team's request. It was adjudicated once
 after the first comparison with PaperLens' output: items the paper states that fit the
 definitions below but had been left out were added, never removed to suit the system. Every
-change is logged in `gold/CHANGES.md`. A spot-check by the team (two or three papers) is
-recommended before the numbers are cited; report them as "LLM-annotated, team-checked".
+change is logged in `gold/CHANGES.md`. The 40 papers added in v2 (50 in all) were annotated
+and adjudicated the same way, the adjudication recorded item by item in `gold/audit_v2.csv`.
+A spot-check by the team (two or three papers) is recommended before the numbers are cited;
+report them as "LLM-annotated, team-checked".
 
 ## What counts
 

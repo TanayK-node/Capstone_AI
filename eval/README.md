@@ -53,5 +53,7 @@ page does not show the expected title is not processed (wrong id): fix the id an
 
 Upload `bundle.zip` (TEI, page text, the run's extractions and report.md; no PDFs) and, if its
 size allows, `pdfs.zip` (needed for the A1/A6 ablations). From the page text the gold rows of
-the 40 new papers are annotated the same way as the first 10 (LLM-annotated, logged in
-`gold/CHANGES.md`); the run becomes `runs/collect_flash_lite/` and `run_eval` scores all 50.
+the 40 new papers were annotated the same way as the first 10 (LLM-annotated, gold v2 in
+`gold/CHANGES.md`); the run is `runs/collect_flash_lite/` and `run_eval` scores all 50. A1/A6
+on all 50 need the PDFs: `run_eval --pdf-dir <data_dir>/eval_collect/pdfs --tei-dir
+<data_dir>/eval_collect/tei` on the machine that ran the collector.

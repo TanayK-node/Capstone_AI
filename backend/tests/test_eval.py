@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from app.eval.data import GoldItem, PredItem, from_extraction, from_markdown
 from app.eval.extraction import evaluate
 from app.eval.match import numbers, parts, text_match, value_match
+from app.eval.run_eval import audit_md, breakdown_md
 from app.schemas.extraction import Evidence, Hyperparameter, Item, PaperExtraction
 
 
@@ -132,3 +135,25 @@ def test_gold_found_in_parsed_text() -> None:
     assert _found_in(texts, GoldItem("p", "hyperparameters", "0.0003", name="learning_rate"))
     assert not _found_in(texts, GoldItem("p", "hyperparameters", "1e-4", name="learning_rate"))
     assert _found_in(texts, GoldItem("p", "datasets", "WMT 2014 English-German"))
+
+
+def test_breakdown_by_group_and_shared_papers(tmp_path: Path) -> None:
+    gold = [GoldItem(pid, "datasets", "SQuAD") for pid in ("a", "b", "c")]
+    preds = {
+        "big": [PredItem(pid, "datasets", "SQuAD", status="verified") for pid in ("a", "b", "c")],
+        "small": [PredItem("a", "datasets", "MNIST", status="verified")],
+    }
+    groups = {"a": ("reference", "NLP"), "b": ("new", "NLP"), "c": ("new", "CV")}
+    md = breakdown_md(gold, preds, groups)
+    assert "| set: new | 2 | 1.00 |" in md and "| area: NLP | 2 | 1.00 |" in md
+    assert "### small" not in md  # one paper: nothing to break down
+    assert "Every run on the 1 papers they share" in md
+    assert "| small | 1 | 0.00 |" in md  # like-for-like on paper a only
+
+    audit = tmp_path / "audit_x.csv"
+    rows = ["run,paper_id,field,extracted,evidence,category",
+            "big,a,datasets,SQuAD v1,verified,matcher missed",
+            "big,a,code_urls,https://x,verified,out of scope"]  # fmt: skip
+    audit.write_text("\n".join(rows) + "\n", encoding="utf-8")
+    md = audit_md([audit])
+    assert "| datasets | 1 | 0 |" in md and "| all | 1 | 1 |" in md
