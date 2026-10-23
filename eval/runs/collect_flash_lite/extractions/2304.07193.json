@@ -1,0 +1,3446 @@
+{
+ "metadata": {
+  "title": "DINOv2: Learning Robust Visual Features without Supervision",
+  "authors": [
+   "Maxime Oquab",
+   "Timothée Darcet",
+   "Théo Moutakanni",
+   "Huy V Vo",
+   "Marc Szafraniec",
+   "Vasil Khalidov",
+   "Pierre Fernandez",
+   "Daniel Haziza",
+   "Francisco Massa",
+   "Alaaeldin El-Nouby",
+   "Mahmoud Assran",
+   "Nicolas Ballas",
+   "Wojciech Galuba",
+   "Russell Howes",
+   "Po-Yao Huang",
+   "Shang-Wen Li",
+   "Ishan Misra",
+   "Michael Rabbat",
+   "Vasu Sharma",
+   "Gabriel Synnaeve",
+   "Hu Xu",
+   "Hervé Jegou",
+   "Julien Mairal",
+   "Patrick Labatut",
+   "Armand Joulin",
+   "Piotr Bojanowski"
+  ],
+  "venue": null,
+  "year": "2024",
+  "arxiv_id": "2304.07193v2[cs.CV]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Text-guided pretraining limits the information retained about images because captions only approximate rich visual content.",
+   "evidence": [
+    {
+     "chunk_id": "b0004",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 72.0,
+      "y0": 381.67,
+      "x1": 540.0,
+      "y1": 415.53999999999996
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 105.25,
+       "y0": 381.67,
+       "x1": 540.0,
+       "y1": 391.63
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 393.62,
+       "x1": 540.0,
+       "y1": 403.58
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 405.58,
+       "x1": 214.77,
+       "y1": 415.53999999999996
+      }
+     ],
+     "quote": "This form of text-guided pretraining limits the information that can be retained about the image since captions only approximate the rich information in images, and complex pixel-level information may not surface with this supervision.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Scaling self-supervised learning on uncurated datasets typically leads to a significant drop in feature quality due to a lack of data control.",
+   "evidence": [
+    {
+     "chunk_id": "b0005",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 72.0,
+      "y0": 519.15,
+      "x1": 540.0,
+      "y1": 553.02
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 362.27,
+       "y0": 519.15,
+       "x1": 540.0,
+       "y1": 529.11
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 531.11,
+       "x1": 540.0,
+       "y1": 541.07
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 543.06,
+       "x1": 462.74,
+       "y1": 553.02
+      }
+     ],
+     "quote": "Some efforts on scaling these approaches beyond ImageNet-1k have been attempted (Caron et al., 2019;Goyal et al., 2021;2022a), but they focused on uncurated datasets, which typically lead to a significant drop in the quality of the features.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "An automatic pipeline to build a dedicated, diverse, and curated image dataset from uncurated sources.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 107.87,
+      "y0": 421.78,
+      "x1": 504.14,
+      "y1": 455.65
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 248.03,
+       "y0": 421.78,
+       "x1": 504.14,
+       "y1": 431.73999999999995
+      },
+      {
+       "page": 1,
+       "x0": 107.87,
+       "y0": 433.74,
+       "x1": 504.14,
+       "y1": 443.7
+      },
+      {
+       "page": 1,
+       "x0": 107.87,
+       "y0": 445.69,
+       "x1": 248.9,
+       "y1": 455.65
+      }
+     ],
+     "quote": "In terms of data, we propose an automatic pipeline to build a dedicated, diverse, and curated image dataset instead of uncurated data, as typically done in the self-supervised literature.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Training a 1B parameter ViT model and distilling it into smaller models that surpass existing general-purpose features on most benchmarks.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 107.87,
+      "y0": 445.69,
+      "x1": 504.14,
+      "y1": 491.52
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 256.02,
+       "y0": 445.69,
+       "x1": 504.13,
+       "y1": 455.65
+      },
+      {
+       "page": 1,
+       "x0": 107.87,
+       "y0": 457.65,
+       "x1": 504.14,
+       "y1": 467.60999999999996
+      },
+      {
+       "page": 1,
+       "x0": 107.87,
+       "y0": 469.6,
+       "x1": 504.14,
+       "y1": 479.56
+      },
+      {
+       "page": 1,
+       "x0": 107.87,
+       "y0": 481.56,
+       "x1": 273.5,
+       "y1": 491.52
+      }
+     ],
+     "quote": "In terms of models, we train a ViT model (Dosovitskiy et al., 2021) with 1B parameters and distill it into a series of smaller models that surpass the best available general-purpose features, OpenCLIP (Ilharco et al., 2021) on most of the benchmarks at image and pixel levels.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "Technical improvements that accelerate and stabilize training at scale, making the approach faster and more memory efficient.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 107.87,
+      "y0": 409.83,
+      "x1": 504.13,
+      "y1": 431.73999999999995
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 243.44,
+       "y0": 409.83,
+       "x1": 504.13,
+       "y1": 419.78999999999996
+      },
+      {
+       "page": 1,
+       "x0": 107.87,
+       "y0": 421.78,
+       "x1": 243.78,
+       "y1": 431.73999999999995
+      }
+     ],
+     "quote": "Most of the technical contributions aim at accelerating and stabilizing the training at scale.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "image classification",
+   "evidence": [
+    {
+     "chunk_id": "b0004",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 72.0,
+      "y0": 647.7,
+      "x1": 540.0,
+      "y1": 669.62
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 212.94,
+       "y0": 647.7,
+       "x1": 540.0,
+       "y1": 657.6600000000001
+      },
+      {
+       "page": 1,
+       "x0": 72.0,
+       "y0": 659.66,
+       "x1": 478.1,
+       "y1": 669.62
+      }
+     ],
+     "quote": "These models should generate visual features that work out of the box on any task, both at the image level, e.g., image classification, and pixel level, e.g., segmentation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "task.1",
+   "value": "segmentation",
+   "evidence": [
+    {
+     "chunk_id": "b0004",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 72.0,
+      "y0": 647.7,
+      "x1": 540.0,
+      "y1": 669.62
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 212.94,
+       "y0": 647.7,
+       "x1": 540.0,
+       "y1": 657.6600000000001
+      },
+      {
+       "page": 1,
+       "x0": 72.0,
+       "y0": 659.66,
+       "x1": 478.1,
+       "y1": 669.62
+      }
+     ],
+     "quote": "These models should generate visual features that work out of the box on any task, both at the image level, e.g., image classification, and pixel level, e.g., segmentation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "An image-level cross-entropy loss objective between student and teacher network class tokens extracted from different crops.",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 107.87,
+      "y0": 475.74,
+      "x1": 540.0,
+      "y1": 497.65999999999997
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 330.28,
+       "y0": 475.74,
+       "x1": 540.0,
+       "y1": 485.7
+      },
+      {
+       "page": 5,
+       "x0": 107.87,
+       "y0": 487.7,
+       "x1": 359.0,
+       "y1": 497.65999999999997
+      }
+     ],
+     "quote": "We consider the cross-entropy loss between the features extracted from a student and a teacher network.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "A patch-level objective utilizing masked input patches for the student network and visible patches for the teacher network.",
+   "evidence": [
+    {
+     "chunk_id": "b0027",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 107.87,
+      "y0": 644.41,
+      "x1": 540.01,
+      "y1": 666.33
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 332.1,
+       "y0": 644.41,
+       "x1": 540.01,
+       "y1": 654.37
+      },
+      {
+       "page": 5,
+       "x0": 107.87,
+       "y0": 656.37,
+       "x1": 299.43,
+       "y1": 666.33
+      }
+     ],
+     "quote": "We randomly mask some of the input patches given to the student, but not to the teacher.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "Sinkhorn-Knopp centering is used for the teacher network instead of standard softmax-centering.",
+   "evidence": [
+    {
+     "chunk_id": "b0031",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 107.87,
+      "y0": 194.08,
+      "x1": 540.01,
+      "y1": 227.95000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 347.67,
+       "y0": 194.08,
+       "x1": 540.0,
+       "y1": 204.04000000000002
+      },
+      {
+       "page": 6,
+       "x0": 107.87,
+       "y0": 206.04,
+       "x1": 540.01,
+       "y1": 216.0
+      },
+      {
+       "page": 6,
+       "x0": 107.87,
+       "y0": 217.99,
+       "x1": 236.44,
+       "y1": 227.95000000000002
+      }
+     ],
+     "quote": "Ruan et al. (2023) recommend to replace the teacher softmax-centering step of DINO and iBot by the Sinkhorn-Knopp (SK) batch normalization of SwAV (Caron et al., 2020).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "The KoLeo regularizer is applied to encourage a uniform span of the features within a batch.",
+   "evidence": [
+    {
+     "chunk_id": "b0032",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 107.87,
+      "y0": 254.92,
+      "x1": 540.01,
+      "y1": 288.78999999999996
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 358.81,
+       "y0": 254.92,
+       "x1": 540.0,
+       "y1": 264.88
+      },
+      {
+       "page": 6,
+       "x0": 107.87,
+       "y0": 266.88,
+       "x1": 540.01,
+       "y1": 276.84
+      },
+      {
+       "page": 6,
+       "x0": 107.87,
+       "y0": 278.83,
+       "x1": 424.1,
+       "y1": 288.78999999999996
+      }
+     ],
+     "quote": "The KoLeo regularizer derives from the Kozachenko-Leonenko differential entropy estimator (see Beirlant et al. (1997); Delattre & Fournier (2017)) and encourages a uniform span of the features within a batch.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "The image resolution is increased during a short period at the end of pretraining.",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 107.87,
+      "y0": 398.87,
+      "x1": 540.01,
+      "y1": 420.78
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 162.7,
+       "y0": 398.87,
+       "x1": 540.01,
+       "y1": 408.83
+      },
+      {
+       "page": 6,
+       "x0": 107.87,
+       "y0": 410.82,
+       "x1": 506.87,
+       "y1": 420.78
+      }
+     ],
+     "quote": "However, training at high resolution is time and memory demanding, and instead, we increase the resolution of images to 518 × 518 during a short period at the end of pretraining.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "Unlike prior work that shares parameters between DINO and iBOT projection heads, separate heads are used at scale.",
+   "evidence": [
+    {
+     "chunk_id": "b0030",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 107.87,
+      "y0": 157.15,
+      "x1": 540.0,
+      "y1": 179.06
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 261.91,
+       "y0": 157.15,
+       "x1": 540.0,
+       "y1": 167.11
+      },
+      {
+       "page": 6,
+       "x0": 107.87,
+       "y0": 169.1,
+       "x1": 309.37,
+       "y1": 179.06
+      }
+     ],
+     "quote": "At scale, we observed that the opposite is true, and we therefore use two separate heads in all our experiments.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "ImageNet-22k dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 72.0,
+      "y0": 710.44,
+      "x1": 540.0,
+      "y1": 732.35
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 150.21,
+       "y0": 710.44,
+       "x1": 540.0,
+       "y1": 720.4000000000001
+      },
+      {
+       "page": 4,
+       "x0": 72.0,
+       "y0": 722.39,
+       "x1": 504.06,
+       "y1": 732.35
+      }
+     ],
+     "quote": "Our selection of curated datasets is detailed in the appendix (Table 15) and contains ImageNet-22k, the train split of ImageNet-1k, Google Landmarks and several fine-grained datasets.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ImageNet-22k",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "ImageNet-1k training dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 72.0,
+      "y0": 710.44,
+      "x1": 540.0,
+      "y1": 732.35
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 150.21,
+       "y0": 710.44,
+       "x1": 540.0,
+       "y1": 720.4000000000001
+      },
+      {
+       "page": 4,
+       "x0": 72.0,
+       "y0": 722.39,
+       "x1": 504.06,
+       "y1": 732.35
+      }
+     ],
+     "quote": "Our selection of curated datasets is detailed in the appendix (Table 15) and contains ImageNet-22k, the train split of ImageNet-1k, Google Landmarks and several fine-grained datasets.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0046",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 182.27,
+      "y0": 703.64,
+      "x1": 539.99,
+      "y1": 713.6
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 182.27,
+       "y0": 703.64,
+       "x1": 539.99,
+       "y1": 713.6
+      },
+      {
+       "page": 8,
+       "x0": 199.18,
+       "y0": 498.19,
+       "x1": 206.93,
+       "y1": 508.15
+      }
+     ],
+     "quote": "We report the Top-1 accuracy on the validation set of ImageNet-1k with a k-NN 1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0064",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 72.0,
+      "y0": 348.45,
+      "x1": 540.0,
+      "y1": 370.35999999999996
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 348.45,
+       "x1": 540.0,
+       "y1": 358.40999999999997
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 360.4,
+       "x1": 223.44,
+       "y1": 370.35999999999996
+      }
+     ],
+     "quote": "As a first evaluation, we probe the quality of the holistic image representation produced by the model on the ImageNet-1k classification dataset.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ImageNet-1k",
+   "split": "train",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "Google Landmarks dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 72.0,
+      "y0": 710.44,
+      "x1": 540.0,
+      "y1": 732.35
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 150.21,
+       "y0": 710.44,
+       "x1": 540.0,
+       "y1": 720.4000000000001
+      },
+      {
+       "page": 4,
+       "x0": 72.0,
+       "y0": 722.39,
+       "x1": 504.06,
+       "y1": 732.35
+      }
+     ],
+     "quote": "Our selection of curated datasets is detailed in the appendix (Table 15) and contains ImageNet-22k, the train split of ImageNet-1k, Google Landmarks and several fine-grained datasets.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Google Landmarks",
+   "split": "",
+   "size": "",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.3",
+   "value": "Uncurated raw web crawled dataset of images",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 508.44,
+      "y0": 722.39,
+      "x1": 540.0,
+      "y1": 732.35
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 508.44,
+       "y0": 722.39,
+       "x1": 540.0,
+       "y1": 732.35
+      },
+      {
+       "page": 5,
+       "x0": 72.0,
+       "y0": 84.35,
+       "x1": 540.0,
+       "y1": 94.31
+      },
+      {
+       "page": 5,
+       "x0": 72.0,
+       "y0": 96.31,
+       "x1": 150.69,
+       "y1": 106.27000000000001
+      }
+     ],
+     "quote": "For the uncurated data source, we collect a raw unfiltered dataset of images from a publicly available repository of crawled web data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "uncurated web data",
+   "split": "",
+   "size": "1.2B unique images",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.4",
+   "value": "LVD-142M dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 72.0,
+      "y0": 639.7,
+      "x1": 540.0,
+      "y1": 661.62
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 72.0,
+       "y0": 639.7,
+       "x1": 540.0,
+       "y1": 649.6600000000001
+      },
+      {
+       "page": 4,
+       "x0": 72.0,
+       "y0": 651.66,
+       "x1": 269.07,
+       "y1": 661.62
+      }
+     ],
+     "quote": "We assemble our curated LVD-142M dataset by retrieving, from a large pool of uncurated data, images that are close to those in several curated datasets.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "LVD-142M",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "Uncurated dataset sampled from web data source",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 72.0,
+      "y0": 596.86,
+      "x1": 540.01,
+      "y1": 618.7800000000001
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 221.58,
+       "y0": 596.86,
+       "x1": 540.01,
+       "y1": 606.82
+      },
+      {
+       "page": 8,
+       "x0": 72.0,
+       "y0": 608.82,
+       "x1": 227.97,
+       "y1": 618.7800000000001
+      }
+     ],
+     "quote": "For the uncurated dataset, we randomly sample 142 million images from the same data source as LVD-142M.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "uncurated dataset",
+   "split": "",
+   "size": "142 million images",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.6",
+   "value": "ImageNet-22k without ImageNet-1k synsets",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 72.0,
+      "y0": 620.77,
+      "x1": 540.0,
+      "y1": 642.69
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 72.0,
+       "y0": 620.77,
+       "x1": 540.0,
+       "y1": 630.73
+      },
+      {
+       "page": 8,
+       "x0": 72.0,
+       "y0": 632.73,
+       "x1": 186.70999999999998,
+       "y1": 642.69
+      }
+     ],
+     "quote": "We also include a variant of ImageNet-22k obtained by removing the synsets of ImageNet-1k (INet-22k \\ INet-1k) for completeness.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "INet-22k \\ INet-1k",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.7",
+   "value": "Oxford-M dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0055",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 72.0,
+      "y0": 571.83,
+      "x1": 540.0,
+      "y1": 593.75
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 368.55,
+       "y0": 571.83,
+       "x1": 540.0,
+       "y1": 581.7900000000001
+      },
+      {
+       "page": 9,
+       "x0": 72.0,
+       "y0": 583.79,
+       "x1": 121.56,
+       "y1": 593.75
+      }
+     ],
+     "quote": "Table 3a shows the impact of using the KoLeo loss.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.8,
+   "source": "llm",
+   "name": "Oxford-M",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.8",
+   "value": "ADE-20k segmentation dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0055",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 72.0,
+      "y0": 571.83,
+      "x1": 540.0,
+      "y1": 593.75
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 368.55,
+       "y0": 571.83,
+       "x1": 540.0,
+       "y1": 581.7900000000001
+      },
+      {
+       "page": 9,
+       "x0": 72.0,
+       "y0": 583.79,
+       "x1": 121.56,
+       "y1": 593.75
+      }
+     ],
+     "quote": "Table 3a shows the impact of using the KoLeo loss.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.8,
+   "source": "llm",
+   "name": "ADE-20k",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.9",
+   "value": "ImageNet-ReaL dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0064",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 72.0,
+      "y0": 396.27,
+      "x1": 540.01,
+      "y1": 418.18
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 155.89,
+       "y0": 396.27,
+       "x1": 540.01,
+       "y1": 406.22999999999996
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 408.22,
+       "x1": 497.03,
+       "y1": 418.18
+      }
+     ],
+     "quote": "Because most SSL methods were developped using ImageNet-1k validation performance as a debugging signal, we also report the top-1 accuracy on ImageNet-ReaL and ImageNet-V2.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ImageNet-ReaL",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.10",
+   "value": "ImageNet-V2 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0064",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 72.0,
+      "y0": 396.27,
+      "x1": 540.01,
+      "y1": 418.18
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 155.89,
+       "y0": 396.27,
+       "x1": 540.01,
+       "y1": 406.22999999999996
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 408.22,
+       "x1": 497.03,
+       "y1": 418.18
+      }
+     ],
+     "quote": "Because most SSL methods were developped using ImageNet-1k validation performance as a debugging signal, we also report the top-1 accuracy on ImageNet-ReaL and ImageNet-V2.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ImageNet-V2",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.11",
+   "value": "iNaturalist 2018 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0070",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 72.0,
+      "y0": 531.11,
+      "x1": 540.0,
+      "y1": 553.02
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 220.62,
+       "y0": 531.11,
+       "x1": 540.0,
+       "y1": 541.07
+      },
+      {
+       "page": 13,
+       "x0": 72.0,
+       "y0": 543.06,
+       "x1": 261.27,
+       "y1": 553.02
+      },
+      {
+       "page": 13,
+       "x0": 263.95,
+       "y0": 543.06,
+       "x1": 540.0,
+       "y1": 553.02
+      }
+     ],
+     "quote": "For iNaturalist 2018, iNaturalist 2021, and Places205, we train a linear classifier with data augmentations as in Sec. 7.1",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "iNaturalist 2018",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.12",
+   "value": "iNaturalist 2021 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0070",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 72.0,
+      "y0": 531.11,
+      "x1": 540.0,
+      "y1": 553.02
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 220.62,
+       "y0": 531.11,
+       "x1": 540.0,
+       "y1": 541.07
+      },
+      {
+       "page": 13,
+       "x0": 72.0,
+       "y0": 543.06,
+       "x1": 261.27,
+       "y1": 553.02
+      },
+      {
+       "page": 13,
+       "x0": 263.95,
+       "y0": 543.06,
+       "x1": 540.0,
+       "y1": 553.02
+      }
+     ],
+     "quote": "For iNaturalist 2018, iNaturalist 2021, and Places205, we train a linear classifier with data augmentations as in Sec. 7.1",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "iNaturalist 2021",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.13",
+   "value": "Places205 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0070",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 72.0,
+      "y0": 531.11,
+      "x1": 540.0,
+      "y1": 553.02
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 220.62,
+       "y0": 531.11,
+       "x1": 540.0,
+       "y1": 541.07
+      },
+      {
+       "page": 13,
+       "x0": 72.0,
+       "y0": 543.06,
+       "x1": 261.27,
+       "y1": 553.02
+      },
+      {
+       "page": 13,
+       "x0": 263.95,
+       "y0": 543.06,
+       "x1": 540.0,
+       "y1": 553.02
+      }
+     ],
+     "quote": "For iNaturalist 2018, iNaturalist 2021, and Places205, we train a linear classifier with data augmentations as in Sec. 7.1",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Places205",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.14",
+   "value": "UCF-101 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 72.0,
+      "y0": 596.86,
+      "x1": 540.0,
+      "y1": 618.7800000000001
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 294.88,
+       "y0": 596.86,
+       "x1": 540.0,
+       "y1": 606.82
+      },
+      {
+       "page": 13,
+       "x0": 72.0,
+       "y0": 608.82,
+       "x1": 540.0,
+       "y1": 618.7800000000001
+      }
+     ],
+     "quote": "We evaluated features on three datasets, namely UCF-101 (Soomro et al., 2012), Kinetics-400 (Kay et al., 2017) and Something-Something v2 (Goyal et al., 2017).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "UCF-101",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.15",
+   "value": "Kinetics-400 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 72.0,
+      "y0": 596.86,
+      "x1": 540.0,
+      "y1": 618.7800000000001
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 294.88,
+       "y0": 596.86,
+       "x1": 540.0,
+       "y1": 606.82
+      },
+      {
+       "page": 13,
+       "x0": 72.0,
+       "y0": 608.82,
+       "x1": 540.0,
+       "y1": 618.7800000000001
+      }
+     ],
+     "quote": "We evaluated features on three datasets, namely UCF-101 (Soomro et al., 2012), Kinetics-400 (Kay et al., 2017) and Something-Something v2 (Goyal et al., 2017).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Kinetics-400",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.16",
+   "value": "Something-Something v2 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 72.0,
+      "y0": 596.86,
+      "x1": 540.0,
+      "y1": 618.7800000000001
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 294.88,
+       "y0": 596.86,
+       "x1": 540.0,
+       "y1": 606.82
+      },
+      {
+       "page": 13,
+       "x0": 72.0,
+       "y0": 608.82,
+       "x1": 540.0,
+       "y1": 618.7800000000001
+      }
+     ],
+     "quote": "We evaluated features on three datasets, namely UCF-101 (Soomro et al., 2012), Kinetics-400 (Kay et al., 2017) and Something-Something v2 (Goyal et al., 2017).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Something-Something v2",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.17",
+   "value": "NYUd dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 224.75,
+      "y0": 686.52,
+      "x1": 456.68,
+      "y1": 696.48
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 224.75,
+       "y0": 686.52,
+       "x1": 456.68,
+       "y1": 696.48
+      }
+     ],
+     "quote": "We consider three different setups for this evaluation.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.8,
+   "source": "llm",
+   "name": "NYUd",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.18",
+   "value": "KITTI dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 224.75,
+      "y0": 686.52,
+      "x1": 456.68,
+      "y1": 696.48
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 224.75,
+       "y0": 686.52,
+       "x1": 456.68,
+       "y1": 696.48
+      }
+     ],
+     "quote": "We consider three different setups for this evaluation.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.8,
+   "source": "llm",
+   "name": "KITTI",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.19",
+   "value": "SUN3d dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 72.0,
+      "y0": 353.89,
+      "x1": 540.0,
+      "y1": 387.76
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 72.0,
+       "y0": 353.89,
+       "x1": 540.0,
+       "y1": 363.84999999999997
+      },
+      {
+       "page": 15,
+       "x0": 72.0,
+       "y0": 365.85,
+       "x1": 540.0,
+       "y1": 375.81
+      },
+      {
+       "page": 15,
+       "x0": 72.0,
+       "y0": 377.8,
+       "x1": 252.63,
+       "y1": 387.76
+      }
+     ],
+     "quote": "We probe the quality of patch-level features extracted from our network on several dense downstream tasks: semantic image segmentation and monocular depth estimation in several settings and we conduct evaluations on multiple datasets for each.",
+     "grounding_status": "partial",
+     "match_score": 94.7
+    }
+   ],
+   "confidence": 0.8,
+   "source": "llm",
+   "name": "SUN3d",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "MAE",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 72.0,
+      "y0": 204.09,
+      "x1": 540.01,
+      "y1": 237.96
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 290.35,
+       "y0": 204.09,
+       "x1": 540.01,
+       "y1": 214.05
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 216.05,
+       "x1": 540.0,
+       "y1": 226.01000000000002
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 228.0,
+       "x1": 358.68,
+       "y1": 237.96
+      }
+     ],
+     "quote": "First, we run our evaluations for MAE (He et al., 2022), DINO (Caron et al., 2021), SEERv2 (Goyal et al., 2022a), MSN (Assran et al., 2022), EsViT (Li et al., 2022a), Mugs (Zhou et al., 2022b) and iBOT (Zhou et al., 2022a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "DINO",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 72.0,
+      "y0": 204.09,
+      "x1": 540.01,
+      "y1": 237.96
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 290.35,
+       "y0": 204.09,
+       "x1": 540.01,
+       "y1": 214.05
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 216.05,
+       "x1": 540.0,
+       "y1": 226.01000000000002
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 228.0,
+       "x1": 358.68,
+       "y1": 237.96
+      }
+     ],
+     "quote": "First, we run our evaluations for MAE (He et al., 2022), DINO (Caron et al., 2021), SEERv2 (Goyal et al., 2022a), MSN (Assran et al., 2022), EsViT (Li et al., 2022a), Mugs (Zhou et al., 2022b) and iBOT (Zhou et al., 2022a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "SEERv2",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 72.0,
+      "y0": 204.09,
+      "x1": 540.01,
+      "y1": 237.96
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 290.35,
+       "y0": 204.09,
+       "x1": 540.01,
+       "y1": 214.05
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 216.05,
+       "x1": 540.0,
+       "y1": 226.01000000000002
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 228.0,
+       "x1": 358.68,
+       "y1": 237.96
+      }
+     ],
+     "quote": "First, we run our evaluations for MAE (He et al., 2022), DINO (Caron et al., 2021), SEERv2 (Goyal et al., 2022a), MSN (Assran et al., 2022), EsViT (Li et al., 2022a), Mugs (Zhou et al., 2022b) and iBOT (Zhou et al., 2022a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "MSN",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 72.0,
+      "y0": 204.09,
+      "x1": 540.01,
+      "y1": 237.96
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 290.35,
+       "y0": 204.09,
+       "x1": 540.01,
+       "y1": 214.05
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 216.05,
+       "x1": 540.0,
+       "y1": 226.01000000000002
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 228.0,
+       "x1": 358.68,
+       "y1": 237.96
+      }
+     ],
+     "quote": "First, we run our evaluations for MAE (He et al., 2022), DINO (Caron et al., 2021), SEERv2 (Goyal et al., 2022a), MSN (Assran et al., 2022), EsViT (Li et al., 2022a), Mugs (Zhou et al., 2022b) and iBOT (Zhou et al., 2022a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "EsViT",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 72.0,
+      "y0": 204.09,
+      "x1": 540.01,
+      "y1": 237.96
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 290.35,
+       "y0": 204.09,
+       "x1": 540.01,
+       "y1": 214.05
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 216.05,
+       "x1": 540.0,
+       "y1": 226.01000000000002
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 228.0,
+       "x1": 358.68,
+       "y1": 237.96
+      }
+     ],
+     "quote": "First, we run our evaluations for MAE (He et al., 2022), DINO (Caron et al., 2021), SEERv2 (Goyal et al., 2022a), MSN (Assran et al., 2022), EsViT (Li et al., 2022a), Mugs (Zhou et al., 2022b) and iBOT (Zhou et al., 2022a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "Mugs",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 72.0,
+      "y0": 204.09,
+      "x1": 540.01,
+      "y1": 237.96
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 290.35,
+       "y0": 204.09,
+       "x1": 540.01,
+       "y1": 214.05
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 216.05,
+       "x1": 540.0,
+       "y1": 226.01000000000002
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 228.0,
+       "x1": 358.68,
+       "y1": 237.96
+      }
+     ],
+     "quote": "First, we run our evaluations for MAE (He et al., 2022), DINO (Caron et al., 2021), SEERv2 (Goyal et al., 2022a), MSN (Assran et al., 2022), EsViT (Li et al., 2022a), Mugs (Zhou et al., 2022b) and iBOT (Zhou et al., 2022a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "iBOT",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 72.0,
+      "y0": 204.09,
+      "x1": 540.01,
+      "y1": 237.96
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 290.35,
+       "y0": 204.09,
+       "x1": 540.01,
+       "y1": 214.05
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 216.05,
+       "x1": 540.0,
+       "y1": 226.01000000000002
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 228.0,
+       "x1": 358.68,
+       "y1": 237.96
+      }
+     ],
+     "quote": "First, we run our evaluations for MAE (He et al., 2022), DINO (Caron et al., 2021), SEERv2 (Goyal et al., 2022a), MSN (Assran et al., 2022), EsViT (Li et al., 2022a), Mugs (Zhou et al., 2022b) and iBOT (Zhou et al., 2022a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.7",
+   "value": "CLIP",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 72.0,
+      "y0": 251.91,
+      "x1": 540.0,
+      "y1": 273.83
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 89.73,
+       "y0": 251.91,
+       "x1": 540.0,
+       "y1": 261.87
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 263.87,
+       "x1": 462.8,
+       "y1": 273.83
+      }
+     ],
+     "quote": "Second, we report performance of open-source weakly-supervised models such as CLIP (Radford et al., 2021), OpenCLIP (Ilharco et al., 2021;Cherti et al., 2023), and SWAG (Singh et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.8",
+   "value": "OpenCLIP",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 72.0,
+      "y0": 251.91,
+      "x1": 540.0,
+      "y1": 273.83
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 89.73,
+       "y0": 251.91,
+       "x1": 540.0,
+       "y1": 261.87
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 263.87,
+       "x1": 462.8,
+       "y1": 273.83
+      }
+     ],
+     "quote": "Second, we report performance of open-source weakly-supervised models such as CLIP (Radford et al., 2021), OpenCLIP (Ilharco et al., 2021;Cherti et al., 2023), and SWAG (Singh et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.9",
+   "value": "SWAG",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 72.0,
+      "y0": 251.91,
+      "x1": 540.0,
+      "y1": 273.83
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 89.73,
+       "y0": 251.91,
+       "x1": 540.0,
+       "y1": 261.87
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 263.87,
+       "x1": 462.8,
+       "y1": 273.83
+      }
+     ],
+     "quote": "Second, we report performance of open-source weakly-supervised models such as CLIP (Radford et al., 2021), OpenCLIP (Ilharco et al., 2021;Cherti et al., 2023), and SWAG (Singh et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Top-1 accuracy on ImageNet-1k",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 182.27,
+      "y0": 703.64,
+      "x1": 539.99,
+      "y1": 713.6
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 182.27,
+       "y0": 703.64,
+       "x1": 539.99,
+       "y1": 713.6
+      },
+      {
+       "page": 8,
+       "x0": 199.18,
+       "y0": 498.19,
+       "x1": 206.93,
+       "y1": 508.15
+      }
+     ],
+     "quote": "We report the Top-1 accuracy on the validation set of ImageNet-1k with a k-NN 1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "mIoU",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 72.0,
+      "y0": 494.09,
+      "x1": 539.99,
+      "y1": 516.0
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 389.66,
+       "y0": 494.09,
+       "x1": 539.99,
+       "y1": 504.04999999999995
+      },
+      {
+       "page": 10,
+       "x0": 72.0,
+       "y0": 506.04,
+       "x1": 521.77,
+       "y1": 516.0
+      }
+     ],
+     "quote": "We train linear classifiers on top of frozen features at different resolutions and report Top-1 accuracy on ImageNet and mIoU on ADE-20k.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "RMSE",
+   "evidence": [
+    {
+     "chunk_id": "b0120",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 168.21876525878906,
+      "y0": 273.5408935546875,
+      "x1": 380.2628173828125,
+      "y1": 283.5035095214844
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 168.21876525878906,
+       "y0": 273.5408935546875,
+       "x1": 380.2628173828125,
+       "y1": 283.5035095214844
+      }
+     ],
+     "quote": "We report the RMSE metric on the 3 datasets.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Drop rate for stochastic depth",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 72.0,
+      "y0": 193.06,
+      "x1": 540.0,
+      "y1": 226.94
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 494.76,
+       "y0": 193.06,
+       "x1": 540.0,
+       "y1": 203.02
+      },
+      {
+       "page": 7,
+       "x0": 72.0,
+       "y0": 205.02,
+       "x1": 540.0,
+       "y1": 214.98000000000002
+      },
+      {
+       "page": 7,
+       "x0": 72.0,
+       "y0": 216.98,
+       "x1": 98.62,
+       "y1": 226.94
+      }
+     ],
+     "quote": "With high drop rates (d = 40% in this work), this allows a drastic improvement in compute efficiency and memory usage.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "drop rate",
+   "value_raw": "40%",
+   "value_norm": 40.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "KoLeo regularizer weight",
+   "evidence": [
+    {
+     "chunk_id": "b0144",
+     "page": 29,
+     "bbox": {
+      "page": 29,
+      "x0": 72.0,
+      "y0": 710.44,
+      "x1": 540.0,
+      "y1": 732.35
+     },
+     "boxes": [
+      {
+       "page": 29,
+       "x0": 190.27,
+       "y0": 710.44,
+       "x1": 540.0,
+       "y1": 720.4000000000001
+      },
+      {
+       "page": 29,
+       "x0": 72.0,
+       "y0": 722.39,
+       "x1": 481.2,
+       "y1": 732.35
+      }
+     ],
+     "quote": "We apply the KoLeo regularizer with a weight of 0.1 between the class tokens of the first global crop, for all samples within a GPU without cross-communication for this step.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "KoLeo regularizer weight",
+   "value_raw": "0.1",
+   "value_norm": 0.1,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Learning rate for DINOv2-S distilled",
+   "evidence": [
+    {
+     "chunk_id": "b0146",
+     "page": 31,
+     "bbox": {
+      "page": 31,
+      "x0": 155.69,
+      "y0": 86.94,
+      "x1": 450.33,
+      "y1": 121.78
+     },
+     "boxes": [
+      {
+       "page": 31,
+       "x0": 322.39,
+       "y0": 86.94,
+       "x1": 361.73,
+       "y1": 94.86
+      },
+      {
+       "page": 31,
+       "x0": 379.2,
+       "y0": 86.94,
+       "x1": 391.74,
+       "y1": 94.86
+      },
+      {
+       "page": 31,
+       "x0": 409.19,
+       "y0": 86.94,
+       "x1": 450.33,
+       "y1": 94.86
+      },
+      {
+       "page": 31,
+       "x0": 155.69,
+       "y0": 102.9,
+       "x1": 239.82999999999998,
+       "y1": 110.82000000000001
+      },
+      {
+       "page": 31,
+       "x0": 271.59,
+       "y0": 102.9,
+       "x1": 309.72999999999996,
+       "y1": 110.82000000000001
+      },
+      {
+       "page": 31,
+       "x0": 339.75,
+       "y0": 102.9,
+       "x1": 344.36,
+       "y1": 110.82000000000001
+      },
+      {
+       "page": 31,
+       "x0": 377.27,
+       "y0": 102.9,
+       "x1": 393.65999999999997,
+       "y1": 110.82000000000001
+      },
+      {
+       "page": 31,
+       "x0": 420.55,
+       "y0": 102.9,
+       "x1": 438.98,
+       "y1": 110.82000000000001
+      },
+      {
+       "page": 31,
+       "x0": 155.69,
+       "y0": 113.86,
+       "x1": 241.23000000000002,
+       "y1": 121.78
+      }
+     ],
+     "quote": "Drop-rate LR Batch size DINOv2-S (distilled) ViT-S/14 0 1e-3 2048 DINOv2-B (distilled)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "1e-3",
+   "value_norm": 0.001,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Batch size for DINOv2-S distilled",
+   "evidence": [
+    {
+     "chunk_id": "b0146",
+     "page": 31,
+     "bbox": {
+      "page": 31,
+      "x0": 155.69,
+      "y0": 86.94,
+      "x1": 450.33,
+      "y1": 121.78
+     },
+     "boxes": [
+      {
+       "page": 31,
+       "x0": 322.39,
+       "y0": 86.94,
+       "x1": 361.73,
+       "y1": 94.86
+      },
+      {
+       "page": 31,
+       "x0": 379.2,
+       "y0": 86.94,
+       "x1": 391.74,
+       "y1": 94.86
+      },
+      {
+       "page": 31,
+       "x0": 409.19,
+       "y0": 86.94,
+       "x1": 450.33,
+       "y1": 94.86
+      },
+      {
+       "page": 31,
+       "x0": 155.69,
+       "y0": 102.9,
+       "x1": 239.82999999999998,
+       "y1": 110.82000000000001
+      },
+      {
+       "page": 31,
+       "x0": 271.59,
+       "y0": 102.9,
+       "x1": 309.72999999999996,
+       "y1": 110.82000000000001
+      },
+      {
+       "page": 31,
+       "x0": 339.75,
+       "y0": 102.9,
+       "x1": 344.36,
+       "y1": 110.82000000000001
+      },
+      {
+       "page": 31,
+       "x0": 377.27,
+       "y0": 102.9,
+       "x1": 393.65999999999997,
+       "y1": 110.82000000000001
+      },
+      {
+       "page": 31,
+       "x0": 420.55,
+       "y0": 102.9,
+       "x1": 438.98,
+       "y1": 110.82000000000001
+      },
+      {
+       "page": 31,
+       "x0": 155.69,
+       "y0": 113.86,
+       "x1": 241.23000000000002,
+       "y1": 121.78
+      }
+     ],
+     "quote": "Drop-rate LR Batch size DINOv2-S (distilled) ViT-S/14 0 1e-3 2048 DINOv2-B (distilled)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "2048",
+   "value_norm": 2048.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Training iterations for models",
+   "evidence": [
+    {
+     "chunk_id": "b0150",
+     "page": 31,
+     "bbox": {
+      "page": 31,
+      "x0": 72.0,
+      "y0": 169.57,
+      "x1": 540.0,
+      "y1": 227.35
+     },
+     "boxes": [
+      {
+       "page": 31,
+       "x0": 526.99,
+       "y0": 169.57,
+       "x1": 540.0,
+       "y1": 179.53
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 181.53,
+       "x1": 540.0,
+       "y1": 191.49
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 193.48,
+       "x1": 540.0,
+       "y1": 203.44
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 205.44,
+       "x1": 540.0,
+       "y1": 215.4
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 217.39,
+       "x1": 211.31,
+       "y1": 227.35
+      }
+     ],
+     "quote": "All models run for 625k iterations with optimizer AdamW, an initial LayerScale value of 1e-5, a weight decay cosine schedule from 0.04 to 0.2, a learning rate warmup of 100k iterations, a teacher momentum cosine schedule from 0.994 to 1, and we train in float16 precision in all cases (except for the",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "iterations",
+   "value_raw": "625k",
+   "value_norm": 625000.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Optimizer for models",
+   "evidence": [
+    {
+     "chunk_id": "b0150",
+     "page": 31,
+     "bbox": {
+      "page": 31,
+      "x0": 72.0,
+      "y0": 169.57,
+      "x1": 540.0,
+      "y1": 227.35
+     },
+     "boxes": [
+      {
+       "page": 31,
+       "x0": 526.99,
+       "y0": 169.57,
+       "x1": 540.0,
+       "y1": 179.53
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 181.53,
+       "x1": 540.0,
+       "y1": 191.49
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 193.48,
+       "x1": 540.0,
+       "y1": 203.44
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 205.44,
+       "x1": 540.0,
+       "y1": 215.4
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 217.39,
+       "x1": 211.31,
+       "y1": 227.35
+      }
+     ],
+     "quote": "All models run for 625k iterations with optimizer AdamW, an initial LayerScale value of 1e-5, a weight decay cosine schedule from 0.04 to 0.2, a learning rate warmup of 100k iterations, a teacher momentum cosine schedule from 0.994 to 1, and we train in float16 precision in all cases (except for the",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "AdamW",
+   "value_norm": null,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Initial LayerScale value",
+   "evidence": [
+    {
+     "chunk_id": "b0150",
+     "page": 31,
+     "bbox": {
+      "page": 31,
+      "x0": 72.0,
+      "y0": 169.57,
+      "x1": 540.0,
+      "y1": 227.35
+     },
+     "boxes": [
+      {
+       "page": 31,
+       "x0": 526.99,
+       "y0": 169.57,
+       "x1": 540.0,
+       "y1": 179.53
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 181.53,
+       "x1": 540.0,
+       "y1": 191.49
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 193.48,
+       "x1": 540.0,
+       "y1": 203.44
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 205.44,
+       "x1": 540.0,
+       "y1": 215.4
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 217.39,
+       "x1": 211.31,
+       "y1": 227.35
+      }
+     ],
+     "quote": "All models run for 625k iterations with optimizer AdamW, an initial LayerScale value of 1e-5, a weight decay cosine schedule from 0.04 to 0.2, a learning rate warmup of 100k iterations, a teacher momentum cosine schedule from 0.994 to 1, and we train in float16 precision in all cases (except for the",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "initial LayerScale value",
+   "value_raw": "1e-5",
+   "value_norm": 0.00001,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Weight decay cosine schedule",
+   "evidence": [
+    {
+     "chunk_id": "b0150",
+     "page": 31,
+     "bbox": {
+      "page": 31,
+      "x0": 72.0,
+      "y0": 169.57,
+      "x1": 540.0,
+      "y1": 227.35
+     },
+     "boxes": [
+      {
+       "page": 31,
+       "x0": 526.99,
+       "y0": 169.57,
+       "x1": 540.0,
+       "y1": 179.53
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 181.53,
+       "x1": 540.0,
+       "y1": 191.49
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 193.48,
+       "x1": 540.0,
+       "y1": 203.44
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 205.44,
+       "x1": 540.0,
+       "y1": 215.4
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 217.39,
+       "x1": 211.31,
+       "y1": 227.35
+      }
+     ],
+     "quote": "All models run for 625k iterations with optimizer AdamW, an initial LayerScale value of 1e-5, a weight decay cosine schedule from 0.04 to 0.2, a learning rate warmup of 100k iterations, a teacher momentum cosine schedule from 0.994 to 1, and we train in float16 precision in all cases (except for the",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "0.04 to 0.2",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "Learning rate warmup iterations",
+   "evidence": [
+    {
+     "chunk_id": "b0150",
+     "page": 31,
+     "bbox": {
+      "page": 31,
+      "x0": 72.0,
+      "y0": 169.57,
+      "x1": 540.0,
+      "y1": 227.35
+     },
+     "boxes": [
+      {
+       "page": 31,
+       "x0": 526.99,
+       "y0": 169.57,
+       "x1": 540.0,
+       "y1": 179.53
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 181.53,
+       "x1": 540.0,
+       "y1": 191.49
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 193.48,
+       "x1": 540.0,
+       "y1": 203.44
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 205.44,
+       "x1": 540.0,
+       "y1": 215.4
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 217.39,
+       "x1": 211.31,
+       "y1": 227.35
+      }
+     ],
+     "quote": "All models run for 625k iterations with optimizer AdamW, an initial LayerScale value of 1e-5, a weight decay cosine schedule from 0.04 to 0.2, a learning rate warmup of 100k iterations, a teacher momentum cosine schedule from 0.994 to 1, and we train in float16 precision in all cases (except for the",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "warmup",
+   "value_raw": "100k",
+   "value_norm": 100000.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "Teacher momentum cosine schedule",
+   "evidence": [
+    {
+     "chunk_id": "b0150",
+     "page": 31,
+     "bbox": {
+      "page": 31,
+      "x0": 72.0,
+      "y0": 169.57,
+      "x1": 540.0,
+      "y1": 227.35
+     },
+     "boxes": [
+      {
+       "page": 31,
+       "x0": 526.99,
+       "y0": 169.57,
+       "x1": 540.0,
+       "y1": 179.53
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 181.53,
+       "x1": 540.0,
+       "y1": 191.49
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 193.48,
+       "x1": 540.0,
+       "y1": 203.44
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 205.44,
+       "x1": 540.0,
+       "y1": 215.4
+      },
+      {
+       "page": 31,
+       "x0": 72.0,
+       "y0": 217.39,
+       "x1": 211.31,
+       "y1": 227.35
+      }
+     ],
+     "quote": "All models run for 625k iterations with optimizer AdamW, an initial LayerScale value of 1e-5, a weight decay cosine schedule from 0.04 to 0.2, a learning rate warmup of 100k iterations, a teacher momentum cosine schedule from 0.994 to 1, and we train in float16 precision in all cases (except for the",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "teacher momentum",
+   "value_raw": "0.994 to 1",
+   "value_norm": null,
+   "scope": ""
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Compute cluster for LVD-142M dataset creation",
+   "evidence": [
+    {
+     "chunk_id": "b0021",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 72.0,
+      "y0": 344.38,
+      "x1": 540.0,
+      "y1": 366.28999999999996
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 265.62,
+       "y0": 344.38,
+       "x1": 540.0,
+       "y1": 354.34
+      },
+      {
+       "page": 5,
+       "x0": 72.0,
+       "y0": 356.33,
+       "x1": 535.62,
+       "y1": 366.28999999999996
+      }
+     ],
+     "quote": "The whole processing is distributed on a compute cluster of 20 nodes equipped with 8 V100-32GB GPUs and takes less than two days to produce the LVD-142M dataset.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "compute.1",
+   "value": "Hardware used for model training",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 72.0,
+      "y0": 488.06,
+      "x1": 540.0,
+      "y1": 509.96999999999997
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 372.57,
+       "y0": 488.06,
+       "x1": 540.0,
+       "y1": 498.02
+      },
+      {
+       "page": 6,
+       "x0": 72.0,
+       "y0": 500.01,
+       "x1": 127.53,
+       "y1": 509.96999999999997
+      }
+     ],
+     "quote": "We train models on A100 GPUs using PyTorch 2.0.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "compute.2",
+   "value": "Segmentation training compute time and hardware",
+   "evidence": [
+    {
+     "chunk_id": "b0078",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 72.0,
+      "y0": 613.51,
+      "x1": 540.0,
+      "y1": 647.38
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 499.32,
+       "y0": 613.51,
+       "x1": 540.0,
+       "y1": 623.47
+      },
+      {
+       "page": 15,
+       "x0": 72.0,
+       "y0": 625.46,
+       "x1": 540.0,
+       "y1": 635.4200000000001
+      },
+      {
+       "page": 15,
+       "x0": 72.0,
+       "y0": 637.42,
+       "x1": 337.3,
+       "y1": 647.38
+      }
+     ],
+     "quote": "Although our setup for this experiment doesn't makes use of the optimisations described in Sec. 5, the segmentation training in this experiment took 28 hours on 16 V100 GPUs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "compute.3",
+   "value": "GPU-hours and carbon emission for ViT-g pre-training",
+   "evidence": [
+    {
+     "chunk_id": "b0096",
+     "page": 21,
+     "bbox": {
+      "page": 21,
+      "x0": 72.0,
+      "y0": 219.13,
+      "x1": 540.0,
+      "y1": 241.05
+     },
+     "boxes": [
+      {
+       "page": 21,
+       "x0": 126.42,
+       "y0": 219.13,
+       "x1": 523.08,
+       "y1": 229.09
+      },
+      {
+       "page": 21,
+       "x0": 523.08,
+       "y0": 223.29,
+       "x1": 527.0500000000001,
+       "y1": 229.45
+      },
+      {
+       "page": 21,
+       "x0": 527.55,
+       "y0": 219.13,
+       "x1": 540.0,
+       "y1": 229.09
+      },
+      {
+       "page": 21,
+       "x0": 72.0,
+       "y0": 231.09,
+       "x1": 362.91,
+       "y1": 241.05
+      }
+     ],
+     "quote": "For example, a single pre-training of a ViT-g model (22k GPU-hours) emits 3.7 tons of CO 2 eq, while a finetuning on ImageNet-1k (1k GPU-hours) emits 0.2 tons.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation of pretraining data sources comparing LVD-142M, ImageNet-22k, and uncurated data",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 72.0,
+      "y0": 572.95,
+      "x1": 540.0,
+      "y1": 606.82
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 439.1,
+       "y0": 572.95,
+       "x1": 540.0,
+       "y1": 582.9100000000001
+      },
+      {
+       "page": 8,
+       "x0": 72.0,
+       "y0": 584.91,
+       "x1": 540.0,
+       "y1": 594.87
+      },
+      {
+       "page": 8,
+       "x0": 72.0,
+       "y0": 596.86,
+       "x1": 216.65,
+       "y1": 606.82
+      }
+     ],
+     "quote": "In this experiment, we probe the impact of LVD-142M compared to ImageNet-22k, a commonly used pretraining dataset, or using directly raw and uncurated data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Ablation of loss terms including KoLeo loss and masked image modeling",
+   "evidence": [
+    {
+     "chunk_id": "b0054",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 72.0,
+      "y0": 524.01,
+      "x1": 540.0,
+      "y1": 557.88
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 487.0,
+       "y0": 524.01,
+       "x1": 540.0,
+       "y1": 533.97
+      },
+      {
+       "page": 9,
+       "x0": 72.0,
+       "y0": 535.97,
+       "x1": 540.0,
+       "y1": 545.9300000000001
+      },
+      {
+       "page": 9,
+       "x0": 72.0,
+       "y0": 547.92,
+       "x1": 101.06,
+       "y1": 557.88
+      }
+     ],
+     "quote": "This section analyzes the performance hit observed if we ablate specific loss terms, starting from our best-performing model.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.2",
+   "value": "Ablation of changing image resolution during pretraining",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 72.0,
+      "y0": 614.79,
+      "x1": 540.0,
+      "y1": 636.71
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 72.0,
+       "y0": 614.79,
+       "x1": 540.0,
+       "y1": 624.75
+      },
+      {
+       "page": 10,
+       "x0": 72.0,
+       "y0": 626.75,
+       "x1": 158.8,
+       "y1": 636.71
+      }
+     ],
+     "quote": "We measure the impact of changing the resolution during the pretraining on the performance of image and patch-level features.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "The model remains biased toward Western countries, particularly showing a performance drop in Africa.",
+   "evidence": [
+    {
+     "chunk_id": "b0090",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 110.76,
+      "y0": 722.39,
+      "x1": 405.34999999999997,
+      "y1": 732.35
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 110.76,
+       "y0": 722.39,
+       "x1": 405.34999999999997,
+       "y1": 732.35
+      }
+     ],
+     "quote": "This shows that our model is still biased toward Western countries.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.1",
+   "value": "The model performs significantly better on high-income households than low-income ones.",
+   "evidence": [
+    {
+     "chunk_id": "b0090",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 409.91,
+      "y0": 722.39,
+      "x1": 540.0,
+      "y1": 732.35
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 409.91,
+       "y0": 722.39,
+       "x1": 540.0,
+       "y1": 732.35
+      },
+      {
+       "page": 19,
+       "x0": 72.0,
+       "y0": 390.8,
+       "x1": 245.97,
+       "y1": 400.76
+      }
+     ],
+     "quote": "Similarly, our model performs Figure 10: Matching across images.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.5,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.2",
+   "value": "A more thorough evaluation of biases may reveal additional flaws.",
+   "evidence": [
+    {
+     "chunk_id": "b0094",
+     "page": 20,
+     "bbox": {
+      "page": 20,
+      "x0": 72.0,
+      "y0": 478.4,
+      "x1": 540.0,
+      "y1": 500.32
+     },
+     "boxes": [
+      {
+       "page": 20,
+       "x0": 167.15,
+       "y0": 478.4,
+       "x1": 540.0,
+       "y1": 488.35999999999996
+      },
+      {
+       "page": 20,
+       "x0": 72.0,
+       "y0": 490.36,
+       "x1": 234.39,
+       "y1": 500.32
+      }
+     ],
+     "quote": "While this is encouraging, we also acknowledge that a more thorough evaluation of biases may reveal flaws in our model.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Continue scaling models and data along the same axes.",
+   "evidence": [
+    {
+     "chunk_id": "b0098",
+     "page": 21,
+     "bbox": {
+      "page": 21,
+      "x0": 72.0,
+      "y0": 396.06,
+      "x1": 540.0,
+      "y1": 429.93
+     },
+     "boxes": [
+      {
+       "page": 21,
+       "x0": 309.87,
+       "y0": 396.06,
+       "x1": 540.0,
+       "y1": 406.02
+      },
+      {
+       "page": 21,
+       "x0": 72.0,
+       "y0": 408.01,
+       "x1": 540.0,
+       "y1": 417.96999999999997
+      },
+      {
+       "page": 21,
+       "x0": 72.0,
+       "y0": 419.97,
+       "x1": 220.13,
+       "y1": 429.93
+      }
+     ],
+     "quote": "We expect that more of these properties will emerge at larger scales of models and data, akin to instruction emergence in large language models, and plan to continue scaling along these axes.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Leverage linear layer compatibility to train a language-enabled AI system that processes visual features.",
+   "evidence": [
+    {
+     "chunk_id": "b0098",
+     "page": 21,
+     "bbox": {
+      "page": 21,
+      "x0": 72.0,
+      "y0": 431.92,
+      "x1": 540.0,
+      "y1": 465.78999999999996
+     },
+     "boxes": [
+      {
+       "page": 21,
+       "x0": 501.38,
+       "y0": 431.92,
+       "x1": 540.0,
+       "y1": 441.88
+      },
+      {
+       "page": 21,
+       "x0": 72.0,
+       "y0": 443.88,
+       "x1": 540.0,
+       "y1": 453.84
+      },
+      {
+       "page": 21,
+       "x0": 72.0,
+       "y0": 455.83,
+       "x1": 456.53,
+       "y1": 465.78999999999996
+      }
+     ],
+     "quote": "In future work, we plan to leverage this ability to train a a language-enabled AI system that can process visual features as if they were word tokens, and extract the required information to ground the system.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "ethics": [
+  {
+   "id": "ethics.0",
+   "value": "The carbon footprint and potential carbon emissions of reproducing DINOv2 are reported.",
+   "evidence": [
+    {
+     "chunk_id": "b0093",
+     "page": 20,
+     "bbox": {
+      "page": 20,
+      "x0": 72.0,
+      "y0": 349.68,
+      "x1": 540.0,
+      "y1": 383.91
+     },
+     "boxes": [
+      {
+       "page": 20,
+       "x0": 345.49,
+       "y0": 349.68,
+       "x1": 540.0,
+       "y1": 359.64
+      },
+      {
+       "page": 20,
+       "x0": 72.0,
+       "y0": 361.63,
+       "x1": 540.0,
+       "y1": 371.59
+      },
+      {
+       "page": 20,
+       "x0": 72.0,
+       "y0": 373.59,
+       "x1": 240.1,
+       "y1": 383.54999999999995
+      },
+      {
+       "page": 20,
+       "x0": 240.09,
+       "y0": 377.75,
+       "x1": 244.06,
+       "y1": 383.91
+      },
+      {
+       "page": 20,
+       "x0": 244.56,
+       "y0": 373.59,
+       "x1": 296.06,
+       "y1": 383.54999999999995
+      }
+     ],
+     "quote": "We report the potential carbon emission of reproducing DINOv2-g when assuming a power consumption for the A100-40GB of 400W, a PUE of 1.1 and carbon intensity factor of 0.385 kg CO 2 e per KWh.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/facebookresearch/dinov2",
+   "evidence": [
+    {
+     "chunk_id": "b0099",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 87.24300384521484,
+      "y0": 725.0719604492188,
+      "x1": 264.9760437011719,
+      "y1": 731.63134765625
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 87.24300384521484,
+       "y0": 725.0719604492188,
+       "x1": 264.9760437011719,
+       "y1": 731.63134765625
+      }
+     ],
+     "quote": "https://github.com/facebookresearch/dinov2",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/facebookresearch/xformers",
+   "evidence": [
+    {
+     "chunk_id": "b0100",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 87.24300384521484,
+      "y0": 725.0719604492188,
+      "x1": 273.4402770996094,
+      "y1": 731.63134765625
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 87.24300384521484,
+       "y0": 725.0719604492188,
+       "x1": 273.4402770996094,
+       "y1": 731.63134765625
+      }
+     ],
+     "quote": "https://github.com/facebookresearch/xformers",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "The proposed technical improvements make the approach roughly 2 times faster and require 3 times less memory than similar discriminative self-supervised methods.",
+   "evidence": [
+    {
+     "chunk_id": "b0006",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 72.0,
+      "y0": 632.73,
+      "x1": 539.99,
+      "y1": 654.64
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 99.78,
+       "y0": 632.73,
+       "x1": 539.99,
+       "y1": 642.69
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 644.68,
+       "x1": 515.97,
+       "y1": 654.64
+      }
+     ],
+     "quote": "These improvements make our approach around 2× faster and require 3× less memory than similar discriminative self-supervised methods, allowing us to leverage longer training with larger batch sizes.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "Self-supervised pretraining alone is a viable approach for learning transferable frozen features comparable to top openly available weakly-supervised models.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 72.0,
+      "y0": 438.91,
+      "x1": 540.01,
+      "y1": 484.73999999999995
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 261.37,
+       "y0": 438.91,
+       "x1": 540.01,
+       "y1": 448.87
+      },
+      {
+       "page": 3,
+       "x0": 72.0,
+       "y0": 450.87,
+       "x1": 540.0,
+       "y1": 460.83
+      },
+      {
+       "page": 3,
+       "x0": 72.0,
+       "y0": 462.82,
+       "x1": 540.0,
+       "y1": 472.78
+      },
+      {
+       "page": 3,
+       "x0": 72.0,
+       "y0": 474.78,
+       "x1": 321.03999999999996,
+       "y1": 484.73999999999995
+      }
+     ],
+     "quote": "We conclude that selfsupervised pretraining alone is a good candidate for learning transferable frozen features that are competitive with the best openly available weakly-supervised models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

@@ -1,0 +1,1913 @@
+{
+ "metadata": {
+  "title": "Deep Residual Learning for Image Recognition",
+  "authors": [
+   "Kaiming He",
+   "Xiangyu Zhang",
+   "Shaoqing Ren",
+   "Jian Sun"
+  ],
+  "venue": null,
+  "year": "2015",
+  "arxiv_id": "1512.03385v1[cs.CV]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Deeper neural networks are difficult to train due to vanishing or exploding gradients and a degradation problem where accuracy saturates and then degrades rapidly.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 62.07,
+      "y0": 247.11,
+      "x1": 269.05,
+      "y1": 255.70000000000002
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 62.07,
+       "y0": 247.11,
+       "x1": 269.05,
+       "y1": 255.70000000000002
+      }
+     ],
+     "quote": "Deeper neural networks are more difficult to train.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "We present a residual learning framework to ease the training of networks that are substantially deeper than those used previously.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 247.11,
+      "x1": 286.37,
+      "y1": 291.57
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 274.56,
+       "y0": 247.11,
+       "x1": 286.37,
+       "y1": 255.70000000000002
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 259.07,
+       "x1": 286.36,
+       "y1": 267.65999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 271.02,
+       "x1": 286.36,
+       "y1": 279.60999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 282.98,
+       "x1": 93.03999999999999,
+       "y1": 291.57
+      }
+     ],
+     "quote": "We present a residual learning framework to ease the training of networks that are substantially deeper than those used previously.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "image classification",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 390.58,
+      "x1": 286.36,
+      "y1": 411.11999999999995
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 149.08,
+       "y0": 390.58,
+       "x1": 286.36,
+       "y1": 399.16999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 402.53,
+       "x1": 182.77999999999997,
+       "y1": 411.11999999999995
+      }
+     ],
+     "quote": "This result won the 1st place on the ILSVRC 2015 classification task.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "task.1",
+   "value": "visual recognition tasks",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 426.87,
+      "x1": 286.37,
+      "y1": 447.40999999999997
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 62.07,
+       "y0": 426.87,
+       "x1": 286.37,
+       "y1": 435.46
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 438.82,
+       "x1": 190.8,
+       "y1": 447.40999999999997
+      }
+     ],
+     "quote": "The depth of representations is of central importance for many visual recognition tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "Instead of expecting stacked layers to approximate an underlying mapping H(x), the network is formulated to explicitly approximate a residual function F(x) := H(x) - x, with the original function represented as F(x) + x.",
+   "evidence": [
+    {
+     "chunk_id": "b0021",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 50.11,
+      "y0": 232.41,
+      "x1": 286.37,
+      "y1": 284.33000000000004
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 275.84,
+       "y0": 232.41,
+       "x1": 286.35999999999996,
+       "y1": 241.05
+      },
+      {
+       "page": 3,
+       "x0": 50.11,
+       "y0": 244.37,
+       "x1": 244.26999999999998,
+       "y1": 253.01
+      },
+      {
+       "page": 3,
+       "x0": 247.07,
+       "y0": 243.13,
+       "x1": 271.87,
+       "y1": 260.42
+      },
+      {
+       "page": 3,
+       "x0": 274.75,
+       "y0": 244.37,
+       "x1": 286.37,
+       "y1": 253.01
+      },
+      {
+       "page": 3,
+       "x0": 50.11,
+       "y0": 256.32,
+       "x1": 286.36,
+       "y1": 264.96
+      },
+      {
+       "page": 3,
+       "x0": 50.11,
+       "y0": 267.04,
+       "x1": 72.06,
+       "y1": 284.33000000000004
+      },
+      {
+       "page": 3,
+       "x0": 76.5,
+       "y0": 267.29,
+       "x1": 87.02,
+       "y1": 277.25
+      },
+      {
+       "page": 3,
+       "x0": 91.46,
+       "y0": 267.04,
+       "x1": 124.39999999999999,
+       "y1": 284.33000000000004
+      },
+      {
+       "page": 3,
+       "x0": 127.28,
+       "y0": 267.29,
+       "x1": 135.82,
+       "y1": 277.25
+      }
+     ],
+     "quote": "So rather than expect stacked layers to approximate H(x), we explicitly let these layers approximate a residual function F(x) := H(x)x.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "The building block of the residual network is defined by y = F(x, {Wi}) + x, where x and y are input and output vectors, and F represents the residual mapping learned by stacked layers connected via shortcut connections and element-wise addition.",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 50.11192321777344,
+      "y0": 593.4112548828125,
+      "x1": 286.36492919921875,
+      "y1": 614.2738037109375
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 196.3927001953125,
+       "y0": 593.4112548828125,
+       "x1": 286.36492919921875,
+       "y1": 602.3178100585938
+      },
+      {
+       "page": 3,
+       "x0": 50.11192321777344,
+       "y0": 605.3672485351562,
+       "x1": 140.39297485351562,
+       "y1": 614.2738037109375
+      }
+     ],
+     "quote": "Formally, in this paper we consider a building block defined as: y = F(x, {W i }) + x.",
+     "grounding_status": "verified",
+     "match_score": 93.3
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "Plain network baselines use 3x3 filters inspired by VGG nets, maintaining equal filter counts for the same feature map sizes and doubling filters when spatial size is halved, ending with global average pooling and a fully-connected softmax layer.",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 308.86,
+      "y0": 524.95,
+      "x1": 545.11,
+      "y1": 557.5
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 380.91,
+       "y0": 524.95,
+       "x1": 545.11,
+       "y1": 533.59
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 536.9,
+       "x1": 545.11,
+       "y1": 545.54
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 548.86,
+       "x1": 327.95,
+       "y1": 557.5
+      }
+     ],
+     "quote": "Our plain baselines (Fig. 3, middle) are mainly inspired by the philosophy of VGG nets [41] (Fig. 3, left).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "Residual networks are created by inserting shortcut connections into the plain networks, utilizing either identity mappings with zero padding or projection shortcuts via 1x1 convolutions to handle dimension changes.",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 75.48,
+      "x1": 545.11,
+      "y1": 108.03
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 392.02,
+       "y0": 75.48,
+       "x1": 545.11,
+       "y1": 84.12
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 87.43,
+       "x1": 545.11,
+       "y1": 96.07000000000001
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 99.39,
+       "x1": 490.83000000000004,
+       "y1": 108.03
+      }
+     ],
+     "quote": "Based on the above plain network, we insert shortcut connections (Fig. 3, right) which turn the network into its counterpart residual version.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "Training is performed from scratch using SGD with mini-batches of 256, batch normalization after convolutions and before activation, weight decay, momentum, and a decaying learning rate schedule.",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 339.68,
+      "x1": 545.12,
+      "y1": 360.28
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 445.65,
+       "y0": 339.68,
+       "x1": 545.12,
+       "y1": 348.32
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 351.64,
+       "x1": 528.46,
+       "y1": 360.28
+      }
+     ],
+     "quote": "We initialize the weights as in [13] and train all plain/residual nets from scratch.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "ImageNet 2012 classification dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 531.16,
+      "x1": 545.12,
+      "y1": 551.76
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 320.82,
+       "y0": 531.16,
+       "x1": 545.12,
+       "y1": 539.8
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 543.12,
+       "x1": 495.98,
+       "y1": 551.76
+      }
+     ],
+     "quote": "We evaluate our method on the ImageNet 2012 classification dataset [36] that consists of 1000 classes.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ImageNet 2012 classification dataset",
+   "split": "training, validation, test",
+   "size": "1.28 million training images, 50k validation images, 100k test images",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "PASCAL VOC 2007",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 308.86,
+      "y0": 537.05,
+      "x1": 545.12,
+      "y1": 569.6
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 406.64,
+       "y0": 537.05,
+       "x1": 545.12,
+       "y1": 545.6899999999999
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 549.0,
+       "x1": 545.11,
+       "y1": 557.64
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 560.96,
+       "x1": 387.74,
+       "y1": 569.6
+      }
+     ],
+     "quote": "Table 7 and8 show the object detection baseline results on PASCAL VOC 2007 and 2012 [5] and COCO [26].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "PASCAL VOC 2007",
+   "split": "trainval, test",
+   "size": "5k trainval images in VOC 2007 and 16k trainval images in VOC 2012 for training",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "PASCAL VOC 2012",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 308.86,
+      "y0": 537.05,
+      "x1": 545.12,
+      "y1": 569.6
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 406.64,
+       "y0": 537.05,
+       "x1": 545.12,
+       "y1": 545.6899999999999
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 549.0,
+       "x1": 545.11,
+       "y1": 557.64
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 560.96,
+       "x1": 387.74,
+       "y1": 569.6
+      }
+     ],
+     "quote": "Table 7 and8 show the object detection baseline results on PASCAL VOC 2007 and 2012 [5] and COCO [26].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "PASCAL VOC 2012",
+   "split": "trainval, test",
+   "size": "10k trainval+test images in VOC 2007 and 16k trainval images in VOC 2012 for training",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "COCO dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 308.86,
+      "y0": 537.05,
+      "x1": 545.12,
+      "y1": 569.6
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 406.64,
+       "y0": 537.05,
+       "x1": 545.12,
+       "y1": 545.6899999999999
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 549.0,
+       "x1": 545.11,
+       "y1": 557.64
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 560.96,
+       "x1": 387.74,
+       "y1": 569.6
+      }
+     ],
+     "quote": "Table 7 and8 show the object detection baseline results on PASCAL VOC 2007 and 2012 [5] and COCO [26].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "COCO",
+   "split": "train, val, test-dev",
+   "size": "80k images on the train set and 40k images on the val set",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "CIFAR-10",
+   "evidence": [
+    {
+     "chunk_id": "b0098",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 323.2080078125,
+      "y0": 667.73828125,
+      "x1": 459.9562072753906,
+      "y1": 674.8635864257812
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 323.2080078125,
+       "y0": 667.73828125,
+       "x1": 459.9562072753906,
+       "y1": 674.8635864257812
+      }
+     ],
+     "quote": "Deeper non-bottleneck ResNets (e.g., Fig.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "CIFAR-10",
+   "split": "test",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "VGG-16",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 308.86,
+      "y0": 572.91,
+      "x1": 545.12,
+      "y1": 593.51
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 373.52,
+       "y0": 572.91,
+       "x1": 545.12,
+       "y1": 581.55
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 584.87,
+       "x1": 486.74,
+       "y1": 593.51
+      }
+     ],
+     "quote": "Here we are interested in the improvements of replacing VGG-16 [41] with ResNet-101.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "GoogLeNet",
+   "evidence": [
+    {
+     "chunk_id": "b0097",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11199951171875,
+      "y0": 281.1327819824219,
+      "x1": 316.05499267578125,
+      "y1": 291.14874267578125
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 50.11199951171875,
+       "y0": 281.1327819824219,
+       "x1": 316.05499267578125,
+       "y1": 291.14874267578125
+      }
+     ],
+     "quote": "GoogLeNet [44] (ILSVRC’14)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "PReLU-net",
+   "evidence": [
+    {
+     "chunk_id": "b0097",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11199951171875,
+      "y0": 476.749755859375,
+      "x1": 316.05499267578125,
+      "y1": 486.7657165527344
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 50.11199951171875,
+       "y0": 476.749755859375,
+       "x1": 316.05499267578125,
+       "y1": 486.7657165527344
+      }
+     ],
+     "quote": "PReLU-net [13]",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "BN-inception",
+   "evidence": [
+    {
+     "chunk_id": "b0097",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11199951171875,
+      "y0": 317.69677734375,
+      "x1": 316.05499267578125,
+      "y1": 327.7127380371094
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 50.11199951171875,
+       "y0": 317.69677734375,
+       "x1": 316.05499267578125,
+       "y1": 327.7127380371094
+      }
+     ],
+     "quote": "BN-inception [16]",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "Highway networks",
+   "evidence": [
+    {
+     "chunk_id": "b0100",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 316.3656311035156,
+      "y0": 159.38192749023438,
+      "x1": 537.611328125,
+      "y1": 169.7093048095703
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 316.3656311035156,
+       "y0": 159.38192749023438,
+       "x1": 537.611328125,
+       "y1": 169.7093048095703
+      }
+     ],
+     "quote": "Highway [42, 43]",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "FitNet",
+   "evidence": [
+    {
+     "chunk_id": "b0100",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 316.3656311035156,
+      "y0": 135.47384643554688,
+      "x1": 537.611328125,
+      "y1": 145.8012237548828
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 316.3656311035156,
+       "y0": 135.47384643554688,
+       "x1": 537.611328125,
+       "y1": 145.8012237548828
+      }
+     ],
+     "quote": "FitNet [35]",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "Maxout",
+   "evidence": [
+    {
+     "chunk_id": "b0100",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 316.3656311035156,
+      "y0": 86.83071899414062,
+      "x1": 537.611328125,
+      "y1": 97.1581039428711
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 316.3656311035156,
+       "y0": 86.83071899414062,
+       "x1": 537.611328125,
+       "y1": 97.1581039428711
+      }
+     ],
+     "quote": "Maxout [10]",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.7",
+   "value": "NIN",
+   "evidence": [
+    {
+     "chunk_id": "b0100",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 316.3656311035156,
+      "y0": 98.78482055664062,
+      "x1": 537.611328125,
+      "y1": 109.1122055053711
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 316.3656311035156,
+       "y0": 98.78482055664062,
+       "x1": 537.611328125,
+       "y1": 109.1122055053711
+      }
+     ],
+     "quote": "NIN [25]",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.8",
+   "value": "DSN",
+   "evidence": [
+    {
+     "chunk_id": "b0100",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 316.3656311035156,
+      "y0": 110.73776245117188,
+      "x1": 537.611328125,
+      "y1": 121.06514739990234
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 316.3656311035156,
+       "y0": 110.73776245117188,
+       "x1": 537.611328125,
+       "y1": 121.06514739990234
+      }
+     ],
+     "quote": "DSN [24]",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "top-1 and top-5 error rates",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 590.94,
+      "x1": 486.84000000000003,
+      "y1": 599.58
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 590.94,
+       "x1": 486.84000000000003,
+       "y1": 599.58
+      }
+     ],
+     "quote": "We evaluate both top-1 and top-5 error rates.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "mAP@[.5, .95] and mAP@.5",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 50.11,
+      "y0": 632.78,
+      "x1": 286.36,
+      "y1": 665.33
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 84.43,
+       "y0": 632.78,
+       "x1": 286.36,
+       "y1": 641.42
+      },
+      {
+       "page": 10,
+       "x0": 50.11,
+       "y0": 644.74,
+       "x1": 286.36,
+       "y1": 653.38
+      },
+      {
+       "page": 10,
+       "x0": 50.11,
+       "y0": 656.69,
+       "x1": 93.84,
+       "y1": 665.33
+      }
+     ],
+     "quote": "We evaluate the PASCAL VOC metric (mAP @ IoU = 0.5) and the standard COCO metric (mAP @ IoU = .5:.05:.95).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "optimizer is SGD",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 351.64,
+      "x1": 545.11,
+      "y1": 372.22999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 532.08,
+       "y0": 351.64,
+       "x1": 545.11,
+       "y1": 360.28
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 363.59,
+       "x1": 470.66,
+       "y1": 372.22999999999996
+      }
+     ],
+     "quote": "We use SGD with a mini-batch size of 256.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "SGD",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "mini-batch size of 256",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 351.64,
+      "x1": 545.11,
+      "y1": 372.22999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 532.08,
+       "y0": 351.64,
+       "x1": 545.11,
+       "y1": 360.28
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 363.59,
+       "x1": 470.66,
+       "y1": 372.22999999999996
+      }
+     ],
+     "quote": "We use SGD with a mini-batch size of 256.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch_size",
+   "value_raw": "256",
+   "value_norm": 256.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "initial learning rate of 0.1",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 363.59,
+      "x1": 545.12,
+      "y1": 403.56
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 475.74,
+       "y0": 363.59,
+       "x1": 545.12,
+       "y1": 372.22999999999996
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 375.55,
+       "x1": 545.11,
+       "y1": 384.19
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 386.52,
+       "x1": 461.85,
+       "y1": 396.47999999999996
+      },
+      {
+       "page": 4,
+       "x0": 463.42,
+       "y0": 386.27,
+       "x1": 471.17,
+       "y1": 403.56
+      },
+      {
+       "page": 4,
+       "x0": 472.73,
+       "y0": 386.52,
+       "x1": 482.69,
+       "y1": 396.47999999999996
+      },
+      {
+       "page": 4,
+       "x0": 482.7,
+       "y0": 385.61,
+       "x1": 486.67,
+       "y1": 391.73
+      },
+      {
+       "page": 4,
+       "x0": 489.48,
+       "y0": 387.51,
+       "x1": 529.0500000000001,
+       "y1": 396.15
+      }
+     ],
+     "quote": "The learning rate starts from 0.1 and is divided by 10 when the error plateaus, and the models are trained for up to 60 × 10 4 iterations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.1",
+   "value_norm": 0.1,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "training iterations up to 60 * 10^4",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 363.59,
+      "x1": 545.12,
+      "y1": 403.56
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 475.74,
+       "y0": 363.59,
+       "x1": 545.12,
+       "y1": 372.22999999999996
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 375.55,
+       "x1": 545.11,
+       "y1": 384.19
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 386.52,
+       "x1": 461.85,
+       "y1": 396.47999999999996
+      },
+      {
+       "page": 4,
+       "x0": 463.42,
+       "y0": 386.27,
+       "x1": 471.17,
+       "y1": 403.56
+      },
+      {
+       "page": 4,
+       "x0": 472.73,
+       "y0": 386.52,
+       "x1": 482.69,
+       "y1": 396.47999999999996
+      },
+      {
+       "page": 4,
+       "x0": 482.7,
+       "y0": 385.61,
+       "x1": 486.67,
+       "y1": 391.73
+      },
+      {
+       "page": 4,
+       "x0": 489.48,
+       "y0": 387.51,
+       "x1": 529.0500000000001,
+       "y1": 396.15
+      }
+     ],
+     "quote": "The learning rate starts from 0.1 and is divided by 10 when the error plateaus, and the models are trained for up to 60 × 10 4 iterations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "iterations",
+   "value_raw": "60 × 10 4",
+   "value_norm": 600000.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "weight decay of 0.0001",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 387.51,
+      "x1": 545.11,
+      "y1": 408.09999999999997
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 532.08,
+       "y0": 387.51,
+       "x1": 545.11,
+       "y1": 396.15
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 399.46,
+       "x1": 528.06,
+       "y1": 408.09999999999997
+      }
+     ],
+     "quote": "We use a weight decay of 0.0001 and a momentum of 0.9.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "0.0001",
+   "value_norm": 0.0001,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "momentum of 0.9",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 387.51,
+      "x1": 545.11,
+      "y1": 408.09999999999997
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 532.08,
+       "y0": 387.51,
+       "x1": 545.11,
+       "y1": 396.15
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 399.46,
+       "x1": 528.06,
+       "y1": 408.09999999999997
+      }
+     ],
+     "quote": "We use a weight decay of 0.0001 and a momentum of 0.9.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "momentum",
+   "value_raw": "0.9",
+   "value_norm": 0.9,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "no dropout used",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 399.46,
+      "x1": 545.11,
+      "y1": 420.06
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 532.08,
+       "y0": 399.46,
+       "x1": 545.11,
+       "y1": 408.09999999999997
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 411.42,
+       "x1": 526.37,
+       "y1": 420.06
+      }
+     ],
+     "quote": "We do not use dropout [14], following the practice in [16].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "dropout",
+   "value_raw": "none",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "RPN mini-batch size of 8 images and Fast R-CNN mini-batch size of 16 images",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 50.11,
+      "y0": 75.48,
+      "x1": 545.11,
+      "y1": 713.15
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 76.77,
+       "y0": 692.56,
+       "x1": 286.36,
+       "y1": 701.1999999999999
+      },
+      {
+       "page": 10,
+       "x0": 50.11,
+       "y0": 704.51,
+       "x1": 286.36,
+       "y1": 713.15
+      },
+      {
+       "page": 10,
+       "x0": 308.86,
+       "y0": 75.48,
+       "x1": 545.11,
+       "y1": 84.12
+      },
+      {
+       "page": 10,
+       "x0": 308.86,
+       "y0": 87.43,
+       "x1": 430.25,
+       "y1": 96.07000000000001
+      }
+     ],
+     "quote": "We train the COCO models with an 8-GPU implementation, and thus the RPN step has a mini-batch size of 8 images (i.e., 1 per GPU) and the Fast R-CNN step has a mini-batch size of 16 images.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch_size",
+   "value_raw": "8 (RPN), 16 (Fast R-CNN)",
+   "value_norm": null,
+   "scope": "detection"
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "RPN and Fast R-CNN learning rate of 0.001 for 240k iterations and 0.0001 for 80k iterations",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 308.86,
+      "y0": 87.43,
+      "x1": 545.11,
+      "y1": 119.98
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 436.19,
+       "y0": 87.43,
+       "x1": 545.11,
+       "y1": 96.07000000000001
+      },
+      {
+       "page": 10,
+       "x0": 308.86,
+       "y0": 99.39,
+       "x1": 545.11,
+       "y1": 108.03
+      },
+      {
+       "page": 10,
+       "x0": 308.86,
+       "y0": 111.34,
+       "x1": 534.9300000000001,
+       "y1": 119.98
+      }
+     ],
+     "quote": "The RPN step and Fast R-CNN step are both trained for 240k iterations with a learning rate of 0.001 and then for 80k iterations with 0.0001.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.001, 0.0001",
+   "value_norm": null,
+   "scope": "detection"
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "RPN and Fast R-CNN training iterations of 240k and 80k",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 308.86,
+      "y0": 87.43,
+      "x1": 545.11,
+      "y1": 119.98
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 436.19,
+       "y0": 87.43,
+       "x1": 545.11,
+       "y1": 96.07000000000001
+      },
+      {
+       "page": 10,
+       "x0": 308.86,
+       "y0": 99.39,
+       "x1": 545.11,
+       "y1": 108.03
+      },
+      {
+       "page": 10,
+       "x0": 308.86,
+       "y0": 111.34,
+       "x1": 534.9300000000001,
+       "y1": 119.98
+      }
+     ],
+     "quote": "The RPN step and Fast R-CNN step are both trained for 240k iterations with a learning rate of 0.001 and then for 80k iterations with 0.0001.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "iterations",
+   "value_raw": "240k, 80k",
+   "value_norm": null,
+   "scope": "detection"
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "8-GPU implementation",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 50.11,
+      "y0": 75.48,
+      "x1": 545.11,
+      "y1": 713.15
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 76.77,
+       "y0": 692.56,
+       "x1": 286.36,
+       "y1": 701.1999999999999
+      },
+      {
+       "page": 10,
+       "x0": 50.11,
+       "y0": 704.51,
+       "x1": 286.36,
+       "y1": 713.15
+      },
+      {
+       "page": 10,
+       "x0": 308.86,
+       "y0": 75.48,
+       "x1": 545.11,
+       "y1": 84.12
+      },
+      {
+       "page": 10,
+       "x0": 308.86,
+       "y0": 87.43,
+       "x1": 430.25,
+       "y1": 96.07000000000001
+      }
+     ],
+     "quote": "We train the COCO models with an 8-GPU implementation, and thus the RPN step has a mini-batch size of 8 images (i.e., 1 per GPU) and the Fast R-CNN step has a mini-batch size of 16 images.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "ResNet-110 run 5 times on CIFAR-10",
+   "evidence": [
+    {
+     "chunk_id": "b0100",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 308.86199951171875,
+      "y0": 264.85076904296875,
+      "x1": 545.108642578125,
+      "y1": 283.8257141113281
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 421.9909973144531,
+       "y0": 264.85076904296875,
+       "x1": 545.108642578125,
+       "y1": 272.8667297363281
+      },
+      {
+       "page": 7,
+       "x0": 308.86199951171875,
+       "y0": 275.80975341796875,
+       "x1": 321.80950927734375,
+       "y1": 283.8257141113281
+      }
+     ],
+     "quote": "For ResNet-110, we run it 5 times and show \"best (mean±std)\" as in[43].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Identity vs. Projection Shortcuts comparison",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 218.56,
+      "x1": 545.12,
+      "y1": 286.97999999999996
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 491.23,
+       "y0": 218.56,
+       "x1": 545.12,
+       "y1": 227.2
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 230.52,
+       "x1": 545.11,
+       "y1": 239.16000000000003
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 242.47,
+       "x1": 545.11,
+       "y1": 251.11
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 254.43,
+       "x1": 545.11,
+       "y1": 263.07
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 266.38,
+       "x1": 545.11,
+       "y1": 275.02
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 278.34,
+       "x1": 542.6700000000001,
+       "y1": 286.97999999999996
+      }
+     ],
+     "quote": "In Table 3 we compare three options: (A) zero-padding shortcuts are used for increasing dimensions, and all shortcuts are parameterfree (the same as Table 2 and Fig. 4 right); (B) projection shortcuts are used for increasing dimensions, and other shortcuts are identity; and (C) all shortcuts are projections.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Combining deep architectures with stronger regularization to potentially improve results",
+   "evidence": [
+    {
+     "chunk_id": "b0064",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 308.86,
+      "y0": 474.9,
+      "x1": 545.11,
+      "y1": 495.49
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 332.16,
+       "y0": 474.9,
+       "x1": 545.11,
+       "y1": 483.53999999999996
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 486.85,
+       "x1": 498.94000000000005,
+       "y1": 495.49
+      }
+     ],
+     "quote": "But combining with stronger regularization may improve results, which we will study in the future.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "An ensemble of these residual nets achieves 3.57% error on the ImageNet test set.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 378.62,
+      "x1": 286.37,
+      "y1": 399.4
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 64.96,
+       "y0": 378.62,
+       "x1": 286.37,
+       "y1": 387.21
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 390.58,
+       "x1": 146.17000000000002,
+       "y1": 399.4
+      }
+     ],
+     "quote": "An ensemble of these residual nets achieves 3.57% error on the ImageNet test set.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "Solely due to extremely deep representations, a 28% relative improvement on the COCO object detection dataset is obtained.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 438.82,
+      "x1": 286.37,
+      "y1": 471.32
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 198.28,
+       "y0": 438.82,
+       "x1": 286.37,
+       "y1": 447.40999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 450.78,
+       "x1": 286.36,
+       "y1": 459.36999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 462.73,
+       "x1": 257.67,
+       "y1": 471.32
+      }
+     ],
+     "quote": "Solely due to our extremely deep representations, we obtain a 28% relative improvement on the COCO object detection dataset.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "Residual networks are easier to optimize and can gain accuracy from considerably increased depth.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 306.89,
+      "x1": 286.37,
+      "y1": 351.34999999999997
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 219.06,
+       "y0": 306.89,
+       "x1": 286.37,
+       "y1": 315.47999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 318.84,
+       "x1": 286.36,
+       "y1": 327.42999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 330.8,
+       "x1": 286.36,
+       "y1": 339.39
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 342.76,
+       "x1": 169.66,
+       "y1": 351.34999999999997
+      }
+     ],
+     "quote": "We provide comprehensive empirical evidence showing that these residual networks are easier to optimize, and can gain accuracy from considerably increased depth.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

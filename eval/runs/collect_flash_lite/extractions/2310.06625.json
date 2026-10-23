@@ -1,0 +1,2051 @@
+{
+ "metadata": {
+  "title": "ITRANSFORMER: INVERTED TRANSFORMERS ARE EFFECTIVE FOR TIME SERIES FORECASTING",
+  "authors": [
+   "Yong Liu",
+   "Tengge Hu",
+   "Haoran Zhang",
+   "Haixu Wu",
+   "Shiyu Wang",
+   "Lintao Ma",
+   "Mingsheng Long"
+  ],
+  "venue": null,
+  "year": "2024",
+  "arxiv_id": "2310.06625v4[cs.LG]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Transformers struggle with forecasting time series that use larger lookback windows.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.51,
+      "y0": 291.81,
+      "x1": 468.38,
+      "y1": 311.4
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 291.81,
+       "x1": 468.38,
+       "y1": 300.45
+      },
+      {
+       "page": 1,
+       "x0": 143.51,
+       "y0": 302.76,
+       "x1": 417.55,
+       "y1": 311.4
+      }
+     ],
+     "quote": "However, Transformers are challenged in forecasting series with larger lookback windows due to performance degradation and computation explosion.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Embedding each temporal token by fusing multiple variates fails to learn variate-centric representations.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.62,
+      "y0": 302.76,
+      "x1": 468.13,
+      "y1": 344.28
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 420.64,
+       "y0": 302.76,
+       "x1": 468.13,
+       "y1": 311.4
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 313.72,
+       "x1": 468.13,
+       "y1": 322.36
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 324.68,
+       "x1": 468.13,
+       "y1": 333.32
+      },
+      {
+       "page": 1,
+       "x0": 143.62,
+       "y0": 335.64,
+       "x1": 438.16,
+       "y1": 344.28
+      }
+     ],
+     "quote": "Besides, the embedding for each temporal token fuses multiple variates that represent potential delayed events and distinct physical measurements, which may fail in learning variate-centric representations and result in meaningless attention maps.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Repurposing the Transformer architecture without modifying basic components.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.51,
+      "y0": 335.64,
+      "x1": 468.14,
+      "y1": 366.2
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 442.18,
+       "y0": 335.64,
+       "x1": 468.13,
+       "y1": 344.28
+      },
+      {
+       "page": 1,
+       "x0": 143.51,
+       "y0": 346.6,
+       "x1": 468.14,
+       "y1": 355.24
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 357.56,
+       "x1": 452.4,
+       "y1": 366.2
+      }
+     ],
+     "quote": "In this work, we reflect on the competent duties of Transformer components and repurpose the Transformer architecture without any modification to the basic components.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Proposing iTransformer which applies attention and feed-forward networks on inverted dimensions.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 357.56,
+      "x1": 468.39,
+      "y1": 388.12
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 455.38,
+       "y0": 357.56,
+       "x1": 468.13,
+       "y1": 366.2
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 368.13,
+       "x1": 468.39,
+       "y1": 377.15999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 379.48,
+       "x1": 250.73000000000002,
+       "y1": 388.12
+      }
+     ],
+     "quote": "We propose iTransformer that simply applies the attention and feed-forward network on the inverted dimensions.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "time series forecasting",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.56,
+      "y0": 247.97,
+      "x1": 468.3,
+      "y1": 267.57
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.56,
+       "y0": 247.97,
+       "x1": 468.3,
+       "y1": 256.61
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 258.93,
+       "x1": 393.01,
+       "y1": 267.57
+      }
+     ],
+     "quote": "The recent boom of linear forecasting models questions the ongoing passion for architectural modifications of Transformer-based forecasters.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The model uses an encoder-only Transformer architecture composed of embedding, projection, and Transformer blocks.",
+   "evidence": [
+    {
+     "chunk_id": "b0022",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 666.92,
+      "x1": 505.66,
+      "y1": 686.6999999999999
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 666.92,
+       "x1": 505.66,
+       "y1": 675.74
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 678.06,
+       "x1": 476.38,
+       "y1": 686.6999999999999
+      }
+     ],
+     "quote": "Our proposed iTransformer illustrated in Figure 4 adopts the encoder-only architecture of Transformer (Vaswani et al., 2017), including the embedding, projection, and Transformer blocks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "Each time series is tokenized to describe variate properties, interacts via self-attention for mutual correlations, and is processed by feed-forward networks.",
+   "evidence": [
+    {
+     "chunk_id": "b0023",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 365.41,
+      "x1": 504.0,
+      "y1": 395.96999999999997
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 247.44,
+       "y0": 365.41,
+       "x1": 504.0,
+       "y1": 374.05
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 376.37,
+       "x1": 504.0,
+       "y1": 385.01
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 387.33,
+       "x1": 468.92,
+       "y1": 395.96999999999997
+      }
+     ],
+     "quote": "Each time series driven by the underlying complicated process is firstly tokenized to describe the properties of the variate, applied by self-attention for mutual interactions, and individually processed by feed-forward networks for series representations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "The final prediction task for generating future series is delivered to linear projection layers.",
+   "evidence": [
+    {
+     "chunk_id": "b0023",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 387.33,
+      "x1": 505.7,
+      "y1": 417.89
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 472.0,
+       "y0": 387.33,
+       "x1": 505.24,
+       "y1": 395.96999999999997
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 398.29,
+       "x1": 504.0,
+       "y1": 406.93
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 409.25,
+       "x1": 505.7,
+       "y1": 417.89
+      }
+     ],
+     "quote": "Notably, the task to generate the predicted series is essentially delivered to linear layers, which has been proven competent by previous work (Das et al., 2023) and we provide a detailed analysis in the next section.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "Unlike typical forecasters treating timestamps as tokens, the proposed iTransformer inverts the architecture to treat each entire time series of a variate as a token.",
+   "evidence": [
+    {
+     "chunk_id": "b0023",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 354.45,
+      "x1": 504.0,
+      "y1": 374.05
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 354.45,
+       "x1": 504.0,
+       "y1": 363.09
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 365.41,
+       "x1": 243.29,
+       "y1": 374.05
+      }
+     ],
+     "quote": "Instead, our proposed encoder-only iTransformer focuses on representation learning and adaptive correlating of multivariate series.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "Layer normalization and feed-forward networks are applied to the series representation of individual variates rather than across timestamps to diminish measurement discrepancies.",
+   "evidence": [
+    {
+     "chunk_id": "b0031",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 129.17,
+      "x1": 505.24,
+      "y1": 170.69
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 414.84,
+       "y0": 129.17,
+       "x1": 505.24,
+       "y1": 137.81
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 140.13,
+       "x1": 504.0,
+       "y1": 148.76999999999998
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 151.09,
+       "x1": 504.0,
+       "y1": 159.73000000000002
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 162.05,
+       "x1": 163.2,
+       "y1": 170.69
+      }
+     ],
+     "quote": "In our inverted version, the normalization is applied to the series representation of individual variate as Equation 2, which has been studied and proved effective in tackling non-stationary problems (Kim et al., 2021;Liu et al., 2022b).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.2",
+   "value": "Position embeddings are no longer needed because the order of the sequence is implicitly stored in the neuron permutation of the feed-forward network.",
+   "evidence": [
+    {
+     "chunk_id": "b0027",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 565.69,
+      "x1": 504.0,
+      "y1": 585.29
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 156.19,
+       "y0": 565.69,
+       "x1": 504.0,
+       "y1": 574.33
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 576.65,
+       "x1": 502.02,
+       "y1": 585.29
+      }
+     ],
+     "quote": "Specifically, as the order of sequence is implicitly stored in the neuron permutation of the feed-forward network, the position embedding in the vanilla Transformer is no longer needed here.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "ECL dataset used in multivariate forecasting experiments",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 712.42,
+      "x1": 504.01,
+      "y1": 732.02
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 153.68,
+       "y0": 712.42,
+       "x1": 504.01,
+       "y1": 721.06
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 723.38,
+       "x1": 504.0,
+       "y1": 732.02
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 85.34,
+       "x1": 505.75,
+       "y1": 93.98
+      }
+     ],
+     "quote": "We extensively include 7 real-world datasets in our experiments, including ECL, ETT (4 subsets), Exchange, Traffic, Weather used by Autoformer (Wu et al., 2021), Solar-Energy datasets proposed in LSTNet (Lai et al., 2018), and PEMS (4 subsets) evaluated in SCINet (Liu et al., 2022a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ECL",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "ETT dataset with 4 subsets",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 712.42,
+      "x1": 504.01,
+      "y1": 732.02
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 153.68,
+       "y0": 712.42,
+       "x1": 504.01,
+       "y1": 721.06
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 723.38,
+       "x1": 504.0,
+       "y1": 732.02
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 85.34,
+       "x1": 505.75,
+       "y1": 93.98
+      }
+     ],
+     "quote": "We extensively include 7 real-world datasets in our experiments, including ECL, ETT (4 subsets), Exchange, Traffic, Weather used by Autoformer (Wu et al., 2021), Solar-Energy datasets proposed in LSTNet (Lai et al., 2018), and PEMS (4 subsets) evaluated in SCINet (Liu et al., 2022a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ETT",
+   "split": "4 subsets",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "Exchange dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 712.42,
+      "x1": 504.01,
+      "y1": 732.02
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 153.68,
+       "y0": 712.42,
+       "x1": 504.01,
+       "y1": 721.06
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 723.38,
+       "x1": 504.0,
+       "y1": 732.02
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 85.34,
+       "x1": 505.75,
+       "y1": 93.98
+      }
+     ],
+     "quote": "We extensively include 7 real-world datasets in our experiments, including ECL, ETT (4 subsets), Exchange, Traffic, Weather used by Autoformer (Wu et al., 2021), Solar-Energy datasets proposed in LSTNet (Lai et al., 2018), and PEMS (4 subsets) evaluated in SCINet (Liu et al., 2022a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Exchange",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "Traffic dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 712.42,
+      "x1": 504.01,
+      "y1": 732.02
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 153.68,
+       "y0": 712.42,
+       "x1": 504.01,
+       "y1": 721.06
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 723.38,
+       "x1": 504.0,
+       "y1": 732.02
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 85.34,
+       "x1": 505.75,
+       "y1": 93.98
+      }
+     ],
+     "quote": "We extensively include 7 real-world datasets in our experiments, including ECL, ETT (4 subsets), Exchange, Traffic, Weather used by Autoformer (Wu et al., 2021), Solar-Energy datasets proposed in LSTNet (Lai et al., 2018), and PEMS (4 subsets) evaluated in SCINet (Liu et al., 2022a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Traffic",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "Weather dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 712.42,
+      "x1": 504.01,
+      "y1": 732.02
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 153.68,
+       "y0": 712.42,
+       "x1": 504.01,
+       "y1": 721.06
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 723.38,
+       "x1": 504.0,
+       "y1": 732.02
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 85.34,
+       "x1": 505.75,
+       "y1": 93.98
+      }
+     ],
+     "quote": "We extensively include 7 real-world datasets in our experiments, including ECL, ETT (4 subsets), Exchange, Traffic, Weather used by Autoformer (Wu et al., 2021), Solar-Energy datasets proposed in LSTNet (Lai et al., 2018), and PEMS (4 subsets) evaluated in SCINet (Liu et al., 2022a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Weather",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "Solar-Energy dataset proposed in LSTNet",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 712.42,
+      "x1": 504.01,
+      "y1": 732.02
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 153.68,
+       "y0": 712.42,
+       "x1": 504.01,
+       "y1": 721.06
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 723.38,
+       "x1": 504.0,
+       "y1": 732.02
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 85.34,
+       "x1": 505.75,
+       "y1": 93.98
+      }
+     ],
+     "quote": "We extensively include 7 real-world datasets in our experiments, including ECL, ETT (4 subsets), Exchange, Traffic, Weather used by Autoformer (Wu et al., 2021), Solar-Energy datasets proposed in LSTNet (Lai et al., 2018), and PEMS (4 subsets) evaluated in SCINet (Liu et al., 2022a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Solar-Energy",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.6",
+   "value": "PEMS dataset with 4 subsets",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 712.42,
+      "x1": 504.01,
+      "y1": 732.02
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 153.68,
+       "y0": 712.42,
+       "x1": 504.01,
+       "y1": 721.06
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 723.38,
+       "x1": 504.0,
+       "y1": 732.02
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 85.34,
+       "x1": 505.75,
+       "y1": 93.98
+      }
+     ],
+     "quote": "We extensively include 7 real-world datasets in our experiments, including ECL, ETT (4 subsets), Exchange, Traffic, Weather used by Autoformer (Wu et al., 2021), Solar-Energy datasets proposed in LSTNet (Lai et al., 2018), and PEMS (4 subsets) evaluated in SCINet (Liu et al., 2022a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "PEMS",
+   "split": "4 subsets",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.7",
+   "value": "Market dataset with 6 subsets presented in Appendix F.4",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 107.53,
+      "y0": 96.3,
+      "x1": 410.03999999999996,
+      "y1": 104.94
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 107.53,
+       "y0": 96.3,
+       "x1": 410.03999999999996,
+       "y1": 104.94
+      }
+     ],
+     "quote": "We also provide the experiments on Market (6 subsets) in Appendix F.4.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Market",
+   "split": "6 subsets",
+   "size": "",
+   "public": "unknown"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Autoformer baseline model",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 198.35,
+      "x1": 505.24,
+      "y1": 229.29000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 198.35,
+       "x1": 505.24,
+       "y1": 207.38
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 209.69,
+       "x1": 505.24,
+       "y1": 218.32999999999998
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 220.65,
+       "x1": 504.83,
+       "y1": 229.29000000000002
+      }
+     ],
+     "quote": "Baselines We carefully choose 10 well-acknowledged forecasting models as our benchmark, including (1) Transformer-based methods: Autoformer (Wu et al., 2021), FEDformer (Zhou et al., 2022), Stationary (Liu et al., 2022b), Crossformer (Zhang & Yan, 2023), PatchTST (Nie et al., 2023);",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "FEDformer baseline model",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 198.35,
+      "x1": 505.24,
+      "y1": 229.29000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 198.35,
+       "x1": 505.24,
+       "y1": 207.38
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 209.69,
+       "x1": 505.24,
+       "y1": 218.32999999999998
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 220.65,
+       "x1": 504.83,
+       "y1": 229.29000000000002
+      }
+     ],
+     "quote": "Baselines We carefully choose 10 well-acknowledged forecasting models as our benchmark, including (1) Transformer-based methods: Autoformer (Wu et al., 2021), FEDformer (Zhou et al., 2022), Stationary (Liu et al., 2022b), Crossformer (Zhang & Yan, 2023), PatchTST (Nie et al., 2023);",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "Stationary baseline model",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 198.35,
+      "x1": 505.24,
+      "y1": 229.29000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 198.35,
+       "x1": 505.24,
+       "y1": 207.38
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 209.69,
+       "x1": 505.24,
+       "y1": 218.32999999999998
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 220.65,
+       "x1": 504.83,
+       "y1": 229.29000000000002
+      }
+     ],
+     "quote": "Baselines We carefully choose 10 well-acknowledged forecasting models as our benchmark, including (1) Transformer-based methods: Autoformer (Wu et al., 2021), FEDformer (Zhou et al., 2022), Stationary (Liu et al., 2022b), Crossformer (Zhang & Yan, 2023), PatchTST (Nie et al., 2023);",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "Crossformer baseline model",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 198.35,
+      "x1": 505.24,
+      "y1": 229.29000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 198.35,
+       "x1": 505.24,
+       "y1": 207.38
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 209.69,
+       "x1": 505.24,
+       "y1": 218.32999999999998
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 220.65,
+       "x1": 504.83,
+       "y1": 229.29000000000002
+      }
+     ],
+     "quote": "Baselines We carefully choose 10 well-acknowledged forecasting models as our benchmark, including (1) Transformer-based methods: Autoformer (Wu et al., 2021), FEDformer (Zhou et al., 2022), Stationary (Liu et al., 2022b), Crossformer (Zhang & Yan, 2023), PatchTST (Nie et al., 2023);",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "PatchTST baseline model",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 198.35,
+      "x1": 505.24,
+      "y1": 229.29000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 198.35,
+       "x1": 505.24,
+       "y1": 207.38
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 209.69,
+       "x1": 505.24,
+       "y1": 218.32999999999998
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 220.65,
+       "x1": 504.83,
+       "y1": 229.29000000000002
+      }
+     ],
+     "quote": "Baselines We carefully choose 10 well-acknowledged forecasting models as our benchmark, including (1) Transformer-based methods: Autoformer (Wu et al., 2021), FEDformer (Zhou et al., 2022), Stationary (Liu et al., 2022b), Crossformer (Zhang & Yan, 2023), PatchTST (Nie et al., 2023);",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "DLinear baseline model",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 107.67,
+      "y0": 231.61,
+      "x1": 505.24,
+      "y1": 251.20999999999998
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 107.67,
+       "y0": 231.61,
+       "x1": 505.24,
+       "y1": 240.25
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 242.57,
+       "x1": 475.76,
+       "y1": 251.20999999999998
+      }
+     ],
+     "quote": "(2) Linear-based methods: DLinear (Zeng et al., 2023), TiDE (Das et al., 2023), RLinear (Li et al., 2023); and (3) TCN-based methods: SCINet (Liu et al., 2022a), TimesNet (Wu et al., 2023).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "TiDE baseline model",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 107.67,
+      "y0": 231.61,
+      "x1": 505.24,
+      "y1": 251.20999999999998
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 107.67,
+       "y0": 231.61,
+       "x1": 505.24,
+       "y1": 240.25
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 242.57,
+       "x1": 475.76,
+       "y1": 251.20999999999998
+      }
+     ],
+     "quote": "(2) Linear-based methods: DLinear (Zeng et al., 2023), TiDE (Das et al., 2023), RLinear (Li et al., 2023); and (3) TCN-based methods: SCINet (Liu et al., 2022a), TimesNet (Wu et al., 2023).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.7",
+   "value": "SCINet baseline model",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 107.67,
+      "y0": 231.61,
+      "x1": 505.24,
+      "y1": 251.20999999999998
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 107.67,
+       "y0": 231.61,
+       "x1": 505.24,
+       "y1": 240.25
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 242.57,
+       "x1": 475.76,
+       "y1": 251.20999999999998
+      }
+     ],
+     "quote": "(2) Linear-based methods: DLinear (Zeng et al., 2023), TiDE (Das et al., 2023), RLinear (Li et al., 2023); and (3) TCN-based methods: SCINet (Liu et al., 2022a), TimesNet (Wu et al., 2023).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.8",
+   "value": "TimesNet baseline model",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 107.67,
+      "y0": 231.61,
+      "x1": 505.24,
+      "y1": 251.20999999999998
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 107.67,
+       "y0": 231.61,
+       "x1": 505.24,
+       "y1": 240.25
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 242.57,
+       "x1": 475.76,
+       "y1": 251.20999999999998
+      }
+     ],
+     "quote": "(2) Linear-based methods: DLinear (Zeng et al., 2023), TiDE (Das et al., 2023), RLinear (Li et al., 2023); and (3) TCN-based methods: SCINet (Liu et al., 2022a), TimesNet (Wu et al., 2023).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "MSE",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 186.68,
+      "y0": 277.35,
+      "x1": 458.95,
+      "y1": 285.99
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 186.68,
+       "y0": 277.35,
+       "x1": 458.95,
+       "y1": 285.99
+      }
+     ],
+     "quote": "The lower MSE/MAE indicates the more accurate prediction result.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "MAE",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 186.68,
+      "y0": 277.35,
+      "x1": 458.95,
+      "y1": 285.99
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 186.68,
+       "y0": 277.35,
+       "x1": 458.95,
+       "y1": 285.99
+      }
+     ],
+     "quote": "The lower MSE/MAE indicates the more accurate prediction result.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Initial learning rate set to values in {10^-3, 5*10^-4, 10^-4}",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 441.4,
+      "x1": 504.0,
+      "y1": 461.0
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 220.18,
+       "y0": 441.4,
+       "x1": 504.0,
+       "y1": 450.03999999999996
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 452.04,
+       "x1": 122.94,
+       "y1": 460.78000000000003
+      },
+      {
+       "page": 14,
+       "x0": 122.94,
+       "y0": 450.47,
+       "x1": 133.14,
+       "y1": 456.59000000000003
+      },
+      {
+       "page": 14,
+       "x0": 133.64,
+       "y0": 452.04,
+       "x1": 163.52999999999997,
+       "y1": 460.78000000000003
+      },
+      {
+       "page": 14,
+       "x0": 163.53,
+       "y0": 450.47,
+       "x1": 173.73,
+       "y1": 456.59000000000003
+      },
+      {
+       "page": 14,
+       "x0": 174.23,
+       "y0": 452.04,
+       "x1": 188.62,
+       "y1": 460.78000000000003
+      },
+      {
+       "page": 14,
+       "x0": 188.62,
+       "y0": 450.47,
+       "x1": 198.82,
+       "y1": 456.59000000000003
+      },
+      {
+       "page": 14,
+       "x0": 199.32,
+       "y0": 452.04,
+       "x1": 359.83,
+       "y1": 461.0
+      }
+     ],
+     "quote": "We utilize ADAM (Kingma & Ba, 2015) with an initial learning rate in {10 -3 , 5 × 10 -4 , 10 -4 } and L2 loss for the model optimization.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "initial learning rate",
+   "value_raw": "{10 -3 , 5 × 10 -4 , 10 -4 }",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Batch size set to 32",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 452.36,
+      "x1": 504.0,
+      "y1": 471.96
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 362.85,
+       "y0": 452.36,
+       "x1": 504.0,
+       "y1": 461.0
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 463.0,
+       "x1": 296.08000000000004,
+       "y1": 471.96
+      }
+     ],
+     "quote": "The batch size is uniformly set to 32 and the number of training epochs is fixed to 10.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "32",
+   "value_norm": 32.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Number of training epochs fixed to 10",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 452.36,
+      "x1": 504.0,
+      "y1": 471.96
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 362.85,
+       "y0": 452.36,
+       "x1": 504.0,
+       "y1": 461.0
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 463.0,
+       "x1": 296.08000000000004,
+       "y1": 471.96
+      }
+     ],
+     "quote": "The batch size is uniformly set to 32 and the number of training epochs is fixed to 10.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "10",
+   "value_norm": 10.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Number of inverted Transformer blocks set to values in {2, 3, 4}",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 463.32,
+      "x1": 504.0,
+      "y1": 482.91999999999996
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 299.11,
+       "y0": 463.32,
+       "x1": 504.0,
+       "y1": 471.96
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 473.96,
+       "x1": 243.72,
+       "y1": 482.91999999999996
+      }
+     ],
+     "quote": "We set the number of inverted Transformer blocks in our proposed model L ∈ {2, 3, 4}.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "number of Transformer blocks",
+   "value_raw": "{2, 3, 4}",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Dimension of series representations set from {256, 512}",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 246.79,
+      "y0": 473.96,
+      "x1": 505.74,
+      "y1": 482.91999999999996
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 246.79,
+       "y0": 473.96,
+       "x1": 505.74,
+       "y1": 482.91999999999996
+      }
+     ],
+     "quote": "The dimension of series representations D is set from {256, 512}.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "hidden dimension",
+   "value_raw": "{256, 512}",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Optimizer set to ADAM",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 441.4,
+      "x1": 504.0,
+      "y1": 461.0
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 220.18,
+       "y0": 441.4,
+       "x1": 504.0,
+       "y1": 450.03999999999996
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 452.04,
+       "x1": 122.94,
+       "y1": 460.78000000000003
+      },
+      {
+       "page": 14,
+       "x0": 122.94,
+       "y0": 450.47,
+       "x1": 133.14,
+       "y1": 456.59000000000003
+      },
+      {
+       "page": 14,
+       "x0": 133.64,
+       "y0": 452.04,
+       "x1": 163.52999999999997,
+       "y1": 460.78000000000003
+      },
+      {
+       "page": 14,
+       "x0": 163.53,
+       "y0": 450.47,
+       "x1": 173.73,
+       "y1": 456.59000000000003
+      },
+      {
+       "page": 14,
+       "x0": 174.23,
+       "y0": 452.04,
+       "x1": 188.62,
+       "y1": 460.78000000000003
+      },
+      {
+       "page": 14,
+       "x0": 188.62,
+       "y0": 450.47,
+       "x1": 198.82,
+       "y1": 456.59000000000003
+      },
+      {
+       "page": 14,
+       "x0": 199.32,
+       "y0": 452.04,
+       "x1": 359.83,
+       "y1": 461.0
+      }
+     ],
+     "quote": "We utilize ADAM (Kingma & Ba, 2015) with an initial learning rate in {10 -3 , 5 × 10 -4 , 10 -4 } and L2 loss for the model optimization.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "ADAM",
+   "value_norm": null,
+   "scope": ""
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Experiments conducted on a single NVIDIA P100 16GB GPU using PyTorch",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 107.64,
+      "y0": 430.44,
+      "x1": 504.0,
+      "y1": 450.03999999999996
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 107.64,
+       "y0": 430.44,
+       "x1": 504.0,
+       "y1": 439.08
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 441.4,
+       "x1": 217.69,
+       "y1": 450.03999999999996
+      }
+     ],
+     "quote": "All the experiments are implemented in PyTorch (Paszke et al., 2019) and conducted on a single NVIDIA P100 16GB GPU.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Performance evaluated under five runs with different random seeds",
+   "evidence": [
+    {
+     "chunk_id": "b0086",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 107.53,
+      "y0": 518.12,
+      "x1": 503.99,
+      "y1": 537.71
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 107.53,
+       "y0": 518.12,
+       "x1": 503.99,
+       "y1": 526.76
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 529.07,
+       "x1": 455.6,
+       "y1": 537.71
+      }
+     ],
+     "quote": "We also report the standard deviation of iTransformer performance under five runs with different random seeds in Table 5, which exhibits that the performance of iTransformer is stable.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation studies replacing and removing components on variate and temporal dimensions",
+   "evidence": [
+    {
+     "chunk_id": "b0088",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 107.69,
+      "y0": 108.66,
+      "x1": 504.0,
+      "y1": 128.26
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 107.69,
+       "y0": 108.66,
+       "x1": 504.0,
+       "y1": 117.3
+      },
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 119.62,
+       "x1": 403.98,
+       "y1": 128.26
+      }
+     ],
+     "quote": "To elaborate on the rational business of Transformer components, we conduct detailed ablations covering replacing components (Replace) and removing components (w/o).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "Under univariate scenarios, iTransformer degrades into a stackable linear forecaster, which requires further enhancement to better exploit temporal dependencies.",
+   "evidence": [
+    {
+     "chunk_id": "b0125",
+     "page": 25,
+     "bbox": {
+      "page": 25,
+      "x0": 108.0,
+      "y0": 410.62,
+      "x1": 503.99,
+      "y1": 430.21
+     },
+     "boxes": [
+      {
+       "page": 25,
+       "x0": 108.0,
+       "y0": 410.62,
+       "x1": 503.99,
+       "y1": 419.26
+      },
+      {
+       "page": 25,
+       "x0": 108.0,
+       "y0": 421.57,
+       "x1": 469.09,
+       "y1": 430.21
+      }
+     ],
+     "quote": "Under univariate scenarios, iTransformer actually becomes a stackable linear forecaster (attention degradation), which leaves further enhancement to exploit the temporal dependency better.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Explore large-scale pre-training and other time series analysis tasks in future work.",
+   "evidence": [
+    {
+     "chunk_id": "b0064",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 145.68,
+      "y0": 723.38,
+      "x1": 501.43,
+      "y1": 732.02
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 145.68,
+       "y0": 723.38,
+       "x1": 501.43,
+       "y1": 732.02
+      }
+     ],
+     "quote": "In the future, we will explore large-scale pre-training and more time series analysis tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Design components based on the inverted architecture like efficient attention, structural temporal dependency modeling, fine-grained variate tokenization, and embedding mechanisms.",
+   "evidence": [
+    {
+     "chunk_id": "b0128",
+     "page": 25,
+     "bbox": {
+      "page": 25,
+      "x0": 107.53,
+      "y0": 571.44,
+      "x1": 505.7,
+      "y1": 612.9499999999999
+     },
+     "boxes": [
+      {
+       "page": 25,
+       "x0": 107.53,
+       "y0": 571.44,
+       "x1": 504.0,
+       "y1": 580.08
+      },
+      {
+       "page": 25,
+       "x0": 108.0,
+       "y0": 582.39,
+       "x1": 505.24,
+       "y1": 591.03
+      },
+      {
+       "page": 25,
+       "x0": 108.0,
+       "y0": 593.35,
+       "x1": 504.0,
+       "y1": 601.99
+      },
+      {
+       "page": 25,
+       "x0": 108.0,
+       "y0": 604.31,
+       "x1": 505.7,
+       "y1": 612.9499999999999
+      }
+     ],
+     "quote": "We believe the capability and scalability of Transformer have stood the test by extensive fields, but there is still improvement room to elaborately design components based on the inverted architecture, such as efficient attention for multivariate correlation, structural temporal dependency modeling under distribution shift, fine-grained variate tokenization and well-designed embedding mechanisms.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "ethics": [
+  {
+   "id": "ethics.0",
+   "value": "The work focuses solely on time series forecasting, presenting no potential ethical risks.",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 109.32,
+      "x1": 498.05,
+      "y1": 117.96
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 109.32,
+       "x1": 498.05,
+       "y1": 117.96
+      }
+     ],
+     "quote": "Our work only focuses on the time series forecasting problem, so there is no potential ethical risk.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/thuml/iTransformer",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 456.19,
+      "x1": 469.78000000000003,
+      "y1": 475.78999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 414.47,
+       "y0": 456.19,
+       "x1": 469.78000000000003,
+       "y1": 464.83
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 467.15,
+       "x1": 232.7,
+       "y1": 475.78999999999996
+      },
+      {
+       "page": 1,
+       "x0": 453.55,
+       "y0": 468.08,
+       "x1": 459.44,
+       "y1": 475.09
+      }
+     ],
+     "quote": "Code is available at this repository: https://github.com/thuml/iTransformer.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "The iTransformer model achieves state-of-the-art results on challenging real-world datasets.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.56,
+      "y0": 412.35,
+      "x1": 469.79,
+      "y1": 464.83
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 335.0,
+       "y0": 412.35,
+       "x1": 468.13,
+       "y1": 420.99
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 423.31,
+       "x1": 468.13,
+       "y1": 431.95
+      },
+      {
+       "page": 1,
+       "x0": 143.56,
+       "y0": 434.27,
+       "x1": 469.79,
+       "y1": 442.90999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 445.23,
+       "x1": 468.14,
+       "y1": 453.87
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 456.19,
+       "x1": 411.38,
+       "y1": 464.83
+      }
+     ],
+     "quote": "The iTransformer model achieves state-of-the-art on challenging real-world datasets, which further empowers the Transformer family with promoted performance, generalization ability across different variates, and better utilization of arbitrary lookback windows, making it a nice alternative as the fundamental backbone of time series forecasting.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

@@ -1,0 +1,302 @@
+{
+ "1409.0473": {
+  "name": "Bahdanau",
+  "title_score": 100,
+  "error": null,
+  "extracted": 91.5
+ },
+ "1409.1556": {
+  "name": "VGG",
+  "title_score": 100,
+  "error": null,
+  "extracted": 14.4
+ },
+ "1512.03385": {
+  "name": "ResNet",
+  "title_score": 100,
+  "error": null,
+  "extracted": 19.6
+ },
+ "1706.03762": {
+  "name": "Transformer",
+  "title_score": 100,
+  "error": null,
+  "extracted": 27.9
+ },
+ "1810.04805": {
+  "name": "BERT",
+  "title_score": 100,
+  "error": null,
+  "extracted": 18.6
+ },
+ "1907.11692": {
+  "name": "RoBERTa",
+  "title_score": 100,
+  "error": null,
+  "extracted": 15.4
+ },
+ "1910.01108": {
+  "name": "DistilBERT",
+  "title_score": 100,
+  "error": null,
+  "extracted": 13.2
+ },
+ "2002.05709": {
+  "name": "SimCLR",
+  "title_score": 100,
+  "error": null,
+  "extracted": 26.8
+ },
+ "2010.11929": {
+  "name": "ViT",
+  "title_score": 100,
+  "error": null,
+  "extracted": 16.2
+ },
+ "2106.09685": {
+  "name": "LoRA",
+  "title_score": 98,
+  "error": null,
+  "extracted": 62.3
+ },
+ "1910.10683": {
+  "name": "T5",
+  "title_score": 100,
+  "error": null,
+  "extracted": 32.5
+ },
+ "2003.10555": {
+  "name": "ELECTRA",
+  "title_score": 100,
+  "error": null,
+  "extracted": 18.2
+ },
+ "2104.08821": {
+  "name": "SimCSE",
+  "title_score": 100,
+  "error": null,
+  "extracted": 26.6
+ },
+ "2005.11401": {
+  "name": "RAG",
+  "title_score": 100,
+  "error": null,
+  "extracted": 12.2
+ },
+ "2201.11903": {
+  "name": "Chain-of-thought",
+  "title_score": 100,
+  "error": null,
+  "extracted": 17.8
+ },
+ "2210.03629": {
+  "name": "ReAct",
+  "title_score": 100,
+  "error": null,
+  "extracted": 46.4
+ },
+ "2302.13971": {
+  "name": "LLaMA",
+  "title_score": 100,
+  "error": null,
+  "extracted": 30.9
+ },
+ "2305.18290": {
+  "name": "DPO",
+  "title_score": 100,
+  "error": null,
+  "extracted": 17.8
+ },
+ "2305.14314": {
+  "name": "QLoRA",
+  "title_score": 100,
+  "error": null,
+  "extracted": 25.7
+ },
+ "2402.03300": {
+  "name": "DeepSeekMath",
+  "title_score": 100,
+  "error": null,
+  "extracted": 26.9
+ },
+ "1506.01497": {
+  "name": "Faster R-CNN",
+  "title_score": 100,
+  "error": null,
+  "extracted": 20.9
+ },
+ "1505.04597": {
+  "name": "U-Net",
+  "title_score": 100,
+  "error": null,
+  "extracted": 14.2
+ },
+ "2103.14030": {
+  "name": "Swin",
+  "title_score": 100,
+  "error": null,
+  "extracted": 24.8
+ },
+ "2111.06377": {
+  "name": "MAE",
+  "title_score": 100,
+  "error": null,
+  "extracted": 16.0
+ },
+ "2201.03545": {
+  "name": "ConvNeXt",
+  "title_score": 100,
+  "error": null,
+  "extracted": 25.4
+ },
+ "2304.07193": {
+  "name": "DINOv2",
+  "title_score": 100,
+  "error": null,
+  "extracted": 52.9
+ },
+ "2304.02643": {
+  "name": "SAM",
+  "title_score": 100,
+  "error": null,
+  "extracted": 35.0
+ },
+ "2309.16588": {
+  "name": "ViT registers",
+  "title_score": 100,
+  "error": null,
+  "extracted": 20.1
+ },
+ "2303.15343": {
+  "name": "SigLIP",
+  "title_score": 100,
+  "error": null,
+  "extracted": 18.1
+ },
+ "2112.10752": {
+  "name": "Latent diffusion",
+  "title_score": 100,
+  "error": null,
+  "extracted": 30.5
+ },
+ "2212.09748": {
+  "name": "DiT",
+  "title_score": 100,
+  "error": null,
+  "extracted": 35.0
+ },
+ "2210.02747": {
+  "name": "Flow matching",
+  "title_score": 100,
+  "error": null,
+  "extracted": 33.5
+ },
+ "2304.08485": {
+  "name": "LLaVA",
+  "title_score": 100,
+  "error": null,
+  "extracted": 18.6
+ },
+ "1502.03167": {
+  "name": "BatchNorm",
+  "title_score": 100,
+  "error": null,
+  "extracted": 14.6
+ },
+ "1711.05101": {
+  "name": "AdamW",
+  "title_score": 100,
+  "error": null,
+  "extracted": 11.5
+ },
+ "1706.06083": {
+  "name": "PGD",
+  "title_score": 100,
+  "error": null,
+  "extracted": 18.9
+ },
+ "1803.03635": {
+  "name": "Lottery ticket",
+  "title_score": 100,
+  "error": null,
+  "extracted": 19.3
+ },
+ "2001.08361": {
+  "name": "Scaling laws",
+  "title_score": 100,
+  "error": null,
+  "extracted": 10.3
+ },
+ "2203.15556": {
+  "name": "Chinchilla",
+  "title_score": 100,
+  "error": null,
+  "extracted": 17.5
+ },
+ "2205.14135": {
+  "name": "FlashAttention",
+  "title_score": 100,
+  "error": null,
+  "extracted": 31.1
+ },
+ "2312.00752": {
+  "name": "Mamba",
+  "title_score": 100,
+  "error": null,
+  "extracted": 27.9
+ },
+ "2404.19756": {
+  "name": "KAN",
+  "title_score": 100,
+  "error": null,
+  "extracted": 29.7
+ },
+ "1609.02907": {
+  "name": "GCN",
+  "title_score": 100,
+  "error": null,
+  "extracted": 35.0
+ },
+ "1710.10903": {
+  "name": "GAT",
+  "title_score": 100,
+  "error": null,
+  "extracted": 43.7
+ },
+ "1707.06347": {
+  "name": "PPO",
+  "title_score": 100,
+  "error": null,
+  "extracted": 40.5
+ },
+ "1801.01290": {
+  "name": "SAC",
+  "title_score": 100,
+  "error": null,
+  "extracted": 30.0
+ },
+ "2006.11477": {
+  "name": "wav2vec 2.0",
+  "title_score": 100,
+  "error": null,
+  "extracted": 37.6
+ },
+ "2212.04356": {
+  "name": "Whisper",
+  "title_score": 100,
+  "error": null,
+  "extracted": 24.6
+ },
+ "2211.14730": {
+  "name": "PatchTST",
+  "title_score": 100,
+  "error": null,
+  "extracted": 20.6
+ },
+ "2310.06625": {
+  "name": "iTransformer",
+  "title_score": 100,
+  "error": null,
+  "extracted": 47.7
+ }
+}

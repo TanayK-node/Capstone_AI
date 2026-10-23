@@ -1,0 +1,1809 @@
+{
+ "metadata": {
+  "title": "FLOW MATCHING FOR GENERATIVE MODELING",
+  "authors": [
+   "Yaron Lipman",
+   "Ricky T Q Chen",
+   "Heli Ben-Hamu",
+   "Maximilian Nickel",
+   "Matt Le",
+   "FAIR Meta Ai"
+  ],
+  "venue": null,
+  "year": "2023",
+  "arxiv_id": "2210.02747v2[cs.LG]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Existing methods for training Continuous Normalizing Flows lack scalability due to expensive simulations, intractable integrals, or biased gradients.",
+   "evidence": [
+    {
+     "chunk_id": "b0004",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 574.93,
+      "x1": 315.84000000000003,
+      "y1": 638.37
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 220.71,
+       "y0": 574.93,
+       "x1": 315.84000000000003,
+       "y1": 583.5699999999999
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 585.89,
+       "x1": 315.84000000000003,
+       "y1": 594.53
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 596.85,
+       "x1": 315.84000000000003,
+       "y1": 605.49
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 607.81,
+       "x1": 315.84000000000003,
+       "y1": 616.4499999999999
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 618.77,
+       "x1": 315.84000000000003,
+       "y1": 627.41
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 629.73,
+       "x1": 233.9,
+       "y1": 638.37
+      }
+     ],
+     "quote": "Indeed, maximum likelihood training (e.g., Grathwohl et al. (2018)) require expensive numerical ODE simulations, while existing simulation-free methods either involve intractable integrals (Rozen et al., 2021) or biased gradients (Ben-Hamu et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Diffusion-based models are restricted to simple diffusion processes, leading to confined sampling paths and long training times.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 459.37,
+      "x1": 504.01,
+      "y1": 489.91999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 146.44,
+       "y0": 459.37,
+       "x1": 504.01,
+       "y1": 468.01
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 470.33,
+       "x1": 504.0,
+       "y1": 478.96999999999997
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 481.28,
+       "x1": 429.81,
+       "y1": 489.91999999999996
+      }
+     ],
+     "quote": "However, the restriction to simple diffusion processes leads to a rather confined space of sampling probability paths, resulting in very long training times and the need to adopt specialized methods (e.g., Song et al. (2020a); Zhang & Chen (2022)) for efficient sampling.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "We introduce Flow Matching (FM), a simulation-free approach for training Continuous Normalizing Flows.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 215.29,
+      "x1": 468.14,
+      "y1": 245.85000000000002
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 215.29,
+       "x1": 468.14,
+       "y1": 223.93
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 226.25,
+       "x1": 468.14,
+       "y1": 234.89
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 237.21,
+       "x1": 213.37,
+       "y1": 245.85000000000002
+      }
+     ],
+     "quote": "Specifically, we present the notion of Flow Matching (FM), a simulation-free approach for training CNFs based on regressing vector fields of fixed conditional probability paths.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "We propose the Conditional Flow Matching (CFM) training objective which provides equivalent gradients without requiring knowledge of the target vector field.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 118.22,
+      "x1": 504.0,
+      "y1": 148.76999999999998
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 140.12,
+       "y0": 118.22,
+       "x1": 504.0,
+       "y1": 126.86
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 129.17,
+       "x1": 504.0,
+       "y1": 137.81
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 140.13,
+       "x1": 321.93,
+       "y1": 148.76999999999998
+      }
+     ],
+     "quote": "Then, inspired by denoising score matching, we show that a per-example training objective, termed Conditional Flow Matching (CFM), provides equivalent gradients and does not require explicit knowledge of the intractable target vector field.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "We introduce the use of Optimal Transport displacement interpolation to define conditional probability paths for faster training and sampling.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 292.0,
+      "x1": 468.14,
+      "y1": 322.56
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 455.96,
+       "y0": 292.0,
+       "x1": 468.13,
+       "y1": 300.64
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 302.96,
+       "x1": 468.14,
+       "y1": 311.59999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 313.92,
+       "x1": 373.1,
+       "y1": 322.56
+      }
+     ],
+     "quote": "An instance of particular interest is using Optimal Transport (OT) displacement interpolation to define the conditional probability paths.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "generative modeling",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 193.37,
+      "x1": 468.14,
+      "y1": 212.97000000000003
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 193.37,
+       "x1": 468.14,
+       "y1": 202.01
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 204.33,
+       "x1": 468.14,
+       "y1": 212.97000000000003
+      }
+     ],
+     "quote": "We introduce a new paradigm for generative modeling built on Continuous Normalizing Flows (CNFs), allowing us to train CNFs at unprecedented scale.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The Flow Matching objective is designed to match a target probability path by regressing the vector field u_t with a neural network v_t parameterized by learnable parameters theta.",
+   "evidence": [
+    {
+     "chunk_id": "b0021",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 694.12,
+      "x1": 503.99,
+      "y1": 714.41
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 320.8,
+       "y0": 694.12,
+       "x1": 503.99,
+       "y1": 702.76
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 704.76,
+       "x1": 422.11,
+       "y1": 714.41
+      }
+     ],
+     "quote": "The Flow Matching objective is then designed to match this target probability path, which will allow us to flow from p 0 to p 1 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "The Conditional Flow Matching (CFM) objective allows for tractable training by conditioning on individual data samples, sharing identical gradients with the original Flow Matching objective.",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 149.52,
+      "x1": 406.78,
+      "y1": 158.34
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 149.52,
+       "x1": 406.78,
+       "y1": 158.34
+      }
+     ],
+     "quote": "Specifically, we consider the Conditional Flow Matching (CFM) objective,",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "Gaussian conditional probability paths and corresponding unique vector fields are constructed using time-dependent mean and standard deviation functions.",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 404.09,
+      "x1": 504.01,
+      "y1": 463.28
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 369.81,
+       "y0": 404.09,
+       "x1": 504.01,
+       "y1": 412.72999999999996
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 415.05,
+       "x1": 222.56,
+       "y1": 423.69
+      },
+      {
+       "page": 4,
+       "x0": 231.65,
+       "y0": 428.7,
+       "x1": 364.09000000000003,
+       "y1": 438.34999999999997
+      },
+      {
+       "page": 4,
+       "x0": 364.08,
+       "y0": 426.63,
+       "x1": 368.05,
+       "y1": 432.75
+      },
+      {
+       "page": 4,
+       "x0": 368.55,
+       "y0": 428.7,
+       "x1": 380.35,
+       "y1": 437.44
+      },
+      {
+       "page": 4,
+       "x0": 487.4,
+       "y0": 429.02,
+       "x1": 504.0,
+       "y1": 437.65999999999997
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 442.67,
+       "x1": 193.31,
+       "y1": 451.97
+      },
+      {
+       "page": 4,
+       "x0": 193.31,
+       "y0": 441.1,
+       "x1": 197.46,
+       "y1": 447.22
+      },
+      {
+       "page": 4,
+       "x0": 202.18,
+       "y0": 442.67,
+       "x1": 223.57,
+       "y1": 451.97
+      },
+      {
+       "page": 4,
+       "x0": 223.57,
+       "y0": 441.1,
+       "x1": 227.72,
+       "y1": 447.22
+      },
+      {
+       "page": 4,
+       "x0": 231.5,
+       "y0": 442.67,
+       "x1": 504.01,
+       "y1": 451.63
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 453.63,
+       "x1": 421.42,
+       "y1": 463.28
+      }
+     ],
+     "quote": "Namely, we consider conditional probability paths of the form p t (x|x 1 ) = N (x | µ t (x 1 ), σ t (x 1 ) 2 I), (10) where µ : [0, 1] × R d → R d is the time-dependent mean of the Gaussian distribution, while σ : [0, 1] × R → R >0 describes a time-dependent scalar standard deviation (std).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "Conditional Flow Matching generalizes vector field matching compared to existing diffusion models and score matching approaches.",
+   "evidence": [
+    {
+     "chunk_id": "b0099",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 383.36,
+      "x1": 504.0,
+      "y1": 402.96
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 233.33,
+       "y0": 383.36,
+       "x1": 504.0,
+       "y1": 392.0
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 394.32,
+       "x1": 290.11,
+       "y1": 402.96
+      }
+     ],
+     "quote": "Conditional Flow Matching draws inspiration from this result, but generalizes to matching vector fields directly.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "Unlike previous works that rely on restricted settings of Gaussian conditional paths defined by simple diffusion processes, the proposed formulation accommodates broader paths such as the conditional Optimal Transport path.",
+   "evidence": [
+    {
+     "chunk_id": "b0099",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 427.2,
+      "x1": 504.01,
+      "y1": 468.71999999999997
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 466.05,
+       "y0": 427.2,
+       "x1": 504.01,
+       "y1": 435.84
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 438.16,
+       "x1": 504.0,
+       "y1": 446.8
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 449.12,
+       "x1": 504.0,
+       "y1": 457.76
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 460.08,
+       "x1": 271.75,
+       "y1": 468.71999999999997
+      }
+     ],
+     "quote": "in particular -it does not include our conditional OT path.",
+     "grounding_status": "verified",
+     "match_score": 98.3
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "CIFAR-10",
+   "evidence": [
+    {
+     "chunk_id": "b0101",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 638.53,
+      "x1": 504.0,
+      "y1": 669.09
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 638.53,
+       "x1": 504.0,
+       "y1": 647.17
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 649.49,
+       "x1": 504.0,
+       "y1": 658.13
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 660.45,
+       "x1": 183.69,
+       "y1": 669.09
+      }
+     ],
+     "quote": "We explore the empirical benefits of using Flow Matching on the image datasets of CIFAR-10 ( Krizhevsky et al., 2009) and ImageNet at resolutions 32, 64, and 128 (Chrabaszcz et al., 2017;Deng et al., 2009).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "CIFAR-10",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "ImageNet",
+   "evidence": [
+    {
+     "chunk_id": "b0101",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 638.53,
+      "x1": 504.0,
+      "y1": 669.09
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 638.53,
+       "x1": 504.0,
+       "y1": 647.17
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 649.49,
+       "x1": 504.0,
+       "y1": 658.13
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 660.45,
+       "x1": 183.69,
+       "y1": 669.09
+      }
+     ],
+     "quote": "We explore the empirical benefits of using Flow Matching on the image datasets of CIFAR-10 ( Krizhevsky et al., 2009) and ImageNet at resolutions 32, 64, and 128 (Chrabaszcz et al., 2017;Deng et al., 2009).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ImageNet",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "ImageNet validation set",
+   "evidence": [
+    {
+     "chunk_id": "b0104",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 475.01,
+      "x1": 338.14,
+      "y1": 538.4499999999999
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 475.01,
+       "x1": 338.14,
+       "y1": 483.65
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 485.97,
+       "x1": 204.45999999999998,
+       "y1": 494.61
+      },
+      {
+       "page": 9,
+       "x0": 207.53,
+       "y0": 485.97,
+       "x1": 338.14,
+       "y1": 494.61
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 507.89,
+       "x1": 338.14,
+       "y1": 516.53
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 518.85,
+       "x1": 338.14,
+       "y1": 527.49
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 529.81,
+       "x1": 302.48,
+       "y1": 538.4499999999999
+      }
+     ],
+     "quote": "Lastly, we experimented with Flow Matching for conditional image generation. In particular, upsampling images procedure in (Saharia et al., 2022) and compute the FID of the upsampled validation images; baselines include reference (FID of original validation set), and regression.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ImageNet validation set",
+   "split": "validation",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "DDPM",
+   "evidence": [
+    {
+     "chunk_id": "b0212",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.00299835205078,
+      "y0": 113.4369888305664,
+      "x1": 501.01824951171875,
+      "y1": 121.35664367675781
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.00299835205078,
+       "y0": 113.4369888305664,
+       "x1": 501.01824951171875,
+       "y1": 121.35664367675781
+      }
+     ],
+     "quote": "DDPM | 3.12 | 7.48 | 274 | 3.54 | 6.99 | 262 | 3.32 | 17.36 | 264 | PacGAN2 (Lin et al., 2018) | – | 57.5",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Score Matching",
+   "evidence": [
+    {
+     "chunk_id": "b0212",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.00299835205078,
+      "y0": 121.08502960205078,
+      "x1": 501.01824951171875,
+      "y1": 129.0046844482422
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.00299835205078,
+       "y0": 121.08502960205078,
+       "x1": 501.01824951171875,
+       "y1": 129.0046844482422
+      }
+     ],
+     "quote": "Score Matching | 3.16 | 19.94 | 242 | 3.56 | 5.68 | 178 | 3.40 | 19.74 | 441 | Logo-GAN-AE (Sage et al., 2018) | – | 50.9",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "ScoreFlow",
+   "evidence": [
+    {
+     "chunk_id": "b0212",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.00299835205078,
+      "y0": 128.7330322265625,
+      "x1": 501.01824951171875,
+      "y1": 136.65269470214844
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.00299835205078,
+       "y0": 128.7330322265625,
+       "x1": 501.01824951171875,
+       "y1": 136.65269470214844
+      }
+     ],
+     "quote": "ScoreFlow | 3.09 | 20.78 | 428 | 3.55 | 14.14 | 195 | 3.36 | 24.95 | 601 | Self-cond. GAN (Luˇci´c et al., 2019) | – | 41.7",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "MGAN",
+   "evidence": [
+    {
+     "chunk_id": "b0212",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.00299835205078,
+      "y0": 106.2915267944336,
+      "x1": 501.01824951171875,
+      "y1": 113.42855072021484
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.00299835205078,
+       "y0": 106.2915267944336,
+       "x1": 501.01824951171875,
+       "y1": 113.42855072021484
+      }
+     ],
+     "quote": "MGAN (Hoang et al., 2018) | – | 58.9",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "PacGAN2",
+   "evidence": [
+    {
+     "chunk_id": "b0212",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.00299835205078,
+      "y0": 113.4369888305664,
+      "x1": 501.01824951171875,
+      "y1": 121.35664367675781
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.00299835205078,
+       "y0": 113.4369888305664,
+       "x1": 501.01824951171875,
+       "y1": 121.35664367675781
+      }
+     ],
+     "quote": "PacGAN2 (Lin et al., 2018) | – | 57.5",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "Logo-GAN-AE",
+   "evidence": [
+    {
+     "chunk_id": "b0212",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.00299835205078,
+      "y0": 121.08502960205078,
+      "x1": 501.01824951171875,
+      "y1": 129.0046844482422
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.00299835205078,
+       "y0": 121.08502960205078,
+       "x1": 501.01824951171875,
+       "y1": 129.0046844482422
+      }
+     ],
+     "quote": "Logo-GAN-AE (Sage et al., 2018) | – | 50.9",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "Self-cond. GAN",
+   "evidence": [
+    {
+     "chunk_id": "b0212",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.00299835205078,
+      "y0": 128.7330322265625,
+      "x1": 501.01824951171875,
+      "y1": 136.65269470214844
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.00299835205078,
+       "y0": 128.7330322265625,
+       "x1": 501.01824951171875,
+       "y1": 136.65269470214844
+      }
+     ],
+     "quote": "Self-cond. GAN (Luˇci´c et al., 2019) | – | 41.7",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.7",
+   "value": "Uncond. BigGAN",
+   "evidence": [
+    {
+     "chunk_id": "b0212",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.00299835205078,
+      "y0": 140.07518005371094,
+      "x1": 501.01824951171875,
+      "y1": 147.21221923828125
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.00299835205078,
+       "y0": 140.07518005371094,
+       "x1": 501.01824951171875,
+       "y1": 147.21221923828125
+      }
+     ],
+     "quote": "Uncond. BigGAN (Luˇci´c et al., 2019) | – | 25.3",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.8",
+   "value": "PGMGAN",
+   "evidence": [
+    {
+     "chunk_id": "b0212",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 364.86444091796875,
+      "y0": 145.02841186523438,
+      "x1": 436.8078308105469,
+      "y1": 150.9480743408203
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 364.86444091796875,
+       "y0": 145.02841186523438,
+       "x1": 393.55560302734375,
+       "y1": 150.9480743408203
+      },
+      {
+       "page": 8,
+       "x0": 393.55560302734375,
+       "y0": 146.82415771484375,
+       "x1": 436.8078308105469,
+       "y1": 150.3759765625
+      }
+     ],
+     "quote": "PGMGAN (Armandpour et al., 2021) | – | 21.7",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.9",
+   "value": "SR3",
+   "evidence": [
+    {
+     "chunk_id": "b0215",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 492.43853759765625,
+      "x1": 500.7840576171875,
+      "y1": 530.5291748046875
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 492.43853759765625,
+       "x1": 500.7840576171875,
+       "y1": 530.5291748046875
+      }
+     ],
+     "quote": "SR3Regression(Sahariaet al., 2022) | 15.25.2 | 121.1180.1 | 26.427.9 | 0.8010.762",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.10",
+   "value": "Regression",
+   "evidence": [
+    {
+     "chunk_id": "b0215",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 492.43853759765625,
+      "x1": 500.7840576171875,
+      "y1": 530.5291748046875
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 492.43853759765625,
+       "x1": 500.7840576171875,
+       "y1": 530.5291748046875
+      }
+     ],
+     "quote": "SR3Regression(Sahariaet al., 2022) | 15.25.2 | 121.1180.1 | 26.427.9 | 0.8010.762",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Likelihood (BPD / NLL)",
+   "evidence": [
+    {
+     "chunk_id": "b0212",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 175.20135498046875,
+      "x1": 446.3995361328125,
+      "y1": 184.10791015625
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 175.20135498046875,
+       "x1": 446.3995361328125,
+       "y1": 184.10791015625
+      }
+     ],
+     "quote": "Table 1: Likelihood (BPD), quality of generated samples (FID), and evaluation time (NFE) for the same model trained with different methods.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "FID",
+   "evidence": [
+    {
+     "chunk_id": "b0212",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 175.20135498046875,
+      "x1": 446.3995361328125,
+      "y1": 184.10791015625
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 175.20135498046875,
+       "x1": 446.3995361328125,
+       "y1": 184.10791015625
+      }
+     ],
+     "quote": "Table 1: Likelihood (BPD), quality of generated samples (FID), and evaluation time (NFE) for the same model trained with different methods.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "NFE",
+   "evidence": [
+    {
+     "chunk_id": "b0212",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 175.20135498046875,
+      "x1": 446.3995361328125,
+      "y1": 184.10791015625
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 175.20135498046875,
+       "x1": 446.3995361328125,
+       "y1": 184.10791015625
+      }
+     ],
+     "quote": "Table 1: Likelihood (BPD), quality of generated samples (FID), and evaluation time (NFE) for the same model trained with different methods.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "PSNR",
+   "evidence": [
+    {
+     "chunk_id": "b0104",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 551.73,
+      "x1": 504.0,
+      "y1": 593.24
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 246.1,
+       "y0": 551.73,
+       "x1": 338.14,
+       "y1": 560.37
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 562.69,
+       "x1": 338.14,
+       "y1": 571.33
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 573.64,
+       "x1": 504.0,
+       "y1": 582.28
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 584.6,
+       "x1": 192.85,
+       "y1": 593.24
+      }
+     ],
+     "quote": "FM-OT achieves similar PSNR and SSIM values to (Saharia et al., 2022) while considerably improving on FID and IS, which as argued by (Saharia et al., 2022) is a better indication of generation quality.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.4",
+   "value": "SSIM",
+   "evidence": [
+    {
+     "chunk_id": "b0104",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 551.73,
+      "x1": 504.0,
+      "y1": 593.24
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 246.1,
+       "y0": 551.73,
+       "x1": 338.14,
+       "y1": 560.37
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 562.69,
+       "x1": 338.14,
+       "y1": 571.33
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 573.64,
+       "x1": 504.0,
+       "y1": 582.28
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 584.6,
+       "x1": 192.85,
+       "y1": 593.24
+      }
+     ],
+     "quote": "FM-OT achieves similar PSNR and SSIM values to (Saharia et al., 2022) while considerably improving on FID and IS, which as argued by (Saharia et al., 2022) is a better indication of generation quality.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.5",
+   "value": "IS",
+   "evidence": [
+    {
+     "chunk_id": "b0104",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 551.73,
+      "x1": 504.0,
+      "y1": 593.24
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 246.1,
+       "y0": 551.73,
+       "x1": 338.14,
+       "y1": 560.37
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 562.69,
+       "x1": 338.14,
+       "y1": 571.33
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 573.64,
+       "x1": 504.0,
+       "y1": 582.28
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 584.6,
+       "x1": 192.85,
+       "y1": 593.24
+      }
+     ],
+     "quote": "FM-OT achieves similar PSNR and SSIM values to (Saharia et al., 2022) while considerably improving on FID and IS, which as argued by (Saharia et al., 2022) is a better indication of generation quality.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [],
+ "compute": [],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Averaged over 50k samples",
+   "evidence": [
+    {
+     "chunk_id": "b0102",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 155.79,
+      "x1": 504.0,
+      "y1": 418.25
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 452.4,
+       "y0": 155.79,
+       "x1": 463.98999999999995,
+       "y1": 161.73999999999998
+      },
+      {
+       "page": 8,
+       "x0": 489.43,
+       "y0": 155.79,
+       "x1": 501.02,
+       "y1": 161.73999999999998
+      },
+      {
+       "page": 8,
+       "x0": 164.4,
+       "y0": 398.66,
+       "x1": 504.0,
+       "y1": 407.3
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 409.61,
+       "x1": 439.19,
+       "y1": 418.25
+      }
+     ],
+     "quote": "w / OT 2.90 20.9 2017)), and averaged number of function evaluations (NFE) required for the adaptive solver to reach its a prespecified numerical tolerance, averaged over 50k samples.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "seeds_and_runs.1",
+   "value": "Identical random seeds used for comparison",
+   "evidence": [
+    {
+     "chunk_id": "b0103",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 284.03,
+      "x1": 504.0,
+      "y1": 325.55
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 173.25,
+       "y0": 284.03,
+       "x1": 504.0,
+       "y1": 292.66999999999996
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 294.99,
+       "x1": 504.0,
+       "y1": 303.63
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 305.95,
+       "x1": 504.0,
+       "y1": 314.59
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 316.91,
+       "x1": 341.91999999999996,
+       "y1": 325.55
+      }
+     ],
+     "quote": "Figure 6 shows samples from ImageNet-64 models using identical random seeds, where we find that the OT path model starts generating images sooner than the diffusion path models, where noise dominates the image until the very last time point.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "seeds_and_runs.2",
+   "value": "256 random noise seeds",
+   "evidence": [
+    {
+     "chunk_id": "b0104",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 355.76,
+      "x1": 504.01,
+      "y1": 397.28
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 329.74,
+       "y0": 355.76,
+       "x1": 504.01,
+       "y1": 364.4
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 366.72,
+       "x1": 504.0,
+       "y1": 375.36
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 377.68,
+       "x1": 504.0,
+       "y1": 386.32
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 388.64,
+       "x1": 504.0,
+       "y1": 397.28
+      }
+     ],
+     "quote": "In Figure 7 (left), we compare the per-pixel MSE of low NFE solutions compared with 1000 NFE solutions (we use 256 random noise seeds), and notice that the FM with OT model produces the best numerical error, in terms of computational cost, requiring roughly only 60% of the NFEs to reach the same error threshold as diffusion models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Choice of diffusion path in Flow Matching between standard variance preserving diffusion path and optimal transport path",
+   "evidence": [
+    {
+     "chunk_id": "b0101",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 660.45,
+      "x1": 504.01,
+      "y1": 680.05
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 188.31,
+       "y0": 660.45,
+       "x1": 504.01,
+       "y1": 669.09
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 671.41,
+       "x1": 453.67,
+       "y1": 680.05
+      }
+     ],
+     "quote": "We also ablate the choice of diffusion path in Flow Matching, particularly between the standard variance preserving diffusion path and the optimal transport path.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Expect FM to enable a wide variety of probability paths, such as non-isotropic Gaussians or more general kernels.",
+   "evidence": [
+    {
+     "chunk_id": "b0107",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 678.0,
+      "x1": 504.0,
+      "y1": 719.52
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 490.97,
+       "y0": 678.0,
+       "x1": 504.0,
+       "y1": 686.64
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 688.96,
+       "x1": 504.0,
+       "y1": 697.6
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 699.92,
+       "x1": 504.0,
+       "y1": 708.56
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 710.88,
+       "x1": 348.89,
+       "y1": 719.52
+      }
+     ],
+     "quote": "We experimentally showed the ease of training and sampling when using the Flow Matching framework, and in the future, we expect FM to open the door to allowing a multitude of probability paths (e.g., non-isotropic Gaussians or more general kernels altogether).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "ethics": [
+  {
+   "id": "ethics.0",
+   "value": "Image generation can potentially be misused for harmful purposes, which can be mitigated via content-controlled training sets and image validation or classification.",
+   "evidence": [
+    {
+     "chunk_id": "b0220",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 108.78,
+      "x1": 504.0,
+      "y1": 117.42
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 108.78,
+       "x1": 504.0,
+       "y1": 117.42
+      }
+     ],
+     "quote": "Along side its many positive applications, image generation can also be used for harmful proposes.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.1",
+   "value": "The energy consumption of training large deep learning models is rapidly growing, so utilizing methods that require fewer gradient updates or less image throughput can result in major energy and time reductions.",
+   "evidence": [
+    {
+     "chunk_id": "b0220",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 130.7,
+      "x1": 504.0,
+      "y1": 161.25
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 130.7,
+       "x1": 504.0,
+       "y1": 139.33999999999997
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 141.66,
+       "x1": 504.0,
+       "y1": 150.3
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 152.61,
+       "x1": 460.15,
+       "y1": 161.25
+      }
+     ],
+     "quote": "Furthermore, the energy demand for training large deep learning models is increasing at a rapid pace (Amodei et al., 2018;Thompson et al., 2020), focusing on methods that are able to train using less gradient updates / image throughput can lead to significant time and energy savings.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/tensorflow/gan",
+   "evidence": [
+    {
+     "chunk_id": "b0216",
+     "page": 21,
+     "bbox": {
+      "page": 21,
+      "x0": 124.13899993896484,
+      "y0": 713.3829956054688,
+      "x1": 301.67376708984375,
+      "y1": 720.3050537109375
+     },
+     "boxes": [
+      {
+       "page": 21,
+       "x0": 124.13899993896484,
+       "y0": 713.3829956054688,
+       "x1": 301.67376708984375,
+       "y1": 720.3050537109375
+      }
+     ],
+     "quote": "https://github.com/tensorflow/gan",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/openai/guided-diffusion",
+   "evidence": [
+    {
+     "chunk_id": "b0217",
+     "page": 21,
+     "bbox": {
+      "page": 21,
+      "x0": 124.13899993896484,
+      "y0": 724.2579956054688,
+      "x1": 350.59454345703125,
+      "y1": 731.1800537109375
+     },
+     "boxes": [
+      {
+       "page": 21,
+       "x0": 124.13899993896484,
+       "y0": 724.2579956054688,
+       "x1": 350.59454345703125,
+       "y1": 731.1800537109375
+      }
+     ],
+     "quote": "https://github.com/openai/guided-diffusion",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "Flow Matching on ImageNet leads to better performance than alternative diffusion-based methods in likelihood and sample quality.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 335.84,
+      "x1": 468.14,
+      "y1": 377.34999999999997
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 235.68,
+       "y0": 335.84,
+       "x1": 468.14,
+       "y1": 344.47999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 346.8,
+       "x1": 468.14,
+       "y1": 355.44
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 357.75,
+       "x1": 468.14,
+       "y1": 366.39
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 368.71,
+       "x1": 360.39,
+       "y1": 377.34999999999997
+      }
+     ],
+     "quote": "Training CNFs using Flow Matching on ImageNet leads to consistently better performance than alternative diffusion-based methods in terms of both likelihood and sample quality, and allows fast and reliable sample generation using off-the-shelf numerical ODE solvers.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

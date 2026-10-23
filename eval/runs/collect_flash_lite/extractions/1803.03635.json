@@ -1,0 +1,1652 @@
+{
+ "metadata": {
+  "title": "THE LOTTERY TICKET HYPOTHESIS: FINDING SPARSE, TRAINABLE NEURAL NETWORKS",
+  "authors": [
+   "Jonathan Frankle",
+   "Michael Carbin"
+  ],
+  "venue": null,
+  "year": "2019",
+  "arxiv_id": "1803.03635v5[cs.LG]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Sparse architectures produced by pruning are difficult to train from the start.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 250.63,
+      "x1": 468.49,
+      "y1": 281.18
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 374.75,
+       "y0": 250.63,
+       "x1": 468.49,
+       "y1": 259.27
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 261.58,
+       "x1": 468.14,
+       "y1": 270.21999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 272.54,
+       "x1": 416.3,
+       "y1": 281.18
+      }
+     ],
+     "quote": "However, contemporary experience is that the sparse architectures produced by pruning are difficult to train from the start, which would similarly improve training performance.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Demonstrating that pruning uncovers trainable subnetworks matching original test accuracy and iterations.",
+   "evidence": [
+    {
+     "chunk_id": "b0020",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 133.9,
+      "y0": 384.78,
+      "x1": 505.75,
+      "y1": 404.7
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 133.9,
+       "y0": 384.78,
+       "x1": 505.65,
+       "y1": 393.73999999999995
+      },
+      {
+       "page": 3,
+       "x0": 143.87,
+       "y0": 396.06,
+       "x1": 505.75,
+       "y1": 404.7
+      }
+     ],
+     "quote": "• We demonstrate that pruning uncovers trainable subnetworks that reach test accuracy comparable to the original networks from which they derived in a comparable number of iterations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Showing that pruning finds winning tickets that learn faster, reach higher test accuracy, and generalize better.",
+   "evidence": [
+    {
+     "chunk_id": "b0021",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 133.9,
+      "y0": 411.33,
+      "x1": 504.0,
+      "y1": 431.25
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 133.9,
+       "y0": 411.33,
+       "x1": 504.0,
+       "y1": 420.28999999999996
+      },
+      {
+       "page": 3,
+       "x0": 143.87,
+       "y0": 422.61,
+       "x1": 355.90999999999997,
+       "y1": 431.25
+      }
+     ],
+     "quote": "• We show that pruning finds winning tickets that learn faster than the original network while reaching higher test accuracy and generalizing better.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "Proposing the lottery ticket hypothesis as a new perspective on neural network composition.",
+   "evidence": [
+    {
+     "chunk_id": "b0022",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 133.9,
+      "y0": 437.88,
+      "x1": 504.0,
+      "y1": 457.8
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 133.9,
+       "y0": 437.88,
+       "x1": 504.0,
+       "y1": 446.84
+      },
+      {
+       "page": 3,
+       "x0": 143.87,
+       "y0": 449.16,
+       "x1": 282.26,
+       "y1": 457.8
+      }
+     ],
+     "quote": "• We propose the lottery ticket hypothesis as a new perspective on the composition of neural networks to explain these findings.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Neural network pruning and training",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 397.84,
+      "x1": 468.13,
+      "y1": 428.4
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 204.83,
+       "y0": 397.84,
+       "x1": 468.13,
+       "y1": 406.47999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 408.8,
+       "x1": 468.13,
+       "y1": 417.44
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 419.76,
+       "x1": 250.05,
+       "y1": 428.4
+      }
+     ],
+     "quote": "We consistently find winning tickets that are less than 10-20% of the size of several fully-connected and convolutional feed-forward architectures for MNIST and CIFAR10.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [],
+ "novelty": [],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "MNIST dataset for fully-connected networks",
+   "evidence": [
+    {
+     "chunk_id": "b0028",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 646.66,
+      "x1": 504.0,
+      "y1": 666.26
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 646.66,
+       "x1": 504.0,
+       "y1": 655.3
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 657.62,
+       "x1": 154.42000000000002,
+       "y1": 666.26
+      }
+     ],
+     "quote": "In this Section, we assess the lottery ticket hypothesis as applied to fully-connected networks trained on MNIST.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "MNIST",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "CIFAR10 dataset for convolutional networks",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 576.96,
+      "x1": 504.0,
+      "y1": 596.56
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 576.96,
+       "x1": 504.0,
+       "y1": 585.6
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 587.92,
+       "x1": 402.83,
+       "y1": 596.56
+      }
+     ],
+     "quote": "Here, we apply the lottery ticket hypothesis to convolutional networks on CIFAR10, increasing both the complexity of the learning problem and the size of the networks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "CIFAR10",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "test accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0028",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 298.97,
+      "x1": 503.99,
+      "y1": 318.57
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 449.41,
+       "y0": 298.97,
+       "x1": 503.99,
+       "y1": 307.61
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 309.93,
+       "x1": 479.8,
+       "y1": 318.57
+      }
+     ],
+     "quote": "Figure 3 plots the average test accuracy when training winning tickets iteratively pruned to various extents.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "validation loss",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 107.67,
+      "y0": 403.58,
+      "x1": 504.0,
+      "y1": 434.13
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 173.54,
+       "y0": 403.58,
+       "x1": 504.0,
+       "y1": 412.21999999999997
+      },
+      {
+       "page": 4,
+       "x0": 107.67,
+       "y0": 414.53,
+       "x1": 504.0,
+       "y1": 423.16999999999996
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 425.49,
+       "x1": 386.29,
+       "y1": 434.13
+      }
+     ],
+     "quote": "On the left is the iteration at which each network reaches minimum validation loss (i.e., when the early-stopping criterion would halt training) in relation to the percent of weights remaining after pruning; in the middle is test accuracy at that iteration.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "training accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0031",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 107.64,
+      "y0": 514.16,
+      "x1": 504.0,
+      "y1": 544.72
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 107.64,
+       "y0": 514.16,
+       "x1": 503.99,
+       "y1": 522.8
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 525.12,
+       "x1": 504.0,
+       "y1": 533.76
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 536.08,
+       "x1": 133.13,
+       "y1": 544.72
+      }
+     ],
+     "quote": "At early stopping, training accuracy (Figure 4a, right) increases with pruning in a similar pattern to test accuracy, seemingly implying that winning tickets optimize more effectively but do not generalize better.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "dropout rate of 0.5 for Conv-2, Conv-4, and Conv-6",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 635.64,
+      "x1": 471.66,
+      "y1": 644.28
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 635.64,
+       "x1": 471.66,
+       "y1": 644.28
+      }
+     ],
+     "quote": "Figure 6 shows the results of training Conv-2, Conv-4, and Conv-6 with a dropout rate of 0.5.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "dropout rate",
+   "value_raw": "0.5",
+   "value_norm": 0.5,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "momentum of 0.9",
+   "evidence": [
+    {
+     "chunk_id": "b0044",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 226.01,
+      "x1": 480.46,
+      "y1": 234.64999999999998
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 226.01,
+       "x1": 480.46,
+       "y1": 234.64999999999998
+      }
+     ],
+     "quote": "momentum (0.9) and decreasing the learning rate by a factor of 10 at 80 and 120 epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "momentum",
+   "value_raw": "0.9",
+   "value_norm": 0.9,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "initial learning rate of 0.1 and 0.01 for VGG-19",
+   "evidence": [
+    {
+     "chunk_id": "b0044",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 226.01,
+      "x1": 504.0,
+      "y1": 256.56
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 485.93,
+       "y0": 226.01,
+       "x1": 504.0,
+       "y1": 234.64999999999998
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 236.97,
+       "x1": 504.0,
+       "y1": 245.61
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 247.92,
+       "x1": 477.03,
+       "y1": 256.56
+      }
+     ],
+     "quote": "Figure 7 shows the results of iterative pruning and random reinitialization on VGG-19 at two initial learning rates: 0.1 (used in Liu et al. (2019)) and 0.01.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.1",
+   "value_norm": 0.1,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "initial learning rate of 0.01 for VGG-19",
+   "evidence": [
+    {
+     "chunk_id": "b0044",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 226.01,
+      "x1": 504.0,
+      "y1": 256.56
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 485.93,
+       "y0": 226.01,
+       "x1": 504.0,
+       "y1": 234.64999999999998
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 236.97,
+       "x1": 504.0,
+       "y1": 245.61
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 247.92,
+       "x1": 477.03,
+       "y1": 256.56
+      }
+     ],
+     "quote": "Figure 7 shows the results of iterative pruning and random reinitialization on VGG-19 at two initial learning rates: 0.1 (used in Liu et al. (2019)) and 0.01.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.01",
+   "value_norm": 0.01,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "warmup iterations k = 10000 for VGG-19",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 374.13,
+      "x1": 505.74,
+      "y1": 394.05
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 271.09,
+       "y0": 374.13,
+       "x1": 504.01,
+       "y1": 383.09
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 385.41,
+       "x1": 505.74,
+       "y1": 394.05
+      }
+     ],
+     "quote": "Training VGG-19 with warmup (k = 10000, green line) at learning rate 0.1 improves the test accuracy of the unpruned network by about one percentage point.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0222",
+     "page": 40,
+     "bbox": {
+      "page": 40,
+      "x0": 108.0,
+      "y0": 710.26,
+      "x1": 504.0,
+      "y1": 729.86
+     },
+     "boxes": [
+      {
+       "page": 40,
+       "x0": 332.17,
+       "y0": 710.26,
+       "x1": 504.0,
+       "y1": 718.9
+      },
+      {
+       "page": 40,
+       "x0": 108.0,
+       "y0": 720.9,
+       "x1": 331.63,
+       "y1": 729.86
+      }
+     ],
+     "quote": "For the experiments in Section 4, we select k = 10000, as there is little benefit to larger values of k.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "warmup iterations",
+   "value_raw": "k = 10000",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "training for 30,000 iterations for Resnet-18",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 424.26,
+      "x1": 504.0,
+      "y1": 454.82
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 314.81,
+       "y0": 424.26,
+       "x1": 504.0,
+       "y1": 432.9
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 435.22,
+       "x1": 504.0,
+       "y1": 443.86
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 446.18,
+       "x1": 148.36,
+       "y1": 454.82
+      }
+     ],
+     "quote": "We train the network for 30,000 iterations with SGD with momentum (0.9), decreasing the learning rate by a factor of 10 at 20,000 and 25,000 iterations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "epochs/steps",
+   "value_raw": "30,000 iterations",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "optimizer SGD with momentum for Resnet-18",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 424.26,
+      "x1": 504.0,
+      "y1": 454.82
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 314.81,
+       "y0": 424.26,
+       "x1": 504.0,
+       "y1": 432.9
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 435.22,
+       "x1": 504.0,
+       "y1": 443.86
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 446.18,
+       "x1": 148.36,
+       "y1": 454.82
+      }
+     ],
+     "quote": "We train the network for 30,000 iterations with SGD with momentum (0.9), decreasing the learning rate by a factor of 10 at 20,000 and 25,000 iterations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0211",
+     "page": 40,
+     "bbox": {
+      "page": 40,
+      "x0": 133.9,
+      "y0": 270.41,
+      "x1": 316.28999999999996,
+      "y1": 279.37
+     },
+     "boxes": [
+      {
+       "page": 40,
+       "x0": 133.9,
+       "y0": 270.41,
+       "x1": 316.28999999999996,
+       "y1": 279.37
+      }
+     ],
+     "quote": "• We train using SGD with momentum (0.9).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "SGD with momentum",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "warmup iterations k = 20000 for Resnet-18",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 511.93,
+      "x1": 504.0,
+      "y1": 543.18
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 357.67,
+       "y0": 511.93,
+       "x1": 504.0,
+       "y1": 520.57
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 522.89,
+       "x1": 504.0,
+       "y1": 531.53
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 533.53,
+       "x1": 394.19,
+       "y1": 543.18
+      }
+     ],
+     "quote": "Winning tickets trained with warmup close the accuracy gap with the unpruned network at the higher learning rate, reaching 90.5% test accuracy with learning rate 0.03 (warmup, k = 20000) at P m = 27.1%.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "warmup iterations",
+   "value_raw": "k = 20000",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "batch size of 128",
+   "evidence": [
+    {
+     "chunk_id": "b0208",
+     "page": 40,
+     "bbox": {
+      "page": 40,
+      "x0": 133.9,
+      "y0": 226.65,
+      "x1": 252.34,
+      "y1": 235.61
+     },
+     "boxes": [
+      {
+       "page": 40,
+       "x0": 133.9,
+       "y0": 226.65,
+       "x1": 252.34,
+       "y1": 235.61
+      }
+     ],
+     "quote": "• We use a batch size of 128.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "128",
+   "value_norm": 128.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "stages last for 20,000, 5,000, and 5,000 iterations",
+   "evidence": [
+    {
+     "chunk_id": "b0212",
+     "page": 40,
+     "bbox": {
+      "page": 40,
+      "x0": 143.87,
+      "y0": 285.32,
+      "x1": 505.24,
+      "y1": 315.88
+     },
+     "boxes": [
+      {
+       "page": 40,
+       "x0": 395.46,
+       "y0": 285.32,
+       "x1": 505.24,
+       "y1": 293.96
+      },
+      {
+       "page": 40,
+       "x0": 143.87,
+       "y0": 296.28,
+       "x1": 504.01,
+       "y1": 304.91999999999996
+      },
+      {
+       "page": 40,
+       "x0": 143.87,
+       "y0": 307.24,
+       "x1": 194.77,
+       "y1": 315.88
+      }
+     ],
+     "quote": "Our stages last for 20,000, 5,000, and 5,000 iterations each, shorter than the 32,000, 16,000, and 16,000 used in He et al. (2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "epochs/steps",
+   "value_raw": "20,000, 5,000, and 5,000 iterations",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.10",
+   "value": "Gaussian Glorot initialization",
+   "evidence": [
+    {
+     "chunk_id": "b0212",
+     "page": 40,
+     "bbox": {
+      "page": 40,
+      "x0": 133.9,
+      "y0": 343.42,
+      "x1": 295.53,
+      "y1": 352.38
+     },
+     "boxes": [
+      {
+       "page": 40,
+       "x0": 133.9,
+       "y0": 343.42,
+       "x1": 295.53,
+       "y1": 352.38
+      }
+     ],
+     "quote": "• We use Gaussian Glorot initialization.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "initialization",
+   "value_raw": "Gaussian Glorot",
+   "value_norm": null,
+   "scope": ""
+  }
+ ],
+ "compute": [],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "five runs with minimum and maximum error bars",
+   "evidence": [
+    {
+     "chunk_id": "b0028",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 309.93,
+      "x1": 504.17,
+      "y1": 329.53
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 482.92,
+       "y0": 309.93,
+       "x1": 504.17,
+       "y1": 318.57
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 320.89,
+       "x1": 304.11,
+       "y1": 329.53
+      }
+     ],
+     "quote": "Error bars are the minimum and maximum of five runs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "seeds_and_runs.1",
+   "value": "randomly reinitialize each winning ticket three times, making 15 total per point",
+   "evidence": [
+    {
+     "chunk_id": "b0032",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 107.53,
+      "y0": 607.81,
+      "x1": 504.0,
+      "y1": 627.41
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 107.53,
+       "y0": 607.81,
+       "x1": 504.0,
+       "y1": 616.4499999999999
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 618.77,
+       "x1": 386.08,
+       "y1": 627.41
+      }
+     ],
+     "quote": "We randomly reinitialize each winning ticket three times, making 15 total per point in Figure 4.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "random reinitialization of winning tickets",
+   "evidence": [
+    {
+     "chunk_id": "b0032",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 585.89,
+      "x1": 505.73999999999995,
+      "y1": 607.17
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 214.99,
+       "y0": 585.89,
+       "x1": 504.0,
+       "y1": 594.53
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 596.53,
+       "x1": 473.36,
+       "y1": 605.49
+      },
+      {
+       "page": 4,
+       "x0": 473.36,
+       "y0": 601.05,
+       "x1": 477.33000000000004,
+       "y1": 607.17
+      },
+      {
+       "page": 4,
+       "x0": 480.59,
+       "y0": 596.53,
+       "x1": 505.73999999999995,
+       "y1": 606.18
+      }
+     ],
+     "quote": "To measure the importance of a winning ticket's initialization, we retain the structure of a winning ticket (i.e., the mask m) but randomly sample a new initialization θ 0 ∼ D θ .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "one-shot pruning compared to iterative pruning",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 107.64,
+      "y0": 435.02,
+      "x1": 504.0,
+      "y1": 454.62
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 240.46,
+       "y0": 435.02,
+       "x1": 504.0,
+       "y1": 443.65999999999997
+      },
+      {
+       "page": 5,
+       "x0": 107.64,
+       "y0": 445.98,
+       "x1": 225.95,
+       "y1": 454.62
+      }
+     ],
+     "quote": "One-shot pruning makes it possible to identify winning tickets without this repeated training.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.2",
+   "value": "training networks with dropout",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 635.64,
+      "x1": 471.66,
+      "y1": 644.28
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 635.64,
+       "x1": 471.66,
+       "y1": 644.28
+      }
+     ],
+     "quote": "Figure 6 shows the results of training Conv-2, Conv-4, and Conv-6 with a dropout rate of 0.5.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.3",
+   "value": "exploring the effect of linear learning rate warmup over k iterations",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 107.69,
+      "y0": 352.53,
+      "x1": 504.35,
+      "y1": 383.09
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 107.69,
+       "y0": 352.53,
+       "x1": 504.35,
+       "y1": 361.16999999999996
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 363.49,
+       "x1": 504.0,
+       "y1": 372.13
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 374.13,
+       "x1": 268.0,
+       "y1": 383.09
+      }
+     ],
+     "quote": "To bridge the gap between the lottery ticket behavior of the lower learning rate and the accuracy advantage of the higher learning rate, we explore the effect of linear learning rate warmup from 0 to the initial learning rate over k iterations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "The study is limited to vision-centric classification tasks on smaller datasets like MNIST and CIFAR10.",
+   "evidence": [
+    {
+     "chunk_id": "b0055",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 107.53,
+      "y0": 618.77,
+      "x1": 475.37,
+      "y1": 627.41
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 107.53,
+       "y0": 618.77,
+       "x1": 475.37,
+       "y1": 627.41
+      }
+     ],
+     "quote": "We only consider vision-centric classification tasks on smaller datasets (MNIST, CIFAR10).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.1",
+   "value": "Larger datasets such as ImageNet were not investigated due to the high computational intensity of iterative pruning.",
+   "evidence": [
+    {
+     "chunk_id": "b0055",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 618.77,
+      "x1": 504.0,
+      "y1": 660.29
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 478.48,
+       "y0": 618.77,
+       "x1": 504.0,
+       "y1": 627.41
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 629.73,
+       "x1": 504.0,
+       "y1": 638.37
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 640.69,
+       "x1": 504.0,
+       "y1": 649.33
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 651.65,
+       "x1": 130.84,
+       "y1": 660.29
+      }
+     ],
+     "quote": "We do not investigate larger datasets (namely Imagenet (Russakovsky et al., 2015)): iterative pruning is computationally intensive, requiring training a network 15 or more times consecutively for multiple trials.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.2",
+   "value": "The sparse pruning method used does not result in architectures optimized for modern libraries or hardware.",
+   "evidence": [
+    {
+     "chunk_id": "b0056",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 679.54,
+      "x1": 505.24,
+      "y1": 699.14
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 353.83,
+       "y0": 679.54,
+       "x1": 505.24,
+       "y1": 688.18
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 690.5,
+       "x1": 424.85,
+       "y1": 699.14
+      }
+     ],
+     "quote": "Although we reduce parameter-counts, the resulting architectures are not optimized for modern libraries or hardware.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.3",
+   "value": "On deeper networks, iterative pruning fails to find winning tickets unless learning rate warmup is used.",
+   "evidence": [
+    {
+     "chunk_id": "b0058",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 135.15,
+      "x1": 190.32,
+      "y1": 143.79000000000002
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 135.15,
+       "x1": 190.32,
+       "y1": 143.79000000000002
+      }
+     ],
+     "quote": "On deeper networks , iterative pruning is unable to find winning tickets unless we train the networks with learning rate warmup.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Explore more efficient methods for finding winning tickets to enable studies in more resource-intensive settings.",
+   "evidence": [
+    {
+     "chunk_id": "b0055",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 107.64,
+      "y0": 651.65,
+      "x1": 504.0,
+      "y1": 671.24
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 133.93,
+       "y0": 651.65,
+       "x1": 504.0,
+       "y1": 660.29
+      },
+      {
+       "page": 9,
+       "x0": 107.64,
+       "y0": 662.6,
+       "x1": 481.13,
+       "y1": 671.24
+      }
+     ],
+     "quote": "In future work, we intend to explore more efficient methods for finding winning tickets that will make it possible to study the lottery ticket hypothesis in more resource-intensive settings.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Study other pruning methods like structured pruning and non-magnitude pruning methods.",
+   "evidence": [
+    {
+     "chunk_id": "b0056",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 690.5,
+      "x1": 504.0,
+      "y1": 732.02
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 428.27,
+       "y0": 690.5,
+       "x1": 504.0,
+       "y1": 699.14
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 701.46,
+       "x1": 504.0,
+       "y1": 710.1
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 712.42,
+       "x1": 504.0,
+       "y1": 721.06
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 723.38,
+       "x1": 444.92,
+       "y1": 732.02
+      }
+     ],
+     "quote": "In future work, we intend to study other pruning methods from the extensive contemporary literature, such as structured pruning (which would produce networks optimized for contemporary hardware) and non-magnitude pruning methods (which could produce smaller winning tickets or find them earlier).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.2",
+   "value": "Study the properties of winning ticket initializations and their interactions with network architecture inductive biases.",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 107.64,
+      "y0": 96.3,
+      "x1": 504.0,
+      "y1": 126.86
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 468.51,
+       "y0": 96.3,
+       "x1": 503.99,
+       "y1": 104.94
+      },
+      {
+       "page": 10,
+       "x0": 107.64,
+       "y0": 107.26,
+       "x1": 504.0,
+       "y1": 115.9
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 118.22,
+       "x1": 484.53,
+       "y1": 126.86
+      }
+     ],
+     "quote": "In future work, we intend to study the properties of these initializations that, in concert with the inductive biases of the pruned network architectures, make these networks particularly adept at learning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.3",
+   "value": "Explore why learning rate warmup is necessary for deeper networks and if other improvements can avoid hyperparameter modifications.",
+   "evidence": [
+    {
+     "chunk_id": "b0058",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 193.15,
+      "y0": 135.15,
+      "x1": 197.61,
+      "y1": 143.79000000000002
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 193.15,
+       "y0": 135.15,
+       "x1": 197.61,
+       "y1": 143.79000000000002
+      }
+     ],
+     "quote": "In future work, we plan to explore why warmup is necessary and whether other improvements to our scheme for identifying winning tickets could obviate the need for these hyperparameter modifications.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "Neural network pruning can reduce parameter counts by over 90% without compromising accuracy.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.51,
+      "y0": 228.71,
+      "x1": 469.79,
+      "y1": 259.27
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 228.71,
+       "x1": 469.79,
+       "y1": 237.35000000000002
+      },
+      {
+       "page": 1,
+       "x0": 143.51,
+       "y0": 239.67,
+       "x1": 468.14,
+       "y1": 248.31
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 250.63,
+       "x1": 371.73,
+       "y1": 259.27
+      }
+     ],
+     "quote": "Neural network pruning techniques can reduce the parameter counts of trained networks by over 90%, decreasing storage requirements and improving computational performance of inference without compromising accuracy.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "Winning tickets are less than 10-20% of the size of several architectures for MNIST and CIFAR10.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 397.84,
+      "x1": 468.13,
+      "y1": 428.4
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 204.83,
+       "y0": 397.84,
+       "x1": 468.13,
+       "y1": 406.47999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 408.8,
+       "x1": 468.13,
+       "y1": 417.44
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 419.76,
+       "x1": 250.05,
+       "y1": 428.4
+      }
+     ],
+     "quote": "We consistently find winning tickets that are less than 10-20% of the size of several fully-connected and convolutional feed-forward architectures for MNIST and CIFAR10.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

@@ -1,0 +1,33 @@
+1502.03167,task,,image classification,ImageNet classification,6,
+1502.03167,task,,digit classification,MNIST digit classification|handwritten digit classification,5,
+1502.03167,datasets,,ImageNet,ILSVRC 2012|LSVRC2012|ImageNet LSVRC 2012|ImageNet Large Scale Visual Recognition Competition,6,
+1502.03167,datasets,,MNIST,,5,
+1502.03167,baselines,,Inception,GoogLeNet|Inception without Batch Normalization,6,
+1502.03167,baselines,,GoogLeNet ensemble,,8,
+1502.03167,baselines,,Deep Image low-res,Deep Image,8,
+1502.03167,baselines,,Deep Image high-res,Deep Image,8,
+1502.03167,baselines,,Deep Image ensemble,Deep Image,7,
+1502.03167,baselines,,He et al. 2015 ensemble,He et al.|PReLU ensemble,7,
+1502.03167,metrics,,top-1 accuracy,validation accuracy @1|validation accuracy|single crop validation accuracy,6,
+1502.03167,metrics,,top-5 error,top-5 validation error,7,
+1502.03167,metrics,,top-1 error,,8,
+1502.03167,metrics,,training steps to reach accuracy,steps to 72.2%|number of training steps,7,
+1502.03167,metrics,,test accuracy,fraction of correct predictions,6,MNIST
+1502.03167,hyperparameters,num_layers,3,hidden layers,6,MNIST network
+1502.03167,hyperparameters,hidden_size,100,activations,6,MNIST network
+1502.03167,hyperparameters,train_steps,50000,,6,MNIST
+1502.03167,hyperparameters,batch_size,60,mini-batch,6,MNIST
+1502.03167,hyperparameters,optimizer,SGD with momentum,Stochastic Gradient Descent with momentum,6,ImageNet
+1502.03167,hyperparameters,batch_size,32,mini-batch size,6,ImageNet
+1502.03167,hyperparameters,learning_rate,0.0015,initial learning rate,7,Inception and BN-Baseline
+1502.03167,hyperparameters,learning_rate,0.0075,initial learning rate,7,BN-x5
+1502.03167,hyperparameters,learning_rate,0.045,initial learning rate,7,BN-x30
+1502.03167,hyperparameters,dropout,0.4,40%|Dropout probability,7,original Inception
+1502.03167,hyperparameters,dropout,0.05,5%,7,ensemble members
+1502.03167,hyperparameters,dropout,0.1,10%,7,ensemble members
+1502.03167,hyperparameters,model_size,13.6M,13.6 · 106 parameters,6,
+1502.03167,hyperparameters,train_steps,6000000,6 · 106,7,BN-x30 and ensemble members
+1502.03167,hyperparameters,ensemble_size,6,networks,7,
+1502.03167,hyperparameters,image_size,224,resolution,8,
+1502.03167,hyperparameters,test_crops,144,crops,8,multicrop and ensemble
+1502.03167,hyperparameters,depth_multiplier,8,separable convolution,10,first convolutional layer

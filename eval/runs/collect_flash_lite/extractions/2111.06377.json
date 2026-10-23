@@ -1,0 +1,1912 @@
+{
+ "metadata": {
+  "title": "Masked Autoencoders Are Scalable Vision Learners",
+  "authors": [
+   "Kaiming He",
+   "Xinlei Chen",
+   "Saining Xie",
+   "Yanghao Li",
+   "Piotr Dollár",
+   "Ross Girshick"
+  ],
+  "venue": null,
+  "year": "2021",
+  "arxiv_id": "2111.06377v3[cs.CV]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Progress of autoencoding methods in computer vision lags behind natural language processing.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 308.86,
+      "y0": 452.58,
+      "x1": 545.11,
+      "y1": 497.08
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 447.83,
+       "y0": 452.58,
+       "x1": 545.11,
+       "y1": 461.21999999999997
+      },
+      {
+       "page": 1,
+       "x0": 308.86,
+       "y0": 464.53,
+       "x1": 545.11,
+       "y1": 473.16999999999996
+      },
+      {
+       "page": 1,
+       "x0": 308.86,
+       "y0": 476.49,
+       "x1": 545.11,
+       "y1": 485.13
+      },
+      {
+       "page": 1,
+       "x0": 308.86,
+       "y0": 488.44,
+       "x1": 329.06,
+       "y1": 497.08
+      }
+     ],
+     "quote": "However, despite significant interest in this idea following the success of BERT, progress of autoencoding methods in vision lags behind NLP.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "We develop an asymmetric encoder-decoder architecture where the encoder operates only on visible patches and a lightweight decoder reconstructs the image.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 277.67,
+      "x1": 286.37,
+      "y1": 346.03999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 147.62,
+       "y0": 277.67,
+       "x1": 286.37,
+       "y1": 286.49
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 289.63,
+       "x1": 286.36,
+       "y1": 298.21999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 301.58,
+       "x1": 286.36,
+       "y1": 310.16999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 313.54,
+       "x1": 286.36,
+       "y1": 322.13
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 325.49,
+       "x1": 286.36,
+       "y1": 334.08
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 337.45,
+       "x1": 77.96000000000001,
+       "y1": 346.03999999999996
+      }
+     ],
+     "quote": "First, we develop an asymmetric encoder-decoder architecture, with an encoder that operates only on the visible subset of patches (without mask tokens), along with a lightweight decoder that reconstructs the original image from the latent representation and mask tokens.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "We find that masking a high proportion of the input image, such as 75%, yields a meaningful self-supervisory task.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 337.45,
+      "x1": 286.37,
+      "y1": 369.95
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 85.87,
+       "y0": 337.45,
+       "x1": 286.37,
+       "y1": 346.03999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 349.4,
+       "x1": 286.36,
+       "y1": 358.21999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 361.36,
+       "x1": 184.36,
+       "y1": 369.95
+      }
+     ],
+     "quote": "Second, we find that masking a high proportion of the input image, e.g., 75%, yields a nontrivial and meaningful self-supervisory task.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "computer vision",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 229.85,
+      "x1": 286.37,
+      "y1": 250.39000000000001
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 62.07,
+       "y0": 229.85,
+       "x1": 286.37,
+       "y1": 238.44
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 241.8,
+       "x1": 266.08,
+       "y1": 250.39000000000001
+      }
+     ],
+     "quote": "This paper shows that masked autoencoders (MAE) are scalable self-supervised learners for computer vision.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "An asymmetric autoencoder design consisting of an encoder that operates only on unmasked patches and a lightweight decoder that processes both encoded patches and mask tokens.",
+   "evidence": [
+    {
+     "chunk_id": "b0023",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 308.86,
+      "y0": 294.65,
+      "x1": 545.12,
+      "y1": 363.07
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 480.87,
+       "y0": 294.65,
+       "x1": 545.12,
+       "y1": 303.28999999999996
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 306.43,
+       "x1": 545.11,
+       "y1": 315.25
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 318.56,
+       "x1": 545.11,
+       "y1": 327.2
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 330.52,
+       "x1": 545.11,
+       "y1": 339.15999999999997
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 342.47,
+       "x1": 545.11,
+       "y1": 351.11
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 354.43,
+       "x1": 360.78000000000003,
+       "y1": 363.07
+      }
+     ],
+     "quote": "Unlike classical autoencoders, we adopt an asymmetric design that allows the encoder to operate only on the partial, observed signal (without mask tokens) and a lightweight decoder that reconstructs the full signal from the latent representation and mask tokens.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "Images are divided into patches and sampled using a uniform random distribution with a high masking ratio.",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 308.86,
+      "y0": 395.02,
+      "x1": 545.11,
+      "y1": 439.52
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 529.62,
+       "y0": 395.02,
+       "x1": 545.11,
+       "y1": 403.65999999999997
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 406.97,
+       "x1": 545.11,
+       "y1": 415.61
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 418.93,
+       "x1": 545.11,
+       "y1": 427.57
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 430.88,
+       "x1": 326.85,
+       "y1": 439.52
+      }
+     ],
+     "quote": "Our sampling strategy is straightforward: we sample random patches without replacement, following a uniform distribution.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "The encoder is a Vision Transformer applied solely to visible, unmasked patches without using mask tokens.",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 308.86,
+      "y0": 592.2,
+      "x1": 545.11,
+      "y1": 612.79
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 455.73,
+       "y0": 592.2,
+       "x1": 545.11,
+       "y1": 600.84
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 604.15,
+       "x1": 545.11,
+       "y1": 612.79
+      }
+     ],
+     "quote": "However, our encoder only operates on a small subset (e.g., 25%) of the full set.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "The decoder is a separate series of Transformer blocks taking the full set of encoded patches and shared mask tokens with added positional embeddings.",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 308.86,
+      "y0": 668.65,
+      "x1": 545.11,
+      "y1": 701.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 376.27,
+       "y0": 668.65,
+       "x1": 545.11,
+       "y1": 677.29
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 680.6,
+       "x1": 545.11,
+       "y1": 689.24
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 692.56,
+       "x1": 376.46000000000004,
+       "y1": 701.1999999999999
+      }
+     ],
+     "quote": "The input to the MAE decoder is the full set of tokens consisting of (i) encoded visible patches, and (ii) mask tokens.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "The model is trained to reconstruct the original image by minimizing the mean squared error on masked patches in the pixel space.",
+   "evidence": [
+    {
+     "chunk_id": "b0028",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 50.11,
+      "y0": 336.48,
+      "x1": 286.37,
+      "y1": 369.03
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 216.37,
+       "y0": 336.48,
+       "x1": 286.37,
+       "y1": 345.12
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 348.44,
+       "x1": 286.36,
+       "y1": 357.08
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 360.39,
+       "x1": 234.01,
+       "y1": 369.03
+      }
+     ],
+     "quote": "Our loss function computes the mean squared error (MSE) between the reconstructed and original images in the pixel space.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "The use of an asymmetric encoder-decoder architecture where the encoder processes only a small subset of unmasked patches and a lightweight decoder reconstructs the full signal.",
+   "evidence": [
+    {
+     "chunk_id": "b0023",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 308.86,
+      "y0": 294.65,
+      "x1": 545.12,
+      "y1": 363.07
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 480.87,
+       "y0": 294.65,
+       "x1": 545.12,
+       "y1": 303.28999999999996
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 306.43,
+       "x1": 545.11,
+       "y1": 315.25
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 318.56,
+       "x1": 545.11,
+       "y1": 327.2
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 330.52,
+       "x1": 545.11,
+       "y1": 339.15999999999997
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 342.47,
+       "x1": 545.11,
+       "y1": 351.11
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 354.43,
+       "x1": 360.78000000000003,
+       "y1": 363.07
+      }
+     ],
+     "quote": "Unlike classical autoencoders, we adopt an asymmetric design that allows the encoder to operate only on the partial, observed signal (without mask tokens) and a lightweight decoder that reconstructs the full signal from the latent representation and mask tokens.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "ImageNet-1K training set used for pre-training and supervised training",
+   "evidence": [
+    {
+     "chunk_id": "b0031",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 260.78,
+      "x1": 545.12,
+      "y1": 281.38
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 320.82,
+       "y0": 260.78,
+       "x1": 545.12,
+       "y1": 269.41999999999996
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 272.74,
+       "x1": 406.57,
+       "y1": 281.38
+      }
+     ],
+     "quote": "We do self-supervised pre-training on the ImageNet-1K (IN1K) [13] training set.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ImageNet-1K (IN1K)",
+   "split": "training set",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "COCO dataset used for object detection and instance segmentation fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0077",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 311.32,
+      "x1": 286.36,
+      "y1": 331.90999999999997
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 208.89,
+       "y0": 311.32,
+       "x1": 286.36,
+       "y1": 319.96
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 323.27,
+       "x1": 209.44,
+       "y1": 331.90999999999997
+      }
+     ],
+     "quote": "We fine-tune Mask R-CNN [24] end-to-end on COCO [37].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "COCO",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "ADE20K dataset used for semantic segmentation",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 494.19,
+      "x1": 286.36,
+      "y1": 538.7
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 154.21,
+       "y0": 494.19,
+       "x1": 286.35,
+       "y1": 502.83
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 506.15,
+       "x1": 286.36,
+       "y1": 514.79
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 517.92,
+       "x1": 286.36,
+       "y1": 526.74
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 529.88,
+       "x1": 197.08999999999997,
+       "y1": 538.7
+      }
+     ],
+     "quote": "We experiment on ADE20K [72] using UperNet [63] (see A.4).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ADE20K",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "iNaturalists and Places tasks used for transfer learning classification",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 569.46,
+      "x1": 286.37,
+      "y1": 590.06
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 141.56,
+       "y0": 569.46,
+       "x1": 286.37,
+       "y1": 578.1
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 581.42,
+       "x1": 267.42,
+       "y1": 590.06
+      }
+     ],
+     "quote": "Table 6 studies transfer learning on the iNaturalists [56] and Places [71] tasks (see A.5).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "iNaturalists",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "Places dataset used for classification transfer learning",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 569.46,
+      "x1": 286.37,
+      "y1": 590.06
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 141.56,
+       "y0": 569.46,
+       "x1": 286.37,
+       "y1": 578.1
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 581.42,
+       "x1": 267.42,
+       "y1": 590.06
+      }
+     ],
+     "quote": "Table 6 studies transfer learning on the iNaturalists [56] and Places [71] tasks (see A.5).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Places",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "ViT-Large backbone used in ablation studies",
+   "evidence": [
+    {
+     "chunk_id": "b0032",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 324.1,
+      "x1": 545.11,
+      "y1": 344.7
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 404.58,
+       "y0": 324.1,
+       "x1": 545.11,
+       "y1": 332.74
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 336.06,
+       "x1": 458.70000000000005,
+       "y1": 344.7
+      }
+     ],
+     "quote": "We use ViT-Large (ViT-L/16) [16] as the backbone in our ablation study.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "MoCo v3 contrastive learning method",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 656.52,
+      "x1": 545.11,
+      "y1": 677.29
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 656.52,
+       "x1": 545.11,
+       "y1": 665.34
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 668.65,
+       "x1": 504.37,
+       "y1": 677.29
+      }
+     ],
+     "quote": "MoCo v3 [9] saturates at 300 epochs for ViT-L.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "BEiT masked image modeling method",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 50.11,
+      "y0": 605.4,
+      "x1": 286.37,
+      "y1": 626.1700000000001
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 62.07,
+       "y0": 605.4,
+       "x1": 286.37,
+       "y1": 614.22
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 617.35,
+       "x1": 178.81,
+       "y1": 626.1700000000001
+      }
+     ],
+     "quote": "Comparing with BEiT [2], our MAE is more accurate while being simpler and faster.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "DINO self-supervised method",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 53.43000030517578,
+      "y0": 89.72127532958984,
+      "x1": 282.54541015625,
+      "y1": 98.84654235839844
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 53.43000030517578,
+       "y0": 89.72127532958984,
+       "x1": 282.54541015625,
+       "y1": 98.84654235839844
+      }
+     ],
+     "quote": "DINO [5] | IN1K | 82.8 | - | - | -",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "Supervised training baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0097",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 344.30596923828125,
+      "y0": 78.5052719116211,
+      "x1": 507.67724609375,
+      "y1": 87.63053894042969
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 344.30596923828125,
+       "y0": 78.5052719116211,
+       "x1": 507.67724609375,
+       "y1": 87.63053894042969
+      }
+     ],
+     "quote": "supervised | IN1K w/ labels | 47.4 | 49.9",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Top-1 validation accuracy of a single crop",
+   "evidence": [
+    {
+     "chunk_id": "b0031",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 296.65,
+      "x1": 545.11,
+      "y1": 317.25
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 399.89,
+       "y0": 296.65,
+       "x1": 545.11,
+       "y1": 305.28999999999996
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 308.61,
+       "x1": 413.18,
+       "y1": 317.25
+      }
+     ],
+     "quote": "We report top-1 validation accuracy of a single 224×224 crop.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Fine-tuning (ft) and linear probing (lin) accuracy in percentage",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 52.403995513916016,
+      "y0": 168.92359924316406,
+      "x1": 542.8219604492188,
+      "y1": 218.5535125732422
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 52.403995513916016,
+       "y0": 168.92359924316406,
+       "x1": 542.8219604492188,
+       "y1": 218.5535125732422
+      }
+     ],
+     "quote": "We report fine-tuning (ft) and linear probing (lin) accuracy (%).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "Box AP for object detection and mask AP for instance segmentation",
+   "evidence": [
+    {
+     "chunk_id": "b0077",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 347.18,
+      "x1": 286.36,
+      "y1": 367.78
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 197.09,
+       "y0": 347.18,
+       "x1": 286.36,
+       "y1": 355.82
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 359.14,
+       "x1": 276.3,
+       "y1": 367.78
+      }
+     ],
+     "quote": "We report box AP for object detection and mask AP for instance segmentation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "Mean Intersection over Union (mIoU) for semantic segmentation",
+   "evidence": [
+    {
+     "chunk_id": "b0097",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 344.30596923828125,
+      "y0": 68.57100677490234,
+      "x1": 507.67724609375,
+      "y1": 116.84251403808594
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 344.30596923828125,
+       "y0": 68.57100677490234,
+       "x1": 507.67724609375,
+       "y1": 116.84251403808594
+      }
+     ],
+     "quote": "Table 5: ADE20K semantic segmentation (mIoU) using Uper-Net.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Decoder depth of 8 Transformer blocks by default",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 150.97503662109375,
+      "y0": 250.65264892578125,
+      "x1": 387.140869140625,
+      "y1": 258.6686096191406
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 150.97503662109375,
+       "y0": 250.65264892578125,
+       "x1": 387.140869140625,
+       "y1": 258.6686096191406
+      }
+     ],
+     "quote": "the decoder has depth 8 and width 512, the reconstruction target is unnormalized pixels, the data augmentation is random resized cropping, the masking ratio is 75%, and the pre-training length is 800 epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "decoder depth",
+   "value_raw": "8",
+   "value_norm": 8.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Decoder width of 512 channels by default",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 150.97503662109375,
+      "y0": 250.65264892578125,
+      "x1": 387.140869140625,
+      "y1": 258.6686096191406
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 150.97503662109375,
+       "y0": 250.65264892578125,
+       "x1": 387.140869140625,
+       "y1": 258.6686096191406
+      }
+     ],
+     "quote": "the decoder has depth 8 and width 512, the reconstruction target is unnormalized pixels, the data augmentation is random resized cropping, the masking ratio is 75%, and the pre-training length is 800 epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "decoder width",
+   "value_raw": "512",
+   "value_norm": 512.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Masking ratio of 75% by default",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 150.97503662109375,
+      "y0": 250.65264892578125,
+      "x1": 387.140869140625,
+      "y1": 258.6686096191406
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 150.97503662109375,
+       "y0": 250.65264892578125,
+       "x1": 387.140869140625,
+       "y1": 258.6686096191406
+      }
+     ],
+     "quote": "the decoder has depth 8 and width 512, the reconstruction target is unnormalized pixels, the data augmentation is random resized cropping, the masking ratio is 75%, and the pre-training length is 800 epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "masking ratio",
+   "value_raw": "75%",
+   "value_norm": 75.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Pre-training length of 800 epochs for default ablations",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 150.97503662109375,
+      "y0": 250.65264892578125,
+      "x1": 387.140869140625,
+      "y1": 258.6686096191406
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 150.97503662109375,
+       "y0": 250.65264892578125,
+       "x1": 387.140869140625,
+       "y1": 258.6686096191406
+      }
+     ],
+     "quote": "the decoder has depth 8 and width 512, the reconstruction target is unnormalized pixels, the data augmentation is random resized cropping, the masking ratio is 75%, and the pre-training length is 800 epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "pre-training length",
+   "value_raw": "800 epochs",
+   "value_norm": null,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Fine-tuning for 50 epochs in specific evaluation",
+   "evidence": [
+    {
+     "chunk_id": "b0033",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 448.34,
+      "x1": 545.12,
+      "y1": 480.89
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 470.2,
+       "y0": 448.34,
+       "x1": 545.12,
+       "y1": 456.97999999999996
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 460.29,
+       "x1": 399.42,
+       "y1": 468.93
+      },
+      {
+       "page": 4,
+       "x0": 401.79,
+       "y0": 460.29,
+       "x1": 545.11,
+       "y1": 468.93
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 472.25,
+       "x1": 521.55,
+       "y1": 480.89
+      }
+     ],
+     "quote": "Here fine-tuning is only for 50 epochs (vs. 200 from scratch), implying that the fine-tuning accuracy heavily depends on pre-training.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "fine-tuning epochs",
+   "value_raw": "50",
+   "value_norm": 50.0,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Pre-training schedule length of 1600 epochs for best accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0068",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 308.86,
+      "y0": 244.7,
+      "x1": 545.12,
+      "y1": 265.3
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 320.82,
+       "y0": 244.7,
+       "x1": 545.12,
+       "y1": 253.33999999999997
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 256.66,
+       "x1": 464.53,
+       "y1": 265.3
+      }
+     ],
+     "quote": "The MAE models in Table 3 are pre-trained for 1600 epochs for better accuracy (Figure 7).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "pre-training length",
+   "value_raw": "1600 epochs",
+   "value_norm": null,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Batch size of 16 for UperNet semantic segmentation fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0106",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 50.11,
+      "y0": 543.59,
+      "x1": 286.37,
+      "y1": 564.18
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 123.22,
+       "y0": 543.59,
+       "x1": 286.37,
+       "y1": 552.23
+      },
+      {
+       "page": 12,
+       "x0": 50.11,
+       "y0": 555.54,
+       "x1": 147.73000000000002,
+       "y1": 564.18
+      }
+     ],
+     "quote": "We fine-tune end-to-end for 100 epochs with a batch size of 16.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "16",
+   "value_norm": 16.0,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Fine-tuning epochs for UperNet semantic segmentation",
+   "evidence": [
+    {
+     "chunk_id": "b0106",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 50.11,
+      "y0": 543.59,
+      "x1": 286.37,
+      "y1": 564.18
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 123.22,
+       "y0": 543.59,
+       "x1": 286.37,
+       "y1": 552.23
+      },
+      {
+       "page": 12,
+       "x0": 50.11,
+       "y0": 555.54,
+       "x1": 147.73000000000002,
+       "y1": 564.18
+      }
+     ],
+     "quote": "We fine-tune end-to-end for 100 epochs with a batch size of 16.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "fine-tuning epochs",
+   "value_raw": "100",
+   "value_norm": 100.0,
+   "scope": "fine-tuning"
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Benchmarked using 128 TPU-v3 cores with TensorFlow",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 328.35699462890625,
+      "y0": 300.8562927246094,
+      "x1": 517.9483032226562,
+      "y1": 360.4345397949219
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 328.35699462890625,
+       "y0": 300.8562927246094,
+       "x1": 517.9483032226562,
+       "y1": 360.4345397949219
+      }
+     ],
+     "quote": "Table 2: Wall-clock time of our MAE training (800 epochs), benchmarked in 128 TPU-v3 cores with TensorFlow.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.1",
+   "value": "Training time of 31 hours for 1600 epochs on ViT-L using 128 TPU-v3 cores",
+   "evidence": [
+    {
+     "chunk_id": "b0068",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 308.86,
+      "y0": 280.57,
+      "x1": 545.11,
+      "y1": 313.12
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 402.31,
+       "y0": 280.57,
+       "x1": 545.11,
+       "y1": 289.21
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 292.52,
+       "x1": 545.11,
+       "y1": 301.15999999999997
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 304.48,
+       "x1": 524.97,
+       "y1": 313.12
+      }
+     ],
+     "quote": "For example, training ViT-L on 128 TPU-v3 cores, our MAE's training time is 31 hours for 1600 epochs and MoCo v3's is 36 hours for 300 epochs [9].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation study on reconstruction targets",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11,
+      "y0": 276.6,
+      "x1": 286.36,
+      "y1": 297.58
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 276.6,
+       "x1": 145.81,
+       "y1": 285.56
+      },
+      {
+       "page": 6,
+       "x0": 150.8,
+       "y0": 276.98,
+       "x1": 286.36,
+       "y1": 285.62
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 288.94,
+       "x1": 147.25,
+       "y1": 297.58
+      }
+     ],
+     "quote": "Reconstruction target. We compare different reconstruction targets in Table 1d.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Ablation study on data augmentation",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 52.403995513916016,
+      "y0": 210.4281768798828,
+      "x1": 542.8219604492188,
+      "y1": 219.55345153808594
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 52.403995513916016,
+       "y0": 210.4281768798828,
+       "x1": 542.8219604492188,
+       "y1": 219.55345153808594
+      }
+     ],
+     "quote": "(e) Data augmentation. Our MAE works with",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.2",
+   "value": "Ablation study on mask sampling strategies",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 402.65,
+      "x1": 545.11,
+      "y1": 423.25
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 415.14,
+       "y0": 402.65,
+       "x1": 545.11,
+       "y1": 411.28999999999996
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 414.61,
+       "x1": 502.42,
+       "y1": 423.25
+      }
+     ],
+     "quote": "In Table 1f we compare different mask sampling strategies, illustrated in Figure 6.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.3",
+   "value": "Ablation study on decoder depth and width",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 50.11,
+      "y0": 366.62,
+      "x1": 286.36,
+      "y1": 387.59999999999997
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 366.62,
+       "x1": 119.15,
+       "y1": 375.58
+      },
+      {
+       "page": 5,
+       "x0": 126.83,
+       "y0": 367.01,
+       "x1": 286.36,
+       "y1": 375.65
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 378.96,
+       "x1": 199.01,
+       "y1": 387.59999999999997
+      }
+     ],
+     "quote": "Decoder design. Our MAE decoder can be flexibly designed, as studied in Table 1a and 1b.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "Images and languages are fundamentally different signals and this distinction must be carefully handled.",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 308.86,
+      "y0": 561.05,
+      "x1": 545.12,
+      "y1": 593.6
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 320.82,
+       "y0": 561.05,
+       "x1": 545.12,
+       "y1": 569.6899999999999
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 572.83,
+       "x1": 545.11,
+       "y1": 581.6500000000001
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 584.96,
+       "x1": 402.12,
+       "y1": 593.6
+      }
+     ],
+     "quote": "On the other hand, we note that images and languages are signals of a different nature and this difference must be addressed carefully.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "The authors hope that the provided perspective will inspire future research.",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 308.86,
+      "y0": 692.56,
+      "x1": 545.11,
+      "y1": 713.15
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 532.08,
+       "y0": 692.56,
+       "x1": 545.11,
+       "y1": 701.1999999999999
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 704.51,
+       "x1": 491.81,
+       "y1": 713.15
+      }
+     ],
+     "quote": "We hope this perspective will inspire future work.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [
+  {
+   "id": "ethics.0",
+   "value": "The model's predictions reflect dataset biases that can lead to negative societal impacts, and it may generate non-existent content.",
+   "evidence": [
+    {
+     "chunk_id": "b0084",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 50.11,
+      "y0": 75.48,
+      "x1": 286.36,
+      "y1": 119.98
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 130.13,
+       "y0": 75.48,
+       "x1": 286.36,
+       "y1": 84.12
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 87.43,
+       "x1": 286.36,
+       "y1": 96.07000000000001
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 99.39,
+       "x1": 286.36,
+       "y1": 108.03
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 111.34,
+       "x1": 135.75,
+       "y1": 119.98
+      }
+     ],
+     "quote": "The proposed method predicts content based on learned statistics of the training dataset and as such will reflect biases in those data, including ones with negative societal impacts.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "code_urls": [],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "The approach accelerates training by 3x or more and improves accuracy.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 361.36,
+      "x1": 286.36,
+      "y1": 405.81
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 190.82,
+       "y0": 361.36,
+       "x1": 286.36,
+       "y1": 369.95
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 373.31,
+       "x1": 286.36,
+       "y1": 381.9
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 385.27,
+       "x1": 286.36,
+       "y1": 393.85999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 397.22,
+       "x1": 112.96000000000001,
+       "y1": 405.81
+      }
+     ],
+     "quote": "Coupling these two designs enables us to train large models efficiently and effectively: we accelerate training (by 3× or more) and improve accuracy.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "A vanilla ViT-Huge model achieves an accuracy of 87.8% using only ImageNet-1K data.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 397.22,
+      "x1": 286.36,
+      "y1": 441.67999999999995
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 116.03,
+       "y0": 397.22,
+       "x1": 286.36,
+       "y1": 405.81
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 409.18,
+       "x1": 286.36,
+       "y1": 418.0
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 421.13,
+       "x1": 286.36,
+       "y1": 429.71999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 433.09,
+       "x1": 223.93,
+       "y1": 441.67999999999995
+      }
+     ],
+     "quote": "Our scalable approach allows for learning high-capacity models that generalize well: e.g., a vanilla ViT-Huge model achieves the best accuracy (87.8%) among methods that use only ImageNet-1K data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

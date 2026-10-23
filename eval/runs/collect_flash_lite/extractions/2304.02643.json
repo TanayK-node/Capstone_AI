@@ -1,0 +1,3262 @@
+{
+ "metadata": {
+  "title": "Segment Anything",
+  "authors": [
+   "Alexander Kirillov",
+   "Eric Mintun",
+   "Nikhila Ravi",
+   "Hanzi Mao",
+   "Chloe Rolland",
+   "Laura Gustafson",
+   "Tete Xiao",
+   "Spencer Whitehead",
+   "Alexander C Berg",
+   "Wan-Yen Lo",
+   "Piotr Dollár",
+   "Ross Girshick"
+  ],
+  "venue": null,
+  "year": "2023",
+  "arxiv_id": "2304.02643v1[cs.CV]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Computer vision lacks a foundation model for image segmentation that can generalize via prompt engineering.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 308.86,
+      "y0": 565.99,
+      "x1": 545.12,
+      "y1": 586.5300000000001
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 320.82,
+       "y0": 565.99,
+       "x1": 545.12,
+       "y1": 574.8100000000001
+      },
+      {
+       "page": 1,
+       "x0": 308.86,
+       "y0": 577.94,
+       "x1": 390.88,
+       "y1": 586.5300000000001
+      }
+     ],
+     "quote": "In this work, our goal is to build a foundation model for image segmentation.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Abundant training data does not exist for many computer vision problems beyond vision and language encoders.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 308.86,
+      "y0": 518.35,
+      "x1": 545.11,
+      "y1": 562.85
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 442.35,
+       "y0": 518.35,
+       "x1": 545.11,
+       "y1": 526.99
+      },
+      {
+       "page": 1,
+       "x0": 308.86,
+       "y0": 530.3,
+       "x1": 545.11,
+       "y1": 538.9399999999999
+      },
+      {
+       "page": 1,
+       "x0": 308.86,
+       "y0": 542.26,
+       "x1": 545.11,
+       "y1": 550.9
+      },
+      {
+       "page": 1,
+       "x0": 308.86,
+       "y0": 554.21,
+       "x1": 545.11,
+       "y1": 562.85
+      }
+     ],
+     "quote": "While much progress has been made on vision and language encoders, computer vision includes a wide range of problems beyond this scope, and for many of these, abundant training data does not exist.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Proposed the promptable segmentation task as a pre-training objective and zero-shot transfer mechanism.",
+   "evidence": [
+    {
+     "chunk_id": "b0011",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 50.11,
+      "y0": 425.86,
+      "x1": 286.36,
+      "y1": 458.40999999999997
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 76.45,
+       "y0": 425.86,
+       "x1": 286.36,
+       "y1": 434.5
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 437.82,
+       "x1": 286.36,
+       "y1": 446.46
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 449.77,
+       "x1": 210.32999999999998,
+       "y1": 458.40999999999997
+      }
+     ],
+     "quote": "We use the promptable segmentation task as both a pre-training objective and to solve general downstream segmentation tasks via prompt engineering.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Developed the Segment Anything Model (SAM) with a lightweight mask decoder for real-time promptable segmentation.",
+   "evidence": [
+    {
+     "chunk_id": "b0012",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 50.11,
+      "y0": 573.01,
+      "x1": 286.37,
+      "y1": 593.6
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 187.21,
+       "y0": 573.01,
+       "x1": 286.37,
+       "y1": 581.65
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 584.96,
+       "x1": 268.65,
+       "y1": 593.6
+      }
+     ],
+     "quote": "We refer to this model as the Segment Anything Model, or SAM (see Fig. 1b).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "Built a data engine using model-in-the-loop annotation to collect a massive dataset.",
+   "evidence": [
+    {
+     "chunk_id": "b0014",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 308.86,
+      "y0": 147.03,
+      "x1": 545.12,
+      "y1": 179.76
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 347.6,
+       "y0": 147.03,
+       "x1": 545.12,
+       "y1": 155.85
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 159.16,
+       "x1": 545.11,
+       "y1": 167.8
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 171.12,
+       "x1": 400.0,
+       "y1": 179.76
+      }
+     ],
+     "quote": "Our solution is to build a \"data engine\", i.e., we co-develop our model with model-in-the-loop dataset annotation (see Fig. 1c).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.3",
+   "value": "Created the SA-1B dataset containing over 1 billion masks from 11 million images.",
+   "evidence": [
+    {
+     "chunk_id": "b0015",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 308.86,
+      "y0": 295.5,
+      "x1": 545.12,
+      "y1": 328.05
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 365.69,
+       "y0": 295.5,
+       "x1": 545.12,
+       "y1": 304.14
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 307.28,
+       "x1": 545.11,
+       "y1": 316.09999999999997
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 319.41,
+       "x1": 377.83000000000004,
+       "y1": 328.05
+      }
+     ],
+     "quote": "Our final dataset, SA-1B, includes more than 1B masks from 11M licensed and privacy-preserving images (see Fig. 2).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "promptable segmentation",
+   "evidence": [
+    {
+     "chunk_id": "b0011",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 50.11,
+      "y0": 294.35,
+      "x1": 286.37,
+      "y1": 338.86
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 253.72,
+       "y0": 294.35,
+       "x1": 286.37,
+       "y1": 302.99
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 306.13,
+       "x1": 286.36,
+       "y1": 314.95
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 318.09,
+       "x1": 286.36,
+       "y1": 326.90999999999997
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 330.04,
+       "x1": 274.71,
+       "y1": 338.86
+      }
+     ],
+     "quote": "Inspired by this line of work, we propose the promptable segmentation task, where the goal is to return a valid segmentation mask given any segmentation prompt (see Fig. 1a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "SAM consists of three core components: an image encoder, a flexible prompt encoder, and a fast mask decoder.",
+   "evidence": [
+    {
+     "chunk_id": "b0031",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 50.11,
+      "y0": 264.98,
+      "x1": 286.36,
+      "y1": 297.53
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 172.41,
+       "y0": 264.98,
+       "x1": 286.36,
+       "y1": 273.62
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 276.93,
+       "x1": 286.36,
+       "y1": 285.57
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 288.89,
+       "x1": 183.37,
+       "y1": 297.53
+      }
+     ],
+     "quote": "SAM has three components, illustrated in Fig. 4: an image encoder, a flexible prompt encoder, and a fast mask decoder.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "The image encoder uses a Vision Transformer pre-trained with MAE, minimally adapted for high-resolution inputs, running once per image.",
+   "evidence": [
+    {
+     "chunk_id": "b0032",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 50.11,
+      "y0": 341.99,
+      "x1": 286.36,
+      "y1": 386.49
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 117.27,
+       "y0": 341.99,
+       "x1": 286.36,
+       "y1": 350.63
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 353.94,
+       "x1": 286.36,
+       "y1": 362.58
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 365.9,
+       "x1": 286.36,
+       "y1": 374.53999999999996
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 377.85,
+       "x1": 140.86,
+       "y1": 386.49
+      }
+     ],
+     "quote": "Motivated by scalability and powerful pretraining methods, we use an MAE [47] pre-trained Vision Transformer (ViT) [33] minimally adapted to process high resolution inputs [62].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "The prompt encoder handles sparse prompts like points, boxes, and text using positional and learned embeddings, and dense prompts like masks using convolutions.",
+   "evidence": [
+    {
+     "chunk_id": "b0032",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 50.11,
+      "y0": 406.86,
+      "x1": 286.36,
+      "y1": 427.63
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 123.84,
+       "y0": 406.86,
+       "x1": 286.36,
+       "y1": 415.68
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 418.81,
+       "x1": 221.26,
+       "y1": 427.63
+      }
+     ],
+     "quote": "We consider two sets of prompts: sparse (points, boxes, text) and dense (masks).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "The mask decoder combines image and prompt embeddings via a modified Transformer decoder block and outputs dynamic mask predictions.",
+   "evidence": [
+    {
+     "chunk_id": "b0033",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 50.11,
+      "y0": 519.91,
+      "x1": 286.36,
+      "y1": 552.46
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 100.73,
+       "y0": 519.91,
+       "x1": 286.36,
+       "y1": 528.55
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 531.87,
+       "x1": 286.36,
+       "y1": 540.51
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 543.82,
+       "x1": 194.92000000000002,
+       "y1": 552.46
+      }
+     ],
+     "quote": "This design, inspired by [14,20], employs a modification of a Transformer decoder block [103] followed by a dynamic mask prediction head.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "To resolve ambiguity, the model predicts multiple masks simultaneously using separate output tokens and backpropagates only the minimum loss.",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 50.11,
+      "y0": 656.69,
+      "x1": 286.36,
+      "y1": 677.29
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 656.69,
+       "x1": 286.36,
+       "y1": 665.33
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 668.65,
+       "x1": 240.22000000000003,
+       "y1": 677.29
+      }
+     ],
+     "quote": "To address this, we modify the model to predict multiple output masks for a single prompt (see Fig. 3).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.5",
+   "value": "The model is supervised using a linear combination of focal loss and dice loss, trained by simulating interactive prompt sequences across multiple iterations.",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 308.86,
+      "y0": 323.21,
+      "x1": 545.11,
+      "y1": 355.76
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 401.78,
+       "y0": 323.21,
+       "x1": 545.11,
+       "y1": 331.84999999999997
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 335.16,
+       "x1": 545.11,
+       "y1": 343.8
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 347.12,
+       "x1": 358.61,
+       "y1": 355.76
+      }
+     ],
+     "quote": "We supervise mask prediction with the linear combination of focal loss [65] and dice loss [73] used in [14].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "novelty": [],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "SA-1B mask dataset containing 1.1B masks and 11M images",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 308.86,
+      "y0": 437.92,
+      "x1": 545.12,
+      "y1": 470.46999999999997
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 320.82,
+       "y0": 437.92,
+       "x1": 545.12,
+       "y1": 446.56
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 449.88,
+       "x1": 545.11,
+       "y1": 458.52
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 461.83,
+       "x1": 424.21000000000004,
+       "y1": 470.46999999999997
+      }
+     ],
+     "quote": "As segmentation masks are not abundant on the internet, we built a data engine to enable the collection of our 1.1B mask dataset, SA-1B.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "SA-1B",
+   "split": "",
+   "size": "1.1B masks and 11M images",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "COCO dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11,
+      "y0": 135.25,
+      "x1": 286.36,
+      "y1": 203.67000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 271.61,
+       "y0": 135.25,
+       "x1": 286.36,
+       "y1": 143.89
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 147.21,
+       "x1": 286.36,
+       "y1": 155.85000000000002
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 159.16,
+       "x1": 180.76,
+       "y1": 167.8
+      },
+      {
+       "page": 6,
+       "x0": 186.38,
+       "y0": 159.16,
+       "x1": 286.36,
+       "y1": 167.8
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 171.12,
+       "x1": 286.36,
+       "y1": 179.76
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 183.07,
+       "x1": 286.36,
+       "y1": 191.70999999999998
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 195.03,
+       "x1": 111.47999999999999,
+       "y1": 203.67000000000002
+      }
+     ],
+     "quote": "Average annotation time per mask decreased from 34 to 14 seconds as the model improved. We note that 14 seconds is 6.5× faster than mask annotation for COCO [66] and only 2× slower than bounding-box labeling with extreme points [76,71].",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "COCO",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "LVIS v1 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 50.11,
+      "y0": 352.73,
+      "x1": 286.37,
+      "y1": 409.19
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 144.08,
+       "y0": 352.73,
+       "x1": 286.37,
+       "y1": 361.37
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 364.68,
+       "x1": 286.36,
+       "y1": 373.32
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 376.64,
+       "x1": 286.36,
+       "y1": 385.28
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 388.59,
+       "x1": 286.36,
+       "y1": 397.22999999999996
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 400.55,
+       "x1": 139.09,
+       "y1": 409.19
+      }
+     ],
+     "quote": "We observe that SA-1B has greater coverage of image corners compared to LVIS v1 [44] and ADE20K [117], the two most similarly distributed datasets, while COCO [66] and Open Images V5 [60] have a more prominent center bias.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "LVIS v1",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "ADE20K dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 50.11,
+      "y0": 352.73,
+      "x1": 286.37,
+      "y1": 409.19
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 144.08,
+       "y0": 352.73,
+       "x1": 286.37,
+       "y1": 361.37
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 364.68,
+       "x1": 286.36,
+       "y1": 373.32
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 376.64,
+       "x1": 286.36,
+       "y1": 385.28
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 388.59,
+       "x1": 286.36,
+       "y1": 397.22999999999996
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 400.55,
+       "x1": 139.09,
+       "y1": 409.19
+      }
+     ],
+     "quote": "We observe that SA-1B has greater coverage of image corners compared to LVIS v1 [44] and ADE20K [117], the two most similarly distributed datasets, while COCO [66] and Open Images V5 [60] have a more prominent center bias.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ADE20K",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "Open Images V5 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 50.11,
+      "y0": 352.73,
+      "x1": 286.37,
+      "y1": 409.19
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 144.08,
+       "y0": 352.73,
+       "x1": 286.37,
+       "y1": 361.37
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 364.68,
+       "x1": 286.36,
+       "y1": 373.32
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 376.64,
+       "x1": 286.36,
+       "y1": 385.28
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 388.59,
+       "x1": 286.36,
+       "y1": 397.22999999999996
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 400.55,
+       "x1": 139.09,
+       "y1": 409.19
+      }
+     ],
+     "quote": "We observe that SA-1B has greater coverage of image corners compared to LVIS v1 [44] and ADE20K [117], the two most similarly distributed datasets, while COCO [66] and Open Images V5 [60] have a more prominent center bias.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Open Images V5",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "Suite of 23 diverse segmentation datasets for zero-shot transfer evaluation",
+   "evidence": [
+    {
+     "chunk_id": "b0060",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 308.86,
+      "y0": 620.83,
+      "x1": 545.11,
+      "y1": 641.42
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 354.29,
+       "y0": 620.83,
+       "x1": 545.11,
+       "y1": 629.47
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 632.78,
+       "x1": 442.68,
+       "y1": 641.42
+      }
+     ],
+     "quote": "We use a newly compiled suite of 23 datasets with diverse image distributions.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ADE20K [117] BBBC038v1 [12] Cityscapes [25] DOORS [80] DRAM [24] EgoHOS [113] GTEA [34,63] Hypersim [86] IBD [17] iShape [111] LVIS [44] NDD20 [100] NDISPark [22,23] OVIS [81] PPDLS [74] Plittersdorf [46] STREETS [91] TimberSeg [38] TrashCan [52] VISOR [28,27] WoodScape [112] PIDRay [104] ZeroWaste-f [6]",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.6",
+   "value": "BSDS500 dataset for edge detection",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 50.11,
+      "y0": 382.71,
+      "x1": 286.35,
+      "y1": 403.31
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 98.48,
+       "y0": 382.71,
+       "x1": 286.35,
+       "y1": 391.34999999999997
+      },
+      {
+       "page": 10,
+       "x0": 50.11,
+       "y0": 394.67,
+       "x1": 222.01999999999998,
+       "y1": 403.31
+      }
+     ],
+     "quote": "We evaluate SAM on the classic low-level task of edge detection using BSDS500 [72,3].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "BSDS500",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "RITM interactive segmentation model",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 308.86,
+      "y0": 581.37,
+      "x1": 545.11,
+      "y1": 613.92
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 401.98,
+       "y0": 581.37,
+       "x1": 545.11,
+       "y1": 590.01
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 593.32,
+       "x1": 545.11,
+       "y1": 601.96
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 605.28,
+       "x1": 531.04,
+       "y1": 613.92
+      }
+     ],
+     "quote": "We compare mainly to RITM [92], a strong interactive segmenter that performs best on our benchmark compared to other strong baselines [67,18].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "SimpleClick interactive segmentation model",
+   "evidence": [
+    {
+     "chunk_id": "b0064",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 308.86,
+      "y0": 596.92,
+      "x1": 545.12,
+      "y1": 629.47
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 320.82,
+       "y0": 596.92,
+       "x1": 545.12,
+       "y1": 605.56
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 608.87,
+       "x1": 545.11,
+       "y1": 617.51
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 620.83,
+       "x1": 428.31,
+       "y1": 629.47
+      }
+     ],
+     "quote": "Fig. 9c shows additional baselines, SimpleClick [67] and FocalClick [18], which obtain lower single point performance than RITM and SAM.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "FocalClick interactive segmentation model",
+   "evidence": [
+    {
+     "chunk_id": "b0064",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 308.86,
+      "y0": 596.92,
+      "x1": 545.12,
+      "y1": 629.47
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 320.82,
+       "y0": 596.92,
+       "x1": 545.12,
+       "y1": 605.56
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 608.87,
+       "x1": 545.11,
+       "y1": 617.51
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 620.83,
+       "x1": 428.31,
+       "y1": 629.47
+      }
+     ],
+     "quote": "Fig. 9c shows additional baselines, SimpleClick [67] and FocalClick [18], which obtain lower single point performance than RITM and SAM.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "ViTDet-H detector acting as proposal generator",
+   "evidence": [
+    {
+     "chunk_id": "b0073",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 308.86,
+      "y0": 271.26,
+      "x1": 545.12,
+      "y1": 303.81
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 482.6,
+       "y0": 271.26,
+       "x1": 545.12,
+       "y1": 279.9
+      },
+      {
+       "page": 10,
+       "x0": 308.86,
+       "y0": 283.03,
+       "x1": 545.11,
+       "y1": 291.84999999999997
+      },
+      {
+       "page": 10,
+       "x0": 308.86,
+       "y0": 295.17,
+       "x1": 491.29,
+       "y1": 303.81
+      }
+     ],
+     "quote": "We compare to a strong baseline implemented as a ViTDet [62] detector (with cascade Mask R-CNN [48,11] ViT-H).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "HED deep learning edge detection method",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 50.11,
+      "y0": 601.83,
+      "x1": 286.36,
+      "y1": 646.33
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 93.13,
+       "y0": 601.83,
+       "x1": 286.36,
+       "y1": 610.47
+      },
+      {
+       "page": 10,
+       "x0": 50.11,
+       "y0": 613.78,
+       "x1": 286.36,
+       "y1": 622.42
+      },
+      {
+       "page": 10,
+       "x0": 50.11,
+       "y0": 625.74,
+       "x1": 286.36,
+       "y1": 634.38
+      },
+      {
+       "page": 10,
+       "x0": 50.11,
+       "y0": 637.69,
+       "x1": 273.41,
+       "y1": 646.33
+      }
+     ],
+     "quote": "Nevertheless, SAM performs well compared to pioneering deep learning methods such as HED [108] (also trained on BSDS500) and significantly better than prior, though admittedly outdated, zero-shot transfer methods.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "mIoU (mean intersection-over-union)",
+   "evidence": [
+    {
+     "chunk_id": "b0058",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 308.86,
+      "y0": 449.81,
+      "x1": 545.11,
+      "y1": 506.27
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 423.12,
+       "y0": 449.81,
+       "x1": 545.11,
+       "y1": 458.45
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 461.76,
+       "x1": 545.11,
+       "y1": 470.4
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 473.72,
+       "x1": 545.11,
+       "y1": 482.36
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 485.67,
+       "x1": 545.11,
+       "y1": 494.31
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 497.63,
+       "x1": 368.74,
+       "y1": 506.27
+      }
+     ],
+     "quote": "We therefore supplement the standard mIoU metric (i.e., the mean of all IoUs between predicted and ground truth masks) with a human study in which annotators rate mask quality from 1 (nonsense) to 10 (pixel-perfect).",
+     "grounding_status": "verified",
+     "match_score": 98.1
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Human evaluation score from 1 to 10",
+   "evidence": [
+    {
+     "chunk_id": "b0058",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 308.86,
+      "y0": 449.81,
+      "x1": 545.11,
+      "y1": 506.27
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 423.12,
+       "y0": 449.81,
+       "x1": 545.11,
+       "y1": 458.45
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 461.76,
+       "x1": 545.11,
+       "y1": 470.4
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 473.72,
+       "x1": 545.11,
+       "y1": 482.36
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 485.67,
+       "x1": 545.11,
+       "y1": 494.31
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 497.63,
+       "x1": 368.74,
+       "y1": 506.27
+      }
+     ],
+     "quote": "We therefore supplement the standard mIoU metric (i.e., the mean of all IoUs between predicted and ground truth masks) with a human study in which annotators rate mask quality from 1 (nonsense) to 10 (pixel-perfect).",
+     "grounding_status": "verified",
+     "match_score": 98.1
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "Recall at 50% precision (R50)",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 50.11,
+      "y0": 554.0,
+      "x1": 286.36,
+      "y1": 586.55
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 137.43,
+       "y0": 554.0,
+       "x1": 286.36,
+       "y1": 562.64
+      },
+      {
+       "page": 10,
+       "x0": 50.11,
+       "y0": 565.96,
+       "x1": 286.36,
+       "y1": 574.6
+      },
+      {
+       "page": 10,
+       "x0": 50.11,
+       "y0": 577.91,
+       "x1": 89.12,
+       "y1": 586.55
+      }
+     ],
+     "quote": "This bias is reflected quantitatively in Table 3: recall at 50% precision (R50) is high, at the cost of precision.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "Average recall (AR) metric",
+   "evidence": [
+    {
+     "chunk_id": "b0073",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 308.86,
+      "y0": 247.35,
+      "x1": 545.12,
+      "y1": 267.94
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 320.82,
+       "y0": 247.35,
+       "x1": 545.12,
+       "y1": 255.99
+      },
+      {
+       "page": 10,
+       "x0": 308.86,
+       "y0": 259.3,
+       "x1": 364.65000000000003,
+       "y1": 267.94
+      }
+     ],
+     "quote": "We compute the standard average recall (AR) metric on LVIS v1 [44].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.4",
+   "value": "Mask average precision (AP) metric",
+   "evidence": [
+    {
+     "chunk_id": "b0077",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 308.86,
+      "y0": 596.92,
+      "x1": 545.11,
+      "y1": 629.47
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 484.08,
+       "y0": 596.92,
+       "x1": 545.11,
+       "y1": 605.56
+      },
+      {
+       "page": 10,
+       "x0": 308.86,
+       "y0": 608.87,
+       "x1": 545.11,
+       "y1": 617.51
+      },
+      {
+       "page": 10,
+       "x0": 308.86,
+       "y0": 620.83,
+       "x1": 545.11,
+       "y1": 629.47
+      }
+     ],
+     "quote": "Looking at the mask AP metric we observe gaps on both datasets, where SAM is reasonably close, though certainly behind ViTDet.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "AdamW optimizer with beta parameters",
+   "evidence": [
+    {
+     "chunk_id": "b0115",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 308.86,
+      "y0": 560.73,
+      "x1": 545.11,
+      "y1": 593.6
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 379.58,
+       "y0": 560.73,
+       "x1": 545.11,
+       "y1": 570.38
+      },
+      {
+       "page": 17,
+       "x0": 308.86,
+       "y0": 572.69,
+       "x1": 545.11,
+       "y1": 582.34
+      },
+      {
+       "page": 17,
+       "x0": 308.86,
+       "y0": 584.96,
+       "x1": 545.11,
+       "y1": 593.6
+      }
+     ],
+     "quote": "We use the AdamW [68] optimizer (β 1 = 0.9, β 2 = 0.999) and a linear learning rate warmup [42] for 250 iterations and a step-wise learning rate decay schedule.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "AdamW (β 1 = 0.9, β 2 = 0.999)",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Linear learning rate warmup for 250 iterations",
+   "evidence": [
+    {
+     "chunk_id": "b0115",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 308.86,
+      "y0": 560.73,
+      "x1": 545.11,
+      "y1": 593.6
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 379.58,
+       "y0": 560.73,
+       "x1": 545.11,
+       "y1": 570.38
+      },
+      {
+       "page": 17,
+       "x0": 308.86,
+       "y0": 572.69,
+       "x1": 545.11,
+       "y1": 582.34
+      },
+      {
+       "page": 17,
+       "x0": 308.86,
+       "y0": 584.96,
+       "x1": 545.11,
+       "y1": 593.6
+      }
+     ],
+     "quote": "We use the AdamW [68] optimizer (β 1 = 0.9, β 2 = 0.999) and a linear learning rate warmup [42] for 250 iterations and a step-wise learning rate decay schedule.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "warmup",
+   "value_raw": "250 iterations",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Initial learning rate after warmup is 8e-4",
+   "evidence": [
+    {
+     "chunk_id": "b0115",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 308.86,
+      "y0": 595.03,
+      "x1": 524.99,
+      "y1": 605.5600000000001
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 308.86,
+       "y0": 596.6,
+       "x1": 511.8,
+       "y1": 605.5600000000001
+      },
+      {
+       "page": 17,
+       "x0": 511.8,
+       "y0": 595.03,
+       "x1": 522.0,
+       "y1": 601.15
+      },
+      {
+       "page": 17,
+       "x0": 522.5,
+       "y0": 596.92,
+       "x1": 524.99,
+       "y1": 605.56
+      }
+     ],
+     "quote": "The initial learning rate (lr), after warmup, is 8e -4 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "8e -4",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Training iterations total 90k",
+   "evidence": [
+    {
+     "chunk_id": "b0115",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 308.86,
+      "y0": 596.92,
+      "x1": 545.11,
+      "y1": 641.42
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 532.08,
+       "y0": 596.92,
+       "x1": 545.11,
+       "y1": 605.56
+      },
+      {
+       "page": 17,
+       "x0": 308.86,
+       "y0": 608.87,
+       "x1": 545.11,
+       "y1": 617.51
+      },
+      {
+       "page": 17,
+       "x0": 308.86,
+       "y0": 620.65,
+       "x1": 545.11,
+       "y1": 629.47
+      },
+      {
+       "page": 17,
+       "x0": 308.86,
+       "y0": 632.78,
+       "x1": 342.89,
+       "y1": 641.42
+      }
+     ],
+     "quote": "We train for 90k iterations (∼2 SA-1B epochs) and decrease the lr by a factor of 10 at 60k iterations and again at 86666 iterations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs/steps",
+   "value_raw": "90k iterations",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Batch size of 256 images",
+   "evidence": [
+    {
+     "chunk_id": "b0115",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 345.97,
+      "y0": 632.78,
+      "x1": 463.1,
+      "y1": 641.42
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 345.97,
+       "y0": 632.78,
+       "x1": 463.1,
+       "y1": 641.42
+      }
+     ],
+     "quote": "The batch size is 256 images.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "256",
+   "value_norm": 256.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Weight decay set to 0.1",
+   "evidence": [
+    {
+     "chunk_id": "b0115",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 308.86,
+      "y0": 632.78,
+      "x1": 545.11,
+      "y1": 665.33
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 466.17,
+       "y0": 632.78,
+       "x1": 545.11,
+       "y1": 641.42
+      },
+      {
+       "page": 17,
+       "x0": 308.86,
+       "y0": 644.74,
+       "x1": 545.11,
+       "y1": 653.38
+      },
+      {
+       "page": 17,
+       "x0": 308.86,
+       "y0": 656.69,
+       "x1": 402.74,
+       "y1": 665.33
+      }
+     ],
+     "quote": "To regularize SAM, we set weight decay (wd) to 0.1 and apply drop path [53] (dp) with a rate of 0.4.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0116",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 50.11,
+      "y0": 218.98,
+      "x1": 286.37,
+      "y1": 239.75
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 230.56,
+       "y0": 218.98,
+       "x1": 286.37,
+       "y1": 227.79999999999998
+      },
+      {
+       "page": 18,
+       "x0": 50.11,
+       "y0": 230.93,
+       "x1": 202.87,
+       "y1": 239.75
+      }
+     ],
+     "quote": "wd = 0.1, and dp = 0.6/0.4 for ViT-B/L, respectively.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "0.1",
+   "value_norm": 0.1,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Drop path rate of 0.4",
+   "evidence": [
+    {
+     "chunk_id": "b0115",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 308.86,
+      "y0": 632.78,
+      "x1": 545.11,
+      "y1": 665.33
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 466.17,
+       "y0": 632.78,
+       "x1": 545.11,
+       "y1": 641.42
+      },
+      {
+       "page": 17,
+       "x0": 308.86,
+       "y0": 644.74,
+       "x1": 545.11,
+       "y1": 653.38
+      },
+      {
+       "page": 17,
+       "x0": 308.86,
+       "y0": 656.69,
+       "x1": 402.74,
+       "y1": 665.33
+      }
+     ],
+     "quote": "To regularize SAM, we set weight decay (wd) to 0.1 and apply drop path [53] (dp) with a rate of 0.4.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "drop path",
+   "value_raw": "0.4",
+   "value_norm": 0.4,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Layer-wise learning rate decay of 0.8",
+   "evidence": [
+    {
+     "chunk_id": "b0115",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 308.86,
+      "y0": 656.69,
+      "x1": 545.12,
+      "y1": 677.29
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 408.54,
+       "y0": 656.69,
+       "x1": 545.12,
+       "y1": 665.33
+      },
+      {
+       "page": 17,
+       "x0": 308.86,
+       "y0": 668.65,
+       "x1": 392.40000000000003,
+       "y1": 677.29
+      }
+     ],
+     "quote": "We use a layer-wise learning rate decay [5] (ld) of 0.8.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "layer-wise learning rate decay",
+   "value_raw": "0.8",
+   "value_norm": 0.8,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "MAE pre-trained ViT-H initialization",
+   "evidence": [
+    {
+     "chunk_id": "b0115",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 308.86,
+      "y0": 668.65,
+      "x1": 545.11,
+      "y1": 689.24
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 532.08,
+       "y0": 668.65,
+       "x1": 545.11,
+       "y1": 677.29
+      },
+      {
+       "page": 17,
+       "x0": 308.86,
+       "y0": 680.6,
+       "x1": 528.57,
+       "y1": 689.24
+      }
+     ],
+     "quote": "We initialize SAM from an MAE [47] pre-trained ViT-H.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "model size",
+   "value_raw": "ViT-H",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "180k iterations for ViT-B and ViT-L",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 50.11,
+      "y0": 195.24,
+      "x1": 286.37,
+      "y1": 227.79000000000002
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 143.89,
+       "y0": 195.24,
+       "x1": 286.37,
+       "y1": 203.88
+      },
+      {
+       "page": 18,
+       "x0": 50.11,
+       "y0": 207.2,
+       "x1": 286.36,
+       "y1": 215.83999999999997
+      },
+      {
+       "page": 18,
+       "x0": 50.11,
+       "y0": 219.15,
+       "x1": 76.4,
+       "y1": 227.79000000000002
+      }
+     ],
+     "quote": "To train ViT-B and ViT-L, we use 180k iterations with batch size 128 distributed across 128 GPUs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs/steps",
+   "value_raw": "180k iterations",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.10",
+   "value": "Batch size 128 for ViT-B and ViT-L",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 50.11,
+      "y0": 195.24,
+      "x1": 286.37,
+      "y1": 227.79000000000002
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 143.89,
+       "y0": 195.24,
+       "x1": 286.37,
+       "y1": 203.88
+      },
+      {
+       "page": 18,
+       "x0": 50.11,
+       "y0": 207.2,
+       "x1": 286.36,
+       "y1": 215.83999999999997
+      },
+      {
+       "page": 18,
+       "x0": 50.11,
+       "y0": 219.15,
+       "x1": 76.4,
+       "y1": 227.79000000000002
+      }
+     ],
+     "quote": "To train ViT-B and ViT-L, we use 180k iterations with batch size 128 distributed across 128 GPUs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0151",
+     "page": 22,
+     "bbox": {
+      "page": 22,
+      "x0": 50.11,
+      "y0": 533.03,
+      "x1": 286.36,
+      "y1": 553.63
+     },
+     "boxes": [
+      {
+       "page": 22,
+       "x0": 157.86,
+       "y0": 533.03,
+       "x1": 286.36,
+       "y1": 541.67
+      },
+      {
+       "page": 22,
+       "x0": 50.11,
+       "y0": 544.99,
+       "x1": 270.07,
+       "y1": 553.63
+      }
+     ],
+     "quote": "We train this model with largescale jitter [40] for 120k iterations with batch size 128.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "128",
+   "value_norm": 128.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.11",
+   "value": "Learning rate for ViT-B/L is 8e-4/4e-4",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 80.87,
+      "y0": 217.26,
+      "x1": 227.5,
+      "y1": 227.8
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 80.87,
+       "y0": 218.84,
+       "x1": 138.67000000000002,
+       "y1": 227.8
+      },
+      {
+       "page": 18,
+       "x0": 138.66,
+       "y0": 217.26,
+       "x1": 148.85999999999999,
+       "y1": 223.38
+      },
+      {
+       "page": 18,
+       "x0": 149.36,
+       "y0": 219.15,
+       "x1": 161.54000000000002,
+       "y1": 227.79000000000002
+      },
+      {
+       "page": 18,
+       "x0": 161.54,
+       "y0": 217.26,
+       "x1": 171.73999999999998,
+       "y1": 223.38
+      },
+      {
+       "page": 18,
+       "x0": 172.24,
+       "y0": 218.98,
+       "x1": 227.5,
+       "y1": 227.79999999999998
+      }
+     ],
+     "quote": "We set lr = 8e -4 /4e -4 , ld = 0.6/0.8,",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "8e -4 /4e -4",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.12",
+   "value": "Layer-wise decay for ViT-B/L is 0.6/0.8",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 80.87,
+      "y0": 217.26,
+      "x1": 227.5,
+      "y1": 227.8
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 80.87,
+       "y0": 218.84,
+       "x1": 138.67000000000002,
+       "y1": 227.8
+      },
+      {
+       "page": 18,
+       "x0": 138.66,
+       "y0": 217.26,
+       "x1": 148.85999999999999,
+       "y1": 223.38
+      },
+      {
+       "page": 18,
+       "x0": 149.36,
+       "y0": 219.15,
+       "x1": 161.54000000000002,
+       "y1": 227.79000000000002
+      },
+      {
+       "page": 18,
+       "x0": 161.54,
+       "y0": 217.26,
+       "x1": 171.73999999999998,
+       "y1": 223.38
+      },
+      {
+       "page": 18,
+       "x0": 172.24,
+       "y0": 218.98,
+       "x1": 227.5,
+       "y1": 227.79999999999998
+      }
+     ],
+     "quote": "We set lr = 8e -4 /4e -4 , ld = 0.6/0.8,",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "layer-wise learning rate decay",
+   "value_raw": "0.6/0.8",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.13",
+   "value": "Drop path rate for ViT-B/L is 0.6/0.4",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 50.11,
+      "y0": 218.98,
+      "x1": 286.37,
+      "y1": 239.75
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 230.56,
+       "y0": 218.98,
+       "x1": 286.37,
+       "y1": 227.79999999999998
+      },
+      {
+       "page": 18,
+       "x0": 50.11,
+       "y0": 230.93,
+       "x1": 202.87,
+       "y1": 239.75
+      }
+     ],
+     "quote": "wd = 0.1, and dp = 0.6/0.4 for ViT-B/L, respectively.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "drop path",
+   "value_raw": "0.6/0.4",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.14",
+   "value": "Large-scale jitter for training with first two stages",
+   "evidence": [
+    {
+     "chunk_id": "b0151",
+     "page": 22,
+     "bbox": {
+      "page": 22,
+      "x0": 50.11,
+      "y0": 533.03,
+      "x1": 286.36,
+      "y1": 553.63
+     },
+     "boxes": [
+      {
+       "page": 22,
+       "x0": 157.86,
+       "y0": 533.03,
+       "x1": 286.36,
+       "y1": 541.67
+      },
+      {
+       "page": 22,
+       "x0": 50.11,
+       "y0": 544.99,
+       "x1": 270.07,
+       "y1": 553.63
+      }
+     ],
+     "quote": "We train this model with largescale jitter [40] for 120k iterations with batch size 128.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "data augmentation",
+   "value_raw": "largescale jitter",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.15",
+   "value": "120k iterations for model trained with first two stages",
+   "evidence": [
+    {
+     "chunk_id": "b0151",
+     "page": 22,
+     "bbox": {
+      "page": 22,
+      "x0": 50.11,
+      "y0": 533.03,
+      "x1": 286.36,
+      "y1": 553.63
+     },
+     "boxes": [
+      {
+       "page": 22,
+       "x0": 157.86,
+       "y0": 533.03,
+       "x1": 286.36,
+       "y1": 541.67
+      },
+      {
+       "page": 22,
+       "x0": 50.11,
+       "y0": 544.99,
+       "x1": 270.07,
+       "y1": 553.63
+      }
+     ],
+     "quote": "We train this model with largescale jitter [40] for 120k iterations with batch size 128.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs/steps",
+   "value_raw": "120k iterations",
+   "value_norm": null,
+   "scope": ""
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Training distributed across 256 GPUs",
+   "evidence": [
+    {
+     "chunk_id": "b0115",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 308.86,
+      "y0": 680.6,
+      "x1": 545.11,
+      "y1": 713.16
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 532.08,
+       "y0": 680.6,
+       "x1": 545.11,
+       "y1": 689.24
+      },
+      {
+       "page": 17,
+       "x0": 308.86,
+       "y0": 692.56,
+       "x1": 545.11,
+       "y1": 701.1999999999999
+      },
+      {
+       "page": 17,
+       "x0": 308.86,
+       "y0": 704.52,
+       "x1": 455.39,
+       "y1": 713.16
+      }
+     ],
+     "quote": "We distribute training across 256 GPUs, due to the large image encoder and 1024×1024 input size.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.1",
+   "value": "Training with up to 64 randomly sampled masks per GPU",
+   "evidence": [
+    {
+     "chunk_id": "b0115",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 461.93,
+      "y0": 704.52,
+      "x1": 545.12,
+      "y1": 713.16
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 461.93,
+       "y0": 704.52,
+       "x1": 545.12,
+       "y1": 713.16
+      },
+      {
+       "page": 18,
+       "x0": 50.11,
+       "y0": 75.48,
+       "x1": 286.36,
+       "y1": 84.12
+      },
+      {
+       "page": 18,
+       "x0": 50.11,
+       "y0": 87.43,
+       "x1": 87.94,
+       "y1": 96.07000000000001
+      }
+     ],
+     "quote": "To limit GPU mem-ory usage, we train with up to 64 randomly sampled masks per GPU.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.2",
+   "value": "Training ViT-B and ViT-L distributed across 128 GPUs",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 50.11,
+      "y0": 195.24,
+      "x1": 286.37,
+      "y1": 227.79000000000002
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 143.89,
+       "y0": 195.24,
+       "x1": 286.37,
+       "y1": 203.88
+      },
+      {
+       "page": 18,
+       "x0": 50.11,
+       "y0": 207.2,
+       "x1": 286.36,
+       "y1": 215.83999999999997
+      },
+      {
+       "page": 18,
+       "x0": 50.11,
+       "y0": 219.15,
+       "x1": 76.4,
+       "y1": 227.79000000000002
+      }
+     ],
+     "quote": "To train ViT-B and ViT-L, we use 180k iterations with batch size 128 distributed across 128 GPUs.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation on training with cumulative data from data engine stages versus automatically generated masks only",
+   "evidence": [
+    {
+     "chunk_id": "b0088",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 308.86,
+      "y0": 477.37,
+      "x1": 545.12,
+      "y1": 497.96
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 320.82,
+       "y0": 477.37,
+       "x1": 545.12,
+       "y1": 486.01
+      },
+      {
+       "page": 11,
+       "x0": 308.86,
+       "y0": 489.32,
+       "x1": 491.72,
+       "y1": 497.96
+      }
+     ],
+     "quote": "Fig. 13 (left) plots SAM's performance when trained on cumulative data from the data engine stages.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Ablation on data volume using 11M, 1M, and 0.1M images",
+   "evidence": [
+    {
+     "chunk_id": "b0089",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 320.82,
+      "y0": 620.83,
+      "x1": 545.12,
+      "y1": 629.47
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 320.82,
+       "y0": 620.83,
+       "x1": 545.12,
+       "y1": 629.47
+      }
+     ],
+     "quote": "In Fig. 13 (middle) we look at the impact of data volume.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.2",
+   "value": "Ablation on image encoder scaling using ViT-B, ViT-L, and ViT-H",
+   "evidence": [
+    {
+     "chunk_id": "b0089",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 50.11,
+      "y0": 191.99,
+      "x1": 545.12,
+      "y1": 212.58999999999997
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 427.32,
+       "y0": 191.99,
+       "x1": 545.12,
+       "y1": 200.63
+      },
+      {
+       "page": 12,
+       "x0": 50.11,
+       "y0": 203.95,
+       "x1": 241.56,
+       "y1": 212.58999999999997
+      }
+     ],
+     "quote": "(Right) Scaling SAM's image encoder shows meaningful, yet saturating gains.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "SAM is not perfect and can miss fine structures or hallucinate small components.",
+   "evidence": [
+    {
+     "chunk_id": "b0095",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 308.86,
+      "y0": 228.92,
+      "x1": 545.11,
+      "y1": 249.51
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 367.56,
+       "y0": 228.92,
+       "x1": 545.11,
+       "y1": 237.56
+      },
+      {
+       "page": 12,
+       "x0": 308.86,
+       "y0": 240.87,
+       "x1": 355.14,
+       "y1": 249.51
+      }
+     ],
+     "quote": "While SAM performs well in general, it is not perfect.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.1",
+   "value": "SAM's overall performance is not real-time when using a heavy image encoder.",
+   "evidence": [
+    {
+     "chunk_id": "b0095",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 308.86,
+      "y0": 324.56,
+      "x1": 545.12,
+      "y1": 369.07
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 520.22,
+       "y0": 324.56,
+       "x1": 545.12,
+       "y1": 333.2
+      },
+      {
+       "page": 12,
+       "x0": 308.86,
+       "y0": 336.52,
+       "x1": 545.11,
+       "y1": 345.15999999999997
+      },
+      {
+       "page": 12,
+       "x0": 308.86,
+       "y0": 348.47,
+       "x1": 545.11,
+       "y1": 357.11
+      },
+      {
+       "page": 12,
+       "x0": 308.86,
+       "y0": 360.43,
+       "x1": 401.07,
+       "y1": 369.07
+      }
+     ],
+     "quote": "Moreover, SAM can process prompts in real-time, but nevertheless SAM's overall performance is not real-time when using a heavy image encoder.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.2",
+   "value": "The text-to-mask task is exploratory and not entirely robust.",
+   "evidence": [
+    {
+     "chunk_id": "b0095",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 308.86,
+      "y0": 360.43,
+      "x1": 545.11,
+      "y1": 392.97999999999996
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 404.04,
+       "y0": 360.43,
+       "x1": 545.11,
+       "y1": 369.07
+      },
+      {
+       "page": 12,
+       "x0": 308.86,
+       "y0": 372.38,
+       "x1": 545.11,
+       "y1": 381.02
+      },
+      {
+       "page": 12,
+       "x0": 308.86,
+       "y0": 384.34,
+       "x1": 455.98,
+       "y1": 392.97999999999996
+      }
+     ],
+     "quote": "Our foray into the text-to-mask task is exploratory and not entirely robust, although we believe it can be improved with more effort.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.3",
+   "value": "Some geographic regions and economic groups are underrepresented in SA-1B.",
+   "evidence": [
+    {
+     "chunk_id": "b0317",
+     "page": 28,
+     "bbox": {
+      "page": 28,
+      "x0": 167.76,
+      "y0": 509.45,
+      "x1": 507.92,
+      "y1": 524.3000000000001
+     },
+     "boxes": [
+      {
+       "page": 28,
+       "x0": 167.76,
+       "y0": 509.45,
+       "x1": 507.92,
+       "y1": 515.93
+      },
+      {
+       "page": 28,
+       "x0": 167.76,
+       "y0": 517.82,
+       "x1": 321.61,
+       "y1": 524.3000000000001
+      }
+     ],
+     "quote": "While SA-1B is more geographically diverse than many of its predecessors, we acknowledge that some geographic regions and economic groups are underrepresented.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "future_work": [],
+ "ethics": [
+  {
+   "id": "ethics.0",
+   "value": "Biases may arise when SAM is used as a component in larger systems.",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 565.46,
+      "x1": 286.37,
+      "y1": 598.01
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 86.43,
+       "y0": 565.46,
+       "x1": 286.37,
+       "y1": 574.1
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 577.41,
+       "x1": 286.36,
+       "y1": 586.05
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 589.37,
+       "x1": 209.85000000000002,
+       "y1": 598.01
+      }
+     ],
+     "quote": "We believe our findings stem from the nature of the task, and acknowledge biases may arise when SAM is used as a component in larger systems.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.1",
+   "value": "Images were filtered for objectionable content by the provider, but false negatives are possible.",
+   "evidence": [
+    {
+     "chunk_id": "b0316",
+     "page": 28,
+     "bbox": {
+      "page": 28,
+      "x0": 167.76,
+      "y0": 492.71,
+      "x1": 507.91999999999996,
+      "y1": 507.56
+     },
+     "boxes": [
+      {
+       "page": 28,
+       "x0": 283.34,
+       "y0": 492.71,
+       "x1": 507.91999999999996,
+       "y1": 499.19
+      },
+      {
+       "page": 28,
+       "x0": 167.76,
+       "y0": 501.08,
+       "x1": 308.42999999999995,
+       "y1": 507.56
+      }
+     ],
+     "quote": "The images were filtered for objectionable content by the provider, but we acknowledge the possibility of false negatives.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.2",
+   "value": "Training large models incurs environmental impact and cost.",
+   "evidence": [
+    {
+     "chunk_id": "b0317",
+     "page": 28,
+     "bbox": {
+      "page": 28,
+      "x0": 167.76,
+      "y0": 526.19,
+      "x1": 507.92,
+      "y1": 541.04
+     },
+     "boxes": [
+      {
+       "page": 28,
+       "x0": 321.68,
+       "y0": 526.19,
+       "x1": 507.92,
+       "y1": 532.6700000000001
+      },
+      {
+       "page": 28,
+       "x0": 167.76,
+       "y0": 534.56,
+       "x1": 225.64999999999998,
+       "y1": 541.04
+      }
+     ],
+     "quote": "We acknowledge the environmental impact and cost of training large scale models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.3",
+   "value": "Users should run their own fairness evaluations for specific downstream use cases.",
+   "evidence": [
+    {
+     "chunk_id": "b0319",
+     "page": 28,
+     "bbox": {
+      "page": 28,
+      "x0": 167.76,
+      "y0": 584.77,
+      "x1": 507.91999999999996,
+      "y1": 599.62
+     },
+     "boxes": [
+      {
+       "page": 28,
+       "x0": 236.98,
+       "y0": 584.77,
+       "x1": 507.91999999999996,
+       "y1": 591.25
+      },
+      {
+       "page": 28,
+       "x0": 167.76,
+       "y0": 593.14,
+       "x1": 219.01,
+       "y1": 599.62
+      }
+     ],
+     "quote": "As such we recommend users run their own fairness evaluation when using SAM for their specific use case.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/serengil/retinaface",
+   "evidence": [
+    {
+     "chunk_id": "b0212",
+     "page": 26,
+     "bbox": {
+      "page": 26,
+      "x0": 247.49,
+      "y0": 77.1,
+      "x1": 545.12,
+      "y1": 712.62
+     },
+     "boxes": [
+      {
+       "page": 26,
+       "x0": 247.49,
+       "y0": 706.14,
+       "x1": 286.36,
+       "y1": 712.62
+      },
+      {
+       "page": 26,
+       "x0": 320.2,
+       "y0": 77.1,
+       "x1": 404.28999999999996,
+       "y1": 83.58
+      },
+      {
+       "page": 26,
+       "x0": 514.94,
+       "y0": 77.1,
+       "x1": 545.12,
+       "y1": 83.58
+      },
+      {
+       "page": 26,
+       "x0": 320.2,
+       "y0": 85.47,
+       "x1": 337.34,
+       "y1": 91.95
+      }
+     ],
+     "quote": "We used the RetinaFace [88,89] model (https://github.com/serengil/retinaface) to detect faces.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/facebookresearch/segment-anything",
+   "evidence": [
+    {
+     "chunk_id": "b0298",
+     "page": 28,
+     "bbox": {
+      "page": 28,
+      "x0": 330.47,
+      "y0": 198.52,
+      "x1": 507.92,
+      "y1": 213.36999999999998
+     },
+     "boxes": [
+      {
+       "page": 28,
+       "x0": 352.3,
+       "y0": 198.52,
+       "x1": 507.92,
+       "y1": 205.0
+      },
+      {
+       "page": 28,
+       "x0": 330.47,
+       "y0": 206.89,
+       "x1": 333.6,
+       "y1": 213.36999999999998
+      }
+     ],
+     "quote": "The license for SAM can be found at https://github.com/facebookresearch/segment-anything.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "SAM produces high-quality masks from a single foreground point across 23 diverse segmentation datasets.",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 308.86,
+      "y0": 496.45,
+      "x1": 545.11,
+      "y1": 552.91
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 510.03,
+       "y0": 496.45,
+       "x1": 545.11,
+       "y1": 505.09
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 508.4,
+       "x1": 545.11,
+       "y1": 517.04
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 520.36,
+       "x1": 545.11,
+       "y1": 529.0
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 532.31,
+       "x1": 545.11,
+       "y1": 540.9499999999999
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 544.27,
+       "x1": 422.29,
+       "y1": 552.91
+      }
+     ],
+     "quote": "First, using a diverse new suite of 23 segmentation datasets, we find that SAM produces high-quality masks from a single foreground point, often only slightly below that of the manually annotated ground truth.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "SA-1B has 400 times more masks than any existing segmentation dataset.",
+   "evidence": [
+    {
+     "chunk_id": "b0015",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 308.86,
+      "y0": 319.41,
+      "x1": 545.12,
+      "y1": 375.87
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 382.11,
+       "y0": 319.41,
+       "x1": 545.12,
+       "y1": 328.05
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 331.37,
+       "x1": 545.11,
+       "y1": 340.01
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 343.32,
+       "x1": 545.11,
+       "y1": 351.96
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 355.28,
+       "x1": 545.11,
+       "y1": 363.91999999999996
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 367.23,
+       "x1": 362.41,
+       "y1": 375.87
+      }
+     ],
+     "quote": "SA-1B, collected fully automatically using the final stage of our data engine, has 400× more masks than any existing segmentation dataset [66,44,117,60], and as we verify extensively, the masks are of high quality and diversity.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "The prompt encoder and mask decoder can predict a mask from a prompt in about 50 milliseconds.",
+   "evidence": [
+    {
+     "chunk_id": "b0012",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 50.11,
+      "y0": 632.78,
+      "x1": 286.36,
+      "y1": 665.33
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 632.78,
+       "x1": 286.36,
+       "y1": 641.42
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 644.74,
+       "x1": 286.36,
+       "y1": 653.38
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 656.69,
+       "x1": 83.89,
+       "y1": 665.33
+      }
+     ],
+     "quote": "Given an image embedding, the prompt encoder and mask decoder predict a mask from a prompt in ∼50ms in a web browser.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.3",
+   "value": "SAM demonstrates consistently strong quantitative and qualitative results on various downstream tasks under a zero-shot transfer protocol.",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 308.86,
+      "y0": 544.27,
+      "x1": 545.11,
+      "y1": 612.68
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 428.12,
+       "y0": 544.27,
+       "x1": 545.11,
+       "y1": 552.91
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 556.22,
+       "x1": 545.11,
+       "y1": 564.86
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 568.18,
+       "x1": 545.11,
+       "y1": 576.8199999999999
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 580.13,
+       "x1": 545.11,
+       "y1": 588.77
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 592.09,
+       "x1": 545.11,
+       "y1": 600.73
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 604.04,
+       "x1": 465.63,
+       "y1": 612.68
+      }
+     ],
+     "quote": "Second, we find consistently strong quantitative and qualitative results on a variety of downstream tasks under a zero-shot transfer protocol using prompt engineering, including edge detection, object proposal generation, instance segmentation, and a preliminary exploration of text-to-mask prediction.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

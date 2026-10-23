@@ -1,0 +1,2952 @@
+{
+ "metadata": {
+  "title": "DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models",
+  "authors": [
+   "Zhihong Shao",
+   "Peiyi Wang",
+   "Qihao Zhu",
+   "Runxin Xu",
+   "Junxiao Song",
+   "Xiao Bi",
+   "Haowei Zhang",
+   "Mingchuan Zhang",
+   "Y K Li",
+   "Y Wu",
+   "Daya Guo"
+  ],
+  "venue": null,
+  "year": "2024",
+  "arxiv_id": "2402.03300v3[cs.CL]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Mathematical reasoning presents a major challenge for language models due to its structured and complex nature.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 70.87,
+      "y0": 331.95,
+      "x1": 524.7,
+      "y1": 356.84000000000003
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 331.95,
+       "x1": 524.7,
+       "y1": 342.49
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 346.3,
+       "x1": 182.25,
+       "y1": 356.84000000000003
+      }
+     ],
+     "quote": "Mathematical reasoning poses a significant challenge for language models due to its complex and structured nature.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Top models like GPT-4 and Gemini-Ultra are closed-source, while accessible open-source models trail significantly in performance.",
+   "evidence": [
+    {
+     "chunk_id": "b0005",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 70.87,
+      "y0": 168.08,
+      "x1": 525.77,
+      "y1": 205.67000000000002
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 250.72,
+       "y0": 168.08,
+       "x1": 525.77,
+       "y1": 178.57000000000002
+      },
+      {
+       "page": 2,
+       "x0": 70.87,
+       "y0": 181.63,
+       "x1": 524.4100000000001,
+       "y1": 192.12
+      },
+      {
+       "page": 2,
+       "x0": 70.87,
+       "y0": 195.18,
+       "x1": 370.66,
+       "y1": 205.67000000000002
+      }
+     ],
+     "quote": "However, cutting-edge models such as GPT-4 (OpenAI, 2023) and Gemini-Ultra (Anil et al., 2023) are not publicly available, and the currently accessible open-source models considerably trail behind in performance.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "The authors introduce DeepSeekMath 7B, trained on a large math-related corpus using code pretraining and a data selection pipeline.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 70.87,
+      "y0": 346.3,
+      "x1": 526.23,
+      "y1": 385.53000000000003
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 187.03,
+       "y0": 346.3,
+       "x1": 526.23,
+       "y1": 356.84000000000003
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 360.64,
+       "x1": 524.4100000000001,
+       "y1": 371.18
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 374.99,
+       "x1": 342.37,
+       "y1": 385.53000000000003
+      }
+     ],
+     "quote": "In this paper, we introduce DeepSeekMath 7B, which continues pretraining DeepSeek-Coder-Base-v1.5 7B with 120B math-related tokens sourced from Common Crawl, together with natural language and code data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "The authors propose Group Relative Policy Optimization (GRPO), a memory-efficient variant of PPO for reinforcement learning.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 70.5,
+      "y0": 461.07,
+      "x1": 524.41,
+      "y1": 500.3
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 242.66,
+       "y0": 461.07,
+       "x1": 524.41,
+       "y1": 471.61
+      },
+      {
+       "page": 1,
+       "x0": 70.5,
+       "y0": 475.41,
+       "x1": 524.4,
+       "y1": 485.95000000000005
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 489.76,
+       "x1": 391.19,
+       "y1": 500.3
+      }
+     ],
+     "quote": "Second, we introduce Group Relative Policy Optimization (GRPO), a variant of Proximal Policy Optimization (PPO), that enhances mathematical reasoning abilities while concurrently optimizing the memory usage of PPO.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "The research contribution includes scalable math pre-training and the exploration and analysis of reinforcement learning.",
+   "evidence": [
+    {
+     "chunk_id": "b0011",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 70.87,
+      "y0": 171.11,
+      "x1": 524.4100000000001,
+      "y1": 195.15
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 70.87,
+       "y0": 171.11,
+       "x1": 524.4100000000001,
+       "y1": 181.60000000000002
+      },
+      {
+       "page": 3,
+       "x0": 70.87,
+       "y0": 184.66,
+       "x1": 183.82,
+       "y1": 195.15
+      }
+     ],
+     "quote": "Our contribution includes scalable math pre-training, along with the exploration and analysis of reinforcement learning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "mathematical reasoning",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 70.87,
+      "y0": 331.95,
+      "x1": 524.7,
+      "y1": 356.84000000000003
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 331.95,
+       "x1": 524.7,
+       "y1": 342.49
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 346.3,
+       "x1": 182.25,
+       "y1": 356.84000000000003
+      }
+     ],
+     "quote": "Mathematical reasoning poses a significant challenge for language models due to its complex and structured nature.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "An iterative pipeline is used to build the DeepSeekMath Corpus from Common Crawl, starting with a seed corpus and training a fastText model to gather math web pages over four iterations.",
+   "evidence": [
+    {
+     "chunk_id": "b0021",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 70.41,
+      "y0": 593.41,
+      "x1": 524.4100000000001,
+      "y1": 631.0
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 156.92,
+       "y0": 593.41,
+       "x1": 524.41,
+       "y1": 603.9
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 606.96,
+       "x1": 524.4100000000001,
+       "y1": 617.45
+      },
+      {
+       "page": 4,
+       "x0": 70.41,
+       "y0": 620.51,
+       "x1": 474.20000000000005,
+       "y1": 631.0
+      }
+     ],
+     "quote": "As depicted in Figure 2, we present an iterative pipeline that demonstrates how to systematically gather a large-scale mathematical corpus from Common Crawl, starting with a seed corpus (e.g., a small but high-quality collection of math-related dataset).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "To prevent benchmark contamination, web pages containing 10-gram strings (or 3-to-9-gram exact matches) matching evaluation benchmarks are filtered out from the math training corpus.",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 70.87,
+      "y0": 676.04,
+      "x1": 524.83,
+      "y1": 713.63
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 327.97,
+       "y0": 676.04,
+       "x1": 524.83,
+       "y1": 686.53
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 689.59,
+       "x1": 524.4200000000001,
+       "y1": 700.08
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 703.14,
+       "x1": 398.55,
+       "y1": 713.63
+      }
+     ],
+     "quote": "The filtering criteria are as follows: any text segment containing a 10-gram string that matches exactly with any sub-string from the evaluation benchmarks is removed from our math training corpus.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "DeepSeekMath-Base 7B is initialized with DeepSeek-Coder-Base-v1.5 7B and trained for 500B tokens on a mix of DeepSeekMath Corpus, AlgebraicStack, arXiv, GitHub code, and natural language data.",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 241.49,
+      "y0": 740.92,
+      "x1": 524.4100000000001,
+      "y1": 751.41
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 241.49,
+       "y0": 740.92,
+       "x1": 524.4100000000001,
+       "y1": 751.41
+      },
+      {
+       "page": 8,
+       "x0": 70.51,
+       "y0": 88.58,
+       "x1": 295.41,
+       "y1": 99.07
+      }
+     ],
+     "quote": "Our model is initialized with DeepSeek-Coder-Base-v1.5 7B (Guo et al., 2024) and trained for 500B tokens.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "Mathematical instruction-tuning is performed on DeepSeekMath-Base using a dataset of 776K examples covering chain-of-thought, program-of-thought, and tool-integrated reasoning formats.",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 70.87,
+      "y0": 479.48,
+      "x1": 526.22,
+      "y1": 503.52
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 70.87,
+       "y0": 479.48,
+       "x1": 526.22,
+       "y1": 489.97
+      },
+      {
+       "page": 10,
+       "x0": 70.87,
+       "y0": 493.03,
+       "x1": 273.86,
+       "y1": 503.52
+      }
+     ],
+     "quote": "In this section, we introduce DeepSeekMath-Instruct 7B which undergoes mathematical instruction tuning based on DeepSeekMath-Base.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "Group Relative Policy Optimization (GRPO) is proposed as a reinforcement learning algorithm that eliminates the need for a separate value function by using the average reward of multiple sampled outputs as the baseline.",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 70.87,
+      "y0": 526.86,
+      "x1": 524.8399999999999,
+      "y1": 577.99
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 182.0,
+       "y0": 526.86,
+       "x1": 524.8399999999999,
+       "y1": 537.35
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 540.41,
+       "x1": 524.4200000000001,
+       "y1": 550.9
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 553.95,
+       "x1": 524.4100000000001,
+       "y1": 564.44
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 567.5,
+       "x1": 252.0,
+       "y1": 577.99
+      }
+     ],
+     "quote": "To address this, as shown in Figure 4, we propose Group Relative Policy Optimization (GRPO), which obviates the need for additional value function approximation as in PPO, and instead uses the average reward of multiple sampled outputs, produced in response to the same question, as the baseline.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "GRPO avoids the memory and computational burden of approximating a separate value function in PPO by using the average reward of multiple sampled outputs for the same question as the baseline.",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 70.87,
+      "y0": 526.86,
+      "x1": 524.8399999999999,
+      "y1": 577.99
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 182.0,
+       "y0": 526.86,
+       "x1": 524.8399999999999,
+       "y1": 537.35
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 540.41,
+       "x1": 524.4200000000001,
+       "y1": 550.9
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 553.95,
+       "x1": 524.4100000000001,
+       "y1": 564.44
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 567.5,
+       "x1": 252.0,
+       "y1": 577.99
+      }
+     ],
+     "quote": "To address this, as shown in Figure 4, we propose Group Relative Policy Optimization (GRPO), which obviates the need for additional value function approximation as in PPO, and instead uses the average reward of multiple sampled outputs, produced in response to the same question, as the baseline.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "OpenWebMath dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0022",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 70.41,
+      "y0": 654.38,
+      "x1": 524.41,
+      "y1": 678.42
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 87.8,
+       "y0": 654.38,
+       "x1": 524.41,
+       "y1": 664.87
+      },
+      {
+       "page": 4,
+       "x0": 70.41,
+       "y0": 667.93,
+       "x1": 245.68,
+       "y1": 678.42
+      }
+     ],
+     "quote": "First, we choose OpenWebMath (Paster et al., 2023), a collection of high-quality mathematical web texts, as our initial seed corpus.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "OpenWebMath",
+   "split": "",
+   "size": "13.6B",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "Common Crawl dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0022",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 70.87,
+      "y0": 681.48,
+      "x1": 524.84,
+      "y1": 719.07
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 398.31,
+       "y0": 681.48,
+       "x1": 524.84,
+       "y1": 691.97
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 695.03,
+       "x1": 524.63,
+       "y1": 705.52
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 708.58,
+       "x1": 350.93,
+       "y1": 719.07
+      }
+     ],
+     "quote": "Specifically, we randomly select 500,000 data points from the seed corpus as positive training examples and another 500,000 web pages from Common Crawl as negative ones.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "Common Crawl",
+   "split": "",
+   "size": "40B HTML pages",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "DeepSeekMath Corpus",
+   "evidence": [
+    {
+     "chunk_id": "b0023",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 70.87,
+      "y0": 574.42,
+      "x1": 524.62,
+      "y1": 612.01
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 474.33,
+       "y0": 574.42,
+       "x1": 524.62,
+       "y1": 584.91
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 587.97,
+       "x1": 524.4200000000001,
+       "y1": 598.46
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 601.52,
+       "x1": 105.27000000000001,
+       "y1": 612.01
+      }
+     ],
+     "quote": "After four iterations of data collection, we end up with 35.5M mathematical web pages, totaling 120B tokens.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "DeepSeekMath Corpus",
+   "split": "",
+   "size": "120.2B",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "AlgebraicStack",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 70.87,
+      "y0": 88.58,
+      "x1": 525.33,
+      "y1": 139.72
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 299.43,
+       "y0": 88.58,
+       "x1": 525.33,
+       "y1": 99.07
+      },
+      {
+       "page": 8,
+       "x0": 70.87,
+       "y0": 102.13,
+       "x1": 524.4200000000001,
+       "y1": 112.61999999999999
+      },
+      {
+       "page": 8,
+       "x0": 70.87,
+       "y0": 115.68,
+       "x1": 524.4100000000001,
+       "y1": 126.17
+      },
+      {
+       "page": 8,
+       "x0": 70.87,
+       "y0": 129.23,
+       "x1": 112.53,
+       "y1": 139.72
+      }
+     ],
+     "quote": "The distribution of the data is as follows: 56% is from the DeepSeekMath Corpus, 4% from AlgebraicStack, 10% from arXiv, 20% is Github code, and the remaining 10% is natural language data from Common Crawl in both English and Chinese.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "AlgebraicStack",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "arXiv",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 70.87,
+      "y0": 88.58,
+      "x1": 525.33,
+      "y1": 139.72
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 299.43,
+       "y0": 88.58,
+       "x1": 525.33,
+       "y1": 99.07
+      },
+      {
+       "page": 8,
+       "x0": 70.87,
+       "y0": 102.13,
+       "x1": 524.4200000000001,
+       "y1": 112.61999999999999
+      },
+      {
+       "page": 8,
+       "x0": 70.87,
+       "y0": 115.68,
+       "x1": 524.4100000000001,
+       "y1": 126.17
+      },
+      {
+       "page": 8,
+       "x0": 70.87,
+       "y0": 129.23,
+       "x1": 112.53,
+       "y1": 139.72
+      }
+     ],
+     "quote": "The distribution of the data is as follows: 56% is from the DeepSeekMath Corpus, 4% from AlgebraicStack, 10% from arXiv, 20% is Github code, and the remaining 10% is natural language data from Common Crawl in both English and Chinese.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "arXiv",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "Github code",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 70.87,
+      "y0": 88.58,
+      "x1": 525.33,
+      "y1": 139.72
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 299.43,
+       "y0": 88.58,
+       "x1": 525.33,
+       "y1": 99.07
+      },
+      {
+       "page": 8,
+       "x0": 70.87,
+       "y0": 102.13,
+       "x1": 524.4200000000001,
+       "y1": 112.61999999999999
+      },
+      {
+       "page": 8,
+       "x0": 70.87,
+       "y0": 115.68,
+       "x1": 524.4100000000001,
+       "y1": 126.17
+      },
+      {
+       "page": 8,
+       "x0": 70.87,
+       "y0": 129.23,
+       "x1": 112.53,
+       "y1": 139.72
+      }
+     ],
+     "quote": "The distribution of the data is as follows: 56% is from the DeepSeekMath Corpus, 4% from AlgebraicStack, 10% from arXiv, 20% is Github code, and the remaining 10% is natural language data from Common Crawl in both English and Chinese.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "Github",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.6",
+   "value": "MathPile",
+   "evidence": [
+    {
+     "chunk_id": "b0136",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 75.95338439941406,
+      "y0": 517.0587768554688,
+      "x1": 519.32373046875,
+      "y1": 528.7371215820312
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 75.95338439941406,
+       "y0": 517.0587768554688,
+       "x1": 519.32373046875,
+       "y1": 528.7371215820312
+      }
+     ],
+     "quote": "MathPile | 8.9B | 2.7% | 3.3% | 2.2% | 12.5% | 15.7% | 1.2% | 0.0% | 2.8%",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "MathPile",
+   "split": "",
+   "size": "8.9B",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.7",
+   "value": "Proof-Pile-2",
+   "evidence": [
+    {
+     "chunk_id": "b0136",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 75.95338439941406,
+      "y0": 541.1728515625,
+      "x1": 519.32373046875,
+      "y1": 552.8511962890625
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 75.95338439941406,
+       "y0": 541.1728515625,
+       "x1": 519.32373046875,
+       "y1": 552.8511962890625
+      }
+     ],
+     "quote": "Proof-Pile-2 | 51.9B | 14.3% | 11.2% | 3.7% | 43.8% | 29.2% | 19.9% | 5.1% | 11.7%",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "Proof-Pile-2",
+   "split": "",
+   "size": "51.9B",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.8",
+   "value": "ArXiv-RedPajama",
+   "evidence": [
+    {
+     "chunk_id": "b0155",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 75.12178802490234,
+      "y0": 383.47283935546875,
+      "x1": 520.1570434570312,
+      "y1": 393.5707092285156
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 75.12178802490234,
+       "y0": 383.47283935546875,
+       "x1": 520.1570434570312,
+       "y1": 393.5707092285156
+      }
+     ],
+     "quote": "ArXiv-RedPajama | 3.3% | 3.4% | 4.0% | 9.4% | 9.0% | 7.4% | 0.8% | 2.3%",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "ArXiv-RedPajama",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Minerva",
+   "evidence": [
+    {
+     "chunk_id": "b0138",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 76.16130065917969,
+      "y0": 538.3638916015625,
+      "x1": 519.1174926757812,
+      "y1": 550.4398193359375
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 76.16130065917969,
+       "y0": 538.3638916015625,
+       "x1": 519.1174926757812,
+       "y1": 550.4398193359375
+      }
+     ],
+     "quote": "Minerva | 7B | 16.2% | 14.1% | 7.7% | - | 35.6% | - | - | -",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Mistral",
+   "evidence": [
+    {
+     "chunk_id": "b0138",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 76.16130065917969,
+      "y0": 598.7114868164062,
+      "x1": 519.1174926757812,
+      "y1": 610.7874145507812
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 76.16130065917969,
+       "y0": 598.7114868164062,
+       "x1": 519.1174926757812,
+       "y1": 610.7874145507812
+      }
+     ],
+     "quote": "Mistral | 7B | 40.3% | 14.3% | 9.2% | 71.9% | 51.1% | 44.9% | 5.1% | 23.4%",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "Llemma",
+   "evidence": [
+    {
+     "chunk_id": "b0138",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 76.16130065917969,
+      "y0": 616.33349609375,
+      "x1": 519.1174926757812,
+      "y1": 628.409423828125
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 76.16130065917969,
+       "y0": 616.33349609375,
+       "x1": 519.1174926757812,
+       "y1": 628.409423828125
+      }
+     ],
+     "quote": "Llemma | 7B | 37.4% | 18.1% | 6.3% | 59.4% | 43.1% | 43.4% | 11.9% | 23.6%",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "CodeLlama",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 98.01899719238281,
+      "y0": 235.00875854492188,
+      "x1": 494.7688903808594,
+      "y1": 246.94146728515625
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 98.01899719238281,
+       "y0": 235.00875854492188,
+       "x1": 494.7688903808594,
+       "y1": 246.94146728515625
+      }
+     ],
+     "quote": "CodeLlama | 7B | 27.1% | 17.2% | 16.3% | 17.6%",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "InternLM2-Math",
+   "evidence": [
+    {
+     "chunk_id": "b0148",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 119.10800170898438,
+      "y0": 306.4120178222656,
+      "x1": 468.1473693847656,
+      "y1": 319.28839111328125
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 119.10800170898438,
+       "y0": 306.4120178222656,
+       "x1": 468.1473693847656,
+       "y1": 319.28839111328125
+      }
+     ],
+     "quote": "InternLM2-Math | 20B | 82.6% | 37.7% | - | -",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "Qwen",
+   "evidence": [
+    {
+     "chunk_id": "b0148",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 119.10800170898438,
+      "y0": 319.9610290527344,
+      "x1": 468.1473693847656,
+      "y1": 332.83740234375
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 119.10800170898438,
+       "y0": 319.9610290527344,
+       "x1": 468.1473693847656,
+       "y1": 332.83740234375
+      }
+     ],
+     "quote": "Qwen | 72B | 78.9% | 35.2% | - | -",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "WizardMath-v1.1",
+   "evidence": [
+    {
+     "chunk_id": "b0148",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 119.10800170898438,
+      "y0": 347.0590515136719,
+      "x1": 468.1473693847656,
+      "y1": 359.9354248046875
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 119.10800170898438,
+       "y0": 347.0590515136719,
+       "x1": 468.1473693847656,
+       "y1": 359.9354248046875
+      }
+     ],
+     "quote": "WizardMath-v1.1 | 7B | 83.2% | 33.0% | - | -",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.7",
+   "value": "MetaMath",
+   "evidence": [
+    {
+     "chunk_id": "b0148",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 119.10800170898438,
+      "y0": 374.1570739746094,
+      "x1": 468.1473693847656,
+      "y1": 387.033447265625
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 119.10800170898438,
+       "y0": 374.1570739746094,
+       "x1": 468.1473693847656,
+       "y1": 387.033447265625
+      }
+     ],
+     "quote": "MetaMath | 70B | 82.3% | 26.6% | 66.4% | 70.9%",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Pass@1",
+   "evidence": [
+    {
+     "chunk_id": "b0142",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 100.05999755859375,
+      "y0": 524.1207885742188,
+      "x1": 492.72601318359375,
+      "y1": 536.053466796875
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 100.05999755859375,
+       "y0": 524.1207885742188,
+       "x1": 492.72601318359375,
+       "y1": 536.053466796875
+      }
+     ],
+     "quote": "HumanEval (Pass@1)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "fastText model vector dimension",
+   "evidence": [
+    {
+     "chunk_id": "b0022",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 70.87,
+      "y0": 708.58,
+      "x1": 524.4100000000001,
+      "y1": 732.62
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 354.31,
+       "y0": 708.58,
+       "x1": 520.3199999999999,
+       "y1": 719.07
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 722.13,
+       "x1": 524.4100000000001,
+       "y1": 732.62
+      },
+      {
+       "page": 5,
+       "x0": 87.8,
+       "y0": 425.38,
+       "x1": 526.21,
+       "y1": 435.87
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 438.93,
+       "x1": 524.4100000000001,
+       "y1": 449.42
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 452.48,
+       "x1": 160.27,
+       "y1": 462.97
+      }
+     ],
+     "quote": "We employ an open-source libraryfoot_0 for training, configuring the vector dimension to 256, learning rate to 0.1, the maximum length",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "vector dimension",
+   "value_raw": "256",
+   "value_norm": 256.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "fastText model learning rate",
+   "evidence": [
+    {
+     "chunk_id": "b0022",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 70.87,
+      "y0": 708.58,
+      "x1": 524.4100000000001,
+      "y1": 732.62
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 354.31,
+       "y0": 708.58,
+       "x1": 520.3199999999999,
+       "y1": 719.07
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 722.13,
+       "x1": 524.4100000000001,
+       "y1": 732.62
+      },
+      {
+       "page": 5,
+       "x0": 87.8,
+       "y0": 425.38,
+       "x1": 526.21,
+       "y1": 435.87
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 438.93,
+       "x1": 524.4100000000001,
+       "y1": 449.42
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 452.48,
+       "x1": 160.27,
+       "y1": 462.97
+      }
+     ],
+     "quote": "We employ an open-source libraryfoot_0 for training, configuring the vector dimension to 256, learning rate to 0.1, the maximum length",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.1",
+   "value_norm": 0.1,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Pre-training model parameters",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.32,
+      "y0": 306.04,
+      "x1": 526.22,
+      "y1": 343.62
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 70.32,
+       "y0": 306.04,
+       "x1": 524.4,
+       "y1": 316.53000000000003
+      },
+      {
+       "page": 6,
+       "x0": 70.87,
+       "y0": 319.58,
+       "x1": 526.22,
+       "y1": 330.07
+      },
+      {
+       "page": 6,
+       "x0": 70.87,
+       "y0": 333.13,
+       "x1": 122.31,
+       "y1": 343.62
+      }
+     ],
+     "quote": "We apply math training to a general pre-trained language model with 1.3B parameters, which shares the same framework as the DeepSeek LLMs (DeepSeek-AI, 2024), denoted as DeepSeek-LLM 1.3B.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "model size",
+   "value_raw": "1.3B",
+   "value_norm": 1300000000.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Pre-training tokens",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 126.15,
+      "y0": 333.13,
+      "x1": 502.59000000000003,
+      "y1": 343.62
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 126.15,
+       "y0": 333.13,
+       "x1": 502.59000000000003,
+       "y1": 343.62
+      }
+     ],
+     "quote": "We separately train a model on each mathematical corpus for 150B tokens.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "training tokens",
+   "value_raw": "150B",
+   "value_norm": 150000000000.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Optimizer",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.32,
+      "y0": 360.23,
+      "x1": 524.96,
+      "y1": 424.92
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 174.22,
+       "y0": 360.23,
+       "x1": 524.96,
+       "y1": 370.72
+      },
+      {
+       "page": 6,
+       "x0": 70.87,
+       "y0": 373.72,
+       "x1": 524.4200000000001,
+       "y1": 385.17
+      },
+      {
+       "page": 6,
+       "x0": 70.41,
+       "y0": 387.33,
+       "x1": 524.41,
+       "y1": 397.82
+      },
+      {
+       "page": 6,
+       "x0": 70.41,
+       "y0": 400.88,
+       "x1": 524.41,
+       "y1": 411.37
+      },
+      {
+       "page": 6,
+       "x0": 70.32,
+       "y0": 414.43,
+       "x1": 314.39,
+       "y1": 424.92
+      }
+     ],
+     "quote": "Following the training practice of DeepSeek LLMs, we use the AdamW optimizer (Loshchilov and Hutter, 2017) with 1 = 0.9, 2 = 0.95, and weight_decay = 0.1, along with a multi-step learning rate schedule where the learning rate reaches the peak after 2,000 warmup steps, decreases to its 31.6% after 80% of the training process, and further decreases to 10.0% of the peak after 90% of the training process.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "AdamW",
+   "value_norm": null,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Weight decay",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.32,
+      "y0": 360.23,
+      "x1": 524.96,
+      "y1": 424.92
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 174.22,
+       "y0": 360.23,
+       "x1": 524.96,
+       "y1": 370.72
+      },
+      {
+       "page": 6,
+       "x0": 70.87,
+       "y0": 373.72,
+       "x1": 524.4200000000001,
+       "y1": 385.17
+      },
+      {
+       "page": 6,
+       "x0": 70.41,
+       "y0": 387.33,
+       "x1": 524.41,
+       "y1": 397.82
+      },
+      {
+       "page": 6,
+       "x0": 70.41,
+       "y0": 400.88,
+       "x1": 524.41,
+       "y1": 411.37
+      },
+      {
+       "page": 6,
+       "x0": 70.32,
+       "y0": 414.43,
+       "x1": 314.39,
+       "y1": 424.92
+      }
+     ],
+     "quote": "Following the training practice of DeepSeek LLMs, we use the AdamW optimizer (Loshchilov and Hutter, 2017) with 1 = 0.9, 2 = 0.95, and weight_decay = 0.1, along with a multi-step learning rate schedule where the learning rate reaches the peak after 2,000 warmup steps, decreases to its 31.6% after 80% of the training process, and further decreases to 10.0% of the peak after 90% of the training process.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "0.1",
+   "value_norm": 0.1,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Warmup steps",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.32,
+      "y0": 360.23,
+      "x1": 524.96,
+      "y1": 424.92
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 174.22,
+       "y0": 360.23,
+       "x1": 524.96,
+       "y1": 370.72
+      },
+      {
+       "page": 6,
+       "x0": 70.87,
+       "y0": 373.72,
+       "x1": 524.4200000000001,
+       "y1": 385.17
+      },
+      {
+       "page": 6,
+       "x0": 70.41,
+       "y0": 387.33,
+       "x1": 524.41,
+       "y1": 397.82
+      },
+      {
+       "page": 6,
+       "x0": 70.41,
+       "y0": 400.88,
+       "x1": 524.41,
+       "y1": 411.37
+      },
+      {
+       "page": 6,
+       "x0": 70.32,
+       "y0": 414.43,
+       "x1": 314.39,
+       "y1": 424.92
+      }
+     ],
+     "quote": "Following the training practice of DeepSeek LLMs, we use the AdamW optimizer (Loshchilov and Hutter, 2017) with 1 = 0.9, 2 = 0.95, and weight_decay = 0.1, along with a multi-step learning rate schedule where the learning rate reaches the peak after 2,000 warmup steps, decreases to its 31.6% after 80% of the training process, and further decreases to 10.0% of the peak after 90% of the training process.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "warmup steps",
+   "value_raw": "2,000",
+   "value_norm": 2000.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Maximum learning rate",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.87,
+      "y0": 414.43,
+      "x1": 524.4100000000001,
+      "y1": 438.47
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 317.79,
+       "y0": 414.43,
+       "x1": 524.4100000000001,
+       "y1": 424.92
+      },
+      {
+       "page": 6,
+       "x0": 70.87,
+       "y0": 427.98,
+       "x1": 401.02,
+       "y1": 438.47
+      }
+     ],
+     "quote": "We set the maximum value of learning rate to 5.3e-4, and use a batch size of 4M tokens with a 4K context length.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "5.3e-4",
+   "value_norm": 0.00053,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "Batch size",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.87,
+      "y0": 414.43,
+      "x1": 524.4100000000001,
+      "y1": 438.47
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 317.79,
+       "y0": 414.43,
+       "x1": 524.4100000000001,
+       "y1": 424.92
+      },
+      {
+       "page": 6,
+       "x0": 70.87,
+       "y0": 427.98,
+       "x1": 401.02,
+       "y1": 438.47
+      }
+     ],
+     "quote": "We set the maximum value of learning rate to 5.3e-4, and use a batch size of 4M tokens with a 4K context length.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "4M tokens",
+   "value_norm": null,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "Context length",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.87,
+      "y0": 414.43,
+      "x1": 524.4100000000001,
+      "y1": 438.47
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 317.79,
+       "y0": 414.43,
+       "x1": 524.4100000000001,
+       "y1": 424.92
+      },
+      {
+       "page": 6,
+       "x0": 70.87,
+       "y0": 427.98,
+       "x1": 401.02,
+       "y1": 438.47
+      }
+     ],
+     "quote": "We set the maximum value of learning rate to 5.3e-4, and use a batch size of 4M tokens with a 4K context length.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "context length",
+   "value_raw": "4K",
+   "value_norm": 4000.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.10",
+   "value": "DeepSeekMath-Base 7B training tokens",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 241.49,
+      "y0": 740.92,
+      "x1": 524.4100000000001,
+      "y1": 751.41
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 241.49,
+       "y0": 740.92,
+       "x1": 524.4100000000001,
+       "y1": 751.41
+      },
+      {
+       "page": 8,
+       "x0": 70.51,
+       "y0": 88.58,
+       "x1": 295.41,
+       "y1": 99.07
+      }
+     ],
+     "quote": "Our model is initialized with DeepSeek-Coder-Base-v1.5 7B (Guo et al., 2024) and trained for 500B tokens.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "training tokens",
+   "value_raw": "500B",
+   "value_norm": 500000000000.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.11",
+   "value": "DeepSeekMath-Base 7B maximum learning rate",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 70.87,
+      "y0": 129.23,
+      "x1": 524.4100000000001,
+      "y1": 153.27
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 115.94,
+       "y0": 129.23,
+       "x1": 524.4100000000001,
+       "y1": 139.72
+      },
+      {
+       "page": 8,
+       "x0": 70.87,
+       "y0": 142.78,
+       "x1": 459.33,
+       "y1": 153.27
+      }
+     ],
+     "quote": "We mainly adopt the training setting specified in Section 2.2.1, except that we set the maximum value of the learning rate to 4.2e-4 and use a batch size of 10M tokens.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "4.2e-4",
+   "value_norm": 0.00042,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.12",
+   "value": "DeepSeekMath-Base 7B batch size",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 70.87,
+      "y0": 129.23,
+      "x1": 524.4100000000001,
+      "y1": 153.27
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 115.94,
+       "y0": 129.23,
+       "x1": 524.4100000000001,
+       "y1": 139.72
+      },
+      {
+       "page": 8,
+       "x0": 70.87,
+       "y0": 142.78,
+       "x1": 459.33,
+       "y1": 153.27
+      }
+     ],
+     "quote": "We mainly adopt the training setting specified in Section 2.2.1, except that we set the maximum value of the learning rate to 4.2e-4 and use a batch size of 10M tokens.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "10M tokens",
+   "value_norm": null,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.13",
+   "value": "Instruction tuning context length",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 70.87,
+      "y0": 493.03,
+      "x1": 524.4100000000001,
+      "y1": 517.0699999999999
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 277.23,
+       "y0": 493.03,
+       "x1": 524.4100000000001,
+       "y1": 503.52
+      },
+      {
+       "page": 10,
+       "x0": 70.87,
+       "y0": 506.58,
+       "x1": 306.8,
+       "y1": 517.0699999999999
+      }
+     ],
+     "quote": "Training examples are randomly concatenated until reaching a maximum context length of 4K tokens.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "context length",
+   "value_raw": "4K tokens",
+   "value_norm": null,
+   "scope": "instruction tuning"
+  },
+  {
+   "id": "hyperparameters.14",
+   "value": "Instruction tuning training steps",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 70.87,
+      "y0": 506.58,
+      "x1": 524.41,
+      "y1": 530.62
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 310.2,
+       "y0": 506.58,
+       "x1": 524.41,
+       "y1": 517.0699999999999
+      },
+      {
+       "page": 10,
+       "x0": 70.87,
+       "y0": 520.13,
+       "x1": 295.19,
+       "y1": 530.62
+      }
+     ],
+     "quote": "We train the model for 500 steps with a batch size of 256 and a constant learning rate of 5e-5.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "epochs/steps",
+   "value_raw": "500 steps",
+   "value_norm": null,
+   "scope": "instruction tuning"
+  },
+  {
+   "id": "hyperparameters.15",
+   "value": "Instruction tuning batch size",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 70.87,
+      "y0": 506.58,
+      "x1": 524.41,
+      "y1": 530.62
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 310.2,
+       "y0": 506.58,
+       "x1": 524.41,
+       "y1": 517.0699999999999
+      },
+      {
+       "page": 10,
+       "x0": 70.87,
+       "y0": 520.13,
+       "x1": 295.19,
+       "y1": 530.62
+      }
+     ],
+     "quote": "We train the model for 500 steps with a batch size of 256 and a constant learning rate of 5e-5.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "256",
+   "value_norm": 256.0,
+   "scope": "instruction tuning"
+  },
+  {
+   "id": "hyperparameters.16",
+   "value": "Instruction tuning learning rate",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 70.87,
+      "y0": 506.58,
+      "x1": 524.41,
+      "y1": 530.62
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 310.2,
+       "y0": 506.58,
+       "x1": 524.41,
+       "y1": 517.0699999999999
+      },
+      {
+       "page": 10,
+       "x0": 70.87,
+       "y0": 520.13,
+       "x1": 295.19,
+       "y1": 530.62
+      }
+     ],
+     "quote": "We train the model for 500 steps with a batch size of 256 and a constant learning rate of 5e-5.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "5e-5",
+   "value_norm": 0.00005,
+   "scope": "instruction tuning"
+  },
+  {
+   "id": "hyperparameters.17",
+   "value": "Reward model learning rate",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 70.87,
+      "y0": 301.82,
+      "x1": 524.4100000000001,
+      "y1": 325.86
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 297.29,
+       "y0": 301.82,
+       "x1": 524.4100000000001,
+       "y1": 312.31
+      },
+      {
+       "page": 15,
+       "x0": 70.87,
+       "y0": 315.37,
+       "x1": 321.52,
+       "y1": 325.86
+      }
+     ],
+     "quote": "We train our initial reward model based on the DeepSeekMath-Base 7B with a learning rate of 2e-5.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "2e-5",
+   "value_norm": 0.00002,
+   "scope": "reward model training"
+  },
+  {
+   "id": "hyperparameters.18",
+   "value": "Policy model learning rate",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 70.54,
+      "y0": 315.37,
+      "x1": 524.4100000000001,
+      "y1": 339.41
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 324.91,
+       "y0": 315.37,
+       "x1": 524.4100000000001,
+       "y1": 325.86
+      },
+      {
+       "page": 15,
+       "x0": 70.54,
+       "y0": 328.92,
+       "x1": 172.36,
+       "y1": 339.41
+      }
+     ],
+     "quote": "For GRPO, we set the learning rate of the policy model as 1e-6.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "1e-6",
+   "value_norm": 1e-6,
+   "scope": "RL"
+  },
+  {
+   "id": "hyperparameters.19",
+   "value": "KL coefficient",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 175.75,
+      "y0": 328.92,
+      "x1": 299.09000000000003,
+      "y1": 339.41
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 175.75,
+       "y0": 328.92,
+       "x1": 299.09000000000003,
+       "y1": 339.41
+      }
+     ],
+     "quote": "The KL coefficient is 0.04.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "KL coefficient",
+   "value_raw": "0.04",
+   "value_norm": 0.04,
+   "scope": "RL"
+  },
+  {
+   "id": "hyperparameters.20",
+   "value": "Outputs sampled per question",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 302.48,
+      "y0": 328.92,
+      "x1": 502.65,
+      "y1": 339.41
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 302.48,
+       "y0": 328.92,
+       "x1": 502.65,
+       "y1": 339.41
+      }
+     ],
+     "quote": "For each question, we sample 64 outputs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "outputs per question",
+   "value_raw": "64",
+   "value_norm": 64.0,
+   "scope": "RL"
+  },
+  {
+   "id": "hyperparameters.21",
+   "value": "Max length for RL",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 70.87,
+      "y0": 328.92,
+      "x1": 524.41,
+      "y1": 352.96000000000004
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 506.02,
+       "y0": 328.92,
+       "x1": 524.41,
+       "y1": 339.41
+      },
+      {
+       "page": 15,
+       "x0": 70.87,
+       "y0": 342.47,
+       "x1": 355.95,
+       "y1": 352.96000000000004
+      }
+     ],
+     "quote": "The max length is set to 1024, and the training batch size is 1024.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "max length",
+   "value_raw": "1024",
+   "value_norm": 1024.0,
+   "scope": "RL"
+  },
+  {
+   "id": "hyperparameters.22",
+   "value": "Training batch size for RL",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 70.87,
+      "y0": 328.92,
+      "x1": 524.41,
+      "y1": 352.96000000000004
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 506.02,
+       "y0": 328.92,
+       "x1": 524.41,
+       "y1": 339.41
+      },
+      {
+       "page": 15,
+       "x0": 70.87,
+       "y0": 342.47,
+       "x1": 355.95,
+       "y1": 352.96000000000004
+      }
+     ],
+     "quote": "The max length is set to 1024, and the training batch size is 1024.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "1024",
+   "value_norm": 1024.0,
+   "scope": "RL"
+  }
+ ],
+ "compute": [],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Investigation of how code affects mathematical reasoning under different training settings",
+   "evidence": [
+    {
+     "chunk_id": "b0152",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 75.50956726074219,
+      "y0": 89.5920181274414,
+      "x1": 519.7681884765625,
+      "y1": 248.00967407226562
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 75.50956726074219,
+       "y0": 89.5920181274414,
+       "x1": 519.7681884765625,
+       "y1": 248.00967407226562
+      }
+     ],
+     "quote": "Table 6: Investigation of how code affects mathematical reasoning under different training settings.We experiment with DeepSeek-LLM 1.3B, and evaluate its mathematical reasoning performance without and with tool use via few-shot chain-of-thought prompting and few-shot program-of-thought prompting, respectively.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Investigation of how different settings of code and math training affect model performance of language understanding, reasoning, and coding",
+   "evidence": [
+    {
+     "chunk_id": "b0154",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 75.77690124511719,
+      "y0": 95.67423248291016,
+      "x1": 519.5255737304688,
+      "y1": 253.03643798828125
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 75.77690124511719,
+       "y0": 95.67423248291016,
+       "x1": 519.5255737304688,
+       "y1": 253.03643798828125
+      }
+     ],
+     "quote": "Table 7: Investigation of how different settings of code and math training affect model performance of language understanding, reasoning, and coding.We experiment with DeepSeek-LLM 1.3B.We evaluate the models on MMLU and BBH using few-shot chain-of-thought prompting.On HumanEval and MBPP, we conduct zero-shot and few-shot evaluations, respectively.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.2",
+   "value": "Effect of math training on different arXiv datasets",
+   "evidence": [
+    {
+     "chunk_id": "b0155",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 75.12178802490234,
+      "y0": 322.1317443847656,
+      "x1": 520.1570434570312,
+      "y1": 430.82220458984375
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 75.12178802490234,
+       "y0": 322.1317443847656,
+       "x1": 520.1570434570312,
+       "y1": 430.82220458984375
+      }
+     ],
+     "quote": "Table 8: Effect of math training on different arXiv datasets.Model performance is evaluated with few-shot chain-of-thought prompting.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "The conclusion regarding arXiv papers being ineffective has certain limitations and unstudied aspects.",
+   "evidence": [
+    {
+     "chunk_id": "b0099",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 87.8,
+      "y0": 325.69,
+      "x1": 504.84000000000003,
+      "y1": 336.18
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 87.8,
+       "y0": 325.69,
+       "x1": 504.84000000000003,
+       "y1": 336.18
+      }
+     ],
+     "quote": "However, this conclusion has its limitations and should be taken with a grain of salt.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.1",
+   "value": "The model has weaker performance on geometry and theorem-proof compared to closed-source models.",
+   "evidence": [
+    {
+     "chunk_id": "b0126",
+     "page": 22,
+     "bbox": {
+      "page": 22,
+      "x0": 70.87,
+      "y0": 607.28,
+      "x1": 525.77,
+      "y1": 631.32
+     },
+     "boxes": [
+      {
+       "page": 22,
+       "x0": 87.8,
+       "y0": 607.28,
+       "x1": 525.77,
+       "y1": 617.77
+      },
+      {
+       "page": 22,
+       "x0": 70.87,
+       "y0": 620.83,
+       "x1": 503.6,
+       "y1": 631.32
+      }
+     ],
+     "quote": "Although DeepSeekMath achieves impressive scores on quantitative reasoning benchmarks, its capability on geometry and theorem-proof are relatively weaker than closed models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.2",
+   "value": "DeepSeekMath shows similar performance in zero-shot and few-shot evaluation due to model scale limitations.",
+   "evidence": [
+    {
+     "chunk_id": "b0126",
+     "page": 22,
+     "bbox": {
+      "page": 22,
+      "x0": 70.87,
+      "y0": 647.93,
+      "x1": 524.4100000000001,
+      "y1": 671.97
+     },
+     "boxes": [
+      {
+       "page": 22,
+       "x0": 418.22,
+       "y0": 647.93,
+       "x1": 524.4100000000001,
+       "y1": 658.42
+      },
+      {
+       "page": 22,
+       "x0": 70.87,
+       "y0": 661.48,
+       "x1": 459.2,
+       "y1": 671.97
+      }
+     ],
+     "quote": "In addition, restricted by the model scale, DeepSeekMath is worse than GPT-4 on few-shot capability.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Further exploration is required regarding the impact of arXiv tokens.",
+   "evidence": [
+    {
+     "chunk_id": "b0101",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 70.53,
+      "y0": 434.08,
+      "x1": 415.94000000000005,
+      "y1": 444.57
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 70.53,
+       "y0": 434.08,
+       "x1": 415.94000000000005,
+       "y1": 444.57
+      }
+     ],
+     "quote": "Thus, further exploration is required, which we leave for future studies.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Explore the reinforcement learning pipeline on out-of-distribution question prompts using advanced sampling strategies.",
+   "evidence": [
+    {
+     "chunk_id": "b0121",
+     "page": 21,
+     "bbox": {
+      "page": 21,
+      "x0": 70.87,
+      "y0": 705.86,
+      "x1": 525.5,
+      "y1": 743.45
+     },
+     "boxes": [
+      {
+       "page": 21,
+       "x0": 306.81,
+       "y0": 705.86,
+       "x1": 524.41,
+       "y1": 716.35
+      },
+      {
+       "page": 21,
+       "x0": 70.87,
+       "y0": 719.41,
+       "x1": 525.5,
+       "y1": 729.9
+      },
+      {
+       "page": 21,
+       "x0": 70.87,
+       "y0": 732.96,
+       "x1": 389.27,
+       "y1": 743.45
+      }
+     ],
+     "quote": "In the future, we will explore our RL pipeline on out-of-distribution question prompts, in conjunction with advanced sampling (decoding) strategies, like those based on tree-search methods (Yao et al., 2023).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.2",
+   "value": "Explore reinforcement learning algorithms that are robust against noisy reward signals.",
+   "evidence": [
+    {
+     "chunk_id": "b0122",
+     "page": 22,
+     "bbox": {
+      "page": 22,
+      "x0": 70.87,
+      "y0": 205.46,
+      "x1": 524.41,
+      "y1": 229.5
+     },
+     "boxes": [
+      {
+       "page": 22,
+       "x0": 206.54,
+       "y0": 205.46,
+       "x1": 524.41,
+       "y1": 215.95000000000002
+      },
+      {
+       "page": 22,
+       "x0": 70.87,
+       "y0": 219.01,
+       "x1": 274.49,
+       "y1": 229.5
+      }
+     ],
+     "quote": "To this end, we will explore the reinforcement learning algorithm that is robust against noisy reward signals.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.3",
+   "value": "Improve the engineered data selection pipeline to construct higher quality pre-trained corpora and explore potential directions for effective RL.",
+   "evidence": [
+    {
+     "chunk_id": "b0126",
+     "page": 22,
+     "bbox": {
+      "page": 22,
+      "x0": 70.87,
+      "y0": 688.57,
+      "x1": 524.4200000000001,
+      "y1": 712.61
+     },
+     "boxes": [
+      {
+       "page": 22,
+       "x0": 259.51,
+       "y0": 688.57,
+       "x1": 524.4200000000001,
+       "y1": 699.0600000000001
+      },
+      {
+       "page": 22,
+       "x0": 70.87,
+       "y0": 702.12,
+       "x1": 425.65,
+       "y1": 712.61
+      }
+     ],
+     "quote": "In the future, we will further improve our engineered data selection pipeline to construct more high-quality pre-trained corpus.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/InternLM/InternLM-Math",
+   "evidence": [
+    {
+     "chunk_id": "b0147",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 90.39100646972656,
+      "y0": 750.9331665039062,
+      "x1": 303.1875305175781,
+      "y1": 759.0406494140625
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 90.39100646972656,
+       "y0": 750.9331665039062,
+       "x1": 303.1875305175781,
+       "y1": 759.0406494140625
+      }
+     ],
+     "quote": "https://github.com/InternLM/InternLM-Math",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/openai/prm800k/issues/12",
+   "evidence": [
+    {
+     "chunk_id": "b0160",
+     "page": 22,
+     "bbox": {
+      "page": 22,
+      "x0": 90.39100646972656,
+      "y0": 750.9331665039062,
+      "x1": 437.8189392089844,
+      "y1": 759.0406494140625
+     },
+     "boxes": [
+      {
+       "page": 22,
+       "x0": 90.39100646972656,
+       "y0": 750.9331665039062,
+       "x1": 437.8189392089844,
+       "y1": 759.0406494140625
+      }
+     ],
+     "quote": "https://github.com/openai/prm800k/issues/12#issuecomment-1728491852",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "DeepSeekMath 7B scores 51.7% on the competition-level MATH benchmark without external toolkits.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 70.87,
+      "y0": 374.99,
+      "x1": 524.4100000000001,
+      "y1": 428.57
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 348.76,
+       "y0": 374.99,
+       "x1": 524.4,
+       "y1": 385.53000000000003
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 389.34,
+       "x1": 524.4100000000001,
+       "y1": 399.88
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 403.68,
+       "x1": 524.4100000000001,
+       "y1": 414.22
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 418.03,
+       "x1": 124.26,
+       "y1": 428.57
+      }
+     ],
+     "quote": "DeepSeekMath 7B has achieved an impressive score of 51.7% on the competition-level MATH benchmark without relying on external toolkits and voting techniques, approaching the performance level of Gemini-Ultra and GPT-4.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "Self-consistency over 64 samples achieves 60.9% on the MATH benchmark.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 127.69,
+      "y0": 418.03,
+      "x1": 526.3299999999999,
+      "y1": 428.57
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 127.69,
+       "y0": 418.03,
+       "x1": 526.3299999999999,
+       "y1": 428.57
+      }
+     ],
+     "quote": "Self-consistency over 64 samples from DeepSeekMath 7B achieves 60.9% on MATH.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "DeepSeekMath-Base 7B achieves 64.2% on GSM8K and 36.2% on the MATH dataset, outperforming Minerva 540B.",
+   "evidence": [
+    {
+     "chunk_id": "b0006",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 70.87,
+      "y0": 337.45,
+      "x1": 524.4200000000001,
+      "y1": 388.58
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 415.43,
+       "y0": 337.45,
+       "x1": 524.41,
+       "y1": 347.94
+      },
+      {
+       "page": 2,
+       "x0": 70.87,
+       "y0": 351.0,
+       "x1": 524.4200000000001,
+       "y1": 361.49
+      },
+      {
+       "page": 2,
+       "x0": 70.87,
+       "y0": 364.55,
+       "x1": 524.4200000000001,
+       "y1": 375.04
+      },
+      {
+       "page": 2,
+       "x0": 70.87,
+       "y0": 378.09,
+       "x1": 509.62,
+       "y1": 388.58
+      }
+     ],
+     "quote": "The evaluation results indicate that the large-scale corpus is of high quality, as our base model DeepSeekMath-Base 7B achieves 64.2% on GSM8K (Cobbe et al., 2021) and 36.2% on the competition-level MATH dataset (Hendrycks et al., 2021), outperforming Minerva 540B (Lewkowycz et al., 2022a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.3",
+   "value": "GRPO provides improvements on in-domain and out-of-domain mathematical tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0009",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 70.87,
+      "y0": 628.75,
+      "x1": 524.4200000000001,
+      "y1": 679.9
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 208.9,
+       "y0": 628.75,
+       "x1": 524.41,
+       "y1": 639.24
+      },
+      {
+       "page": 2,
+       "x0": 70.87,
+       "y0": 642.3,
+       "x1": 524.4200000000001,
+       "y1": 652.79
+      },
+      {
+       "page": 2,
+       "x0": 70.87,
+       "y0": 655.56,
+       "x1": 524.4100000000001,
+       "y1": 666.3499999999999
+      },
+      {
+       "page": 2,
+       "x0": 70.87,
+       "y0": 669.11,
+       "x1": 444.15,
+       "y1": 679.9
+      }
+     ],
+     "quote": "By solely using a subset of English instruction tuning data, GRPO obtains a substantial improvement over the strong DeepSeekMath-Instruct, including both in-domain (GSM8K: 82.9% → 88.2%, MATH: 46.8% → 51.7%) and out-of-domain mathematical tasks (e.g., CMATH: 84.6% → 88.8%) during the reinforcement learning phase.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

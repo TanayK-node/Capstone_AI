@@ -1,0 +1,27 @@
+1505.04597,task,,neuronal structure segmentation in electron microscopy,segmentation of neuronal structures|EM segmentation|biomedical image segmentation|image segmentation,1,
+1505.04597,task,,cell segmentation in light microscopy,cell segmentation|biomedical image segmentation,1,
+1505.04597,datasets,,ISBI 2012 EM segmentation challenge,EM segmentation challenge|ISBI 2012|Drosophila VNC|serial section transmission electron microscopy,6,30 training images 512x512
+1505.04597,datasets,,PhC-U373,ISBI cell tracking challenge|PhC U373|Glioblastoma-astrocytoma U373,7,ISBI cell tracking challenge 2015
+1505.04597,datasets,,DIC-HeLa,DIC HeLa|HeLa cells|ISBI cell tracking challenge,7,ISBI cell tracking challenge 2015
+1505.04597,baselines,,Ciresan et al. sliding-window convolutional network,Ciresan et al.|IDSIA|sliding-window convolutional network|sliding window,6,
+1505.04597,baselines,,DIVE-SCI,,6,
+1505.04597,baselines,,DIVE,,6,
+1505.04597,baselines,,IDSIA-SCI,,6,
+1505.04597,baselines,,IMCB-SG,,7,
+1505.04597,baselines,,KTH-SE,,7,
+1505.04597,baselines,,HOUS-US,,7,
+1505.04597,metrics,,warping error,,6,
+1505.04597,metrics,,Rand error,rand error,6,
+1505.04597,metrics,,pixel error,,6,
+1505.04597,metrics,,IOU,intersection over union|IoU,7,
+1505.04597,hyperparameters,optimizer,SGD,stochastic gradient descent,4,
+1505.04597,hyperparameters,batch_size,1,single image,4,
+1505.04597,hyperparameters,momentum,0.99,,4,
+1505.04597,hyperparameters,num_layers,23,convolutional layers,4,
+1505.04597,hyperparameters,loss_weight_w0,10,w0,5,border weight map
+1505.04597,hyperparameters,loss_weight_sigma,5,σ|sigma,5,pixels
+1505.04597,hyperparameters,augmentation_displacement_std,10,standard deviation,6,elastic deformation in pixels on a 3x3 grid
+1505.04597,hyperparameters,test_time_augmentation,7,rotated versions,6,EM challenge
+1505.04597,compute,,NVidia Titan GPU (6 GB),Titan GPU|NVidia Titan,8,
+1505.04597,compute,,10 hours training,10 hours,8,
+1505.04597,code_urls,,http://lmb.informatik.uni-freiburg.de/people/ronneber/u-net,,1,

@@ -1,0 +1,1324 @@
+{
+ "metadata": {
+  "title": "Proximal Policy Optimization Algorithms",
+  "authors": [
+   "John Schulman",
+   "Filip Wolski",
+   "Prafulla Dhariwal",
+   "Alec Radford",
+   "Oleg Klimov"
+  ],
+  "venue": null,
+  "year": "2017",
+  "arxiv_id": "1707.06347v2[cs.LG]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Existing reinforcement learning methods either fail on simple problems, lack data efficiency and robustness, or are relatively complicated and incompatible with certain architectures.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 69.93,
+      "y0": 498.18,
+      "x1": 525.36,
+      "y1": 560.48
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 290.94,
+       "y0": 498.18,
+       "x1": 525.35,
+       "y1": 508.8
+      },
+      {
+       "page": 1,
+       "x0": 69.93,
+       "y0": 511.1,
+       "x1": 525.36,
+       "y1": 521.72
+      },
+      {
+       "page": 1,
+       "x0": 69.93,
+       "y0": 524.02,
+       "x1": 525.35,
+       "y1": 534.64
+      },
+      {
+       "page": 1,
+       "x0": 69.93,
+       "y0": 536.94,
+       "x1": 525.35,
+       "y1": 547.5600000000001
+      },
+      {
+       "page": 1,
+       "x0": 69.93,
+       "y0": 549.86,
+       "x1": 369.12,
+       "y1": 560.48
+      }
+     ],
+     "quote": "Q-learning (with function approximation) fails on many simple problemsfoot_0 and is poorly understood, vanilla policy gradient methods have poor data effiency and robustness; and trust region policy optimization (TRPO) is relatively complicated, and is not compatible with architectures that include noise (such as dropout) or parameter sharing (between the policy and value function, or with auxiliary tasks).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "We propose proximal policy optimization (PPO), a new family of policy gradient methods that enable multiple epochs of minibatch updates and strike a favorable balance between sample complexity, simplicity, and wall-time.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 96.47,
+      "y0": 309.32,
+      "x1": 498.80999999999995,
+      "y1": 353.21
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 358.91,
+       "y0": 309.32,
+       "x1": 498.8,
+       "y1": 319.01
+      },
+      {
+       "page": 1,
+       "x0": 96.47,
+       "y0": 320.72,
+       "x1": 498.80999999999995,
+       "y1": 330.41
+      },
+      {
+       "page": 1,
+       "x0": 96.47,
+       "y0": 332.12,
+       "x1": 498.80999999999995,
+       "y1": 341.81
+      },
+      {
+       "page": 1,
+       "x0": 96.47,
+       "y0": 343.52,
+       "x1": 201.97,
+       "y1": 353.21
+      }
+     ],
+     "quote": "The new methods, which we call proximal policy optimization (PPO), have some of the benefits of trust region policy optimization (TRPO), but they are much simpler to implement, more general, and have better sample complexity (empirically).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "We introduce an algorithm that attains TRPO's data efficiency and reliable performance while using only first-order optimization, proposing a novel objective with clipped probability ratios.",
+   "evidence": [
+    {
+     "chunk_id": "b0004",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 69.93,
+      "y0": 562.78,
+      "x1": 525.36,
+      "y1": 586.33
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 86.41,
+       "y0": 562.78,
+       "x1": 525.36,
+       "y1": 573.4
+      },
+      {
+       "page": 1,
+       "x0": 69.93,
+       "y0": 575.71,
+       "x1": 525.35,
+       "y1": 586.33
+      }
+     ],
+     "quote": "This paper seeks to improve the current state of affairs by introducing an algorithm that attains the data efficiency and reliable performance of TRPO, while using only first-order optimization.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "reinforcement learning",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 96.47,
+      "y0": 263.72,
+      "x1": 498.81,
+      "y1": 296.21
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 111.01,
+       "y0": 263.72,
+       "x1": 498.81,
+       "y1": 273.41
+      },
+      {
+       "page": 1,
+       "x0": 96.47,
+       "y0": 275.12,
+       "x1": 498.80999999999995,
+       "y1": 284.81
+      },
+      {
+       "page": 1,
+       "x0": 96.47,
+       "y0": 286.52,
+       "x1": 367.07000000000005,
+       "y1": 296.21
+      }
+     ],
+     "quote": "We propose a new family of policy gradient methods for reinforcement learning, which alternate between sampling data through interaction with the environment, and optimizing a \"surrogate\" objective function using stochastic gradient ascent.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The main proposed objective is a clipped surrogate objective that penalizes policy updates moving the probability ratio away from 1 by taking the minimum of clipped and unclipped objectives.",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 170.13,
+      "y0": 283.06,
+      "x1": 520.8299999999999,
+      "y1": 303.95
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 170.13,
+       "y0": 283.06,
+       "x1": 520.8299999999999,
+       "y1": 303.95
+      }
+     ],
+     "quote": "L CLIP (θ) = Êt min(r t (θ) Ât , clip(r t (θ), 1 -, 1 + ) Ât ) (7",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "An alternative or additional approach uses a KL divergence penalty with an adaptive coefficient to target a specific KL divergence value each update.",
+   "evidence": [
+    {
+     "chunk_id": "b0033",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 69.93,
+      "y0": 340.19,
+      "x1": 525.36,
+      "y1": 377.52
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 69.93,
+       "y0": 340.19,
+       "x1": 525.36,
+       "y1": 350.81
+      },
+      {
+       "page": 4,
+       "x0": 69.93,
+       "y0": 353.11,
+       "x1": 525.36,
+       "y1": 363.73
+      },
+      {
+       "page": 4,
+       "x0": 69.93,
+       "y0": 366.03,
+       "x1": 411.64,
+       "y1": 377.52
+      }
+     ],
+     "quote": "Another approach, which can be used as an alternative to the clipped surrogate objective, or in addition to it, is to use a penalty on KL divergence, and to adapt the penalty coefficient so that we achieve some target value of the KL divergence d targ each policy update.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "The overall objective function combines the clipped policy surrogate, a squared-error value function term, and an optional entropy bonus.",
+   "evidence": [
+    {
+     "chunk_id": "b0013",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 520.83,
+      "y0": 307.55,
+      "x1": 525.35,
+      "y1": 318.17
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 520.83,
+       "y0": 307.55,
+       "x1": 525.35,
+       "y1": 318.17
+      }
+     ],
+     "quote": "Combining these terms, we obtain the following objective, which is (approximately) maximized each iteration: L CLIP +V F +S t (θ) = Êt L CLIP t (θ) -c 1 L V F t (θ) + c 2 S[π θ ](s t ) ,(9)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "The algorithm collects fixed-length trajectory segments from parallel actors and optimizes the surrogate loss using minibatch SGD or Adam over multiple epochs.",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 69.93,
+      "y0": 403.98,
+      "x1": 525.35,
+      "y1": 427.52
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 69.93,
+       "y0": 403.98,
+       "x1": 525.35,
+       "y1": 414.6
+      },
+      {
+       "page": 5,
+       "x0": 69.93,
+       "y0": 416.9,
+       "x1": 132.57,
+       "y1": 427.52
+      }
+     ],
+     "quote": "A proximal policy optimization (PPO) algorithm that uses fixed-length trajectory segments is shown below.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "The policy is represented using a fully-connected multi-layer perceptron with two hidden layers of 64 units and tanh nonlinearities, outputting the mean of a Gaussian distribution.",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 69.93,
+      "y0": 224.64,
+      "x1": 525.36,
+      "y1": 261.11
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 86.41,
+       "y0": 224.64,
+       "x1": 525.35,
+       "y1": 235.26
+      },
+      {
+       "page": 6,
+       "x0": 69.93,
+       "y0": 237.57,
+       "x1": 525.36,
+       "y1": 248.19
+      },
+      {
+       "page": 6,
+       "x0": 69.93,
+       "y0": 250.49,
+       "x1": 261.35,
+       "y1": 261.11
+      }
+     ],
+     "quote": "To represent the policy, we used a fully-connected MLP with two hidden layers of 64 units, and tanh nonlinearities, outputting the mean of a Gaussian distribution, with variable standard deviations, following [Sch+15b;Dua+16].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "Continuous control benchmark featuring 7 environments",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 86.41,
+      "y0": 276.33,
+      "x1": 448.23,
+      "y1": 286.95
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 86.41,
+       "y0": 276.33,
+       "x1": 448.23,
+       "y1": 286.95
+      }
+     ],
+     "quote": "Each algorithm was run on all 7 environments, with 3 random seeds on each.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "continuous control benchmark",
+   "split": "",
+   "size": "7 environments",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.1",
+   "value": "A collection of 49 Atari games",
+   "evidence": [
+    {
+     "chunk_id": "b0079",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 69.93,
+      "y0": 702.43,
+      "x1": 483.06,
+      "y1": 713.05
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 69.93,
+       "y0": 702.43,
+       "x1": 483.06,
+       "y1": 713.05
+      }
+     ],
+     "quote": "Here we include a comparison of PPO against A2C on a larger collection of 49 Atari games.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Atari games",
+   "split": "",
+   "size": "49 games",
+   "public": "unknown"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "A2C",
+   "evidence": [
+    {
+     "chunk_id": "b0079",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 69.93,
+      "y0": 702.43,
+      "x1": 483.06,
+      "y1": 713.05
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 69.93,
+       "y0": 702.43,
+       "x1": 483.06,
+       "y1": 713.05
+      }
+     ],
+     "quote": "Here we include a comparison of PPO against A2C on a larger collection of 49 Atari games.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Average total reward of the last 100 episodes",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 69.93,
+      "y0": 276.33,
+      "x1": 525.35,
+      "y1": 299.87
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 453.69,
+       "y0": 276.33,
+       "x1": 525.35,
+       "y1": 286.95
+      },
+      {
+       "page": 6,
+       "x0": 69.93,
+       "y0": 289.25,
+       "x1": 469.55,
+       "y1": 299.87
+      }
+     ],
+     "quote": "We scored each run of the algorithm by computing the average total reward of the last 100 episodes.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Average normalized score",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 69.92636108398438,
+      "y0": 552.8065795898438,
+      "x1": 525.3736572265625,
+      "y1": 573.9027099609375
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 315.7794189453125,
+       "y0": 552.8065795898438,
+       "x1": 525.3736572265625,
+       "y1": 562.50146484375
+      },
+      {
+       "page": 6,
+       "x0": 69.92636108398438,
+       "y0": 564.2078247070312,
+       "x1": 198.50987243652344,
+       "y1": 573.9027099609375
+      }
+     ],
+     "quote": "Average normalized scores (over 21 runs of the algorithm, on 7 environments) for each algorithm / hyperparameter setting .β was initialized at 1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "Mean performance",
+   "evidence": [
+    {
+     "chunk_id": "b0079",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 69.93,
+      "y0": 702.43,
+      "x1": 525.35,
+      "y1": 725.97
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 487.47,
+       "y0": 702.43,
+       "x1": 525.35,
+       "y1": 713.05
+      },
+      {
+       "page": 10,
+       "x0": 69.93,
+       "y0": 715.35,
+       "x1": 525.35,
+       "y1": 725.97
+      }
+     ],
+     "quote": "Figure 6 shows the learning curves of each of three random seeds, while Table 6 shows the mean performance.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Number of epochs for optimization",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 69.93,
+      "y0": 416.9,
+      "x1": 525.36,
+      "y1": 453.36
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 484.6,
+       "y0": 416.9,
+       "x1": 525.36,
+       "y1": 427.52
+      },
+      {
+       "page": 5,
+       "x0": 69.93,
+       "y0": 429.82,
+       "x1": 525.36,
+       "y1": 440.44
+      },
+      {
+       "page": 5,
+       "x0": 69.93,
+       "y0": 442.74,
+       "x1": 372.97,
+       "y1": 453.36
+      }
+     ],
+     "quote": "Then we construct the surrogate loss on these N T timesteps of data, and optimize it with minibatch SGD (or usually for better performance, Adam [KB14]), for K epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "K",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Clipping parameter epsilon",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 179.70901489257812,
+      "y0": 410.5938720703125,
+      "x1": 415.595947265625,
+      "y1": 423.2098388671875
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 179.70901489257812,
+       "y0": 410.5938720703125,
+       "x1": 415.595947265625,
+       "y1": 423.2098388671875
+      }
+     ],
+     "quote": "Clipping, ϵ = 0.1 |  | 0.76",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ϵ",
+   "value_raw": "0.1",
+   "value_norm": 0.1,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Clipping parameter epsilon",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 179.70901489257812,
+      "y0": 423.5151062011719,
+      "x1": 415.595947265625,
+      "y1": 436.1310729980469
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 179.70901489257812,
+       "y0": 423.5151062011719,
+       "x1": 415.595947265625,
+       "y1": 436.1310729980469
+      }
+     ],
+     "quote": "Clipping, | ϵ = 0.2 | 0.82",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ϵ",
+   "value_raw": "0.2",
+   "value_norm": 0.2,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Clipping parameter epsilon",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 179.70901489257812,
+      "y0": 436.43634033203125,
+      "x1": 415.595947265625,
+      "y1": 449.05230712890625
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 179.70901489257812,
+       "y0": 436.43634033203125,
+       "x1": 415.595947265625,
+       "y1": 449.05230712890625
+      }
+     ],
+     "quote": "Clipping, ϵ = 0.3 |  | 0.70",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 179.70901489257812,
+      "y0": 488.12225341796875,
+      "x1": 415.595947265625,
+      "y1": 500.73822021484375
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 179.70901489257812,
+       "y0": 488.12225341796875,
+       "x1": 415.595947265625,
+       "y1": 500.73822021484375
+      }
+     ],
+     "quote": "Fixed KL, β = 0.3 |  | 0.62",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ϵ",
+   "value_raw": "0.3",
+   "value_norm": 0.3,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Adaptive KL target dtarg",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 179.70901489257812,
+      "y0": 449.3575744628906,
+      "x1": 415.595947265625,
+      "y1": 461.9735412597656
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 179.70901489257812,
+       "y0": 449.3575744628906,
+       "x1": 415.595947265625,
+       "y1": 461.9735412597656
+      }
+     ],
+     "quote": "Adaptive KL dtarg = 0.003 | 0.68",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "dtarg",
+   "value_raw": "0.003",
+   "value_norm": 0.003,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Adaptive KL target dtarg",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 179.70901489257812,
+      "y0": 462.27880859375,
+      "x1": 415.595947265625,
+      "y1": 474.894775390625
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 179.70901489257812,
+       "y0": 462.27880859375,
+       "x1": 415.595947265625,
+       "y1": 474.894775390625
+      }
+     ],
+     "quote": "Adaptive KL dtarg = 0.01 | 0.74",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "dtarg",
+   "value_raw": "0.01",
+   "value_norm": 0.01,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Adaptive KL target dtarg",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 179.70901489257812,
+      "y0": 475.2010192871094,
+      "x1": 415.595947265625,
+      "y1": 487.8169860839844
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 179.70901489257812,
+       "y0": 475.2010192871094,
+       "x1": 415.595947265625,
+       "y1": 487.8169860839844
+      }
+     ],
+     "quote": "Adaptive KL dtarg = 0.03 | 0.71",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "dtarg",
+   "value_raw": "0.03",
+   "value_norm": 0.03,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Fixed KL beta",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 179.70901489257812,
+      "y0": 501.0434875488281,
+      "x1": 415.595947265625,
+      "y1": 513.6594848632812
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 179.70901489257812,
+       "y0": 501.0434875488281,
+       "x1": 415.595947265625,
+       "y1": 513.6594848632812
+      }
+     ],
+     "quote": "Fixed KL, β = 1. |  | 0.71",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "β",
+   "value_raw": "1.",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "Fixed KL beta",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 179.70901489257812,
+      "y0": 513.9647216796875,
+      "x1": 415.595947265625,
+      "y1": 526.5806884765625
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 179.70901489257812,
+       "y0": 513.9647216796875,
+       "x1": 415.595947265625,
+       "y1": 526.5806884765625
+      }
+     ],
+     "quote": "Fixed KL, β = 3. |  | 0.72",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "β",
+   "value_raw": "3.",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "Fixed KL beta",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 179.70901489257812,
+      "y0": 526.8859252929688,
+      "x1": 415.595947265625,
+      "y1": 539.5018920898438
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 179.70901489257812,
+       "y0": 526.8859252929688,
+       "x1": 415.595947265625,
+       "y1": 539.5018920898438
+      }
+     ],
+     "quote": "Fixed KL, β = 10. |  | 0.69",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "β",
+   "value_raw": "10.",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.10",
+   "value": "Initial value for beta",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 69.92636108398438,
+      "y0": 552.8065795898438,
+      "x1": 525.3736572265625,
+      "y1": 573.9027099609375
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 315.7794189453125,
+       "y0": 552.8065795898438,
+       "x1": 525.3736572265625,
+       "y1": 562.50146484375
+      },
+      {
+       "page": 6,
+       "x0": 69.92636108398438,
+       "y0": 564.2078247070312,
+       "x1": 198.50987243652344,
+       "y1": 573.9027099609375
+      }
+     ],
+     "quote": "Average normalized scores (over 21 runs of the algorithm, on 7 environments) for each algorithm / hyperparameter setting .β was initialized at 1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "β initialization",
+   "value_raw": "1",
+   "value_norm": 1.0,
+   "scope": ""
+  }
+ ],
+ "compute": [],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "3 random seeds per environment",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 86.41,
+      "y0": 276.33,
+      "x1": 448.23,
+      "y1": 286.95
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 86.41,
+       "y0": 276.33,
+       "x1": 448.23,
+       "y1": 286.95
+      }
+     ],
+     "quote": "Each algorithm was run on all 7 environments, with 3 random seeds on each.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "seeds_and_runs.1",
+   "value": "Averaged over 21 runs to produce a single scalar",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 69.93,
+      "y0": 289.25,
+      "x1": 525.36,
+      "y1": 325.71
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 475.6,
+       "y0": 289.25,
+       "x1": 525.35,
+       "y1": 299.87
+      },
+      {
+       "page": 6,
+       "x0": 69.93,
+       "y0": 302.17,
+       "x1": 525.36,
+       "y1": 312.79
+      },
+      {
+       "page": 6,
+       "x0": 69.93,
+       "y0": 315.09,
+       "x1": 525.36,
+       "y1": 325.71
+      }
+     ],
+     "quote": "We shifted and scaled the scores for each environment so that the random policy gave a score of 0 and the best result was set to 1, and averaged over 21 runs to produce a single scalar for each algorithm setting.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Comparison of surrogate objective L CLIP to natural variations and ablated versions with different hyperparameters",
+   "evidence": [
+    {
+     "chunk_id": "b0068",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 69.92636108398438,
+      "y0": 655.2471313476562,
+      "x1": 525.3621826171875,
+      "y1": 678.7843627929688
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 485.3824462890625,
+       "y0": 655.2471313476562,
+       "x1": 525.3621826171875,
+       "y1": 665.8630981445312
+      },
+      {
+       "page": 5,
+       "x0": 69.92636108398438,
+       "y0": 668.1683959960938,
+       "x1": 173.8779296875,
+       "y1": 678.7843627929688
+      }
+     ],
+     "quote": "Here, we compare the surrogate objective L CLIP to several natural variations and ablated versions.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/berkeleydeeprlcourse/homework/tree/master/hw4",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 301.90179443359375,
+      "y0": 716.6944580078125,
+      "x1": 435.2357177734375,
+      "y1": 725.4199829101562
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 301.90179443359375,
+       "y0": 716.6944580078125,
+       "x1": 435.2357177734375,
+       "y1": 725.4199829101562
+      }
+     ],
+     "quote": "An implementation is available at https://github.com/berkeleydeeprlcourse/homework/tree/master/hw4.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "PPO outperforms other online policy gradient methods across benchmark tasks including simulated robotic locomotion and Atari game playing.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 96.47,
+      "y0": 343.52,
+      "x1": 498.82000000000005,
+      "y1": 387.42
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 206.07,
+       "y0": 343.52,
+       "x1": 498.82,
+       "y1": 353.21
+      },
+      {
+       "page": 1,
+       "x0": 96.47,
+       "y0": 354.93,
+       "x1": 498.80999999999995,
+       "y1": 364.62
+      },
+      {
+       "page": 1,
+       "x0": 96.47,
+       "y0": 366.33,
+       "x1": 498.82000000000005,
+       "y1": 376.02
+      },
+      {
+       "page": 1,
+       "x0": 96.47,
+       "y0": 377.73,
+       "x1": 254.34,
+       "y1": 387.42
+      }
+     ],
+     "quote": "Our experiments test PPO on a collection of benchmark tasks, including simulated robotic locomotion and Atari game playing, and we show that PPO outperforms other online policy gradient methods, and overall strikes a favorable balance between sample complexity, simplicity, and wall-time.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "On continuous control tasks, PPO performs better than the compared algorithms, and on Atari it performs significantly better in sample complexity than A2C and similarly to ACER.",
+   "evidence": [
+    {
+     "chunk_id": "b0005",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 69.93,
+      "y0": 653.23,
+      "x1": 525.35,
+      "y1": 676.77
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 335.95,
+       "y0": 653.23,
+       "x1": 525.35,
+       "y1": 663.85
+      },
+      {
+       "page": 1,
+       "x0": 69.93,
+       "y0": 666.15,
+       "x1": 288.01,
+       "y1": 676.77
+      }
+     ],
+     "quote": "On continuous control tasks, it performs better than the algorithms we compare against.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

@@ -1,0 +1,2087 @@
+{
+ "metadata": {
+  "title": "AN IMAGE IS WORTH 16X16 WORDS: TRANSFORMERS FOR IMAGE RECOGNITION AT SCALE",
+  "authors": [
+   "Alexey Dosovitskiy",
+   "Lucas Beyer",
+   "Alexander Kolesnikov",
+   "Dirk Weissenborn",
+   "Xiaohua Zhai",
+   "Thomas Unterthiner",
+   "Mostafa Dehghani",
+   "Matthias Minderer",
+   "Georg Heigold",
+   "Sylvain Gelly",
+   "Jakob Uszkoreit",
+   "Neil Houlsby"
+  ],
+  "venue": null,
+  "year": "2021",
+  "arxiv_id": "2010.11929v2[cs.CV]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Applications of the Transformer architecture to computer vision remain limited and rely heavily on convolutional networks.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 271.61,
+      "x1": 468.14,
+      "y1": 291.21
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 271.61,
+       "x1": 468.14,
+       "y1": 280.25
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 282.57,
+       "x1": 455.83,
+       "y1": 291.21
+      }
+     ],
+     "quote": "While the Transformer architecture has become the de-facto standard for natural language processing tasks, its applications to computer vision remain limited.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Alternative models that replace convolutions entirely have not yet been scaled effectively on modern hardware accelerators.",
+   "evidence": [
+    {
+     "chunk_id": "b0004",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 547.6,
+      "x1": 504.01,
+      "y1": 578.16
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 407.15,
+       "y0": 547.6,
+       "x1": 504.01,
+       "y1": 556.24
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 558.56,
+       "x1": 504.0,
+       "y1": 567.1999999999999
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 569.52,
+       "x1": 264.94,
+       "y1": 578.16
+      }
+     ],
+     "quote": "The latter models, while theoretically efficient, have not yet been scaled effectively on modern hardware accelerators due to the use of specialized attention patterns.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "image classification",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 315.44,
+      "x1": 468.14,
+      "y1": 346.0
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 251.98,
+       "y0": 315.44,
+       "x1": 468.14,
+       "y1": 324.08
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 326.4,
+       "x1": 468.14,
+       "y1": 335.03999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 337.36,
+       "x1": 304.99,
+       "y1": 346.0
+      }
+     ],
+     "quote": "We show that this reliance on CNNs is not necessary and a pure transformer applied directly to sequences of image patches can perform very well on image classification tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The model follows the original Transformer design closely and uses standard learnable 1D position embeddings added to patch embeddings.",
+   "evidence": [
+    {
+     "chunk_id": "b0021",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 651.65,
+      "x1": 504.0,
+      "y1": 682.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 474.46,
+       "y0": 651.65,
+       "x1": 504.0,
+       "y1": 660.29
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 662.6,
+       "x1": 504.0,
+       "y1": 671.24
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 673.56,
+       "x1": 443.29,
+       "y1": 682.1999999999999
+      }
+     ],
+     "quote": "We use standard learnable 1D position embeddings, since we have not observed significant performance gains from using more advanced 2D-aware position embeddings (Appendix D.4).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "To process 2D images, the input image is reshaped into a sequence of flattened 2D patches and mapped to a constant latent dimension using a trainable linear projection.",
+   "evidence": [
+    {
+     "chunk_id": "b0019",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 503.27,
+      "x1": 504.0,
+      "y1": 560.66
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 237.44,
+       "y0": 504.81,
+       "x1": 443.85,
+       "y1": 514.14
+      },
+      {
+       "page": 3,
+       "x0": 443.85,
+       "y0": 503.27,
+       "x1": 477.64000000000004,
+       "y1": 509.39
+      },
+      {
+       "page": 3,
+       "x0": 481.35,
+       "y0": 505.16,
+       "x1": 503.99,
+       "y1": 513.8000000000001
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 517.8,
+       "x1": 274.39,
+       "y1": 527.4799999999999
+      },
+      {
+       "page": 3,
+       "x0": 274.39,
+       "y0": 514.62,
+       "x1": 312.5,
+       "y1": 522.37
+      },
+      {
+       "page": 3,
+       "x0": 313.0,
+       "y0": 517.83,
+       "x1": 504.0,
+       "y1": 526.7900000000001
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 529.78,
+       "x1": 498.15,
+       "y1": 538.74
+      },
+      {
+       "page": 3,
+       "x0": 499.53,
+       "y0": 528.21,
+       "x1": 503.5,
+       "y1": 534.33
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 541.06,
+       "x1": 504.0,
+       "y1": 549.6999999999999
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 552.02,
+       "x1": 159.39,
+       "y1": 560.66
+      }
+     ],
+     "quote": "To handle 2D images, we reshape the image x ∈ R H×W ×C into a sequence of flattened 2D patches x p ∈ R N ×(P 2 •C) , where (H, W ) is the resolution of the original image, C is the number of channels, (P, P ) is the resolution of each image patch, and N = HW/P 2 is the resulting number of patches, which also serves as the effective input sequence length for the Transformer.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "A learnable classification embedding is prepended to the sequence of patches, and a classification head is attached to its output state during both pre-training and fine-tuning.",
+   "evidence": [
+    {
+     "chunk_id": "b0020",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 612.79,
+      "x1": 504.0,
+      "y1": 634.34
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 235.9,
+       "y0": 612.79,
+       "x1": 504.0,
+       "y1": 621.43
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 623.4,
+       "x1": 151.18,
+       "y1": 632.39
+      },
+      {
+       "page": 3,
+       "x0": 151.18,
+       "y0": 621.86,
+       "x1": 155.15,
+       "y1": 627.98
+      },
+      {
+       "page": 3,
+       "x0": 151.18,
+       "y0": 628.22,
+       "x1": 156.65,
+       "y1": 634.34
+      },
+      {
+       "page": 3,
+       "x0": 157.14,
+       "y0": 623.75,
+       "x1": 159.63,
+       "y1": 632.39
+      }
+     ],
+     "quote": "Both during pre-training and fine-tuning, a classification head is attached to z 0 L .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "The Transformer encoder consists of alternating layers of multiheaded self-attention and MLP blocks, with layernorm applied before every block and residual connections after every block.",
+   "evidence": [
+    {
+     "chunk_id": "b0022",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 701.46,
+      "x1": 504.0,
+      "y1": 721.06
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 701.46,
+       "x1": 504.0,
+       "y1": 710.1
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 712.42,
+       "x1": 335.86,
+       "y1": 721.06
+      },
+      {
+       "page": 3,
+       "x0": 339.03,
+       "y0": 712.42,
+       "x1": 360.63,
+       "y1": 721.06
+      }
+     ],
+     "quote": "The Transformer encoder (Vaswani et al., 2017) consists of alternating layers of multiheaded selfattention (MSA, see Appendix A) and MLP blocks (Eq. 2, 3).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "The model is typically pre-trained on large datasets and then fine-tuned on smaller downstream tasks by replacing the prediction head with a zero-initialized feedforward layer.",
+   "evidence": [
+    {
+     "chunk_id": "b0030",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 384.96,
+      "x1": 483.23,
+      "y1": 393.59999999999997
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 384.96,
+       "x1": 483.23,
+       "y1": 393.59999999999997
+      }
+     ],
+     "quote": "Typically, we pre-train ViT on large datasets, and fine-tune to (smaller) downstream tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "ILSVRC-2012 ImageNet dataset with 1k classes and 1.3M images",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 635.71,
+      "x1": 504.0,
+      "y1": 677.22
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 149.51,
+       "y0": 635.71,
+       "x1": 504.0,
+       "y1": 644.35
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 646.66,
+       "x1": 504.0,
+       "y1": 655.3
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 657.62,
+       "x1": 504.0,
+       "y1": 666.26
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 668.58,
+       "x1": 229.91,
+       "y1": 677.22
+      }
+     ],
+     "quote": "To explore model scalability, we use the ILSVRC-2012 ImageNet dataset with 1k classes and 1.3M images (we refer to it as ImageNet in what follows), its superset ImageNet-21k with 21k classes and 14M images (Deng et al., 2009), and JFT (Sun et al., 2017) with 18k classes and 303M high-resolution images.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ILSVRC-2012 ImageNet",
+   "split": "",
+   "size": "1.3M images",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "ImageNet-21k with 21k classes and 14M images",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 635.71,
+      "x1": 504.0,
+      "y1": 677.22
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 149.51,
+       "y0": 635.71,
+       "x1": 504.0,
+       "y1": 644.35
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 646.66,
+       "x1": 504.0,
+       "y1": 655.3
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 657.62,
+       "x1": 504.0,
+       "y1": 666.26
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 668.58,
+       "x1": 229.91,
+       "y1": 677.22
+      }
+     ],
+     "quote": "To explore model scalability, we use the ILSVRC-2012 ImageNet dataset with 1k classes and 1.3M images (we refer to it as ImageNet in what follows), its superset ImageNet-21k with 21k classes and 14M images (Deng et al., 2009), and JFT (Sun et al., 2017) with 18k classes and 303M high-resolution images.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ImageNet-21k",
+   "split": "",
+   "size": "14M images",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "JFT with 18k classes and 303M high-resolution images",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 635.71,
+      "x1": 504.0,
+      "y1": 677.22
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 149.51,
+       "y0": 635.71,
+       "x1": 504.0,
+       "y1": 644.35
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 646.66,
+       "x1": 504.0,
+       "y1": 655.3
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 657.62,
+       "x1": 504.0,
+       "y1": 666.26
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 668.58,
+       "x1": 229.91,
+       "y1": 677.22
+      }
+     ],
+     "quote": "To explore model scalability, we use the ILSVRC-2012 ImageNet dataset with 1k classes and 1.3M images (we refer to it as ImageNet in what follows), its superset ImageNet-21k with 21k classes and 14M images (Deng et al., 2009), and JFT (Sun et al., 2017) with 18k classes and 303M high-resolution images.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "JFT",
+   "split": "",
+   "size": "303M high-resolution images",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.3",
+   "value": "CIFAR-10/100 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 679.54,
+      "x1": 504.01,
+      "y1": 721.06
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 337.59,
+       "y0": 679.54,
+       "x1": 504.01,
+       "y1": 688.18
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 690.5,
+       "x1": 504.0,
+       "y1": 699.14
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 701.46,
+       "x1": 504.0,
+       "y1": 710.1
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 712.42,
+       "x1": 363.84000000000003,
+       "y1": 721.06
+      }
+     ],
+     "quote": "We transfer the models trained on these dataset to several benchmark tasks: ImageNet on the original validation labels and the cleaned-up ReaL labels (Beyer et al., 2020), CIFAR-10/100 (Krizhevsky, 2009), Oxford-IIIT Pets (Parkhi et al., 2012), and Oxford Flowers-102 (Nilsback & Zisserman, 2008).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "CIFAR-10/100",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "Oxford-IIIT Pets dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 679.54,
+      "x1": 504.01,
+      "y1": 721.06
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 337.59,
+       "y0": 679.54,
+       "x1": 504.01,
+       "y1": 688.18
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 690.5,
+       "x1": 504.0,
+       "y1": 699.14
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 701.46,
+       "x1": 504.0,
+       "y1": 710.1
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 712.42,
+       "x1": 363.84000000000003,
+       "y1": 721.06
+      }
+     ],
+     "quote": "We transfer the models trained on these dataset to several benchmark tasks: ImageNet on the original validation labels and the cleaned-up ReaL labels (Beyer et al., 2020), CIFAR-10/100 (Krizhevsky, 2009), Oxford-IIIT Pets (Parkhi et al., 2012), and Oxford Flowers-102 (Nilsback & Zisserman, 2008).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Oxford-IIIT Pets",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "Oxford Flowers-102 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 679.54,
+      "x1": 504.01,
+      "y1": 721.06
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 337.59,
+       "y0": 679.54,
+       "x1": 504.01,
+       "y1": 688.18
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 690.5,
+       "x1": 504.0,
+       "y1": 699.14
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 701.46,
+       "x1": 504.0,
+       "y1": 710.1
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 712.42,
+       "x1": 363.84000000000003,
+       "y1": 721.06
+      }
+     ],
+     "quote": "We transfer the models trained on these dataset to several benchmark tasks: ImageNet on the original validation labels and the cleaned-up ReaL labels (Beyer et al., 2020), CIFAR-10/100 (Krizhevsky, 2009), Oxford-IIIT Pets (Parkhi et al., 2012), and Oxford Flowers-102 (Nilsback & Zisserman, 2008).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Oxford Flowers-102",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.6",
+   "value": "VTAB classification suite with 19 tasks",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 175.12,
+      "x1": 431.7,
+      "y1": 183.76
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 175.12,
+       "x1": 431.7,
+       "y1": 183.76
+      }
+     ],
+     "quote": "We also evaluate on the 19-task VTAB classification suite (Zhai et al., 2019b).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "VTAB",
+   "split": "",
+   "size": "19 tasks",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Big Transfer (BiT)",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 607.81,
+      "x1": 504.0,
+      "y1": 627.41
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 168.45,
+       "y0": 607.81,
+       "x1": 504.0,
+       "y1": 616.4499999999999
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 618.77,
+       "x1": 339.47,
+       "y1": 627.41
+      }
+     ],
+     "quote": "The first comparison point is Big Transfer (BiT) (Kolesnikov et al., 2020), which performs supervised transfer learning with large ResNets.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Noisy Student",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 618.77,
+      "x1": 504.01,
+      "y1": 649.33
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 343.43,
+       "y0": 618.77,
+       "x1": 504.01,
+       "y1": 627.41
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 629.73,
+       "x1": 504.0,
+       "y1": 638.37
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 640.69,
+       "x1": 235.36,
+       "y1": 649.33
+      }
+     ],
+     "quote": "The second is Noisy Student (Xie et al., 2020), which is a large EfficientNet trained using semi-supervised learning on ImageNet and JFT-300M with the labels removed.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "VIVI",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 498.89,
+      "x1": 504.0,
+      "y1": 529.4499999999999
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 498.89,
+       "x1": 504.0,
+       "y1": 507.53
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 509.85,
+       "x1": 504.0,
+       "y1": 518.49
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 520.81,
+       "x1": 504.0,
+       "y1": 529.4499999999999
+      }
+     ],
+     "quote": "Figure 2 decomposes the VTAB tasks into their respective groups, and compares to previous SOTA methods on this benchmark: BiT, VIVI -a ResNet co-trained on ImageNet and Youtube (Tschannen et al., 2020), and S4L -supervised plus semi-supervised learning on ImageNet (Zhai et al., 2019a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "S4L",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 498.89,
+      "x1": 504.0,
+      "y1": 529.4499999999999
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 498.89,
+       "x1": 504.0,
+       "y1": 507.53
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 509.85,
+       "x1": 504.0,
+       "y1": 518.49
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 520.81,
+       "x1": 504.0,
+       "y1": 529.4499999999999
+      }
+     ],
+     "quote": "Figure 2 decomposes the VTAB tasks into their respective groups, and compares to previous SOTA methods on this benchmark: BiT, VIVI -a ResNet co-trained on ImageNet and Youtube (Tschannen et al., 2020), and S4L -supervised plus semi-supervised learning on ImageNet (Zhai et al., 2019a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Few-shot or fine-tuning accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0038",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 146.26,
+      "y0": 483.97,
+      "x1": 504.0,
+      "y1": 492.61
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 146.26,
+       "y0": 483.97,
+       "x1": 504.0,
+       "y1": 492.61
+      }
+     ],
+     "quote": "We report results on downstream datasets either through few-shot or fine-tuning accuracy.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Top-5 and top-1 accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0114",
+     "page": 20,
+     "bbox": {
+      "page": 20,
+      "x0": 108.0,
+      "y0": 573.81,
+      "x1": 504.0,
+      "y1": 593.41
+     },
+     "boxes": [
+      {
+       "page": 20,
+       "x0": 108.0,
+       "y0": 573.81,
+       "x1": 504.0,
+       "y1": 582.4499999999999
+      },
+      {
+       "page": 20,
+       "x0": 108.0,
+       "y0": 584.77,
+       "x1": 485.79,
+       "y1": 593.41
+      }
+     ],
+     "quote": "We also evaluate our flagship ViT-H/14 model on the ObjectNet benchmark following the evaluation setup in Kolesnikov et al. (2020), resulting in 82.1% top-5 accuracy and 61.7% top-1 accuracy.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Optimizer for pre-training models",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 390.32,
+      "x1": 504.0,
+      "y1": 431.83
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 218.97,
+       "y0": 390.32,
+       "x1": 504.0,
+       "y1": 398.96
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 400.96,
+       "x1": 504.0,
+       "y1": 410.60999999999996
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 412.24,
+       "x1": 504.0,
+       "y1": 420.88
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 423.19,
+       "x1": 406.29,
+       "y1": 431.83
+      }
+     ],
+     "quote": "We train all models, including ResNets, using Adam (Kingma & Ba, 2015) with β 1 = 0.9, β 2 = 0.999, a batch size of 4096 and apply a high weight decay of 0.1, which we found to be useful for transfer of all models (Appendix D.1 shows that, in contrast to common practices, Adam works slightly better than SGD for ResNets in our setting).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "Adam",
+   "value_norm": null,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Beta 1 parameter for Adam",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 390.32,
+      "x1": 504.0,
+      "y1": 431.83
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 218.97,
+       "y0": 390.32,
+       "x1": 504.0,
+       "y1": 398.96
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 400.96,
+       "x1": 504.0,
+       "y1": 410.60999999999996
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 412.24,
+       "x1": 504.0,
+       "y1": 420.88
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 423.19,
+       "x1": 406.29,
+       "y1": 431.83
+      }
+     ],
+     "quote": "We train all models, including ResNets, using Adam (Kingma & Ba, 2015) with β 1 = 0.9, β 2 = 0.999, a batch size of 4096 and apply a high weight decay of 0.1, which we found to be useful for transfer of all models (Appendix D.1 shows that, in contrast to common practices, Adam works slightly better than SGD for ResNets in our setting).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "beta_1",
+   "value_raw": "0.9",
+   "value_norm": 0.9,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Beta 2 parameter for Adam",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 390.32,
+      "x1": 504.0,
+      "y1": 431.83
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 218.97,
+       "y0": 390.32,
+       "x1": 504.0,
+       "y1": 398.96
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 400.96,
+       "x1": 504.0,
+       "y1": 410.60999999999996
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 412.24,
+       "x1": 504.0,
+       "y1": 420.88
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 423.19,
+       "x1": 406.29,
+       "y1": 431.83
+      }
+     ],
+     "quote": "We train all models, including ResNets, using Adam (Kingma & Ba, 2015) with β 1 = 0.9, β 2 = 0.999, a batch size of 4096 and apply a high weight decay of 0.1, which we found to be useful for transfer of all models (Appendix D.1 shows that, in contrast to common practices, Adam works slightly better than SGD for ResNets in our setting).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "beta_2",
+   "value_raw": "0.999",
+   "value_norm": 0.999,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Batch size for pre-training",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 390.32,
+      "x1": 504.0,
+      "y1": 431.83
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 218.97,
+       "y0": 390.32,
+       "x1": 504.0,
+       "y1": 398.96
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 400.96,
+       "x1": 504.0,
+       "y1": 410.60999999999996
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 412.24,
+       "x1": 504.0,
+       "y1": 420.88
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 423.19,
+       "x1": 406.29,
+       "y1": 431.83
+      }
+     ],
+     "quote": "We train all models, including ResNets, using Adam (Kingma & Ba, 2015) with β 1 = 0.9, β 2 = 0.999, a batch size of 4096 and apply a high weight decay of 0.1, which we found to be useful for transfer of all models (Appendix D.1 shows that, in contrast to common practices, Adam works slightly better than SGD for ResNets in our setting).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "4096",
+   "value_norm": 4096.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Weight decay for pre-training",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 390.32,
+      "x1": 504.0,
+      "y1": 431.83
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 218.97,
+       "y0": 390.32,
+       "x1": 504.0,
+       "y1": 398.96
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 400.96,
+       "x1": 504.0,
+       "y1": 410.60999999999996
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 412.24,
+       "x1": 504.0,
+       "y1": 420.88
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 423.19,
+       "x1": 406.29,
+       "y1": 431.83
+      }
+     ],
+     "quote": "We train all models, including ResNets, using Adam (Kingma & Ba, 2015) with β 1 = 0.9, β 2 = 0.999, a batch size of 4096 and apply a high weight decay of 0.1, which we found to be useful for transfer of all models (Appendix D.1 shows that, in contrast to common practices, Adam works slightly better than SGD for ResNets in our setting).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "0.1",
+   "value_norm": 0.1,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Optimizer for fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 434.15,
+      "x1": 504.0,
+      "y1": 453.75
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 322.49,
+       "y0": 434.15,
+       "x1": 504.0,
+       "y1": 442.78999999999996
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 445.11,
+       "x1": 308.63,
+       "y1": 453.75
+      }
+     ],
+     "quote": "For fine-tuning we use SGD with momentum, batch size 512, for all models, see Appendix B.1.1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "SGD with momentum",
+   "value_norm": null,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Batch size for fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 434.15,
+      "x1": 504.0,
+      "y1": 453.75
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 322.49,
+       "y0": 434.15,
+       "x1": 504.0,
+       "y1": 442.78999999999996
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 445.11,
+       "x1": 308.63,
+       "y1": 453.75
+      }
+     ],
+     "quote": "For fine-tuning we use SGD with momentum, batch size 512, for all models, see Appendix B.1.1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "512",
+   "value_norm": 512.0,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Polyak averaging factor",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 445.11,
+      "x1": 504.01,
+      "y1": 475.66999999999996
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 311.6,
+       "y0": 445.11,
+       "x1": 504.01,
+       "y1": 453.75
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 455.75,
+       "x1": 504.0,
+       "y1": 464.71
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 466.71,
+       "x1": 438.76,
+       "y1": 475.66999999999996
+      }
+     ],
+     "quote": "For ImageNet results in Table 2, we fine-tuned at higher resolution: 512 for ViT-L/16 and 518 for ViT-H/14, and also used Polyak & Juditsky (1992) averaging with a factor of 0.9999 (Ramachandran et al., 2019;Wang et al., 2020b).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Polyak averaging factor",
+   "value_raw": "0.9999",
+   "value_norm": 0.9999,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "Momentum for fine-tuning ViT",
+   "evidence": [
+    {
+     "chunk_id": "b0090",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 108.0,
+      "y0": 668.58,
+      "x1": 372.76,
+      "y1": 677.22
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 108.0,
+       "y0": 668.58,
+       "x1": 372.76,
+       "y1": 677.22
+      }
+     ],
+     "quote": "We fine-tune all ViT models using SGD with a momentum of 0.9.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "momentum",
+   "value_raw": "0.9",
+   "value_norm": 0.9,
+   "scope": "fine-tuning"
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Models were trained on TPUv3 hardware, and compute reported in TPUv3-core-days",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 651.65,
+      "x1": 504.01,
+      "y1": 682.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 284.49,
+       "y0": 651.65,
+       "x1": 504.01,
+       "y1": 660.29
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 662.6,
+       "x1": 504.0,
+       "y1": 671.24
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 673.56,
+       "x1": 416.53,
+       "y1": 682.1999999999999
+      }
+     ],
+     "quote": "All models were trained on TPUv3 hardware, and we report the number of TPUv3-core-days taken to pre-train each of them, that is, the number of TPU v3 cores (2 per chip) used for training multiplied by the training time in days.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.1",
+   "value": "ViT-L/16 model pre-trained on ImageNet-21k could be trained using standard cloud TPUv3 with 8 cores in approximately 30 days",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 449.08,
+      "x1": 504.01,
+      "y1": 490.59
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 388.78,
+       "y0": 449.08,
+       "x1": 504.01,
+       "y1": 457.71999999999997
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 460.04,
+       "x1": 504.0,
+       "y1": 468.68
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 470.99,
+       "x1": 504.0,
+       "y1": 479.63
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 481.95,
+       "x1": 191.85,
+       "y1": 490.59
+      }
+     ],
+     "quote": "Finally, the ViT-L/16 model pre-trained on the public ImageNet-21k dataset performs well on most datasets too, while taking fewer resources to pre-train: it could be trained using a standard cloud TPUv3 with 8 cores in approximately 30 days.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Mean and standard deviation of accuracies averaged over three fine-tuning runs",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 208.03338623046875,
+      "x1": 504.0033874511719,
+      "y1": 227.89892578125
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 476.36712646484375,
+       "y0": 208.03338623046875,
+       "x1": 504.0033874511719,
+       "y1": 216.93994140625
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 218.99237060546875,
+       "x1": 397.67254638671875,
+       "y1": 227.89892578125
+      }
+     ],
+     "quote": "We report mean and standard deviation of the accuracies, averaged over three fine-tuning runs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation study on positional embedding presence and encoding method using ViT-B/16 model",
+   "evidence": [
+    {
+     "chunk_id": "b0068",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 108.0,
+      "y0": 308.11,
+      "x1": 417.3,
+      "y1": 316.75
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 308.11,
+       "x1": 417.3,
+       "y1": 316.75
+      }
+     ],
+     "quote": "Table 8 summarizes the results from this ablation study on a ViT-B/16 model.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "Gap between self-supervised and large-scale supervised pre-training performance",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 531.0,
+      "x1": 504.01,
+      "y1": 561.55
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 244.93,
+       "y0": 531.0,
+       "x1": 504.01,
+       "y1": 539.64
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 541.95,
+       "x1": 504.0,
+       "y1": 550.59
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 552.91,
+       "x1": 141.48,
+       "y1": 561.55
+      }
+     ],
+     "quote": "Our initial experiments show improvement from self-supervised pre-training, but there is still large gap between self-supervised and large-scale supervised pretraining.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Apply Vision Transformer to other computer vision tasks like detection and segmentation",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 498.12,
+      "x1": 504.0,
+      "y1": 517.72
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 389.1,
+       "y0": 498.12,
+       "x1": 504.0,
+       "y1": 506.76
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 509.08,
+       "x1": 339.64,
+       "y1": 517.72
+      }
+     ],
+     "quote": "One is to apply ViT to other computer vision tasks, such as detection and segmentation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Continue exploring self-supervised pre-training methods",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 520.04,
+      "x1": 504.01,
+      "y1": 539.64
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 314.07,
+       "y0": 520.04,
+       "x1": 504.01,
+       "y1": 528.68
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 531.0,
+       "x1": 240.06,
+       "y1": 539.64
+      }
+     ],
+     "quote": "Another challenge is to continue exploring selfsupervised pre-training methods.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.2",
+   "value": "Further scale Vision Transformer models to improve performance",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 144.57,
+      "y0": 552.91,
+      "x1": 441.11,
+      "y1": 561.55
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 144.57,
+       "y0": 552.91,
+       "x1": 441.11,
+       "y1": 561.55
+      }
+     ],
+     "quote": "Finally, further scaling of ViT would likely lead to improved performance.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/google-research/vision_transformer",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.00003051757812,
+      "y0": 713.8197631835938,
+      "x1": 504.0002136230469,
+      "y1": 731.1800537109375
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 124.13899993896484,
+       "y0": 713.8197631835938,
+       "x1": 165.9851837158203,
+       "y1": 721.8357543945312
+      },
+      {
+       "page": 1,
+       "x0": 177.3994140625,
+       "y0": 713.8197631835938,
+       "x1": 194.32797241210938,
+       "y1": 721.8357543945312
+      },
+      {
+       "page": 1,
+       "x0": 205.74220275878906,
+       "y0": 713.8197631835938,
+       "x1": 218.68968200683594,
+       "y1": 721.8357543945312
+      },
+      {
+       "page": 1,
+       "x0": 230.09494018554688,
+       "y0": 713.8197631835938,
+       "x1": 269.4305419921875,
+       "y1": 721.8357543945312
+      },
+      {
+       "page": 1,
+       "x0": 280.8447570800781,
+       "y0": 713.8197631835938,
+       "x1": 306.7486877441406,
+       "y1": 721.8357543945312
+      },
+      {
+       "page": 1,
+       "x0": 318.16290283203125,
+       "y0": 713.8197631835938,
+       "x1": 329.1108703613281,
+       "y1": 721.8357543945312
+      },
+      {
+       "page": 1,
+       "x0": 340.52508544921875,
+       "y0": 713.8197631835938,
+       "x1": 372.4902648925781,
+       "y1": 721.8357543945312
+      },
+      {
+       "page": 1,
+       "x0": 383.8955383300781,
+       "y0": 713.8197631835938,
+       "x1": 390.3692626953125,
+       "y1": 721.8357543945312
+      },
+      {
+       "page": 1,
+       "x0": 401.78302001953125,
+       "y0": 714.2949829101562,
+       "x1": 504.0002136230469,
+       "y1": 721.217041015625
+      },
+      {
+       "page": 1,
+       "x0": 108.00003051757812,
+       "y0": 724.2579956054688,
+       "x1": 291.4077453613281,
+       "y1": 731.1800537109375
+      }
+     ],
+     "quote": "Fine-tuning code and pre-trained models are available at https://github.com/ google-research/vision_transformer",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/csrhddlam/axial-deeplab",
+   "evidence": [
+    {
+     "chunk_id": "b0082",
+     "page": 19,
+     "bbox": {
+      "page": 19,
+      "x0": 124.13899993896484,
+      "y0": 683.9317626953125,
+      "x1": 332.7064208984375,
+      "y1": 691.94775390625
+     },
+     "boxes": [
+      {
+       "page": 19,
+       "x0": 124.13899993896484,
+       "y0": 683.9317626953125,
+       "x1": 332.7064208984375,
+       "y1": 691.94775390625
+      }
+     ],
+     "quote": "Our implementation is based on the open-sourced PyTorch implementation in https://github.com/ csrhddlam/axial-deeplab.In our experiments, we reproduced the scores reported in(Wang et al., 2020b) in terms of accuracy, however, our implementation, similar to the open-source implementation, is very slow on TPUs.Therefore, we were not able to use it for extensive large-scale experiments.These may be unlocked by a carefully optimized implementation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "Vision Transformer attains excellent results compared to state-of-the-art convolutional networks while requiring fewer computational resources.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 337.36,
+      "x1": 468.14,
+      "y1": 389.84
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 311.21,
+       "y0": 337.36,
+       "x1": 468.14,
+       "y1": 346.0
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 348.32,
+       "x1": 468.14,
+       "y1": 356.96
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 359.28,
+       "x1": 468.14,
+       "y1": 367.91999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 370.24,
+       "x1": 468.14,
+       "y1": 378.88
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 381.2,
+       "x1": 338.40999999999997,
+       "y1": 389.84
+      },
+      {
+       "page": 1,
+       "x0": 338.4,
+       "y0": 379.53,
+       "x1": 341.89,
+       "y1": 385.58
+      }
+     ],
+     "quote": "When pre-trained on large amounts of data and transferred to multiple mid-sized or small image recognition benchmarks (ImageNet, CIFAR-100, VTAB, etc.), Vision Transformer (ViT) attains excellent results compared to state-of-the-art convolutional networks while requiring substantially fewer computational resources to train.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "The best model reaches specific high accuracy percentages on ImageNet, ImageNet-ReaL, CIFAR-100, and the VTAB suite.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 157.07,
+      "x1": 504.01,
+      "y1": 187.63
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 388.7,
+       "y0": 157.07,
+       "x1": 504.01,
+       "y1": 165.70999999999998
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 167.71,
+       "x1": 504.0,
+       "y1": 176.67000000000002
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 178.67,
+       "x1": 281.13,
+       "y1": 187.63
+      }
+     ],
+     "quote": "In particular, the best model reaches the accuracy of 88.55% on ImageNet, 90.72% on ImageNet-ReaL, 94.55% on CIFAR-100, and 77.63% on the VTAB suite of 19 tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

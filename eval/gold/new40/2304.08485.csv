@@ -1,0 +1,36 @@
+2304.08485,task,,multimodal instruction following,visual instruction following|multimodal chatbot|visual chat|instruction-following,5,
+2304.08485,task,,science question answering,multimodal reasoning|ScienceQA|visual reasoning,5,
+2304.08485,datasets,,CC-595K,CC3M|filtered CC3M|Conceptual Captions,5,pre-training (595K pairs)
+2304.08485,datasets,,LLaVA-Instruct-158K,158K instruction-following data|LLaVA-Instruct,5,fine-tuning
+2304.08485,datasets,,COCO,COCO images|COCO-Val-2014,3,instruction data source
+2304.08485,datasets,,LLaVA-Bench (COCO),LLaVA-Bench,7,30 images 90 questions
+2304.08485,datasets,,LLaVA-Bench (In-the-Wild),LLaVA-Bench,7,24 images 60 questions
+2304.08485,datasets,,ScienceQA,Science QA,5,
+2304.08485,baselines,,BLIP-2,,6,
+2304.08485,baselines,,OpenFlamingo,,6,
+2304.08485,baselines,,GPT-4,multimodal GPT-4|text-only GPT-4,6,
+2304.08485,baselines,,GPT-3.5,text-davinci-002,8,
+2304.08485,baselines,,GPT-3.5 w/ CoT,GPT-3.5 with chain-of-thought,8,
+2304.08485,baselines,,LLaMA-Adapter,,8,
+2304.08485,baselines,,MM-CoT,multimodal chain-of-thought|MM-CoT Base|MM-CoT Large,8,
+2304.08485,baselines,,Human,human performance,9,ScienceQA
+2304.08485,metrics,,relative score,GPT-4 judged relative score|overall score,6,
+2304.08485,metrics,,accuracy,ScienceQA accuracy,8,
+2304.08485,hyperparameters,epochs,1,,5,pre-training
+2304.08485,hyperparameters,learning_rate,2e-3,,5,pre-training
+2304.08485,hyperparameters,batch_size,128,,5,pre-training
+2304.08485,hyperparameters,epochs,3,,5,fine-tuning on LLaVA-Instruct-158K
+2304.08485,hyperparameters,learning_rate,2e-5,,5,fine-tuning
+2304.08485,hyperparameters,batch_size,32,,5,fine-tuning
+2304.08485,hyperparameters,epochs,12,,8,ScienceQA
+2304.08485,hyperparameters,optimizer,Adam,,20,
+2304.08485,hyperparameters,weight_decay,0,no weight decay,20,
+2304.08485,hyperparameters,lr_schedule,cosine,cosine learning rate,20,
+2304.08485,hyperparameters,warmup_ratio,0.03,3%,20,
+2304.08485,hyperparameters,precision,BF16,BF16 and TF32,20,
+2304.08485,hyperparameters,model_size,13B,,9,LLM; 7B in ablation
+2304.08485,hyperparameters,model_size,7B,,9,ablation
+2304.08485,hyperparameters,patch_size,14,ViT-L/14,4,CLIP vision encoder
+2304.08485,compute,,8 A100 GPUs,8× A100s|A100,5,
+2304.08485,compute,,4 hours pre-training / 10 hours fine-tuning,4 hours|10 hours,20,ScienceQA fine-tuning 4 hours
+2304.08485,code_urls,,https://llava-vl.github.io,llava-vl.github.io,1,project page with code

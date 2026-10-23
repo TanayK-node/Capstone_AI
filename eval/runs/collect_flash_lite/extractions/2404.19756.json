@@ -1,0 +1,1799 @@
+{
+ "metadata": {
+  "title": "KAN: Kolmogorov-Arnold Networks",
+  "authors": [
+   "Ziming Liu",
+   "Yixuan Wang",
+   "Sachin Vaidya",
+   "Fabian Ruehle",
+   "James Halverson",
+   "Marin Soljačić",
+   "Thomas Y Hou",
+   "Max Tegmark"
+  ],
+  "venue": null,
+  "year": "2025",
+  "arxiv_id": "2404.19756v5[cs.LG]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Today's deep learning models rely heavily on MLPs.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 433.01,
+      "x1": 468.14,
+      "y1": 465.69
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 398.43,
+       "y0": 433.01,
+       "x1": 468.13,
+       "y1": 440.78
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 445.47,
+       "x1": 468.14,
+       "y1": 453.24
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 457.92,
+       "x1": 326.98,
+       "y1": 465.69
+      }
+     ],
+     "quote": "In summary, KANs are promising alternatives for MLPs, opening opportunities for further improving today's deep learning models which rely heavily on MLPs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Proposing Kolmogorov-Arnold Networks (KANs) as alternatives to MLPs with learnable activation functions on edges.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 296.03,
+      "x1": 468.14,
+      "y1": 316.25
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 296.03,
+       "x1": 468.14,
+       "y1": 303.79999999999995
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 308.48,
+       "x1": 468.14,
+       "y1": 316.25
+      }
+     ],
+     "quote": "Inspired by the Kolmogorov-Arnold representation theorem, we propose Kolmogorov-Arnold Networks (KANs) as promising alternatives to Multi-Layer Perceptrons (MLPs).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Small-scale AI and Science tasks including function fitting.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 345.84,
+      "x1": 468.14000000000004,
+      "y1": 378.52
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 434.97,
+       "y0": 345.84,
+       "x1": 468.14000000000004,
+       "y1": 353.60999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 358.29,
+       "x1": 468.14,
+       "y1": 366.06
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 370.75,
+       "x1": 344.14,
+       "y1": 378.52
+      }
+     ],
+     "quote": "We show that this seemingly simple change makes KANs outperform MLPs in terms of accuracy and interpretability, on small-scale AI + Science tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "Designing Kolmogorov-Arnold Networks (KANs) which replace fixed linear weights and node activation functions with learnable univariate activation functions parametrized as B-splines placed on the network edges.",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 631.7,
+      "x1": 504.0,
+      "y1": 653.97
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 298.58,
+       "y0": 631.7,
+       "x1": 504.0,
+       "y1": 640.34
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 645.33,
+       "x1": 239.88,
+       "y1": 653.97
+      }
+     ],
+     "quote": "This inspires us to design a neural network which explicitly parametrizes Eq. (2.1).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "Defining KAN layers and stacking multiple layers to build deeper and wider KAN architectures capable of processing multivariate functions.",
+   "evidence": [
+    {
+     "chunk_id": "b0028",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 201.37,
+      "x1": 504.0,
+      "y1": 223.95999999999998
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 139.78,
+       "y0": 201.37,
+       "x1": 504.0,
+       "y1": 211.02
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 215.32,
+       "x1": 260.46000000000004,
+       "y1": 223.95999999999998
+      }
+     ],
+     "quote": "It turns out that a KAN layer with n in -dimensional inputs and n out -dimensional outputs can be defined as a matrix of 1D functions",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "Training KANs using backpropagation with specific implementation techniques including residual activation functions (combining a basis function with a spline function), custom initialization scales, and on-the-fly updates of spline grids.",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 185.84,
+      "x1": 504.0,
+      "y1": 208.12
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 272.21,
+       "y0": 185.84,
+       "x1": 504.0,
+       "y1": 194.48000000000002
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 199.48,
+       "x1": 247.48,
+       "y1": 208.12
+      }
+     ],
+     "quote": "Notice that all the operations are differentiable, so we can train KANs with back propagation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "Employing a grid extension technique to transition a trained KAN from coarse to finer spline grids via least squares fitting, improving accuracy without retraining from scratch.",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 639.46,
+      "x1": 504.0,
+      "y1": 675.37
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 215.01,
+       "y0": 639.46,
+       "x1": 504.0,
+       "y1": 648.1
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 653.09,
+       "x1": 504.0,
+       "y1": 661.73
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 666.73,
+       "x1": 315.6,
+       "y1": 675.37
+      }
+     ],
+     "quote": "By contrast, for KANs, one can first train a KAN with fewer parameters and then extend it to a KAN with more parameters by simply making its spline grids finer, without the need to retraining the larger model from scratch.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "Applying sparsity regularization via L1 norm and entropy of activation functions, followed by network pruning and symbolic fitting interfaces to yield interpretable models.",
+   "evidence": [
+    {
+     "chunk_id": "b0100",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 108.0,
+      "y0": 279.9,
+      "x1": 504.0,
+      "y1": 315.82
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 322.74,
+       "y0": 279.9,
+       "x1": 504.0,
+       "y1": 288.53999999999996
+      },
+      {
+       "page": 11,
+       "x0": 108.0,
+       "y0": 293.54,
+       "x1": 504.0,
+       "y1": 302.18
+      },
+      {
+       "page": 11,
+       "x0": 108.0,
+       "y0": 307.18,
+       "x1": 353.62,
+       "y1": 315.82
+      }
+     ],
+     "quote": "To make KANs maximally interpretable, we propose a few simplification techniques in Section 2.5.1, and an example of how users can interact with KANs to make them more interpretable in Section 2.5.2.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "Introducing Kolmogorov-Arnold networks (KANs) that place activation functions on the edges instead of nodes, contrasting with traditional MLPs which separate linear transformations and nonlinearities.",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 257.47,
+      "x1": 504.0,
+      "y1": 280.1
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 257.47,
+       "x1": 504.0,
+       "y1": 266.46000000000004
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 271.11,
+       "x1": 248.19,
+       "y1": 280.1
+      }
+     ],
+     "quote": "It is clear that MLPs treat linear transformations and nonlinearities separately as W and σ, while KANs treat them all together in Φ.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "Utilizing both external degrees of freedom (network connectivity for compositional structures) and internal degrees of freedom (grid points inside activation functions for univariate functions).",
+   "evidence": [
+    {
+     "chunk_id": "b0098",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 108.0,
+      "y0": 75.48,
+      "x1": 503.99,
+      "y1": 97.75
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 289.06,
+       "y0": 75.48,
+       "x1": 503.99,
+       "y1": 84.12
+      },
+      {
+       "page": 11,
+       "x0": 108.0,
+       "y0": 89.11,
+       "x1": 370.69,
+       "y1": 97.75
+      }
+     ],
+     "quote": "A new concept that KANs highlights is a distinction between external versus internal degrees of freedom (parameters).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.2",
+   "value": "Achieving better neural scaling laws and avoiding the curse of dimensionality by leveraging compositional structures and smooth Kolmogorov-Arnold representations.",
+   "evidence": [
+    {
+     "chunk_id": "b0097",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 623.77,
+      "x1": 504.01,
+      "y1": 673.3199999999999
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 269.22,
+       "y0": 623.77,
+       "x1": 504.01,
+       "y1": 632.41
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 637.41,
+       "x1": 504.0,
+       "y1": 646.05
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 651.04,
+       "x1": 157.88,
+       "y1": 659.68
+      },
+      {
+       "page": 10,
+       "x0": 160.91,
+       "y0": 650.72,
+       "x1": 504.0,
+       "y1": 659.6800000000001
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 664.68,
+       "x1": 211.23000000000002,
+       "y1": 673.3199999999999
+      },
+      {
+       "page": 10,
+       "x0": 213.72,
+       "y0": 663.01,
+       "x1": 217.21,
+       "y1": 669.06
+      },
+      {
+       "page": 10,
+       "x0": 217.71,
+       "y0": 664.68,
+       "x1": 220.20000000000002,
+       "y1": 673.3199999999999
+      }
+     ],
+     "quote": "In addition, KANs still have much better scaling laws than MLPs, for data fitting (Figure 3.1) and PDE solving (Figure 3.3).",
+     "grounding_status": "verified",
+     "match_score": 95.2
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "Special functions dataset containing 15 common mathematical and physical special functions",
+   "evidence": [
+    {
+     "chunk_id": "b0150",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 108.0,
+      "y0": 391.89,
+      "x1": 455.87,
+      "y1": 400.53
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 391.89,
+       "x1": 455.87,
+       "y1": 400.53
+      }
+     ],
+     "quote": "We collect 15 special functions common in math and physics, summarized in Table 1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Special functions",
+   "split": "",
+   "size": "15 functions",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.1",
+   "value": "Feynman_no_units dataset collecting physics equations from Feynman's textbooks",
+   "evidence": [
+    {
+     "chunk_id": "b0165",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 108.0,
+      "y0": 600.63,
+      "x1": 504.01,
+      "y1": 636.54
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 173.14,
+       "y0": 600.63,
+       "x1": 504.01,
+       "y1": 609.33
+      },
+      {
+       "page": 16,
+       "x0": 108.0,
+       "y0": 614.26,
+       "x1": 504.0,
+       "y1": 622.9
+      },
+      {
+       "page": 16,
+       "x0": 108.0,
+       "y0": 627.9,
+       "x1": 141.48,
+       "y1": 636.54
+      }
+     ],
+     "quote": "For our purpose, we are interested in problems in the Feynman_no_units dataset that have at least 2 variables, since univariate problems are trivial for KANs (they simplify to 1D splines).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Feynman_no_units",
+   "split": "",
+   "size": "",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.2",
+   "value": "Knot theory dataset containing 17 knot invariants and knot signatures",
+   "evidence": [
+    {
+     "chunk_id": "b0219",
+     "page": 23,
+     "bbox": {
+      "page": 23,
+      "x0": 108.0,
+      "y0": 460.65,
+      "x1": 441.19,
+      "y1": 469.28999999999996
+     },
+     "boxes": [
+      {
+       "page": 23,
+       "x0": 108.0,
+       "y0": 460.65,
+       "x1": 441.19,
+       "y1": 469.28999999999996
+      }
+     ],
+     "quote": "To investigate (1), we treat 17 knot invariants as inputs and signature as outputs.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Knot dataset",
+   "split": "",
+   "size": "",
+   "public": "unknown"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "MLPs with different depths and widths",
+   "evidence": [
+    {
+     "chunk_id": "b0145",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 438.91,
+      "x1": 504.0,
+      "y1": 461.19
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 267.15,
+       "y0": 438.91,
+       "x1": 504.0,
+       "y1": 447.55
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 452.55,
+       "x1": 129.31,
+       "y1": 461.19
+      }
+     ],
+     "quote": "We train MLPs with different depths and widths as baselines.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "MLPs with fixed width 5 or 100 and depths swept in {2, 3, 4, 5, 6}",
+   "evidence": [
+    {
+     "chunk_id": "b0150",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 108.0,
+      "y0": 391.89,
+      "x1": 504.01,
+      "y1": 414.16999999999996
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 460.35,
+       "y0": 391.89,
+       "x1": 504.01,
+       "y1": 400.53
+      },
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 405.21,
+       "x1": 381.72,
+       "y1": 414.16999999999996
+      }
+     ],
+     "quote": "We choose MLPs with fixed width 5 or 100 and depths swept in {2, 3, 4, 5, 6}.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "Deepmind's 4-layer width-300 MLP for signature classification",
+   "evidence": [
+    {
+     "chunk_id": "b0219",
+     "page": 23,
+     "bbox": {
+      "page": 23,
+      "x0": 108.0,
+      "y0": 487.6,
+      "x1": 504.0,
+      "y1": 510.2
+     },
+     "boxes": [
+      {
+       "page": 23,
+       "x0": 237.64,
+       "y0": 487.6,
+       "x1": 504.0,
+       "y1": 496.56
+      },
+      {
+       "page": 23,
+       "x0": 108.0,
+       "y0": 501.24,
+       "x1": 484.43,
+       "y1": 510.2
+      }
+     ],
+     "quote": "while Deepmind's 4-layer width-300 MLP achieves 78% test accuracy",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Test RMSE loss",
+   "evidence": [
+    {
+     "chunk_id": "b0138",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 225.97,
+      "x1": 504.0,
+      "y1": 250.14000000000001
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 227.54,
+       "x1": 399.6,
+       "y1": 236.5
+      },
+      {
+       "page": 14,
+       "x0": 400.69,
+       "y0": 225.97,
+       "x1": 410.89,
+       "y1": 232.09
+      },
+      {
+       "page": 14,
+       "x0": 413.48,
+       "y0": 227.86,
+       "x1": 504.0,
+       "y1": 236.5
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 241.18,
+       "x1": 119.58,
+       "y1": 250.14000000000001
+      }
+     ],
+     "quote": "In Section 2.3, our theory suggested that test RMSE loss ℓ scales as ℓ ∝ N -4 with model parameters N .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "RMSE",
+   "evidence": [
+    {
+     "chunk_id": "b0151",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 108.0,
+      "y0": 505.38,
+      "x1": 504.0,
+      "y1": 529.33
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 507.05,
+       "x1": 465.96,
+       "y1": 515.69
+      },
+      {
+       "page": 15,
+       "x0": 469.73,
+       "y0": 505.38,
+       "x1": 473.22,
+       "y1": 511.43
+      },
+      {
+       "page": 15,
+       "x0": 473.71,
+       "y0": 507.05,
+       "x1": 504.0,
+       "y1": 515.69
+      },
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 520.69,
+       "x1": 341.48,
+       "y1": 529.33
+      }
+     ],
+     "quote": "For each dataset and each model family (KANs or MLPs), we plot the Pareto frontier 5 , in the (number of parameters, RMSE) plane, shown in Figure 3",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "Error in the L2 norm and energy (H1) norm",
+   "evidence": [
+    {
+     "chunk_id": "b0185",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 108.0,
+      "y0": 466.33,
+      "x1": 504.0,
+      "y1": 504.14
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 227.91,
+       "y0": 467.91,
+       "x1": 376.85,
+       "y1": 476.87
+      },
+      {
+       "page": 18,
+       "x0": 376.85,
+       "y0": 466.33,
+       "x1": 380.82000000000005,
+       "y1": 472.45
+      },
+      {
+       "page": 18,
+       "x0": 385.14,
+       "y0": 468.23,
+       "x1": 470.54999999999995,
+       "y1": 476.87
+      },
+      {
+       "page": 18,
+       "x0": 471.36,
+       "y0": 466.33,
+       "x1": 475.33000000000004,
+       "y1": 472.45
+      },
+      {
+       "page": 18,
+       "x0": 475.83,
+       "y0": 468.23,
+       "x1": 504.0,
+       "y1": 476.87
+      },
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 481.86,
+       "x1": 504.0,
+       "y1": 490.5
+      },
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 495.5,
+       "x1": 260.82,
+       "y1": 504.14
+      }
+     ],
+     "quote": "We measure both the error in the L 2 norm and energy (H 1 ) norm and see that KAN achieves a much better scaling law with a smaller error, using smaller networks and fewer parameters; see Figure 3.3.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "MSE",
+   "evidence": [
+    {
+     "chunk_id": "b0185",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 108.0,
+      "y0": 495.5,
+      "x1": 504.01,
+      "y1": 531.41
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 265.76,
+       "y0": 495.5,
+       "x1": 504.01,
+       "y1": 504.14
+      },
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 509.14,
+       "x1": 232.3,
+       "y1": 517.78
+      },
+      {
+       "page": 18,
+       "x0": 232.3,
+       "y0": 507.24,
+       "x1": 242.5,
+       "y1": 513.36
+      },
+      {
+       "page": 18,
+       "x0": 246.4,
+       "y0": 508.82,
+       "x1": 268.63,
+       "y1": 517.78
+      },
+      {
+       "page": 18,
+       "x0": 268.63,
+       "y0": 507.24,
+       "x1": 278.83,
+       "y1": 513.36
+      },
+      {
+       "page": 18,
+       "x0": 282.73,
+       "y0": 509.14,
+       "x1": 487.27,
+       "y1": 517.78
+      },
+      {
+       "page": 18,
+       "x0": 487.27,
+       "y0": 507.24,
+       "x1": 491.24,
+       "y1": 513.36
+      },
+      {
+       "page": 18,
+       "x0": 495.14,
+       "y0": 509.14,
+       "x1": 504.0,
+       "y1": 517.78
+      },
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 522.45,
+       "x1": 117.96000000000001,
+       "y1": 531.19
+      },
+      {
+       "page": 18,
+       "x0": 117.96,
+       "y0": 520.88,
+       "x1": 121.92999999999999,
+       "y1": 527.0
+      },
+      {
+       "page": 18,
+       "x0": 125.32,
+       "y0": 522.77,
+       "x1": 174.82999999999998,
+       "y1": 531.41
+      }
+     ],
+     "quote": "A 2-Layer width-10 KAN is 100 times more accurate than a 4-Layer width-100 MLP (10 -7 vs 10 -5 MSE) and 100 times more parameter efficient (10 2 vs 10 4 parameters).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.4",
+   "value": "Cross-entropy loss",
+   "evidence": [
+    {
+     "chunk_id": "b0142",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 354.93,
+      "x1": 111.87,
+      "y1": 363.57
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 354.93,
+       "x1": 111.87,
+       "y1": 363.57
+      }
+     ],
+     "quote": "Similar to the setup in [45], signatures (which are even numbers) are encoded as one-hot vectors and networks are trained with cross-entropy loss.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.5",
+   "value": "Test accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0219",
+     "page": 23,
+     "bbox": {
+      "page": 23,
+      "x0": 108.0,
+      "y0": 487.6,
+      "x1": 504.0,
+      "y1": 510.2
+     },
+     "boxes": [
+      {
+       "page": 23,
+       "x0": 237.64,
+       "y0": 487.6,
+       "x1": 504.0,
+       "y1": 496.56
+      },
+      {
+       "page": 23,
+       "x0": 108.0,
+       "y0": 501.24,
+       "x1": 484.43,
+       "y1": 510.2
+      }
+     ],
+     "quote": "We find that an extremely small [17,1,14] KAN is able to achieve 81.6% test accuracy (while Deepmind's 4-layer width-300 MLP achieves 78% test accuracy).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Grid points increased every 200 steps covering G = {3, 5, 10, 20, 50, 100, 200, 500, 1000}",
+   "evidence": [
+    {
+     "chunk_id": "b0145",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 424.96,
+      "x1": 504.0,
+      "y1": 447.33
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 424.96,
+       "x1": 504.0,
+       "y1": 433.91999999999996
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 438.59,
+       "x1": 260.48,
+       "y1": 447.33
+      }
+     ],
+     "quote": "We train these KANs by increasing grid points every 200 steps, in total covering G = {3, 5, 10, 20, 50, 100, 200, 500, 1000}.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "grid points",
+   "value_raw": "{3, 5, 10, 20, 50, 100, 200, 500, 1000}",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Total training steps of 1800",
+   "evidence": [
+    {
+     "chunk_id": "b0145",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 132.39,
+      "y0": 452.55,
+      "x1": 413.33,
+      "y1": 461.19
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 132.39,
+       "y0": 452.55,
+       "x1": 413.33,
+       "y1": 461.19
+      }
+     ],
+     "quote": "Both MLPs and KANs are trained with LBFGS for 1800 steps in total.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "training steps",
+   "value_raw": "1800",
+   "value_norm": 1800.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Optimizer LBFGS",
+   "evidence": [
+    {
+     "chunk_id": "b0145",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 132.39,
+      "y0": 452.55,
+      "x1": 413.33,
+      "y1": 461.19
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 132.39,
+       "y0": 452.55,
+       "x1": 413.33,
+       "y1": 461.19
+      }
+     ],
+     "quote": "Both MLPs and KANs are trained with LBFGS for 1800 steps in total.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "LBFGS",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Sparsification lambda value of 10^-2 or 10^-3",
+   "evidence": [
+    {
+     "chunk_id": "b0150",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 108.0,
+      "y0": 430.9,
+      "x1": 504.0,
+      "y1": 455.07
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 318.34,
+       "y0": 432.48,
+       "x1": 454.47999999999996,
+       "y1": 441.44
+      },
+      {
+       "page": 15,
+       "x0": 454.48,
+       "y0": 430.9,
+       "x1": 464.68,
+       "y1": 437.02
+      },
+      {
+       "page": 15,
+       "x0": 467.88,
+       "y0": 432.48,
+       "x1": 489.43,
+       "y1": 441.22
+      },
+      {
+       "page": 15,
+       "x0": 489.43,
+       "y0": 430.9,
+       "x1": 499.63,
+       "y1": 437.02
+      },
+      {
+       "page": 15,
+       "x0": 500.13,
+       "y0": 432.48,
+       "x1": 504.0,
+       "y1": 441.22
+      },
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 446.43,
+       "x1": 504.0,
+       "y1": 455.07
+      }
+     ],
+     "quote": "We use the sparsification (λ = 10 -2 or 10 -3 ) and pruning technique in Section 2.5.1 to obtain a smaller KAN pruned from a fixed-shape KAN.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "sparsification lambda",
+   "value_raw": "10 -2 or 10 -3",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Interior points ni = 10000 for PDE solving",
+   "evidence": [
+    {
+     "chunk_id": "b0185",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 108.0,
+      "y0": 454.27,
+      "x1": 504.0,
+      "y1": 477.56
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 454.27,
+       "x1": 504.0,
+       "y1": 463.91999999999996
+      },
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 467.91,
+       "x1": 220.82999999999998,
+       "y1": 477.56
+      }
+     ],
+     "quote": "We compare the KAN architecture with that of MLPs using the same hyperparameters n i = 10000, n b = 800, and α = 0.01.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "interior points ni",
+   "value_raw": "10000",
+   "value_norm": 10000.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Boundary points nb = 800 for PDE solving",
+   "evidence": [
+    {
+     "chunk_id": "b0185",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 108.0,
+      "y0": 454.27,
+      "x1": 504.0,
+      "y1": 477.56
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 454.27,
+       "x1": 504.0,
+       "y1": 463.91999999999996
+      },
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 467.91,
+       "x1": 220.82999999999998,
+       "y1": 477.56
+      }
+     ],
+     "quote": "We compare the KAN architecture with that of MLPs using the same hyperparameters n i = 10000, n b = 800, and α = 0.01.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "boundary points nb",
+   "value_raw": "800",
+   "value_norm": 800.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Balancing hyperparameter alpha = 0.01 for PDE loss",
+   "evidence": [
+    {
+     "chunk_id": "b0185",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 108.0,
+      "y0": 454.27,
+      "x1": 504.0,
+      "y1": 477.56
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 454.27,
+       "x1": 504.0,
+       "y1": 463.91999999999996
+      },
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 467.91,
+       "x1": 220.82999999999998,
+       "y1": 477.56
+      }
+     ],
+     "quote": "We compare the KAN architecture with that of MLPs using the same hyperparameters n i = 10000, n b = 800, and α = 0.01.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "alpha",
+   "value_raw": "0.01",
+   "value_norm": 0.01,
+   "scope": ""
+  }
+ ],
+ "compute": [],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "3 random seeds for each hyperparameter combination",
+   "evidence": [
+    {
+     "chunk_id": "b0150",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 108.0,
+      "y0": 473.71,
+      "x1": 504.0,
+      "y1": 495.97999999999996
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 347.73,
+       "y0": 473.71,
+       "x1": 504.0,
+       "y1": 482.34999999999997
+      },
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 487.34,
+       "x1": 202.35,
+       "y1": 495.97999999999996
+      }
+     ],
+     "quote": "For each hyperparameter combination, we run 3 random seeds.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation study on signature dependence showing µr contributes more to accuracy than µi",
+   "evidence": [
+    {
+     "chunk_id": "b0219",
+     "page": 23,
+     "bbox": {
+      "page": 23,
+      "x0": 108.0,
+      "y0": 624.28,
+      "x1": 504.0,
+      "y1": 674.52
+     },
+     "boxes": [
+      {
+       "page": 23,
+       "x0": 346.43,
+       "y0": 624.28,
+       "x1": 504.0,
+       "y1": 632.92
+      },
+      {
+       "page": 23,
+       "x0": 108.0,
+       "y0": 637.92,
+       "x1": 487.39,
+       "y1": 646.56
+      },
+      {
+       "page": 23,
+       "x0": 490.97,
+       "y0": 637.92,
+       "x1": 504.0,
+       "y1": 646.56
+      },
+      {
+       "page": 23,
+       "x0": 108.0,
+       "y0": 651.24,
+       "x1": 504.0,
+       "y1": 660.89
+      },
+      {
+       "page": 23,
+       "x0": 108.0,
+       "y0": 664.87,
+       "x1": 407.37,
+       "y1": 674.52
+      }
+     ],
+     "quote": "(a) ablation studies. We show that µ r contributes more to accuracy than µ i (see Figure 4.3): for example, µ r alone can achieve 65.0% accuracy, while µ i alone can only achieve 43.8% accuracy.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "Our mathematical understanding of KANs is still very limited.",
+   "evidence": [
+    {
+     "chunk_id": "b0272",
+     "page": 32,
+     "bbox": {
+      "page": 32,
+      "x0": 108.0,
+      "y0": 75.09,
+      "x1": 504.0,
+      "y1": 97.75
+     },
+     "boxes": [
+      {
+       "page": 32,
+       "x0": 108.0,
+       "y0": 75.09,
+       "x1": 504.0,
+       "y1": 84.12
+      },
+      {
+       "page": 32,
+       "x0": 108.0,
+       "y0": 89.11,
+       "x1": 424.35,
+       "y1": 97.75
+      }
+     ],
+     "quote": "Although we have presented preliminary mathematical analysis of KANs (Theorem 2.1), our mathematical understanding of them is still very limited.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.1",
+   "value": "KANs currently suffer from slow training speeds.",
+   "evidence": [
+    {
+     "chunk_id": "b0284",
+     "page": 33,
+     "bbox": {
+      "page": 33,
+      "x0": 108.0,
+      "y0": 443.19,
+      "x1": 378.79,
+      "y1": 451.83
+     },
+     "boxes": [
+      {
+       "page": 33,
+       "x0": 108.0,
+       "y0": 443.19,
+       "x1": 378.79,
+       "y1": 451.83
+      }
+     ],
+     "quote": "Currently, the biggest bottleneck of KANs lies in its slow training.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Apply KANs to solve Navier-Stokes equations, density functional theory, or other regression and PDE tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0280",
+     "page": 32,
+     "bbox": {
+      "page": 32,
+      "x0": 108.0,
+      "y0": 570.62,
+      "x1": 504.0,
+      "y1": 606.53
+     },
+     "boxes": [
+      {
+       "page": 32,
+       "x0": 446.44,
+       "y0": 570.62,
+       "x1": 504.0,
+       "y1": 579.26
+      },
+      {
+       "page": 32,
+       "x0": 108.0,
+       "y0": 584.26,
+       "x1": 504.0,
+       "y1": 592.9
+      },
+      {
+       "page": 32,
+       "x0": 108.0,
+       "y0": 597.89,
+       "x1": 304.96000000000004,
+       "y1": 606.53
+      }
+     ],
+     "quote": "We would like to apply KANs to solve Navier-Stokes equations, density functional theory, or any other tasks that can be formulated as regression or PDE solving.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Integrate KANs into current architectures such as transformers to propose kansformers.",
+   "evidence": [
+    {
+     "chunk_id": "b0280",
+     "page": 32,
+     "bbox": {
+      "page": 32,
+      "x0": 108.0,
+      "y0": 597.89,
+      "x1": 504.0,
+      "y1": 633.81
+     },
+     "boxes": [
+      {
+       "page": 32,
+       "x0": 309.99,
+       "y0": 597.89,
+       "x1": 504.0,
+       "y1": 606.53
+      },
+      {
+       "page": 32,
+       "x0": 108.0,
+       "y0": 611.53,
+       "x1": 504.0,
+       "y1": 620.17
+      },
+      {
+       "page": 32,
+       "x0": 108.0,
+       "y0": 625.17,
+       "x1": 468.51,
+       "y1": 633.81
+      }
+     ],
+     "quote": "We would also like to apply KANs to machinelearning-related tasks, which would require integrating KANs into current architectures, e.g., transformers -one may propose \"kansformers\" which replace MLPs by KANs in transformers.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/KindXiaoming/pykan",
+   "evidence": [
+    {
+     "chunk_id": "b0015",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 220.07,
+      "y0": 497.37,
+      "x1": 307.85,
+      "y1": 506.01
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 220.07,
+       "y0": 497.37,
+       "x1": 307.85,
+       "y1": 506.01
+      }
+     ],
+     "quote": "Codes are available at https://github.com/KindXiaoming/pykan",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "Smaller KANs can achieve comparable or better accuracy than larger MLPs in function fitting tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 370.75,
+      "x1": 468.14,
+      "y1": 390.96999999999997
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 348.9,
+       "y0": 370.75,
+       "x1": 468.14,
+       "y1": 378.52
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 383.2,
+       "x1": 441.72,
+       "y1": 390.96999999999997
+      }
+     ],
+     "quote": "For accuracy, smaller KANs can achieve comparable or better accuracy than larger MLPs in function fitting tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "KANs possess faster neural scaling laws than MLPs.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 383.2,
+      "x1": 468.13000000000005,
+      "y1": 403.41999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 446.72,
+       "y0": 383.2,
+       "x1": 468.13000000000005,
+       "y1": 390.96999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 395.65,
+       "x1": 429.57,
+       "y1": 403.41999999999996
+      }
+     ],
+     "quote": "Theoretically and empirically, KANs possess faster neural scaling laws than MLPs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

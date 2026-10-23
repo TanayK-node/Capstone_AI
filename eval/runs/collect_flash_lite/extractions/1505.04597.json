@@ -1,0 +1,1627 @@
+{
+ "metadata": {
+  "title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+  "authors": [
+   "Olaf Ronneberger",
+   "Philipp Fischer",
+   "Thomas Brox"
+  ],
+  "venue": null,
+  "year": "2015",
+  "arxiv_id": "1505.04597v1[cs.CV]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Successful training of deep networks typically requires thousands of annotated training samples, which are usually beyond reach in biomedical tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0004",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 134.77,
+      "y0": 620.25,
+      "x1": 480.59000000000003,
+      "y1": 640.95
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 454.82,
+       "y0": 620.25,
+       "x1": 480.58,
+       "y1": 628.99
+      },
+      {
+       "page": 1,
+       "x0": 134.77,
+       "y0": 632.21,
+       "x1": 480.59000000000003,
+       "y1": 640.95
+      }
+     ],
+     "quote": "Hence, thousands of training images are usually beyond reach in biomedical tasks.",
+     "grounding_status": "partial",
+     "match_score": 96.3
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Sliding-window convolutional networks are slow and face a trade-off between localization accuracy and context use.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 134.77,
+      "y0": 471.43,
+      "x1": 480.6,
+      "y1": 504.08
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 445.4,
+       "y0": 471.43,
+       "x1": 480.59,
+       "y1": 480.17
+      },
+      {
+       "page": 2,
+       "x0": 134.77,
+       "y0": 483.38,
+       "x1": 480.6,
+       "y1": 492.12
+      },
+      {
+       "page": 2,
+       "x0": 134.77,
+       "y0": 495.34,
+       "x1": 388.58000000000004,
+       "y1": 504.08
+      }
+     ],
+     "quote": "First, it is quite slow because the network must be run separately for each patch, and there is a lot of redundancy due to overlapping patches.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "We present a network and training strategy relying on strong data augmentation to efficiently use available annotated samples.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 163.11,
+      "y0": 278.0,
+      "x1": 452.25,
+      "y1": 318.73
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 408.71,
+       "y0": 278.0,
+       "x1": 452.25,
+       "y1": 285.86
+      },
+      {
+       "page": 1,
+       "x0": 163.11,
+       "y0": 288.96,
+       "x1": 452.24,
+       "y1": 296.82
+      },
+      {
+       "page": 1,
+       "x0": 163.11,
+       "y0": 299.91,
+       "x1": 452.25,
+       "y1": 307.77000000000004
+      },
+      {
+       "page": 1,
+       "x0": 163.11,
+       "y0": 310.87,
+       "x1": 203.31,
+       "y1": 318.73
+      }
+     ],
+     "quote": "In this paper, we present a network and training strategy that relies on the strong use of data augmentation to use the available annotated samples more efficiently.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "We modify and extend the fully convolutional network architecture to work with very few training images and yield more precise segmentations.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 134.77,
+      "y0": 596.34,
+      "x1": 480.6,
+      "y1": 628.99
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 254.77,
+       "y0": 596.34,
+       "x1": 480.59000000000003,
+       "y1": 605.08
+      },
+      {
+       "page": 2,
+       "x0": 134.77,
+       "y0": 608.3,
+       "x1": 480.6,
+       "y1": 617.04
+      },
+      {
+       "page": 2,
+       "x0": 134.77,
+       "y0": 620.25,
+       "x1": 174.04000000000002,
+       "y1": 628.99
+      }
+     ],
+     "quote": "We modify and extend this architecture such that it works with very few training images and yields more precise segmentations; see Figure 1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "We propose a weighted loss function to separate touching objects of the same class.",
+   "evidence": [
+    {
+     "chunk_id": "b0011",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 134.77,
+      "y0": 594.49,
+      "x1": 480.6,
+      "y1": 627.14
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 327.76,
+       "y0": 594.49,
+       "x1": 480.59000000000003,
+       "y1": 603.23
+      },
+      {
+       "page": 3,
+       "x0": 134.77,
+       "y0": 606.45,
+       "x1": 480.6,
+       "y1": 615.19
+      },
+      {
+       "page": 3,
+       "x0": 134.77,
+       "y0": 618.4,
+       "x1": 316.18,
+       "y1": 627.14
+      }
+     ],
+     "quote": "To this end, we propose the use of a weighted loss, where the separating background labels between touching cells obtain a large weight in the loss function.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "biomedical image segmentation",
+   "evidence": [
+    {
+     "chunk_id": "b0004",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 134.77,
+      "y0": 596.34,
+      "x1": 480.6,
+      "y1": 628.99
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 342.77,
+       "y0": 596.34,
+       "x1": 480.59,
+       "y1": 605.08
+      },
+      {
+       "page": 1,
+       "x0": 134.77,
+       "y0": 608.3,
+       "x1": 480.6,
+       "y1": 617.04
+      },
+      {
+       "page": 1,
+       "x0": 134.77,
+       "y0": 620.25,
+       "x1": 450.72,
+       "y1": 628.99
+      }
+     ],
+     "quote": "However, in many visual tasks, especially in biomedical image processing, the desired output should include localization, i.e., a class label is supposed to be assigned to each pixel.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "task.1",
+   "value": "cell tracking",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 163.11,
+      "y0": 365.67,
+      "x1": 452.25,
+      "y1": 406.40000000000003
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 365.99,
+       "y0": 365.67,
+       "x1": 452.25,
+       "y1": 373.53000000000003
+      },
+      {
+       "page": 1,
+       "x0": 163.11,
+       "y0": 376.63,
+       "x1": 452.24,
+       "y1": 384.49
+      },
+      {
+       "page": 1,
+       "x0": 163.11,
+       "y0": 387.59,
+       "x1": 452.24,
+       "y1": 395.45
+      },
+      {
+       "page": 1,
+       "x0": 163.11,
+       "y0": 398.54,
+       "x1": 266.27,
+       "y1": 406.40000000000003
+      }
+     ],
+     "quote": "Using the same network trained on transmitted light microscopy images (phase contrast and DIC) we won the ISBI cell tracking challenge 2015 in these categories by a large margin.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The network architecture consists of a contracting path for context and an expansive path for precise localization.",
+   "evidence": [
+    {
+     "chunk_id": "b0014",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 134.77,
+      "y0": 205.43,
+      "x1": 480.59,
+      "y1": 226.12
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 363.01,
+       "y0": 205.43,
+       "x1": 480.59,
+       "y1": 214.17000000000002
+      },
+      {
+       "page": 4,
+       "x0": 134.77,
+       "y0": 217.38,
+       "x1": 353.24,
+       "y1": 226.12
+      }
+     ],
+     "quote": "It consists of a contracting path (left side) and an expansive path (right side).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "The network is trained using stochastic gradient descent with a high momentum of 0.99 and a batch size of a single image.",
+   "evidence": [
+    {
+     "chunk_id": "b0017",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 134.77,
+      "y0": 447.28,
+      "x1": 480.6,
+      "y1": 467.98
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 134.77,
+       "y0": 447.28,
+       "x1": 480.6,
+       "y1": 456.02
+      },
+      {
+       "page": 4,
+       "x0": 134.77,
+       "y0": 459.24,
+       "x1": 480.6,
+       "y1": 467.98
+      }
+     ],
+     "quote": "The input images and their corresponding segmentation maps are used to train the network with the stochastic gradient descent implementation of Caffe [6].",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "The objective function combines a pixel-wise soft-max over the final feature map with a cross entropy loss function.",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 134.77,
+      "y0": 542.92,
+      "x1": 480.59000000000003,
+      "y1": 563.62
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 149.71,
+       "y0": 542.92,
+       "x1": 480.59000000000003,
+       "y1": 551.66
+      },
+      {
+       "page": 4,
+       "x0": 134.77,
+       "y0": 554.88,
+       "x1": 404.70000000000005,
+       "y1": 563.62
+      }
+     ],
+     "quote": "The energy function is computed by a pixel-wise soft-max over the final feature map combined with the cross entropy loss function.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "Weights are initialized from a Gaussian distribution with a standard deviation of square root of two over N to ensure unit variance per feature map.",
+   "evidence": [
+    {
+     "chunk_id": "b0027",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 134.77,
+      "y0": 532.98,
+      "x1": 480.6,
+      "y1": 589.54
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 398.67,
+       "y0": 532.98,
+       "x1": 480.59000000000003,
+       "y1": 541.72
+      },
+      {
+       "page": 5,
+       "x0": 134.77,
+       "y0": 544.93,
+       "x1": 480.6,
+       "y1": 553.67
+      },
+      {
+       "page": 5,
+       "x0": 134.77,
+       "y0": 556.89,
+       "x1": 480.59000000000003,
+       "y1": 565.63
+      },
+      {
+       "page": 5,
+       "x0": 134.77,
+       "y0": 568.84,
+       "x1": 480.6,
+       "y1": 577.58
+      },
+      {
+       "page": 5,
+       "x0": 134.77,
+       "y0": 580.8,
+       "x1": 165.78,
+       "y1": 589.54
+      }
+     ],
+     "quote": "For a network with our architecture (alternating convolution and ReLU layers) this can be achieved by drawing the initial weights from a Gaussian distribution with a standard deviation of 2/N , where N denotes the number of incoming nodes of one neuron [5].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "Data augmentation is performed using random elastic deformations, shift and rotation invariance, and drop-out layers.",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 134.77,
+      "y0": 130.95,
+      "x1": 480.6,
+      "y1": 163.60000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 376.0,
+       "y0": 130.95,
+       "x1": 480.58,
+       "y1": 139.69
+      },
+      {
+       "page": 6,
+       "x0": 134.77,
+       "y0": 142.9,
+       "x1": 480.6,
+       "y1": 151.64000000000001
+      },
+      {
+       "page": 6,
+       "x0": 134.77,
+       "y0": 154.86,
+       "x1": 386.88,
+       "y1": 163.60000000000002
+      }
+     ],
+     "quote": "Especially random elastic deformations of the training samples seem to be the key concept to train a segmentation network with very few annotated images.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "EM segmentation challenge dataset consisting of 30 training images of Drosophila VNC and a secret test set.",
+   "evidence": [
+    {
+     "chunk_id": "b0031",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 134.77,
+      "y0": 316.6,
+      "x1": 480.6,
+      "y1": 337.29
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 134.77,
+       "y0": 316.6,
+       "x1": 480.6,
+       "y1": 325.34000000000003
+      },
+      {
+       "page": 6,
+       "x0": 134.77,
+       "y0": 328.55,
+       "x1": 357.83000000000004,
+       "y1": 337.29
+      }
+     ],
+     "quote": "The data set is provided by the EM segmentation challenge [14] that was started at ISBI 2012 and is still open for new contributions.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "EM segmentation challenge",
+   "split": "training, test",
+   "size": "30 images (512x512 pixels)",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "PhC-U373 dataset containing Glioblastoma-astrocytoma U373 cells with 35 partially annotated training images.",
+   "evidence": [
+    {
+     "chunk_id": "b0036",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 134.77,
+      "y0": 409.93,
+      "x1": 480.6,
+      "y1": 444.16
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 190.36,
+       "y0": 411.51,
+       "x1": 320.92,
+       "y1": 420.25
+      },
+      {
+       "page": 7,
+       "x0": 320.92,
+       "y0": 409.93,
+       "x1": 324.89000000000004,
+       "y1": 416.05
+      },
+      {
+       "page": 7,
+       "x0": 327.72,
+       "y0": 411.51,
+       "x1": 480.59000000000003,
+       "y1": 420.25
+      },
+      {
+       "page": 7,
+       "x0": 134.77,
+       "y0": 423.46,
+       "x1": 480.6,
+       "y1": 432.2
+      },
+      {
+       "page": 7,
+       "x0": 134.77,
+       "y0": 435.42,
+       "x1": 253.4,
+       "y1": 444.16
+      },
+      {
+       "page": 7,
+       "x0": 257.05,
+       "y0": 435.42,
+       "x1": 300.53000000000003,
+       "y1": 444.16
+      }
+     ],
+     "quote": "The first data set \"PhC-U373\" 2 contains Glioblastoma-astrocytoma U373 cells on a polyacrylimide substrate recorded by phase contrast microscopy (see Figure 4a,b and Supp. Material).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "PhC-U373",
+   "split": "training",
+   "size": "35 partially annotated training images",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "DIC-HeLa dataset containing HeLa cells with 20 partially annotated training images.",
+   "evidence": [
+    {
+     "chunk_id": "b0036",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 134.77,
+      "y0": 469.71,
+      "x1": 480.59000000000003,
+      "y1": 503.93
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 165.16,
+       "y0": 471.28,
+       "x1": 309.63,
+       "y1": 480.02
+      },
+      {
+       "page": 7,
+       "x0": 309.62,
+       "y0": 469.71,
+       "x1": 313.59000000000003,
+       "y1": 475.83
+      },
+      {
+       "page": 7,
+       "x0": 317.11,
+       "y0": 471.28,
+       "x1": 480.59000000000003,
+       "y1": 480.02
+      },
+      {
+       "page": 7,
+       "x0": 134.77,
+       "y0": 483.24,
+       "x1": 480.59000000000003,
+       "y1": 491.98
+      },
+      {
+       "page": 7,
+       "x0": 134.77,
+       "y0": 495.19,
+       "x1": 178.42000000000002,
+       "y1": 503.93
+      },
+      {
+       "page": 7,
+       "x0": 181.1,
+       "y0": 495.19,
+       "x1": 224.57999999999998,
+       "y1": 503.93
+      }
+     ],
+     "quote": "The second data set \"DIC-HeLa\" 3 are HeLa cells on a flat glass recorded by differential interference contrast (DIC) microscopy (see Figure 3, Figure 4c,d and Supp. Material).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "DIC-HeLa",
+   "split": "training",
+   "size": "20 partially annotated training images",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Sliding-window convolutional network by Ciresan et al.",
+   "evidence": [
+    {
+     "chunk_id": "b0032",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 134.77,
+      "y0": 472.02,
+      "x1": 480.6,
+      "y1": 504.67
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 149.71,
+       "y0": 472.02,
+       "x1": 480.59000000000003,
+       "y1": 480.76
+      },
+      {
+       "page": 6,
+       "x0": 134.77,
+       "y0": 483.97,
+       "x1": 480.6,
+       "y1": 492.71000000000004
+      },
+      {
+       "page": 6,
+       "x0": 134.77,
+       "y0": 495.93,
+       "x1": 255.42000000000002,
+       "y1": 504.67
+      }
+     ],
+     "quote": "This is significantly better than the sliding-window convolutional network result by Ciresan et al. [1], whose best submission had a warping error of 0.000420 and a rand error of 0.0504.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "DIVE-SCI",
+   "evidence": [
+    {
+     "chunk_id": "b0033",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 162.02200317382812,
+      "y0": 598.818359375,
+      "x1": 450.31298828125,
+      "y1": 608.780517578125
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 162.02200317382812,
+       "y0": 598.818359375,
+       "x1": 450.31298828125,
+       "y1": 608.780517578125
+      }
+     ],
+     "quote": "2. | DIVE-SCI | 0.000355 | 0.0305 | 0.0584",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0033",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 162.02200317382812,
+      "y0": 620.736328125,
+      "x1": 450.31298828125,
+      "y1": 630.698486328125
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 162.02200317382812,
+       "y0": 620.736328125,
+       "x1": 450.31298828125,
+       "y1": 630.698486328125
+      }
+     ],
+     "quote": "4. | DIVE | 0.000430 | 0.0545 | 0.0582",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "IDSIA",
+   "evidence": [
+    {
+     "chunk_id": "b0033",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 162.02200317382812,
+      "y0": 609.77734375,
+      "x1": 450.31298828125,
+      "y1": 619.739501953125
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 162.02200317382812,
+       "y0": 609.77734375,
+       "x1": 450.31298828125,
+       "y1": 619.739501953125
+      }
+     ],
+     "quote": "3. | IDSIA [1] | 0.000420 | 0.0504 | 0.0613",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0033",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 162.02200317382812,
+      "y0": 649.8993530273438,
+      "x1": 450.31298828125,
+      "y1": 659.8615112304688
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 162.02200317382812,
+       "y0": 649.8993530273438,
+       "x1": 450.31298828125,
+       "y1": 659.8615112304688
+      }
+     ],
+     "quote": "10. | IDSIA-SCI | 0.000653 | 0.0189 | 0.1027",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "IMCB-SG (2014)",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 220.32699584960938,
+      "y0": 294.3533020019531,
+      "x1": 391.9618835449219,
+      "y1": 304.3154602050781
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 220.32699584960938,
+       "y0": 294.3533020019531,
+       "x1": 391.9618835449219,
+       "y1": 304.3154602050781
+      }
+     ],
+     "quote": "IMCB-SG (2014) |  | 0.2669 | 0.2935",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "KTH-SE (2014)",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 220.32699584960938,
+      "y0": 305.3122863769531,
+      "x1": 391.9618835449219,
+      "y1": 315.2744445800781
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 220.32699584960938,
+       "y0": 305.3122863769531,
+       "x1": 391.9618835449219,
+       "y1": 315.2744445800781
+      }
+     ],
+     "quote": "KTH-SE (2014) |  | 0.7953 | 0.4607",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "HOUS-US (2014)",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 220.32699584960938,
+      "y0": 316.2712707519531,
+      "x1": 391.9618835449219,
+      "y1": 326.2334289550781
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 220.32699584960938,
+       "y0": 316.2712707519531,
+       "x1": 391.9618835449219,
+       "y1": 326.2334289550781
+      }
+     ],
+     "quote": "HOUS-US (2014) |  | 0.5323 | -",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "second-best algorithm (2015) on PhC-U373",
+   "evidence": [
+    {
+     "chunk_id": "b0036",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 134.77,
+      "y0": 447.37,
+      "x1": 480.6,
+      "y1": 480.02
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 186.28,
+       "y0": 447.37,
+       "x1": 480.59000000000003,
+       "y1": 456.11
+      },
+      {
+       "page": 7,
+       "x0": 134.77,
+       "y0": 459.33,
+       "x1": 480.6,
+       "y1": 468.07
+      },
+      {
+       "page": 7,
+       "x0": 134.77,
+       "y0": 471.28,
+       "x1": 162.14000000000001,
+       "y1": 480.02
+      }
+     ],
+     "quote": "Here we achieve an average IOU (\"intersection over union\") of 92%, which is significantly better than the second best algorithm with 83% (see Table 2).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Warping error",
+   "evidence": [
+    {
+     "chunk_id": "b0031",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 134.77,
+      "y0": 400.28,
+      "x1": 480.6,
+      "y1": 432.93
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 381.02,
+       "y0": 400.28,
+       "x1": 480.59999999999997,
+       "y1": 409.02
+      },
+      {
+       "page": 6,
+       "x0": 134.77,
+       "y0": 412.24,
+       "x1": 480.6,
+       "y1": 420.98
+      },
+      {
+       "page": 6,
+       "x0": 134.77,
+       "y0": 424.19,
+       "x1": 358.48,
+       "y1": 432.93
+      }
+     ],
+     "quote": "The evaluation is done by thresholding the map at 10 different levels and computation of the \"warping error\", the \"Rand error\" and the \"pixel error\" [14].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Rand error",
+   "evidence": [
+    {
+     "chunk_id": "b0031",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 134.77,
+      "y0": 400.28,
+      "x1": 480.6,
+      "y1": 432.93
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 381.02,
+       "y0": 400.28,
+       "x1": 480.59999999999997,
+       "y1": 409.02
+      },
+      {
+       "page": 6,
+       "x0": 134.77,
+       "y0": 412.24,
+       "x1": 480.6,
+       "y1": 420.98
+      },
+      {
+       "page": 6,
+       "x0": 134.77,
+       "y0": 424.19,
+       "x1": 358.48,
+       "y1": 432.93
+      }
+     ],
+     "quote": "The evaluation is done by thresholding the map at 10 different levels and computation of the \"warping error\", the \"Rand error\" and the \"pixel error\" [14].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "Pixel error",
+   "evidence": [
+    {
+     "chunk_id": "b0031",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 134.77,
+      "y0": 400.28,
+      "x1": 480.6,
+      "y1": 432.93
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 381.02,
+       "y0": 400.28,
+       "x1": 480.59999999999997,
+       "y1": 409.02
+      },
+      {
+       "page": 6,
+       "x0": 134.77,
+       "y0": 412.24,
+       "x1": 480.6,
+       "y1": 420.98
+      },
+      {
+       "page": 6,
+       "x0": 134.77,
+       "y0": 424.19,
+       "x1": 358.48,
+       "y1": 432.93
+      }
+     ],
+     "quote": "The evaluation is done by thresholding the map at 10 different levels and computation of the \"warping error\", the \"Rand error\" and the \"pixel error\" [14].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "IOU (Intersection over Union)",
+   "evidence": [
+    {
+     "chunk_id": "b0036",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 134.77,
+      "y0": 447.37,
+      "x1": 480.6,
+      "y1": 480.02
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 186.28,
+       "y0": 447.37,
+       "x1": 480.59000000000003,
+       "y1": 456.11
+      },
+      {
+       "page": 7,
+       "x0": 134.77,
+       "y0": 459.33,
+       "x1": 480.6,
+       "y1": 468.07
+      },
+      {
+       "page": 7,
+       "x0": 134.77,
+       "y0": 471.28,
+       "x1": 162.14000000000001,
+       "y1": 480.02
+      }
+     ],
+     "quote": "Here we achieve an average IOU (\"intersection over union\") of 92%, which is significantly better than the second best algorithm with 83% (see Table 2).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Batch size set to a single image",
+   "evidence": [
+    {
+     "chunk_id": "b0017",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 134.77,
+      "y0": 483.15,
+      "x1": 480.6,
+      "y1": 515.8
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 259.38,
+       "y0": 483.15,
+       "x1": 480.59000000000003,
+       "y1": 491.89
+      },
+      {
+       "page": 4,
+       "x0": 134.77,
+       "y0": 495.1,
+       "x1": 480.6,
+       "y1": 503.84000000000003
+      },
+      {
+       "page": 4,
+       "x0": 134.77,
+       "y0": 507.06,
+       "x1": 284.78,
+       "y1": 515.8
+      }
+     ],
+     "quote": "To minimize the overhead and make maximum use of the GPU memory, we favor large input tiles over a large batch size and hence reduce the batch to a single image.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "a single image",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Momentum set to 0.99",
+   "evidence": [
+    {
+     "chunk_id": "b0017",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 134.77,
+      "y0": 507.06,
+      "x1": 480.6,
+      "y1": 539.71
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 287.68,
+       "y0": 507.06,
+       "x1": 480.6,
+       "y1": 515.8
+      },
+      {
+       "page": 4,
+       "x0": 134.77,
+       "y0": 519.01,
+       "x1": 480.59000000000003,
+       "y1": 527.75
+      },
+      {
+       "page": 4,
+       "x0": 134.77,
+       "y0": 530.97,
+       "x1": 310.33000000000004,
+       "y1": 539.71
+      }
+     ],
+     "quote": "Accordingly we use a high momentum (0.99) such that a large number of the previously seen training samples determine the update in the current optimization step.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "momentum",
+   "value_raw": "0.99",
+   "value_norm": 0.99,
+   "scope": ""
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "GPU memory utilization optimized via large input tiles and a batch size of a single image.",
+   "evidence": [
+    {
+     "chunk_id": "b0017",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 134.77,
+      "y0": 483.15,
+      "x1": 480.6,
+      "y1": 515.8
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 259.38,
+       "y0": 483.15,
+       "x1": 480.59000000000003,
+       "y1": 491.89
+      },
+      {
+       "page": 4,
+       "x0": 134.77,
+       "y0": 495.1,
+       "x1": 480.6,
+       "y1": 503.84000000000003
+      },
+      {
+       "page": 4,
+       "x0": 134.77,
+       "y0": 507.06,
+       "x1": 284.78,
+       "y1": 515.8
+      }
+     ],
+     "quote": "To minimize the overhead and make maximum use of the GPU memory, we favor large input tiles over a large batch size and hence reduce the batch to a single image.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Results averaged over 7 rotated versions of the input data.",
+   "evidence": [
+    {
+     "chunk_id": "b0032",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 134.77,
+      "y0": 436.15,
+      "x1": 480.59000000000003,
+      "y1": 468.8
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 149.71,
+       "y0": 436.15,
+       "x1": 480.59000000000003,
+       "y1": 444.89
+      },
+      {
+       "page": 6,
+       "x0": 134.77,
+       "y0": 448.1,
+       "x1": 480.59000000000003,
+       "y1": 456.84000000000003
+      },
+      {
+       "page": 6,
+       "x0": 134.77,
+       "y0": 460.06,
+       "x1": 356.74,
+       "y1": 468.8
+      }
+     ],
+     "quote": "The u-net (averaged over 7 rotated versions of the input data) achieves without any further pre-or postprocessing a warping error of 0.0003529 (the new best score, see Table 1) and a rand-error of 0.0382.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [],
+ "limitations": [],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Apply the u-net architecture to many more tasks easily",
+   "evidence": [
+    {
+     "chunk_id": "b0038",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 134.77,
+      "y0": 142.9,
+      "x1": 480.59,
+      "y1": 163.60000000000002
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 407.38,
+       "y0": 142.9,
+       "x1": 480.59,
+       "y1": 151.64000000000001
+      },
+      {
+       "page": 8,
+       "x0": 134.77,
+       "y0": 154.86,
+       "x1": 416.19000000000005,
+       "y1": 163.60000000000002
+      }
+     ],
+     "quote": "We are sure that the u-net architecture can be applied easily to many more tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "Segmentation of a 512x512 image takes less than a second on a recent GPU.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 163.11,
+      "y0": 398.54,
+      "x1": 452.25,
+      "y1": 417.36
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 397.72,
+       "y0": 398.54,
+       "x1": 452.25,
+       "y1": 406.40000000000003
+      },
+      {
+       "page": 1,
+       "x0": 163.11,
+       "y0": 409.5,
+       "x1": 416.70000000000005,
+       "y1": 417.36
+      }
+     ],
+     "quote": "Segmentation of a 512x512 image takes less than a second on a recent GPU.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "The network outperforms the prior best sliding-window convolutional network on the ISBI challenge for segmentation of neuronal structures.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 163.11,
+      "y0": 332.79,
+      "x1": 452.25,
+      "y1": 373.53000000000003
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 184.55,
+       "y0": 332.79,
+       "x1": 452.25,
+       "y1": 340.65000000000003
+      },
+      {
+       "page": 1,
+       "x0": 163.11,
+       "y0": 343.75,
+       "x1": 452.24,
+       "y1": 351.61
+      },
+      {
+       "page": 1,
+       "x0": 163.11,
+       "y0": 354.71,
+       "x1": 452.24,
+       "y1": 362.57
+      },
+      {
+       "page": 1,
+       "x0": 163.11,
+       "y0": 365.67,
+       "x1": 361.07000000000005,
+       "y1": 373.53000000000003
+      }
+     ],
+     "quote": "We show that such a network can be trained end-to-end from very few images and outperforms the prior best method (a sliding-window convolutional network) on the ISBI challenge for segmentation of neuronal structures in electron microscopic stacks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "The network won the ISBI cell tracking challenge 2015 by a large margin.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 163.11,
+      "y0": 365.67,
+      "x1": 452.25,
+      "y1": 406.40000000000003
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 365.99,
+       "y0": 365.67,
+       "x1": 452.25,
+       "y1": 373.53000000000003
+      },
+      {
+       "page": 1,
+       "x0": 163.11,
+       "y0": 376.63,
+       "x1": 452.24,
+       "y1": 384.49
+      },
+      {
+       "page": 1,
+       "x0": 163.11,
+       "y0": 387.59,
+       "x1": 452.24,
+       "y1": 395.45
+      },
+      {
+       "page": 1,
+       "x0": 163.11,
+       "y0": 398.54,
+       "x1": 266.27,
+       "y1": 406.40000000000003
+      }
+     ],
+     "quote": "Using the same network trained on transmitted light microscopy images (phase contrast and DIC) we won the ISBI cell tracking challenge 2015 in these categories by a large margin.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

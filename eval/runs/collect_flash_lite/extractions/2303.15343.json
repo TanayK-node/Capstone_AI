@@ -1,0 +1,3038 @@
+{
+ "metadata": {
+  "title": "Sigmoid Loss for Language Image Pre-Training",
+  "authors": [
+   "Xiaohua Zhai",
+   "Basil Mustafa",
+   "Alexander Kolesnikov",
+   "Lucas Beyer",
+   "Google Deepmind"
+  ],
+  "venue": null,
+  "year": null,
+  "arxiv_id": null,
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Standard contrastive learning with softmax normalization requires a global view of pairwise similarities, leading to numerical instability and memory bottlenecks.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 265.71,
+      "x1": 286.37,
+      "y1": 322.11999999999995
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 219.61,
+       "y0": 265.71,
+       "x1": 286.37,
+       "y1": 274.29999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 277.67,
+       "x1": 286.36,
+       "y1": 286.26
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 289.62,
+       "x1": 286.36,
+       "y1": 298.21
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 301.58,
+       "x1": 286.36,
+       "y1": 310.16999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 313.53,
+       "x1": 94.67,
+       "y1": 322.11999999999995
+      }
+     ],
+     "quote": "Unlike standard contrastive learning with softmax normalization, the sigmoid loss operates solely on image-text pairs and does not require a global view of the pairwise similarities for normalization.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Proposing a simple pairwise sigmoid loss for Language-Image Pre-training (SigLIP) that operates solely on image-text pairs.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 253.76,
+      "x1": 286.37,
+      "y1": 274.29999999999995
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 62.07,
+       "y0": 253.76,
+       "x1": 286.37,
+       "y1": 262.34999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 265.71,
+       "x1": 214.35000000000002,
+       "y1": 274.29999999999995
+      }
+     ],
+     "quote": "We propose a simple pairwise Sigmoid loss for Language-Image Pre-training (SigLIP).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Demonstrating that the sigmoid loss improves performance at smaller batch sizes and allows extreme batch size scaling up to one million.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 397.22,
+      "x1": 286.37,
+      "y1": 453.63
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 240.49,
+       "y0": 397.22,
+       "x1": 286.37,
+       "y1": 405.81
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 409.18,
+       "x1": 286.36,
+       "y1": 417.77
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 421.13,
+       "x1": 286.36,
+       "y1": 429.71999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 433.09,
+       "x1": 286.36,
+       "y1": 441.67999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 445.04,
+       "x1": 76.95,
+       "y1": 453.63
+      }
+     ],
+     "quote": "Finally, we push the batch size to the extreme, up to one million, and find that the benefits of growing batch size quickly diminish, with a more reasonable batch size of 32 k being sufficient.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Language-Image Pre-training",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 253.76,
+      "x1": 286.37,
+      "y1": 274.29999999999995
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 62.07,
+       "y0": 253.76,
+       "x1": 286.37,
+       "y1": 262.34999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 265.71,
+       "x1": 214.35000000000002,
+       "y1": 274.29999999999995
+      }
+     ],
+     "quote": "We propose a simple pairwise Sigmoid loss for Language-Image Pre-training (SigLIP).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The model architecture adopts a vision transformer for processing images and a transformer architecture for processing texts.",
+   "evidence": [
+    {
+     "chunk_id": "b0023",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 50.11,
+      "y0": 431.15,
+      "x1": 286.37,
+      "y1": 464.71
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 218.7,
+       "y0": 431.15,
+       "x1": 286.37,
+       "y1": 439.78999999999996
+      },
+      {
+       "page": 3,
+       "x0": 50.11,
+       "y0": 444.12,
+       "x1": 286.36,
+       "y1": 452.76
+      },
+      {
+       "page": 3,
+       "x0": 50.11,
+       "y0": 456.07,
+       "x1": 241.68,
+       "y1": 464.71
+      }
+     ],
+     "quote": "In this paper, we adopt the vision transformer architecture [17] for images and the transformer architecture [47] for texts.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "Instead of a softmax-based contrastive loss, a pairwise sigmoid loss is proposed that processes every image-text pair independently as binary classification.",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 50.11,
+      "y0": 540.46,
+      "x1": 286.37,
+      "y1": 573.02
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 62.07,
+       "y0": 540.46,
+       "x1": 286.37,
+       "y1": 549.1
+      },
+      {
+       "page": 3,
+       "x0": 50.11,
+       "y0": 552.42,
+       "x1": 286.36,
+       "y1": 561.06
+      },
+      {
+       "page": 3,
+       "x0": 50.11,
+       "y0": 564.38,
+       "x1": 166.15,
+       "y1": 573.02
+      }
+     ],
+     "quote": "Instead of the softmax-based contrastive loss, we propose a simpler alternative that does not require computing global normalization factors.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "An additional learnable bias term b is introduced alongside the temperature t to alleviate the heavy imbalance from numerous negative pairs.",
+   "evidence": [
+    {
+     "chunk_id": "b0028",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 308.86,
+      "y0": 373.54,
+      "x1": 545.12,
+      "y1": 406.09999999999997
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 462.46,
+       "y0": 373.54,
+       "x1": 545.12,
+       "y1": 382.18
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 385.18,
+       "x1": 545.11,
+       "y1": 394.14
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 397.14,
+       "x1": 365.5,
+       "y1": 406.09999999999997
+      }
+     ],
+     "quote": "To alleviate this, we introduce an additional learnable bias term b similar to the temperature t.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "The training procedure utilizes a memory-efficient distributed implementation where representations are permuted across devices to avoid expensive all-gathers and reduce memory cost.",
+   "evidence": [
+    {
+     "chunk_id": "b0031",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 308.86,
+      "y0": 569.0,
+      "x1": 545.11,
+      "y1": 593.49
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 474.52,
+       "y0": 569.0,
+       "x1": 545.11,
+       "y1": 577.64
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 581.9,
+       "x1": 404.74,
+       "y1": 590.86
+      },
+      {
+       "page": 3,
+       "x0": 408.7,
+       "y0": 579.11,
+       "x1": 418.86,
+       "y1": 585.23
+      },
+      {
+       "page": 3,
+       "x0": 410.42,
+       "y0": 587.37,
+       "x1": 416.93,
+       "y1": 593.49
+      },
+      {
+       "page": 3,
+       "x0": 420.06,
+       "y0": 582.22,
+       "x1": 531.85,
+       "y1": 590.86
+      }
+     ],
+     "quote": "Denoting the perdevice batch size as b = |B| D , the loss is reformulated as:",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "The proposed sigmoid-based loss operates independently on image-text pairs without requiring global normalization factors, unlike traditional softmax-based contrastive loss.",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 50.11,
+      "y0": 540.46,
+      "x1": 286.37,
+      "y1": 573.02
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 62.07,
+       "y0": 540.46,
+       "x1": 286.37,
+       "y1": 549.1
+      },
+      {
+       "page": 3,
+       "x0": 50.11,
+       "y0": 552.42,
+       "x1": 286.36,
+       "y1": 561.06
+      },
+      {
+       "page": 3,
+       "x0": 50.11,
+       "y0": 564.38,
+       "x1": 166.15,
+       "y1": 573.02
+      }
+     ],
+     "quote": "Instead of the softmax-based contrastive loss, we propose a simpler alternative that does not require computing global normalization factors.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "ImageNet zero-shot transfer dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 369.12,
+      "x1": 545.12,
+      "y1": 401.66999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 320.82,
+       "y0": 369.12,
+       "x1": 545.12,
+       "y1": 377.76
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 381.07,
+       "x1": 545.11,
+       "y1": 389.71
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 393.03,
+       "x1": 545.11,
+       "y1": 401.66999999999996
+      }
+     ],
+     "quote": "To validate our models, we report zero-shot transfer results on the ImageNet dataset [14] and zero-shot retrieval results across 36 languages on the XM3600 dataset [44].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ImageNet",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "XM3600 zero-shot retrieval dataset across 36 languages",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 369.12,
+      "x1": 545.12,
+      "y1": 401.66999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 320.82,
+       "y0": 369.12,
+       "x1": 545.12,
+       "y1": 377.76
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 381.07,
+       "x1": 545.11,
+       "y1": 389.71
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 393.03,
+       "x1": 545.11,
+       "y1": 401.66999999999996
+      }
+     ],
+     "quote": "To validate our models, we report zero-shot transfer results on the ImageNet dataset [14] and zero-shot retrieval results across 36 languages on the XM3600 dataset [44].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "XM3600",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "LiT image-text dataset for training text tower",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 453.46,
+      "x1": 545.12,
+      "y1": 497.96
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 320.82,
+       "y0": 453.46,
+       "x1": 545.12,
+       "y1": 462.09999999999997
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 465.41,
+       "x1": 545.11,
+       "y1": 474.05
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 477.37,
+       "x1": 545.11,
+       "y1": 486.01
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 489.32,
+       "x1": 496.03,
+       "y1": 497.96
+      }
+     ],
+     "quote": "Following [59], we use the same precomputed embeddings for the images using a ViT-g vision model, and train a base size text tower from scratch with the same hyperparameters using the LiT image-text dataset [59].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "LiT image-text dataset",
+   "split": "",
+   "size": "",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.3",
+   "value": "WebLI English image and text pairs",
+   "evidence": [
+    {
+     "chunk_id": "b0044",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 50.11,
+      "y0": 489.32,
+      "x1": 286.37,
+      "y1": 509.91999999999996
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 62.07,
+       "y0": 489.32,
+       "x1": 286.37,
+       "y1": 497.96
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 501.28,
+       "x1": 208.93,
+       "y1": 509.91999999999996
+      }
+     ],
+     "quote": "We pre-train SigLIP models on the WebLI dataset [13], using only English image and text pairs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "WebLI",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "English C4 dataset for tokenization",
+   "evidence": [
+    {
+     "chunk_id": "b0044",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 50.11,
+      "y0": 561.05,
+      "x1": 286.36,
+      "y1": 593.6
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 135.64,
+       "y0": 561.05,
+       "x1": 286.36,
+       "y1": 569.6899999999999
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 573.01,
+       "x1": 286.36,
+       "y1": 581.65
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 584.96,
+       "x1": 286.36,
+       "y1": 593.6
+      }
+     ],
+     "quote": "The text is tokenized by a 32 k vocabulary sentencepiece tokenizer [27] trained on the English C4 dataset [37], and a maximum of 16 text tokens are kept.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "C4",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "Oxford-iiit pet dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 50.11,
+      "y0": 502.74,
+      "x1": 286.36,
+      "y1": 535.29
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 185.33,
+       "y0": 502.74,
+       "x1": 286.36,
+       "y1": 511.38
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 514.69,
+       "x1": 286.36,
+       "y1": 523.33
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 526.65,
+       "x1": 97.28999999999999,
+       "y1": 535.29
+      }
+     ],
+     "quote": "Zero-shot transfer results are reported on ImageNet [14], Oxford-iiit pet [34] and Ci-far100 [26].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Oxford-iiit pet",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.6",
+   "value": "Cifar100 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 50.11,
+      "y0": 502.74,
+      "x1": 286.36,
+      "y1": 535.29
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 185.33,
+       "y0": 502.74,
+       "x1": 286.36,
+       "y1": 511.38
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 514.69,
+       "x1": 286.36,
+       "y1": 523.33
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 526.65,
+       "x1": 97.28999999999999,
+       "y1": 535.29
+      }
+     ],
+     "quote": "Zero-shot transfer results are reported on ImageNet [14], Oxford-iiit pet [34] and Ci-far100 [26].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Cifar100",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Softmax loss baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 50.11199951171875,
+      "y0": 239.7293701171875,
+      "x1": 545.1118774414062,
+      "y1": 260.5919189453125
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 461.54559326171875,
+       "y0": 239.7293701171875,
+       "x1": 545.1118774414062,
+       "y1": 248.63592529296875
+      },
+      {
+       "page": 4,
+       "x0": 50.11199951171875,
+       "y0": 251.68536376953125,
+       "x1": 119.27235412597656,
+       "y1": 260.5919189453125
+      }
+     ],
+     "quote": "Sigmoid loss outperforms the softmax loss significantly with small batch sizes, and performs similarly at larger batch sizes.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "CLIP baseline pre-trained on WebLI with standard softmax loss",
+   "evidence": [
+    {
+     "chunk_id": "b0044",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 50.11,
+      "y0": 501.28,
+      "x1": 286.36,
+      "y1": 533.83
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 211.95,
+       "y0": 501.28,
+       "x1": 286.36,
+       "y1": 509.91999999999996
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 513.23,
+       "x1": 286.36,
+       "y1": 521.87
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 525.19,
+       "x1": 155.68,
+       "y1": 533.83
+      }
+     ],
+     "quote": "We use CLIP (We-bLI) to denote the CLIP baseline pre-trained on WebLI with the standard softmax loss.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "Open-CLIP and CLIP models",
+   "evidence": [
+    {
+     "chunk_id": "b0063",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 399.41,
+      "x1": 545.12,
+      "y1": 420.0
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 302.99,
+       "y0": 399.41,
+       "x1": 517.12,
+       "y1": 408.05
+      },
+      {
+       "page": 8,
+       "x0": 520.22,
+       "y0": 399.41,
+       "x1": 545.12,
+       "y1": 408.05
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 411.36,
+       "x1": 444.37,
+       "y1": 420.0
+      }
+     ],
+     "quote": "Our SigLIP models outperform all prior models, e.g. Open-CLIP [22] and CLIP [36], by a significant margin on both zero-shot classification and retrieval tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "EVA-CLIP and CLIPA-v2 models",
+   "evidence": [
+    {
+     "chunk_id": "b0063",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 411.36,
+      "x1": 545.11,
+      "y1": 443.90999999999997
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 447.31,
+       "y0": 411.36,
+       "x1": 545.11,
+       "y1": 420.0
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 423.32,
+       "x1": 545.11,
+       "y1": 431.96
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 435.27,
+       "x1": 73.62,
+       "y1": 443.90999999999997
+      }
+     ],
+     "quote": "Compared to the concurrent EVA-CLIP [43] and CLIPA-v2 [29], our SigLIP-L performs across the board, in both the low and high resolution cases.",
+     "grounding_status": "verified",
+     "match_score": 95.1
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Zero-shot transfer accuracy on ImageNet",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 369.12,
+      "x1": 545.12,
+      "y1": 401.66999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 320.82,
+       "y0": 369.12,
+       "x1": 545.12,
+       "y1": 377.76
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 381.07,
+       "x1": 545.11,
+       "y1": 389.71
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 393.03,
+       "x1": 545.11,
+       "y1": 401.66999999999996
+      }
+     ],
+     "quote": "To validate our models, we report zero-shot transfer results on the ImageNet dataset [14] and zero-shot retrieval results across 36 languages on the XM3600 dataset [44].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Zero-shot retrieval results across 36 languages",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 369.12,
+      "x1": 545.12,
+      "y1": 401.66999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 320.82,
+       "y0": 369.12,
+       "x1": 545.12,
+       "y1": 377.76
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 381.07,
+       "x1": 545.11,
+       "y1": 389.71
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 393.03,
+       "x1": 545.11,
+       "y1": 401.66999999999996
+      }
+     ],
+     "quote": "To validate our models, we report zero-shot transfer results on the ImageNet dataset [14] and zero-shot retrieval results across 36 languages on the XM3600 dataset [44].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "Image retrieval recall@1",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 308.86,
+      "y0": 556.02,
+      "x1": 545.11,
+      "y1": 600.5300000000001
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 529.62,
+       "y0": 556.02,
+       "x1": 545.11,
+       "y1": 564.66
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 567.98,
+       "x1": 545.11,
+       "y1": 576.62
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 579.76,
+       "x1": 545.11,
+       "y1": 588.58
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 591.71,
+       "x1": 421.61,
+       "y1": 600.5300000000001
+      }
+     ],
+     "quote": "The scaled-up mSigLIP ViT-B model achieves the state-of-theart 42.6% image retrieval recall@1 and 54.1% text retrieval recall@1 for a Base model.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "Text retrieval recall@1",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 308.86,
+      "y0": 556.02,
+      "x1": 545.11,
+      "y1": 600.5300000000001
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 529.62,
+       "y0": 556.02,
+       "x1": 545.11,
+       "y1": 564.66
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 567.98,
+       "x1": 545.11,
+       "y1": 576.62
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 579.76,
+       "x1": 545.11,
+       "y1": 588.58
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 591.71,
+       "x1": 421.61,
+       "y1": 600.5300000000001
+      }
+     ],
+     "quote": "The scaled-up mSigLIP ViT-B model achieves the state-of-theart 42.6% image retrieval recall@1 and 54.1% text retrieval recall@1 for a Base model.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Default optimizer ScalingViT-Adafactor",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 404.98,
+      "x1": 545.11,
+      "y1": 425.58
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 404.98,
+       "x1": 545.11,
+       "y1": 413.62
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 416.94,
+       "x1": 402.23,
+       "y1": 425.58
+      }
+     ],
+     "quote": "We use the ScalingViT-Adafactor optimizer [58] by default for all our experiments.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "ScalingViT-Adafactor",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "LION optimizer for training in under a day with 4 chips",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 468.94,
+      "x1": 545.11,
+      "y1": 537.36
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 468.94,
+       "x1": 545.11,
+       "y1": 477.58
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 480.58,
+       "x1": 393.70000000000005,
+       "y1": 489.53999999999996
+      },
+      {
+       "page": 6,
+       "x0": 393.7,
+       "y0": 478.66,
+       "x1": 403.9,
+       "y1": 484.78000000000003
+      },
+      {
+       "page": 6,
+       "x0": 404.39,
+       "y0": 480.89,
+       "x1": 545.11,
+       "y1": 489.53
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 492.53,
+       "x1": 459.73,
+       "y1": 501.48999999999995
+      },
+      {
+       "page": 6,
+       "x0": 459.73,
+       "y0": 490.61,
+       "x1": 469.93,
+       "y1": 496.73
+      },
+      {
+       "page": 6,
+       "x0": 470.43,
+       "y0": 492.85,
+       "x1": 545.11,
+       "y1": 501.49
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 504.8,
+       "x1": 545.11,
+       "y1": 513.44
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 516.76,
+       "x1": 545.11,
+       "y1": 525.4
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 528.72,
+       "x1": 324.08000000000004,
+       "y1": 537.36
+      }
+     ],
+     "quote": "It is trained using the LION [12] optimizer with decoupled weight decay 1 × 10 -7 , linearly warm-up of learning rate over 6.5k steps up to a peak of 1 × 10 -4 , followed by a cosine decay to 0.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "LION",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Decoupled weight decay of 1e-7",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 468.94,
+      "x1": 545.11,
+      "y1": 537.36
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 468.94,
+       "x1": 545.11,
+       "y1": 477.58
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 480.58,
+       "x1": 393.70000000000005,
+       "y1": 489.53999999999996
+      },
+      {
+       "page": 6,
+       "x0": 393.7,
+       "y0": 478.66,
+       "x1": 403.9,
+       "y1": 484.78000000000003
+      },
+      {
+       "page": 6,
+       "x0": 404.39,
+       "y0": 480.89,
+       "x1": 545.11,
+       "y1": 489.53
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 492.53,
+       "x1": 459.73,
+       "y1": 501.48999999999995
+      },
+      {
+       "page": 6,
+       "x0": 459.73,
+       "y0": 490.61,
+       "x1": 469.93,
+       "y1": 496.73
+      },
+      {
+       "page": 6,
+       "x0": 470.43,
+       "y0": 492.85,
+       "x1": 545.11,
+       "y1": 501.49
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 504.8,
+       "x1": 545.11,
+       "y1": 513.44
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 516.76,
+       "x1": 545.11,
+       "y1": 525.4
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 528.72,
+       "x1": 324.08000000000004,
+       "y1": 537.36
+      }
+     ],
+     "quote": "It is trained using the LION [12] optimizer with decoupled weight decay 1 × 10 -7 , linearly warm-up of learning rate over 6.5k steps up to a peak of 1 × 10 -4 , followed by a cosine decay to 0.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "1 × 10 -7",
+   "value_norm": 1e-7,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Linear warmup over 6.5k steps",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 468.94,
+      "x1": 545.11,
+      "y1": 537.36
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 468.94,
+       "x1": 545.11,
+       "y1": 477.58
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 480.58,
+       "x1": 393.70000000000005,
+       "y1": 489.53999999999996
+      },
+      {
+       "page": 6,
+       "x0": 393.7,
+       "y0": 478.66,
+       "x1": 403.9,
+       "y1": 484.78000000000003
+      },
+      {
+       "page": 6,
+       "x0": 404.39,
+       "y0": 480.89,
+       "x1": 545.11,
+       "y1": 489.53
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 492.53,
+       "x1": 459.73,
+       "y1": 501.48999999999995
+      },
+      {
+       "page": 6,
+       "x0": 459.73,
+       "y0": 490.61,
+       "x1": 469.93,
+       "y1": 496.73
+      },
+      {
+       "page": 6,
+       "x0": 470.43,
+       "y0": 492.85,
+       "x1": 545.11,
+       "y1": 501.49
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 504.8,
+       "x1": 545.11,
+       "y1": 513.44
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 516.76,
+       "x1": 545.11,
+       "y1": 525.4
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 528.72,
+       "x1": 324.08000000000004,
+       "y1": 537.36
+      }
+     ],
+     "quote": "It is trained using the LION [12] optimizer with decoupled weight decay 1 × 10 -7 , linearly warm-up of learning rate over 6.5k steps up to a peak of 1 × 10 -4 , followed by a cosine decay to 0.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "warmup",
+   "value_raw": "6.5k steps",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Peak learning rate of 1e-4",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 468.94,
+      "x1": 545.11,
+      "y1": 537.36
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 468.94,
+       "x1": 545.11,
+       "y1": 477.58
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 480.58,
+       "x1": 393.70000000000005,
+       "y1": 489.53999999999996
+      },
+      {
+       "page": 6,
+       "x0": 393.7,
+       "y0": 478.66,
+       "x1": 403.9,
+       "y1": 484.78000000000003
+      },
+      {
+       "page": 6,
+       "x0": 404.39,
+       "y0": 480.89,
+       "x1": 545.11,
+       "y1": 489.53
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 492.53,
+       "x1": 459.73,
+       "y1": 501.48999999999995
+      },
+      {
+       "page": 6,
+       "x0": 459.73,
+       "y0": 490.61,
+       "x1": 469.93,
+       "y1": 496.73
+      },
+      {
+       "page": 6,
+       "x0": 470.43,
+       "y0": 492.85,
+       "x1": 545.11,
+       "y1": 501.49
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 504.8,
+       "x1": 545.11,
+       "y1": 513.44
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 516.76,
+       "x1": 545.11,
+       "y1": 525.4
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 528.72,
+       "x1": 324.08000000000004,
+       "y1": 537.36
+      }
+     ],
+     "quote": "It is trained using the LION [12] optimizer with decoupled weight decay 1 × 10 -7 , linearly warm-up of learning rate over 6.5k steps up to a peak of 1 × 10 -4 , followed by a cosine decay to 0.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "1 × 10 -4",
+   "value_norm": 0.0001,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Training for 65,000 steps with a batch size of 32k",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 468.94,
+      "x1": 545.11,
+      "y1": 537.36
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 468.94,
+       "x1": 545.11,
+       "y1": 477.58
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 480.58,
+       "x1": 393.70000000000005,
+       "y1": 489.53999999999996
+      },
+      {
+       "page": 6,
+       "x0": 393.7,
+       "y0": 478.66,
+       "x1": 403.9,
+       "y1": 484.78000000000003
+      },
+      {
+       "page": 6,
+       "x0": 404.39,
+       "y0": 480.89,
+       "x1": 545.11,
+       "y1": 489.53
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 492.53,
+       "x1": 459.73,
+       "y1": 501.48999999999995
+      },
+      {
+       "page": 6,
+       "x0": 459.73,
+       "y0": 490.61,
+       "x1": 469.93,
+       "y1": 496.73
+      },
+      {
+       "page": 6,
+       "x0": 470.43,
+       "y0": 492.85,
+       "x1": 545.11,
+       "y1": 501.49
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 504.8,
+       "x1": 545.11,
+       "y1": 513.44
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 516.76,
+       "x1": 545.11,
+       "y1": 525.4
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 528.72,
+       "x1": 324.08000000000004,
+       "y1": 537.36
+      }
+     ],
+     "quote": "We train for a total of 65 000 steps with a batch size of 32k -this leads to just under one day of training.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs/steps",
+   "value_raw": "65 000 steps",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Batch size of 32k for limited resource setup",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 468.94,
+      "x1": 545.11,
+      "y1": 537.36
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 468.94,
+       "x1": 545.11,
+       "y1": 477.58
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 480.58,
+       "x1": 393.70000000000005,
+       "y1": 489.53999999999996
+      },
+      {
+       "page": 6,
+       "x0": 393.7,
+       "y0": 478.66,
+       "x1": 403.9,
+       "y1": 484.78000000000003
+      },
+      {
+       "page": 6,
+       "x0": 404.39,
+       "y0": 480.89,
+       "x1": 545.11,
+       "y1": 489.53
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 492.53,
+       "x1": 459.73,
+       "y1": 501.48999999999995
+      },
+      {
+       "page": 6,
+       "x0": 459.73,
+       "y0": 490.61,
+       "x1": 469.93,
+       "y1": 496.73
+      },
+      {
+       "page": 6,
+       "x0": 470.43,
+       "y0": 492.85,
+       "x1": 545.11,
+       "y1": 501.49
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 504.8,
+       "x1": 545.11,
+       "y1": 513.44
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 516.76,
+       "x1": 545.11,
+       "y1": 525.4
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 528.72,
+       "x1": 324.08000000000004,
+       "y1": 537.36
+      }
+     ],
+     "quote": "We train for a total of 65 000 steps with a batch size of 32k -this leads to just under one day of training.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "32k",
+   "value_norm": 32000.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Batch size of 20k for ViT-g/14 vision tower",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 564.58,
+      "x1": 545.12,
+      "y1": 597.13
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 341.89,
+       "y0": 564.58,
+       "x1": 545.12,
+       "y1": 573.22
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 576.54,
+       "x1": 545.11,
+       "y1": 585.18
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 588.49,
+       "x1": 465.44000000000005,
+       "y1": 597.13
+      }
+     ],
+     "quote": "With a ViT-g/14 [58] model as the vision tower and a Large text tower, we can train at 20 k batch size on four chips for 107 k steps in under two days.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "20 k",
+   "value_norm": 20000.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "Training steps of 107k for ViT-g/14 setup",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 564.58,
+      "x1": 545.12,
+      "y1": 597.13
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 341.89,
+       "y0": 564.58,
+       "x1": 545.12,
+       "y1": 573.22
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 576.54,
+       "x1": 545.11,
+       "y1": 585.18
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 588.49,
+       "x1": 465.44000000000005,
+       "y1": 597.13
+      }
+     ],
+     "quote": "With a ViT-g/14 [58] model as the vision tower and a Large text tower, we can train at 20 k batch size on four chips for 107 k steps in under two days.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs/steps",
+   "value_raw": "107 k steps",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "Learning rate multiplier of 0.1 applied to pre-trained image tower",
+   "evidence": [
+    {
+     "chunk_id": "b0055",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 50.11,
+      "y0": 381.16,
+      "x1": 286.37,
+      "y1": 413.71
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 83.42,
+       "y0": 381.16,
+       "x1": 286.37,
+       "y1": 389.8
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 393.11,
+       "x1": 286.36,
+       "y1": 401.75
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 405.07,
+       "x1": 110.43,
+       "y1": 413.71
+      }
+     ],
+     "quote": "In all the experiments, we apply a 0.1 learning rate multiplier to the pre-trained image tower to make it suitable for fine-tuning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.1",
+   "value_norm": 0.1,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.10",
+   "value": "Batch size of 16k for fine-tuning with 16 TPU-v4 chips",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 50.11,
+      "y0": 435.24,
+      "x1": 286.36,
+      "y1": 467.78999999999996
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 251.9,
+       "y0": 435.24,
+       "x1": 286.36,
+       "y1": 443.88
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 447.19,
+       "x1": 286.36,
+       "y1": 455.83
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 459.15,
+       "x1": 102.02,
+       "y1": 467.78999999999996
+      }
+     ],
+     "quote": "We used 16 TPU-v4 chips and train at 16 k batch size for 2.4 B examples seen.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "16 k",
+   "value_norm": 16000.0,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.11",
+   "value": "Training for 2.4B examples seen",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 50.11,
+      "y0": 435.24,
+      "x1": 286.36,
+      "y1": 467.78999999999996
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 251.9,
+       "y0": 435.24,
+       "x1": 286.36,
+       "y1": 443.88
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 447.19,
+       "x1": 286.36,
+       "y1": 455.83
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 459.15,
+       "x1": 102.02,
+       "y1": 467.78999999999996
+      }
+     ],
+     "quote": "We used 16 TPU-v4 chips and train at 16 k batch size for 2.4 B examples seen.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs/steps",
+   "value_raw": "2.4 B examples",
+   "value_norm": null,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.12",
+   "value": "Training for 5 billion more examples at target resolution with 100x smaller learning rate",
+   "evidence": [
+    {
+     "chunk_id": "b0060",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 308.86,
+      "y0": 447.67,
+      "x1": 545.12,
+      "y1": 480.21999999999997
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 360.73,
+       "y0": 447.67,
+       "x1": 545.12,
+       "y1": 456.31
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 459.62,
+       "x1": 545.11,
+       "y1": 468.26
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 471.58,
+       "x1": 531.99,
+       "y1": 480.21999999999997
+      }
+     ],
+     "quote": "To get SigLIP models for different resolutions, we train for 5 billion more examples at the target resolution, with a 100x smaller learning rate and no weight decay.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "100x smaller",
+   "value_norm": null,
+   "scope": "resolution adaptation"
+  },
+  {
+   "id": "hyperparameters.13",
+   "value": "Beta 2 set to 0.95 in Adam and AdaFactor",
+   "evidence": [
+    {
+     "chunk_id": "b0064",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 552.12,
+      "x1": 260.98,
+      "y1": 561.77
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 552.12,
+       "x1": 260.98,
+       "y1": 561.77
+      }
+     ],
+     "quote": "We opt for setting β 2 = 0.95 for all our experiments.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "β 2 = 0.95",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.14",
+   "value": "ScalingViT-Adafactor optimizer with beta 1 and beta 2",
+   "evidence": [
+    {
+     "chunk_id": "b0089",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 50.11,
+      "y0": 133.07,
+      "x1": 286.36,
+      "y1": 166.31
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 97.49,
+       "y0": 133.07,
+       "x1": 286.36,
+       "y1": 141.70999999999998
+      },
+      {
+       "page": 14,
+       "x0": 50.11,
+       "y0": 144.71,
+       "x1": 286.36,
+       "y1": 154.36
+      },
+      {
+       "page": 14,
+       "x0": 50.11,
+       "y0": 156.66,
+       "x1": 93.7,
+       "y1": 166.31
+      }
+     ],
+     "quote": "We train a standard base size text tower, using the ScalingViT-Adafactor optimizer [58] with β 1 = 0.9 and β 2 = 0.95.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "ScalingViT-Adafactor with β 1 = 0.9 and β 2 = 0.95",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.15",
+   "value": "Learning rate of 0.001 with linear warmup schedule for first 200M examples",
+   "evidence": [
+    {
+     "chunk_id": "b0089",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 50.11,
+      "y0": 156.98,
+      "x1": 286.36,
+      "y1": 201.48000000000002
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 96.63,
+       "y0": 156.98,
+       "x1": 286.36,
+       "y1": 165.62
+      },
+      {
+       "page": 14,
+       "x0": 50.11,
+       "y0": 168.93,
+       "x1": 286.36,
+       "y1": 177.57
+      },
+      {
+       "page": 14,
+       "x0": 50.11,
+       "y0": 180.89,
+       "x1": 286.36,
+       "y1": 189.52999999999997
+      },
+      {
+       "page": 14,
+       "x0": 50.11,
+       "y0": 192.84,
+       "x1": 87.46000000000001,
+       "y1": 201.48000000000002
+      }
+     ],
+     "quote": "We use 0.001 learning rate with a linear warmup schedule for the first 200 M examples seen, and then the learning rate is decayed to zero with a cosine learning rate schedule.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.001",
+   "value_norm": 0.001,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.16",
+   "value": "Weight decay set to 0.0001",
+   "evidence": [
+    {
+     "chunk_id": "b0089",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 50.11,
+      "y0": 192.84,
+      "x1": 286.36,
+      "y1": 213.44
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 92.28,
+       "y0": 192.84,
+       "x1": 286.36,
+       "y1": 201.48000000000002
+      },
+      {
+       "page": 14,
+       "x0": 50.11,
+       "y0": 204.8,
+       "x1": 76.4,
+       "y1": 213.44
+      }
+     ],
+     "quote": "Weight decay is set to 0.0001 for all the experiments.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "0.0001",
+   "value_norm": 0.0001,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.17",
+   "value": "Batch size of 16384 for noise robustness experiments",
+   "evidence": [
+    {
+     "chunk_id": "b0079",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 308.86,
+      "y0": 480.74,
+      "x1": 545.12,
+      "y1": 513.29
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 413.99,
+       "y0": 480.74,
+       "x1": 545.12,
+       "y1": 489.38
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 492.69,
+       "x1": 545.11,
+       "y1": 501.33
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 504.65,
+       "x1": 497.11,
+       "y1": 513.29
+      }
+     ],
+     "quote": "In order to study this for SigLIP, we train M/16 image models alongside an M text model at batch size 16384 for 3.6 billion seen examples.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "16384",
+   "value_norm": 16384.0,
+   "scope": ""
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Four TPU-v4 chips used for memory efficient sigmoid loss exploration",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11,
+      "y0": 680.6,
+      "x1": 286.36,
+      "y1": 713.15
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 680.6,
+       "x1": 286.36,
+       "y1": 689.24
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 692.56,
+       "x1": 286.36,
+       "y1": 701.1999999999999
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 704.51,
+       "x1": 224.17000000000002,
+       "y1": 713.15
+      }
+     ],
+     "quote": "We explore the usage of SigLiT models in this section with only four TPU-v4 chips, as the memory efficient sigmoid loss is suitable for this application scenario.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.1",
+   "value": "16 TPU-v4 chips used for fine-tuning experiment",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 50.11,
+      "y0": 435.24,
+      "x1": 286.36,
+      "y1": 467.78999999999996
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 251.9,
+       "y0": 435.24,
+       "x1": 286.36,
+       "y1": 443.88
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 447.19,
+       "x1": 286.36,
+       "y1": 455.83
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 459.15,
+       "x1": 102.02,
+       "y1": 467.78999999999996
+      }
+     ],
+     "quote": "We used 16 TPU-v4 chips and train at 16 k batch size for 2.4 B examples seen.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.2",
+   "value": "32 TPU-v4 chips for two days for from-scratch SigLIP",
+   "evidence": [
+    {
+     "chunk_id": "b0058",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 50.11,
+      "y0": 656.69,
+      "x1": 286.37,
+      "y1": 689.24
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 77.57,
+       "y0": 656.69,
+       "x1": 286.37,
+       "y1": 665.33
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 668.65,
+       "x1": 286.36,
+       "y1": 677.29
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 680.6,
+       "x1": 215.97000000000003,
+       "y1": 689.24
+      }
+     ],
+     "quote": "We also present from-scratch results in the bottom rows of Table 1: with 32 TPUv4 chips for only two days, SigLIP achieves 72.1% 0-shot accuracy.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.3",
+   "value": "Comparison training cost of approximately 2500 TPUv3-days reported in [30]",
+   "evidence": [
+    {
+     "chunk_id": "b0058",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 50.11,
+      "y0": 680.6,
+      "x1": 286.37,
+      "y1": 713.15
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 223.58,
+       "y0": 680.6,
+       "x1": 286.36,
+       "y1": 689.24
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 692.56,
+       "x1": 204.64999999999998,
+       "y1": 701.1999999999999
+      },
+      {
+       "page": 7,
+       "x0": 210.75,
+       "y0": 692.56,
+       "x1": 286.37,
+       "y1": 701.1999999999999
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 704.51,
+       "x1": 83.58,
+       "y1": 713.15
+      },
+      {
+       "page": 7,
+       "x0": 86.67,
+       "y0": 704.51,
+       "x1": 272.6,
+       "y1": 713.15
+      }
+     ],
+     "quote": "This presents a significant training cost reduction e.g. compared to CLIP (approx. 2500 TPUv3-days for 72.6%) reported in [30].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.4",
+   "value": "Google Cloud TPUs used for training models developed in big vision codebase",
+   "evidence": [
+    {
+     "chunk_id": "b0107",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 61.57,
+      "y0": 492.52,
+      "x1": 286.37,
+      "y1": 525.46
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 61.57,
+       "y0": 492.52,
+       "x1": 286.36,
+       "y1": 501.54999999999995
+      },
+      {
+       "page": 17,
+       "x0": 70.04,
+       "y0": 504.87,
+       "x1": 286.37,
+       "y1": 513.51
+      },
+      {
+       "page": 17,
+       "x0": 70.04,
+       "y0": 516.82,
+       "x1": 153.89,
+       "y1": 525.46
+      }
+     ],
+     "quote": "• Hardware & Software: The models are developed in the big vision codebase [5,4] and trained on Google Cloud TPUs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Repeating SigLIP training five times with recommended 32k batch size",
+   "evidence": [
+    {
+     "chunk_id": "b0092",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 308.86,
+      "y0": 399.58,
+      "x1": 545.11,
+      "y1": 432.13
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 407.06,
+       "y0": 399.58,
+       "x1": 545.11,
+       "y1": 408.21999999999997
+      },
+      {
+       "page": 14,
+       "x0": 308.86,
+       "y0": 411.54,
+       "x1": 545.11,
+       "y1": 420.18
+      },
+      {
+       "page": 14,
+       "x0": 308.86,
+       "y0": 423.49,
+       "x1": 348.83000000000004,
+       "y1": 432.13
+      }
+     ],
+     "quote": "We repeat SigLIP training five times, using the recommended 32k batch size and 3B seen examples.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation on mini-batch composition and distribution of negative examples by masking out negative examples",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 308.86,
+      "y0": 480.7,
+      "x1": 545.12,
+      "y1": 513.25
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 435.58,
+       "y0": 480.7,
+       "x1": 545.12,
+       "y1": 489.34
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 492.66,
+       "x1": 545.11,
+       "y1": 501.3
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 504.61,
+       "x1": 505.39,
+       "y1": 513.25
+      }
+     ],
+     "quote": "We run experiments in the SigLiT setup at batch-size 16 k for 900 M steps and vary the composition of the batch by masking out (i.e.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Ablation on bias term in the loss function using Base architecture",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 50.11,
+      "y0": 478.83,
+      "x1": 286.37,
+      "y1": 511.38
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 62.07,
+       "y0": 478.83,
+       "x1": 286.37,
+       "y1": 487.46999999999997
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 490.78,
+       "x1": 286.36,
+       "y1": 499.41999999999996
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 502.74,
+       "x1": 180.94,
+       "y1": 511.38
+      }
+     ],
+     "quote": "We ablate the bias term in the loss function, using the Base architecture with an 8 k batch size, trained for 900M examples with the SigLIP setup.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/google-research/big_vision",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 253.76,
+      "x1": 286.37,
+      "y1": 489.5
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 62.07,
+       "y0": 253.76,
+       "x1": 286.37,
+       "y1": 262.34999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 265.71,
+       "x1": 214.35000000000002,
+       "y1": 274.29999999999995
+      },
+      {
+       "page": 1,
+       "x0": 219.61,
+       "y0": 265.71,
+       "x1": 286.37,
+       "y1": 274.29999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 277.67,
+       "x1": 286.36,
+       "y1": 286.26
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 289.62,
+       "x1": 286.36,
+       "y1": 298.21
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 301.58,
+       "x1": 286.36,
+       "y1": 310.16999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 313.53,
+       "x1": 94.67,
+       "y1": 322.11999999999995
+      },
+      {
+       "page": 1,
+       "x0": 102.86,
+       "y0": 313.53,
+       "x1": 286.36,
+       "y1": 322.11999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 325.49,
+       "x1": 286.36,
+       "y1": 334.08
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 337.44,
+       "x1": 157.48000000000002,
+       "y1": 346.03
+      },
+      {
+       "page": 1,
+       "x0": 164.62,
+       "y0": 337.44,
+       "x1": 286.36,
+       "y1": 346.03
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 349.4,
+       "x1": 286.36,
+       "y1": 357.98999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 361.35,
+       "x1": 286.36,
+       "y1": 369.94
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 373.31,
+       "x1": 100.69,
+       "y1": 381.9
+      },
+      {
+       "page": 1,
+       "x0": 107.84,
+       "y0": 373.31,
+       "x1": 286.37,
+       "y1": 381.9
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 385.27,
+       "x1": 286.36,
+       "y1": 393.85999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 397.22,
+       "x1": 232.48000000000002,
+       "y1": 405.81
+      },
+      {
+       "page": 1,
+       "x0": 240.49,
+       "y0": 397.22,
+       "x1": 286.37,
+       "y1": 405.81
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 409.18,
+       "x1": 286.36,
+       "y1": 417.77
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 421.13,
+       "x1": 286.36,
+       "y1": 429.71999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 433.09,
+       "x1": 286.36,
+       "y1": 441.67999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 445.04,
+       "x1": 76.95,
+       "y1": 453.63
+      },
+      {
+       "page": 1,
+       "x0": 85.34,
+       "y0": 445.04,
+       "x1": 192.4,
+       "y1": 453.63
+      },
+      {
+       "page": 1,
+       "x0": 232.75,
+       "y0": 457.0,
+       "x1": 286.36,
+       "y1": 465.59
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 468.95,
+       "x1": 286.36,
+       "y1": 477.53999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 480.91,
+       "x1": 265.25,
+       "y1": 489.5
+      }
+     ],
+     "quote": "We propose a simple pairwise Sigmoid loss for Language-Image Pre-training (SigLIP). Unlike standard contrastive learning with softmax normalization, the sigmoid loss operates solely on image-text pairs and does not require a global view of the pairwise similarities for normalization. The sigmoid loss simultaneously allows further scaling up the batch size, while also performing better at smaller batch sizes. Combined with Locked-image Tuning, with only four TPUv4 chips, we train a SigLiT model that achieves 84.5% ImageNet zero-shot accuracy in two days. The disentanglement of the batch size from the loss further allows us to study the impact of examples vs pairs and negative to positive ratio. Finally, we push the batch size to the extreme, up to one million, and find that the benefits of growing batch size quickly diminish, with a more reasonable batch size of 32 k being sufficient. We release our models at https://github. com/google-research/big_vision and hope our research motivates further explorations in improving the quality and efficiency of language-image pre-training.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "A SigLiT model achieves 84.5% ImageNet zero-shot accuracy in two days using only four TPUv4 chips.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 337.44,
+      "x1": 286.36,
+      "y1": 381.9
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 164.62,
+       "y0": 337.44,
+       "x1": 286.36,
+       "y1": 346.03
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 349.4,
+       "x1": 286.36,
+       "y1": 357.98999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 361.35,
+       "x1": 286.36,
+       "y1": 369.94
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 373.31,
+       "x1": 100.69,
+       "y1": 381.9
+      }
+     ],
+     "quote": "Combined with Locked-image Tuning, with only four TPUv4 chips, we train a SigLiT model that achieves 84.5% ImageNet zero-shot accuracy in two days.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "Sigmoid loss performs significantly better than the softmax loss when the batch size is smaller than 16 k.",
+   "evidence": [
+    {
+     "chunk_id": "b0005",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 50.11,
+      "y0": 111.34,
+      "x1": 286.36,
+      "y1": 143.89
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 111.34,
+       "x1": 286.36,
+       "y1": 119.98
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 123.3,
+       "x1": 286.36,
+       "y1": 131.94
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 135.25,
+       "x1": 69.21000000000001,
+       "y1": 143.89
+      }
+     ],
+     "quote": "We find that the sigmoid loss performs significantly better than the softmax loss when the batch size is smaller than 16 k.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

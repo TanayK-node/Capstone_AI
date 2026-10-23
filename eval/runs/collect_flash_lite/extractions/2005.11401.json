@@ -1,0 +1,1943 @@
+{
+ "metadata": {
+  "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+  "authors": [
+   "Patrick Lewis",
+   "Ethan Perez",
+   "Aleksandra Piktus",
+   "Fabio Petroni",
+   "Vladimir Karpukhin",
+   "Naman Goyal",
+   "Heinrich Küttler",
+   "Mike Lewis",
+   "Wen-Tau Yih",
+   "Tim Rocktäschel",
+   "Sebastian Riedel",
+   "Douwe Kiela"
+  ],
+  "venue": null,
+  "year": "2021",
+  "arxiv_id": "2005.11401v4[cs.CL]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Large language models struggle with precise knowledge access and manipulation on knowledge-intensive tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 366.25,
+      "x1": 469.78999999999996,
+      "y1": 396.71
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 218.1,
+       "y0": 366.25,
+       "x1": 469.78999999999996,
+       "y1": 374.89
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 377.16,
+       "x1": 468.13,
+       "y1": 385.8
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 388.07,
+       "x1": 293.74,
+       "y1": 396.71
+      }
+     ],
+     "quote": "However, their ability to access and precisely manipulate knowledge is still limited, and hence on knowledge-intensive tasks, their performance lags behind task-specific architectures.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Pretrained models cannot easily revise memory, provide provenance, or avoid hallucinations.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 645.86,
+      "x1": 505.65,
+      "y1": 676.3199999999999
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 246.92,
+       "y0": 645.86,
+       "x1": 505.65,
+       "y1": 654.5
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 656.77,
+       "x1": 504.0,
+       "y1": 665.41
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 667.68,
+       "x1": 339.27,
+       "y1": 676.3199999999999
+      }
+     ],
+     "quote": "They cannot easily expand or revise their memory, can't straightforwardly provide insight into their predictions, and may produce \"hallucinations\" [38].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Introduction of retrieval-augmented generation (RAG) models combining parametric and non-parametric memory.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.62,
+      "y0": 453.52,
+      "x1": 468.14,
+      "y1": 483.97999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 266.16,
+       "y0": 453.52,
+       "x1": 468.13,
+       "y1": 462.15999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 464.43,
+       "x1": 468.14,
+       "y1": 473.07
+      },
+      {
+       "page": 1,
+       "x0": 143.62,
+       "y0": 475.34,
+       "x1": 430.11,
+       "y1": 483.97999999999996
+      }
+     ],
+     "quote": "We introduce RAG models where the parametric memory is a pre-trained seq2seq model and the non-parametric memory is a dense vector index of Wikipedia, accessed with a pre-trained neural retriever.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Proposal of two RAG formulations conditioning on retrieved passages per-sequence or per-token.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 475.34,
+      "x1": 469.79,
+      "y1": 516.71
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 433.19,
+       "y0": 475.34,
+       "x1": 469.79,
+       "y1": 483.97999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 486.25,
+       "x1": 468.14,
+       "y1": 494.89
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 497.16,
+       "x1": 468.14,
+       "y1": 505.8
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 508.07,
+       "x1": 184.45,
+       "y1": 516.71
+      }
+     ],
+     "quote": "We compare two RAG formulations, one which conditions on the same retrieved passages across the whole generated sequence, and another which can use different passages per token.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "knowledge-intensive NLP tasks",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 508.07,
+      "x1": 469.79,
+      "y1": 549.43
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 187.82,
+       "y0": 508.07,
+       "x1": 469.79,
+       "y1": 516.71
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 518.97,
+       "x1": 469.38,
+       "y1": 527.61
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 529.88,
+       "x1": 468.13,
+       "y1": 538.52
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 540.79,
+       "x1": 198.33,
+       "y1": 549.43
+      }
+     ],
+     "quote": "We fine-tune and evaluate our models on a wide range of knowledgeintensive NLP tasks and set the state of the art on three open domain QA tasks, outperforming parametric seq2seq models and task-specific retrieve-and-extract architectures.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "task.1",
+   "value": "open-domain extractive question answering",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 700.4,
+      "x1": 505.24,
+      "y1": 719.9499999999999
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 220.93,
+       "y0": 700.4,
+       "x1": 504.0,
+       "y1": 709.04
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 711.31,
+       "x1": 505.24,
+       "y1": 719.9499999999999
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 193.8,
+       "x1": 250.41,
+       "y1": 202.44
+      },
+      {
+       "page": 2,
+       "x0": 253.41,
+       "y0": 193.62,
+       "x1": 504.01,
+       "y1": 202.44
+      },
+      {
+       "page": 2,
+       "x0": 107.83,
+       "y0": 204.53,
+       "x1": 421.49,
+       "y1": 213.35
+      },
+      {
+       "page": 2,
+       "x0": 424.58,
+       "y0": 204.39,
+       "x1": 504.0,
+       "y1": 213.35
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 215.3,
+       "x1": 398.77,
+       "y1": 224.95000000000002
+      },
+      {
+       "page": 2,
+       "x0": 401.85,
+       "y0": 215.3,
+       "x1": 504.0,
+       "y1": 224.26000000000002
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 226.21,
+       "x1": 485.76,
+       "y1": 235.17000000000002
+      }
+     ],
+     "quote": "REALM [20] and ORQA [31], two recently introduced models that combine masked language models [8] with a differentiable retriever, have shown promising results, Figure 1: Overview of our approach. We combine a pre-trained retriever (Query Encoder + Document Index) with a pre-trained seq2seq model (Generator) and fine-tune end-to-end. For query x, we use Maximum Inner Product Search (MIPS) to find the top-K documents z i . For final prediction y, we treat z as a latent variable and marginalize over seq2seq predictions given different documents. but have only explored open-domain extractive question answering.",
+     "grounding_status": "partial",
+     "match_score": 94.3
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [],
+ "novelty": [],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "Wikipedia dump from December 2018",
+   "evidence": [
+    {
+     "chunk_id": "b0033",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 395.59,
+      "x1": 504.0,
+      "y1": 415.14
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 395.52,
+       "y0": 395.59,
+       "x1": 504.0,
+       "y1": 404.22999999999996
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 406.5,
+       "x1": 383.01,
+       "y1": 415.14
+      }
+     ],
+     "quote": "For all experiments, we use a single Wikipedia dump for our non-parametric knowledge source.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Wikipedia",
+   "split": "",
+   "size": "21M documents",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "Natural Questions dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 581.83,
+      "x1": 504.0,
+      "y1": 601.38
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 268.32,
+       "y0": 581.83,
+       "x1": 504.0,
+       "y1": 590.47
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 592.74,
+       "x1": 283.47,
+       "y1": 601.38
+      }
+     ],
+     "quote": "We consider four popular open-domain QA datasets: Natural Questions (NQ) [29], TriviaQA (TQA) [24].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Natural Questions (NQ)",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "TriviaQA dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 581.83,
+      "x1": 504.0,
+      "y1": 601.38
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 268.32,
+       "y0": 581.83,
+       "x1": 504.0,
+       "y1": 590.47
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 592.74,
+       "x1": 283.47,
+       "y1": 601.38
+      }
+     ],
+     "quote": "We consider four popular open-domain QA datasets: Natural Questions (NQ) [29], TriviaQA (TQA) [24].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "TriviaQA (TQA)",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "WebQuestions dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 286.57,
+      "y0": 592.74,
+      "x1": 489.93,
+      "y1": 601.38
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 286.57,
+       "y0": 592.74,
+       "x1": 489.93,
+       "y1": 601.38
+      }
+     ],
+     "quote": "WebQuestions (WQ) [3] and CuratedTrec (CT) [2].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "WebQuestions (WQ)",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "CuratedTrec dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 286.57,
+      "y0": 592.74,
+      "x1": 489.93,
+      "y1": 601.38
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 286.57,
+       "y0": 592.74,
+       "x1": 489.93,
+       "y1": 601.38
+      }
+     ],
+     "quote": "WebQuestions (WQ) [3] and CuratedTrec (CT) [2].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "CuratedTrec (CT)",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "MSMARCO NLG task v2.1",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 107.64,
+      "y0": 680.79,
+      "x1": 505.25,
+      "y1": 700.34
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 172.86,
+       "y0": 680.79,
+       "x1": 505.25,
+       "y1": 689.43
+      },
+      {
+       "page": 4,
+       "x0": 107.64,
+       "y0": 691.7,
+       "x1": 295.04,
+       "y1": 700.34
+      }
+     ],
+     "quote": "To test RAG's natural language generation (NLG) in a knowledge-intensive setting, we use the MSMARCO NLG task v2.1 [43].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "MSMARCO NLG task v2.1",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.6",
+   "value": "SearchQA splits for generating Jeopardy questions",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 107.53,
+      "y0": 255.71,
+      "x1": 486.41999999999996,
+      "y1": 264.35
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 107.53,
+       "y0": 255.71,
+       "x1": 486.41999999999996,
+       "y1": 264.35
+      }
+     ],
+     "quote": "We use the splits from SearchQA [10], with 100K train, 14K dev, and 27K test examples.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "SearchQA",
+   "split": "100K train, 14K dev, and 27K test",
+   "size": "100K train, 14K dev, and 27K test examples",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.7",
+   "value": "FEVER dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0044",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 107.53,
+      "y0": 397.73,
+      "x1": 504.35,
+      "y1": 417.28
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 397.73,
+       "x1": 504.35,
+       "y1": 406.37
+      },
+      {
+       "page": 5,
+       "x0": 107.53,
+       "y0": 408.64,
+       "x1": 381.90999999999997,
+       "y1": 417.28
+      }
+     ],
+     "quote": "FEVER [56] requires classifying whether a natural language claim is supported or refuted by Wikipedia, or whether there is not enough information to decide.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "FEVER",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Extractive QA paradigm",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 538.19,
+      "x1": 504.0,
+      "y1": 568.65
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 420.68,
+       "y0": 538.19,
+       "x1": 503.99,
+       "y1": 546.83
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 549.1,
+       "x1": 504.0,
+       "y1": 557.74
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 560.01,
+       "x1": 356.07,
+       "y1": 568.65
+      }
+     ],
+     "quote": "We compare RAG to the popular extractive QA paradigm [5,7,31,26], where answers are extracted spans from retrieved documents, relying primarily on non-parametric knowledge.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Closed-Book QA approaches",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 560.01,
+      "x1": 504.25,
+      "y1": 590.47
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 361.05,
+       "y0": 560.01,
+       "x1": 504.25,
+       "y1": 568.65
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 570.92,
+       "x1": 504.0,
+       "y1": 579.56
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 581.83,
+       "x1": 265.38,
+       "y1": 590.47
+      }
+     ],
+     "quote": "We also compare to \"Closed-Book QA\" approaches [52], which, like RAG, generate answers, but which do not exploit retrieval, instead relying purely on parametric knowledge.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "BART model for comparison on Jeopardy",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 255.71,
+      "x1": 504.0,
+      "y1": 275.26
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 492.71,
+       "y0": 255.71,
+       "x1": 504.0,
+       "y1": 264.35
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 266.62,
+       "x1": 346.95,
+       "y1": 275.26
+      }
+     ],
+     "quote": "As this is a new task, we train a BART model for comparison.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "DPR QA system",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 653.49,
+      "x1": 505.65000000000003,
+      "y1": 673.04
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 167.74,
+       "y0": 653.49,
+       "x1": 505.65000000000003,
+       "y1": 662.13
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 664.4,
+       "x1": 367.03,
+       "y1": 673.04
+      }
+     ],
+     "quote": "RAG compares favourably to the DPR QA system, which uses a BERT-based \"crossencoder\" to re-rank documents, along with an extractive reader.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "Thorne and Vlachos 2-way FEVER model",
+   "evidence": [
+    {
+     "chunk_id": "b0055",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 374.86,
+      "x1": 504.0,
+      "y1": 394.4
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 374.86,
+       "x1": 504.0,
+       "y1": 383.5
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 385.76,
+       "x1": 391.64,
+       "y1": 394.4
+      }
+     ],
+     "quote": "For 2-way classification, we compare against Thorne and Vlachos [57], who train RoBERTa [35] to classify the claim as true or false given the gold evidence sentence.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "BART-large model",
+   "evidence": [
+    {
+     "chunk_id": "b0077",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 107.64,
+      "y0": 183.18,
+      "x1": 505.24,
+      "y1": 213.64
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 289.92,
+       "y0": 183.18,
+       "x1": 505.24,
+       "y1": 191.82
+      },
+      {
+       "page": 17,
+       "x0": 107.64,
+       "y0": 194.09,
+       "x1": 505.24,
+       "y1": 202.73000000000002
+      },
+      {
+       "page": 17,
+       "x0": 108.0,
+       "y0": 205.0,
+       "x1": 320.40999999999997,
+       "y1": 213.64
+      }
+     ],
+     "quote": "For Open-MSMarco and Jeopardy question generation, we report test numbers using ten retrieved documents for both RAG-Token and RAG-Sequence, and we also train a BART-large model as a baseline.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Exact Match (EM)",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 614.55,
+      "x1": 504.66999999999996,
+      "y1": 634.1
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 139.96,
+       "y0": 614.55,
+       "x1": 504.66999999999996,
+       "y1": 623.1899999999999
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 625.46,
+       "x1": 135.39,
+       "y1": 634.1
+      }
+     ],
+     "quote": "We use the same train/dev/test splits as prior work [31,26] and report Exact Match (EM) scores.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "SQuAD-tuned Q-BLEU-1",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 266.62,
+      "x1": 503.99,
+      "y1": 286.16999999999996
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 350.47,
+       "y0": 266.62,
+       "x1": 503.99,
+       "y1": 275.26
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 277.53,
+       "x1": 267.28,
+       "y1": 286.16999999999996
+      }
+     ],
+     "quote": "Following [67], we evaluate using the SQuAD-tuned Q-BLEU-1 metric [42].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "Label accuracy for FEVER",
+   "evidence": [
+    {
+     "chunk_id": "b0044",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 345.95,
+      "y0": 517.73,
+      "x1": 499.78999999999996,
+      "y1": 526.37
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 345.95,
+       "y0": 517.73,
+       "x1": 499.78999999999996,
+       "y1": 526.37
+      }
+     ],
+     "quote": "In both cases we report label accuracy.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "Rouge-L",
+   "evidence": [
+    {
+     "chunk_id": "b0050",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 107.64,
+      "y0": 303.14,
+      "x1": 504.0,
+      "y1": 322.69
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 107.64,
+       "y0": 303.14,
+       "x1": 504.0,
+       "y1": 311.78
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 314.05,
+       "x1": 237.99,
+       "y1": 322.69
+      }
+     ],
+     "quote": "RAG-Sequence outperforms BART on Open MS-MARCO NLG by 2.6 Bleu points and 2.6 Rouge-L points.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.4",
+   "value": "Ratio of distinct ngrams to total ngrams",
+   "evidence": [
+    {
+     "chunk_id": "b0058",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 496.69,
+      "x1": 504.0,
+      "y1": 527.15
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 275.98,
+       "y0": 496.69,
+       "x1": 504.0,
+       "y1": 505.33
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 507.6,
+       "x1": 504.0,
+       "y1": 516.24
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 518.51,
+       "x1": 286.15999999999997,
+       "y1": 527.15
+      }
+     ],
+     "quote": "Following recent work on diversity-promoting decoding [33,59,39], we also investigate generation diversity by calculating the ratio of distinct ngrams to total ngrams generated by different models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Number of retrieved documents during training",
+   "evidence": [
+    {
+     "chunk_id": "b0033",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 460.73,
+      "x1": 504.25,
+      "y1": 480.59999999999997
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 225.46,
+       "y0": 460.73,
+       "x1": 504.25,
+       "y1": 469.69
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 471.96,
+       "x1": 127.09,
+       "y1": 480.59999999999997
+      }
+     ],
+     "quote": "We consider k ∈ {5, 10} for training and set k for test time using dev data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "k (retrieved documents)",
+   "value_raw": "{5, 10}",
+   "value_norm": null,
+   "scope": "training"
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Number of retrieved documents for Open-domain QA test time (RAG-Token)",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 108.0,
+      "y0": 150.45,
+      "x1": 505.75,
+      "y1": 159.08999999999997
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 108.0,
+       "y0": 150.45,
+       "x1": 505.75,
+       "y1": 159.08999999999997
+      }
+     ],
+     "quote": "For Open-domain QA we report test numbers using 15 retrieved documents for RAG-Token models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0077",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 107.64,
+      "y0": 183.18,
+      "x1": 505.24,
+      "y1": 213.64
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 289.92,
+       "y0": 183.18,
+       "x1": 505.24,
+       "y1": 191.82
+      },
+      {
+       "page": 17,
+       "x0": 107.64,
+       "y0": 194.09,
+       "x1": 505.24,
+       "y1": 202.73000000000002
+      },
+      {
+       "page": 17,
+       "x0": 108.0,
+       "y0": 205.0,
+       "x1": 320.40999999999997,
+       "y1": 213.64
+      }
+     ],
+     "quote": "For Open-MSMarco and Jeopardy question generation, we report test numbers using ten retrieved documents for both RAG-Token and RAG-Sequence, and we also train a BART-large model as a baseline.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "retrieved documents",
+   "value_raw": "15",
+   "value_norm": 15.0,
+   "scope": "test time"
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Number of retrieved documents for Open-domain QA test time (RAG-Sequence)",
+   "evidence": [
+    {
+     "chunk_id": "b0077",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 107.69,
+      "y0": 161.36,
+      "x1": 504.0,
+      "y1": 180.91000000000003
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 108.0,
+       "y0": 161.36,
+       "x1": 504.0,
+       "y1": 170.0
+      },
+      {
+       "page": 17,
+       "x0": 107.69,
+       "y0": 172.27,
+       "x1": 362.46000000000004,
+       "y1": 180.91000000000003
+      }
+     ],
+     "quote": "For RAG-Sequence models, we report test results using 50 retrieved documents, and we use the Thorough Decoding approach since answers are generally short.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "retrieved documents",
+   "value_raw": "50",
+   "value_norm": 50.0,
+   "scope": "test time"
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Beam size",
+   "evidence": [
+    {
+     "chunk_id": "b0077",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 108.0,
+      "y0": 205.0,
+      "x1": 505.62,
+      "y1": 224.55
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 323.83,
+       "y0": 205.0,
+       "x1": 504.0,
+       "y1": 213.64
+      },
+      {
+       "page": 17,
+       "x0": 108.0,
+       "y0": 215.91,
+       "x1": 505.62,
+       "y1": 224.55
+      }
+     ],
+     "quote": "We use a beam size of four, and use the Fast Decoding approach for RAG-Sequence models, as Thorough Decoding did not improve performance.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "beam size",
+   "value_raw": "four",
+   "value_norm": null,
+   "scope": ""
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Hardware and precision setup using 8 NVIDIA V100 GPUs",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 107.53,
+      "y0": 572.31,
+      "x1": 504.0,
+      "y1": 604.43
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 107.53,
+       "y0": 573.98,
+       "x1": 374.29999999999995,
+       "y1": 582.62
+      },
+      {
+       "page": 17,
+       "x0": 374.3,
+       "y0": 572.31,
+       "x1": 377.79,
+       "y1": 578.3599999999999
+      },
+      {
+       "page": 17,
+       "x0": 381.44,
+       "y0": 573.98,
+       "x1": 504.0,
+       "y1": 582.62
+      },
+      {
+       "page": 17,
+       "x0": 108.0,
+       "y0": 584.89,
+       "x1": 504.0,
+       "y1": 593.53
+      },
+      {
+       "page": 17,
+       "x0": 108.0,
+       "y0": 595.79,
+       "x1": 295.35,
+       "y1": 604.43
+      }
+     ],
+     "quote": "We train with mixed precision floating point arithmetic [40], distributing training across 8, 32GB NVIDIA V100 GPUs, though training and inference can be run on one GPU.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.1",
+   "value": "CPU memory required for FAISS index",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 107.64,
+      "y0": 595.79,
+      "x1": 504.25,
+      "y1": 626.25
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 297.84,
+       "y0": 595.79,
+       "x1": 503.99,
+       "y1": 604.43
+      },
+      {
+       "page": 17,
+       "x0": 107.64,
+       "y0": 606.38,
+       "x1": 504.25,
+       "y1": 615.34
+      },
+      {
+       "page": 17,
+       "x0": 108.0,
+       "y0": 617.61,
+       "x1": 268.83000000000004,
+       "y1": 626.25
+      }
+     ],
+     "quote": "We find that doing Maximum Inner Product Search with FAISS is sufficiently fast on CPU, so we store document index vectors on CPU, requiring ∼ 100 GB of CPU memory for all of Wikipedia.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Freezing the retriever during training",
+   "evidence": [
+    {
+     "chunk_id": "b0060",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 107.69,
+      "y0": 575.09,
+      "x1": 504.17,
+      "y1": 594.64
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 107.69,
+       "y0": 575.09,
+       "x1": 504.17,
+       "y1": 583.73
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 586.0,
+       "x1": 169.99,
+       "y1": 594.64
+      }
+     ],
+     "quote": "To assess the effectiveness of the retrieval mechanism, we run ablations where we freeze the retriever during training.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Replacing dense retriever with BM25 word-overlap retriever",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 602.39,
+      "x1": 504.0,
+      "y1": 632.63
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 436.42,
+       "y0": 602.39,
+       "x1": 504.0,
+       "y1": 611.03
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 613.3,
+       "x1": 504.0,
+       "y1": 621.9399999999999
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 623.89,
+       "x1": 136.73,
+       "y1": 632.63
+      }
+     ],
+     "quote": "Here, we replace RAG's retriever with a fixed BM25 system, and use BM25 retrieval scores as logits when calculating p(z|x).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "External knowledge sources like Wikipedia may contain biases and are not entirely factual",
+   "evidence": [
+    {
+     "chunk_id": "b0073",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 107.53,
+      "y0": 169.61,
+      "x1": 504.0,
+      "y1": 189.14999999999998
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 107.53,
+       "y0": 169.61,
+       "x1": 504.0,
+       "y1": 178.25
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 180.51,
+       "x1": 424.39,
+       "y1": 189.14999999999998
+      }
+     ],
+     "quote": "With these advantages also come potential downsides: Wikipedia, or any potential external knowledge source, will probably never be entirely factual and completely devoid of bias.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Investigate jointly pre-training the components from scratch using a denoising objective or similar approach",
+   "evidence": [
+    {
+     "chunk_id": "b0070",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 578.14,
+      "x1": 504.01,
+      "y1": 608.6
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 236.87,
+       "y0": 578.14,
+       "x1": 504.01,
+       "y1": 586.78
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 589.05,
+       "x1": 504.0,
+       "y1": 597.6899999999999
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 599.96,
+       "x1": 177.55,
+       "y1": 608.6
+      }
+     ],
+     "quote": "In future work, it may be fruitful to investigate if the two components can be jointly pre-trained from scratch, either with a denoising objective similar to BART or some another objective.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [
+  {
+   "id": "ethics.0",
+   "value": "The model provides societal benefits by hallucinating less and offering more factual grounding, control, and interpretability",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 107.64,
+      "y0": 98.67,
+      "x1": 504.0,
+      "y1": 129.13
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 107.69,
+       "y0": 98.67,
+       "x1": 504.0,
+       "y1": 107.31
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 109.58,
+       "x1": 504.0,
+       "y1": 118.22
+      },
+      {
+       "page": 10,
+       "x0": 107.64,
+       "y0": 120.49,
+       "x1": 442.78,
+       "y1": 129.13
+      }
+     ],
+     "quote": "This work offers several positive societal benefits over previous work: the fact that it is more strongly grounded in real factual knowledge (in this case Wikipedia) makes it \"hallucinate\" less with generations that are more factual, and offers more control and interpretability.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.1",
+   "value": "Potential risks include generating abusive, faked, misleading content, impersonating others, or automating spam and job automation",
+   "evidence": [
+    {
+     "chunk_id": "b0073",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 180.51,
+      "x1": 504.34,
+      "y1": 232.79000000000002
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 428.34,
+       "y0": 180.51,
+       "x1": 503.99,
+       "y1": 189.14999999999998
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 191.42,
+       "x1": 504.34,
+       "y1": 200.06
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 202.33,
+       "x1": 504.0,
+       "y1": 210.97000000000003
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 213.24,
+       "x1": 503.99,
+       "y1": 221.88
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 224.15,
+       "x1": 160.24,
+       "y1": 232.79000000000002
+      }
+     ],
+     "quote": "Since RAG can be employed as a language model, similar concerns as for GPT-2 [50] are valid here, although arguably to a lesser extent, including that it might be used to generate abuse, faked or misleading content in the news or on social media; to impersonate others; or to automate the production of spam/phishing content [54].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/huggingface/transformers/blob/master/examples/rag/",
+   "evidence": [
+    {
+     "chunk_id": "b0096",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 124.13999938964844,
+      "y0": 693.9957885742188,
+      "x1": 392.4482116699219,
+      "y1": 702.0117797851562
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 124.13999938964844,
+       "y0": 693.9957885742188,
+       "x1": 392.4482116699219,
+       "y1": 702.0117797851562
+      }
+     ],
+     "quote": "Code to run experiments with RAG has been open-sourced as part of the HuggingFace Transformers Library[66] and can be found at https://github.com/huggingface/transformers/blob/master/ examples/rag/.An interactive demo of RAG models can be found at https://huggingface.co/rag/",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://huggingface.co/rag/",
+   "evidence": [
+    {
+     "chunk_id": "b0096",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 124.13999938964844,
+      "y0": 693.9957885742188,
+      "x1": 392.4482116699219,
+      "y1": 702.0117797851562
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 124.13999938964844,
+       "y0": 693.9957885742188,
+       "x1": 392.4482116699219,
+       "y1": 702.0117797851562
+      }
+     ],
+     "quote": "Code to run experiments with RAG has been open-sourced as part of the HuggingFace Transformers Library[66] and can be found at https://github.com/huggingface/transformers/blob/master/ examples/rag/.An interactive demo of RAG models can be found at https://huggingface.co/rag/",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.2",
+   "value": "https://github.com/pytorch/fairseq",
+   "evidence": [
+    {
+     "chunk_id": "b0105",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 124.13999938964844,
+      "y0": 703.6705322265625,
+      "x1": 284.1814880371094,
+      "y1": 711.1395263671875
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 124.13999938964844,
+       "y0": 703.6705322265625,
+       "x1": 284.1814880371094,
+       "y1": 711.1395263671875
+      }
+     ],
+     "quote": "https://github.com/pytorch/fairseq",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.3",
+   "value": "https://github.com/huggingface/transformers",
+   "evidence": [
+    {
+     "chunk_id": "b0106",
+     "page": 17,
+     "bbox": {
+      "page": 17,
+      "x0": 124.13999938964844,
+      "y0": 661.6478271484375,
+      "x1": 499.86126708984375,
+      "y1": 721.9905395507812
+     },
+     "boxes": [
+      {
+       "page": 17,
+       "x0": 274.9649963378906,
+       "y0": 661.6478271484375,
+       "x1": 499.86126708984375,
+       "y1": 669.9466552734375
+      },
+      {
+       "page": 17,
+       "x0": 124.13999938964844,
+       "y0": 714.5215454101562,
+       "x1": 326.54779052734375,
+       "y1": 721.9905395507812
+      }
+     ],
+     "quote": "https://github.com/huggingface/transformers",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "RAG models set state-of-the-art results on three open domain QA tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 508.07,
+      "x1": 469.79,
+      "y1": 549.43
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 187.82,
+       "y0": 508.07,
+       "x1": 469.79,
+       "y1": 516.71
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 518.97,
+       "x1": 469.38,
+       "y1": 527.61
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 529.88,
+       "x1": 468.13,
+       "y1": 538.52
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 540.79,
+       "x1": 198.33,
+       "y1": 549.43
+      }
+     ],
+     "quote": "We fine-tune and evaluate our models on a wide range of knowledgeintensive NLP tasks and set the state of the art on three open domain QA tasks, outperforming parametric seq2seq models and task-specific retrieve-and-extract architectures.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "Fact verification results are achieved within 4.3% of the state-of-the-art pipeline models.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 569.41,
+      "x1": 504.0,
+      "y1": 588.96
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 232.01,
+       "y0": 569.41,
+       "x1": 504.0,
+       "y1": 578.05
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 580.32,
+       "x1": 388.4,
+       "y1": 588.96
+      }
+     ],
+     "quote": "For FEVER [56] fact verification, we achieve results within 4.3% of state-of-the-art pipeline models which use strong retrieval supervision.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

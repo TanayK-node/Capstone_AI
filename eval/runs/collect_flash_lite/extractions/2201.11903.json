@@ -1,0 +1,1728 @@
+{
+ "metadata": {
+  "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+  "authors": [
+   "Jason Wei",
+   "Xuezhi Wang",
+   "Dale Schuurmans",
+   "Maarten Bosma",
+   "Brian Ichter",
+   "Fei Xia",
+   "Ed H Chi Quoc",
+   "V Le",
+   "Denny Zhou"
+  ],
+  "venue": null,
+  "year": "2023",
+  "arxiv_id": "2201.11903v6[cs.CL]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Large language models struggle with complex reasoning tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 303.68,
+      "x1": 468.14,
+      "y1": 334.32
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 303.68,
+       "x1": 468.14,
+       "y1": 312.5
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 314.77,
+       "x1": 468.13,
+       "y1": 323.40999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 325.68,
+       "x1": 223.42000000000002,
+       "y1": 334.32
+      }
+     ],
+     "quote": "We explore how generating a chain of thought-a series of intermediate reasoning steps-significantly improves the ability of large language models to perform complex reasoning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Introducing chain-of-thought prompting to improve reasoning capabilities in large language models.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 325.68,
+      "x1": 469.79,
+      "y1": 367.05
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 226.99,
+       "y0": 325.68,
+       "x1": 468.13,
+       "y1": 334.32
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 336.41,
+       "x1": 469.79,
+       "y1": 345.23
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 347.32,
+       "x1": 468.14,
+       "y1": 356.14
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 358.41,
+       "x1": 241.25,
+       "y1": 367.05
+      }
+     ],
+     "quote": "In particular, we show how such reasoning abilities emerge naturally in sufficiently large language models via a simple method called chain-ofthought prompting, where a few chain of thought demonstrations are provided as exemplars in prompting.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Arithmetic, commonsense, and symbolic reasoning tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 371.31,
+      "x1": 468.14,
+      "y1": 401.77
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 371.31,
+       "x1": 468.14,
+       "y1": 379.95
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 382.22,
+       "x1": 468.13,
+       "y1": 390.86
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 393.13,
+       "x1": 208.98000000000002,
+       "y1": 401.77
+      }
+     ],
+     "quote": "Experiments on three large language models show that chain-of-thought prompting improves performance on a range of arithmetic, commonsense, and symbolic reasoning tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [],
+ "novelty": [],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "GSM8K benchmark of math word problems",
+   "evidence": [
+    {
+     "chunk_id": "b0021",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 538.53,
+      "x1": 504.39,
+      "y1": 591.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 168.97,
+       "y0": 538.53,
+       "x1": 504.39,
+       "y1": 547.56
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 549.44,
+       "x1": 504.0,
+       "y1": 558.47
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 560.35,
+       "x1": 504.0,
+       "y1": 569.38
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 571.26,
+       "x1": 504.0,
+       "y1": 580.29
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 582.56,
+       "x1": 285.85,
+       "y1": 591.1999999999999
+      }
+     ],
+     "quote": "We consider the following five math word problem benchmarks: (1) the GSM8K benchmark of math word problems (Cobbe et al., 2021), (2) the SVAMP dataset of math word problems with varying structures (Patel et al., 2021), (3) the ASDiv dataset of diverse math word problems (Miao et al., 2020), (4) the AQuA dataset of algebraic word problems, and (5) the MAWPS benchmark (Koncel-Kedziorski et al., 2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "GSM8K",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "SVAMP dataset of math word problems with varying structures",
+   "evidence": [
+    {
+     "chunk_id": "b0021",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 538.53,
+      "x1": 504.39,
+      "y1": 591.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 168.97,
+       "y0": 538.53,
+       "x1": 504.39,
+       "y1": 547.56
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 549.44,
+       "x1": 504.0,
+       "y1": 558.47
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 560.35,
+       "x1": 504.0,
+       "y1": 569.38
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 571.26,
+       "x1": 504.0,
+       "y1": 580.29
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 582.56,
+       "x1": 285.85,
+       "y1": 591.1999999999999
+      }
+     ],
+     "quote": "We consider the following five math word problem benchmarks: (1) the GSM8K benchmark of math word problems (Cobbe et al., 2021), (2) the SVAMP dataset of math word problems with varying structures (Patel et al., 2021), (3) the ASDiv dataset of diverse math word problems (Miao et al., 2020), (4) the AQuA dataset of algebraic word problems, and (5) the MAWPS benchmark (Koncel-Kedziorski et al., 2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "SVAMP",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "ASDiv dataset of diverse math word problems",
+   "evidence": [
+    {
+     "chunk_id": "b0021",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 538.53,
+      "x1": 504.39,
+      "y1": 591.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 168.97,
+       "y0": 538.53,
+       "x1": 504.39,
+       "y1": 547.56
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 549.44,
+       "x1": 504.0,
+       "y1": 558.47
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 560.35,
+       "x1": 504.0,
+       "y1": 569.38
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 571.26,
+       "x1": 504.0,
+       "y1": 580.29
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 582.56,
+       "x1": 285.85,
+       "y1": 591.1999999999999
+      }
+     ],
+     "quote": "We consider the following five math word problem benchmarks: (1) the GSM8K benchmark of math word problems (Cobbe et al., 2021), (2) the SVAMP dataset of math word problems with varying structures (Patel et al., 2021), (3) the ASDiv dataset of diverse math word problems (Miao et al., 2020), (4) the AQuA dataset of algebraic word problems, and (5) the MAWPS benchmark (Koncel-Kedziorski et al., 2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ASDiv",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "AQuA dataset of algebraic word problems",
+   "evidence": [
+    {
+     "chunk_id": "b0021",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 538.53,
+      "x1": 504.39,
+      "y1": 591.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 168.97,
+       "y0": 538.53,
+       "x1": 504.39,
+       "y1": 547.56
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 549.44,
+       "x1": 504.0,
+       "y1": 558.47
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 560.35,
+       "x1": 504.0,
+       "y1": 569.38
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 571.26,
+       "x1": 504.0,
+       "y1": 580.29
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 582.56,
+       "x1": 285.85,
+       "y1": 591.1999999999999
+      }
+     ],
+     "quote": "We consider the following five math word problem benchmarks: (1) the GSM8K benchmark of math word problems (Cobbe et al., 2021), (2) the SVAMP dataset of math word problems with varying structures (Patel et al., 2021), (3) the ASDiv dataset of diverse math word problems (Miao et al., 2020), (4) the AQuA dataset of algebraic word problems, and (5) the MAWPS benchmark (Koncel-Kedziorski et al., 2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "AQuA",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "MAWPS benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0021",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 538.53,
+      "x1": 504.39,
+      "y1": 591.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 168.97,
+       "y0": 538.53,
+       "x1": 504.39,
+       "y1": 547.56
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 549.44,
+       "x1": 504.0,
+       "y1": 558.47
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 560.35,
+       "x1": 504.0,
+       "y1": 569.38
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 571.26,
+       "x1": 504.0,
+       "y1": 580.29
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 582.56,
+       "x1": 285.85,
+       "y1": 591.1999999999999
+      }
+     ],
+     "quote": "We consider the following five math word problem benchmarks: (1) the GSM8K benchmark of math word problems (Cobbe et al., 2021), (2) the SVAMP dataset of math word problems with varying structures (Patel et al., 2021), (3) the ASDiv dataset of diverse math word problems (Miao et al., 2020), (4) the AQuA dataset of algebraic word problems, and (5) the MAWPS benchmark (Koncel-Kedziorski et al., 2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "MAWPS",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "CSQA asks commonsense questions about the world involving complex semantics",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 107.69,
+      "y0": 258.92,
+      "x1": 504.0,
+      "y1": 278.86
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 107.69,
+       "y0": 258.92,
+       "x1": 504.0,
+       "y1": 267.95
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 270.22,
+       "x1": 332.68,
+       "y1": 278.86
+      }
+     ],
+     "quote": "The popular CSQA (Talmor et al., 2019) asks commonsense questions about the world involving complex semantics that often require prior knowledge.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "CSQA",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.6",
+   "value": "StrategyQA requires models to infer a multi-hop strategy to answer questions",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 269.83,
+      "x1": 504.01,
+      "y1": 289.77
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 337.4,
+       "y0": 269.83,
+       "x1": 504.01,
+       "y1": 278.85999999999996
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 281.13,
+       "x1": 333.47,
+       "y1": 289.77
+      }
+     ],
+     "quote": "StrategyQA (Geva et al., 2021) requires models to infer a multi-hop strategy to answer questions.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "StrategyQA",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.7",
+   "value": "Date Understanding from BIG-bench involves inferring a date from a given context",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 281.13,
+      "x1": 504.17,
+      "y1": 322.5
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 336.56,
+       "y0": 281.13,
+       "x1": 504.0,
+       "y1": 289.77
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 291.65,
+       "x1": 504.0,
+       "y1": 300.67999999999995
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 302.56,
+       "x1": 504.17,
+       "y1": 311.59
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 313.86,
+       "x1": 336.95,
+       "y1": 322.5
+      }
+     ],
+     "quote": "We choose two specialized evaluation sets from the BIG-bench effort (BIG-bench collaboration, 2021): Date Understanding, which involves inferring a date from a given context, and Sports Understanding, which involves determining whether a sentence relating to sports is plausible or implausible.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Date Understanding",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.8",
+   "value": "Sports Understanding from BIG-bench involves determining whether a sentence relating to sports is plausible or implausible",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 281.13,
+      "x1": 504.17,
+      "y1": 322.5
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 336.56,
+       "y0": 281.13,
+       "x1": 504.0,
+       "y1": 289.77
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 291.65,
+       "x1": 504.0,
+       "y1": 300.67999999999995
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 302.56,
+       "x1": 504.17,
+       "y1": 311.59
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 313.86,
+       "x1": 336.95,
+       "y1": 322.5
+      }
+     ],
+     "quote": "We choose two specialized evaluation sets from the BIG-bench effort (BIG-bench collaboration, 2021): Date Understanding, which involves inferring a date from a given context, and Sports Understanding, which involves determining whether a sentence relating to sports is plausible or implausible.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Sports Understanding",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.9",
+   "value": "SayCan dataset involves mapping a natural language instruction to a sequence of robot actions",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 313.47,
+      "x1": 505.24,
+      "y1": 344.31
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 341.68,
+       "y0": 313.47,
+       "x1": 505.24,
+       "y1": 322.5
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 324.77,
+       "x1": 503.99,
+       "y1": 333.40999999999997
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 335.67,
+       "x1": 424.76,
+       "y1": 344.31
+      }
+     ],
+     "quote": "Finally, the SayCan dataset (Ahn et al., 2022) involves mapping a natural language instruction to a sequence of robot actions from a discrete set.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "SayCan",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Standard few-shot prompting",
+   "evidence": [
+    {
+     "chunk_id": "b0022",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 598.94,
+      "x1": 504.35,
+      "y1": 629.4
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 200.99,
+       "y0": 598.94,
+       "x1": 504.35,
+       "y1": 607.58
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 609.85,
+       "x1": 504.0,
+       "y1": 618.49
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 620.76,
+       "x1": 329.53,
+       "y1": 629.4
+      }
+     ],
+     "quote": "For the baseline, we consider standard few-shot prompting, popularized by Brown et al. (2020), in which a language model is given in-context exemplars of input-output pairs before outputting a prediction for a test-time example.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [],
+ "hyperparameters": [],
+ "compute": [],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Averaged results over five random seeds for LaMDA",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 107.64,
+      "y0": 563.87,
+      "x1": 505.24,
+      "y1": 583.42
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 247.42,
+       "y0": 563.87,
+       "x1": 505.24,
+       "y1": 572.51
+      },
+      {
+       "page": 4,
+       "x0": 107.64,
+       "y0": 574.78,
+       "x1": 398.49,
+       "y1": 583.42
+      }
+     ],
+     "quote": "For LaMDA, we report averaged results over five random seeds, where each seed had a different randomly shuffled order of exemplars.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "seeds_and_runs.1",
+   "value": "Single exemplar order for all other models",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 574.78,
+      "x1": 504.01,
+      "y1": 605.24
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 403.14,
+       "y0": 574.78,
+       "x1": 504.01,
+       "y1": 583.42
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 585.69,
+       "x1": 504.0,
+       "y1": 594.33
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 596.6,
+       "x1": 251.57,
+       "y1": 605.24
+      }
+     ],
+     "quote": "As LaMDA experiments did not show large variance among different seeds, to save compute we report results for a single exemplar order for all other models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Equation only prompting variation",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 634.99,
+      "x1": 504.0,
+      "y1": 665.4499999999999
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 172.97,
+       "y0": 634.99,
+       "x1": 503.99,
+       "y1": 643.63
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 645.9,
+       "x1": 504.0,
+       "y1": 654.54
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 656.81,
+       "x1": 378.49,
+       "y1": 665.4499999999999
+      }
+     ],
+     "quote": "One reason for why chain-of-thought prompting might help is that it produces the mathematical equation to be evaluated, and so we test a variation where the model is prompted to output only a mathematical equation before giving the answer.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Variable compute only variation using a sequence of dots",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 97.3,
+      "x1": 355.44,
+      "y1": 149.57
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 276.44,
+       "y0": 97.3,
+       "x1": 355.44,
+       "y1": 105.94
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 108.2,
+       "x1": 355.43,
+       "y1": 116.84
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 119.11,
+       "x1": 355.43,
+       "y1": 127.75
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 129.7,
+       "x1": 210.1,
+       "y1": 138.66
+      },
+      {
+       "page": 6,
+       "x0": 210.1,
+       "y0": 129.7,
+       "x1": 355.43,
+       "y1": 138.66
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 140.93,
+       "x1": 268.8,
+       "y1": 149.57
+      }
+     ],
+     "quote": "To isolate the effect of variable computation from chain-of-thought reasoning, we test a configuration where the model is prompted to output a only sequence of dots (. . .) equal to the number of characters in the equation needed to solve the problem.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.2",
+   "value": "Chain of thought after answer variation",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 233.68,
+      "x1": 357.08,
+      "y1": 275.05
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 185.69,
+       "y0": 233.68,
+       "x1": 357.08,
+       "y1": 242.32
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 244.59,
+       "x1": 355.43,
+       "y1": 253.23000000000002
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 255.5,
+       "x1": 355.43,
+       "y1": 264.14
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 266.41,
+       "x1": 305.72,
+       "y1": 275.05
+      }
+     ],
+     "quote": "Therefore, we test an alternative configuration where the chain of thought prompt is only given after the answer, isolating whether the model actually depends on the produced chain of thought to give the final answer.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "Emulating human thought processes does not prove that neural networks are actually reasoning.",
+   "evidence": [
+    {
+     "chunk_id": "b0063",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 107.64,
+      "y0": 228.25,
+      "x1": 504.0,
+      "y1": 258.71
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 107.64,
+       "y0": 228.25,
+       "x1": 504.0,
+       "y1": 236.89
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 239.16,
+       "x1": 504.0,
+       "y1": 247.8
+      },
+      {
+       "page": 9,
+       "x0": 107.64,
+       "y0": 250.07,
+       "x1": 228.61,
+       "y1": 258.71
+      }
+     ],
+     "quote": "As for limitations, we first qualify that although chain of thought emulates the thought processes of human reasoners, this does not answer whether the neural network is actually \"reasoning,\" which we leave as an open question.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.1",
+   "value": "Manual annotation costs could become prohibitive when attempting to use chain of thought for finetuning.",
+   "evidence": [
+    {
+     "chunk_id": "b0063",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 250.07,
+      "x1": 504.17,
+      "y1": 291.44
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 232.16,
+       "y0": 250.07,
+       "x1": 504.0,
+       "y1": 258.71
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 260.98,
+       "x1": 504.17,
+       "y1": 269.62
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 271.89,
+       "x1": 504.0,
+       "y1": 280.53
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 282.8,
+       "x1": 169.0,
+       "y1": 291.44
+      }
+     ],
+     "quote": "Second, although the cost of manually augmenting exemplars with chains of thought is minimal in the few-shot setting, such annotation costs could be prohibitive for finetuning (though this could potentially be surmounted with synthetic data generation, or zero-shot generalization).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.2",
+   "value": "There is no absolute guarantee of correct reasoning paths, which can cause both correct and incorrect answers.",
+   "evidence": [
+    {
+     "chunk_id": "b0063",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 282.8,
+      "x1": 504.17,
+      "y1": 313.26
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 172.02,
+       "y0": 282.8,
+       "x1": 504.0,
+       "y1": 291.44
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 293.71,
+       "x1": 504.17,
+       "y1": 302.34999999999997
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 304.44,
+       "x1": 471.72,
+       "y1": 313.26
+      }
+     ],
+     "quote": "Third, there is no guarantee of correct reasoning paths, which can lead to both correct and incorrect answers; improving factual generations of language models is an open direction for future work (Rashkin et al., 2021;Ye and Durrett, 2022;Wiegreffe et al., 2022, inter alia).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.3",
+   "value": "Emergence of chain-of-thought reasoning only at large model scales makes real-world deployment costly.",
+   "evidence": [
+    {
+     "chunk_id": "b0063",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 304.62,
+      "x1": 505.25,
+      "y1": 335.08
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 474.8,
+       "y0": 304.62,
+       "x1": 505.25,
+       "y1": 313.26
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 315.53,
+       "x1": 504.0,
+       "y1": 324.16999999999996
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 326.44,
+       "x1": 500.67,
+       "y1": 335.08
+      }
+     ],
+     "quote": "Finally, the emergence of chain-of-thought reasoning only at large model scales makes it costly to serve in real-world applications; further research could explore how to induce reasoning in smaller models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.4",
+   "value": "Performance gains from chain of thought did not transfer perfectly across all models.",
+   "evidence": [
+    {
+     "chunk_id": "b0087",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 116.47,
+      "y0": 463.79,
+      "x1": 504.0,
+      "y1": 494.25
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 156.92,
+       "y0": 463.79,
+       "x1": 504.0,
+       "y1": 472.43
+      },
+      {
+       "page": 18,
+       "x0": 116.47,
+       "y0": 474.7,
+       "x1": 504.0,
+       "y1": 483.34
+      },
+      {
+       "page": 18,
+       "x0": 116.47,
+       "y0": 485.61,
+       "x1": 417.17999999999995,
+       "y1": 494.25
+      }
+     ],
+     "quote": "The fact that gains from chain of thought did not transfer perfectly among models is a limitation; further work could investigate why how different pre-training datasets and model architectures affect the performance gain from chain-of-thought prompting.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.5",
+   "value": "Reasoning processes generated by large language models lack guarantees of factual correctness or coherence.",
+   "evidence": [
+    {
+     "chunk_id": "b0153",
+     "page": 28,
+     "bbox": {
+      "page": 28,
+      "x0": 108.0,
+      "y0": 405.11,
+      "x1": 504.0,
+      "y1": 446.47999999999996
+     },
+     "boxes": [
+      {
+       "page": 28,
+       "x0": 108.0,
+       "y0": 405.11,
+       "x1": 504.0,
+       "y1": 413.75
+      },
+      {
+       "page": 28,
+       "x0": 108.0,
+       "y0": 416.02,
+       "x1": 504.0,
+       "y1": 424.65999999999997
+      },
+      {
+       "page": 28,
+       "x0": 108.0,
+       "y0": 426.93,
+       "x1": 504.0,
+       "y1": 435.57
+      },
+      {
+       "page": 28,
+       "x0": 108.0,
+       "y0": 437.84,
+       "x1": 349.75,
+       "y1": 446.47999999999996
+      }
+     ],
+     "quote": "Overall, there are no guarantees that the reasoning processes generated by large language models are coherent or factually correct, as underscored by the recent work evaluating the factuality of language model generations and explanations (Maynez et al., 2020;Rashkin et al., 2021;Ye and Durrett, 2022;Marasović et al., 2022;Wiegreffe et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Improve factual generations of language models.",
+   "evidence": [
+    {
+     "chunk_id": "b0063",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 282.8,
+      "x1": 504.17,
+      "y1": 313.26
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 172.02,
+       "y0": 282.8,
+       "x1": 504.0,
+       "y1": 291.44
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 293.71,
+       "x1": 504.17,
+       "y1": 302.34999999999997
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 304.44,
+       "x1": 471.72,
+       "y1": 313.26
+      }
+     ],
+     "quote": "Third, there is no guarantee of correct reasoning paths, which can lead to both correct and incorrect answers; improving factual generations of language models is an open direction for future work (Rashkin et al., 2021;Ye and Durrett, 2022;Wiegreffe et al., 2022, inter alia).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Explore how to induce reasoning in smaller models.",
+   "evidence": [
+    {
+     "chunk_id": "b0063",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 304.62,
+      "x1": 505.25,
+      "y1": 335.08
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 474.8,
+       "y0": 304.62,
+       "x1": 505.25,
+       "y1": 313.26
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 315.53,
+       "x1": 504.0,
+       "y1": 324.16999999999996
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 326.44,
+       "x1": 500.67,
+       "y1": 335.08
+      }
+     ],
+     "quote": "Finally, the emergence of chain-of-thought reasoning only at large model scales makes it costly to serve in real-world applications; further research could explore how to induce reasoning in smaller models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.2",
+   "value": "Investigate how pre-training datasets and architectures affect chain-of-thought performance gains.",
+   "evidence": [
+    {
+     "chunk_id": "b0087",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 116.47,
+      "y0": 463.79,
+      "x1": 504.0,
+      "y1": 494.25
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 156.92,
+       "y0": 463.79,
+       "x1": 504.0,
+       "y1": 472.43
+      },
+      {
+       "page": 18,
+       "x0": 116.47,
+       "y0": 474.7,
+       "x1": 504.0,
+       "y1": 483.34
+      },
+      {
+       "page": 18,
+       "x0": 116.47,
+       "y0": 485.61,
+       "x1": 417.17999999999995,
+       "y1": 494.25
+      }
+     ],
+     "quote": "The fact that gains from chain of thought did not transfer perfectly among models is a limitation; further work could investigate why how different pre-training datasets and model architectures affect the performance gain from chain-of-thought prompting.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.3",
+   "value": "Examine how to generate chain of thought annotations robustly.",
+   "evidence": [
+    {
+     "chunk_id": "b0089",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 108.0,
+      "y0": 622.8,
+      "x1": 504.0,
+      "y1": 642.35
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 622.8,
+       "x1": 504.0,
+       "y1": 631.4399999999999
+      },
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 633.71,
+       "x1": 171.84,
+       "y1": 642.35
+      }
+     ],
+     "quote": "How to generate chain of thought annotations in a robust fashion could be an interesting direction for future work.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.4",
+   "value": "Evaluate chain-of-thought prompting empirically on diverse tasks where humans use chains of thought.",
+   "evidence": [
+    {
+     "chunk_id": "b0094",
+     "page": 19,
+     "bbox": {
+      "page": 19,
+      "x0": 108.0,
+      "y0": 195.53,
+      "x1": 504.01,
+      "y1": 215.07999999999998
+     },
+     "boxes": [
+      {
+       "page": 19,
+       "x0": 296.84,
+       "y0": 195.53,
+       "x1": 504.01,
+       "y1": 204.17000000000002
+      },
+      {
+       "page": 19,
+       "x0": 108.0,
+       "y0": 206.44,
+       "x1": 424.36,
+       "y1": 215.07999999999998
+      }
+     ],
+     "quote": "We leave the empirical evaluation of chain-of-thought prompting on such diverse tasks (e.g., machine translation, etc.) to future work.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.5",
+   "value": "Conduct an analysis of the factuality of generated chains of thought.",
+   "evidence": [
+    {
+     "chunk_id": "b0129",
+     "page": 26,
+     "bbox": {
+      "page": 26,
+      "x0": 108.0,
+      "y0": 86.39,
+      "x1": 504.0,
+      "y1": 105.94
+     },
+     "boxes": [
+      {
+       "page": 26,
+       "x0": 301.46,
+       "y0": 86.39,
+       "x1": 504.0,
+       "y1": 95.03
+      },
+      {
+       "page": 26,
+       "x0": 108.0,
+       "y0": 97.3,
+       "x1": 323.16999999999996,
+       "y1": 105.94
+      }
+     ],
+     "quote": "This is a limitation, and future work should perform an analysis of the factuality of such chains of thought.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/google/BIG-bench/tree/main/bigbench/benchmark_tasks/strategyqa",
+   "evidence": [
+    {
+     "chunk_id": "b0396",
+     "page": 30,
+     "bbox": {
+      "page": 30,
+      "x0": 108.0,
+      "y0": 467.58135986328125,
+      "x1": 505.3886413574219,
+      "y1": 752.0399169921875
+     },
+     "boxes": [
+      {
+       "page": 30,
+       "x0": 108.0,
+       "y0": 467.58135986328125,
+       "x1": 505.3886413574219,
+       "y1": 752.0399169921875
+      }
+     ],
+     "quote": "Geva et al., 2021): we use the open-domain setting (question-only set) from BIG-bench collaboration (2021): https://github.com/google/BIG-bench/ tree/main/bigbench/benchmark_tasks/strategyqa.The original dataset is from https://github.com/eladsegal/strategyqa,MIT license: https://github.com/ eladsegal/strategyqa/blob/main/LICENSE.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/eladsegal/strategyqa",
+   "evidence": [
+    {
+     "chunk_id": "b0396",
+     "page": 30,
+     "bbox": {
+      "page": 30,
+      "x0": 108.0,
+      "y0": 467.58135986328125,
+      "x1": 505.3886413574219,
+      "y1": 752.0399169921875
+     },
+     "boxes": [
+      {
+       "page": 30,
+       "x0": 108.0,
+       "y0": 467.58135986328125,
+       "x1": 505.3886413574219,
+       "y1": 752.0399169921875
+      }
+     ],
+     "quote": "Geva et al., 2021): we use the open-domain setting (question-only set) from BIG-bench collaboration (2021): https://github.com/google/BIG-bench/ tree/main/bigbench/benchmark_tasks/strategyqa.The original dataset is from https://github.com/eladsegal/strategyqa,MIT license: https://github.com/ eladsegal/strategyqa/blob/main/LICENSE.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.2",
+   "value": "https://github.com/eladsegal/strategyqa/blob/main/LICENSE",
+   "evidence": [
+    {
+     "chunk_id": "b0396",
+     "page": 30,
+     "bbox": {
+      "page": 30,
+      "x0": 108.0,
+      "y0": 467.58135986328125,
+      "x1": 505.3886413574219,
+      "y1": 752.0399169921875
+     },
+     "boxes": [
+      {
+       "page": 30,
+       "x0": 108.0,
+       "y0": 467.58135986328125,
+       "x1": 505.3886413574219,
+       "y1": 752.0399169921875
+      }
+     ],
+     "quote": "Geva et al., 2021): we use the open-domain setting (question-only set) from BIG-bench collaboration (2021): https://github.com/google/BIG-bench/ tree/main/bigbench/benchmark_tasks/strategyqa.The original dataset is from https://github.com/eladsegal/strategyqa,MIT license: https://github.com/ eladsegal/strategyqa/blob/main/LICENSE.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "Prompting PaLM 540B with eight chain-of-thought exemplars achieves state-of-the-art accuracy on GSM8K.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 393.13,
+      "x1": 468.14,
+      "y1": 434.49
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 363.2,
+       "y0": 393.13,
+       "x1": 468.13,
+       "y1": 401.77
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 404.04,
+       "x1": 468.14,
+       "y1": 412.68
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 414.95,
+       "x1": 468.13,
+       "y1": 423.59
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 425.85,
+       "x1": 269.82,
+       "y1": 434.49
+      }
+     ],
+     "quote": "For instance, prompting a PaLM 540B with just eight chain-of-thought exemplars achieves state-of-the-art accuracy on the GSM8K benchmark of math word problems, surpassing even finetuned GPT-3 with a verifier.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

@@ -1,0 +1,2605 @@
+{
+ "metadata": {
+  "title": "SimCSE: Simple Contrastive Learning of Sentence Embeddings",
+  "authors": [
+   "Tianyu Gao",
+   "Xingcheng Yao",
+   "Danqi Chen"
+  ],
+  "venue": null,
+  "year": null,
+  "arxiv_id": null,
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Pre-trained word embeddings suffer from anisotropy issues.",
+   "evidence": [
+    {
+     "chunk_id": "b0017",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 70.87,
+      "y0": 492.01,
+      "x1": 290.95000000000005,
+      "y1": 582.77
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 99.98,
+       "y0": 492.01,
+       "x1": 290.95,
+       "y1": 501.46999999999997
+      },
+      {
+       "page": 2,
+       "x0": 70.87,
+       "y0": 505.56,
+       "x1": 289.14,
+       "y1": 515.02
+      },
+      {
+       "page": 2,
+       "x0": 70.87,
+       "y0": 519.11,
+       "x1": 289.14,
+       "y1": 528.57
+      },
+      {
+       "page": 2,
+       "x0": 70.87,
+       "y0": 532.66,
+       "x1": 289.14,
+       "y1": 542.12
+      },
+      {
+       "page": 2,
+       "x0": 70.87,
+       "y0": 546.21,
+       "x1": 290.95000000000005,
+       "y1": 555.6700000000001
+      },
+      {
+       "page": 2,
+       "x0": 70.87,
+       "y0": 559.76,
+       "x1": 289.14,
+       "y1": 569.22
+      },
+      {
+       "page": 2,
+       "x0": 70.87,
+       "y0": 573.31,
+       "x1": 225.43,
+       "y1": 582.77
+      }
+     ],
+     "quote": "We also draw a connection to the recent findings that pre-trained word embeddings suffer from anisotropy (Ethayarajh, 2019;Li et al., 2020) and prove that-through a spectrum perspective-the contrastive learning objective \"flattens\" the singular value distribution of the sentence embedding space, hence improving uniformity.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "We present SimCSE, a simple contrastive learning framework that advances state-of-the-art sentence embeddings.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 87.63,
+      "y0": 240.96,
+      "x1": 273.87,
+      "y1": 273.51
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 240.96,
+       "x1": 273.77,
+       "y1": 249.60000000000002
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 252.92,
+       "x1": 273.77,
+       "y1": 261.56
+      },
+      {
+       "page": 1,
+       "x0": 87.63,
+       "y0": 264.87,
+       "x1": 273.87,
+       "y1": 273.51
+      }
+     ],
+     "quote": "This paper presents SimCSE, a simple contrastive learning framework that greatly advances state-of-the-art sentence embeddings.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "We describe an unsupervised approach using standard dropout as noise.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 87.41,
+      "y0": 276.83,
+      "x1": 273.37,
+      "y1": 321.33
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 87.41,
+       "y0": 276.83,
+       "x1": 273.37,
+       "y1": 285.46999999999997
+      },
+      {
+       "page": 1,
+       "x0": 87.52,
+       "y0": 288.78,
+       "x1": 272.13,
+       "y1": 297.41999999999996
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 300.56,
+       "x1": 272.47,
+       "y1": 309.38
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 312.69,
+       "x1": 217.46,
+       "y1": 321.33
+      }
+     ],
+     "quote": "We first describe an unsupervised approach, which takes an input sentence and predicts itself in a contrastive objective, with only standard dropout used as noise.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "We propose a supervised approach incorporating natural language inference datasets into contrastive learning.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 87.63,
+      "y0": 372.47,
+      "x1": 273.78,
+      "y1": 440.88
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 166.51,
+       "y0": 372.47,
+       "x1": 273.78,
+       "y1": 381.11
+      },
+      {
+       "page": 1,
+       "x0": 87.63,
+       "y0": 384.42,
+       "x1": 272.13,
+       "y1": 393.06
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 396.38,
+       "x1": 272.12,
+       "y1": 405.02
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 408.33,
+       "x1": 273.77,
+       "y1": 416.96999999999997
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 420.29,
+       "x1": 273.77,
+       "y1": 428.93
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 432.24,
+       "x1": 228.05,
+       "y1": 440.88
+      }
+     ],
+     "quote": "Then, we propose a supervised approach, which incorporates annotated pairs from natural language inference datasets into our contrastive learning framework by using \"entailment\" pairs as positives and \"contradiction\" pairs as hard negatives.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Learning universal sentence embeddings and evaluating on semantic textual similarity tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 70.87,
+      "y0": 622.97,
+      "x1": 291.05,
+      "y1": 700.18
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 622.97,
+       "x1": 290.95000000000005,
+       "y1": 632.4300000000001
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 636.52,
+       "x1": 290.95000000000005,
+       "y1": 645.98
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 650.07,
+       "x1": 290.94,
+       "y1": 659.5300000000001
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 663.62,
+       "x1": 289.13,
+       "y1": 673.08
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 677.17,
+       "x1": 290.5,
+       "y1": 686.63
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 690.52,
+       "x1": 291.05,
+       "y1": 700.18
+      }
+     ],
+     "quote": "Learning universal sentence embeddings is a fundamental problem in natural language processing and has been studied extensively in the literature (Kiros et al., 2015;Hill et al., 2016;Conneau et al., 2017;Logeswaran and Lee, 2018;Cer et al., 2018;Reimers and Gurevych, 2019, inter alia).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "Sentences are encoded using a pre-trained language model such as BERT or RoBERTa.",
+   "evidence": [
+    {
+     "chunk_id": "b0027",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 305.87,
+      "y0": 527.92,
+      "x1": 526.22,
+      "y1": 605.12
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 515.14,
+       "y0": 527.92,
+       "x1": 524.41,
+       "y1": 537.38
+      },
+      {
+       "page": 2,
+       "x0": 306.14,
+       "y0": 541.47,
+       "x1": 524.41,
+       "y1": 550.9300000000001
+      },
+      {
+       "page": 2,
+       "x0": 306.14,
+       "y0": 555.02,
+       "x1": 526.22,
+       "y1": 564.48
+      },
+      {
+       "page": 2,
+       "x0": 305.87,
+       "y0": 568.56,
+       "x1": 525.9200000000001,
+       "y1": 578.02
+      },
+      {
+       "page": 2,
+       "x0": 306.14,
+       "y0": 581.73,
+       "x1": 524.41,
+       "y1": 592.54
+      },
+      {
+       "page": 2,
+       "x0": 306.14,
+       "y0": 595.66,
+       "x1": 497.97,
+       "y1": 605.12
+      },
+      {
+       "page": 2,
+       "x0": 500.69,
+       "y0": 595.66,
+       "x1": 512.5,
+       "y1": 605.12
+      }
+     ],
+     "quote": "In this work, we encode input sentences using a pre-trained language model such as BERT (Devlin et al., 2019) or RoBERTa (Liu et al., 2019): h = f θ (x), and then fine-tune all the parameters using the contrastive learning objective (Eq. 1).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "Unsupervised SimCSE uses identical sentences as positive pairs, relying on independently sampled standard dropout masks in Transformers as noise.",
+   "evidence": [
+    {
+     "chunk_id": "b0036",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 70.53,
+      "y0": 628.43,
+      "x1": 289.51,
+      "y1": 667.4300000000001
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 70.53,
+       "y0": 628.43,
+       "x1": 289.51,
+       "y1": 637.89
+      },
+      {
+       "page": 3,
+       "x0": 70.87,
+       "y0": 641.63,
+       "x1": 274.94,
+       "y1": 652.26
+      },
+      {
+       "page": 3,
+       "x0": 274.93,
+       "y0": 639.68,
+       "x1": 282.42,
+       "y1": 646.67
+      },
+      {
+       "page": 3,
+       "x0": 274.93,
+       "y0": 646.69,
+       "x1": 288.63,
+       "y1": 653.6800000000001
+      },
+      {
+       "page": 3,
+       "x0": 70.87,
+       "y0": 655.18,
+       "x1": 112.82000000000001,
+       "y1": 664.9899999999999
+      },
+      {
+       "page": 3,
+       "x0": 112.81,
+       "y0": 652.6,
+       "x1": 119.4,
+       "y1": 659.59
+      },
+      {
+       "page": 3,
+       "x0": 112.81,
+       "y0": 660.44,
+       "x1": 115.69,
+       "y1": 667.4300000000001
+      },
+      {
+       "page": 3,
+       "x0": 122.93,
+       "y0": 655.18,
+       "x1": 146.79000000000002,
+       "y1": 665.81
+      }
+     ],
+     "quote": "The idea of unsupervised SimCSE is extremely simple: we take a collection of sentences {x i } m i=1 and use x + i = x i .",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "Supervised SimCSE leverages entailment pairs from NLI datasets as positive examples and incorporates contradiction pairs as hard negatives.",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 179.95,
+      "y0": 389.24,
+      "x1": 286.99,
+      "y1": 404.07
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 179.95,
+       "y0": 389.24,
+       "x1": 286.99,
+       "y1": 404.07
+      }
+     ],
+     "quote": "Formally, we extend (x i , x + i ) to (x i , x + i , x - i ) , where x i is the premise, x + i and x - i are entailment and contradiction hypotheses.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "Using standard dropout on intermediate representations outperforms discrete data augmentation operators in NLP contrastive learning.",
+   "evidence": [
+    {
+     "chunk_id": "b0028",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 435.88,
+      "y0": 763.92,
+      "x1": 525.78,
+      "y1": 773.38
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 435.88,
+       "y0": 763.92,
+       "x1": 525.78,
+       "y1": 773.38
+      },
+      {
+       "page": 3,
+       "x0": 70.87,
+       "y0": 74.72,
+       "x1": 290.95000000000005,
+       "y1": 84.18
+      },
+      {
+       "page": 3,
+       "x0": 70.87,
+       "y0": 88.27,
+       "x1": 286.88,
+       "y1": 97.72999999999999
+      }
+     ],
+     "quote": "As we will see in §3, simply using standard dropout on intermediate representations outperforms these discrete operators.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "7 semantic textual similarity tasks including STS 2012-2016, STS Benchmark, and SICK-Relatedness",
+   "evidence": [
+    {
+     "chunk_id": "b0068",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 306.14,
+      "y0": 343.45,
+      "x1": 526.23,
+      "y1": 407.09999999999997
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 479.15,
+       "y0": 343.45,
+       "x1": 526.23,
+       "y1": 352.90999999999997
+      },
+      {
+       "page": 6,
+       "x0": 306.14,
+       "y0": 356.99,
+       "x1": 524.41,
+       "y1": 366.45
+      },
+      {
+       "page": 6,
+       "x0": 306.14,
+       "y0": 370.54,
+       "x1": 524.41,
+       "y1": 380.0
+      },
+      {
+       "page": 6,
+       "x0": 306.14,
+       "y0": 384.09,
+       "x1": 526.22,
+       "y1": 393.54999999999995
+      },
+      {
+       "page": 6,
+       "x0": 306.14,
+       "y0": 397.64,
+       "x1": 456.78999999999996,
+       "y1": 407.09999999999997
+      }
+     ],
+     "quote": "We evaluate on 7 STS tasks: STS 2012-2016 (Agirre et al., 2012(Agirre et al., , 2013(Agirre et al., , 2014(Agirre et al., , 2015(Agirre et al., , 2016)), STS Benchmark (Cer et al., 2017) and SICK-Relatedness (Marelli et al., 2014).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "STS tasks (STS 2012-2016, STS Benchmark, SICK-Relatedness)",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "English Wikipedia sentences for unsupervised training",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 305.63,
+      "y0": 675.55,
+      "x1": 526.3199999999999,
+      "y1": 725.6600000000001
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 388.14,
+       "y0": 675.55,
+       "x1": 524.41,
+       "y1": 685.01
+      },
+      {
+       "page": 6,
+       "x0": 306.14,
+       "y0": 688.75,
+       "x1": 330.74,
+       "y1": 698.56
+      },
+      {
+       "page": 6,
+       "x0": 330.75,
+       "y0": 686.8,
+       "x1": 334.98,
+       "y1": 693.79
+      },
+      {
+       "page": 6,
+       "x0": 338.22,
+       "y0": 689.1,
+       "x1": 524.4100000000001,
+       "y1": 698.5600000000001
+      },
+      {
+       "page": 6,
+       "x0": 305.63,
+       "y0": 702.65,
+       "x1": 524.41,
+       "y1": 712.11
+      },
+      {
+       "page": 6,
+       "x0": 306.14,
+       "y0": 716.2,
+       "x1": 526.3199999999999,
+       "y1": 725.6600000000001
+      }
+     ],
+     "quote": "We train unsupervised SimCSE on 10 6 randomly sampled sentences from English Wikipedia, and train supervised SimCSE on the combination of MNLI and SNLI datasets (314k).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "English Wikipedia",
+   "split": "",
+   "size": "10 6",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "Combination of MNLI and SNLI datasets for supervised training",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 305.63,
+      "y0": 675.55,
+      "x1": 526.3199999999999,
+      "y1": 725.6600000000001
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 388.14,
+       "y0": 675.55,
+       "x1": 524.41,
+       "y1": 685.01
+      },
+      {
+       "page": 6,
+       "x0": 306.14,
+       "y0": 688.75,
+       "x1": 330.74,
+       "y1": 698.56
+      },
+      {
+       "page": 6,
+       "x0": 330.75,
+       "y0": 686.8,
+       "x1": 334.98,
+       "y1": 693.79
+      },
+      {
+       "page": 6,
+       "x0": 338.22,
+       "y0": 689.1,
+       "x1": 524.4100000000001,
+       "y1": 698.5600000000001
+      },
+      {
+       "page": 6,
+       "x0": 305.63,
+       "y0": 702.65,
+       "x1": 524.41,
+       "y1": 712.11
+      },
+      {
+       "page": 6,
+       "x0": 306.14,
+       "y0": 716.2,
+       "x1": 526.3199999999999,
+       "y1": 725.6600000000001
+      }
+     ],
+     "quote": "We train unsupervised SimCSE on 10 6 randomly sampled sentences from English Wikipedia, and train supervised SimCSE on the combination of MNLI and SNLI datasets (314k).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "MNLI and SNLI datasets",
+   "split": "",
+   "size": "314k",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "QQP dataset for positive pairs ablation",
+   "evidence": [
+    {
+     "chunk_id": "b0120",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 230.68,
+      "y0": 108.4254150390625,
+      "x1": 526.1600000000001,
+      "y1": 118.94422149658203
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 230.68,
+       "y0": 108.4254150390625,
+       "x1": 526.1600000000001,
+       "y1": 118.94422149658203
+      }
+     ],
+     "quote": "QQP (134k) | 81.8 | 81.8",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "QQP",
+   "split": "",
+   "size": "134k",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "Flickr30k dataset for positive pairs ablation",
+   "evidence": [
+    {
+     "chunk_id": "b0120",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 230.68,
+      "y0": 119.013427734375,
+      "x1": 526.1600000000001,
+      "y1": 129.5322265625
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 230.68,
+       "y0": 119.013427734375,
+       "x1": 526.1600000000001,
+       "y1": 129.5322265625
+      }
+     ],
+     "quote": "Flickr30k (318k) | 81.5 | 81.4",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Flickr30k",
+   "split": "",
+   "size": "318k",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "ParaNMT dataset for positive pairs ablation",
+   "evidence": [
+    {
+     "chunk_id": "b0120",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 230.68,
+      "y0": 129.6014404296875,
+      "x1": 526.1600000000001,
+      "y1": 140.1202392578125
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 230.68,
+       "y0": 129.6014404296875,
+       "x1": 526.1600000000001,
+       "y1": 140.1202392578125
+      }
+     ],
+     "quote": "ParaNMT (5m) | 79.7 | 78.7",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ParaNMT",
+   "split": "",
+   "size": "5m",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.6",
+   "value": "ANLI dataset for positive pairs ablation",
+   "evidence": [
+    {
+     "chunk_id": "b0120",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 230.68,
+      "y0": 221.3033447265625,
+      "x1": 526.1600000000001,
+      "y1": 231.8221435546875
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 230.68,
+       "y0": 221.3033447265625,
+       "x1": 526.1600000000001,
+       "y1": 231.8221435546875
+      }
+     ],
+     "quote": "+ ANLI (52k) | - | 85.0",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ANLI",
+   "split": "",
+   "size": "52k",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Average GloVe embeddings",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 70.47,
+      "y0": 511.37,
+      "x1": 290.94,
+      "y1": 588.57
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 202.86,
+       "y0": 511.37,
+       "x1": 290.94,
+       "y1": 520.83
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 524.92,
+       "x1": 290.94,
+       "y1": 534.38
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 538.47,
+       "x1": 289.14,
+       "y1": 547.9300000000001
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 552.02,
+       "x1": 124.17,
+       "y1": 561.48
+      },
+      {
+       "page": 7,
+       "x0": 124.17,
+       "y0": 549.97,
+       "x1": 132.14000000000001,
+       "y1": 556.88
+      },
+      {
+       "page": 7,
+       "x0": 132.64,
+       "y0": 552.02,
+       "x1": 289.13,
+       "y1": 561.48
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 565.56,
+       "x1": 290.94,
+       "y1": 575.02
+      },
+      {
+       "page": 7,
+       "x0": 70.47,
+       "y0": 579.11,
+       "x1": 185.18,
+       "y1": 588.57
+      }
+     ],
+     "quote": "Unsupervised baselines include average GloVe embeddings (Pennington et al., 2014), average BERT or RoBERTa embeddings 10 , and post-processing methods such as BERT-flow (Li et al., 2020) and BERTwhitening (Su et al., 2021).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Average BERT or RoBERTa embeddings",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 70.47,
+      "y0": 511.37,
+      "x1": 290.94,
+      "y1": 588.57
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 202.86,
+       "y0": 511.37,
+       "x1": 290.94,
+       "y1": 520.83
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 524.92,
+       "x1": 290.94,
+       "y1": 534.38
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 538.47,
+       "x1": 289.14,
+       "y1": 547.9300000000001
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 552.02,
+       "x1": 124.17,
+       "y1": 561.48
+      },
+      {
+       "page": 7,
+       "x0": 124.17,
+       "y0": 549.97,
+       "x1": 132.14000000000001,
+       "y1": 556.88
+      },
+      {
+       "page": 7,
+       "x0": 132.64,
+       "y0": 552.02,
+       "x1": 289.13,
+       "y1": 561.48
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 565.56,
+       "x1": 290.94,
+       "y1": 575.02
+      },
+      {
+       "page": 7,
+       "x0": 70.47,
+       "y0": 579.11,
+       "x1": 185.18,
+       "y1": 588.57
+      }
+     ],
+     "quote": "Unsupervised baselines include average GloVe embeddings (Pennington et al., 2014), average BERT or RoBERTa embeddings 10 , and post-processing methods such as BERT-flow (Li et al., 2020) and BERTwhitening (Su et al., 2021).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "BERT-flow",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 70.47,
+      "y0": 511.37,
+      "x1": 290.94,
+      "y1": 588.57
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 202.86,
+       "y0": 511.37,
+       "x1": 290.94,
+       "y1": 520.83
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 524.92,
+       "x1": 290.94,
+       "y1": 534.38
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 538.47,
+       "x1": 289.14,
+       "y1": 547.9300000000001
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 552.02,
+       "x1": 124.17,
+       "y1": 561.48
+      },
+      {
+       "page": 7,
+       "x0": 124.17,
+       "y0": 549.97,
+       "x1": 132.14000000000001,
+       "y1": 556.88
+      },
+      {
+       "page": 7,
+       "x0": 132.64,
+       "y0": 552.02,
+       "x1": 289.13,
+       "y1": 561.48
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 565.56,
+       "x1": 290.94,
+       "y1": 575.02
+      },
+      {
+       "page": 7,
+       "x0": 70.47,
+       "y0": 579.11,
+       "x1": 185.18,
+       "y1": 588.57
+      }
+     ],
+     "quote": "Unsupervised baselines include average GloVe embeddings (Pennington et al., 2014), average BERT or RoBERTa embeddings 10 , and post-processing methods such as BERT-flow (Li et al., 2020) and BERTwhitening (Su et al., 2021).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "BERTwhitening",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 70.47,
+      "y0": 511.37,
+      "x1": 290.94,
+      "y1": 588.57
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 202.86,
+       "y0": 511.37,
+       "x1": 290.94,
+       "y1": 520.83
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 524.92,
+       "x1": 290.94,
+       "y1": 534.38
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 538.47,
+       "x1": 289.14,
+       "y1": 547.9300000000001
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 552.02,
+       "x1": 124.17,
+       "y1": 561.48
+      },
+      {
+       "page": 7,
+       "x0": 124.17,
+       "y0": 549.97,
+       "x1": 132.14000000000001,
+       "y1": 556.88
+      },
+      {
+       "page": 7,
+       "x0": 132.64,
+       "y0": 552.02,
+       "x1": 289.13,
+       "y1": 561.48
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 565.56,
+       "x1": 290.94,
+       "y1": 575.02
+      },
+      {
+       "page": 7,
+       "x0": 70.47,
+       "y0": 579.11,
+       "x1": 185.18,
+       "y1": 588.57
+      }
+     ],
+     "quote": "Unsupervised baselines include average GloVe embeddings (Pennington et al., 2014), average BERT or RoBERTa embeddings 10 , and post-processing methods such as BERT-flow (Li et al., 2020) and BERTwhitening (Su et al., 2021).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "IS-BERT",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 70.47,
+      "y0": 579.11,
+      "x1": 290.95000000000005,
+      "y1": 696.97
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 188.38,
+       "y0": 579.11,
+       "x1": 290.94,
+       "y1": 588.57
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 592.66,
+       "x1": 290.5,
+       "y1": 602.12
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 606.21,
+       "x1": 289.14,
+       "y1": 615.6700000000001
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 619.76,
+       "x1": 290.95000000000005,
+       "y1": 629.22
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 633.31,
+       "x1": 290.5,
+       "y1": 642.77
+      },
+      {
+       "page": 7,
+       "x0": 70.47,
+       "y0": 646.86,
+       "x1": 290.95,
+       "y1": 656.32
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 660.41,
+       "x1": 290.5,
+       "y1": 669.87
+      },
+      {
+       "page": 7,
+       "x0": 70.47,
+       "y0": 673.96,
+       "x1": 289.13,
+       "y1": 683.4200000000001
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 687.51,
+       "x1": 199.35,
+       "y1": 696.97
+      },
+      {
+       "page": 7,
+       "x0": 199.34,
+       "y0": 685.46,
+       "x1": 207.31,
+       "y1": 692.37
+      }
+     ],
+     "quote": "We also compare to several recent methods using a contrastive objective, including 1) IS-BERT (Zhang et al., 2020), which maximizes the agreement between global and local features; 2) DeCLUTR (Giorgi et al., 2021), which takes different spans from the same document as positive pairs; 3) CT (Carlsson et al., 2021), which aligns embeddings of the same sentence from two different encoders.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "DeCLUTR",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 70.47,
+      "y0": 579.11,
+      "x1": 290.95000000000005,
+      "y1": 696.97
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 188.38,
+       "y0": 579.11,
+       "x1": 290.94,
+       "y1": 588.57
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 592.66,
+       "x1": 290.5,
+       "y1": 602.12
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 606.21,
+       "x1": 289.14,
+       "y1": 615.6700000000001
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 619.76,
+       "x1": 290.95000000000005,
+       "y1": 629.22
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 633.31,
+       "x1": 290.5,
+       "y1": 642.77
+      },
+      {
+       "page": 7,
+       "x0": 70.47,
+       "y0": 646.86,
+       "x1": 290.95,
+       "y1": 656.32
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 660.41,
+       "x1": 290.5,
+       "y1": 669.87
+      },
+      {
+       "page": 7,
+       "x0": 70.47,
+       "y0": 673.96,
+       "x1": 289.13,
+       "y1": 683.4200000000001
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 687.51,
+       "x1": 199.35,
+       "y1": 696.97
+      },
+      {
+       "page": 7,
+       "x0": 199.34,
+       "y0": 685.46,
+       "x1": 207.31,
+       "y1": 692.37
+      }
+     ],
+     "quote": "We also compare to several recent methods using a contrastive objective, including 1) IS-BERT (Zhang et al., 2020), which maximizes the agreement between global and local features; 2) DeCLUTR (Giorgi et al., 2021), which takes different spans from the same document as positive pairs; 3) CT (Carlsson et al., 2021), which aligns embeddings of the same sentence from two different encoders.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "CT",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 70.47,
+      "y0": 579.11,
+      "x1": 290.95000000000005,
+      "y1": 696.97
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 188.38,
+       "y0": 579.11,
+       "x1": 290.94,
+       "y1": 588.57
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 592.66,
+       "x1": 290.5,
+       "y1": 602.12
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 606.21,
+       "x1": 289.14,
+       "y1": 615.6700000000001
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 619.76,
+       "x1": 290.95000000000005,
+       "y1": 629.22
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 633.31,
+       "x1": 290.5,
+       "y1": 642.77
+      },
+      {
+       "page": 7,
+       "x0": 70.47,
+       "y0": 646.86,
+       "x1": 290.95,
+       "y1": 656.32
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 660.41,
+       "x1": 290.5,
+       "y1": 669.87
+      },
+      {
+       "page": 7,
+       "x0": 70.47,
+       "y0": 673.96,
+       "x1": 289.13,
+       "y1": 683.4200000000001
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 687.51,
+       "x1": 199.35,
+       "y1": 696.97
+      },
+      {
+       "page": 7,
+       "x0": 199.34,
+       "y0": 685.46,
+       "x1": 207.31,
+       "y1": 692.37
+      }
+     ],
+     "quote": "We also compare to several recent methods using a contrastive objective, including 1) IS-BERT (Zhang et al., 2020), which maximizes the agreement between global and local features; 2) DeCLUTR (Giorgi et al., 2021), which takes different spans from the same document as positive pairs; 3) CT (Carlsson et al., 2021), which aligns embeddings of the same sentence from two different encoders.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.7",
+   "value": "InferSent",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 70.87,
+      "y0": 463.55,
+      "x1": 526.23,
+      "y1": 772.96
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 212.91,
+       "y0": 687.51,
+       "x1": 289.13,
+       "y1": 696.97
+      },
+      {
+       "page": 7,
+       "x0": 80.53,
+       "y0": 712.62,
+       "x1": 86.51,
+       "y1": 717.8
+      },
+      {
+       "page": 7,
+       "x0": 87.01,
+       "y0": 714.49,
+       "x1": 289.14,
+       "y1": 722.26
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 724.45,
+       "x1": 283.3,
+       "y1": 732.22
+      },
+      {
+       "page": 7,
+       "x0": 80.53,
+       "y0": 733.44,
+       "x1": 86.51,
+       "y1": 738.62
+      },
+      {
+       "page": 7,
+       "x0": 87.01,
+       "y0": 735.3,
+       "x1": 289.14,
+       "y1": 743.0699999999999
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 745.26,
+       "x1": 289.14,
+       "y1": 753.03
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 755.22,
+       "x1": 200.32,
+       "y1": 762.99
+      },
+      {
+       "page": 7,
+       "x0": 205.44,
+       "y0": 755.22,
+       "x1": 289.14,
+       "y1": 762.99
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 765.19,
+       "x1": 158.93,
+       "y1": 772.96
+      },
+      {
+       "page": 7,
+       "x0": 306.14,
+       "y0": 463.55,
+       "x1": 525.77,
+       "y1": 473.01
+      },
+      {
+       "page": 7,
+       "x0": 306.14,
+       "y0": 477.1,
+       "x1": 524.41,
+       "y1": 486.56
+      },
+      {
+       "page": 7,
+       "x0": 306.14,
+       "y0": 490.65,
+       "x1": 525.14,
+       "y1": 500.10999999999996
+      },
+      {
+       "page": 7,
+       "x0": 305.75,
+       "y0": 504.2,
+       "x1": 526.23,
+       "y1": 513.66
+      },
+      {
+       "page": 7,
+       "x0": 306.14,
+       "y0": 517.75,
+       "x1": 368.15999999999997,
+       "y1": 527.21
+      }
+     ],
+     "quote": "Other supervised 10 Following Su et al. (2021), we take the average of the first and the last layers, which is better than only taking the last. 11 We do not compare to CLEAR (Wu et al., 2020), because they use their own version of pre-trained models, and the numbers appear to be much lower. Also note that CT is a concurrent work to ours. methods include InferSent (Conneau et al., 2017), Universal Sentence Encoder (Cer et al., 2018), and SBERT/SRoBERTa (Reimers and Gurevych, 2019) with post-processing methods (BERT-flow, whitening, and CT).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.8",
+   "value": "Universal Sentence Encoder",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 70.87,
+      "y0": 463.55,
+      "x1": 526.23,
+      "y1": 772.96
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 212.91,
+       "y0": 687.51,
+       "x1": 289.13,
+       "y1": 696.97
+      },
+      {
+       "page": 7,
+       "x0": 80.53,
+       "y0": 712.62,
+       "x1": 86.51,
+       "y1": 717.8
+      },
+      {
+       "page": 7,
+       "x0": 87.01,
+       "y0": 714.49,
+       "x1": 289.14,
+       "y1": 722.26
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 724.45,
+       "x1": 283.3,
+       "y1": 732.22
+      },
+      {
+       "page": 7,
+       "x0": 80.53,
+       "y0": 733.44,
+       "x1": 86.51,
+       "y1": 738.62
+      },
+      {
+       "page": 7,
+       "x0": 87.01,
+       "y0": 735.3,
+       "x1": 289.14,
+       "y1": 743.0699999999999
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 745.26,
+       "x1": 289.14,
+       "y1": 753.03
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 755.22,
+       "x1": 200.32,
+       "y1": 762.99
+      },
+      {
+       "page": 7,
+       "x0": 205.44,
+       "y0": 755.22,
+       "x1": 289.14,
+       "y1": 762.99
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 765.19,
+       "x1": 158.93,
+       "y1": 772.96
+      },
+      {
+       "page": 7,
+       "x0": 306.14,
+       "y0": 463.55,
+       "x1": 525.77,
+       "y1": 473.01
+      },
+      {
+       "page": 7,
+       "x0": 306.14,
+       "y0": 477.1,
+       "x1": 524.41,
+       "y1": 486.56
+      },
+      {
+       "page": 7,
+       "x0": 306.14,
+       "y0": 490.65,
+       "x1": 525.14,
+       "y1": 500.10999999999996
+      },
+      {
+       "page": 7,
+       "x0": 305.75,
+       "y0": 504.2,
+       "x1": 526.23,
+       "y1": 513.66
+      },
+      {
+       "page": 7,
+       "x0": 306.14,
+       "y0": 517.75,
+       "x1": 368.15999999999997,
+       "y1": 527.21
+      }
+     ],
+     "quote": "Other supervised 10 Following Su et al. (2021), we take the average of the first and the last layers, which is better than only taking the last. 11 We do not compare to CLEAR (Wu et al., 2020), because they use their own version of pre-trained models, and the numbers appear to be much lower. Also note that CT is a concurrent work to ours. methods include InferSent (Conneau et al., 2017), Universal Sentence Encoder (Cer et al., 2018), and SBERT/SRoBERTa (Reimers and Gurevych, 2019) with post-processing methods (BERT-flow, whitening, and CT).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.9",
+   "value": "SBERT/SRoBERTa",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 70.87,
+      "y0": 463.55,
+      "x1": 526.23,
+      "y1": 772.96
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 212.91,
+       "y0": 687.51,
+       "x1": 289.13,
+       "y1": 696.97
+      },
+      {
+       "page": 7,
+       "x0": 80.53,
+       "y0": 712.62,
+       "x1": 86.51,
+       "y1": 717.8
+      },
+      {
+       "page": 7,
+       "x0": 87.01,
+       "y0": 714.49,
+       "x1": 289.14,
+       "y1": 722.26
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 724.45,
+       "x1": 283.3,
+       "y1": 732.22
+      },
+      {
+       "page": 7,
+       "x0": 80.53,
+       "y0": 733.44,
+       "x1": 86.51,
+       "y1": 738.62
+      },
+      {
+       "page": 7,
+       "x0": 87.01,
+       "y0": 735.3,
+       "x1": 289.14,
+       "y1": 743.0699999999999
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 745.26,
+       "x1": 289.14,
+       "y1": 753.03
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 755.22,
+       "x1": 200.32,
+       "y1": 762.99
+      },
+      {
+       "page": 7,
+       "x0": 205.44,
+       "y0": 755.22,
+       "x1": 289.14,
+       "y1": 762.99
+      },
+      {
+       "page": 7,
+       "x0": 70.87,
+       "y0": 765.19,
+       "x1": 158.93,
+       "y1": 772.96
+      },
+      {
+       "page": 7,
+       "x0": 306.14,
+       "y0": 463.55,
+       "x1": 525.77,
+       "y1": 473.01
+      },
+      {
+       "page": 7,
+       "x0": 306.14,
+       "y0": 477.1,
+       "x1": 524.41,
+       "y1": 486.56
+      },
+      {
+       "page": 7,
+       "x0": 306.14,
+       "y0": 490.65,
+       "x1": 525.14,
+       "y1": 500.10999999999996
+      },
+      {
+       "page": 7,
+       "x0": 305.75,
+       "y0": 504.2,
+       "x1": 526.23,
+       "y1": 513.66
+      },
+      {
+       "page": 7,
+       "x0": 306.14,
+       "y0": 517.75,
+       "x1": 368.15999999999997,
+       "y1": 527.21
+      }
+     ],
+     "quote": "Other supervised 10 Following Su et al. (2021), we take the average of the first and the last layers, which is better than only taking the last. 11 We do not compare to CLEAR (Wu et al., 2020), because they use their own version of pre-trained models, and the numbers appear to be much lower. Also note that CT is a concurrent work to ours. methods include InferSent (Conneau et al., 2017), Universal Sentence Encoder (Cer et al., 2018), and SBERT/SRoBERTa (Reimers and Gurevych, 2019) with post-processing methods (BERT-flow, whitening, and CT).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Spearman's correlation",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 306.14,
+      "y0": 435.19,
+      "x1": 526.3199999999999,
+      "y1": 458.14
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 407.4,
+       "y0": 435.19,
+       "x1": 526.3199999999999,
+       "y1": 444.59
+      },
+      {
+       "page": 13,
+       "x0": 306.14,
+       "y0": 448.74,
+       "x1": 478.96,
+       "y1": 458.14
+      }
+     ],
+     "quote": "For all of our experiments, we report Spearman's rank correlation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Supervised training epochs",
+   "evidence": [
+    {
+     "chunk_id": "b0137",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 70.87,
+      "y0": 108.3,
+      "x1": 290.94,
+      "y1": 171.96
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 200.23,
+       "y0": 108.3,
+       "x1": 290.94,
+       "y1": 117.75999999999999
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 121.5,
+       "x1": 289.14,
+       "y1": 131.31
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 135.05,
+       "x1": 289.14,
+       "y1": 144.86
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 148.95,
+       "x1": 289.13,
+       "y1": 158.41
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 162.5,
+       "x1": 195.78,
+       "y1": 171.96
+      }
+     ],
+     "quote": "For supervised Sim-CSE, we train our models for 3 epochs, evaluate the model every 250 training steps on the development set of STS-B and keep the best checkpoint for the final evaluation on test sets.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "3",
+   "value_norm": 3.0,
+   "scope": "supervised Sim-CSE"
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Unsupervised training epochs",
+   "evidence": [
+    {
+     "chunk_id": "b0137",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 70.87,
+      "y0": 162.5,
+      "x1": 289.32,
+      "y1": 199.06
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 200.92,
+       "y0": 162.5,
+       "x1": 289.32,
+       "y1": 171.96
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 176.05,
+       "x1": 289.14,
+       "y1": 185.51000000000002
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 189.6,
+       "x1": 164.66000000000003,
+       "y1": 199.06
+      }
+     ],
+     "quote": "We do the same for the unsupervised SimCSE, except that we train the model for one epoch.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "one",
+   "value_norm": null,
+   "scope": "unsupervised SimCSE"
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Batch size search space",
+   "evidence": [
+    {
+     "chunk_id": "b0137",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 70.87,
+      "y0": 189.6,
+      "x1": 291.05,
+      "y1": 239.71
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 168.04,
+       "y0": 189.6,
+       "x1": 289.14,
+       "y1": 199.06
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 202.8,
+       "x1": 289.14,
+       "y1": 212.61
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 216.35,
+       "x1": 289.14,
+       "y1": 226.16
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 230.25,
+       "x1": 291.05,
+       "y1": 239.71
+      }
+     ],
+     "quote": "We carry out grid-search of batch size ∈ {64, 128, 256, 512} and learning rate ∈ {1e-5, 3e-5, 5e-5} on STS-B development set and adopt the hyperparameter settings in Table A.1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "{64, 128, 256, 512}",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Learning rate search space",
+   "evidence": [
+    {
+     "chunk_id": "b0137",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 70.87,
+      "y0": 189.6,
+      "x1": 291.05,
+      "y1": 239.71
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 168.04,
+       "y0": 189.6,
+       "x1": 289.14,
+       "y1": 199.06
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 202.8,
+       "x1": 289.14,
+       "y1": 212.61
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 216.35,
+       "x1": 289.14,
+       "y1": 226.16
+      },
+      {
+       "page": 13,
+       "x0": 70.87,
+       "y0": 230.25,
+       "x1": 291.05,
+       "y1": 239.71
+      }
+     ],
+     "quote": "We carry out grid-search of batch size ∈ {64, 128, 256, 512} and learning rate ∈ {1e-5, 3e-5, 5e-5} on STS-B development set and adopt the hyperparameter settings in Table A.1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "{1e-5, 3e-5, 5e-5}",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Temperature for cosine similarity",
+   "evidence": [
+    {
+     "chunk_id": "b0107",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 70.47,
+      "y0": 718.22,
+      "x1": 290.94,
+      "y1": 754.7800000000001
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 192.09,
+       "y0": 718.22,
+       "x1": 290.5,
+       "y1": 727.6800000000001
+      },
+      {
+       "page": 15,
+       "x0": 70.47,
+       "y0": 731.42,
+       "x1": 290.94,
+       "y1": 741.2299999999999
+      },
+      {
+       "page": 15,
+       "x0": 70.87,
+       "y0": 745.32,
+       "x1": 247.53,
+       "y1": 754.7800000000001
+      }
+     ],
+     "quote": "As shown in Table D.1, with a carefully tuned temperature τ = 0.05, cosine similarity is better than dot product.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "temperature",
+   "value_raw": "0.05",
+   "value_norm": 0.05,
+   "scope": ""
+  }
+ ],
+ "compute": [],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Impact of different pooling methods and hard negatives",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 70.35,
+      "y0": 397.03,
+      "x1": 290.95,
+      "y1": 420.03999999999996
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 70.35,
+       "y0": 397.03,
+       "x1": 290.95,
+       "y1": 406.48999999999995
+      },
+      {
+       "page": 8,
+       "x0": 70.87,
+       "y0": 410.58,
+       "x1": 172.23000000000002,
+       "y1": 420.03999999999996
+      }
+     ],
+     "quote": "We investigate the impact of different pooling methods and hard negatives.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Ablation studies of normalization, temperature, and MLM objectives",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 70.35,
+      "y0": 437.68,
+      "x1": 290.95000000000005,
+      "y1": 460.68
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 70.35,
+       "y0": 437.68,
+       "x1": 290.49,
+       "y1": 447.14
+      },
+      {
+       "page": 8,
+       "x0": 70.87,
+       "y0": 451.22,
+       "x1": 290.95000000000005,
+       "y1": 460.68
+      }
+     ],
+     "quote": "We provide more ablation studies (normalization, temperature, and MLM objectives) in Appendix D.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Call for unifying evaluation settings for sentence embeddings in future research",
+   "evidence": [
+    {
+     "chunk_id": "b0097",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 70.87,
+      "y0": 584.82,
+      "x1": 290.95,
+      "y1": 621.38
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 222.99,
+       "y0": 584.82,
+       "x1": 290.95,
+       "y1": 594.2800000000001
+      },
+      {
+       "page": 14,
+       "x0": 70.87,
+       "y0": 598.37,
+       "x1": 289.14,
+       "y1": 607.83
+      },
+      {
+       "page": 14,
+       "x0": 70.87,
+       "y0": 611.92,
+       "x1": 152.24,
+       "y1": 621.38
+      }
+     ],
+     "quote": "We call for unifying the setting in evaluating sentence embeddings for future research.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/princeton-nlp/SimCSE",
+   "evidence": [
+    {
+     "chunk_id": "b0115",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 70.87,
+      "y0": 723.91,
+      "x1": 290.62,
+      "y1": 772.3399999999999
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 83.52,
+       "y0": 723.91,
+       "x1": 290.62,
+       "y1": 732.23
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 734.41,
+       "x1": 289.13,
+       "y1": 742.18
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 744.37,
+       "x1": 196.55,
+       "y1": 752.14
+      },
+      {
+       "page": 1,
+       "x0": 83.52,
+       "y0": 753.36,
+       "x1": 86.50999999999999,
+       "y1": 758.54
+      },
+      {
+       "page": 1,
+       "x0": 87.01,
+       "y0": 755.22,
+       "x1": 289.13,
+       "y1": 762.99
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 766.03,
+       "x1": 283.42,
+       "y1": 772.3399999999999
+      }
+     ],
+     "quote": "* The first two authors contributed equally (listed in alphabetical order).This work was done when Xingcheng visited the Princeton NLP group remotely.1Our code and pre-trained models are publicly available at https://github.com/princeton-nlp/SimCSE.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/huggingface/",
+   "evidence": [
+    {
+     "chunk_id": "b0131",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 306.1419982910156,
+      "y0": 744.6069946289062,
+      "x1": 489.0564270019531,
+      "y1": 772.342041015625
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 370.6996765136719,
+       "y0": 744.6069946289062,
+       "x1": 489.0564270019531,
+       "y1": 751.529052734375
+      },
+      {
+       "page": 14,
+       "x0": 306.1419982910156,
+       "y0": 754.5690307617188,
+       "x1": 370.7002258300781,
+       "y1": 761.4910888671875
+      },
+      {
+       "page": 14,
+       "x0": 315.8059997558594,
+       "y0": 763.1622314453125,
+       "x1": 321.7835998535156,
+       "y1": 768.5061645507812
+      },
+      {
+       "page": 14,
+       "x0": 322.281005859375,
+       "y0": 765.4199829101562,
+       "x1": 359.9399719238281,
+       "y1": 772.342041015625
+      }
+     ],
+     "quote": "https://github.com/huggingface/ transformers",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.2",
+   "value": "https://github.com/facebookresearch/",
+   "evidence": [
+    {
+     "chunk_id": "b0133",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 306.1419982910156,
+      "y0": 753.19921875,
+      "x1": 515.9556884765625,
+      "y1": 772.342041015625
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 315.8059997558594,
+       "y0": 753.19921875,
+       "x1": 321.7835998535156,
+       "y1": 758.5431518554688
+      },
+      {
+       "page": 15,
+       "x0": 322.281005859375,
+       "y0": 755.45703125,
+       "x1": 515.9556884765625,
+       "y1": 762.3790893554688
+      },
+      {
+       "page": 15,
+       "x0": 306.1419982910156,
+       "y0": 765.4199829101562,
+       "x1": 343.80096435546875,
+       "y1": 772.342041015625
+      }
+     ],
+     "quote": "https://github.com/facebookresearch/ SentEval",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "Unsupervised and supervised BERT base models achieve high average Spearman's correlation on STS tasks representing improvements over previous best results.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 87.87,
+      "y0": 432.24,
+      "x1": 273.78000000000003,
+      "y1": 524.5699999999999
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 233.18,
+       "y0": 432.24,
+       "x1": 273.78000000000003,
+       "y1": 440.88
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 444.2,
+       "x1": 273.77,
+       "y1": 452.84
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 456.15,
+       "x1": 272.12,
+       "y1": 464.78999999999996
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 468.11,
+       "x1": 220.07,
+       "y1": 476.75
+      },
+      {
+       "page": 1,
+       "x0": 220.08,
+       "y0": 472.2,
+       "x1": 236.82000000000002,
+       "y1": 477.11
+      },
+      {
+       "page": 1,
+       "x0": 242.1,
+       "y0": 468.11,
+       "x1": 272.13,
+       "y1": 476.75
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 480.06,
+       "x1": 272.12,
+       "y1": 488.7
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 492.02,
+       "x1": 272.95000000000005,
+       "y1": 500.65999999999997
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 503.97,
+       "x1": 272.12,
+       "y1": 512.61
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 515.93,
+       "x1": 116.37,
+       "y1": 524.5699999999999
+      }
+     ],
+     "quote": "We evaluate SimCSE on standard semantic textual similarity (STS) tasks, and our unsupervised and supervised models using BERT base achieve an average of 76.3% and 81.6% Spearman's correlation respectively, a 4.2% and 2.2% improvement compared to the previous best results.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

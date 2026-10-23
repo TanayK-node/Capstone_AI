@@ -1,0 +1,2304 @@
+{
+ "metadata": {
+  "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+  "authors": [
+   "Albert Gu",
+   "Tri Dao"
+  ],
+  "venue": null,
+  "year": "2024",
+  "arxiv_id": "2312.00752v2[cs.LG]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Transformers suffer from computational inefficiency on long sequences due to quadratic scaling with respect to the window length.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 71.65,
+      "y0": 588.69,
+      "x1": 562.7,
+      "y1": 605.18
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 71.65,
+       "y0": 588.69,
+       "x1": 562.7,
+       "y1": 593.23
+      },
+      {
+       "page": 1,
+       "x0": 72.0,
+       "y0": 600.64,
+       "x1": 465.16,
+       "y1": 605.18
+      }
+     ],
+     "quote": "An enormous body of research has appeared on more efficient variants of attention to overcome these drawbacks (Tay, Dehghani, Bahri, et al. 2022), but often at the expense of the very properties that makes it effective.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Subquadratic-time architectures like SSMs have been less effective at modeling discrete, information-dense data such as text.",
+   "evidence": [
+    {
+     "chunk_id": "b0004",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 72.0,
+      "y0": 114.17,
+      "x1": 561.59,
+      "y1": 130.66
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 186.37,
+       "y0": 114.17,
+       "x1": 561.59,
+       "y1": 118.71000000000001
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 126.12,
+       "x1": 100.68,
+       "y1": 130.66
+      }
+     ],
+     "quote": "However, they have been less effective at modeling discrete and information-dense data such as text.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Designing a simple selection mechanism by parameterizing SSM parameters based on the input.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 72.0,
+      "y0": 193.24,
+      "x1": 561.6,
+      "y1": 221.69
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 350.72,
+       "y0": 193.24,
+       "x1": 561.6,
+       "y1": 197.78
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 205.2,
+       "x1": 561.6,
+       "y1": 209.73999999999998
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 217.15,
+       "x1": 193.12,
+       "y1": 221.69
+      }
+     ],
+     "quote": "Building on intuition based on important synthetic tasks such as selective copy and induction heads, we design a simple selection mechanism by parameterizing the SSM parameters based on the input.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Developing a hardware-aware recurrent algorithm using a scan that avoids materializing the expanded state.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 71.63,
+      "y0": 266.34,
+      "x1": 561.6,
+      "y1": 294.79
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 488.73,
+       "y0": 266.34,
+       "x1": 561.6,
+       "y1": 270.88
+      },
+      {
+       "page": 2,
+       "x0": 71.63,
+       "y0": 278.3,
+       "x1": 561.5899999999999,
+       "y1": 282.84000000000003
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 290.25,
+       "x1": 542.46,
+       "y1": 294.79
+      }
+     ],
+     "quote": "We overcome this with a hardware-aware algorithm that computes the model recurrently with a scan instead of convolution, but does not materialize the expanded state in order to avoid IO access between different levels of the GPU memory hierarchy.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "Introducing Mamba, a simplified homogeneous neural network architecture combining selective state spaces with Transformer MLP blocks.",
+   "evidence": [
+    {
+     "chunk_id": "b0009",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 71.7,
+      "y0": 339.44,
+      "x1": 561.61,
+      "y1": 367.89000000000004
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 140.39,
+       "y0": 339.44,
+       "x1": 561.61,
+       "y1": 343.98
+      },
+      {
+       "page": 2,
+       "x0": 71.7,
+       "y0": 351.4,
+       "x1": 561.59,
+       "y1": 355.94
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 363.35,
+       "x1": 340.11,
+       "y1": 367.89000000000004
+      }
+     ],
+     "quote": "We simplify prior deep sequence model architectures by combining the design of prior SSM architectures (Dao, Fu, Saab, et al. 2023) with the MLP block of Transformers into a single block, leading to a simple and homogenous architecture design (Mamba) incorporating selective state spaces.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "language modeling",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 96.91,
+      "y0": 404.95,
+      "x1": 536.7,
+      "y1": 430.95
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 375.2,
+       "y0": 404.95,
+       "x1": 536.69,
+       "y1": 409.03999999999996
+      },
+      {
+       "page": 1,
+       "x0": 96.91,
+       "y0": 415.91,
+       "x1": 536.7,
+       "y1": 420.0
+      },
+      {
+       "page": 1,
+       "x0": 96.91,
+       "y0": 426.86,
+       "x1": 137.25,
+       "y1": 430.95
+      }
+     ],
+     "quote": "On language modeling, our Mamba-3B model outperforms Transformers of the same size and matches Transformers twice its size, both in pretraining and downstream evaluation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "task.1",
+   "value": "audio modeling",
+   "evidence": [
+    {
+     "chunk_id": "b0013",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 80.48,
+      "y0": 518.77,
+      "x1": 561.6,
+      "y1": 547.2199999999999
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 179.43,
+       "y0": 518.77,
+       "x1": 561.6,
+       "y1": 523.31
+      },
+      {
+       "page": 2,
+       "x0": 80.48,
+       "y0": 530.72,
+       "x1": 522.91,
+       "y1": 535.26
+      },
+      {
+       "page": 2,
+       "x0": 525.81,
+       "y0": 530.72,
+       "x1": 561.5999999999999,
+       "y1": 535.26
+      },
+      {
+       "page": 2,
+       "x0": 80.48,
+       "y0": 542.68,
+       "x1": 348.20000000000005,
+       "y1": 547.2199999999999
+      }
+     ],
+     "quote": "Mamba out-performs prior state-of-the-art models such as SaShiMi, Hyena, and Transformers on modeling audio waveforms and DNA sequences, both in pretraining quality and downstream metrics (e.g. reducing FID on a challenging speech generation dataset by more than half).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "task.2",
+   "value": "genomics modeling",
+   "evidence": [
+    {
+     "chunk_id": "b0013",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 80.48,
+      "y0": 518.77,
+      "x1": 561.6,
+      "y1": 547.2199999999999
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 179.43,
+       "y0": 518.77,
+       "x1": 561.6,
+       "y1": 523.31
+      },
+      {
+       "page": 2,
+       "x0": 80.48,
+       "y0": 530.72,
+       "x1": 522.91,
+       "y1": 535.26
+      },
+      {
+       "page": 2,
+       "x0": 525.81,
+       "y0": 530.72,
+       "x1": 561.5999999999999,
+       "y1": 535.26
+      },
+      {
+       "page": 2,
+       "x0": 80.48,
+       "y0": 542.68,
+       "x1": 348.20000000000005,
+       "y1": 547.2199999999999
+      }
+     ],
+     "quote": "Mamba out-performs prior state-of-the-art models such as SaShiMi, Hyena, and Transformers on modeling audio waveforms and DNA sequences, both in pretraining quality and downstream metrics (e.g. reducing FID on a challenging speech generation dataset by more than half).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The proposed Mamba architecture combines the H3 block and MLP block into a single homogeneous block, repeating it with normalization and residual connections.",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 72.0,
+      "y0": 483.59,
+      "x1": 561.5999999999999,
+      "y1": 500.09000000000003
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 548.31,
+       "y0": 483.59,
+       "x1": 561.5999999999999,
+       "y1": 488.13
+      },
+      {
+       "page": 7,
+       "x0": 72.0,
+       "y0": 495.55,
+       "x1": 532.21,
+       "y1": 500.09000000000003
+      }
+     ],
+     "quote": "We simplify this architecture by combining these two components into one, which is stacked homogenously (Figure 3).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "A selection mechanism is introduced by making parameters such as B, C, and Delta functions of the input, turning the model into a time-varying SSM.",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 71.65,
+      "y0": 587.29,
+      "x1": 561.61,
+      "y1": 606.26
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 71.65,
+       "y0": 587.29,
+       "x1": 372.28,
+       "y1": 591.8299999999999
+      },
+      {
+       "page": 5,
+       "x0": 375.22,
+       "y0": 587.29,
+       "x1": 561.61,
+       "y1": 591.8299999999999
+      },
+      {
+       "page": 5,
+       "x0": 72.0,
+       "y0": 596.3,
+       "x1": 493.49,
+       "y1": 606.26
+      }
+     ],
+     "quote": "The main difference is simply making several parameters Δ, B, C functions of the input, along with the associated changes to tensor shapes throughout.",
+     "grounding_status": "verified",
+     "match_score": 98.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "A hardware-aware algorithm is used to compute selective SSMs efficiently on GPUs by leveraging kernel fusion, parallel scan, and recomputation to avoid materializing the full expanded state.",
+   "evidence": [
+    {
+     "chunk_id": "b0065",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 72.0,
+      "y0": 108.62,
+      "x1": 561.61,
+      "y1": 125.12
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 240.94,
+       "y0": 108.62,
+       "x1": 561.61,
+       "y1": 113.16000000000001
+      },
+      {
+       "page": 7,
+       "x0": 72.0,
+       "y0": 120.58,
+       "x1": 133.93,
+       "y1": 125.12
+      }
+     ],
+     "quote": "We address this with three classical techniques: kernel fusion, parallel scan, and recomputation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "The model uses real values as the default for the state h, alongside initialization strategies derived from prior SSM and HIPPO theory.",
+   "evidence": [
+    {
+     "chunk_id": "b0095",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 71.75,
+      "y0": 435.17,
+      "x1": 562.69,
+      "y1": 475.57
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 472.76,
+       "y0": 435.17,
+       "x1": 561.59,
+       "y1": 439.71000000000004
+      },
+      {
+       "page": 9,
+       "x0": 72.0,
+       "y0": 447.12,
+       "x1": 561.6,
+       "y1": 451.66
+      },
+      {
+       "page": 9,
+       "x0": 72.0,
+       "y0": 459.08,
+       "x1": 535.98,
+       "y1": 463.62
+      },
+      {
+       "page": 9,
+       "x0": 538.49,
+       "y0": 459.08,
+       "x1": 562.69,
+       "y1": 463.62
+      },
+      {
+       "page": 9,
+       "x0": 71.75,
+       "y0": 471.03,
+       "x1": 181.93,
+       "y1": 475.57
+      },
+      {
+       "page": 9,
+       "x0": 184.42,
+       "y0": 471.03,
+       "x1": 230.57999999999998,
+       "y1": 475.57
+      }
+     ],
+     "quote": "We use real values as the default, which work well for all but one of our tasks; we hypothesize that the complex-real tradeoff is related to the continuous-discrete spectrum in data modalities, where complex numbers are helpful for continuous modalities (e.g. audio, video) but not discrete (e.g. text, DNA).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "The authors introduce a selection mechanism to state space models, removing the linear time invariance (LTI) constraint to allow input-dependent dynamics.",
+   "evidence": [
+    {
+     "chunk_id": "b0033",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 72.0,
+      "y0": 132.1,
+      "x1": 561.86,
+      "y1": 160.54999999999998
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 170.94,
+       "y0": 132.1,
+       "x1": 561.61,
+       "y1": 136.64
+      },
+      {
+       "page": 4,
+       "x0": 72.0,
+       "y0": 144.06,
+       "x1": 561.86,
+       "y1": 148.6
+      },
+      {
+       "page": 4,
+       "x0": 72.0,
+       "y0": 156.01,
+       "x1": 120.78,
+       "y1": 160.54999999999998
+      }
+     ],
+     "quote": "However, a core insight of this work is that LTI models have fundamental limitations in modeling certain types of data, and our technical contributions involve removing the LTI constraint while overcoming the efficiency bottlenecks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "A novel hardware-aware algorithm avoids full state materialization through recomputation and kernel fusion, enabling efficient selective SSM computations.",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 72.0,
+      "y0": 124.27,
+      "x1": 561.61,
+      "y1": 140.76999999999998
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 301.91,
+       "y0": 124.27,
+       "x1": 561.61,
+       "y1": 128.81
+      },
+      {
+       "page": 5,
+       "x0": 72.0,
+       "y0": 136.23,
+       "x1": 300.98,
+       "y1": 140.76999999999998
+      }
+     ],
+     "quote": "We overcome this with a hardware-aware algorithm that exploits the memory hierarchy on modern hardware (Section 3.3).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "The Pile dataset used for language modeling pretraining",
+   "evidence": [
+    {
+     "chunk_id": "b0120",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 132.83,
+      "y0": 523.25,
+      "x1": 240.3,
+      "y1": 527.79
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 132.83,
+       "y0": 523.25,
+       "x1": 240.3,
+       "y1": 527.79
+      }
+     ],
+     "quote": "We use the Pile dataset (L.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Pile",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "HG38 dataset consisting of a single human genome for DNA pretraining",
+   "evidence": [
+    {
+     "chunk_id": "b0130",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 71.63,
+      "y0": 654.58,
+      "x1": 562.69,
+      "y1": 683.03
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 224.95,
+       "y0": 654.58,
+       "x1": 562.69,
+       "y1": 659.12
+      },
+      {
+       "page": 12,
+       "x0": 71.63,
+       "y0": 666.53,
+       "x1": 561.6,
+       "y1": 671.0699999999999
+      },
+      {
+       "page": 12,
+       "x0": 72.0,
+       "y0": 678.49,
+       "x1": 178.32,
+       "y1": 683.03
+      }
+     ],
+     "quote": "For the dataset, we largely follow the setup of HyenaDNA (Nguyen, Poli, et al. 2023), which uses the HG38 dataset for pretraining consisting of a single human genome with about 4.5 billion tokens (DNA base pairs) in the training split.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "HG38",
+   "split": "training",
+   "size": "4.5 billion tokens",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "YouTubeMix solo piano music dataset for audio waveform pretraining",
+   "evidence": [
+    {
+     "chunk_id": "b0148",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 71.52,
+      "y0": 404.19,
+      "x1": 561.6,
+      "y1": 420.68
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 71.52,
+       "y0": 404.19,
+       "x1": 561.6,
+       "y1": 408.73
+      },
+      {
+       "page": 14,
+       "x0": 72.0,
+       "y0": 416.14,
+       "x1": 513.6600000000001,
+       "y1": 420.68
+      }
+     ],
+     "quote": "We evaluate pretraining quality (autoregressive next-sample prediction) on YouTubeMix (DeepSound 2017), a standard piano music dataset used by prior work consisting of 4 hours of solo piano music, sampled at a rate of 16000 Hz.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "YouTubeMix",
+   "split": "",
+   "size": "4 hours",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Transformer architecture (GPT3 architecture)",
+   "evidence": [
+    {
+     "chunk_id": "b0122",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 71.7,
+      "y0": 579.42,
+      "x1": 563.14,
+      "y1": 607.87
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 579.42,
+       "x1": 561.6,
+       "y1": 583.9599999999999
+      },
+      {
+       "page": 11,
+       "x0": 71.7,
+       "y0": 591.37,
+       "x1": 563.14,
+       "y1": 595.91
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 603.33,
+       "x1": 525.72,
+       "y1": 607.87
+      }
+     ],
+     "quote": "For baselines, we compare against the standard Transformer architecture (GPT3 architecture), as well as the strongest Transformer recipe we know of (here referred to as Transformer++), based on the PaLM and LLaMa architectures (e.g. rotary embedding, SwiGLU MLP, RMSNorm instead of LayerNorm, no linear bias, and higher learning rates).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Transformer++ architecture",
+   "evidence": [
+    {
+     "chunk_id": "b0122",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 71.7,
+      "y0": 579.42,
+      "x1": 563.14,
+      "y1": 607.87
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 579.42,
+       "x1": 561.6,
+       "y1": 583.9599999999999
+      },
+      {
+       "page": 11,
+       "x0": 71.7,
+       "y0": 591.37,
+       "x1": 563.14,
+       "y1": 595.91
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 603.33,
+       "x1": 525.72,
+       "y1": 607.87
+      }
+     ],
+     "quote": "For baselines, we compare against the standard Transformer architecture (GPT3 architecture), as well as the strongest Transformer recipe we know of (here referred to as Transformer++), based on the PaLM and LLaMa architectures (e.g. rotary embedding, SwiGLU MLP, RMSNorm instead of LayerNorm, no linear bias, and higher learning rates).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "Pythia open source models",
+   "evidence": [
+    {
+     "chunk_id": "b0125",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 72.0,
+      "y0": 96.67,
+      "x1": 561.6,
+      "y1": 113.16000000000001
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 509.86,
+       "y0": 96.67,
+       "x1": 561.6,
+       "y1": 101.21000000000001
+      },
+      {
+       "page": 12,
+       "x0": 72.0,
+       "y0": 108.62,
+       "x1": 505.4,
+       "y1": 113.16000000000001
+      }
+     ],
+     "quote": "We compare against the most well-known open source models at these sizes, most importantly Pythia (Biderman et",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "RWKV open source models",
+   "evidence": [
+    {
+     "chunk_id": "b0126",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 71.77,
+      "y0": 108.62,
+      "x1": 561.79,
+      "y1": 149.03
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 71.77,
+       "y0": 108.62,
+       "x1": 561.79,
+       "y1": 149.03
+      }
+     ],
+     "quote": "al. 2023) and RWKV (B.Peng et al. 2023) which were trained with the same tokenizer, dataset, and training length (300B tokens) as our models.(Note that Mamba and Pythia are trained with context length 2048, while RWKV was trained with context length 1024.)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "HyenaDNA",
+   "evidence": [
+    {
+     "chunk_id": "b0135",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 72.0,
+      "y0": 368.14,
+      "x1": 561.6,
+      "y1": 386.37
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 72.0,
+       "y0": 368.14,
+       "x1": 561.6,
+       "y1": 376.7
+      },
+      {
+       "page": 13,
+       "x0": 72.0,
+       "y0": 381.83,
+       "x1": 299.21000000000004,
+       "y1": 386.37
+      }
+     ],
+     "quote": "Figure 5 (Left) shows that Mamba's pretraining perplexity improves smoothly with model size, and that Mamba scales better than both HyenaDNA and Transformer++.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "SaShiMi architecture for audio waveform modeling",
+   "evidence": [
+    {
+     "chunk_id": "b0144",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 72.0,
+      "y0": 294.22,
+      "x1": 563.13,
+      "y1": 310.72
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 72.0,
+       "y0": 294.22,
+       "x1": 563.13,
+       "y1": 298.76000000000005
+      },
+      {
+       "page": 14,
+       "x0": 72.0,
+       "y0": 306.18,
+       "x1": 95.69,
+       "y1": 310.72
+      }
+     ],
+     "quote": "For the audio waveform modality, we compare primarily to the SaShiMi architecture and training protocols (Goel et al. 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Perplexity",
+   "evidence": [
+    {
+     "chunk_id": "b0120",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 71.52,
+      "y0": 499.34,
+      "x1": 561.6,
+      "y1": 515.83
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 71.52,
+       "y0": 499.34,
+       "x1": 561.6,
+       "y1": 503.88
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 511.29,
+       "x1": 316.27,
+       "y1": 515.83
+      }
+     ],
+     "quote": "We evaluate the Mamba architecture on standard autoregressive language modeling against other architectures, on both pretraining metrics (perplexity) and zero-shot evaluations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Zero-shot evaluation metrics including LAMBADA, HellaSwag, PIQA, Arc-E, Arc-C, and WinoGrande accuracy and perplexity",
+   "evidence": [
+    {
+     "chunk_id": "b0127",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 75.42750549316406,
+      "y0": 223.54629516601562,
+      "x1": 555.9326782226562,
+      "y1": 513.8211669921875
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 75.42750549316406,
+       "y0": 223.54629516601562,
+       "x1": 555.9326782226562,
+       "y1": 513.8211669921875
+      }
+     ],
+     "quote": "Table 3: (Zero-shot Evaluations.)Best results for each size in bold.We compare against open source LMs with various tokenizers, trained for up to 300B tokens.Pile refers to the validation split, comparing only against models trained on the same dataset and tokenizer (GPT-NeoX-20B).For each model size, Mamba is best-in-class on every single evaluation result, and generally matches baselines at twice the model size.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "Bits per byte (BPB)",
+   "evidence": [
+    {
+     "chunk_id": "b0149",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 72.0,
+      "y0": 493.85,
+      "x1": 561.6,
+      "y1": 510.35
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 325.7,
+       "y0": 493.85,
+       "x1": 561.6,
+       "y1": 498.39000000000004
+      },
+      {
+       "page": 14,
+       "x0": 72.0,
+       "y0": 505.81,
+       "x1": 461.09,
+       "y1": 510.35
+      }
+     ],
+     "quote": "The main metric is bits per byte (BPB), which is a constant factor log(2) of the standard negative log-likelihood (NLL) loss for pretraining other modalities.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "Negative log-likelihood (NLL)",
+   "evidence": [
+    {
+     "chunk_id": "b0149",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 72.0,
+      "y0": 493.85,
+      "x1": 561.6,
+      "y1": 510.35
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 325.7,
+       "y0": 493.85,
+       "x1": 561.6,
+       "y1": 498.39000000000004
+      },
+      {
+       "page": 14,
+       "x0": 72.0,
+       "y0": 505.81,
+       "x1": 461.09,
+       "y1": 510.35
+      }
+     ],
+     "quote": "The main metric is bits per byte (BPB), which is a constant factor log(2) of the standard negative log-likelihood (NLL) loss for pretraining other modalities.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.4",
+   "value": "Fréchet Inception Distance (FID)",
+   "evidence": [
+    {
+     "chunk_id": "b0155",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 90.23898315429688,
+      "y0": 131.65689086914062,
+      "x1": 561.7720947265625,
+      "y1": 136.83694458007812
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 90.23898315429688,
+       "y0": 131.65689086914062,
+       "x1": 561.7720947265625,
+       "y1": 136.83694458007812
+      }
+     ],
+     "quote": "Model | Params | NLL ↓ | FID ↓ | IS ↑ | mIS ↑ | AM ↓",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.5",
+   "value": "Inception Score (IS)",
+   "evidence": [
+    {
+     "chunk_id": "b0155",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 90.23898315429688,
+      "y0": 131.65689086914062,
+      "x1": 561.7720947265625,
+      "y1": 136.83694458007812
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 90.23898315429688,
+       "y0": 131.65689086914062,
+       "x1": 561.7720947265625,
+       "y1": 136.83694458007812
+      }
+     ],
+     "quote": "Model | Params | NLL ↓ | FID ↓ | IS ↑ | mIS ↑ | AM ↓",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.6",
+   "value": "Mean Inception Score (mIS)",
+   "evidence": [
+    {
+     "chunk_id": "b0155",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 90.23898315429688,
+      "y0": 131.65689086914062,
+      "x1": 561.7720947265625,
+      "y1": 136.83694458007812
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 90.23898315429688,
+       "y0": 131.65689086914062,
+       "x1": 561.7720947265625,
+       "y1": 136.83694458007812
+      }
+     ],
+     "quote": "Model | Params | NLL ↓ | FID ↓ | IS ↑ | mIS ↑ | AM ↓",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.7",
+   "value": "AM",
+   "evidence": [
+    {
+     "chunk_id": "b0155",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 90.23898315429688,
+      "y0": 131.65689086914062,
+      "x1": 561.7720947265625,
+      "y1": 136.83694458007812
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 90.23898315429688,
+       "y0": 131.65689086914062,
+       "x1": 561.7720947265625,
+       "y1": 136.83694458007812
+      }
+     ],
+     "quote": "Model | Params | NLL ↓ | FID ↓ | IS ↑ | mIS ↑ | AM ↓",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Learning rate sweep for models ranging across 1e-3, 2e-3, 4e-3, 8e-3",
+   "evidence": [
+    {
+     "chunk_id": "b0315",
+     "page": 33,
+     "bbox": {
+      "page": 33,
+      "x0": 72.0,
+      "y0": 75.78,
+      "x1": 561.6,
+      "y1": 96.3
+     },
+     "boxes": [
+      {
+       "page": 33,
+       "x0": 123.45,
+       "y0": 75.78,
+       "x1": 561.6,
+       "y1": 84.34
+      },
+      {
+       "page": 33,
+       "x0": 72.0,
+       "y0": 87.74,
+       "x1": 111.05,
+       "y1": 96.3
+      }
+     ],
+     "quote": "For each model (Transformer++, HyenaDNA, Mamba), we swept the learning rate across {1 -3, 2 -3, 4 -3, 8 -3}.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "{1 -3, 2 -3, 4 -3, 8 -3}",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Optimal learning rate for Transformer and HyenaDNA across all sizes",
+   "evidence": [
+    {
+     "chunk_id": "b0315",
+     "page": 33,
+     "bbox": {
+      "page": 33,
+      "x0": 113.95,
+      "y0": 90.26,
+      "x1": 442.57,
+      "y1": 94.80000000000001
+     },
+     "boxes": [
+      {
+       "page": 33,
+       "x0": 113.95,
+       "y0": 90.26,
+       "x1": 442.57,
+       "y1": 94.80000000000001
+      }
+     ],
+     "quote": "The optimal Transformer and HyenaDNA learning rates were 2e-3 across all sizes.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "2e-3",
+   "value_norm": 0.002,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Optimal learning rate for Mamba",
+   "evidence": [
+    {
+     "chunk_id": "b0315",
+     "page": 33,
+     "bbox": {
+      "page": 33,
+      "x0": 72.0,
+      "y0": 90.26,
+      "x1": 561.6,
+      "y1": 118.71000000000001
+     },
+     "boxes": [
+      {
+       "page": 33,
+       "x0": 445.47,
+       "y0": 90.26,
+       "x1": 561.6,
+       "y1": 94.80000000000001
+      },
+      {
+       "page": 33,
+       "x0": 72.0,
+       "y0": 102.21,
+       "x1": 561.6,
+       "y1": 106.75
+      },
+      {
+       "page": 33,
+       "x0": 72.0,
+       "y0": 114.17,
+       "x1": 268.82,
+       "y1": 118.71000000000001
+      }
+     ],
+     "quote": "The optimal Mamba learning rate was 8e-3; note that Mamba performed better than baselines with matched learning rates (2e-3), but was more stable and improved even more at higher learning rates.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "8e-3",
+   "value_norm": 0.008,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Global batch size for DNA pretraining",
+   "evidence": [
+    {
+     "chunk_id": "b0134",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 72.0,
+      "y0": 329.55,
+      "x1": 560.8100000000001,
+      "y1": 348.57
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 330.19,
+       "y0": 329.68,
+       "x1": 535.8299999999999,
+       "y1": 336.62
+      },
+      {
+       "page": 13,
+       "x0": 539.1,
+       "y0": 329.55,
+       "x1": 560.8100000000001,
+       "y1": 338.11
+      },
+      {
+       "page": 13,
+       "x0": 72.0,
+       "y0": 344.03,
+       "x1": 141.82,
+       "y1": 348.57
+      }
+     ],
+     "quote": "We fix a global batch size of 1024, for a total of 2 20 ≈ 1 tokens per batch.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "1024",
+   "value_norm": 1024.0,
+   "scope": "pretraining"
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Total batch size in tokens per training step",
+   "evidence": [
+    {
+     "chunk_id": "b0318",
+     "page": 33,
+     "bbox": {
+      "page": 33,
+      "x0": 71.52,
+      "y0": 209.66,
+      "x1": 561.6,
+      "y1": 228.68
+     },
+     "boxes": [
+      {
+       "page": 33,
+       "x0": 71.52,
+       "y0": 209.78,
+       "x1": 199.85000000000002,
+       "y1": 216.72
+      },
+      {
+       "page": 33,
+       "x0": 203.78,
+       "y0": 209.66,
+       "x1": 561.6,
+       "y1": 218.22
+      },
+      {
+       "page": 33,
+       "x0": 71.77,
+       "y0": 221.74,
+       "x1": 393.57,
+       "y1": 228.68
+      }
+     ],
+     "quote": "We use a total batch size of 2 24 ≈ 16 tokens per training step, for every sequence length (e.g. at length 2 20 there are 16 segments per batch and at length 2 10 there are 16384 segments per batch).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "2 24",
+   "value_norm": null,
+   "scope": "training step"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Learning rate for Mamba in DNA pretraining",
+   "evidence": [
+    {
+     "chunk_id": "b0319",
+     "page": 33,
+     "bbox": {
+      "page": 33,
+      "x0": 71.7,
+      "y0": 265.98,
+      "x1": 561.6,
+      "y1": 282.47
+     },
+     "boxes": [
+      {
+       "page": 33,
+       "x0": 71.7,
+       "y0": 265.98,
+       "x1": 561.6,
+       "y1": 270.52000000000004
+      },
+      {
+       "page": 33,
+       "x0": 72.0,
+       "y0": 277.93,
+       "x1": 522.13,
+       "y1": 282.47
+      }
+     ],
+     "quote": "The learning rate used was 0.008 for Mamba and 0.001 for HyenaDNA; we initially attempted to use the same learning rate of 0.002 from the previous section for HyenaDNA, but found that it was unstable at the longest context length.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.008",
+   "value_norm": 0.008,
+   "scope": "DNA pretraining"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Learning rate for HyenaDNA in DNA pretraining",
+   "evidence": [
+    {
+     "chunk_id": "b0319",
+     "page": 33,
+     "bbox": {
+      "page": 33,
+      "x0": 71.7,
+      "y0": 265.98,
+      "x1": 561.6,
+      "y1": 282.47
+     },
+     "boxes": [
+      {
+       "page": 33,
+       "x0": 71.7,
+       "y0": 265.98,
+       "x1": 561.6,
+       "y1": 270.52000000000004
+      },
+      {
+       "page": 33,
+       "x0": 72.0,
+       "y0": 277.93,
+       "x1": 522.13,
+       "y1": 282.47
+      }
+     ],
+     "quote": "The learning rate used was 0.008 for Mamba and 0.001 for HyenaDNA; we initially attempted to use the same learning rate of 0.002 from the previous section for HyenaDNA, but found that it was unstable at the longest context length.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.001",
+   "value_norm": 0.001,
+   "scope": "DNA pretraining"
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Batch size per gradient step for classification",
+   "evidence": [
+    {
+     "chunk_id": "b0326",
+     "page": 33,
+     "bbox": {
+      "page": 33,
+      "x0": 72.0,
+      "y0": 545.25,
+      "x1": 561.86,
+      "y1": 573.6999999999999
+     },
+     "boxes": [
+      {
+       "page": 33,
+       "x0": 356.19,
+       "y0": 545.25,
+       "x1": 561.6,
+       "y1": 549.79
+      },
+      {
+       "page": 33,
+       "x0": 72.0,
+       "y0": 557.2,
+       "x1": 561.86,
+       "y1": 561.74
+      },
+      {
+       "page": 33,
+       "x0": 72.0,
+       "y0": 569.16,
+       "x1": 229.69,
+       "y1": 573.6999999999999
+      }
+     ],
+     "quote": "Each gradient step uses batch size 64, which are all independently randomly drawn by uniformly picking a species, uniformly picking a chromosome, and then uniformly picking a contiguous segment of DNA.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "64",
+   "value_norm": 64.0,
+   "scope": "classification task"
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "Learning rate for Hyena models in fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0328",
+     "page": 33,
+     "bbox": {
+      "page": 33,
+      "x0": 71.7,
+      "y0": 638.37,
+      "x1": 487.3,
+      "y1": 647.15
+     },
+     "boxes": [
+      {
+       "page": 33,
+       "x0": 71.7,
+       "y0": 638.37,
+       "x1": 487.3,
+       "y1": 647.15
+      }
+     ],
+     "quote": "The learning rate for all Hyena models is 4e -5, while the learning rate for all Mamba models is 1e -4.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "4e -5",
+   "value_norm": null,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "Learning rate for Mamba models in fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0328",
+     "page": 33,
+     "bbox": {
+      "page": 33,
+      "x0": 71.7,
+      "y0": 638.37,
+      "x1": 487.3,
+      "y1": 647.15
+     },
+     "boxes": [
+      {
+       "page": 33,
+       "x0": 71.7,
+       "y0": 638.37,
+       "x1": 487.3,
+       "y1": 647.15
+      }
+     ],
+     "quote": "The learning rate for all Hyena models is 4e -5, while the learning rate for all Mamba models is 1e -4.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "1e -4",
+   "value_norm": null,
+   "scope": "fine-tuning"
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Machine with 8 GPUs",
+   "evidence": [
+    {
+     "chunk_id": "b0318",
+     "page": 33,
+     "bbox": {
+      "page": 33,
+      "x0": 72.0,
+      "y0": 224.13,
+      "x1": 561.6,
+      "y1": 252.59
+     },
+     "boxes": [
+      {
+       "page": 33,
+       "x0": 397.57,
+       "y0": 224.13,
+       "x1": 561.6,
+       "y1": 228.67
+      },
+      {
+       "page": 33,
+       "x0": 72.0,
+       "y0": 233.69,
+       "x1": 561.6,
+       "y1": 240.63
+      },
+      {
+       "page": 33,
+       "x0": 72.0,
+       "y0": 245.65,
+       "x1": 385.72,
+       "y1": 252.59
+      }
+     ],
+     "quote": "This is a large batch size relative to the model size by usual LM standards, but note that a batch size of 2 23 is the minimum possible on a machine with 8 GPUs and sequence length of 2 2 0, and that HyenaDNA used much larger batches of 2 28 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation of model architecture and inner SSM layer comparing non-selective and selective SSMs",
+   "evidence": [
+    {
+     "chunk_id": "b0160",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 71.7,
+      "y0": 616.37,
+      "x1": 444.44,
+      "y1": 620.91
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 71.7,
+       "y0": 616.37,
+       "x1": 444.44,
+       "y1": 620.91
+      }
+     ],
+     "quote": "Table 6 investigates the effects of the architecture (block) and its inner SSM layer (Figure 3).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Ablation of selective SSM layer considering different combinations of selective parameters",
+   "evidence": [
+    {
+     "chunk_id": "b0166",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 71.7,
+      "y0": 432.67,
+      "x1": 563.29,
+      "y1": 454.58
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 71.7,
+       "y0": 432.67,
+       "x1": 563.29,
+       "y1": 442.63
+      },
+      {
+       "page": 16,
+       "x0": 72.0,
+       "y0": 444.62,
+       "x1": 509.85,
+       "y1": 454.58
+      }
+     ],
+     "quote": "Table 7 ablates the selective SSM layer by considering different combinations of selective Δ, , and parameters (Algorithm 2), showing that Δ is the most important parameter due to its connection to RNN gating (Theorem 1).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.2",
+   "value": "Ablation of different initializations of the SSM",
+   "evidence": [
+    {
+     "chunk_id": "b0167",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 71.7,
+      "y0": 465.51,
+      "x1": 561.6,
+      "y1": 482.0
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 71.7,
+       "y0": 465.51,
+       "x1": 561.6,
+       "y1": 470.05
+      },
+      {
+       "page": 16,
+       "x0": 72.0,
+       "y0": 477.46,
+       "x1": 370.85,
+       "y1": 482.0
+      }
+     ],
+     "quote": "Table 8 considers different initializations of the SSM, which have been shown to make a large difference in some data modalities and settings (Gu, Goel, and Ré 2022; Gu, Gupta, et al. 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.3",
+   "value": "Ablation varying the dimension of Δ and B, C projections",
+   "evidence": [
+    {
+     "chunk_id": "b0168",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 71.7,
+      "y0": 528.31,
+      "x1": 472.2,
+      "y1": 538.27
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 71.7,
+       "y0": 528.31,
+       "x1": 472.2,
+       "y1": 538.27
+      }
+     ],
+     "quote": "Table 9 and Table 10 consider varying the dimension of the Δ and (, ) projections respectively.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.4",
+   "value": "Ablation on interleaving the Mamba block with other blocks such as MLP and MHA",
+   "evidence": [
+    {
+     "chunk_id": "b0261",
+     "page": 30,
+     "bbox": {
+      "page": 30,
+      "x0": 72.0,
+      "y0": 660.78,
+      "x1": 561.5999999999999,
+      "y1": 679.01
+     },
+     "boxes": [
+      {
+       "page": 30,
+       "x0": 72.0,
+       "y0": 660.78,
+       "x1": 265.37,
+       "y1": 669.3399999999999
+      },
+      {
+       "page": 30,
+       "x0": 275.33,
+       "y0": 662.51,
+       "x1": 561.5999999999999,
+       "y1": 667.05
+      },
+      {
+       "page": 30,
+       "x0": 72.0,
+       "y0": 674.47,
+       "x1": 130.55,
+       "y1": 679.01
+      }
+     ],
+     "quote": "Mamba Architecture: Interleaving Blocks. We test the effect of different architectural blocks combined with the Mamba block.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Apply selective SSMs generically to meta-RL settings",
+   "evidence": [
+    {
+     "chunk_id": "b0192",
+     "page": 25,
+     "bbox": {
+      "page": 25,
+      "x0": 80.48,
+      "y0": 299.91,
+      "x1": 561.86,
+      "y1": 316.40000000000003
+     },
+     "boxes": [
+      {
+       "page": 25,
+       "x0": 330.89,
+       "y0": 299.91,
+       "x1": 561.86,
+       "y1": 304.45000000000005
+      },
+      {
+       "page": 25,
+       "x0": 80.48,
+       "y0": 311.86,
+       "x1": 500.63,
+       "y1": 316.40000000000003
+      }
+     ],
+     "quote": "It would be interesting to apply selective SSMs generically to this setting and probe if the model has learned to automatically reset its state on episode boundaries.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/state-spaces/mamba",
+   "evidence": [
+    {
+     "chunk_id": "b0015",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 72.0,
+      "y0": 648.53,
+      "x1": 508.40000000000003,
+      "y1": 656.53
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 650.27,
+       "x1": 318.90999999999997,
+       "y1": 654.81
+      },
+      {
+       "page": 2,
+       "x0": 503.48,
+       "y0": 648.53,
+       "x1": 508.40000000000003,
+       "y1": 656.53
+      }
+     ],
+     "quote": "Model code and pre-trained checkpoints are open-sourced at https://github.com/state-spaces/mamba.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "Mamba achieves 5x higher inference throughput than Transformers.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 96.91,
+      "y0": 372.07,
+      "x1": 536.7,
+      "y1": 398.08
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 467.25,
+       "y0": 372.07,
+       "x1": 536.69,
+       "y1": 376.15999999999997
+      },
+      {
+       "page": 1,
+       "x0": 96.91,
+       "y0": 383.03,
+       "x1": 536.7,
+       "y1": 387.11999999999995
+      },
+      {
+       "page": 1,
+       "x0": 96.91,
+       "y0": 393.99,
+       "x1": 261.40999999999997,
+       "y1": 398.08
+      }
+     ],
+     "quote": "Mamba enjoys fast inference (5× higher throughput than Transformers) and linear scaling in sequence length, and its performance improves on real data up to million-length sequences.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "Mamba-3B matches the quality of Transformers twice its size on language modeling.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 96.91,
+      "y0": 404.95,
+      "x1": 536.7,
+      "y1": 430.95
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 375.2,
+       "y0": 404.95,
+       "x1": 536.69,
+       "y1": 409.03999999999996
+      },
+      {
+       "page": 1,
+       "x0": 96.91,
+       "y0": 415.91,
+       "x1": 536.7,
+       "y1": 420.0
+      },
+      {
+       "page": 1,
+       "x0": 96.91,
+       "y0": 426.86,
+       "x1": 137.25,
+       "y1": 430.95
+      }
+     ],
+     "quote": "On language modeling, our Mamba-3B model outperforms Transformers of the same size and matches Transformers twice its size, both in pretraining and downstream evaluation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "The hardware-aware algorithm is up to 3x faster on A100 GPUs compared to previous methods.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 72.0,
+      "y0": 290.25,
+      "x1": 561.6,
+      "y1": 318.70000000000005
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 545.52,
+       "y0": 290.25,
+       "x1": 561.6,
+       "y1": 294.79
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 302.21,
+       "x1": 561.6,
+       "y1": 306.75
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 314.16,
+       "x1": 497.19,
+       "y1": 318.70000000000005
+      }
+     ],
+     "quote": "The resulting implementation is faster than previous methods both in theory (scaling linearly in sequence length, compared to pseudo-linear for all convolution-based SSMs) and on modern hardware (up to 3× faster on A100 GPUs).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.3",
+   "value": "Mamba reduces FID on a challenging speech generation dataset by more than half.",
+   "evidence": [
+    {
+     "chunk_id": "b0013",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 80.48,
+      "y0": 518.77,
+      "x1": 561.6,
+      "y1": 547.2199999999999
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 179.43,
+       "y0": 518.77,
+       "x1": 561.6,
+       "y1": 523.31
+      },
+      {
+       "page": 2,
+       "x0": 80.48,
+       "y0": 530.72,
+       "x1": 522.91,
+       "y1": 535.26
+      },
+      {
+       "page": 2,
+       "x0": 525.81,
+       "y0": 530.72,
+       "x1": 561.5999999999999,
+       "y1": 535.26
+      },
+      {
+       "page": 2,
+       "x0": 80.48,
+       "y0": 542.68,
+       "x1": 348.20000000000005,
+       "y1": 547.2199999999999
+      }
+     ],
+     "quote": "Mamba out-performs prior state-of-the-art models such as SaShiMi, Hyena, and Transformers on modeling audio waveforms and DNA sequences, both in pretraining quality and downstream metrics (e.g. reducing FID on a challenging speech generation dataset by more than half).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.4",
+   "value": "Mamba-3B scores 4 points higher on average on common sense reasoning compared to Pythia-3B and exceeds Pythia-7B.",
+   "evidence": [
+    {
+     "chunk_id": "b0014",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 80.48,
+      "y0": 608.43,
+      "x1": 561.6,
+      "y1": 636.88
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 211.91,
+       "y0": 608.43,
+       "x1": 561.6,
+       "y1": 612.9699999999999
+      },
+      {
+       "page": 2,
+       "x0": 80.48,
+       "y0": 620.39,
+       "x1": 561.6,
+       "y1": 624.93
+      },
+      {
+       "page": 2,
+       "x0": 80.48,
+       "y0": 632.34,
+       "x1": 370.98,
+       "y1": 636.88
+      }
+     ],
+     "quote": "Our Mamba language model has 5× generation throughput compared to Transformers of similar size, and Mamba-3B's quality matches that of Transformers twice its size (e.g. 4 points higher avg. on common sense reasoning compared to Pythia-3B and even exceeding Pythia-7B).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

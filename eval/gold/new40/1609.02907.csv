@@ -1,0 +1,35 @@
+1609.02907,task,,semi-supervised node classification,node classification|semi-supervised classification|document classification in citation networks,5,
+1609.02907,task,,semi-supervised entity classification in a knowledge graph,entity classification|NELL,5,
+1609.02907,datasets,,Citeseer,CiteSeer,5,
+1609.02907,datasets,,Cora,,5,
+1609.02907,datasets,,Pubmed,PubMed,5,
+1609.02907,datasets,,NELL,,5,knowledge graph
+1609.02907,datasets,,random graphs,simulated random graphs,6,training time experiments
+1609.02907,baselines,,manifold regularization,ManiReg,6,
+1609.02907,baselines,,semi-supervised embedding,SemiEmb,6,
+1609.02907,baselines,,label propagation,LP,6,
+1609.02907,baselines,,DeepWalk,,6,
+1609.02907,baselines,,iterative classification algorithm,ICA,6,
+1609.02907,baselines,,Planetoid,,6,
+1609.02907,baselines,,Chebyshev filter,Chebyshev|Chebyshev polynomials,7,propagation-model comparison
+1609.02907,baselines,,multi-layer perceptron,MLP,7,propagation-model comparison
+1609.02907,metrics,,classification accuracy,accuracy|prediction accuracy,7,
+1609.02907,metrics,,wall-clock training time,training time|time per epoch,7,
+1609.02907,hyperparameters,num_layers,2,two-layer GCN,6,
+1609.02907,hyperparameters,epochs,200,training iterations,6,
+1609.02907,hyperparameters,optimizer,Adam,,6,
+1609.02907,hyperparameters,learning_rate,0.01,,6,
+1609.02907,hyperparameters,early_stopping_patience,10,window size,6,epochs
+1609.02907,hyperparameters,dropout,0.5,dropout rate,7,citation networks
+1609.02907,hyperparameters,dropout,0.1,dropout rate,7,NELL
+1609.02907,hyperparameters,weight_decay,5e-4,L2 regularization,7,citation networks
+1609.02907,hyperparameters,weight_decay,1e-5,L2 regularization,7,NELL
+1609.02907,hyperparameters,hidden_size,16,hidden units,7,citation networks
+1609.02907,hyperparameters,hidden_size,64,hidden units,7,NELL
+1609.02907,hyperparameters,hidden_size,32,hidden layer size,6,random graphs
+1609.02907,hyperparameters,epochs,400,,14,model-depth experiments
+1609.02907,hyperparameters,epochs,300,training iterations,12,karate club
+1609.02907,hyperparameters,hidden_size,4,hidden layer dimensionality,12,karate club
+1609.02907,compute,,16-core Intel Xeon CPU E5-2640 v3,Intel Xeon E5-2640 v3|Xeon CPU,8,
+1609.02907,compute,,GeForce GTX TITAN X,GTX TITAN X|TITAN X,8,
+1609.02907,code_urls,,https://github.com/tkipf/gcn,,4,

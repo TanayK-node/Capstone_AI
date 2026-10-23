@@ -1,0 +1,2316 @@
+{
+ "metadata": {
+  "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+  "authors": [
+   "Tri Dao",
+   "Daniel Y Fu",
+   "Stefano Ermon",
+   "Atri Rudra",
+   "Christopher Ré"
+  ],
+  "venue": null,
+  "year": "2022",
+  "arxiv_id": "2205.14135v2[cs.LG]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Transformers have quadratic time and memory complexity with respect to sequence length, making them slow and memory-hungry on long sequences.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 96.91,
+      "y0": 317.49,
+      "x1": 515.4399999999999,
+      "y1": 336.37
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 110.73,
+       "y0": 317.49,
+       "x1": 515.4399999999999,
+       "y1": 325.41
+      },
+      {
+       "page": 1,
+       "x0": 96.91,
+       "y0": 328.45,
+       "x1": 305.68,
+       "y1": 336.37
+      }
+     ],
+     "quote": "Transformers are slow and memory-hungry on long sequences, since the time and memory complexity of self-attention are quadratic in sequence length.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Approximate attention methods fail to achieve wall-clock speedups because they overlook memory access overheads.",
+   "evidence": [
+    {
+     "chunk_id": "b0004",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 72.0,
+      "y0": 665.57,
+      "x1": 540.26,
+      "y1": 687.48
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 230.34,
+       "y0": 665.57,
+       "x1": 540.26,
+       "y1": 675.5300000000001
+      },
+      {
+       "page": 1,
+       "x0": 72.0,
+       "y0": 677.52,
+       "x1": 456.13,
+       "y1": 687.48
+      }
+     ],
+     "quote": "One main reason is that they focus on FLOP reduction (which may not correlate with wall-clock speed) and tend to ignore overheads from memory access (IO).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Proposing FlashAttention, an IO-aware exact attention algorithm using tiling to reduce memory reads and writes.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 96.91,
+      "y0": 361.33,
+      "x1": 516.38,
+      "y1": 391.16
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 390.43,
+       "y0": 361.33,
+       "x1": 516.38,
+       "y1": 369.75
+      },
+      {
+       "page": 1,
+       "x0": 96.91,
+       "y0": 372.28,
+       "x1": 515.1,
+       "y1": 380.2
+      },
+      {
+       "page": 1,
+       "x0": 96.91,
+       "y0": 383.24,
+       "x1": 391.33000000000004,
+       "y1": 391.16
+      }
+     ],
+     "quote": "We propose FlashAttention, an IO-aware exact attention algorithm that uses tiling to reduce the number of memory reads/writes between GPU high bandwidth memory (HBM) and GPU on-chip SRAM.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Analyzing the IO complexity of FlashAttention and showing it requires fewer HBM accesses than standard attention.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 96.91,
+      "y0": 383.24,
+      "x1": 515.44,
+      "y1": 413.08000000000004
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 394.41,
+       "y0": 383.24,
+       "x1": 515.44,
+       "y1": 391.16
+      },
+      {
+       "page": 1,
+       "x0": 96.91,
+       "y0": 394.2,
+       "x1": 515.1,
+       "y1": 402.62
+      },
+      {
+       "page": 1,
+       "x0": 96.91,
+       "y0": 405.16,
+       "x1": 236.94,
+       "y1": 413.08000000000004
+      }
+     ],
+     "quote": "We analyze the IO complexity of FlashAttention, showing that it requires fewer HBM accesses than standard attention, and is optimal for a range of SRAM sizes.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "Extending FlashAttention to block-sparse attention to create a faster approximate attention method.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 96.91,
+      "y0": 405.16,
+      "x1": 516.88,
+      "y1": 424.04
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 241.07,
+       "y0": 405.16,
+       "x1": 515.0899999999999,
+       "y1": 413.58000000000004
+      },
+      {
+       "page": 1,
+       "x0": 96.91,
+       "y0": 416.12,
+       "x1": 516.88,
+       "y1": 424.04
+      }
+     ],
+     "quote": "We also extend FlashAttention to block-sparse attention, yielding an approximate attention algorithm that is faster than any existing approximate attention method.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "natural language processing",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 71.64,
+      "y0": 546.02,
+      "x1": 539.99,
+      "y1": 567.9300000000001
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 71.64,
+       "y0": 546.02,
+       "x1": 539.99,
+       "y1": 555.98
+      },
+      {
+       "page": 1,
+       "x0": 72.0,
+       "y0": 557.97,
+       "x1": 275.64,
+       "y1": 567.9300000000001
+      }
+     ],
+     "quote": "Transformer models [82] have emerged as the most widely used architecture in applications such as natural language processing and image classification.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "task.1",
+   "value": "image classification",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 71.64,
+      "y0": 546.02,
+      "x1": 539.99,
+      "y1": 567.9300000000001
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 71.64,
+       "y0": 546.02,
+       "x1": 539.99,
+       "y1": 555.98
+      },
+      {
+       "page": 1,
+       "x0": 72.0,
+       "y0": 557.97,
+       "x1": 275.64,
+       "y1": 567.9300000000001
+      }
+     ],
+     "quote": "Transformer models [82] have emerged as the most widely used architecture in applications such as natural language processing and image classification.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The proposed method computes exact attention using tiling and recomputation to reduce HBM memory accesses.",
+   "evidence": [
+    {
+     "chunk_id": "b0036",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 72.0,
+      "y0": 584.81,
+      "x1": 540.0,
+      "y1": 606.72
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 86.94,
+       "y0": 584.81,
+       "x1": 540.0,
+       "y1": 594.77
+      },
+      {
+       "page": 4,
+       "x0": 72.0,
+       "y0": 596.76,
+       "x1": 327.2,
+       "y1": 606.72
+      }
+     ],
+     "quote": "We apply two established techniques (tiling, recomputation) to overcome the technical challenge of computing exact attention in sub-quadratic HBM accesses.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "Tiling is used to split inputs into blocks, compute softmax with scaling statistics across blocks, and combine the results.",
+   "evidence": [
+    {
+     "chunk_id": "b0036",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 72.0,
+      "y0": 596.76,
+      "x1": 540.0,
+      "y1": 630.63
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 477.38,
+       "y0": 596.76,
+       "x1": 540.0,
+       "y1": 606.72
+      },
+      {
+       "page": 4,
+       "x0": 72.0,
+       "y0": 608.72,
+       "x1": 540.0,
+       "y1": 618.6800000000001
+      },
+      {
+       "page": 4,
+       "x0": 72.0,
+       "y0": 620.67,
+       "x1": 268.15,
+       "y1": 630.63
+      }
+     ],
+     "quote": "The main idea is that we split the inputs Q, K, V into blocks, load them from slow HBM to fast SRAM, then compute the attention output with respect to those blocks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "The method recomputes attention matrices in the backward pass using saved outputs and softmax statistics instead of storing large intermediate matrices.",
+   "evidence": [
+    {
+     "chunk_id": "b0044",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 72.0,
+      "y0": 205.84,
+      "x1": 539.99,
+      "y1": 227.76000000000002
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 72.0,
+       "y0": 205.84,
+       "x1": 539.99,
+       "y1": 215.8
+      },
+      {
+       "page": 5,
+       "x0": 72.0,
+       "y0": 217.8,
+       "x1": 445.18,
+       "y1": 227.76000000000002
+      }
+     ],
+     "quote": "However, by storing the output O and the softmax normalization statistics (m, ℓ), we can recompute the attention matrix S and P easily in the backward pass from blocks of Q, K, V in SRAM.",
+     "grounding_status": "verified",
+     "match_score": 99.5
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "The algorithm is implemented via kernel fusion in a single CUDA kernel to avoid repeatedly reading and writing inputs and outputs to HBM.",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 72.0,
+      "y0": 277.58,
+      "x1": 541.38,
+      "y1": 323.4
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 296.59,
+       "y0": 277.58,
+       "x1": 540.0,
+       "y1": 287.53999999999996
+      },
+      {
+       "page": 5,
+       "x0": 72.0,
+       "y0": 289.53,
+       "x1": 541.38,
+       "y1": 299.48999999999995
+      },
+      {
+       "page": 5,
+       "x0": 72.0,
+       "y0": 301.49,
+       "x1": 540.27,
+       "y1": 311.45
+      },
+      {
+       "page": 5,
+       "x0": 72.0,
+       "y0": 313.44,
+       "x1": 142.95999999999998,
+       "y1": 323.4
+      }
+     ],
+     "quote": "Tiling enables us to implement our algorithm in one CUDA kernel, loading input from HBM, performing all the computation steps (matrix multiply, softmax, optionally masking and dropout, matrix multiply), then write the result back to HBM (masking and dropout in Appendix B).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "FlashAttention computes exact attention with fewer HBM reads and writes and without storing large intermediate matrices for the backward pass, yielding a memory-efficient and faster algorithm.",
+   "evidence": [
+    {
+     "chunk_id": "b0032",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 71.49,
+      "y0": 454.85,
+      "x1": 540.0,
+      "y1": 476.76
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 71.49,
+       "y0": 454.85,
+       "x1": 540.0,
+       "y1": 464.81
+      },
+      {
+       "page": 4,
+       "x0": 72.0,
+       "y0": 466.8,
+       "x1": 206.45,
+       "y1": 476.76
+      }
+     ],
+     "quote": "We show how to compute exact attention with fewer HBM reads/writes and without storing large intermediate matrices for the backward pass.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "Unlike standard gradient checkpointing that trades speed for memory, FlashAttention's recomputation speeds up the backward pass by reducing HBM accesses despite using more FLOPs.",
+   "evidence": [
+    {
+     "chunk_id": "b0044",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 72.0,
+      "y0": 253.66,
+      "x1": 540.01,
+      "y1": 275.58
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 129.94,
+       "y0": 253.66,
+       "x1": 540.01,
+       "y1": 263.62
+      },
+      {
+       "page": 5,
+       "x0": 72.0,
+       "y0": 265.62,
+       "x1": 209.69,
+       "y1": 275.58
+      }
+     ],
+     "quote": "In contrast, even with more FLOPs, our recomputation speeds up the backward pass due to reduced HBM accesses (Fig. 2).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "Wikipedia",
+   "evidence": [
+    {
+     "chunk_id": "b0084",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 72.0,
+      "y0": 557.69,
+      "x1": 540.01,
+      "y1": 579.6
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 494.49,
+       "y0": 557.69,
+       "x1": 540.01,
+       "y1": 567.6500000000001
+      },
+      {
+       "page": 7,
+       "x0": 72.0,
+       "y0": 569.64,
+       "x1": 348.7,
+       "y1": 579.6
+      }
+     ],
+     "quote": "We train a BERT-large [22] model with FlashAttention on Wikipedia.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Wikipedia",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "OpenWebText",
+   "evidence": [
+    {
+     "chunk_id": "b0089",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 72.0,
+      "y0": 689.48,
+      "x1": 540.0,
+      "y1": 711.4000000000001
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 72.0,
+       "y0": 690.08,
+       "x1": 109.53,
+       "y1": 698.89
+      },
+      {
+       "page": 7,
+       "x0": 119.49,
+       "y0": 689.48,
+       "x1": 540.0,
+       "y1": 699.44
+      },
+      {
+       "page": 7,
+       "x0": 72.0,
+       "y0": 701.44,
+       "x1": 414.83,
+       "y1": 711.4000000000001
+      }
+     ],
+     "quote": "GPT-2. FlashAttention yields faster training times for GPT-2 [67] on the large OpenWebText dataset [32] than the widely used HuggingFace [87] and Megatron-LM [77] implementations.",
+     "grounding_status": "verified",
+     "match_score": 99.4
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "OpenWebText",
+   "split": "",
+   "size": "large",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "Long-range arena benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0090",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 71.7,
+      "y0": 246.5,
+      "x1": 326.81,
+      "y1": 256.46
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 71.7,
+       "y0": 246.5,
+       "x1": 326.81,
+       "y1": 256.46
+      }
+     ],
+     "quote": "FlashAttention) on the long-range arena (LRA [80]) benchmark.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "long-range arena (LRA)",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "MIMIC-III dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0093",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 72.0,
+      "y0": 297.52,
+      "x1": 540.0,
+      "y1": 319.43
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 86.94,
+       "y0": 297.52,
+       "x1": 540.0,
+       "y1": 307.47999999999996
+      },
+      {
+       "page": 9,
+       "x0": 72.0,
+       "y0": 309.47,
+       "x1": 305.8,
+       "y1": 319.43
+      }
+     ],
+     "quote": "Table 5 shows that sequence length 16K outperforms length 512 by 4.3 points on MIMIC, and that length 8K outperforms length 512 by 8.5 points on ECtHR.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "MIMIC-III",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "European Court of Human Rights dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0093",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 72.0,
+      "y0": 297.52,
+      "x1": 540.0,
+      "y1": 319.43
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 86.94,
+       "y0": 297.52,
+       "x1": 540.0,
+       "y1": 307.47999999999996
+      },
+      {
+       "page": 9,
+       "x0": 72.0,
+       "y0": 309.47,
+       "x1": 305.8,
+       "y1": 319.43
+      }
+     ],
+     "quote": "Table 5 shows that sequence length 16K outperforms length 512 by 4.3 points on MIMIC, and that length 8K outperforms length 512 by 8.5 points on ECtHR.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ECtHR",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "Path-X and Path-256 datasets",
+   "evidence": [
+    {
+     "chunk_id": "b0094",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 72.0,
+      "y0": 486.46,
+      "x1": 540.0,
+      "y1": 508.37
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 192.33,
+       "y0": 486.46,
+       "x1": 540.0,
+       "y1": 496.41999999999996
+      },
+      {
+       "page": 9,
+       "x0": 72.0,
+       "y0": 498.41,
+       "x1": 283.0,
+       "y1": 508.37
+      }
+     ],
+     "quote": "The Path-X and Path-256 benchmarks are challenging tasks from the long-range arena benchmark designed to test long context.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Path-X and Path-256",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Nvidia implementation from MLPerf 1.1",
+   "evidence": [
+    {
+     "chunk_id": "b0084",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 72.0,
+      "y0": 569.64,
+      "x1": 540.0,
+      "y1": 591.5600000000001
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 353.15,
+       "y0": 569.64,
+       "x1": 540.0,
+       "y1": 579.6
+      },
+      {
+       "page": 7,
+       "x0": 72.0,
+       "y0": 581.6,
+       "x1": 436.68,
+       "y1": 591.5600000000001
+      }
+     ],
+     "quote": "Table 1 compares our training time to the implementation from Nvidia that set the training speed record for MLPerf 1.1 [58].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "HuggingFace and Megatron-LM implementations for GPT-2",
+   "evidence": [
+    {
+     "chunk_id": "b0089",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 72.0,
+      "y0": 689.48,
+      "x1": 540.0,
+      "y1": 711.4000000000001
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 72.0,
+       "y0": 690.08,
+       "x1": 109.53,
+       "y1": 698.89
+      },
+      {
+       "page": 7,
+       "x0": 119.49,
+       "y0": 689.48,
+       "x1": 540.0,
+       "y1": 699.44
+      },
+      {
+       "page": 7,
+       "x0": 72.0,
+       "y0": 701.44,
+       "x1": 414.83,
+       "y1": 711.4000000000001
+      }
+     ],
+     "quote": "GPT-2. FlashAttention yields faster training times for GPT-2 [67] on the large OpenWebText dataset [32] than the widely used HuggingFace [87] and Megatron-LM [77] implementations.",
+     "grounding_status": "verified",
+     "match_score": 99.4
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "Rabe and Staats",
+   "evidence": [
+    {
+     "chunk_id": "b0166",
+     "page": 22,
+     "bbox": {
+      "page": 22,
+      "x0": 71.49,
+      "y0": 93.74,
+      "x1": 540.0,
+      "y1": 115.66
+     },
+     "boxes": [
+      {
+       "page": 22,
+       "x0": 71.49,
+       "y0": 93.74,
+       "x1": 540.0,
+       "y1": 103.69999999999999
+      },
+      {
+       "page": 22,
+       "x0": 72.0,
+       "y0": 105.7,
+       "x1": 177.32999999999998,
+       "y1": 115.66
+      }
+     ],
+     "quote": "We describe here some similarities and differences between our FlashAttention algorithm and the algorithm of Rabe and Staats [66].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "Apex FMHA",
+   "evidence": [
+    {
+     "chunk_id": "b0254",
+     "page": 27,
+     "bbox": {
+      "page": 27,
+      "x0": 71.49,
+      "y0": 665.57,
+      "x1": 354.04,
+      "y1": 687.2099999999999
+     },
+     "boxes": [
+      {
+       "page": 27,
+       "x0": 71.49,
+       "y0": 665.57,
+       "x1": 354.04,
+       "y1": 675.5300000000001
+      },
+      {
+       "page": 27,
+       "x0": 220.07,
+       "y0": 678.91,
+       "x1": 230.28,
+       "y1": 687.2099999999999
+      }
+     ],
+     "quote": "We compare our method/implementation with Apex FMHA (https://github.com/NVIDIA/apex/tree/ master/apex/contrib/csrc/fmha).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "Reference implementations for exact attention from PyTorch/HuggingFace and Megatron, approximate attention, and sparse attention",
+   "evidence": [
+    {
+     "chunk_id": "b0263",
+     "page": 30,
+     "bbox": {
+      "page": 30,
+      "x0": 72.0,
+      "y0": 537.55,
+      "x1": 540.0,
+      "y1": 559.46
+     },
+     "boxes": [
+      {
+       "page": 30,
+       "x0": 72.0,
+       "y0": 537.55,
+       "x1": 540.0,
+       "y1": 547.51
+      },
+      {
+       "page": 30,
+       "x0": 72.0,
+       "y0": 549.5,
+       "x1": 331.37,
+       "y1": 559.46
+      }
+     ],
+     "quote": "We compare against reference implementations for exact attention from PyTorch/HuggingFace and Megatron, approximate attention, and sparse attention.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Target accuracy of 72.0% on masked language modeling",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 71.67,
+      "y0": 605.57,
+      "x1": 540.0,
+      "y1": 624.4399999999999
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 71.67,
+       "y0": 605.57,
+       "x1": 540.0,
+       "y1": 613.49
+      },
+      {
+       "page": 7,
+       "x0": 72.0,
+       "y0": 616.52,
+       "x1": 338.29,
+       "y1": 624.4399999999999
+      }
+     ],
+     "quote": "Table 1: Training time of BERT-large, starting from the same initialization provided by the MLPerf benchmark, to reach the target accuracy of 72.0% on masked language modeling.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Perplexity",
+   "evidence": [
+    {
+     "chunk_id": "b0081",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 81.46,
+      "y0": 366.52,
+      "x1": 541.88,
+      "y1": 397.96999999999997
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 495.59,
+       "y0": 366.52,
+       "x1": 541.88,
+       "y1": 374.06
+      },
+      {
+       "page": 7,
+       "x0": 81.66,
+       "y0": 376.06,
+       "x1": 540.0,
+       "y1": 386.02
+      },
+      {
+       "page": 7,
+       "x0": 81.46,
+       "y0": 388.01,
+       "x1": 262.04,
+       "y1": 397.96999999999997
+      }
+     ],
+     "quote": "FlashAttention trains GPT-2 with context length 4K faster than Megatron trains GPT-2 with context length 1K, while achieving 0.7 better perplexity.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "Accuracy, throughput, and training time",
+   "evidence": [
+    {
+     "chunk_id": "b0090",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 72.0,
+      "y0": 246.5,
+      "x1": 540.0,
+      "y1": 268.41999999999996
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 331.23,
+       "y0": 246.5,
+       "x1": 540.0,
+       "y1": 256.46
+      },
+      {
+       "page": 8,
+       "x0": 72.0,
+       "y0": 258.46,
+       "x1": 152.18,
+       "y1": 268.41999999999996
+      }
+     ],
+     "quote": "We measure accuracy, throughput, and training time of all models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "Micro F1 score",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 510.16,
+      "y0": 686.89,
+      "x1": 512.65,
+      "y1": 691.34
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 510.16,
+       "y0": 686.89,
+       "x1": 512.65,
+       "y1": 691.34
+      }
+     ],
+     "quote": "Table 5: Long Document performance (micro 1 ) at different sequence lengths using FlashAttention.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.8,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "LAMB optimizer learning rate for BERT-large",
+   "evidence": [
+    {
+     "chunk_id": "b0334",
+     "page": 26,
+     "bbox": {
+      "page": 26,
+      "x0": 72.0,
+      "y0": 341.78,
+      "x1": 541.39,
+      "y1": 363.69
+     },
+     "boxes": [
+      {
+       "page": 26,
+       "x0": 147.34,
+       "y0": 341.78,
+       "x1": 541.39,
+       "y1": 351.73999999999995
+      },
+      {
+       "page": 26,
+       "x0": 72.0,
+       "y0": 353.73,
+       "x1": 207.03,
+       "y1": 363.69
+      }
+     ],
+     "quote": "In particular, we use the LAMB optimizer with learning rate 3.75e-3, with batch size 448, trained for at most 7100 steps.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "3.75e-3",
+   "value_norm": 0.00375,
+   "scope": "BERT-large training"
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "LAMB optimizer batch size for BERT-large",
+   "evidence": [
+    {
+     "chunk_id": "b0334",
+     "page": 26,
+     "bbox": {
+      "page": 26,
+      "x0": 72.0,
+      "y0": 341.78,
+      "x1": 541.39,
+      "y1": 363.69
+     },
+     "boxes": [
+      {
+       "page": 26,
+       "x0": 147.34,
+       "y0": 341.78,
+       "x1": 541.39,
+       "y1": 351.73999999999995
+      },
+      {
+       "page": 26,
+       "x0": 72.0,
+       "y0": 353.73,
+       "x1": 207.03,
+       "y1": 363.69
+      }
+     ],
+     "quote": "In particular, we use the LAMB optimizer with learning rate 3.75e-3, with batch size 448, trained for at most 7100 steps.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "448",
+   "value_norm": 448.0,
+   "scope": "BERT-large training"
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "LAMB optimizer steps for BERT-large",
+   "evidence": [
+    {
+     "chunk_id": "b0334",
+     "page": 26,
+     "bbox": {
+      "page": 26,
+      "x0": 72.0,
+      "y0": 341.78,
+      "x1": 541.39,
+      "y1": 363.69
+     },
+     "boxes": [
+      {
+       "page": 26,
+       "x0": 147.34,
+       "y0": 341.78,
+       "x1": 541.39,
+       "y1": 351.73999999999995
+      },
+      {
+       "page": 26,
+       "x0": 72.0,
+       "y0": 353.73,
+       "x1": 207.03,
+       "y1": 363.69
+      }
+     ],
+     "quote": "In particular, we use the LAMB optimizer with learning rate 3.75e-3, with batch size 448, trained for at most 7100 steps.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "steps",
+   "value_raw": "7100",
+   "value_norm": 7100.0,
+   "scope": "BERT-large training"
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Optimizer for BERT-large",
+   "evidence": [
+    {
+     "chunk_id": "b0334",
+     "page": 26,
+     "bbox": {
+      "page": 26,
+      "x0": 72.0,
+      "y0": 341.78,
+      "x1": 541.39,
+      "y1": 363.69
+     },
+     "boxes": [
+      {
+       "page": 26,
+       "x0": 147.34,
+       "y0": 341.78,
+       "x1": 541.39,
+       "y1": 351.73999999999995
+      },
+      {
+       "page": 26,
+       "x0": 72.0,
+       "y0": 353.73,
+       "x1": 207.03,
+       "y1": 363.69
+      }
+     ],
+     "quote": "In particular, we use the LAMB optimizer with learning rate 3.75e-3, with batch size 448, trained for at most 7100 steps.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "LAMB",
+   "value_norm": null,
+   "scope": "BERT-large training"
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Dropout value in attention benchmarking",
+   "evidence": [
+    {
+     "chunk_id": "b0264",
+     "page": 30,
+     "bbox": {
+      "page": 30,
+      "x0": 71.64,
+      "y0": 671.04,
+      "x1": 540.25,
+      "y1": 704.9100000000001
+     },
+     "boxes": [
+      {
+       "page": 30,
+       "x0": 228.14,
+       "y0": 671.04,
+       "x1": 540.25,
+       "y1": 681.0
+      },
+      {
+       "page": 30,
+       "x0": 71.64,
+       "y0": 682.99,
+       "x1": 539.99,
+       "y1": 692.95
+      },
+      {
+       "page": 30,
+       "x0": 71.75,
+       "y0": 694.95,
+       "x1": 84.67,
+       "y1": 704.9100000000001
+      }
+     ],
+     "quote": "For dropout, we use dropout 0.1; for masking, we use a padding mask with uniformly-random mask lengths between the total sequence length and the total sequence length minus 20.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "dropout",
+   "value_raw": "0.1",
+   "value_norm": 0.1,
+   "scope": "attention benchmarking"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Effective batch size for GPT-2 training",
+   "evidence": [
+    {
+     "chunk_id": "b0339",
+     "page": 26,
+     "bbox": {
+      "page": 26,
+      "x0": 86.94,
+      "y0": 519.56,
+      "x1": 541.9200000000001,
+      "y1": 529.52
+     },
+     "boxes": [
+      {
+       "page": 26,
+       "x0": 86.94,
+       "y0": 519.56,
+       "x1": 541.9200000000001,
+       "y1": 529.52
+      }
+     ],
+     "quote": "We use an effective batch size of 512, and use gradient accumulation to fit into available GPU memory.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "effective batch size",
+   "value_raw": "512",
+   "value_norm": 512.0,
+   "scope": "GPT-2 training"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "AdamW optimizer learning rate for GPT-2 small",
+   "evidence": [
+    {
+     "chunk_id": "b0339",
+     "page": 26,
+     "bbox": {
+      "page": 26,
+      "x0": 71.49,
+      "y0": 531.51,
+      "x1": 539.99,
+      "y1": 553.4300000000001
+     },
+     "boxes": [
+      {
+       "page": 26,
+       "x0": 71.49,
+       "y0": 531.51,
+       "x1": 539.99,
+       "y1": 541.47
+      },
+      {
+       "page": 26,
+       "x0": 71.64,
+       "y0": 543.47,
+       "x1": 160.95,
+       "y1": 553.4300000000001
+      }
+     ],
+     "quote": "We use the AdamW optimizer, with learning rate 6e-4 for GPT-2 small and 1.5e-4 for GPT-2 medium, and weight decay of 0.1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "6e-4",
+   "value_norm": 0.0006,
+   "scope": "GPT-2 small training"
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "AdamW optimizer learning rate for GPT-2 medium",
+   "evidence": [
+    {
+     "chunk_id": "b0339",
+     "page": 26,
+     "bbox": {
+      "page": 26,
+      "x0": 71.49,
+      "y0": 531.51,
+      "x1": 539.99,
+      "y1": 553.4300000000001
+     },
+     "boxes": [
+      {
+       "page": 26,
+       "x0": 71.49,
+       "y0": 531.51,
+       "x1": 539.99,
+       "y1": 541.47
+      },
+      {
+       "page": 26,
+       "x0": 71.64,
+       "y0": 543.47,
+       "x1": 160.95,
+       "y1": 553.4300000000001
+      }
+     ],
+     "quote": "We use the AdamW optimizer, with learning rate 6e-4 for GPT-2 small and 1.5e-4 for GPT-2 medium, and weight decay of 0.1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "1.5e-4",
+   "value_norm": 0.00015,
+   "scope": "GPT-2 medium training"
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "Weight decay for GPT-2 training",
+   "evidence": [
+    {
+     "chunk_id": "b0339",
+     "page": 26,
+     "bbox": {
+      "page": 26,
+      "x0": 71.49,
+      "y0": 531.51,
+      "x1": 539.99,
+      "y1": 553.4300000000001
+     },
+     "boxes": [
+      {
+       "page": 26,
+       "x0": 71.49,
+       "y0": 531.51,
+       "x1": 539.99,
+       "y1": 541.47
+      },
+      {
+       "page": 26,
+       "x0": 71.64,
+       "y0": 543.47,
+       "x1": 160.95,
+       "y1": 553.4300000000001
+      }
+     ],
+     "quote": "We use the AdamW optimizer, with learning rate 6e-4 for GPT-2 small and 1.5e-4 for GPT-2 medium, and weight decay of 0.1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "0.1",
+   "value_norm": 0.1,
+   "scope": "GPT-2 training"
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "Optimizer for GPT-2",
+   "evidence": [
+    {
+     "chunk_id": "b0339",
+     "page": 26,
+     "bbox": {
+      "page": 26,
+      "x0": 71.49,
+      "y0": 531.51,
+      "x1": 539.99,
+      "y1": 553.4300000000001
+     },
+     "boxes": [
+      {
+       "page": 26,
+       "x0": 71.49,
+       "y0": 531.51,
+       "x1": 539.99,
+       "y1": 541.47
+      },
+      {
+       "page": 26,
+       "x0": 71.64,
+       "y0": 543.47,
+       "x1": 160.95,
+       "y1": 553.4300000000001
+      }
+     ],
+     "quote": "We use the AdamW optimizer, with learning rate 6e-4 for GPT-2 small and 1.5e-4 for GPT-2 medium, and weight decay of 0.1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "AdamW",
+   "value_norm": null,
+   "scope": "GPT-2 training"
+  },
+  {
+   "id": "hyperparameters.10",
+   "value": "Steps for GPT-2 training",
+   "evidence": [
+    {
+     "chunk_id": "b0339",
+     "page": 26,
+     "bbox": {
+      "page": 26,
+      "x0": 167.11,
+      "y0": 543.47,
+      "x1": 485.92,
+      "y1": 553.4300000000001
+     },
+     "boxes": [
+      {
+       "page": 26,
+       "x0": 167.11,
+       "y0": 543.47,
+       "x1": 485.92,
+       "y1": 553.4300000000001
+      }
+     ],
+     "quote": "All models are trained with the same hyperparameters for 400K steps.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "steps",
+   "value_raw": "400K",
+   "value_norm": 400000.0,
+   "scope": "GPT-2 training"
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "8x A100 GPUs for BERT-large",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 342.39,
+      "y0": 616.52,
+      "x1": 508.15,
+      "y1": 624.4399999999999
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 342.39,
+       "y0": 616.52,
+       "x1": 508.15,
+       "y1": 624.4399999999999
+      }
+     ],
+     "quote": "Averaged over 10 runs on 8×A100 GPUs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "compute.1",
+   "value": "One A100 GPU with 40 GB HBM for attention benchmarks",
+   "evidence": [
+    {
+     "chunk_id": "b0096",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 71.49,
+      "y0": 640.33,
+      "x1": 540.0,
+      "y1": 674.2
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 71.49,
+       "y0": 640.33,
+       "x1": 539.99,
+       "y1": 650.2900000000001
+      },
+      {
+       "page": 9,
+       "x0": 72.0,
+       "y0": 652.28,
+       "x1": 540.0,
+       "y1": 662.24
+      },
+      {
+       "page": 9,
+       "x0": 72.0,
+       "y0": 664.24,
+       "x1": 143.4,
+       "y1": 674.2
+      }
+     ],
+     "quote": "We vary sequence length and measure runtime and memory usage of FlashAttention and block-sparse FlashAttention against various attention baselines on one A100 GPU with 40 GB HBM, with dropout and a padding mask.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "compute.2",
+   "value": "8x A100-80GB GPUs for training",
+   "evidence": [
+    {
+     "chunk_id": "b0336",
+     "page": 26,
+     "bbox": {
+      "page": 26,
+      "x0": 86.94,
+      "y0": 437.42,
+      "x1": 279.26,
+      "y1": 447.38
+     },
+     "boxes": [
+      {
+       "page": 26,
+       "x0": 86.94,
+       "y0": 437.42,
+       "x1": 279.26,
+       "y1": 447.38
+      }
+     ],
+     "quote": "We train the model on 8×A100-80GB GPUs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "compute.3",
+   "value": "8x A100-40GB GPUs for GPT-2 training",
+   "evidence": [
+    {
+     "chunk_id": "b0341",
+     "page": 26,
+     "bbox": {
+      "page": 26,
+      "x0": 86.94,
+      "y0": 603.24,
+      "x1": 496.33,
+      "y1": 613.2
+     },
+     "boxes": [
+      {
+       "page": 26,
+       "x0": 86.94,
+       "y0": 603.24,
+       "x1": 496.33,
+       "y1": 613.2
+      }
+     ],
+     "quote": "We train the model on 8×A100-40GB GPUs, and we measure the wall-clock training time.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Averaged over 10 runs for BERT training",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 342.39,
+      "y0": 616.52,
+      "x1": 508.15,
+      "y1": 624.4399999999999
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 342.39,
+       "y0": 616.52,
+       "x1": 508.15,
+       "y1": 624.4399999999999
+      }
+     ],
+     "quote": "Averaged over 10 runs on 8×A100 GPUs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "seeds_and_runs.1",
+   "value": "Average of 100 measurements for attention runtime",
+   "evidence": [
+    {
+     "chunk_id": "b0264",
+     "page": 30,
+     "bbox": {
+      "page": 30,
+      "x0": 89.1,
+      "y0": 694.95,
+      "x1": 460.03,
+      "y1": 704.9100000000001
+     },
+     "boxes": [
+      {
+       "page": 30,
+       "x0": 89.1,
+       "y0": 694.95,
+       "x1": 460.03,
+       "y1": 704.9100000000001
+      }
+     ],
+     "quote": "To measure runtime, we take the average of 100 measurements of the attention call.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "seeds_and_runs.2",
+   "value": "Averaged results of 10 runs for BERT training",
+   "evidence": [
+    {
+     "chunk_id": "b0336",
+     "page": 26,
+     "bbox": {
+      "page": 26,
+      "x0": 72.0,
+      "y0": 437.42,
+      "x1": 540.0,
+      "y1": 459.33
+     },
+     "boxes": [
+      {
+       "page": 26,
+       "x0": 283.68,
+       "y0": 437.42,
+       "x1": 540.0,
+       "y1": 447.38
+      },
+      {
+       "page": 26,
+       "x0": 72.0,
+       "y0": 449.37,
+       "x1": 202.84,
+       "y1": 459.33
+      }
+     ],
+     "quote": "Each training run takes between 16 and 19 minutes, and we average the results of 10 runs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "Writing IO-aware CUDA kernels requires significant engineering effort and a lower-level language than PyTorch.",
+   "evidence": [
+    {
+     "chunk_id": "b0099",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 72.0,
+      "y0": 346.64,
+      "x1": 541.9300000000001,
+      "y1": 368.56
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 384.04,
+       "y0": 346.64,
+       "x1": 539.99,
+       "y1": 356.59999999999997
+      },
+      {
+       "page": 10,
+       "x0": 72.0,
+       "y0": 358.6,
+       "x1": 541.9300000000001,
+       "y1": 368.56
+      }
+     ],
+     "quote": "This requires writing the attention algorithm in a considerably lower-level language than PyTorch, and requires significant engineering effort.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.1",
+   "value": "Current implementations may not be easily transferrable across different GPU architectures.",
+   "evidence": [
+    {
+     "chunk_id": "b0099",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 72.0,
+      "y0": 370.55,
+      "x1": 402.6,
+      "y1": 380.51
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 72.0,
+       "y0": 370.55,
+       "x1": 402.6,
+       "y1": 380.51
+      }
+     ],
+     "quote": "Implementations may also not be transferrable across GPU architectures.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Prove parameterized complexity lower bounds in terms of block size as future work.",
+   "evidence": [
+    {
+     "chunk_id": "b0064",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 71.64,
+      "y0": 483.22,
+      "x1": 539.99,
+      "y1": 505.13
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 137.24,
+       "y0": 483.22,
+       "x1": 539.99,
+       "y1": 493.18
+      },
+      {
+       "page": 6,
+       "x0": 71.64,
+       "y0": 495.17,
+       "x1": 95.46000000000001,
+       "y1": 505.13
+      }
+     ],
+     "quote": "We leave proving parameterized complexity [27] lower bounds in terms of as exciting future work.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Develop methods to support writing attention algorithms in high-level languages like PyTorch and compiling to IO-aware CUDA implementations.",
+   "evidence": [
+    {
+     "chunk_id": "b0099",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 72.0,
+      "y0": 370.55,
+      "x1": 541.9300000000001,
+      "y1": 404.41999999999996
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 408.59,
+       "y0": 370.55,
+       "x1": 540.0,
+       "y1": 380.51
+      },
+      {
+       "page": 10,
+       "x0": 72.0,
+       "y0": 382.51,
+       "x1": 540.0,
+       "y1": 392.46999999999997
+      },
+      {
+       "page": 10,
+       "x0": 72.0,
+       "y0": 394.46,
+       "x1": 541.9300000000001,
+       "y1": 404.41999999999996
+      }
+     ],
+     "quote": "These limitations suggest the need for a method that supports writing attention algorithms in a high-level language (e.g., PyTorch), and compiling to IO-aware implementations in CUDA-similar to efforts such as Halide in image processing [70].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.2",
+   "value": "Inspire IO-aware implementations of additional deep learning modules beyond attention layers.",
+   "evidence": [
+    {
+     "chunk_id": "b0100",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 161.22,
+      "y0": 430.33,
+      "x1": 489.28,
+      "y1": 440.28999999999996
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 161.22,
+       "y0": 430.33,
+       "x1": 489.28,
+       "y1": 440.28999999999996
+      }
+     ],
+     "quote": "We hope our work inspires IO-aware implementations of additional modules.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.3",
+   "value": "Explore multi-GPU IO-aware methods that account for data transfer between GPUs.",
+   "evidence": [
+    {
+     "chunk_id": "b0101",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 203.24,
+      "y0": 490.11,
+      "x1": 448.70000000000005,
+      "y1": 500.07
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 203.24,
+       "y0": 490.11,
+       "x1": 448.70000000000005,
+       "y1": 500.07
+      }
+     ],
+     "quote": "We hope our work inspires future work in this direction.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/NVIDIA/apex/tree/master/apex/contrib/csrc/fmha",
+   "evidence": [
+    {
+     "chunk_id": "b0254",
+     "page": 27,
+     "bbox": {
+      "page": 27,
+      "x0": 71.49,
+      "y0": 665.57,
+      "x1": 354.04,
+      "y1": 687.2099999999999
+     },
+     "boxes": [
+      {
+       "page": 27,
+       "x0": 71.49,
+       "y0": 665.57,
+       "x1": 354.04,
+       "y1": 675.5300000000001
+      },
+      {
+       "page": 27,
+       "x0": 220.07,
+       "y0": 678.91,
+       "x1": 230.28,
+       "y1": 687.2099999999999
+      }
+     ],
+     "quote": "We compare our method/implementation with Apex FMHA (https://github.com/NVIDIA/apex/tree/ master/apex/contrib/csrc/fmha).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/HazyResearch/flash-attention",
+   "evidence": [
+    {
+     "chunk_id": "b0265",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 87.23899841308594,
+      "y0": 710.9215698242188,
+      "x1": 429.4216003417969,
+      "y1": 718.1823120117188
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 87.23899841308594,
+       "y0": 712.6112060546875,
+       "x1": 154.01248168945312,
+       "y1": 716.4129638671875
+      },
+      {
+       "page": 3,
+       "x0": 154.01248168945312,
+       "y0": 710.9215698242188,
+       "x1": 429.4216003417969,
+       "y1": 718.1823120117188
+      }
+     ],
+     "quote": "FlashAttention code is available at https://github.com/HazyResearch/flash-attention",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "FlashAttention achieves a 15% end-to-end wall-clock speedup on BERT-large, a 3x speedup on GPT-2, and a 2.4x speedup on long-range arena.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 96.91,
+      "y0": 427.08,
+      "x1": 515.1,
+      "y1": 456.92
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 96.91,
+       "y0": 427.08,
+       "x1": 515.1,
+       "y1": 435.5
+      },
+      {
+       "page": 1,
+       "x0": 96.91,
+       "y0": 438.04,
+       "x1": 182.3,
+       "y1": 445.96000000000004
+      },
+      {
+       "page": 1,
+       "x0": 185.98,
+       "y0": 438.04,
+       "x1": 515.09,
+       "y1": 445.96000000000004
+      },
+      {
+       "page": 1,
+       "x0": 96.91,
+       "y0": 449.0,
+       "x1": 146.49,
+       "y1": 456.92
+      },
+      {
+       "page": 1,
+       "x0": 149.56,
+       "y0": 449.0,
+       "x1": 374.28,
+       "y1": 456.92
+      },
+      {
+       "page": 1,
+       "x0": 377.35,
+       "y0": 449.0,
+       "x1": 438.20000000000005,
+       "y1": 456.92
+      }
+     ],
+     "quote": "FlashAttention trains Transformers faster than existing baselines: 15% end-to-end wall-clock speedup on BERT-large (seq. length 512) compared to the MLPerf 1.1 training speed record, 3× speedup on GPT-2 (seq. length 1K), and 2.4× speedup on long-range arena (seq. length 1K-4K).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "FlashAttention yields better perplexity on GPT-2 and higher scores on long-document classification.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 95.83,
+      "y0": 450.79,
+      "x1": 515.42,
+      "y1": 500.75
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 441.27,
+       "y0": 450.79,
+       "x1": 515.0899999999999,
+       "y1": 457.42
+      },
+      {
+       "page": 1,
+       "x0": 96.91,
+       "y0": 459.96,
+       "x1": 515.1,
+       "y1": 468.38
+      },
+      {
+       "page": 1,
+       "x0": 95.83,
+       "y0": 470.91,
+       "x1": 515.42,
+       "y1": 478.83000000000004
+      },
+      {
+       "page": 1,
+       "x0": 96.91,
+       "y0": 481.87,
+       "x1": 515.1,
+       "y1": 489.79
+      },
+      {
+       "page": 1,
+       "x0": 95.83,
+       "y0": 492.83,
+       "x1": 114.57,
+       "y1": 500.75
+      },
+      {
+       "page": 1,
+       "x0": 117.63,
+       "y0": 492.83,
+       "x1": 312.6,
+       "y1": 500.75
+      },
+      {
+       "page": 1,
+       "x0": 315.67,
+       "y0": 492.83,
+       "x1": 434.19,
+       "y1": 500.75
+      }
+     ],
+     "quote": "FlashAttention and block-sparse FlashAttention enable longer context in Transformers, yielding higher quality models (0.7 better perplexity on GPT-2 and 6.4 points of lift on long-document classification) and entirely new capabilities: the first Transformers to achieve better-than-chance performance on the Path-X challenge (seq. length 16K, 61.4% accuracy) and Path-256 (seq. length 64K, 63.1% accuracy).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

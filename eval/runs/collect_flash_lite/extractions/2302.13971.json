@@ -1,0 +1,3651 @@
+{
+ "metadata": {
+  "title": "LLaMA: Open and Efficient Foundation Language Models",
+  "authors": [
+   "Hugo Touvron",
+   "Thibaut Lavril",
+   "Gautier Izacard",
+   "Xavier Martinet",
+   "Marie-Anne Lachaux",
+   "Timothee Lacroix",
+   "Baptiste Rozière",
+   "Naman Goyal",
+   "Eric Hambro",
+   "Faisal Azhar",
+   "Aurelien Rodriguez",
+   "Joulin Edouard Grave",
+   "Guillaume Lample",
+   "Meta Ai",
+   "Sandhini Askell",
+   "Ariel Agarwal",
+   "Gretchen Herbert-Voss",
+   "Tom Krueger",
+   "Rewon Henighan",
+   "Aditya Child",
+   "Daniel M Ramesh",
+   "Jeffrey Ziegler",
+   "Clemens Wu",
+   "Christopher Winter",
+   "Mark Hesse",
+   "Eric Chen",
+   "Mateusz Sigler",
+   "Scott Litwin",
+   "Benjamin Gray",
+   "Jack Chess",
+   "Christopher Clark",
+   "Sam Berner",
+   "Alec Mc- Candlish",
+   "Ilya Radford",
+   "Dario Sutskever",
+   "2020 Amodei",
+   "Mark Chen",
+   "Jerry Tworek",
+   "Heewoo Jun",
+   "Qiming Yuan",
+   "Henrique Ponde",
+   "Oliveira Pinto",
+   "Jared Ka- Plan",
+   "Harri Edwards",
+   "Yuri Burda",
+   "Nicholas Joseph",
+   "Greg Brockman",
+   "Alex Ray",
+   "Raul Puri",
+   "Gretchen Krueger",
+   "Michael Petrov",
+   "Heidy Khlaaf",
+   "Girish Sas- Try",
+   "Pamela Mishkin",
+   "Brooke Chan",
+   "Scott Gray",
+   "Nick Ryder",
+   "Mikhail Pavlov",
+   "Alethea Power",
+   "Lukasz Kaiser",
+   "Mohammad Bavarian",
+   "Clemens Winter",
+   "Philippe Tillet",
+   "Felipe Petroski Such",
+   "Dave Cum- Mings",
+   "Matthias Plappert",
+   "Fotios Chantzis",
+   "Eliza- Beth Barnes",
+   "Ariel Herbert-Voss",
+   "William Hebgen Guss",
+   "Alex Nichol",
+   "Alex Paino",
+   "Nikolas Tezak",
+   "Jie Tang",
+   "Igor Babuschkin",
+   "Suchir Balaji",
+   "Shantanu Jain",
+   "William Saunders",
+   "Christopher Hesse",
+   "Andrew N Carr",
+   "Jan Leike",
+   "Josh Achiam",
+   "Vedant Misra",
+   "Evan Morikawa",
+   "Alec Radford",
+   "Matthew Knight",
+   "Miles Brundage",
+   "Mira Murati",
+   "Peter Katie Mayer",
+   "Bob Mcgrew",
+   "Dario Amodei",
+   "Sam Mccandlish",
+   "Ilya Sutskever",
+   "Wojciech 2021 Zaremba",
+   "Eval",
+   "Aakanksha Chowdhery",
+   "Sharan Narang",
+   "Jacob Devlin",
+   "Maarten Bosma",
+   "Gaurav Mishra",
+   "Adam Roberts",
+   "Hyung Paul Barham",
+   "Won Chung",
+   "Charles Sutton",
+   "Sebastian Gehrmann",
+   "Parker Schuh",
+   "Kensen Shi",
+   "Sasha Tsvyashchenko",
+   "Joshua Maynez",
+   "Abhishek Rao",
+   "Parker Barnes",
+   "Yi Tay",
+   "Noam Shazeer",
+   "Vin- Odkumar Prabhakaran",
+   "Emily Reif",
+   "Nan Du",
+   "Ben Hutchinson",
+   "Reiner Pope",
+   "James Bradbury",
+   "Jacob Austin",
+   "Michael Isard",
+   "Guy Gur-Ari",
+   "Pengcheng Yin",
+   "Toju Duke",
+   "Anselm Levskaya",
+   "Sanjay Ghe- Mawat",
+   "Sunipa Dev",
+   "Henryk Michalewski",
+   "Xavier Garcia",
+   "Kevin Robinson",
+   "Liam Fe- Dus",
+   "Denny Zhou",
+   "Daphne Ippolito",
+   "David Luan",
+   "Hyeontaek Lim",
+   "Barret Zoph",
+   "Alexander Spiridonov",
+   "Ryan Sepassi",
+   "David Dohan",
+   "Shivani Agrawal",
+   "Mark Omernick",
+   "Andrew M Dai",
+   "Thanumalayan Sankara- Narayana Pillai",
+   "Marie Pellat",
+   "Aitor Lewkowycz",
+   "Erica Moreira",
+   "Rewon Child",
+   "Oleksandr Polozov",
+   "Katherine Lee",
+   "Zongwei Zhou",
+   "Xuezhi Wang",
+   "Bren- Nan Saeta",
+   "Mark Diaz",
+   "Orhan Firat",
+   "Michele Catasta",
+   "Jason Wei",
+   "Kathy Meier-Hellstern",
+   "Douglas Eck",
+   "Hyung Won Chung",
+   "Le Hou",
+   "S Longpre",
+   "William Fedus",
+   "Eric Li",
+   "Mostafa Dehghani",
+   "Siddhartha Brahma",
+   "Al- Bert Webson",
+   "Shane Shixiang",
+   "Zhuyun Gu",
+   "Mirac Dai",
+   "Xinyun Suzgun",
+   "Aakanksha Chen",
+   "Dasha Chowdh- Ery",
+   "Sharan Valter",
+   "Gaurav Narang",
+   "Adams Wei Mishra",
+   "Vincent Yu",
+   "Yanping Zhao",
+   "An- Drew M Huang",
+   "Hongkun Dai",
+   "Slav Yu",
+   "Ed Petrov",
+   "Jeff Huai Hsin Chi",
+   "Jacob Dean",
+   "Adam Devlin",
+   "Denny Roberts",
+   "Quoc Zhou",
+   "Jason Wei Le",
+   "Scal",
+   "Kenton Lee",
+   "Ming-Wei Chang",
+   "Tom Kwiatkowski",
+   "Michael Collins",
+   "Kristina 2019 Toutanova",
+   "Boolq",
+   "Peter Clark",
+   "Isaac Cowhey",
+   "Oren Etzioni",
+   "Tushar Khot",
+   "Ashish Sabharwal",
+   "Carissa Schoenick",
+   "Oyvind 2018 Tafjord",
+   "Karl Cobbe",
+   "Vineet Kosaraju",
+   "Jacob Hilton",
+   "Reiichiro Nakano",
+   "Daniel Fried",
+   "Armen Aghajanyan",
+   "Jessy Lin",
+   "Sida Wang",
+   "Eric Wallace",
+   "Freda Shi",
+   "Ruiqi Zhong",
+   "Wen- Tau Yih",
+   "Luke Zettlemoyer",
+   "Mike 2022 Lewis",
+   "Leo Gao",
+   "Stella Biderman",
+   "Sid Black",
+   "Laurence Gold",
+   "Travis Hoppe",
+   "Charles Foster",
+   "Jason Phang",
+   "Horace He",
+   "Anish Thite",
+   "Noa Nabeshima",
+   "Shawn Presser",
+   "Connor 2020 Leahy",
+   "Jonathan Tow",
+   "Jordan Hoffmann",
+   "Sebastian Borgeaud",
+   "Arthur Mensch",
+   "Elena Buchatskaya",
+   "Trevor Cai",
+   "Eliza Rutherford",
+   "Diego De",
+   "Las Casas",
+   "Lisa Anne Hendricks",
+   "Johannes Welbl",
+   "Aidan Clark",
+   "Tom Hennigan",
+   "Eric Noland",
+   "Katie Millican",
+   "George Van Den Driessche",
+   "Bogdan Damoc",
+   "Aurelia Guy",
+   "Simon Osindero",
+   "Karen Si- Monyan",
+   "Erich Elsen",
+   "Jack W Rae"
+  ],
+  "venue": null,
+  "year": "2023",
+  "arxiv_id": "2302.13971v1[cs.CL]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Existing scaling laws prioritize training compute budgets over inference efficiency budgets.",
+   "evidence": [
+    {
+     "chunk_id": "b0004",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 70.87,
+      "y0": 603.38,
+      "x1": 290.95,
+      "y1": 653.48
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 81.78,
+       "y0": 603.38,
+       "x1": 290.95,
+       "y1": 612.84
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 616.93,
+       "x1": 289.14,
+       "y1": 626.39
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 630.48,
+       "x1": 289.32,
+       "y1": 639.94
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 643.84,
+       "x1": 182.3,
+       "y1": 653.48
+      }
+     ],
+     "quote": "The objective of the scaling laws from Hoffmann et al. ( 2022) is to determine how to best scale the dataset and model sizes for a particular training compute budget.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Most high-performing language models rely on proprietary or undocumented training data.",
+   "evidence": [
+    {
+     "chunk_id": "b0006",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 304.69,
+      "y0": 509.17,
+      "x1": 526.22,
+      "y1": 586.38
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 317.05,
+       "y0": 509.17,
+       "x1": 524.78,
+       "y1": 518.63
+      },
+      {
+       "page": 1,
+       "x0": 306.14,
+       "y0": 522.72,
+       "x1": 526.22,
+       "y1": 532.1800000000001
+      },
+      {
+       "page": 1,
+       "x0": 306.14,
+       "y0": 536.27,
+       "x1": 524.41,
+       "y1": 545.73
+      },
+      {
+       "page": 1,
+       "x0": 306.14,
+       "y0": 549.82,
+       "x1": 524.79,
+       "y1": 559.2800000000001
+      },
+      {
+       "page": 1,
+       "x0": 306.14,
+       "y0": 563.37,
+       "x1": 443.12,
+       "y1": 572.83
+      },
+      {
+       "page": 1,
+       "x0": 446.49,
+       "y0": 563.37,
+       "x1": 524.6,
+       "y1": 572.83
+      },
+      {
+       "page": 1,
+       "x0": 304.69,
+       "y0": 576.92,
+       "x1": 443.01,
+       "y1": 586.38
+      }
+     ],
+     "quote": "Unlike Chinchilla, PaLM, or GPT-3, we only use publicly available data, making our work compatible with open-sourcing, while most existing models rely on data which is either not publicly available or undocumented (e.g. \"Books -2TB\" or \"Social media conversations\").",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Introduction of LLaMA, a collection of foundation language models ranging from 7B to 65B parameters trained exclusively on publicly available data.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 87.87,
+      "y0": 238.53,
+      "x1": 273.77,
+      "y1": 271.08
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 238.53,
+       "x1": 273.77,
+       "y1": 247.17000000000002
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 250.48,
+       "x1": 272.12,
+       "y1": 259.12
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 262.44,
+       "x1": 134.07,
+       "y1": 271.08
+      }
+     ],
+     "quote": "We introduce LLaMA, a collection of foundation language models ranging from 7B to 65B parameters.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Training large language models on massive text corpora for generative tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 70.87,
+      "y0": 413.69,
+      "x1": 290.95000000000005,
+      "y1": 463.79999999999995
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 413.69,
+       "x1": 290.95000000000005,
+       "y1": 423.15
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 427.24,
+       "x1": 290.95000000000005,
+       "y1": 436.7
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 440.79,
+       "x1": 289.14,
+       "y1": 450.25
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 454.34,
+       "x1": 220.55,
+       "y1": 463.79999999999995
+      }
+     ],
+     "quote": "Large Languages Models (LLMs) trained on massive corpora of texts have shown their ability to perform new tasks from textual instructions or from a few examples (Brown et al., 2020).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [],
+ "novelty": [],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "CommonCrawl pre-training subset",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 306.1419982910156,
+      "y0": 95.90264129638672,
+      "x1": 525.0440673828125,
+      "y1": 107.65538024902344
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 306.1419982910156,
+       "y0": 95.90264129638672,
+       "x1": 525.0440673828125,
+       "y1": 107.65538024902344
+      }
+     ],
+     "quote": "CommonCrawl | 67.0% | 1.10 | 3.3 TB",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "CommonCrawl",
+   "split": "",
+   "size": "3.3 TB",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.1",
+   "value": "C4 pre-training subset",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 306.1419982910156,
+      "y0": 109.45165252685547,
+      "x1": 525.0440673828125,
+      "y1": 121.20439147949219
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 306.1419982910156,
+       "y0": 109.45165252685547,
+       "x1": 525.0440673828125,
+       "y1": 121.20439147949219
+      }
+     ],
+     "quote": "C4 | 15.0% | 1.06 | 783 GB",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "C4",
+   "split": "",
+   "size": "783 GB",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.2",
+   "value": "Github pre-training subset",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 306.1419982910156,
+      "y0": 123.00164031982422,
+      "x1": 525.0440673828125,
+      "y1": 134.75437927246094
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 306.1419982910156,
+       "y0": 123.00164031982422,
+       "x1": 525.0440673828125,
+       "y1": 134.75437927246094
+      }
+     ],
+     "quote": "Github | 4.5% | 0.64 | 328 GB",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Github",
+   "split": "",
+   "size": "328 GB",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.3",
+   "value": "Wikipedia pre-training subset",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 306.1419982910156,
+      "y0": 136.5506591796875,
+      "x1": 525.0440673828125,
+      "y1": 148.3033905029297
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 306.1419982910156,
+       "y0": 136.5506591796875,
+       "x1": 525.0440673828125,
+       "y1": 148.3033905029297
+      }
+     ],
+     "quote": "Wikipedia | 4.5% | 2.45 | 83 GB",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Wikipedia",
+   "split": "",
+   "size": "83 GB",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.4",
+   "value": "Books pre-training subset",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 306.1419982910156,
+      "y0": 150.09967041015625,
+      "x1": 525.0440673828125,
+      "y1": 161.85240173339844
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 306.1419982910156,
+       "y0": 150.09967041015625,
+       "x1": 525.0440673828125,
+       "y1": 161.85240173339844
+      }
+     ],
+     "quote": "Books | 4.5% | 2.23 | 85 GB",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Books",
+   "split": "",
+   "size": "85 GB",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.5",
+   "value": "ArXiv pre-training subset",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 306.1419982910156,
+      "y0": 163.648681640625,
+      "x1": 525.0440673828125,
+      "y1": 175.4014129638672
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 306.1419982910156,
+       "y0": 163.648681640625,
+       "x1": 525.0440673828125,
+       "y1": 175.4014129638672
+      }
+     ],
+     "quote": "ArXiv | 2.5% | 1.06 | 92 GB",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ArXiv",
+   "split": "",
+   "size": "92 GB",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.6",
+   "value": "StackExchange pre-training subset",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 306.1419982910156,
+      "y0": 177.19769287109375,
+      "x1": 525.0440673828125,
+      "y1": 188.95042419433594
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 306.1419982910156,
+       "y0": 177.19769287109375,
+       "x1": 525.0440673828125,
+       "y1": 188.95042419433594
+      }
+     ],
+     "quote": "StackExchange | 2.0% | 1.03 | 78 GB",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "StackExchange",
+   "split": "",
+   "size": "78 GB",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.7",
+   "value": "BoolQ benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 305.63,
+      "y0": 736.82,
+      "x1": 526.22,
+      "y1": 773.38
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 305.63,
+       "y0": 736.82,
+       "x1": 526.22,
+       "y1": 746.2800000000001
+      },
+      {
+       "page": 4,
+       "x0": 306.14,
+       "y0": 750.37,
+       "x1": 525.77,
+       "y1": 759.83
+      },
+      {
+       "page": 4,
+       "x0": 306.14,
+       "y0": 763.92,
+       "x1": 525.77,
+       "y1": 773.38
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 74.72,
+       "x1": 290.95000000000005,
+       "y1": 84.18
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 88.27,
+       "x1": 289.40999999999997,
+       "y1": 97.72999999999999
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 101.82,
+       "x1": 290.5,
+       "y1": 111.28
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 115.37,
+       "x1": 98.48,
+       "y1": 124.83000000000001
+      }
+     ],
+     "quote": "We consider eight standard common sense reasoning benchmarks: BoolQ (Clark et al., 2019), PIQA (Bisk et al., 2020), SIQA (Sap et al., 2019), HellaSwag (Zellers et al., 2019), WinoGrande (Sakaguchi et al., 2021), ARC easy and challenge (Clark et al., 2018) and OpenBookQA (Mihaylov et al., 2018).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "BoolQ",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.8",
+   "value": "PIQA benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 305.63,
+      "y0": 736.82,
+      "x1": 526.22,
+      "y1": 773.38
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 305.63,
+       "y0": 736.82,
+       "x1": 526.22,
+       "y1": 746.2800000000001
+      },
+      {
+       "page": 4,
+       "x0": 306.14,
+       "y0": 750.37,
+       "x1": 525.77,
+       "y1": 759.83
+      },
+      {
+       "page": 4,
+       "x0": 306.14,
+       "y0": 763.92,
+       "x1": 525.77,
+       "y1": 773.38
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 74.72,
+       "x1": 290.95000000000005,
+       "y1": 84.18
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 88.27,
+       "x1": 289.40999999999997,
+       "y1": 97.72999999999999
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 101.82,
+       "x1": 290.5,
+       "y1": 111.28
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 115.37,
+       "x1": 98.48,
+       "y1": 124.83000000000001
+      }
+     ],
+     "quote": "We consider eight standard common sense reasoning benchmarks: BoolQ (Clark et al., 2019), PIQA (Bisk et al., 2020), SIQA (Sap et al., 2019), HellaSwag (Zellers et al., 2019), WinoGrande (Sakaguchi et al., 2021), ARC easy and challenge (Clark et al., 2018) and OpenBookQA (Mihaylov et al., 2018).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "PIQA",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.9",
+   "value": "SIQA benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 305.63,
+      "y0": 736.82,
+      "x1": 526.22,
+      "y1": 773.38
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 305.63,
+       "y0": 736.82,
+       "x1": 526.22,
+       "y1": 746.2800000000001
+      },
+      {
+       "page": 4,
+       "x0": 306.14,
+       "y0": 750.37,
+       "x1": 525.77,
+       "y1": 759.83
+      },
+      {
+       "page": 4,
+       "x0": 306.14,
+       "y0": 763.92,
+       "x1": 525.77,
+       "y1": 773.38
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 74.72,
+       "x1": 290.95000000000005,
+       "y1": 84.18
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 88.27,
+       "x1": 289.40999999999997,
+       "y1": 97.72999999999999
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 101.82,
+       "x1": 290.5,
+       "y1": 111.28
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 115.37,
+       "x1": 98.48,
+       "y1": 124.83000000000001
+      }
+     ],
+     "quote": "We consider eight standard common sense reasoning benchmarks: BoolQ (Clark et al., 2019), PIQA (Bisk et al., 2020), SIQA (Sap et al., 2019), HellaSwag (Zellers et al., 2019), WinoGrande (Sakaguchi et al., 2021), ARC easy and challenge (Clark et al., 2018) and OpenBookQA (Mihaylov et al., 2018).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "SIQA",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.10",
+   "value": "HellaSwag benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 305.63,
+      "y0": 736.82,
+      "x1": 526.22,
+      "y1": 773.38
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 305.63,
+       "y0": 736.82,
+       "x1": 526.22,
+       "y1": 746.2800000000001
+      },
+      {
+       "page": 4,
+       "x0": 306.14,
+       "y0": 750.37,
+       "x1": 525.77,
+       "y1": 759.83
+      },
+      {
+       "page": 4,
+       "x0": 306.14,
+       "y0": 763.92,
+       "x1": 525.77,
+       "y1": 773.38
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 74.72,
+       "x1": 290.95000000000005,
+       "y1": 84.18
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 88.27,
+       "x1": 289.40999999999997,
+       "y1": 97.72999999999999
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 101.82,
+       "x1": 290.5,
+       "y1": 111.28
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 115.37,
+       "x1": 98.48,
+       "y1": 124.83000000000001
+      }
+     ],
+     "quote": "We consider eight standard common sense reasoning benchmarks: BoolQ (Clark et al., 2019), PIQA (Bisk et al., 2020), SIQA (Sap et al., 2019), HellaSwag (Zellers et al., 2019), WinoGrande (Sakaguchi et al., 2021), ARC easy and challenge (Clark et al., 2018) and OpenBookQA (Mihaylov et al., 2018).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "HellaSwag",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.11",
+   "value": "WinoGrande benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 305.63,
+      "y0": 736.82,
+      "x1": 526.22,
+      "y1": 773.38
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 305.63,
+       "y0": 736.82,
+       "x1": 526.22,
+       "y1": 746.2800000000001
+      },
+      {
+       "page": 4,
+       "x0": 306.14,
+       "y0": 750.37,
+       "x1": 525.77,
+       "y1": 759.83
+      },
+      {
+       "page": 4,
+       "x0": 306.14,
+       "y0": 763.92,
+       "x1": 525.77,
+       "y1": 773.38
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 74.72,
+       "x1": 290.95000000000005,
+       "y1": 84.18
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 88.27,
+       "x1": 289.40999999999997,
+       "y1": 97.72999999999999
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 101.82,
+       "x1": 290.5,
+       "y1": 111.28
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 115.37,
+       "x1": 98.48,
+       "y1": 124.83000000000001
+      }
+     ],
+     "quote": "We consider eight standard common sense reasoning benchmarks: BoolQ (Clark et al., 2019), PIQA (Bisk et al., 2020), SIQA (Sap et al., 2019), HellaSwag (Zellers et al., 2019), WinoGrande (Sakaguchi et al., 2021), ARC easy and challenge (Clark et al., 2018) and OpenBookQA (Mihaylov et al., 2018).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "WinoGrande",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.12",
+   "value": "ARC easy benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 305.63,
+      "y0": 736.82,
+      "x1": 526.22,
+      "y1": 773.38
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 305.63,
+       "y0": 736.82,
+       "x1": 526.22,
+       "y1": 746.2800000000001
+      },
+      {
+       "page": 4,
+       "x0": 306.14,
+       "y0": 750.37,
+       "x1": 525.77,
+       "y1": 759.83
+      },
+      {
+       "page": 4,
+       "x0": 306.14,
+       "y0": 763.92,
+       "x1": 525.77,
+       "y1": 773.38
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 74.72,
+       "x1": 290.95000000000005,
+       "y1": 84.18
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 88.27,
+       "x1": 289.40999999999997,
+       "y1": 97.72999999999999
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 101.82,
+       "x1": 290.5,
+       "y1": 111.28
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 115.37,
+       "x1": 98.48,
+       "y1": 124.83000000000001
+      }
+     ],
+     "quote": "We consider eight standard common sense reasoning benchmarks: BoolQ (Clark et al., 2019), PIQA (Bisk et al., 2020), SIQA (Sap et al., 2019), HellaSwag (Zellers et al., 2019), WinoGrande (Sakaguchi et al., 2021), ARC easy and challenge (Clark et al., 2018) and OpenBookQA (Mihaylov et al., 2018).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ARC-e",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.13",
+   "value": "ARC challenge benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 305.63,
+      "y0": 736.82,
+      "x1": 526.22,
+      "y1": 773.38
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 305.63,
+       "y0": 736.82,
+       "x1": 526.22,
+       "y1": 746.2800000000001
+      },
+      {
+       "page": 4,
+       "x0": 306.14,
+       "y0": 750.37,
+       "x1": 525.77,
+       "y1": 759.83
+      },
+      {
+       "page": 4,
+       "x0": 306.14,
+       "y0": 763.92,
+       "x1": 525.77,
+       "y1": 773.38
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 74.72,
+       "x1": 290.95000000000005,
+       "y1": 84.18
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 88.27,
+       "x1": 289.40999999999997,
+       "y1": 97.72999999999999
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 101.82,
+       "x1": 290.5,
+       "y1": 111.28
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 115.37,
+       "x1": 98.48,
+       "y1": 124.83000000000001
+      }
+     ],
+     "quote": "We consider eight standard common sense reasoning benchmarks: BoolQ (Clark et al., 2019), PIQA (Bisk et al., 2020), SIQA (Sap et al., 2019), HellaSwag (Zellers et al., 2019), WinoGrande (Sakaguchi et al., 2021), ARC easy and challenge (Clark et al., 2018) and OpenBookQA (Mihaylov et al., 2018).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ARC-c",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.14",
+   "value": "OpenBookQA benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 305.63,
+      "y0": 736.82,
+      "x1": 526.22,
+      "y1": 773.38
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 305.63,
+       "y0": 736.82,
+       "x1": 526.22,
+       "y1": 746.2800000000001
+      },
+      {
+       "page": 4,
+       "x0": 306.14,
+       "y0": 750.37,
+       "x1": 525.77,
+       "y1": 759.83
+      },
+      {
+       "page": 4,
+       "x0": 306.14,
+       "y0": 763.92,
+       "x1": 525.77,
+       "y1": 773.38
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 74.72,
+       "x1": 290.95000000000005,
+       "y1": 84.18
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 88.27,
+       "x1": 289.40999999999997,
+       "y1": 97.72999999999999
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 101.82,
+       "x1": 290.5,
+       "y1": 111.28
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 115.37,
+       "x1": 98.48,
+       "y1": 124.83000000000001
+      }
+     ],
+     "quote": "We consider eight standard common sense reasoning benchmarks: BoolQ (Clark et al., 2019), PIQA (Bisk et al., 2020), SIQA (Sap et al., 2019), HellaSwag (Zellers et al., 2019), WinoGrande (Sakaguchi et al., 2021), ARC easy and challenge (Clark et al., 2018) and OpenBookQA (Mihaylov et al., 2018).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "OBQA",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.15",
+   "value": "Natural Questions benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 70.35,
+      "y0": 306.72,
+      "x1": 289.14,
+      "y1": 356.82
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 70.35,
+       "y0": 306.72,
+       "x1": 289.13,
+       "y1": 316.18
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 320.27,
+       "x1": 289.14,
+       "y1": 329.72999999999996
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 333.81,
+       "x1": 289.14,
+       "y1": 343.27
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 347.36,
+       "x1": 271.06,
+       "y1": 356.82
+      }
+     ],
+     "quote": "We compare LLaMA to existing large language models on two closed-book question answering benchmarks: Natural Questions (Kwiatkowski et al., 2019) andTriviaQA (Joshi et al., 2017).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Natural Questions",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.16",
+   "value": "TriviaQA benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 70.35,
+      "y0": 306.72,
+      "x1": 289.14,
+      "y1": 356.82
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 70.35,
+       "y0": 306.72,
+       "x1": 289.13,
+       "y1": 316.18
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 320.27,
+       "x1": 289.14,
+       "y1": 329.72999999999996
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 333.81,
+       "x1": 289.14,
+       "y1": 343.27
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 347.36,
+       "x1": 271.06,
+       "y1": 356.82
+      }
+     ],
+     "quote": "We compare LLaMA to existing large language models on two closed-book question answering benchmarks: Natural Questions (Kwiatkowski et al., 2019) andTriviaQA (Joshi et al., 2017).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "TriviaQA",
+   "split": "filtered dev set",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.17",
+   "value": "RACE reading comprehension benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 70.35,
+      "y0": 723.27,
+      "x1": 290.95,
+      "y1": 746.2800000000001
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 70.35,
+       "y0": 723.27,
+       "x1": 290.95,
+       "y1": 732.73
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 736.82,
+       "x1": 260.61,
+       "y1": 746.2800000000001
+      }
+     ],
+     "quote": "We evaluate our models on the RACE reading comprehension benchmark (Lai et al., 2017).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "RACE",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.18",
+   "value": "MATH dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 306.14,
+      "y0": 397.13,
+      "x1": 524.42,
+      "y1": 433.69
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 492.86,
+       "y0": 397.13,
+       "x1": 524.42,
+       "y1": 406.59
+      },
+      {
+       "page": 5,
+       "x0": 306.14,
+       "y0": 410.68,
+       "x1": 524.4,
+       "y1": 420.14
+      },
+      {
+       "page": 5,
+       "x0": 306.14,
+       "y0": 424.23,
+       "x1": 487.01,
+       "y1": 433.69
+      }
+     ],
+     "quote": "MATH is a dataset of 12K middle school and high school mathematics problems written in LaTeX.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "MATH",
+   "split": "",
+   "size": "12K",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.19",
+   "value": "GSM8k dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 306.14,
+      "y0": 424.23,
+      "x1": 526.3199999999999,
+      "y1": 447.22999999999996
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 489.72,
+       "y0": 424.23,
+       "x1": 524.6800000000001,
+       "y1": 433.69
+      },
+      {
+       "page": 5,
+       "x0": 306.14,
+       "y0": 437.77,
+       "x1": 526.3199999999999,
+       "y1": 447.22999999999996
+      }
+     ],
+     "quote": "GSM8k is a set of middle school mathematical problems.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "GSM8k",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.20",
+   "value": "HumanEval benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0056",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 305.63,
+      "y0": 655.53,
+      "x1": 524.41,
+      "y1": 705.64
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 305.63,
+       "y0": 655.53,
+       "x1": 524.41,
+       "y1": 664.99
+      },
+      {
+       "page": 5,
+       "x0": 306.14,
+       "y0": 669.08,
+       "x1": 524.41,
+       "y1": 678.5400000000001
+      },
+      {
+       "page": 5,
+       "x0": 306.14,
+       "y0": 682.63,
+       "x1": 524.41,
+       "y1": 692.09
+      },
+      {
+       "page": 5,
+       "x0": 306.14,
+       "y0": 696.18,
+       "x1": 433.86,
+       "y1": 705.64
+      }
+     ],
+     "quote": "We evaluate the ability of our models to write code from a natural language description on two benchmarks: HumanEval (Chen et al., 2021) and MBPP (Austin et al., 2021).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "HumanEval",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.21",
+   "value": "MBPP benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0056",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 305.63,
+      "y0": 655.53,
+      "x1": 524.41,
+      "y1": 705.64
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 305.63,
+       "y0": 655.53,
+       "x1": 524.41,
+       "y1": 664.99
+      },
+      {
+       "page": 5,
+       "x0": 306.14,
+       "y0": 669.08,
+       "x1": 524.41,
+       "y1": 678.5400000000001
+      },
+      {
+       "page": 5,
+       "x0": 306.14,
+       "y0": 682.63,
+       "x1": 524.41,
+       "y1": 692.09
+      },
+      {
+       "page": 5,
+       "x0": 306.14,
+       "y0": 696.18,
+       "x1": 433.86,
+       "y1": 705.64
+      }
+     ],
+     "quote": "We evaluate the ability of our models to write code from a natural language description on two benchmarks: HumanEval (Chen et al., 2021) and MBPP (Austin et al., 2021).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "MBPP",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.22",
+   "value": "MMLU benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0060",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 305.8,
+      "y0": 378.81,
+      "x1": 526.21,
+      "y1": 442.46999999999997
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 305.8,
+       "y0": 378.81,
+       "x1": 524.4100000000001,
+       "y1": 388.27
+      },
+      {
+       "page": 6,
+       "x0": 306.14,
+       "y0": 392.36,
+       "x1": 524.41,
+       "y1": 401.82
+      },
+      {
+       "page": 6,
+       "x0": 306.14,
+       "y0": 405.91,
+       "x1": 524.41,
+       "y1": 415.37
+      },
+      {
+       "page": 6,
+       "x0": 306.14,
+       "y0": 419.46,
+       "x1": 526.21,
+       "y1": 428.91999999999996
+      },
+      {
+       "page": 6,
+       "x0": 306.14,
+       "y0": 433.01,
+       "x1": 503.08,
+       "y1": 442.46999999999997
+      }
+     ],
+     "quote": "The massive multitask language understanding benchmark, or MMLU, introduced by Hendrycks et al. ( 2020) consists of multiple choice questions covering various domains of knowledge, including humanities, STEM and social sciences.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "MMLU",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "GPT-3",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 70.87,
+      "y0": 628.43,
+      "x1": 290.95000000000005,
+      "y1": 732.73
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 81.78,
+       "y0": 628.43,
+       "x1": 290.95,
+       "y1": 637.89
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 641.98,
+       "x1": 289.14,
+       "y1": 651.44
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 655.53,
+       "x1": 289.14,
+       "y1": 664.99
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 669.08,
+       "x1": 289.87,
+       "y1": 678.5400000000001
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 682.63,
+       "x1": 289.14,
+       "y1": 692.09
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 696.18,
+       "x1": 290.5,
+       "y1": 705.64
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 709.73,
+       "x1": 290.95000000000005,
+       "y1": 719.19
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 723.27,
+       "x1": 184.82999999999998,
+       "y1": 732.73
+      }
+     ],
+     "quote": "We compare LLaMA with other foundation models, namely the non-publicly available language models GPT-3 (Brown et al., 2020), Gopher (Rae et al., 2021), Chinchilla (Hoffmann et al., 2022) and PaLM (Chowdhery et al., 2022), as well as the open-sourced OPT models (Zhang et al., 2022), GPT-J (Wang and Komatsuzaki, 2021), and GPT-Neo (Black et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Gopher",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 70.87,
+      "y0": 628.43,
+      "x1": 290.95000000000005,
+      "y1": 732.73
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 81.78,
+       "y0": 628.43,
+       "x1": 290.95,
+       "y1": 637.89
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 641.98,
+       "x1": 289.14,
+       "y1": 651.44
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 655.53,
+       "x1": 289.14,
+       "y1": 664.99
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 669.08,
+       "x1": 289.87,
+       "y1": 678.5400000000001
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 682.63,
+       "x1": 289.14,
+       "y1": 692.09
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 696.18,
+       "x1": 290.5,
+       "y1": 705.64
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 709.73,
+       "x1": 290.95000000000005,
+       "y1": 719.19
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 723.27,
+       "x1": 184.82999999999998,
+       "y1": 732.73
+      }
+     ],
+     "quote": "We compare LLaMA with other foundation models, namely the non-publicly available language models GPT-3 (Brown et al., 2020), Gopher (Rae et al., 2021), Chinchilla (Hoffmann et al., 2022) and PaLM (Chowdhery et al., 2022), as well as the open-sourced OPT models (Zhang et al., 2022), GPT-J (Wang and Komatsuzaki, 2021), and GPT-Neo (Black et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "Chinchilla",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 70.87,
+      "y0": 628.43,
+      "x1": 290.95000000000005,
+      "y1": 732.73
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 81.78,
+       "y0": 628.43,
+       "x1": 290.95,
+       "y1": 637.89
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 641.98,
+       "x1": 289.14,
+       "y1": 651.44
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 655.53,
+       "x1": 289.14,
+       "y1": 664.99
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 669.08,
+       "x1": 289.87,
+       "y1": 678.5400000000001
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 682.63,
+       "x1": 289.14,
+       "y1": 692.09
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 696.18,
+       "x1": 290.5,
+       "y1": 705.64
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 709.73,
+       "x1": 290.95000000000005,
+       "y1": 719.19
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 723.27,
+       "x1": 184.82999999999998,
+       "y1": 732.73
+      }
+     ],
+     "quote": "We compare LLaMA with other foundation models, namely the non-publicly available language models GPT-3 (Brown et al., 2020), Gopher (Rae et al., 2021), Chinchilla (Hoffmann et al., 2022) and PaLM (Chowdhery et al., 2022), as well as the open-sourced OPT models (Zhang et al., 2022), GPT-J (Wang and Komatsuzaki, 2021), and GPT-Neo (Black et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "PaLM",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 70.87,
+      "y0": 628.43,
+      "x1": 290.95000000000005,
+      "y1": 732.73
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 81.78,
+       "y0": 628.43,
+       "x1": 290.95,
+       "y1": 637.89
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 641.98,
+       "x1": 289.14,
+       "y1": 651.44
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 655.53,
+       "x1": 289.14,
+       "y1": 664.99
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 669.08,
+       "x1": 289.87,
+       "y1": 678.5400000000001
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 682.63,
+       "x1": 289.14,
+       "y1": 692.09
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 696.18,
+       "x1": 290.5,
+       "y1": 705.64
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 709.73,
+       "x1": 290.95000000000005,
+       "y1": 719.19
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 723.27,
+       "x1": 184.82999999999998,
+       "y1": 732.73
+      }
+     ],
+     "quote": "We compare LLaMA with other foundation models, namely the non-publicly available language models GPT-3 (Brown et al., 2020), Gopher (Rae et al., 2021), Chinchilla (Hoffmann et al., 2022) and PaLM (Chowdhery et al., 2022), as well as the open-sourced OPT models (Zhang et al., 2022), GPT-J (Wang and Komatsuzaki, 2021), and GPT-Neo (Black et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "OPT",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 70.87,
+      "y0": 628.43,
+      "x1": 290.95000000000005,
+      "y1": 732.73
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 81.78,
+       "y0": 628.43,
+       "x1": 290.95,
+       "y1": 637.89
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 641.98,
+       "x1": 289.14,
+       "y1": 651.44
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 655.53,
+       "x1": 289.14,
+       "y1": 664.99
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 669.08,
+       "x1": 289.87,
+       "y1": 678.5400000000001
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 682.63,
+       "x1": 289.14,
+       "y1": 692.09
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 696.18,
+       "x1": 290.5,
+       "y1": 705.64
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 709.73,
+       "x1": 290.95000000000005,
+       "y1": 719.19
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 723.27,
+       "x1": 184.82999999999998,
+       "y1": 732.73
+      }
+     ],
+     "quote": "We compare LLaMA with other foundation models, namely the non-publicly available language models GPT-3 (Brown et al., 2020), Gopher (Rae et al., 2021), Chinchilla (Hoffmann et al., 2022) and PaLM (Chowdhery et al., 2022), as well as the open-sourced OPT models (Zhang et al., 2022), GPT-J (Wang and Komatsuzaki, 2021), and GPT-Neo (Black et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0043",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 70.87,
+      "y0": 723.27,
+      "x1": 289.14,
+      "y1": 773.38
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 191.57,
+       "y0": 723.27,
+       "x1": 289.13,
+       "y1": 732.73
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 736.82,
+       "x1": 289.14,
+       "y1": 746.2800000000001
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 750.37,
+       "x1": 289.14,
+       "y1": 759.83
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 763.92,
+       "x1": 214.03,
+       "y1": 773.38
+      }
+     ],
+     "quote": "In Section 4, we also briefly compare LLaMA with instruction-tuned models such as OPT-IML (Iyer et al., 2022) and Flan-PaLM (Chung et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "GPT-J",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 70.87,
+      "y0": 628.43,
+      "x1": 290.95000000000005,
+      "y1": 732.73
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 81.78,
+       "y0": 628.43,
+       "x1": 290.95,
+       "y1": 637.89
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 641.98,
+       "x1": 289.14,
+       "y1": 651.44
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 655.53,
+       "x1": 289.14,
+       "y1": 664.99
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 669.08,
+       "x1": 289.87,
+       "y1": 678.5400000000001
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 682.63,
+       "x1": 289.14,
+       "y1": 692.09
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 696.18,
+       "x1": 290.5,
+       "y1": 705.64
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 709.73,
+       "x1": 290.95000000000005,
+       "y1": 719.19
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 723.27,
+       "x1": 184.82999999999998,
+       "y1": 732.73
+      }
+     ],
+     "quote": "We compare LLaMA with other foundation models, namely the non-publicly available language models GPT-3 (Brown et al., 2020), Gopher (Rae et al., 2021), Chinchilla (Hoffmann et al., 2022) and PaLM (Chowdhery et al., 2022), as well as the open-sourced OPT models (Zhang et al., 2022), GPT-J (Wang and Komatsuzaki, 2021), and GPT-Neo (Black et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "GPT-Neo",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 70.87,
+      "y0": 628.43,
+      "x1": 290.95000000000005,
+      "y1": 732.73
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 81.78,
+       "y0": 628.43,
+       "x1": 290.95,
+       "y1": 637.89
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 641.98,
+       "x1": 289.14,
+       "y1": 651.44
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 655.53,
+       "x1": 289.14,
+       "y1": 664.99
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 669.08,
+       "x1": 289.87,
+       "y1": 678.5400000000001
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 682.63,
+       "x1": 289.14,
+       "y1": 692.09
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 696.18,
+       "x1": 290.5,
+       "y1": 705.64
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 709.73,
+       "x1": 290.95000000000005,
+       "y1": 719.19
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 723.27,
+       "x1": 184.82999999999998,
+       "y1": 732.73
+      }
+     ],
+     "quote": "We compare LLaMA with other foundation models, namely the non-publicly available language models GPT-3 (Brown et al., 2020), Gopher (Rae et al., 2021), Chinchilla (Hoffmann et al., 2022) and PaLM (Chowdhery et al., 2022), as well as the open-sourced OPT models (Zhang et al., 2022), GPT-J (Wang and Komatsuzaki, 2021), and GPT-Neo (Black et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.7",
+   "value": "Flan-PaLM",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 70.87,
+      "y0": 723.27,
+      "x1": 289.14,
+      "y1": 773.38
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 191.57,
+       "y0": 723.27,
+       "x1": 289.13,
+       "y1": 732.73
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 736.82,
+       "x1": 289.14,
+       "y1": 746.2800000000001
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 750.37,
+       "x1": 289.14,
+       "y1": 759.83
+      },
+      {
+       "page": 4,
+       "x0": 70.87,
+       "y0": 763.92,
+       "x1": 214.03,
+       "y1": 773.38
+      }
+     ],
+     "quote": "In Section 4, we also briefly compare LLaMA with instruction-tuned models such as OPT-IML (Iyer et al., 2022) and Flan-PaLM (Chung et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.8",
+   "value": "Minerva",
+   "evidence": [
+    {
+     "chunk_id": "b0054",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 306.14,
+      "y0": 451.32,
+      "x1": 526.21,
+      "y1": 474.33
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 306.14,
+       "y0": 451.32,
+       "x1": 526.21,
+       "y1": 460.78
+      },
+      {
+       "page": 5,
+       "x0": 306.14,
+       "y0": 464.87,
+       "x1": 439.95,
+       "y1": 474.33
+      }
+     ],
+     "quote": "In Table 7, we compare with PaLM and Minerva (Lewkowycz et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.9",
+   "value": "LaMDA",
+   "evidence": [
+    {
+     "chunk_id": "b0056",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.87,
+      "y0": 392.82,
+      "x1": 290.95000000000005,
+      "y1": 442.93
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 123.75,
+       "y0": 392.82,
+       "x1": 289.95,
+       "y1": 402.28
+      },
+      {
+       "page": 6,
+       "x0": 70.87,
+       "y0": 406.37,
+       "x1": 290.95000000000005,
+       "y1": 415.83
+      },
+      {
+       "page": 6,
+       "x0": 70.87,
+       "y0": 419.92,
+       "x1": 289.52,
+       "y1": 429.38
+      },
+      {
+       "page": 6,
+       "x0": 70.87,
+       "y0": 433.47,
+       "x1": 259.28999999999996,
+       "y1": 442.93
+      }
+     ],
+     "quote": "In Table 8, we compare the pass@1 scores of our models with existing language models that have not been finetuned on code, namely PaLM and LaMDA (Thoppilan et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Exact match performance",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 70.87,
+      "y0": 347.36,
+      "x1": 290.95000000000005,
+      "y1": 411.02
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 274.43,
+       "y0": 347.36,
+       "x1": 289.31,
+       "y1": 356.82
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 360.91,
+       "x1": 290.94,
+       "y1": 370.37
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 374.46,
+       "x1": 290.95000000000005,
+       "y1": 383.91999999999996
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 388.01,
+       "x1": 289.14,
+       "y1": 397.46999999999997
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 401.56,
+       "x1": 218.13,
+       "y1": 411.02
+      }
+     ],
+     "quote": "For both benchmarks, we report exact match performance in a closed book setting, i.e., where the models do not have access to documents that contain evidence to answer the question.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Zero-shot accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0100",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 309.1440124511719,
+      "y0": 76.87963104248047,
+      "x1": 521.4100341796875,
+      "y1": 211.4584197998047
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 309.1440124511719,
+       "y0": 76.87963104248047,
+       "x1": 521.4100341796875,
+       "y1": 211.4584197998047
+      }
+     ],
+     "quote": "Table 6: Reading Comprehension.Zero-shot accuracy.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "pass@1",
+   "evidence": [
+    {
+     "chunk_id": "b0056",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.87,
+      "y0": 392.82,
+      "x1": 290.95000000000005,
+      "y1": 442.93
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 123.75,
+       "y0": 392.82,
+       "x1": 289.95,
+       "y1": 402.28
+      },
+      {
+       "page": 6,
+       "x0": 70.87,
+       "y0": 406.37,
+       "x1": 290.95000000000005,
+       "y1": 415.83
+      },
+      {
+       "page": 6,
+       "x0": 70.87,
+       "y0": 419.92,
+       "x1": 289.52,
+       "y1": 429.38
+      },
+      {
+       "page": 6,
+       "x0": 70.87,
+       "y0": 433.47,
+       "x1": 259.28999999999996,
+       "y1": 442.93
+      }
+     ],
+     "quote": "In Table 8, we compare the pass@1 scores of our models with existing language models that have not been finetuned on code, namely PaLM and LaMDA (Thoppilan et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "pass@100 and pass@80",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.87,
+      "y0": 598.7,
+      "x1": 289.14,
+      "y1": 621.7
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 165.53,
+       "y0": 598.7,
+       "x1": 289.14,
+       "y1": 608.1600000000001
+      },
+      {
+       "page": 6,
+       "x0": 70.87,
+       "y0": 612.24,
+       "x1": 269.55,
+       "y1": 621.7
+      }
+     ],
+     "quote": "The pass@100 and pass@80 metrics were obtained with temperature 0.8.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.4",
+   "value": "Five-shot accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0103",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 122.12799835205078,
+      "y0": 268.0228271484375,
+      "x1": 280.0244445800781,
+      "y1": 277.0489501953125
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 122.12799835205078,
+       "y0": 268.0228271484375,
+       "x1": 280.0244445800781,
+       "y1": 277.0489501953125
+      }
+     ],
+     "quote": "Table 9: Massive Multitask Language Understanding (MMLU).Five-shot accuracy.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Learning rate for 6.7B and 13.0B models",
+   "evidence": [
+    {
+     "chunk_id": "b0023",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 123.24090576171875,
+      "y0": 94.90666961669922,
+      "x1": 465.9303283691406,
+      "y1": 106.65940856933594
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 123.24090576171875,
+       "y0": 94.90666961669922,
+       "x1": 465.9303283691406,
+       "y1": 106.65940856933594
+      }
+     ],
+     "quote": "6.7B | 4096 | 32 | 32 | 3.0e^−^4 | 4M | 1.0T",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "3.0e^−^4",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Batch size for 6.7B model",
+   "evidence": [
+    {
+     "chunk_id": "b0023",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 123.24090576171875,
+      "y0": 94.90666961669922,
+      "x1": 465.9303283691406,
+      "y1": 106.65940856933594
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 123.24090576171875,
+       "y0": 94.90666961669922,
+       "x1": 465.9303283691406,
+       "y1": 106.65940856933594
+      }
+     ],
+     "quote": "6.7B | 4096 | 32 | 32 | 3.0e^−^4 | 4M | 1.0T",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "4M",
+   "value_norm": 4000000.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Tokens for 6.7B model",
+   "evidence": [
+    {
+     "chunk_id": "b0023",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 123.24090576171875,
+      "y0": 94.90666961669922,
+      "x1": 465.9303283691406,
+      "y1": 106.65940856933594
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 123.24090576171875,
+       "y0": 94.90666961669922,
+       "x1": 465.9303283691406,
+       "y1": 106.65940856933594
+      }
+     ],
+     "quote": "6.7B | 4096 | 32 | 32 | 3.0e^−^4 | 4M | 1.0T",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "tokens",
+   "value_raw": "1.0T",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Learning rate for 32.5B and 65.2B models",
+   "evidence": [
+    {
+     "chunk_id": "b0023",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 123.24090576171875,
+      "y0": 122.00469207763672,
+      "x1": 465.9303283691406,
+      "y1": 133.75743103027344
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 123.24090576171875,
+       "y0": 122.00469207763672,
+       "x1": 465.9303283691406,
+       "y1": 133.75743103027344
+      }
+     ],
+     "quote": "32.5B | 6656 | 52 | 60 | 1.5e^−^4 | 4M | 1.4T",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "1.5e^−^4",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Sampling temperature 0.1",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.47,
+      "y0": 571.6,
+      "x1": 289.14,
+      "y1": 608.1600000000001
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 204.5,
+       "y0": 571.6,
+       "x1": 289.14,
+       "y1": 581.0600000000001
+      },
+      {
+       "page": 6,
+       "x0": 70.87,
+       "y0": 585.15,
+       "x1": 289.14,
+       "y1": 594.61
+      },
+      {
+       "page": 6,
+       "x0": 70.47,
+       "y0": 598.7,
+       "x1": 162.12,
+       "y1": 608.1600000000001
+      }
+     ],
+     "quote": "The pass@1 results reported in this table were obtained by sampling with temperature 0.1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "temperature",
+   "value_raw": "0.1",
+   "value_norm": 0.1,
+   "scope": "inference"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Sampling temperature 0.8",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.87,
+      "y0": 598.7,
+      "x1": 289.14,
+      "y1": 621.7
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 165.53,
+       "y0": 598.7,
+       "x1": 289.14,
+       "y1": 608.1600000000001
+      },
+      {
+       "page": 6,
+       "x0": 70.87,
+       "y0": 612.24,
+       "x1": 269.55,
+       "y1": 621.7
+      }
+     ],
+     "quote": "The pass@100 and pass@80 metrics were obtained with temperature 0.8.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "temperature",
+   "value_raw": "0.8",
+   "value_norm": 0.8,
+   "scope": "inference"
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Single V100 GPU during inference",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 70.87,
+      "y0": 496.41,
+      "x1": 289.13,
+      "y1": 519.41
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 194.04,
+       "y0": 496.41,
+       "x1": 289.13,
+       "y1": 505.87
+      },
+      {
+       "page": 5,
+       "x0": 70.87,
+       "y0": 509.95,
+       "x1": 225.69,
+       "y1": 519.41
+      }
+     ],
+     "quote": "This model runs on a single V100 GPU during inference.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.1",
+   "value": "A100-80GB GPU power consumption for LLaMA-7B",
+   "evidence": [
+    {
+     "chunk_id": "b0110",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 92.4530029296875,
+      "y0": 141.03167724609375,
+      "x1": 502.82525634765625,
+      "y1": 152.78440856933594
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 92.4530029296875,
+       "y0": 141.03167724609375,
+       "x1": 502.82525634765625,
+       "y1": 152.78440856933594
+      }
+     ],
+     "quote": "LLaMA-7B | A100-80GB | 400W | 82,432 | 36 MWh | 14",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "compute.2",
+   "value": "A100-80GB GPU power consumption for LLaMA-13B",
+   "evidence": [
+    {
+     "chunk_id": "b0110",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 92.4530029296875,
+      "y0": 154.5806884765625,
+      "x1": 502.82525634765625,
+      "y1": 166.3334197998047
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 92.4530029296875,
+       "y0": 154.5806884765625,
+       "x1": 502.82525634765625,
+       "y1": 166.3334197998047
+      }
+     ],
+     "quote": "LLaMA-13B | A100-80GB | 400W | 135,168 | 59 MWh | 23",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "compute.3",
+   "value": "A100-80GB GPU power consumption for LLaMA-33B",
+   "evidence": [
+    {
+     "chunk_id": "b0110",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 92.4530029296875,
+      "y0": 168.12969970703125,
+      "x1": 502.82525634765625,
+      "y1": 179.88243103027344
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 92.4530029296875,
+       "y0": 168.12969970703125,
+       "x1": 502.82525634765625,
+       "y1": 179.88243103027344
+      }
+     ],
+     "quote": "LLaMA-33B | A100-80GB | 400W | 530,432 | 233 MWh | 90",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "compute.4",
+   "value": "A100-80GB GPU power consumption for LLaMA-65B",
+   "evidence": [
+    {
+     "chunk_id": "b0110",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 92.4530029296875,
+      "y0": 181.6787109375,
+      "x1": 502.82525634765625,
+      "y1": 193.4314422607422
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 92.4530029296875,
+       "y0": 181.6787109375,
+       "x1": 502.82525634765625,
+       "y1": 193.4314422607422
+      }
+     ],
+     "quote": "LLaMA-65B | A100-80GB | 400W | 1,022,362 | 449 MWh | 173",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "Evaluation methods used are insufficient to fully understand model risks.",
+   "evidence": [
+    {
+     "chunk_id": "b0064",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 305.63,
+      "y0": 709.73,
+      "x1": 526.23,
+      "y1": 773.38
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 305.63,
+       "y0": 709.73,
+       "x1": 526.23,
+       "y1": 719.19
+      },
+      {
+       "page": 7,
+       "x0": 306.14,
+       "y0": 723.27,
+       "x1": 526.21,
+       "y1": 732.73
+      },
+      {
+       "page": 7,
+       "x0": 306.14,
+       "y0": 736.82,
+       "x1": 524.41,
+       "y1": 746.2800000000001
+      },
+      {
+       "page": 7,
+       "x0": 306.14,
+       "y0": 750.37,
+       "x1": 524.78,
+       "y1": 759.83
+      },
+      {
+       "page": 7,
+       "x0": 306.14,
+       "y0": 763.92,
+       "x1": 525.21,
+       "y1": 773.38
+      }
+     ],
+     "quote": "While we have selected some of the standard benchmarks that are used by the language model community to indicate some of the issues with these models, these evaluations are not sufficient to fully understand the risks associated with these models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.1",
+   "value": "Lack of control over the third-party PerspectiveAPI pipeline makes comparison difficult.",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 70.35,
+      "y0": 564.88,
+      "x1": 289.51,
+      "y1": 601.44
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 70.35,
+       "y0": 564.88,
+       "x1": 289.51,
+       "y1": 574.34
+      },
+      {
+       "page": 8,
+       "x0": 70.87,
+       "y0": 578.43,
+       "x1": 289.14,
+       "y1": 587.89
+      },
+      {
+       "page": 8,
+       "x0": 70.47,
+       "y0": 591.98,
+       "x1": 203.87,
+       "y1": 601.44
+      }
+     ],
+     "quote": "We do not have control over the pipeline used by the third-party PerspectiveAPI, making comparison with previous models difficult.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Investigate instruction finetuning further.",
+   "evidence": [
+    {
+     "chunk_id": "b0089",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 305.78,
+      "y0": 682.63,
+      "x1": 526.32,
+      "y1": 732.73
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 331.3,
+       "y0": 682.63,
+       "x1": 526.32,
+       "y1": 692.09
+      },
+      {
+       "page": 11,
+       "x0": 305.78,
+       "y0": 696.18,
+       "x1": 524.41,
+       "y1": 705.64
+      },
+      {
+       "page": 11,
+       "x0": 306.14,
+       "y0": 709.73,
+       "x1": 524.5899999999999,
+       "y1": 719.19
+      },
+      {
+       "page": 11,
+       "x0": 306.14,
+       "y0": 723.27,
+       "x1": 439.58,
+       "y1": 732.73
+      }
+     ],
+     "quote": "Additionally, we observed like Chung et al. (2022) that finetuning these models on instructions lead to promising results, and we plan to further investigate this in future work.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Release larger models trained on larger pretraining corpora.",
+   "evidence": [
+    {
+     "chunk_id": "b0089",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 306.14,
+      "y0": 723.27,
+      "x1": 524.41,
+      "y1": 773.38
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 442.96,
+       "y0": 723.27,
+       "x1": 524.41,
+       "y1": 732.73
+      },
+      {
+       "page": 11,
+       "x0": 306.14,
+       "y0": 736.82,
+       "x1": 524.41,
+       "y1": 746.2800000000001
+      },
+      {
+       "page": 11,
+       "x0": 306.14,
+       "y0": 750.37,
+       "x1": 524.41,
+       "y1": 759.83
+      },
+      {
+       "page": 11,
+       "x0": 306.14,
+       "y0": 763.92,
+       "x1": 520.6,
+       "y1": 773.38
+      }
+     ],
+     "quote": "Finally, we plan to release larger models trained on larger pretraining corpora in the future, since we have seen a constant improvement in performance as we were scaling.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "ethics": [
+  {
+   "id": "ethics.0",
+   "value": "Training models consumes significant energy and causes carbon emissions.",
+   "evidence": [
+    {
+     "chunk_id": "b0082",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 70.53,
+      "y0": 630.55,
+      "x1": 290.95,
+      "y1": 667.11
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 70.53,
+       "y0": 630.55,
+       "x1": 290.95,
+       "y1": 640.01
+      },
+      {
+       "page": 10,
+       "x0": 70.87,
+       "y0": 644.1,
+       "x1": 290.94,
+       "y1": 653.5600000000001
+      },
+      {
+       "page": 10,
+       "x0": 70.87,
+       "y0": 657.65,
+       "x1": 172.28,
+       "y1": 667.11
+      }
+     ],
+     "quote": "The training of our models have consumed a massive quantity of energy, responsible for the emission of carbon dioxide.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/facebookresearch/llama",
+   "evidence": [
+    {
+     "chunk_id": "b0004",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 70.87,
+      "y0": 684.68,
+      "x1": 290.5,
+      "y1": 768.5
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 684.68,
+       "x1": 290.5,
+       "y1": 694.14
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 698.23,
+       "x1": 289.14,
+       "y1": 707.69
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 711.78,
+       "x1": 289.33000000000004,
+       "y1": 721.24
+      },
+      {
+       "page": 1,
+       "x0": 70.87,
+       "y0": 725.32,
+       "x1": 289.14,
+       "y1": 734.7800000000001
+      },
+      {
+       "page": 1,
+       "x0": 83.52,
+       "y0": 763.32,
+       "x1": 86.50999999999999,
+       "y1": 768.5
+      }
+     ],
+     "quote": "In this context, given a target level of performance, the preferred model is not the fastest to train but the fastest at inference, and although it may be cheaper to train a large model to reach a certain level of 1 https://github.com/facebookresearch/llama",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/facebookresearch/xformers",
+   "evidence": [
+    {
+     "chunk_id": "b0098",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 322.281005859375,
+      "y0": 764.9447631835938,
+      "x1": 487.4330139160156,
+      "y1": 772.9607543945312
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 322.281005859375,
+       "y0": 764.9447631835938,
+       "x1": 487.4330139160156,
+       "y1": 772.9607543945312
+      }
+     ],
+     "quote": "https://github.com/facebookresearch/xformers",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.2",
+   "value": "https://github.com/facebookresearch/metaseq/tree/main/projects/OPT/chronicles",
+   "evidence": [
+    {
+     "chunk_id": "b0109",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 306.1419982910156,
+      "y0": 753.19921875,
+      "x1": 519.54248046875,
+      "y1": 772.8172607421875
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 318.79400634765625,
+       "y0": 753.19921875,
+       "x1": 321.7828063964844,
+       "y1": 758.5431518554688
+      },
+      {
+       "page": 10,
+       "x0": 322.281005859375,
+       "y0": 753.887939453125,
+       "x1": 519.54248046875,
+       "y1": 762.8543090820312
+      },
+      {
+       "page": 10,
+       "x0": 306.1419982910156,
+       "y0": 763.8508911132812,
+       "x1": 454.08807373046875,
+       "y1": 772.8172607421875
+      }
+     ],
+     "quote": "https://github.com/facebookresearch/metaseq/ tree/main/projects/OPT/chronicles",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "LLaMA-13B outperforms GPT-3 on most benchmarks despite being much smaller.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 87.55,
+      "y0": 310.26,
+      "x1": 273.78,
+      "y1": 366.71999999999997
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 263.82,
+       "y0": 310.26,
+       "x1": 272.12,
+       "y1": 318.9
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 322.21,
+       "x1": 272.12,
+       "y1": 330.84999999999997
+      },
+      {
+       "page": 1,
+       "x0": 87.55,
+       "y0": 334.17,
+       "x1": 273.78,
+       "y1": 342.81
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 346.12,
+       "x1": 273.36,
+       "y1": 354.76
+      },
+      {
+       "page": 1,
+       "x0": 87.87,
+       "y0": 358.08,
+       "x1": 223.64000000000001,
+       "y1": 366.71999999999997
+      }
+     ],
+     "quote": "In particular, LLaMA-13B outperforms GPT-3 (175B) on most benchmarks, and LLaMA-65B is competitive with the best models, Chinchilla-70B and PaLM-540B.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "LLaMA-65B is competitive with top large language models like Chinchilla and PaLM.",
+   "evidence": [
+    {
+     "chunk_id": "b0005",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 305.75,
+      "y0": 457.66,
+      "x1": 526.21,
+      "y1": 494.21999999999997
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 305.75,
+       "y0": 457.66,
+       "x1": 524.6,
+       "y1": 467.12
+      },
+      {
+       "page": 1,
+       "x0": 306.14,
+       "y0": 471.21,
+       "x1": 526.21,
+       "y1": 480.66999999999996
+      },
+      {
+       "page": 1,
+       "x0": 306.14,
+       "y0": 484.76,
+       "x1": 520.81,
+       "y1": 494.21999999999997
+      }
+     ],
+     "quote": "At the higher-end of the scale, our 65B-parameter model is also competitive with the best large language models such as Chinchilla or PaLM-540B.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

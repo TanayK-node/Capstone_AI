@@ -1,0 +1,44 @@
+2005.11401,task,,open-domain question answering,open-domain QA|question answering,4,
+2005.11401,task,,abstractive question answering,abstractive QA|MS-MARCO NLG,4,
+2005.11401,task,,Jeopardy question generation,question generation,5,
+2005.11401,task,,fact verification,FEVER|claim verification,5,
+2005.11401,datasets,,Natural Questions,NQ,4,
+2005.11401,datasets,,TriviaQA,TQA|TQA Wiki,4,
+2005.11401,datasets,,WebQuestions,WQ,4,
+2005.11401,datasets,,CuratedTrec,CT,4,
+2005.11401,datasets,,MS MARCO,MSMARCO NLG task v2.1|MS-MARCO|Open MS-MARCO,4,
+2005.11401,datasets,,SearchQA Jeopardy questions,Jeopardy|SearchQA|Jeopardy Question Generation,5,
+2005.11401,datasets,,FEVER,FEVER-3-way|FEVER-2-way,5,
+2005.11401,datasets,,Wikipedia December 2018 dump,Wikipedia|21M documents,4,non-parametric memory
+2005.11401,datasets,,Wikipedia December 2016 dump,DrQA Wikipedia dump,7,index hot-swapping
+2005.11401,baselines,,T5-11B,T5|closed-book T5,6,
+2005.11401,baselines,,T5-11B+SSM,T5 + SSM|salient span masking,6,
+2005.11401,baselines,,REALM,,6,
+2005.11401,baselines,,DPR,dense passage retrieval,6,
+2005.11401,baselines,,BART,BART-large,6,
+2005.11401,baselines,,Thorne and Vlachos (RoBERTa),Thorne and Vlachos|RoBERTa,7,FEVER-2
+2005.11401,baselines,,state-of-the-art pipeline models,SotA,6,MS-MARCO and FEVER-3 SotA
+2005.11401,baselines,,BM25 retriever,BM25|RAG-BM25,7,ablation retriever
+2005.11401,baselines,,T5-large,,19,parameters comparison
+2005.11401,metrics,,Exact Match,EM,4,
+2005.11401,metrics,,BLEU-1,B-1|Bleu,6,
+2005.11401,metrics,,Q-BLEU-1,QB-1|Q-BLEU,5,
+2005.11401,metrics,,ROUGE-L,R-L|Rouge-L,6,
+2005.11401,metrics,,label accuracy,accuracy,5,FEVER
+2005.11401,metrics,,human evaluation of factuality and specificity,factuality|specificity|human assessments,5,
+2005.11401,metrics,,distinct tri-gram ratio,generation diversity|distinct n-grams,7,
+2005.11401,metrics,,answer recall @ K,retrieval recall,8,
+2005.11401,hyperparameters,optimizer,Adam,,4,
+2005.11401,hyperparameters,top_k,5,k|retrieved documents,4,training
+2005.11401,hyperparameters,top_k,10,k|retrieved documents,4,training; MS-MARCO and Jeopardy test
+2005.11401,hyperparameters,top_k,15,retrieved documents,17,RAG-Token open-domain QA test
+2005.11401,hyperparameters,top_k,50,retrieved documents,17,RAG-Sequence open-domain QA test
+2005.11401,hyperparameters,beam_size,4,beam size of four,17,generation tasks
+2005.11401,hyperparameters,chunk_size,100,100-word chunks,4,Wikipedia documents
+2005.11401,hyperparameters,model_size,626M,trainable parameters,18,
+2005.11401,hyperparameters,model_size,400M,BART-large,3,generator
+2005.11401,hyperparameters,model_size,110M,BERT-base,18,each DPR encoder
+2005.11401,compute,,8 NVIDIA V100 GPUs (32GB),V100|8 V100,17,
+2005.11401,compute,,100 GB CPU memory for the index,100 GB|36GB,17,
+2005.11401,code_urls,,https://github.com/huggingface/transformers/blob/master/examples/rag/,huggingface transformers rag|https://github.com/huggingface/transformers,2,
+2005.11401,code_urls,,https://huggingface.co/rag/,,2,demo

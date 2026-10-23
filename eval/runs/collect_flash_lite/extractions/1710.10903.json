@@ -1,0 +1,2573 @@
+{
+ "metadata": {
+  "title": "GRAPH ATTENTION NETWORKS",
+  "authors": [
+   "Petar Veličković",
+   "Guillem Cucurull",
+   "Arantxa Casanova",
+   "Adriana Romero",
+   "Pietro Liò",
+   "Yoshua Bengio"
+  ],
+  "venue": null,
+  "year": "2018",
+  "arxiv_id": "1710.10903v3[stat.ML]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Spectral graph neural networks depend on the Laplacian eigenbasis, which ties the learned filters to a specific graph structure and prevents direct application to graphs with different structures.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 261.68,
+      "x1": 504.0,
+      "y1": 281.28
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 174.31,
+       "y0": 261.68,
+       "x1": 504.0,
+       "y1": 270.32
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 272.64,
+       "x1": 209.01,
+       "y1": 281.28
+      }
+     ],
+     "quote": "Thus, a model trained on a specific structure can not be directly applied to a graph with a different structure.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Non-spectral approaches struggle to define an operator that accommodates varying neighborhood sizes while preserving the weight sharing characteristics of CNNs.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 311.49,
+      "x1": 504.0,
+      "y1": 331.09
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 221.32,
+       "y0": 311.49,
+       "x1": 504.0,
+       "y1": 320.13
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 322.45,
+       "x1": 491.05,
+       "y1": 331.09
+      }
+     ],
+     "quote": "One of the challenges of these approaches is to define an operator which works with different sized neighborhoods and maintains the weight sharing property of CNNs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Introduction of graph attention networks (GATs), which use masked self-attentional layers to process graph-structured data.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 329.42,
+      "x1": 468.14,
+      "y1": 370.93
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 329.42,
+       "x1": 468.14,
+       "y1": 338.06
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 340.37,
+       "x1": 468.14,
+       "y1": 349.01
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 351.33,
+       "x1": 468.14,
+       "y1": 359.96999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 362.29,
+       "x1": 208.35000000000002,
+       "y1": 370.93
+      }
+     ],
+     "quote": "We present graph attention networks (GATs), novel neural network architectures that operate on graph-structured data, leveraging masked self-attentional layers to address the shortcomings of prior methods based on graph convolutions or their approximations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "node classification",
+   "evidence": [
+    {
+     "chunk_id": "b0010",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 575.5,
+      "x1": 504.0,
+      "y1": 595.1
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 575.5,
+       "x1": 504.0,
+       "y1": 584.14
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 586.46,
+       "x1": 224.3,
+       "y1": 595.1
+      }
+     ],
+     "quote": "Inspired by this recent work, we introduce an attention-based architecture to perform node classification of graph-structured data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "A shared linear transformation parametrized by a weight matrix is initially applied to every node to transform input features into higher-level features.",
+   "evidence": [
+    {
+     "chunk_id": "b0019",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 426.69,
+      "x1": 504.0,
+      "y1": 448.21999999999997
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 352.46,
+       "y0": 426.69,
+       "x1": 504.0,
+       "y1": 435.33
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 438.89,
+       "x1": 363.16999999999996,
+       "y1": 448.21999999999997
+      },
+      {
+       "page": 3,
+       "x0": 363.17,
+       "y0": 437.34,
+       "x1": 383.27000000000004,
+       "y1": 443.46
+      },
+      {
+       "page": 3,
+       "x0": 384.84,
+       "y0": 439.23,
+       "x1": 487.59,
+       "y1": 447.87
+      }
+     ],
+     "quote": "To that end, as an initial step, a shared linear transformation, parametrized by a weight matrix, W ∈ R F ×F , is applied to every node.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "Masked self-attention is performed on the nodes using a single-layer feedforward neural network with LeakyReLU nonlinearity to compute importance coefficients between neighbors.",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 598.39,
+      "x1": 504.0,
+      "y1": 630.85
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 598.39,
+       "x1": 504.0,
+       "y1": 607.35
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 610.9,
+       "x1": 261.22,
+       "y1": 620.23
+      },
+      {
+       "page": 3,
+       "x0": 261.22,
+       "y0": 609.36,
+       "x1": 270.24,
+       "y1": 615.48
+      },
+      {
+       "page": 3,
+       "x0": 274.51,
+       "y0": 611.25,
+       "x1": 504.0,
+       "y1": 619.89
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 621.89,
+       "x1": 196.51999999999998,
+       "y1": 630.85
+      }
+     ],
+     "quote": "In our experiments, the attention mechanism a is a single-layer feedforward neural network, parametrized by a weight vector a ∈ R 2F , and applying the LeakyReLU nonlinearity (with negative input slope α = 0.2).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "Attention coefficients are normalized using a softmax function and used to compute a linear combination of neighbor features followed by a nonlinearity.",
+   "evidence": [
+    {
+     "chunk_id": "b0028",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 712.42,
+      "x1": 504.0,
+      "y1": 732.02
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 712.42,
+       "x1": 504.0,
+       "y1": 721.06
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 723.38,
+       "x1": 504.0,
+       "y1": 732.02
+      }
+     ],
+     "quote": "Once obtained, the normalized attention coefficients are used to compute a linear combination of the features corresponding to them, to serve as the final output features for every node (after potentially",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "Multi-head attention with independent mechanisms is employed to stabilize the learning process, using concatenation for intermediate layers and averaging for the final prediction layer.",
+   "evidence": [
+    {
+     "chunk_id": "b0033",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 426.59,
+      "x1": 504.0,
+      "y1": 457.46
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 419.85,
+       "y0": 426.59,
+       "x1": 504.0,
+       "y1": 435.54999999999995
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 437.87,
+       "x1": 504.0,
+       "y1": 446.51
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 448.82,
+       "x1": 385.55,
+       "y1": 457.46
+      }
+     ],
+     "quote": "Specifically, K independent attention mechanisms execute the transformation of Equation 4, and then their features are concatenated, resulting in the following output feature representation:",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "The model allows for implicitly assigning different importances to nodes of the same neighborhood, enabling higher model capacity and interpretability compared to GCNs.",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 133.9,
+      "y0": 176.14,
+      "x1": 504.0,
+      "y1": 196.05
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 133.9,
+       "y0": 176.14,
+       "x1": 504.0,
+       "y1": 185.1
+      },
+      {
+       "page": 5,
+       "x0": 143.87,
+       "y0": 187.41,
+       "x1": 407.01,
+       "y1": 196.05
+      }
+     ],
+     "quote": "• As opposed to GCNs, our model allows for (implicitly) assigning different importances to nodes of a same neighborhood, enabling a leap in model capacity.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "The approach does not depend on upfront access to the global graph structure, making it directly applicable to inductive learning on unseen graphs.",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 133.9,
+      "y0": 223.42,
+      "x1": 504.01,
+      "y1": 254.29000000000002
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 133.9,
+       "y0": 223.42,
+       "x1": 504.0,
+       "y1": 232.38
+      },
+      {
+       "page": 5,
+       "x0": 143.87,
+       "y0": 234.69,
+       "x1": 504.01,
+       "y1": 243.32999999999998
+      },
+      {
+       "page": 5,
+       "x0": 143.87,
+       "y0": 245.65,
+       "x1": 338.53,
+       "y1": 254.29000000000002
+      }
+     ],
+     "quote": "The attention mechanism is applied in a shared manner to all edges in the graph, and therefore it does not depend on upfront access to the global graph structure or (features of) all of its nodes (a limitation of many prior techniques).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.2",
+   "value": "Unlike some prior inductive methods, the approach works with the entirety of the neighborhood without assuming any consistent sequential node ordering.",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 143.87,
+      "y0": 374.54,
+      "x1": 504.01,
+      "y1": 416.06
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 446.95,
+       "y0": 374.54,
+       "x1": 504.01,
+       "y1": 383.18
+      },
+      {
+       "page": 5,
+       "x0": 143.87,
+       "y0": 385.5,
+       "x1": 504.01,
+       "y1": 394.14
+      },
+      {
+       "page": 5,
+       "x0": 143.87,
+       "y0": 396.46,
+       "x1": 504.01,
+       "y1": 405.09999999999997
+      },
+      {
+       "page": 5,
+       "x0": 143.87,
+       "y0": 407.42,
+       "x1": 378.83000000000004,
+       "y1": 416.06
+      }
+     ],
+     "quote": "Our technique does not suffer from either of these issues-it works with the entirety of the neighborhood (at the expense of a variable computational footprint, which is still on-par with methods like the GCN), and does not assume any ordering within it.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "Cora dataset for transductive learning task",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 189.12899780273438,
+      "y0": 91.8643798828125,
+      "x1": 422.8714904785156,
+      "y1": 100.77094268798828
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 189.12899780273438,
+       "y0": 91.8643798828125,
+       "x1": 422.8714904785156,
+       "y1": 100.77094268798828
+      }
+     ],
+     "quote": "Table 1: Summary of the datasets used in our experiments.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Cora",
+   "split": "Transductive",
+   "size": "2708 (1 graph)",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "Citeseer dataset for transductive learning task",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 189.12899780273438,
+      "y0": 91.8643798828125,
+      "x1": 422.8714904785156,
+      "y1": 100.77094268798828
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 189.12899780273438,
+       "y0": 91.8643798828125,
+       "x1": 422.8714904785156,
+       "y1": 100.77094268798828
+      }
+     ],
+     "quote": "Table 1: Summary of the datasets used in our experiments.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Citeseer",
+   "split": "Transductive",
+   "size": "3327 (1 graph)",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "Pubmed dataset for transductive learning task",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 189.12899780273438,
+      "y0": 91.8643798828125,
+      "x1": 422.8714904785156,
+      "y1": 100.77094268798828
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 189.12899780273438,
+       "y0": 91.8643798828125,
+       "x1": 422.8714904785156,
+       "y1": 100.77094268798828
+      }
+     ],
+     "quote": "Table 1: Summary of the datasets used in our experiments.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Pubmed",
+   "split": "Transductive",
+   "size": "19717 (1 graph)",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "PPI protein-protein interaction dataset for inductive learning task",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 189.12899780273438,
+      "y0": 91.8643798828125,
+      "x1": 422.8714904785156,
+      "y1": 100.77094268798828
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 189.12899780273438,
+       "y0": 91.8643798828125,
+       "x1": 422.8714904785156,
+       "y1": 100.77094268798828
+      }
+     ],
+     "quote": "Table 1: Summary of the datasets used in our experiments.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "PPI",
+   "split": "Inductive",
+   "size": "56944 (24 graphs)",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Label propagation (LP)",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 600.14,
+      "x1": 504.0,
+      "y1": 652.61
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 426.37,
+       "y0": 600.14,
+       "x1": 504.0,
+       "y1": 608.78
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 611.1,
+       "x1": 504.0,
+       "y1": 619.74
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 622.06,
+       "x1": 504.0,
+       "y1": 630.6999999999999
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 633.02,
+       "x1": 504.0,
+       "y1": 641.66
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 643.97,
+       "x1": 225.35,
+       "y1": 652.61
+      }
+     ],
+     "quote": "This includes label propagation (LP) (Zhu et al., 2003), semi-supervised embedding (SemiEmb) (Weston et al., 2012), manifold regularization (ManiReg) (Belkin et al., 2006), skip-gram based graph embeddings (Deep-Walk) (Perozzi et al., 2014), the iterative classification algorithm (ICA) (Lu & Getoor, 2003) and Planetoid (Yang et al., 2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Semi-supervised embedding (SemiEmb)",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 600.14,
+      "x1": 504.0,
+      "y1": 652.61
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 426.37,
+       "y0": 600.14,
+       "x1": 504.0,
+       "y1": 608.78
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 611.1,
+       "x1": 504.0,
+       "y1": 619.74
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 622.06,
+       "x1": 504.0,
+       "y1": 630.6999999999999
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 633.02,
+       "x1": 504.0,
+       "y1": 641.66
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 643.97,
+       "x1": 225.35,
+       "y1": 652.61
+      }
+     ],
+     "quote": "This includes label propagation (LP) (Zhu et al., 2003), semi-supervised embedding (SemiEmb) (Weston et al., 2012), manifold regularization (ManiReg) (Belkin et al., 2006), skip-gram based graph embeddings (Deep-Walk) (Perozzi et al., 2014), the iterative classification algorithm (ICA) (Lu & Getoor, 2003) and Planetoid (Yang et al., 2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "Manifold regularization (ManiReg)",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 600.14,
+      "x1": 504.0,
+      "y1": 652.61
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 426.37,
+       "y0": 600.14,
+       "x1": 504.0,
+       "y1": 608.78
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 611.1,
+       "x1": 504.0,
+       "y1": 619.74
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 622.06,
+       "x1": 504.0,
+       "y1": 630.6999999999999
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 633.02,
+       "x1": 504.0,
+       "y1": 641.66
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 643.97,
+       "x1": 225.35,
+       "y1": 652.61
+      }
+     ],
+     "quote": "This includes label propagation (LP) (Zhu et al., 2003), semi-supervised embedding (SemiEmb) (Weston et al., 2012), manifold regularization (ManiReg) (Belkin et al., 2006), skip-gram based graph embeddings (Deep-Walk) (Perozzi et al., 2014), the iterative classification algorithm (ICA) (Lu & Getoor, 2003) and Planetoid (Yang et al., 2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "DeepWalk",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 600.14,
+      "x1": 504.0,
+      "y1": 652.61
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 426.37,
+       "y0": 600.14,
+       "x1": 504.0,
+       "y1": 608.78
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 611.1,
+       "x1": 504.0,
+       "y1": 619.74
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 622.06,
+       "x1": 504.0,
+       "y1": 630.6999999999999
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 633.02,
+       "x1": 504.0,
+       "y1": 641.66
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 643.97,
+       "x1": 225.35,
+       "y1": 652.61
+      }
+     ],
+     "quote": "This includes label propagation (LP) (Zhu et al., 2003), semi-supervised embedding (SemiEmb) (Weston et al., 2012), manifold regularization (ManiReg) (Belkin et al., 2006), skip-gram based graph embeddings (Deep-Walk) (Perozzi et al., 2014), the iterative classification algorithm (ICA) (Lu & Getoor, 2003) and Planetoid (Yang et al., 2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "Iterative classification algorithm (ICA)",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 600.14,
+      "x1": 504.0,
+      "y1": 652.61
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 426.37,
+       "y0": 600.14,
+       "x1": 504.0,
+       "y1": 608.78
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 611.1,
+       "x1": 504.0,
+       "y1": 619.74
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 622.06,
+       "x1": 504.0,
+       "y1": 630.6999999999999
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 633.02,
+       "x1": 504.0,
+       "y1": 641.66
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 643.97,
+       "x1": 225.35,
+       "y1": 652.61
+      }
+     ],
+     "quote": "This includes label propagation (LP) (Zhu et al., 2003), semi-supervised embedding (SemiEmb) (Weston et al., 2012), manifold regularization (ManiReg) (Belkin et al., 2006), skip-gram based graph embeddings (Deep-Walk) (Perozzi et al., 2014), the iterative classification algorithm (ICA) (Lu & Getoor, 2003) and Planetoid (Yang et al., 2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "Planetoid",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 600.14,
+      "x1": 504.0,
+      "y1": 652.61
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 426.37,
+       "y0": 600.14,
+       "x1": 504.0,
+       "y1": 608.78
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 611.1,
+       "x1": 504.0,
+       "y1": 619.74
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 622.06,
+       "x1": 504.0,
+       "y1": 630.6999999999999
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 633.02,
+       "x1": 504.0,
+       "y1": 641.66
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 643.97,
+       "x1": 225.35,
+       "y1": 652.61
+      }
+     ],
+     "quote": "This includes label propagation (LP) (Zhu et al., 2003), semi-supervised embedding (SemiEmb) (Weston et al., 2012), manifold regularization (ManiReg) (Belkin et al., 2006), skip-gram based graph embeddings (Deep-Walk) (Perozzi et al., 2014), the iterative classification algorithm (ICA) (Lu & Getoor, 2003) and Planetoid (Yang et al., 2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "GCNs",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 643.97,
+      "x1": 504.01,
+      "y1": 674.53
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 229.01,
+       "y0": 643.97,
+       "x1": 504.01,
+       "y1": 652.61
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 654.93,
+       "x1": 504.0,
+       "y1": 663.5699999999999
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 665.89,
+       "x1": 378.89,
+       "y1": 674.53
+      }
+     ],
+     "quote": "We also directly compare our model against GCNs (Kipf & Welling, 2017), as well as graph convolutional models utilising higher-order Chebyshev filters (Defferrard et al., 2016), and the MoNet model presented in Monti et al. (2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.7",
+   "value": "Chebyshev filters graph convolutional models",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 643.97,
+      "x1": 504.01,
+      "y1": 674.53
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 229.01,
+       "y0": 643.97,
+       "x1": 504.01,
+       "y1": 652.61
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 654.93,
+       "x1": 504.0,
+       "y1": 663.5699999999999
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 665.89,
+       "x1": 378.89,
+       "y1": 674.53
+      }
+     ],
+     "quote": "We also directly compare our model against GCNs (Kipf & Welling, 2017), as well as graph convolutional models utilising higher-order Chebyshev filters (Defferrard et al., 2016), and the MoNet model presented in Monti et al. (2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.8",
+   "value": "MoNet",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 643.97,
+      "x1": 504.01,
+      "y1": 674.53
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 229.01,
+       "y0": 643.97,
+       "x1": 504.01,
+       "y1": 652.61
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 654.93,
+       "x1": 504.0,
+       "y1": 663.5699999999999
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 665.89,
+       "x1": 378.89,
+       "y1": 674.53
+      }
+     ],
+     "quote": "We also directly compare our model against GCNs (Kipf & Welling, 2017), as well as graph convolutional models utilising higher-order Chebyshev filters (Defferrard et al., 2016), and the MoNet model presented in Monti et al. (2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.9",
+   "value": "GraphSAGE-GCN",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 690.11,
+      "x1": 504.0,
+      "y1": 710.1
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 690.11,
+       "x1": 504.0,
+       "y1": 699.14
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 701.46,
+       "x1": 405.27,
+       "y1": 710.1
+      }
+     ],
+     "quote": "For the inductive learning task, we compare against the four different supervised GraphSAGE inductive methods presented in Hamilton et al. (2017).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.10",
+   "value": "GraphSAGE-mean",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 690.11,
+      "x1": 504.0,
+      "y1": 710.1
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 690.11,
+       "x1": 504.0,
+       "y1": 699.14
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 701.46,
+       "x1": 405.27,
+       "y1": 710.1
+      }
+     ],
+     "quote": "For the inductive learning task, we compare against the four different supervised GraphSAGE inductive methods presented in Hamilton et al. (2017).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.11",
+   "value": "GraphSAGE-LSTM",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 690.11,
+      "x1": 504.0,
+      "y1": 710.1
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 690.11,
+       "x1": 504.0,
+       "y1": 699.14
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 701.46,
+       "x1": 405.27,
+       "y1": 710.1
+      }
+     ],
+     "quote": "For the inductive learning task, we compare against the four different supervised GraphSAGE inductive methods presented in Hamilton et al. (2017).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.12",
+   "value": "GraphSAGE-pool",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 690.11,
+      "x1": 504.0,
+      "y1": 710.1
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 690.11,
+       "x1": 504.0,
+       "y1": 699.14
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 701.46,
+       "x1": 405.27,
+       "y1": 710.1
+      }
+     ],
+     "quote": "For the inductive learning task, we compare against the four different supervised GraphSAGE inductive methods presented in Hamilton et al. (2017).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.13",
+   "value": "Per-node shared multilayer perceptron (MLP) classifier",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 157.07,
+      "x1": 504.0,
+      "y1": 176.67000000000002
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 157.07,
+       "x1": 504.0,
+       "y1": 165.70999999999998
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 168.03,
+       "x1": 368.08,
+       "y1": 176.67000000000002
+      }
+     ],
+     "quote": "Additionally, for both tasks we provide the performance of a per-node shared multilayer perceptron (MLP) classifier (that does not incorporate graph structure at all).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Mean classification accuracy (with standard deviation)",
+   "evidence": [
+    {
+     "chunk_id": "b0060",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 600.52,
+      "x1": 504.0,
+      "y1": 631.08
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 600.52,
+       "x1": 504.0,
+       "y1": 609.16
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 611.48,
+       "x1": 504.0,
+       "y1": 620.12
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 622.44,
+       "x1": 352.4,
+       "y1": 631.08
+      }
+     ],
+     "quote": "For the transductive tasks, we report the mean classification accuracy (with standard deviation) on the test nodes of our method after 100 runs, and reuse the metrics already reported in Kipf & Welling (2017) and Monti et al. (2016) for state-of-the-art techniques.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Micro-averaged F1 score",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 694.17,
+      "x1": 504.0,
+      "y1": 713.77
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 694.17,
+       "x1": 504.0,
+       "y1": 703.5
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 705.13,
+       "x1": 504.0,
+       "y1": 713.77
+      },
+      {
+       "page": 8,
+       "x0": 180.27,
+       "y0": 160.36,
+       "x1": 260.24,
+       "y1": 169.0
+      },
+      {
+       "page": 8,
+       "x0": 294.5,
+       "y0": 160.36,
+       "x1": 320.23,
+       "y1": 169.0
+      },
+      {
+       "page": 8,
+       "x0": 357.37,
+       "y0": 160.36,
+       "x1": 383.1,
+       "y1": 169.0
+      },
+      {
+       "page": 8,
+       "x0": 420.24,
+       "y0": 160.36,
+       "x1": 445.97,
+       "y1": 169.0
+      },
+      {
+       "page": 8,
+       "x0": 140.84,
+       "y0": 171.32,
+       "x1": 265.67,
+       "y1": 179.95999999999998
+      },
+      {
+       "page": 8,
+       "x0": 294.5,
+       "y0": 171.32,
+       "x1": 320.23,
+       "y1": 179.95999999999998
+      },
+      {
+       "page": 8,
+       "x0": 357.37,
+       "y0": 171.32,
+       "x1": 383.1,
+       "y1": 179.95999999999998
+      },
+      {
+       "page": 8,
+       "x0": 420.24,
+       "y0": 171.32,
+       "x1": 445.97,
+       "y1": 179.95999999999998
+      },
+      {
+       "page": 8,
+       "x0": 140.84,
+       "y0": 182.28,
+       "x1": 224.41,
+       "y1": 190.92000000000002
+      },
+      {
+       "page": 8,
+       "x0": 294.5,
+       "y0": 182.28,
+       "x1": 320.23,
+       "y1": 190.92000000000002
+      },
+      {
+       "page": 8,
+       "x0": 357.37,
+       "y0": 182.28,
+       "x1": 383.1,
+       "y1": 190.92000000000002
+      },
+      {
+       "page": 8,
+       "x0": 420.24,
+       "y0": 182.28,
+       "x1": 445.97,
+       "y1": 190.92000000000002
+      },
+      {
+       "page": 8,
+       "x0": 140.84,
+       "y0": 193.24,
+       "x1": 268.40999999999997,
+       "y1": 201.88
+      },
+      {
+       "page": 8,
+       "x0": 294.5,
+       "y0": 193.24,
+       "x1": 320.23,
+       "y1": 201.88
+      },
+      {
+       "page": 8,
+       "x0": 357.37,
+       "y0": 193.24,
+       "x1": 383.1,
+       "y1": 201.88
+      },
+      {
+       "page": 8,
+       "x0": 420.24,
+       "y0": 193.24,
+       "x1": 445.97,
+       "y1": 201.88
+      },
+      {
+       "page": 8,
+       "x0": 140.84,
+       "y0": 204.2,
+       "x1": 243.49,
+       "y1": 212.83999999999997
+      },
+      {
+       "page": 8,
+       "x0": 294.5,
+       "y0": 204.2,
+       "x1": 320.23,
+       "y1": 212.83999999999997
+      },
+      {
+       "page": 8,
+       "x0": 357.37,
+       "y0": 204.2,
+       "x1": 383.1,
+       "y1": 212.83999999999997
+      },
+      {
+       "page": 8,
+       "x0": 420.24,
+       "y0": 204.2,
+       "x1": 445.97,
+       "y1": 212.83999999999997
+      },
+      {
+       "page": 8,
+       "x0": 140.84,
+       "y0": 215.16,
+       "x1": 254.95,
+       "y1": 223.8
+      },
+      {
+       "page": 8,
+       "x0": 294.5,
+       "y0": 215.16,
+       "x1": 320.23,
+       "y1": 223.8
+      },
+      {
+       "page": 8,
+       "x0": 357.37,
+       "y0": 215.16,
+       "x1": 383.1,
+       "y1": 223.8
+      },
+      {
+       "page": 8,
+       "x0": 420.24,
+       "y0": 215.16,
+       "x1": 445.97,
+       "y1": 223.8
+      },
+      {
+       "page": 8,
+       "x0": 140.84,
+       "y0": 226.12,
+       "x1": 282.53999999999996,
+       "y1": 234.76
+      },
+      {
+       "page": 8,
+       "x0": 370.16,
+       "y0": 488.01,
+       "x1": 427.72,
+       "y1": 497.03999999999996
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 531.1,
+       "x1": 192.42000000000002,
+       "y1": 539.74
+      }
+     ],
+     "quote": "For the inductive task, we report the micro-averaged F 1 score on the nodes of the two unseen test graphs, averaged after 10 runs, and reuse the metrics already reported in Hamilton et al. (2017) for the other techniques.",
+     "grounding_status": "verified",
+     "match_score": 95.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "L2 regularization weight for Cora and Citeseer",
+   "evidence": [
+    {
+     "chunk_id": "b0055",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 278.65,
+      "x1": 504.0,
+      "y1": 298.57
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 341.14,
+       "y0": 278.65,
+       "x1": 504.0,
+       "y1": 288.29999999999995
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 289.61,
+       "x1": 200.06,
+       "y1": 298.57
+      }
+     ],
+     "quote": "During training, we apply L 2 regularization with ͕ = 0.0005.",
+     "grounding_status": "verified",
+     "match_score": 98.4
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "L2 regularization",
+   "value_raw": "͕ = 0.0005",
+   "value_norm": null,
+   "scope": "transductive training"
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Dropout probability",
+   "evidence": [
+    {
+     "chunk_id": "b0055",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 289.61,
+      "x1": 504.0,
+      "y1": 320.47999999999996
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 205.58,
+       "y0": 289.61,
+       "x1": 504.0,
+       "y1": 298.57
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 300.71,
+       "x1": 504.0,
+       "y1": 309.53
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 311.84,
+       "x1": 462.57,
+       "y1": 320.47999999999996
+      }
+     ],
+     "quote": "Furthermore, dropout (Srivastava et al., 2014) with p = 0.6 is applied to both layers' inputs, as well as to the normalized attention coefficients (critically, this means that at each training iteration, each node is exposed to a stochastically sampled neighborhood).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "dropout",
+   "value_raw": "p = 0.6",
+   "value_norm": null,
+   "scope": "transductive training"
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "L2 regularization weight for Pubmed",
+   "evidence": [
+    {
+     "chunk_id": "b0055",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 311.84,
+      "x1": 504.0,
+      "y1": 354.04999999999995
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 466.91,
+       "y0": 311.84,
+       "x1": 504.0,
+       "y1": 320.47999999999996
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 322.8,
+       "x1": 504.0,
+       "y1": 331.44
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 333.44,
+       "x1": 504.0,
+       "y1": 342.4
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 344.4,
+       "x1": 342.72,
+       "y1": 354.04999999999995
+      }
+     ],
+     "quote": "Similarly as observed by Monti et al. (2016), we found that Pubmed's training set size (60 examples) required slight changes to the GAT architecture: we have applied K = 8 output attention heads (instead of one), and strengthened the L 2 regularization to ͕ = 0.001.",
+     "grounding_status": "verified",
+     "match_score": 99.6
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "L2 regularization",
+   "value_raw": "͕ = 0.001",
+   "value_norm": null,
+   "scope": "Pubmed training"
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Batch size for training",
+   "evidence": [
+    {
+     "chunk_id": "b0056",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 294.62,
+      "y0": 444.75,
+      "x1": 490.82,
+      "y1": 453.39
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 294.62,
+       "y0": 444.75,
+       "x1": 490.82,
+       "y1": 453.39
+      }
+     ],
+     "quote": "We utilize a batch size of 2 graphs during training.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "2 graphs",
+   "value_norm": null,
+   "scope": "inductive training"
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Initial learning rate for Pubmed",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 494.56,
+      "x1": 504.0,
+      "y1": 525.12
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 494.56,
+       "x1": 504.0,
+       "y1": 503.2
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 505.52,
+       "x1": 504.0,
+       "y1": 514.16
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 516.48,
+       "x1": 414.52,
+       "y1": 525.12
+      }
+     ],
+     "quote": "Both models are initialized using Glorot initialization (Glorot & Bengio, 2010) and trained to minimize cross-entropy on the training nodes using the Adam SGD optimizer (Kingma & Ba, 2014) with an initial learning rate of 0.01 for Pubmed, and 0.005 for all other datasets.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.01",
+   "value_norm": 0.01,
+   "scope": "Pubmed training"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Initial learning rate for all datasets other than Pubmed",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 494.56,
+      "x1": 504.0,
+      "y1": 525.12
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 494.56,
+       "x1": 504.0,
+       "y1": 503.2
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 505.52,
+       "x1": 504.0,
+       "y1": 514.16
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 516.48,
+       "x1": 414.52,
+       "y1": 525.12
+      }
+     ],
+     "quote": "Both models are initialized using Glorot initialization (Glorot & Bengio, 2010) and trained to minimize cross-entropy on the training nodes using the Adam SGD optimizer (Kingma & Ba, 2014) with an initial learning rate of 0.01 for Pubmed, and 0.005 for all other datasets.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.005",
+   "value_norm": 0.005,
+   "scope": "non-Pubmed training"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Early stopping patience in epochs",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 516.48,
+      "x1": 504.0,
+      "y1": 547.04
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 419.54,
+       "y0": 516.48,
+       "x1": 504.0,
+       "y1": 525.12
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 527.44,
+       "x1": 503.5,
+       "y1": 536.7700000000001
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 538.4,
+       "x1": 399.92,
+       "y1": 547.04
+      }
+     ],
+     "quote": "In both cases we use an early stopping strategy on both the cross-entropy loss and accuracy (transductive) or micro-F 1 (inductive) score on the validation nodes, with a patience of 100 epochsfoot_0 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "early stopping patience",
+   "value_raw": "100 epochs",
+   "value_norm": null,
+   "scope": ""
+  }
+ ],
+ "compute": [],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "100 runs for transductive tasks",
+   "evidence": [
+    {
+     "chunk_id": "b0060",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 600.52,
+      "x1": 504.0,
+      "y1": 631.08
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 600.52,
+       "x1": 504.0,
+       "y1": 609.16
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 611.48,
+       "x1": 504.0,
+       "y1": 620.12
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 622.44,
+       "x1": 352.4,
+       "y1": 631.08
+      }
+     ],
+     "quote": "For the transductive tasks, we report the mean classification accuracy (with standard deviation) on the test nodes of our method after 100 runs, and reuse the metrics already reported in Kipf & Welling (2017) and Monti et al. (2016) for state-of-the-art techniques.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "seeds_and_runs.1",
+   "value": "10 runs for inductive task",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 694.17,
+      "x1": 504.0,
+      "y1": 713.77
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 694.17,
+       "x1": 504.0,
+       "y1": 703.5
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 705.13,
+       "x1": 504.0,
+       "y1": 713.77
+      },
+      {
+       "page": 8,
+       "x0": 180.27,
+       "y0": 160.36,
+       "x1": 260.24,
+       "y1": 169.0
+      },
+      {
+       "page": 8,
+       "x0": 294.5,
+       "y0": 160.36,
+       "x1": 320.23,
+       "y1": 169.0
+      },
+      {
+       "page": 8,
+       "x0": 357.37,
+       "y0": 160.36,
+       "x1": 383.1,
+       "y1": 169.0
+      },
+      {
+       "page": 8,
+       "x0": 420.24,
+       "y0": 160.36,
+       "x1": 445.97,
+       "y1": 169.0
+      },
+      {
+       "page": 8,
+       "x0": 140.84,
+       "y0": 171.32,
+       "x1": 265.67,
+       "y1": 179.95999999999998
+      },
+      {
+       "page": 8,
+       "x0": 294.5,
+       "y0": 171.32,
+       "x1": 320.23,
+       "y1": 179.95999999999998
+      },
+      {
+       "page": 8,
+       "x0": 357.37,
+       "y0": 171.32,
+       "x1": 383.1,
+       "y1": 179.95999999999998
+      },
+      {
+       "page": 8,
+       "x0": 420.24,
+       "y0": 171.32,
+       "x1": 445.97,
+       "y1": 179.95999999999998
+      },
+      {
+       "page": 8,
+       "x0": 140.84,
+       "y0": 182.28,
+       "x1": 224.41,
+       "y1": 190.92000000000002
+      },
+      {
+       "page": 8,
+       "x0": 294.5,
+       "y0": 182.28,
+       "x1": 320.23,
+       "y1": 190.92000000000002
+      },
+      {
+       "page": 8,
+       "x0": 357.37,
+       "y0": 182.28,
+       "x1": 383.1,
+       "y1": 190.92000000000002
+      },
+      {
+       "page": 8,
+       "x0": 420.24,
+       "y0": 182.28,
+       "x1": 445.97,
+       "y1": 190.92000000000002
+      },
+      {
+       "page": 8,
+       "x0": 140.84,
+       "y0": 193.24,
+       "x1": 268.40999999999997,
+       "y1": 201.88
+      },
+      {
+       "page": 8,
+       "x0": 294.5,
+       "y0": 193.24,
+       "x1": 320.23,
+       "y1": 201.88
+      },
+      {
+       "page": 8,
+       "x0": 357.37,
+       "y0": 193.24,
+       "x1": 383.1,
+       "y1": 201.88
+      },
+      {
+       "page": 8,
+       "x0": 420.24,
+       "y0": 193.24,
+       "x1": 445.97,
+       "y1": 201.88
+      },
+      {
+       "page": 8,
+       "x0": 140.84,
+       "y0": 204.2,
+       "x1": 243.49,
+       "y1": 212.83999999999997
+      },
+      {
+       "page": 8,
+       "x0": 294.5,
+       "y0": 204.2,
+       "x1": 320.23,
+       "y1": 212.83999999999997
+      },
+      {
+       "page": 8,
+       "x0": 357.37,
+       "y0": 204.2,
+       "x1": 383.1,
+       "y1": 212.83999999999997
+      },
+      {
+       "page": 8,
+       "x0": 420.24,
+       "y0": 204.2,
+       "x1": 445.97,
+       "y1": 212.83999999999997
+      },
+      {
+       "page": 8,
+       "x0": 140.84,
+       "y0": 215.16,
+       "x1": 254.95,
+       "y1": 223.8
+      },
+      {
+       "page": 8,
+       "x0": 294.5,
+       "y0": 215.16,
+       "x1": 320.23,
+       "y1": 223.8
+      },
+      {
+       "page": 8,
+       "x0": 357.37,
+       "y0": 215.16,
+       "x1": 383.1,
+       "y1": 223.8
+      },
+      {
+       "page": 8,
+       "x0": 420.24,
+       "y0": 215.16,
+       "x1": 445.97,
+       "y1": 223.8
+      },
+      {
+       "page": 8,
+       "x0": 140.84,
+       "y0": 226.12,
+       "x1": 282.53999999999996,
+       "y1": 234.76
+      },
+      {
+       "page": 8,
+       "x0": 370.16,
+       "y0": 488.01,
+       "x1": 427.72,
+       "y1": 497.03999999999996
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 531.1,
+       "x1": 192.42000000000002,
+       "y1": 539.74
+      }
+     ],
+     "quote": "For the inductive task, we report the micro-averaged F 1 score on the nodes of the two unseen test graphs, averaged after 10 runs, and reuse the metrics already reported in Hamilton et al. (2017) for the other techniques.",
+     "grounding_status": "verified",
+     "match_score": 95.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "GCN-64* model for transductive tasks evaluating ELU and ReLU activations",
+   "evidence": [
+    {
+     "chunk_id": "b0060",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 644.36,
+      "x1": 504.0,
+      "y1": 685.88
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 240.06,
+       "y0": 644.36,
+       "x1": 504.0,
+       "y1": 653.0
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 655.32,
+       "x1": 504.0,
+       "y1": 663.96
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 666.28,
+       "x1": 280.12,
+       "y1": 674.92
+      },
+      {
+       "page": 7,
+       "x0": 280.12,
+       "y0": 664.38,
+       "x1": 284.2,
+       "y1": 670.5
+      },
+      {
+       "page": 7,
+       "x0": 284.7,
+       "y0": 666.28,
+       "x1": 504.0,
+       "y1": 674.92
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 677.24,
+       "x1": 179.93,
+       "y1": 685.88
+      }
+     ],
+     "quote": "In order to fairly assess the benefits of the attention mechanism, we further evaluate a GCN model that computes 64 hidden features, attempting both the ReLU and ELU activation, and reporting (as GCN-64 * ) the better result after 100 runs (which was the ReLU in all three cases).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Constant attention GAT model (Const-GAT) for inductive task to evaluate attention mechanism",
+   "evidence": [
+    {
+     "chunk_id": "b0056",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 444.75,
+      "x1": 504.0,
+      "y1": 486.27
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 493.73,
+       "y0": 444.75,
+       "x1": 504.0,
+       "y1": 453.39
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 455.71,
+       "x1": 438.13,
+       "y1": 464.34999999999997
+      },
+      {
+       "page": 7,
+       "x0": 441.21,
+       "y0": 455.71,
+       "x1": 504.0,
+       "y1": 464.34999999999997
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 466.49,
+       "x1": 504.0,
+       "y1": 475.31
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 477.31,
+       "x1": 504.0,
+       "y1": 486.27
+      }
+     ],
+     "quote": "To strictly evaluate the benefits of applying an attention mechanism in this setting (i.e. comparing with a near GCN-equivalent model), we also provide the results when a constant attention mechanism, a(x, y) = 1, is used, with the same architecture-this will assign the same weight to every neighbor.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Overcome practical issues to handle larger batch sizes",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 354.1,
+      "x1": 504.0,
+      "y1": 384.65
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 354.1,
+       "x1": 504.0,
+       "y1": 362.74
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 365.05,
+       "x1": 504.0,
+       "y1": 373.69
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 376.01,
+       "x1": 253.81,
+       "y1": 384.65
+      }
+     ],
+     "quote": "There are several potential improvements and extensions to graph attention networks that could be addressed as future work, such as overcoming the practical problems described in subsection 2.2 to be able to handle larger batch sizes.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Analyze model interpretability using the attention mechanism",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 376.01,
+      "x1": 504.0,
+      "y1": 395.61
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 258.92,
+       "y0": 376.01,
+       "x1": 504.0,
+       "y1": 384.65
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 386.97,
+       "x1": 504.0,
+       "y1": 395.61
+      }
+     ],
+     "quote": "A particularly interesting research direction would be taking advantage of the attention mechanism to perform a thorough analysis on the model interpretability.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.2",
+   "value": "Extend the method for graph classification instead of node classification",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 397.93,
+      "x1": 504.0,
+      "y1": 417.53
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 397.93,
+       "x1": 504.0,
+       "y1": 406.57
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 408.89,
+       "x1": 305.02,
+       "y1": 417.53
+      }
+     ],
+     "quote": "Moreover, extending the method to perform graph classification instead of node classification would also be relevant from the application perspective.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/PetarV-/GAT",
+   "evidence": [
+    {
+     "chunk_id": "b0068",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 124.13899993896484,
+      "y0": 723.7827758789062,
+      "x1": 489.0285949707031,
+      "y1": 731.7987670898438
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 124.13899993896484,
+       "y0": 723.7827758789062,
+       "x1": 489.0285949707031,
+       "y1": 731.7987670898438
+      }
+     ],
+     "quote": "Our implementation of the GAT layer may be found at: https://github.com/PetarV-/GAT.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "The GAT models achieved or matched state-of-the-art results on four graph benchmarks.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 428.05,
+      "x1": 468.14,
+      "y1": 469.56
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 246.79,
+       "y0": 428.05,
+       "x1": 468.14,
+       "y1": 436.69
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 439.0,
+       "x1": 468.14,
+       "y1": 447.64
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 449.78,
+       "x1": 468.14,
+       "y1": 458.59999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 460.74,
+       "x1": 459.81,
+       "y1": 469.56
+      }
+     ],
+     "quote": "Our GAT models have achieved or matched state-of-the-art results across four established transductive and inductive graph benchmarks: the Cora, Citeseer and Pubmed citation network datasets, as well as a proteinprotein interaction dataset (wherein test graphs remain unseen during training).",
+     "grounding_status": "verified",
+     "match_score": 99.8
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

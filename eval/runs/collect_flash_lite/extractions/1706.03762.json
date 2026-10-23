@@ -1,0 +1,2136 @@
+{
+ "metadata": {
+  "title": "Attention Is All You Need",
+  "authors": [
+   "Ashish Vaswani",
+   "Noam Shazeer",
+   "Google Brain",
+   "Niki Parmar",
+   "Jakob Uszkoreit",
+   "Llion Jones",
+   "Aidan N Gomez",
+   "Łukasz Kaiser"
+  ],
+  "venue": null,
+  "year": "2023",
+  "arxiv_id": "1706.03762v7[cs.CL]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Recurrent neural models have an inherently sequential nature that precludes parallelization within training examples.",
+   "evidence": [
+    {
+     "chunk_id": "b0006",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 182.0,
+      "x1": 504.35,
+      "y1": 212.45999999999998
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 444.32,
+       "y0": 182.0,
+       "x1": 504.35,
+       "y1": 190.64
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 192.91,
+       "x1": 504.17,
+       "y1": 201.55
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 203.82,
+       "x1": 397.45,
+       "y1": 212.45999999999998
+      }
+     ],
+     "quote": "This inherently sequential nature precludes parallelization within training examples, which becomes critical at longer sequence lengths, as memory constraints limit batching across examples.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Proposing the Transformer, a new simple network architecture based solely on attention mechanisms.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 447.21,
+      "x1": 469.38,
+      "y1": 477.65999999999997
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 198.77,
+       "y0": 447.21,
+       "x1": 469.38,
+       "y1": 455.84999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 458.12,
+       "x1": 468.14,
+       "y1": 466.76
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 469.02,
+       "x1": 176.8,
+       "y1": 477.65999999999997
+      }
+     ],
+     "quote": "We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Machine translation",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 469.02,
+      "x1": 468.48,
+      "y1": 499.47999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 182.93,
+       "y0": 469.02,
+       "x1": 468.13,
+       "y1": 477.65999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 479.93,
+       "x1": 468.48,
+       "y1": 488.57
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 490.84,
+       "x1": 215.38,
+       "y1": 499.47999999999996
+      }
+     ],
+     "quote": "Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly less time to train.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The model follows an encoder-decoder structure using stacked self-attention and point-wise fully connected layers.",
+   "evidence": [
+    {
+     "chunk_id": "b0015",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 107.69,
+      "y0": 437.87,
+      "x1": 505.25,
+      "y1": 468.33
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 107.69,
+       "y0": 437.87,
+       "x1": 504.35,
+       "y1": 446.51
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 448.78,
+       "x1": 505.25,
+       "y1": 457.41999999999996
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 459.69,
+       "x1": 157.57999999999998,
+       "y1": 468.33
+      }
+     ],
+     "quote": "The Transformer follows this overall architecture using stacked self-attention and point-wise, fully connected layers for both the encoder and decoder, shown in the left and right halves of Figure 1, respectively.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "The encoder consists of 6 identical layers with a multi-head self-attention mechanism and a position-wise fully connected feed-forward network, using residual connections and layer normalization.",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 504.13,
+      "x1": 504.0,
+      "y1": 523.68
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 425.12,
+       "y0": 504.13,
+       "x1": 504.0,
+       "y1": 512.77
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 515.04,
+       "x1": 151.82999999999998,
+       "y1": 523.68
+      }
+     ],
+     "quote": "Each layer has two sub-layers.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "The decoder contains 6 identical layers with an additional multi-head attention sub-layer over the encoder output, alongside masked self-attention and feed-forward networks.",
+   "evidence": [
+    {
+     "chunk_id": "b0019",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 592.71,
+      "x1": 504.0,
+      "y1": 623.16
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 420.32,
+       "y0": 592.71,
+       "x1": 503.99,
+       "y1": 601.35
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 603.62,
+       "x1": 504.0,
+       "y1": 612.26
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 614.52,
+       "x1": 285.59000000000003,
+       "y1": 623.16
+      }
+     ],
+     "quote": "In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer, which performs multi-head attention over the output of the encoder stack.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "Scaled dot-product attention computes query, key, and value dot products scaled by the square root of the key dimension and a softmax function.",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 219.97000122070312,
+      "y0": 473.85797119140625,
+      "x1": 313.40594482421875,
+      "y1": 482.7047424316406
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 219.97000122070312,
+       "y0": 473.85797119140625,
+       "x1": 313.40594482421875,
+       "y1": 482.7047424316406
+      }
+     ],
+     "quote": "Attention(Q, K, V ) = softmax( QK T √ d k )V(1)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "Multi-head attention linearly projects queries, keys, and values multiple times in parallel to perform attention functions simultaneously.",
+   "evidence": [
+    {
+     "chunk_id": "b0033",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 107.64,
+      "y0": 650.25,
+      "x1": 505.24,
+      "y1": 681.72
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 650.25,
+       "x1": 505.24,
+       "y1": 660.06
+      },
+      {
+       "page": 4,
+       "x0": 107.64,
+       "y0": 661.16,
+       "x1": 503.99,
+       "y1": 670.12
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 672.07,
+       "x1": 347.81,
+       "y1": 681.72
+      }
+     ],
+     "quote": "Instead of performing a single attention function with d model -dimensional keys, values and queries, we found it beneficial to linearly project the queries, keys and values h times with different, learned linear projections to d k , d k and d v dimensions, respectively.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.5",
+   "value": "Positional encodings using sine and cosine functions of different frequencies are added to the input embeddings to inject sequence order information.",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 256.74,
+      "x1": 504.0,
+      "y1": 276.28999999999996
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 205.24,
+       "y0": 256.74,
+       "x1": 504.0,
+       "y1": 265.38
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 267.65,
+       "x1": 276.51,
+       "y1": 276.28999999999996
+      }
+     ],
+     "quote": "To this end, we add \"positional encodings\" to the input embeddings at the bottoms of the encoder and decoder stacks.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "The Transformer is the first transduction model relying entirely on self-attention to compute representations without sequence-aligned RNNs or convolutions.",
+   "evidence": [
+    {
+     "chunk_id": "b0013",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 107.69,
+      "y0": 581.46,
+      "x1": 505.66,
+      "y1": 611.92
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 107.69,
+       "y0": 581.46,
+       "x1": 504.0,
+       "y1": 590.1
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 592.37,
+       "x1": 505.66,
+       "y1": 601.01
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 603.28,
+       "x1": 227.19,
+       "y1": 611.92
+      }
+     ],
+     "quote": "To the best of our knowledge, however, the Transformer is the first transduction model relying entirely on self-attention to compute representations of its input and output without using sequence-aligned RNNs or convolution.",
+     "grounding_status": "verified",
+     "match_score": 99.8
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "WMT 2014 English-to-German translation task",
+   "evidence": [
+    {
+     "chunk_id": "b0087",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 419.3,
+      "x1": 504.66,
+      "y1": 449.75
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 419.3,
+       "x1": 504.66,
+       "y1": 427.94
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 429.89,
+       "x1": 504.25,
+       "y1": 438.84999999999997
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 440.79,
+       "x1": 363.38,
+       "y1": 449.75
+      }
+     ],
+     "quote": "On the WMT 2014 English-to-German translation task, the big transformer model (Transformer (big) in Table 2) outperforms the best previously reported models (including ensembles) by more than 2.0 BLEU, establishing a new state-of-the-art BLEU score of 28.4.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "WMT 2014 English-to-German",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "English-to-German and English-to-French newstest2014 tests",
+   "evidence": [
+    {
+     "chunk_id": "b0112",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 107.69100189208984,
+      "y0": 72.0003662109375,
+      "x1": 476.8948974609375,
+      "y1": 80.90692901611328
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 107.69100189208984,
+       "y0": 72.0003662109375,
+       "x1": 476.8948974609375,
+       "y1": 80.90692901611328
+      }
+     ],
+     "quote": "Table 2: The Transformer achieves better BLEU scores than previous state-of-the-art models on the English-to-German and English-to-French newstest2014 tests at a fraction of the training cost.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "newstest2014",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "Section 22 development set",
+   "evidence": [
+    {
+     "chunk_id": "b0098",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 107.53,
+      "y0": 691.7,
+      "x1": 504.0,
+      "y1": 722.15
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 107.53,
+       "y0": 691.7,
+       "x1": 503.99,
+       "y1": 700.34
+      },
+      {
+       "page": 9,
+       "x0": 107.67,
+       "y0": 702.61,
+       "x1": 504.0,
+       "y1": 711.25
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 713.51,
+       "x1": 411.46,
+       "y1": 722.15
+      }
+     ],
+     "quote": "We performed only a small number of experiments to select the dropout, both attention and residual (section 5.4), learning rates and beam size on the Section 22 development set, all other parameters remained unchanged from the English-to-German base translation model.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Section 22 development set",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "English-to-German translation development set, newstest2013",
+   "evidence": [
+    {
+     "chunk_id": "b0115",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 138.40330505371094,
+      "y0": 82.90936279296875,
+      "x1": 476.0743103027344,
+      "y1": 91.81592559814453
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 138.40330505371094,
+       "y0": 82.90936279296875,
+       "x1": 476.0743103027344,
+       "y1": 91.81592559814453
+      }
+     ],
+     "quote": "All metrics are on the English-to-German translation development set, newstest2013.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "newstest2013",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "Section 23 of WSJ",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 107.69100189208984,
+      "y0": 72.0003662109375,
+      "x1": 447.85577392578125,
+      "y1": 80.90692901611328
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 107.69100189208984,
+       "y0": 72.0003662109375,
+       "x1": 447.85577392578125,
+       "y1": 80.90692901611328
+      }
+     ],
+     "quote": "Table 4: The Transformer generalizes well to English constituency parsing (Results are on Section 23 of WSJ)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Section 23 of WSJ",
+   "split": "Section 23",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "ByteNet",
+   "evidence": [
+    {
+     "chunk_id": "b0112",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 136.67098999023438,
+      "y0": 124.93634033203125,
+      "x1": 475.3241882324219,
+      "y1": 135.8428955078125
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 136.67098999023438,
+       "y0": 124.93634033203125,
+       "x1": 475.3241882324219,
+       "y1": 135.8428955078125
+      }
+     ],
+     "quote": "ByteNet [18] | 23.75 |  |  |",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Deep-Att + PosUnk",
+   "evidence": [
+    {
+     "chunk_id": "b0112",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 136.67098999023438,
+      "y0": 136.3193359375,
+      "x1": 475.3241882324219,
+      "y1": 147.22589111328125
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 136.67098999023438,
+       "y0": 136.3193359375,
+       "x1": 475.3241882324219,
+       "y1": 147.22589111328125
+      }
+     ],
+     "quote": "Deep-Att + PosUnk [39] |  | 39.2 |  | 1.0 · 10^20",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "GNMT + RL",
+   "evidence": [
+    {
+     "chunk_id": "b0112",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 136.67098999023438,
+      "y0": 147.7012939453125,
+      "x1": 475.3241882324219,
+      "y1": 158.60784912109375
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 136.67098999023438,
+       "y0": 147.7012939453125,
+       "x1": 475.3241882324219,
+       "y1": 158.60784912109375
+      }
+     ],
+     "quote": "GNMT + RL [38] | 24.6 | 39.92 | 2.3 · 10^19 | 1.4 · 10^20",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "ConvS2S",
+   "evidence": [
+    {
+     "chunk_id": "b0112",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 136.67098999023438,
+      "y0": 159.08428955078125,
+      "x1": 475.3241882324219,
+      "y1": 169.9908447265625
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 136.67098999023438,
+       "y0": 159.08428955078125,
+       "x1": 475.3241882324219,
+       "y1": 169.9908447265625
+      }
+     ],
+     "quote": "ConvS2S [9] | 25.16 | 40.46 | 9.6 · 10^18 | 1.5 · 10^20",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "MoE",
+   "evidence": [
+    {
+     "chunk_id": "b0112",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 136.67098999023438,
+      "y0": 170.46624755859375,
+      "x1": 475.3241882324219,
+      "y1": 181.372802734375
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 136.67098999023438,
+       "y0": 170.46624755859375,
+       "x1": 475.3241882324219,
+       "y1": 181.372802734375
+      }
+     ],
+     "quote": "MoE [32] | 26.03 | 40.56 | 2.0 · 10^19 | 1.2 · 10^20",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "Deep-Att + PosUnk Ensemble",
+   "evidence": [
+    {
+     "chunk_id": "b0112",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 136.67098999023438,
+      "y0": 183.1043701171875,
+      "x1": 475.3241882324219,
+      "y1": 194.01092529296875
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 136.67098999023438,
+       "y0": 183.1043701171875,
+       "x1": 475.3241882324219,
+       "y1": 194.01092529296875
+      }
+     ],
+     "quote": "Deep-Att + PosUnk Ensemble [39] |  | 40.4 |  | 8.0 · 10^20",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "GNMT + RL Ensemble",
+   "evidence": [
+    {
+     "chunk_id": "b0112",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 136.67098999023438,
+      "y0": 194.486328125,
+      "x1": 475.3241882324219,
+      "y1": 205.39288330078125
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 136.67098999023438,
+       "y0": 194.486328125,
+       "x1": 475.3241882324219,
+       "y1": 205.39288330078125
+      }
+     ],
+     "quote": "GNMT + RL Ensemble [38] | 26.30 | 41.16 | 1.8 · 10^20 | 1.1 · 10^21",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.7",
+   "value": "ConvS2S Ensemble",
+   "evidence": [
+    {
+     "chunk_id": "b0112",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 136.67098999023438,
+      "y0": 205.86834716796875,
+      "x1": 475.3241882324219,
+      "y1": 216.77490234375
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 136.67098999023438,
+       "y0": 205.86834716796875,
+       "x1": 475.3241882324219,
+       "y1": 216.77490234375
+      }
+     ],
+     "quote": "ConvS2S Ensemble [9] | 26.36 | 41.29 | 7.7 · 10^19 | 1.2 · 10^21",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.8",
+   "value": "Vinyals & Kaiser el al. (2014)",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 151.02699279785156,
+      "y0": 105.33538818359375,
+      "x1": 460.9724426269531,
+      "y1": 116.24195098876953
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 151.02699279785156,
+       "y0": 105.33538818359375,
+       "x1": 460.9724426269531,
+       "y1": 116.24195098876953
+      }
+     ],
+     "quote": "Vinyals & Kaiser el al. (2014) [37] | WSJ only, discriminative | 88.3",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.9",
+   "value": "Petrov et al. (2006)",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 151.02699279785156,
+      "y0": 116.244384765625,
+      "x1": 460.9724426269531,
+      "y1": 127.15094757080078
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 151.02699279785156,
+       "y0": 116.244384765625,
+       "x1": 460.9724426269531,
+       "y1": 127.15094757080078
+      }
+     ],
+     "quote": "Petrov et al. (2006) [29] | WSJ only, discriminative | 90.4",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.10",
+   "value": "Zhu et al. (2013)",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 151.02699279785156,
+      "y0": 127.15338134765625,
+      "x1": 460.9724426269531,
+      "y1": 138.0599365234375
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 151.02699279785156,
+       "y0": 127.15338134765625,
+       "x1": 460.9724426269531,
+       "y1": 138.0599365234375
+      }
+     ],
+     "quote": "Zhu et al. (2013) [40] | WSJ only, discriminative | 90.4",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.11",
+   "value": "Dyer et al. (2016)",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 151.02699279785156,
+      "y0": 138.0623779296875,
+      "x1": 460.9724426269531,
+      "y1": 148.96893310546875
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 151.02699279785156,
+       "y0": 138.0623779296875,
+       "x1": 460.9724426269531,
+       "y1": 148.96893310546875
+      }
+     ],
+     "quote": "Dyer et al. (2016) [8] | WSJ only, discriminative | 91.7",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.12",
+   "value": "Huang & Harper (2009)",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 151.02699279785156,
+      "y0": 170.79034423828125,
+      "x1": 460.9724426269531,
+      "y1": 181.6968994140625
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 151.02699279785156,
+       "y0": 170.79034423828125,
+       "x1": 460.9724426269531,
+       "y1": 181.6968994140625
+      }
+     ],
+     "quote": "Huang & Harper (2009) [14] | semi-supervised | 91.3",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.13",
+   "value": "McClosky et al. (2006)",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 151.02699279785156,
+      "y0": 181.6993408203125,
+      "x1": 460.9724426269531,
+      "y1": 192.60589599609375
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 151.02699279785156,
+       "y0": 181.6993408203125,
+       "x1": 460.9724426269531,
+       "y1": 192.60589599609375
+      }
+     ],
+     "quote": "McClosky et al. (2006) [26] | semi-supervised | 92.1",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.14",
+   "value": "Luong et al. (2015)",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 151.02699279785156,
+      "y0": 214.4263916015625,
+      "x1": 460.9724426269531,
+      "y1": 225.33294677734375
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 151.02699279785156,
+       "y0": 214.4263916015625,
+       "x1": 460.9724426269531,
+       "y1": 225.33294677734375
+      }
+     ],
+     "quote": "Luong et al. (2015) [23] | multi-task | 93.0",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "BLEU score",
+   "evidence": [
+    {
+     "chunk_id": "b0087",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 419.3,
+      "x1": 504.66,
+      "y1": 449.75
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 419.3,
+       "x1": 504.66,
+       "y1": 427.94
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 429.89,
+       "x1": 504.25,
+       "y1": 438.84999999999997
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 440.79,
+       "x1": 363.38,
+       "y1": 449.75
+      }
+     ],
+     "quote": "On the WMT 2014 English-to-German translation task, the big transformer model (Transformer (big) in Table 2) outperforms the best previously reported models (including ensembles) by more than 2.0 BLEU, establishing a new state-of-the-art BLEU score of 28.4.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Perplexity (PPL)",
+   "evidence": [
+    {
+     "chunk_id": "b0115",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 82.90936279296875,
+      "x1": 503.9969177246094,
+      "y1": 102.72492218017578
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 479.1900634765625,
+       "y0": 82.90936279296875,
+       "x1": 503.9969177246094,
+       "y1": 91.81592559814453
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 93.818359375,
+       "x1": 440.0932312011719,
+       "y1": 102.72492218017578
+      }
+     ],
+     "quote": "Listed perplexities are per-wordpiece, according to our byte-pair encoding, and should not be compared to per-word perplexities.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "F1 score",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 151.02699279785156,
+      "y0": 93.90882873535156,
+      "x1": 460.9724426269531,
+      "y1": 104.86520385742188
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 151.02699279785156,
+       "y0": 93.90882873535156,
+       "x1": 460.9724426269531,
+       "y1": 104.86520385742188
+      }
+     ],
+     "quote": "Parser | Training | WSJ 23 F1",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Adam optimizer beta 1",
+   "evidence": [
+    {
+     "chunk_id": "b0078",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 107.53,
+      "y0": 577.35,
+      "x1": 409.64,
+      "y1": 588.5799999999999
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 107.53,
+       "y0": 578.93,
+       "x1": 396.40999999999997,
+       "y1": 588.5799999999999
+      },
+      {
+       "page": 7,
+       "x0": 396.41,
+       "y0": 577.35,
+       "x1": 406.61,
+       "y1": 583.47
+      },
+      {
+       "page": 7,
+       "x0": 407.11,
+       "y0": 579.25,
+       "x1": 409.64,
+       "y1": 587.89
+      }
+     ],
+     "quote": "We used the Adam optimizer [20] with β 1 = 0.9, β 2 = 0.98 and ϵ = 10 -9 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "beta 1",
+   "value_raw": "0.9",
+   "value_norm": 0.9,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Adam optimizer beta 2",
+   "evidence": [
+    {
+     "chunk_id": "b0078",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 107.53,
+      "y0": 577.35,
+      "x1": 409.64,
+      "y1": 588.5799999999999
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 107.53,
+       "y0": 578.93,
+       "x1": 396.40999999999997,
+       "y1": 588.5799999999999
+      },
+      {
+       "page": 7,
+       "x0": 396.41,
+       "y0": 577.35,
+       "x1": 406.61,
+       "y1": 583.47
+      },
+      {
+       "page": 7,
+       "x0": 407.11,
+       "y0": 579.25,
+       "x1": 409.64,
+       "y1": 587.89
+      }
+     ],
+     "quote": "We used the Adam optimizer [20] with β 1 = 0.9, β 2 = 0.98 and ϵ = 10 -9 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "beta 2",
+   "value_raw": "0.98",
+   "value_norm": 0.98,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Adam optimizer epsilon",
+   "evidence": [
+    {
+     "chunk_id": "b0078",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 107.53,
+      "y0": 577.35,
+      "x1": 409.64,
+      "y1": 588.5799999999999
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 107.53,
+       "y0": 578.93,
+       "x1": 396.40999999999997,
+       "y1": 588.5799999999999
+      },
+      {
+       "page": 7,
+       "x0": 396.41,
+       "y0": 577.35,
+       "x1": 406.61,
+       "y1": 583.47
+      },
+      {
+       "page": 7,
+       "x0": 407.11,
+       "y0": 579.25,
+       "x1": 409.64,
+       "y1": 587.89
+      }
+     ],
+     "quote": "We used the Adam optimizer [20] with β 1 = 0.9, β 2 = 0.98 and ϵ = 10 -9 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "epsilon",
+   "value_raw": "10 -9",
+   "value_norm": 1e-9,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Warmup steps",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 654.92,
+      "x1": 504.0,
+      "y1": 674.25
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 469.4,
+       "y0": 654.92,
+       "x1": 504.0,
+       "y1": 663.56
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 665.51,
+       "x1": 208.17000000000002,
+       "y1": 674.25
+      }
+     ],
+     "quote": "We used warmup_steps = 4000.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "warmup_steps",
+   "value_raw": "4000",
+   "value_norm": 4000.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Base model training steps",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 498.84,
+      "x1": 503.99,
+      "y1": 518.39
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 490.91,
+       "y0": 498.84,
+       "x1": 503.99,
+       "y1": 507.47999999999996
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 509.75,
+       "x1": 356.68,
+       "y1": 518.39
+      }
+     ],
+     "quote": "We trained the base models for a total of 100,000 steps or 12 hours.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "training steps",
+   "value_raw": "100,000",
+   "value_norm": 100000.0,
+   "scope": "base model"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Big model training steps",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 107.67,
+      "y0": 520.66,
+      "x1": 504.0,
+      "y1": 540.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 314.92,
+       "y0": 520.66,
+       "x1": 504.0,
+       "y1": 529.3
+      },
+      {
+       "page": 7,
+       "x0": 107.67,
+       "y0": 531.56,
+       "x1": 150.0,
+       "y1": 540.1999999999999
+      }
+     ],
+     "quote": "The big models were trained for 300,000 steps (3.5 days).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "training steps",
+   "value_raw": "300,000",
+   "value_norm": 300000.0,
+   "scope": "big model"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Maximum output length during inference",
+   "evidence": [
+    {
+     "chunk_id": "b0098",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 416.54,
+      "y0": 713.51,
+      "x1": 503.99,
+      "y1": 722.15
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 416.54,
+       "y0": 713.51,
+       "x1": 503.99,
+       "y1": 722.15
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 262.83,
+       "x1": 344.58000000000004,
+       "y1": 271.78999999999996
+      }
+     ],
+     "quote": "During inference, we increased the maximum output length to input length + 300.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "maximum output length",
+   "value_raw": "input length + 300",
+   "value_norm": null,
+   "scope": "inference"
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Beam size",
+   "evidence": [
+    {
+     "chunk_id": "b0098",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 262.83,
+      "x1": 504.25,
+      "y1": 282.7
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 347.68,
+       "y0": 262.83,
+       "x1": 504.25,
+       "y1": 271.78999999999996
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 274.06,
+       "x1": 311.65999999999997,
+       "y1": 282.7
+      }
+     ],
+     "quote": "We used a beam size of 21 and α = 0.3 for both WSJ only and the semi-supervised setting.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "beam size",
+   "value_raw": "21",
+   "value_norm": 21.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "Alpha parameter",
+   "evidence": [
+    {
+     "chunk_id": "b0098",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 262.83,
+      "x1": 504.25,
+      "y1": 282.7
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 347.68,
+       "y0": 262.83,
+       "x1": 504.25,
+       "y1": 271.78999999999996
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 274.06,
+       "x1": 311.65999999999997,
+       "y1": 282.7
+      }
+     ],
+     "quote": "We used a beam size of 21 and α = 0.3 for both WSJ only and the semi-supervised setting.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "alpha",
+   "value_raw": "0.3",
+   "value_norm": 0.3,
+   "scope": ""
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Training hardware consisting of one machine with 8 NVIDIA P100 GPUs",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 107.53,
+      "y0": 487.93,
+      "x1": 390.73,
+      "y1": 496.57
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 107.53,
+       "y0": 487.93,
+       "x1": 390.73,
+       "y1": 496.57
+      }
+     ],
+     "quote": "We trained our models on one machine with 8 NVIDIA P100 GPUs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "compute.1",
+   "value": "Base models training time of 12 hours",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 498.84,
+      "x1": 503.99,
+      "y1": 518.39
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 490.91,
+       "y0": 498.84,
+       "x1": 503.99,
+       "y1": 507.47999999999996
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 509.75,
+       "x1": 356.68,
+       "y1": 518.39
+      }
+     ],
+     "quote": "We trained the base models for a total of 100,000 steps or 12 hours.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "compute.2",
+   "value": "Big models training time of 3.5 days",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 107.67,
+      "y0": 520.66,
+      "x1": 504.0,
+      "y1": 540.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 314.92,
+       "y0": 520.66,
+       "x1": 504.0,
+       "y1": 529.3
+      },
+      {
+       "page": 7,
+       "x0": 107.67,
+       "y0": 531.56,
+       "x1": 150.0,
+       "y1": 540.1999999999999
+      }
+     ],
+     "quote": "The big models were trained for 300,000 steps (3.5 days).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Variations on the Transformer architecture including number of layers, representation dimensions, feed-forward dimensions, attention heads, key/value dimensions, dropout, label smoothing, and positional embeddings",
+   "evidence": [
+    {
+     "chunk_id": "b0115",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 107.69100189208984,
+      "y0": 72.0003662109375,
+      "x1": 208.9384307861328,
+      "y1": 80.90692901611328
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 107.69100189208984,
+       "y0": 72.0003662109375,
+       "x1": 208.9384307861328,
+       "y1": 80.90692901611328
+      }
+     ],
+     "quote": "Table 3: Variations on the Transformer architecture.Unlisted values are identical to those of the base model.All metrics are on the English-to-German translation development set, newstest2013.Listed perplexities are per-wordpiece, according to our byte-pair encoding, and should not be compared to per-word perplexities.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Extend the Transformer to problems with input and output modalities other than text",
+   "evidence": [
+    {
+     "chunk_id": "b0104",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 477.5,
+      "x1": 504.0,
+      "y1": 518.87
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 491.03,
+       "y0": 477.5,
+       "x1": 504.0,
+       "y1": 486.14
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 488.41,
+       "x1": 504.0,
+       "y1": 497.05
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 499.32,
+       "x1": 504.0,
+       "y1": 507.96
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 510.23,
+       "x1": 236.98,
+       "y1": 518.87
+      }
+     ],
+     "quote": "We plan to extend the Transformer to problems involving input and output modalities other than text and to investigate local, restricted attention mechanisms to efficiently handle large inputs and outputs such as images, audio and video.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Investigate local, restricted attention mechanisms to handle large inputs and outputs",
+   "evidence": [
+    {
+     "chunk_id": "b0104",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 477.5,
+      "x1": 504.0,
+      "y1": 518.87
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 491.03,
+       "y0": 477.5,
+       "x1": 504.0,
+       "y1": 486.14
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 488.41,
+       "x1": 504.0,
+       "y1": 497.05
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 499.32,
+       "x1": 504.0,
+       "y1": 507.96
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 510.23,
+       "x1": 236.98,
+       "y1": 518.87
+      }
+     ],
+     "quote": "We plan to extend the Transformer to problems involving input and output modalities other than text and to investigate local, restricted attention mechanisms to efficiently handle large inputs and outputs such as images, audio and video.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.2",
+   "value": "Make generation less sequential",
+   "evidence": [
+    {
+     "chunk_id": "b0104",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 240.07,
+      "y0": 510.23,
+      "x1": 505.61,
+      "y1": 518.87
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 240.07,
+       "y0": 510.23,
+       "x1": 505.61,
+       "y1": 518.87
+      }
+     ],
+     "quote": "Making generation less sequential is another research goals of ours.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/tensorflow/tensor2tensor",
+   "evidence": [
+    {
+     "chunk_id": "b0105",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 107.69,
+      "y0": 526.61,
+      "x1": 400.71999999999997,
+      "y1": 546.2199999999999
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 107.69,
+       "y0": 526.61,
+       "x1": 400.71999999999997,
+       "y1": 535.25
+      },
+      {
+       "page": 10,
+       "x0": 230.87,
+       "y0": 537.92,
+       "x1": 235.99,
+       "y1": 546.2199999999999
+      }
+     ],
+     "quote": "The code we used to train and evaluate our models is available at https://github.com/ tensorflow/tensor2tensor.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "The model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over existing best results by over 2 BLEU.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 490.84,
+      "x1": 469.78999999999996,
+      "y1": 521.3
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 220.12,
+       "y0": 490.84,
+       "x1": 469.78999999999996,
+       "y1": 499.47999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 501.75,
+       "x1": 468.13,
+       "y1": 510.39
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 512.66,
+       "x1": 255.76,
+       "y1": 521.3
+      }
+     ],
+     "quote": "Our model achieves 28.4 BLEU on the WMT 2014 Englishto-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "On WMT 2014 English-to-French, the model establishes a new single-model state-of-the-art BLEU score of 41.8.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 512.66,
+      "x1": 469.38,
+      "y1": 554.03
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 258.04,
+       "y0": 512.66,
+       "x1": 469.38,
+       "y1": 521.3
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 523.57,
+       "x1": 468.31,
+       "y1": 532.21
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 534.48,
+       "x1": 468.13,
+       "y1": 543.12
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 545.39,
+       "x1": 268.21000000000004,
+       "y1": 554.03
+      }
+     ],
+     "quote": "On the WMT 2014 English-to-French translation task, our model establishes a new single-model state-of-the-art BLEU score of 41.8 after training for 3.5 days on eight GPUs, a small fraction of the training costs of the best models from the literature.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "The Transformer generalizes well to other tasks such as English constituency parsing.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 119.82,
+      "y0": 545.39,
+      "x1": 468.14,
+      "y1": 603.2
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 271.31,
+       "y0": 545.39,
+       "x1": 468.13,
+       "y1": 554.03
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 556.3,
+       "x1": 468.14,
+       "y1": 564.9399999999999
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 567.21,
+       "x1": 266.27,
+       "y1": 575.85
+      },
+      {
+       "page": 1,
+       "x0": 119.82,
+       "y0": 597.96,
+       "x1": 121.08999999999999,
+       "y1": 603.2
+      }
+     ],
+     "quote": "We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

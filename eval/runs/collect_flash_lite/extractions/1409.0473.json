@@ -1,0 +1,1265 @@
+{
+ "metadata": {
+  "title": "NEURAL MACHINE TRANSLATION BY JOINTLY LEARNING TO ALIGN AND TRANSLATE",
+  "authors": [
+   "Dzmitry Bahdanau",
+   "Kyunghyun Cho",
+   "Yoshua Bengio"
+  ],
+  "venue": null,
+  "year": "2016",
+  "arxiv_id": "1409.0473v7[cs.CL]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Using a fixed-length vector in encoder-decoder neural machine translation models creates a performance bottleneck, especially for long sentences.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 317.2,
+      "x1": 468.14,
+      "y1": 369.66999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 192.85,
+       "y0": 317.2,
+       "x1": 468.14,
+       "y1": 325.84
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 328.16,
+       "x1": 468.14,
+       "y1": 336.8
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 339.12,
+       "x1": 468.14,
+       "y1": 347.76
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 350.07,
+       "x1": 468.14,
+       "y1": 358.71
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 361.03,
+       "x1": 366.18,
+       "y1": 369.66999999999996
+      }
+     ],
+     "quote": "In this paper, we conjecture that the use of a fixed-length vector is a bottleneck in improving the performance of this basic encoder-decoder architecture, and propose to extend this by allowing a model to automatically (soft-)search for parts of a source sentence that are relevant to predicting a target word, without having to form these parts as a hard segment explicitly.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Extend the encoder-decoder model by allowing it to automatically search for relevant parts of the source sentence when predicting a target word.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 317.2,
+      "x1": 468.14,
+      "y1": 369.66999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 192.85,
+       "y0": 317.2,
+       "x1": 468.14,
+       "y1": 325.84
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 328.16,
+       "x1": 468.14,
+       "y1": 336.8
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 339.12,
+       "x1": 468.14,
+       "y1": 347.76
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 350.07,
+       "x1": 468.14,
+       "y1": 358.71
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 361.03,
+       "x1": 366.18,
+       "y1": 369.66999999999996
+      }
+     ],
+     "quote": "In this paper, we conjecture that the use of a fixed-length vector is a bottleneck in improving the performance of this basic encoder-decoder architecture, and propose to extend this by allowing a model to automatically (soft-)search for parts of a source sentence that are relevant to predicting a target word, without having to form these parts as a hard segment explicitly.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Encode the input sentence into a sequence of vectors and choose a subset of these vectors adaptively during decoding.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 96.3,
+      "x1": 504.01,
+      "y1": 126.86
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 449.59,
+       "y0": 96.3,
+       "x1": 504.01,
+       "y1": 104.94
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 107.26,
+       "x1": 504.0,
+       "y1": 115.9
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 118.22,
+       "x1": 231.91,
+       "y1": 126.86
+      }
+     ],
+     "quote": "Instead, it encodes the input sentence into a sequence of vectors and chooses a subset of these vectors adaptively while decoding the translation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Neural machine translation",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 251.44,
+      "x1": 468.14,
+      "y1": 271.03999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 251.44,
+       "x1": 468.14,
+       "y1": 260.08
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 262.4,
+       "x1": 161.86,
+       "y1": 271.03999999999996
+      }
+     ],
+     "quote": "Neural machine translation is a recently proposed approach to machine translation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "task.1",
+   "value": "English-to-French translation",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 189.95,
+      "x1": 504.0,
+      "y1": 209.55
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 138.93,
+       "y0": 189.95,
+       "x1": 504.0,
+       "y1": 198.58999999999997
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 200.91,
+       "x1": 504.0,
+       "y1": 209.55
+      }
+     ],
+     "quote": "On the task of English-to-French translation, the proposed approach achieves, with a single model, a translation performance comparable, or close, to the conventional phrase-based system.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The proposed architecture consists of a bidirectional RNN encoder and a decoder that computes a distinct context vector for each target word by emulating searching through the source sentence.",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 273.39,
+      "x1": 504.01,
+      "y1": 303.95
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 420.62,
+       "y0": 273.39,
+       "x1": 504.01,
+       "y1": 282.03
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 284.35,
+       "x1": 323.09000000000003,
+       "y1": 292.99
+      },
+      {
+       "page": 3,
+       "x0": 326.85,
+       "y0": 284.35,
+       "x1": 504.0,
+       "y1": 292.99
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 295.31,
+       "x1": 352.86,
+       "y1": 303.95
+      },
+      {
+       "page": 3,
+       "x0": 355.35,
+       "y0": 295.31,
+       "x1": 373.61,
+       "y1": 303.95
+      }
+     ],
+     "quote": "The new architecture consists of a bidirectional RNN as an encoder (Sec. 3.2) and a decoder that emulates searching through a source sentence during decoding a translation (Sec. 3.1).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "An alignment model parameterized as a feedforward neural network computes soft alignments to score how well input positions and output positions match, allowing the model to be trained jointly.",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 712.1,
+      "x1": 504.0,
+      "y1": 732.02
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 712.1,
+       "x1": 504.0,
+       "y1": 721.0600000000001
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 723.38,
+       "x1": 301.51,
+       "y1": 732.02
+      }
+     ],
+     "quote": "We parametrize the alignment model a as a feedforward neural network which is jointly trained with all the other components of the proposed system.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "The encoder utilizes a bidirectional RNN composed of forward and backward RNNs to generate annotations that summarize both preceding and following words for each input word.",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 308.2,
+      "x1": 504.01,
+      "y1": 338.76
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 476.07,
+       "y0": 308.2,
+       "x1": 504.01,
+       "y1": 316.84
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 319.16,
+       "x1": 504.0,
+       "y1": 327.8
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 329.94,
+       "x1": 423.61,
+       "y1": 338.76
+      }
+     ],
+     "quote": "Hence, we propose to use a bidirectional RNN (BiRNN, Schuster and Paliwal, 1997), which has been successfully used recently in speech recognition (see, e.g., Graves et al., 2013).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "Training is performed using the stochastic gradient descent algorithm together with Adadelta to automatically adapt the learning rate for each parameter.",
+   "evidence": [
+    {
+     "chunk_id": "b0173",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 712.42,
+      "x1": 347.72,
+      "y1": 721.06
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 712.42,
+       "x1": 347.72,
+       "y1": 721.06
+      }
+     ],
+     "quote": "We used the stochastic gradient descent (SGD) algorithm.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "Unlike existing encoder-decoder approaches that use a single fixed-length vector, the proposed model conditions each target word probability on a distinct context vector derived from an attention mechanism.",
+   "evidence": [
+    {
+     "chunk_id": "b0030",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 420.83,
+      "x1": 375.24,
+      "y1": 452.08
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 420.83,
+       "x1": 375.24,
+       "y1": 429.46999999999997
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 431.79,
+       "x1": 375.24,
+       "y1": 440.43
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 442.43,
+       "x1": 270.43,
+       "y1": 452.08
+      }
+     ],
+     "quote": "It should be noted that unlike the existing encoder-decoder approach (see Eq. ( 2)), here the probability is conditioned on a distinct context vector c i for each target word y i .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "The alignment is computed as a soft alignment directly by a neural network rather than treated as a latent variable, enabling backpropagation of the cost function gradient for joint training.",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 85.34,
+      "x1": 504.0,
+      "y1": 104.94
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 330.51,
+       "y0": 85.34,
+       "x1": 504.0,
+       "y1": 93.98
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 96.3,
+       "x1": 504.0,
+       "y1": 104.94
+      }
+     ],
+     "quote": "Instead, the alignment model directly computes a soft alignment, which allows the gradient of the cost function to be backpropagated through.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "ACL WMT '14 English-to-French parallel corpora including Europarl, news commentary, UN, and two crawled corpora",
+   "evidence": [
+    {
+     "chunk_id": "b0050",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 547.16,
+      "x1": 504.0,
+      "y1": 577.72
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 435.33,
+       "y0": 547.16,
+       "x1": 504.0,
+       "y1": 555.8
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 558.12,
+       "x1": 315.93,
+       "y1": 566.76
+      },
+      {
+       "page": 4,
+       "x0": 315.93,
+       "y0": 556.45,
+       "x1": 319.42,
+       "y1": 562.5
+      },
+      {
+       "page": 4,
+       "x0": 325.34,
+       "y0": 558.12,
+       "x1": 504.0,
+       "y1": 566.76
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 568.9,
+       "x1": 469.89,
+       "y1": 577.72
+      }
+     ],
+     "quote": "We use the bilingual, parallel corpora provided by ACL WMT '14.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "ACL WMT '14",
+   "split": "",
+   "size": "850M words",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "RNN Encoder-Decoder proposed by Cho et al. (2014a)",
+   "evidence": [
+    {
+     "chunk_id": "b0050",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 547.16,
+      "x1": 504.0,
+      "y1": 577.72
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 435.33,
+       "y0": 547.16,
+       "x1": 504.0,
+       "y1": 555.8
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 558.12,
+       "x1": 315.93,
+       "y1": 566.76
+      },
+      {
+       "page": 4,
+       "x0": 315.93,
+       "y0": 556.45,
+       "x1": 319.42,
+       "y1": 562.5
+      },
+      {
+       "page": 4,
+       "x0": 325.34,
+       "y0": 558.12,
+       "x1": 504.0,
+       "y1": 566.76
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 568.9,
+       "x1": 469.89,
+       "y1": 577.72
+      }
+     ],
+     "quote": "As a comparison, we also report the performance of an RNN Encoder-Decoder which was proposed recently by Cho et al. (2014a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Conventional phrase-based translation system (Moses)",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 646.85,
+      "x1": 504.0,
+      "y1": 677.41
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 482.42,
+       "y0": 646.85,
+       "x1": 504.0,
+       "y1": 655.49
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 657.81,
+       "x1": 504.0,
+       "y1": 666.4499999999999
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 668.77,
+       "x1": 504.0,
+       "y1": 677.41
+      }
+     ],
+     "quote": "More importantly, the performance of the RNNsearch is as high as that of the conventional phrase-based translation system (Moses), when only the sentences consisting of known words are considered.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "BLEU score",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 635.9,
+      "x1": 403.51,
+      "y1": 644.54
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 635.9,
+       "x1": 403.51,
+       "y1": 644.54
+      }
+     ],
+     "quote": "In Table 1, we list the translation performances measured in BLEU score.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "1000 hidden units for encoder and decoder of RNNencdec and RNNsearch",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 408.46,
+      "x1": 418.8,
+      "y1": 418.77
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 410.13,
+       "x1": 415.31,
+       "y1": 418.77
+      },
+      {
+       "page": 5,
+       "x0": 415.31,
+       "y0": 408.46,
+       "x1": 418.8,
+       "y1": 414.51
+      }
+     ],
+     "quote": "The encoder and decoder of the RNNencdec have 1000 hidden units each.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "hidden units",
+   "value_raw": "1000",
+   "value_norm": 1000.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Minibatch stochastic gradient descent (SGD) optimizer with Adadelta",
+   "evidence": [
+    {
+     "chunk_id": "b0054",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 470.91,
+      "x1": 504.0,
+      "y1": 490.5
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 470.91,
+       "x1": 504.0,
+       "y1": 479.55
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 481.86,
+       "x1": 215.57,
+       "y1": 490.5
+      }
+     ],
+     "quote": "We use a minibatch stochastic gradient descent (SGD) algorithm together with Adadelta (Zeiler, 2012) to train each model.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "minibatch stochastic gradient descent (SGD) algorithm together with Adadelta",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Minibatch size of 80 sentences",
+   "evidence": [
+    {
+     "chunk_id": "b0054",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 481.86,
+      "x1": 504.01,
+      "y1": 501.46
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 220.69,
+       "y0": 481.86,
+       "x1": 504.01,
+       "y1": 490.5
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 492.82,
+       "x1": 135.39,
+       "y1": 501.46
+      }
+     ],
+     "quote": "Each SGD update direction is computed using a minibatch of 80 sentences.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "80",
+   "value_norm": 80.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Epsilon parameter for Adadelta",
+   "evidence": [
+    {
+     "chunk_id": "b0173",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 712.42,
+      "x1": 504.0,
+      "y1": 732.02
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 354.75,
+       "y0": 712.42,
+       "x1": 504.0,
+       "y1": 721.06
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 723.06,
+       "x1": 368.9,
+       "y1": 732.02
+      },
+      {
+       "page": 14,
+       "x0": 368.9,
+       "y0": 721.48,
+       "x1": 379.09999999999997,
+       "y1": 727.6
+      },
+      {
+       "page": 14,
+       "x0": 382.81,
+       "y0": 723.06,
+       "x1": 445.02,
+       "y1": 732.02
+      }
+     ],
+     "quote": "Adadelta (Zeiler, 2012) was used to automatically adapt the learning rate of each parameter ( = 10 -6 and ρ = 0.95).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "epsilon",
+   "value_raw": "10 -6",
+   "value_norm": 1e-6,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Rho parameter for Adadelta",
+   "evidence": [
+    {
+     "chunk_id": "b0173",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 712.42,
+      "x1": 504.0,
+      "y1": 732.02
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 354.75,
+       "y0": 712.42,
+       "x1": 504.0,
+       "y1": 721.06
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 723.06,
+       "x1": 368.9,
+       "y1": 732.02
+      },
+      {
+       "page": 14,
+       "x0": 368.9,
+       "y0": 721.48,
+       "x1": 379.09999999999997,
+       "y1": 727.6
+      },
+      {
+       "page": 14,
+       "x0": 382.81,
+       "y0": 723.06,
+       "x1": 445.02,
+       "y1": 732.02
+      }
+     ],
+     "quote": "Adadelta (Zeiler, 2012) was used to automatically adapt the learning rate of each parameter ( = 10 -6 and ρ = 0.95).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "rho",
+   "value_raw": "0.95",
+   "value_norm": 0.95,
+   "scope": ""
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Training time of approximately 5 days per model",
+   "evidence": [
+    {
+     "chunk_id": "b0054",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 138.48,
+      "y0": 492.82,
+      "x1": 334.66999999999996,
+      "y1": 501.46
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 138.48,
+       "y0": 492.82,
+       "x1": 334.66999999999996,
+       "y1": 501.46
+      }
+     ],
+     "quote": "We trained each model for approximately 5 days.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Training models with sentences of length up to 30 words versus length up to 50 words",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 371.28,
+      "x1": 504.0,
+      "y1": 401.84
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 422.28,
+       "y0": 371.28,
+       "x1": 504.0,
+       "y1": 379.91999999999996
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 382.24,
+       "x1": 504.0,
+       "y1": 390.88
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 393.2,
+       "x1": 415.56,
+       "y1": 401.84
+      }
+     ],
+     "quote": "We train each model twice: first with the sentences of length up to 30 words (RNNencdec-30, RNNsearch-30) and then with the sentences of length up to 50 word (RNNencdec-50, RNNsearch-50).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Improving handling of rare and unknown words",
+   "evidence": [
+    {
+     "chunk_id": "b0095",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 701.46,
+      "x1": 418.89,
+      "y1": 710.1
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 701.46,
+       "x1": 418.89,
+       "y1": 710.1
+      }
+     ],
+     "quote": "One of challenges left for the future is to better handle unknown, or rare words.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/lisa-groundhog/GroundHog",
+   "evidence": [
+    {
+     "chunk_id": "b0150",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 126.38099670410156,
+      "y0": 712.9077758789062,
+      "x1": 479.0766296386719,
+      "y1": 720.9237670898438
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 126.38099670410156,
+       "y0": 712.9077758789062,
+       "x1": 479.0766296386719,
+       "y1": 720.9237670898438
+      }
+     ],
+     "quote": "Implementations are available at https://github.com/lisa-groundhog/GroundHog.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "The new approach achieves translation performance comparable to existing state-of-the-art phrase-based systems on English-to-French translation.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 361.03,
+      "x1": 468.14,
+      "y1": 391.59
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 370.32,
+       "y0": 361.03,
+       "x1": 468.13,
+       "y1": 369.66999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 371.99,
+       "x1": 468.14,
+       "y1": 380.63
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 382.95,
+       "x1": 410.29,
+       "y1": 391.59
+      }
+     ],
+     "quote": "With this new approach, we achieve a translation performance comparable to the existing state-of-the-art phrase-based system on the task of English-to-French translation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "Qualitative analysis shows that the soft-alignments found by the model agree well with intuition.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 382.95,
+      "x1": 468.14,
+      "y1": 413.51
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 415.84,
+       "y0": 382.95,
+       "x1": 468.13,
+       "y1": 391.59
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 393.91,
+       "x1": 468.14,
+       "y1": 402.55
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 404.87,
+       "x1": 235.75,
+       "y1": 413.51
+      }
+     ],
+     "quote": "Furthermore, qualitative analysis reveals that the (soft-)alignments found by the model agree well with our intuition.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "The proposed approach of jointly learning to align and translate achieves significantly improved translation performance over the basic encoder-decoder approach.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 157.07,
+      "x1": 504.0,
+      "y1": 176.67000000000002
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 157.07,
+       "x1": 504.0,
+       "y1": 165.70999999999998
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 168.03,
+       "x1": 467.52,
+       "y1": 176.67000000000002
+      }
+     ],
+     "quote": "In this paper, we show that the proposed approach of jointly learning to align and translate achieves significantly improved translation performance over the basic encoder-decoder approach.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

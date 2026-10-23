@@ -1,0 +1,2629 @@
+{
+ "metadata": {
+  "title": "Robust Speech Recognition via Large-Scale Weak Supervision",
+  "authors": [
+   "Alec Radford",
+   "Jong Wook Kim",
+   "Tao Xu",
+   "Greg Brockman",
+   "Christine Mcleavey",
+   "Ilya Sutskever"
+  ],
+  "venue": null,
+  "year": null,
+  "arxiv_id": null,
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Unsupervised pre-trained audio encoders lack equivalent performant decoders, which makes a fine-tuning stage necessary to perform tasks like speech recognition.",
+   "evidence": [
+    {
+     "chunk_id": "b0004",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 55.13,
+      "y0": 533.24,
+      "x1": 291.1,
+      "y1": 601.65
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 55.13,
+       "y0": 533.24,
+       "x1": 291.09000000000003,
+       "y1": 541.88
+      },
+      {
+       "page": 1,
+       "x0": 55.44,
+       "y0": 545.19,
+       "x1": 291.09000000000003,
+       "y1": 553.83
+      },
+      {
+       "page": 1,
+       "x0": 55.19,
+       "y0": 557.15,
+       "x1": 289.44,
+       "y1": 565.79
+      },
+      {
+       "page": 1,
+       "x0": 55.44,
+       "y0": 569.1,
+       "x1": 291.1,
+       "y1": 577.74
+      },
+      {
+       "page": 1,
+       "x0": 55.44,
+       "y0": 581.06,
+       "x1": 289.44,
+       "y1": 589.6999999999999
+      },
+      {
+       "page": 1,
+       "x0": 55.44,
+       "y0": 593.01,
+       "x1": 132.88,
+       "y1": 601.65
+      },
+      {
+       "page": 1,
+       "x0": 132.88,
+       "y0": 591.34,
+       "x1": 136.37,
+       "y1": 597.39
+      },
+      {
+       "page": 1,
+       "x0": 136.87,
+       "y0": 593.01,
+       "x1": 139.41,
+       "y1": 601.65
+      }
+     ],
+     "quote": "These pre-trained audio encoders learn high-quality representations of speech, but because they are purely unsupervised they lack an equivalently performant decoder mapping those representations to usable outputs, necessitating a finetuning stage in order to actually perform a task such as speech recognition 1 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Scaling weakly supervised speech recognition to 680,000 hours of labeled audio data.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 55.44,
+      "y0": 219.98,
+      "x1": 291.18,
+      "y1": 252.52999999999997
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 182.86,
+       "y0": 219.98,
+       "x1": 289.44,
+       "y1": 228.62
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 231.93,
+       "x1": 289.44,
+       "y1": 240.57
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 243.89,
+       "x1": 291.18,
+       "y1": 252.52999999999997
+      }
+     ],
+     "quote": "In this work we close that gap, scaling weakly supervised speech recognition the next order of magnitude to 680,000 hours of labeled audio data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Broadening the scope of weakly supervised pre-training to be multilingual and multitask.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 55.44,
+      "y0": 309.64,
+      "x1": 291.09000000000003,
+      "y1": 354.15
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 309.64,
+       "x1": 291.09000000000003,
+       "y1": 318.28
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 321.6,
+       "x1": 289.44,
+       "y1": 330.24
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 333.55,
+       "x1": 289.44,
+       "y1": 342.19
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 345.51,
+       "x1": 95.1,
+       "y1": 354.15
+      }
+     ],
+     "quote": "In addition to scale, our work also focuses on broadening the scope of weakly supervised pre-training beyond English-only speech recognition to be both multilingual and multitask.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "Releasing inference code and models to serve as a foundation for further research.",
+   "evidence": [
+    {
+     "chunk_id": "b0009",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 55.44,
+      "y0": 471.04,
+      "x1": 289.44,
+      "y1": 514.85
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 80.46,
+       "y0": 471.04,
+       "x1": 289.44,
+       "y1": 479.68
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 482.99,
+       "x1": 289.44,
+       "y1": 491.63
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 494.95,
+       "x1": 132.74,
+       "y1": 503.59
+      },
+      {
+       "page": 2,
+       "x0": 93.93,
+       "y0": 507.84,
+       "x1": 99.47000000000001,
+       "y1": 514.85
+      }
+     ],
+     "quote": "To serve as a foundation for further research on robust speech recognition, we release inference code and models at the following URL: https://github.com/openai/ whisper.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "speech recognition",
+   "evidence": [
+    {
+     "chunk_id": "b0009",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 55.44,
+      "y0": 471.04,
+      "x1": 289.44,
+      "y1": 514.85
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 80.46,
+       "y0": 471.04,
+       "x1": 289.44,
+       "y1": 479.68
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 482.99,
+       "x1": 289.44,
+       "y1": 491.63
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 494.95,
+       "x1": 132.74,
+       "y1": 503.59
+      },
+      {
+       "page": 2,
+       "x0": 93.93,
+       "y0": 507.84,
+       "x1": 99.47000000000001,
+       "y1": 514.85
+      }
+     ],
+     "quote": "To serve as a foundation for further research on robust speech recognition, we release inference code and models at the following URL: https://github.com/openai/ whisper.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "An off-the-shelf encoder-decoder Transformer architecture is used as the core model to avoid confounding findings with model design changes.",
+   "evidence": [
+    {
+     "chunk_id": "b0020",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 55.44,
+      "y0": 275.72,
+      "x1": 289.44,
+      "y1": 308.27
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 237.56,
+       "y0": 275.72,
+       "x1": 289.44,
+       "y1": 284.36
+      },
+      {
+       "page": 3,
+       "x0": 55.44,
+       "y0": 287.67,
+       "x1": 289.44,
+       "y1": 296.31
+      },
+      {
+       "page": 3,
+       "x0": 55.44,
+       "y0": 299.63,
+       "x1": 272.12,
+       "y1": 308.27
+      }
+     ],
+     "quote": "We chose an encoder-decoder Transformer (Vaswani et al., 2017) as this architecture has been well validated to scale reliably.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "Input audio is processed as an 80-channel log-magnitude Mel spectrogram computed on 25-millisecond windows with a 10-millisecond stride.",
+   "evidence": [
+    {
+     "chunk_id": "b0020",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 55.44,
+      "y0": 299.63,
+      "x1": 291.18,
+      "y1": 344.13
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 276.45,
+       "y0": 299.63,
+       "x1": 289.44,
+       "y1": 308.27
+      },
+      {
+       "page": 3,
+       "x0": 55.44,
+       "y0": 311.58,
+       "x1": 291.09000000000003,
+       "y1": 320.21999999999997
+      },
+      {
+       "page": 3,
+       "x0": 55.44,
+       "y0": 323.54,
+       "x1": 289.44,
+       "y1": 332.18
+      },
+      {
+       "page": 3,
+       "x0": 55.44,
+       "y0": 335.49,
+       "x1": 291.18,
+       "y1": 344.13
+      }
+     ],
+     "quote": "All audio is re-sampled to 16,000 Hz, and an 80-channel logmagnitude Mel spectrogram representation is computed on 25-millisecond windows with a stride of 10 milliseconds.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "A minimalist data pre-processing and training approach is used to predict raw transcripts without standardization, removing the need for inverse text normalization.",
+   "evidence": [
+    {
+     "chunk_id": "b0012",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 54.97,
+      "y0": 597.4,
+      "x1": 291.09000000000003,
+      "y1": 665.8199999999999
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 280.98,
+       "y0": 597.4,
+       "x1": 289.44,
+       "y1": 606.04
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 609.36,
+       "x1": 289.44,
+       "y1": 618.0
+      },
+      {
+       "page": 2,
+       "x0": 54.97,
+       "y0": 621.31,
+       "x1": 289.44,
+       "y1": 629.9499999999999
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 633.27,
+       "x1": 291.09000000000003,
+       "y1": 641.91
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 645.22,
+       "x1": 291.09000000000003,
+       "y1": 653.86
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 657.18,
+       "x1": 228.27,
+       "y1": 665.8199999999999
+      }
+     ],
+     "quote": "In contrast to a lot of work on speech recognition, we train Whisper models to predict the raw text of transcripts without any significant standardization, relying on the expressiveness of sequence-to-sequence models to learn to map between utterances and their transcribed form.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "A multitask sequence-to-sequence format uses special tokens fed into the decoder to specify tasks like transcription, translation, language identification, and timestamps.",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 307.44,
+      "y0": 208.02,
+      "x1": 543.1,
+      "y1": 240.57
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 513.26,
+       "y0": 208.02,
+       "x1": 541.4399999999999,
+       "y1": 216.66000000000003
+      },
+      {
+       "page": 3,
+       "x0": 307.44,
+       "y0": 219.98,
+       "x1": 543.1,
+       "y1": 228.62
+      },
+      {
+       "page": 3,
+       "x0": 307.44,
+       "y0": 231.93,
+       "x1": 516.06,
+       "y1": 240.57
+      }
+     ],
+     "quote": "We use a simple format to specify all tasks and conditioning information as a sequence of input tokens to the decoder.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "Models are optimized using AdamW, gradient norm clipping, and linear learning rate decay with data parallelism and FP16 precision.",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 55.08,
+      "y0": 607.83,
+      "x1": 290.69,
+      "y1": 652.34
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 55.44,
+       "y0": 607.83,
+       "x1": 290.69,
+       "y1": 616.47
+      },
+      {
+       "page": 4,
+       "x0": 55.44,
+       "y0": 619.79,
+       "x1": 290.11,
+       "y1": 628.43
+      },
+      {
+       "page": 4,
+       "x0": 55.08,
+       "y0": 631.74,
+       "x1": 289.6,
+       "y1": 640.38
+      },
+      {
+       "page": 4,
+       "x0": 55.44,
+       "y0": 643.7,
+       "x1": 146.07999999999998,
+       "y1": 652.34
+      }
+     ],
+     "quote": "Models were trained with AdamW (Loshchilov & Hutter, 2017) and gradient norm clipping (Pascanu et al., 2013) with a linear learning rate decay to zero after a warmup over the first 2048 updates.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "The approach uses a minimalist data pre-processing pipeline that trains on raw transcripts without significant standardization or inverse text normalization.",
+   "evidence": [
+    {
+     "chunk_id": "b0012",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 54.97,
+      "y0": 597.4,
+      "x1": 291.09000000000003,
+      "y1": 665.8199999999999
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 280.98,
+       "y0": 597.4,
+       "x1": 289.44,
+       "y1": 606.04
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 609.36,
+       "x1": 289.44,
+       "y1": 618.0
+      },
+      {
+       "page": 2,
+       "x0": 54.97,
+       "y0": 621.31,
+       "x1": 289.44,
+       "y1": 629.9499999999999
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 633.27,
+       "x1": 291.09000000000003,
+       "y1": 641.91
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 645.22,
+       "x1": 291.09000000000003,
+       "y1": 653.86
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 657.18,
+       "x1": 228.27,
+       "y1": 665.8199999999999
+      }
+     ],
+     "quote": "In contrast to a lot of work on speech recognition, we train Whisper models to predict the raw text of transcripts without any significant standardization, relying on the expressiveness of sequence-to-sequence models to learn to map between utterances and their transcribed form.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "A single multitask model replaces many individual stages of a traditional speech processing pipeline by handling transcription, translation, voice activity detection, and language identification.",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 55.44,
+      "y0": 482.23,
+      "x1": 541.5999999999999,
+      "y1": 500.96
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 233.01,
+       "y0": 482.23,
+       "x1": 541.5999999999999,
+       "y1": 490.0
+      },
+      {
+       "page": 4,
+       "x0": 55.44,
+       "y0": 493.19,
+       "x1": 257.86,
+       "y1": 500.96
+      }
+     ],
+     "quote": "The multitask training format uses a set of special tokens that serve as task specifiers or classification targets, as further explained in Section 2.3.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "Multilingual LibriSpeech",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 307.08,
+      "y0": 642.82,
+      "x1": 542.8199999999999,
+      "y1": 687.33
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 642.82,
+       "x1": 541.44,
+       "y1": 651.46
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 654.78,
+       "x1": 542.8199999999999,
+       "y1": 663.42
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 666.73,
+       "x1": 541.44,
+       "y1": 675.37
+      },
+      {
+       "page": 6,
+       "x0": 307.08,
+       "y0": 678.69,
+       "x1": 472.44,
+       "y1": 687.33
+      }
+     ],
+     "quote": "In order to compare to prior work on multilingual speech recognition, we report results on two low-data benchmarks: Multilingual LibriSpeech (MLS) (Pratap et al., 2020b) and VoxPopuli (Wang et al., 2021) in Table 3.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Multilingual LibriSpeech (MLS)",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "VoxPopuli",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 307.08,
+      "y0": 642.82,
+      "x1": 542.8199999999999,
+      "y1": 687.33
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 642.82,
+       "x1": 541.44,
+       "y1": 651.46
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 654.78,
+       "x1": 542.8199999999999,
+       "y1": 663.42
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 666.73,
+       "x1": 541.44,
+       "y1": 675.37
+      },
+      {
+       "page": 6,
+       "x0": 307.08,
+       "y0": 678.69,
+       "x1": 472.44,
+       "y1": 687.33
+      }
+     ],
+     "quote": "In order to compare to prior work on multilingual speech recognition, we report results on two low-data benchmarks: Multilingual LibriSpeech (MLS) (Pratap et al., 2020b) and VoxPopuli (Wang et al., 2021) in Table 3.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "VoxPopuli",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "Fleurs dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 306.97,
+      "y0": 469.47,
+      "x1": 541.4300000000001,
+      "y1": 502.02
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 426.25,
+       "y0": 469.47,
+       "x1": 541.4300000000001,
+       "y1": 478.11
+      },
+      {
+       "page": 7,
+       "x0": 306.97,
+       "y0": 481.43,
+       "x1": 541.4300000000001,
+       "y1": 490.07
+      },
+      {
+       "page": 7,
+       "x0": 307.44,
+       "y0": 493.38,
+       "x1": 453.18,
+       "y1": 502.02
+      }
+     ],
+     "quote": "To study the performance of Whisper more broadly we also report performance on the Fleurs dataset (Conneau et al., 2022).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Fleurs",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "CoVoST2",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 54.97,
+      "y0": 415.67,
+      "x1": 289.44,
+      "y1": 448.21999999999997
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 54.97,
+       "y0": 415.67,
+       "x1": 289.43,
+       "y1": 424.31
+      },
+      {
+       "page": 8,
+       "x0": 55.44,
+       "y0": 427.63,
+       "x1": 289.44,
+       "y1": 436.27
+      },
+      {
+       "page": 8,
+       "x0": 55.44,
+       "y0": 439.58,
+       "x1": 180.38,
+       "y1": 448.21999999999997
+      }
+     ],
+     "quote": "We study the translation capabilities of Whisper models by measuring their performance on the X→en subset of CoVoST2 (Wang et al., 2020b).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "CoVoST2",
+   "split": "X→en",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "XLS-R",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 306.97,
+      "y0": 696.62,
+      "x1": 543.09,
+      "y1": 717.22
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 306.97,
+       "y0": 696.62,
+       "x1": 543.09,
+       "y1": 705.26
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 708.58,
+       "x1": 541.44,
+       "y1": 717.22
+      },
+      {
+       "page": 7,
+       "x0": 157.1,
+       "y0": 535.23,
+       "x1": 289.44,
+       "y1": 543.87
+      },
+      {
+       "page": 7,
+       "x0": 55.44,
+       "y0": 547.18,
+       "x1": 83.92,
+       "y1": 555.8199999999999
+      }
+     ],
+     "quote": "Whisper performs well on Multilingual LibriSpeech, outperforming XLS-R (Babu et al., 2021), mSLAM (Bapna (Chen et al., 2022b) in a zero-shot setting.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "mSLAM",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 306.97,
+      "y0": 696.62,
+      "x1": 543.09,
+      "y1": 717.22
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 306.97,
+       "y0": 696.62,
+       "x1": 543.09,
+       "y1": 705.26
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 708.58,
+       "x1": 541.44,
+       "y1": 717.22
+      },
+      {
+       "page": 7,
+       "x0": 157.1,
+       "y0": 535.23,
+       "x1": 289.44,
+       "y1": 543.87
+      },
+      {
+       "page": 7,
+       "x0": 55.44,
+       "y0": 547.18,
+       "x1": 83.92,
+       "y1": 555.8199999999999
+      }
+     ],
+     "quote": "Whisper performs well on Multilingual LibriSpeech, outperforming XLS-R (Babu et al., 2021), mSLAM (Bapna (Chen et al., 2022b) in a zero-shot setting.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "VP-10K+FT",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 55.08,
+      "y0": 571.09,
+      "x1": 289.61,
+      "y1": 603.64
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 152.51,
+       "y0": 571.09,
+       "x1": 289.61,
+       "y1": 579.73
+      },
+      {
+       "page": 7,
+       "x0": 55.44,
+       "y0": 583.05,
+       "x1": 289.44,
+       "y1": 591.6899999999999
+      },
+      {
+       "page": 7,
+       "x0": 55.08,
+       "y0": 595.0,
+       "x1": 240.64,
+       "y1": 603.64
+      }
+     ],
+     "quote": "On VoxPopuli, however, Whisper significantly underperforms prior work and only beats the VP-10K+FT baseline from the original paper.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "Maestro",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 55.44,
+      "y0": 439.58,
+      "x1": 291.18,
+      "y1": 460.18
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 183.5,
+       "y0": 439.58,
+       "x1": 290.68,
+       "y1": 448.21999999999997
+      },
+      {
+       "page": 8,
+       "x0": 55.44,
+       "y0": 451.54,
+       "x1": 291.18,
+       "y1": 460.18
+      }
+     ],
+     "quote": "We compare with Maestro, mSLAM, and XLS-R, the highest-performing prior work.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Word error rate",
+   "evidence": [
+    {
+     "chunk_id": "b0031",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 55.44,
+      "y0": 439.58,
+      "x1": 291.18,
+      "y1": 460.18
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 55.44,
+       "y0": 439.58,
+       "x1": 291.09000000000003,
+       "y1": 448.21999999999997
+      },
+      {
+       "page": 5,
+       "x0": 55.44,
+       "y0": 451.54,
+       "x1": 291.18,
+       "y1": 460.18
+      }
+     ],
+     "quote": "Speech recognition research typically evaluates and compares systems based on the word error rate (WER) metric.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "BLEU",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 54.97,
+      "y0": 463.49,
+      "x1": 289.43,
+      "y1": 484.09
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 54.97,
+       "y0": 463.49,
+       "x1": 289.43,
+       "y1": 472.13
+      },
+      {
+       "page": 8,
+       "x0": 55.08,
+       "y0": 475.45,
+       "x1": 258.04,
+       "y1": 484.09
+      }
+     ],
+     "quote": "We achieve a new state of the art of 29.1 BLEU zero-shot without using any of the CoVoST2 training data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Optimizer set to AdamW",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 55.08,
+      "y0": 607.83,
+      "x1": 290.69,
+      "y1": 652.34
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 55.44,
+       "y0": 607.83,
+       "x1": 290.69,
+       "y1": 616.47
+      },
+      {
+       "page": 4,
+       "x0": 55.44,
+       "y0": 619.79,
+       "x1": 290.11,
+       "y1": 628.43
+      },
+      {
+       "page": 4,
+       "x0": 55.08,
+       "y0": 631.74,
+       "x1": 289.6,
+       "y1": 640.38
+      },
+      {
+       "page": 4,
+       "x0": 55.44,
+       "y0": 643.7,
+       "x1": 146.07999999999998,
+       "y1": 652.34
+      }
+     ],
+     "quote": "Models were trained with AdamW (Loshchilov & Hutter, 2017) and gradient norm clipping (Pascanu et al., 2013) with a linear learning rate decay to zero after a warmup over the first 2048 updates.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "AdamW",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Warmup over the first 2048 updates",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 55.08,
+      "y0": 607.83,
+      "x1": 290.69,
+      "y1": 652.34
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 55.44,
+       "y0": 607.83,
+       "x1": 290.69,
+       "y1": 616.47
+      },
+      {
+       "page": 4,
+       "x0": 55.44,
+       "y0": 619.79,
+       "x1": 290.11,
+       "y1": 628.43
+      },
+      {
+       "page": 4,
+       "x0": 55.08,
+       "y0": 631.74,
+       "x1": 289.6,
+       "y1": 640.38
+      },
+      {
+       "page": 4,
+       "x0": 55.44,
+       "y0": 643.7,
+       "x1": 146.07999999999998,
+       "y1": 652.34
+      }
+     ],
+     "quote": "Models were trained with AdamW (Loshchilov & Hutter, 2017) and gradient norm clipping (Pascanu et al., 2013) with a linear learning rate decay to zero after a warmup over the first 2048 updates.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "warmup",
+   "value_raw": "2048 updates",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Batch size of 256 segments",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 55.44,
+      "y0": 643.7,
+      "x1": 289.44,
+      "y1": 676.25
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 150.2,
+       "y0": 643.7,
+       "x1": 289.44,
+       "y1": 652.34
+      },
+      {
+       "page": 4,
+       "x0": 55.44,
+       "y0": 655.65,
+       "x1": 210.73,
+       "y1": 664.29
+      },
+      {
+       "page": 4,
+       "x0": 210.73,
+       "y0": 653.98,
+       "x1": 217.7,
+       "y1": 660.03
+      },
+      {
+       "page": 4,
+       "x0": 221.06,
+       "y0": 655.65,
+       "x1": 289.44,
+       "y1": 664.29
+      },
+      {
+       "page": 4,
+       "x0": 55.44,
+       "y0": 667.61,
+       "x1": 239.78,
+       "y1": 676.25
+      }
+     ],
+     "quote": "A batch size of 256 segments was used, and the models are trained for 2 20 updates which is between two and three passes over the dataset.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "256",
+   "value_norm": 256.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Max learning rate for Tiny model",
+   "evidence": [
+    {
+     "chunk_id": "b0151",
+     "page": 28,
+     "bbox": {
+      "page": 28,
+      "x0": 233.62,
+      "y0": 448.46,
+      "x1": 360.77,
+      "y1": 533.84
+     },
+     "boxes": [
+      {
+       "page": 28,
+       "x0": 283.3,
+       "y0": 448.46,
+       "x1": 360.77,
+       "y1": 457.09999999999997
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 465.42,
+       "x1": 251.94,
+       "y1": 474.06
+      },
+      {
+       "page": 28,
+       "x0": 299.25,
+       "y0": 465.1,
+       "x1": 334.12,
+       "y1": 473.84000000000003
+      },
+      {
+       "page": 28,
+       "x0": 334.12,
+       "y0": 463.53,
+       "x1": 344.32,
+       "y1": 469.65
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 477.37,
+       "x1": 252.99,
+       "y1": 486.01
+      },
+      {
+       "page": 28,
+       "x0": 303.12,
+       "y0": 477.06,
+       "x1": 330.24,
+       "y1": 485.8
+      },
+      {
+       "page": 28,
+       "x0": 330.24,
+       "y0": 475.48,
+       "x1": 340.44,
+       "y1": 481.6
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 489.33,
+       "x1": 256.87,
+       "y1": 497.96999999999997
+      },
+      {
+       "page": 28,
+       "x0": 303.12,
+       "y0": 489.01,
+       "x1": 330.24,
+       "y1": 497.75
+      },
+      {
+       "page": 28,
+       "x0": 330.24,
+       "y0": 487.44,
+       "x1": 340.44,
+       "y1": 493.56
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 501.29,
+       "x1": 267.38,
+       "y1": 509.93
+      },
+      {
+       "page": 28,
+       "x0": 299.25,
+       "y0": 500.97,
+       "x1": 334.12,
+       "y1": 509.71000000000004
+      },
+      {
+       "page": 28,
+       "x0": 334.12,
+       "y0": 499.39,
+       "x1": 344.32,
+       "y1": 505.51
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 513.24,
+       "x1": 256.67,
+       "y1": 521.88
+      },
+      {
+       "page": 28,
+       "x0": 296.76,
+       "y0": 512.92,
+       "x1": 336.61,
+       "y1": 521.66
+      },
+      {
+       "page": 28,
+       "x0": 336.61,
+       "y0": 511.35,
+       "x1": 346.81,
+       "y1": 517.47
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 525.2,
+       "x1": 271.34000000000003,
+       "y1": 533.84
+      }
+     ],
+     "quote": "Max Learning Rate Tiny 1.5 × 10 -3",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "1.5 × 10 -3",
+   "value_norm": 0.0015,
+   "scope": "Tiny"
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Max learning rate for Base model",
+   "evidence": [
+    {
+     "chunk_id": "b0151",
+     "page": 28,
+     "bbox": {
+      "page": 28,
+      "x0": 233.62,
+      "y0": 448.46,
+      "x1": 360.77,
+      "y1": 533.84
+     },
+     "boxes": [
+      {
+       "page": 28,
+       "x0": 283.3,
+       "y0": 448.46,
+       "x1": 360.77,
+       "y1": 457.09999999999997
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 465.42,
+       "x1": 251.94,
+       "y1": 474.06
+      },
+      {
+       "page": 28,
+       "x0": 299.25,
+       "y0": 465.1,
+       "x1": 334.12,
+       "y1": 473.84000000000003
+      },
+      {
+       "page": 28,
+       "x0": 334.12,
+       "y0": 463.53,
+       "x1": 344.32,
+       "y1": 469.65
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 477.37,
+       "x1": 252.99,
+       "y1": 486.01
+      },
+      {
+       "page": 28,
+       "x0": 303.12,
+       "y0": 477.06,
+       "x1": 330.24,
+       "y1": 485.8
+      },
+      {
+       "page": 28,
+       "x0": 330.24,
+       "y0": 475.48,
+       "x1": 340.44,
+       "y1": 481.6
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 489.33,
+       "x1": 256.87,
+       "y1": 497.96999999999997
+      },
+      {
+       "page": 28,
+       "x0": 303.12,
+       "y0": 489.01,
+       "x1": 330.24,
+       "y1": 497.75
+      },
+      {
+       "page": 28,
+       "x0": 330.24,
+       "y0": 487.44,
+       "x1": 340.44,
+       "y1": 493.56
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 501.29,
+       "x1": 267.38,
+       "y1": 509.93
+      },
+      {
+       "page": 28,
+       "x0": 299.25,
+       "y0": 500.97,
+       "x1": 334.12,
+       "y1": 509.71000000000004
+      },
+      {
+       "page": 28,
+       "x0": 334.12,
+       "y0": 499.39,
+       "x1": 344.32,
+       "y1": 505.51
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 513.24,
+       "x1": 256.67,
+       "y1": 521.88
+      },
+      {
+       "page": 28,
+       "x0": 296.76,
+       "y0": 512.92,
+       "x1": 336.61,
+       "y1": 521.66
+      },
+      {
+       "page": 28,
+       "x0": 336.61,
+       "y0": 511.35,
+       "x1": 346.81,
+       "y1": 517.47
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 525.2,
+       "x1": 271.34000000000003,
+       "y1": 533.84
+      }
+     ],
+     "quote": "Base 1 × 10 -3",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "1 × 10 -3",
+   "value_norm": 0.001,
+   "scope": "Base"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Max learning rate for Small model",
+   "evidence": [
+    {
+     "chunk_id": "b0151",
+     "page": 28,
+     "bbox": {
+      "page": 28,
+      "x0": 233.62,
+      "y0": 448.46,
+      "x1": 360.77,
+      "y1": 533.84
+     },
+     "boxes": [
+      {
+       "page": 28,
+       "x0": 283.3,
+       "y0": 448.46,
+       "x1": 360.77,
+       "y1": 457.09999999999997
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 465.42,
+       "x1": 251.94,
+       "y1": 474.06
+      },
+      {
+       "page": 28,
+       "x0": 299.25,
+       "y0": 465.1,
+       "x1": 334.12,
+       "y1": 473.84000000000003
+      },
+      {
+       "page": 28,
+       "x0": 334.12,
+       "y0": 463.53,
+       "x1": 344.32,
+       "y1": 469.65
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 477.37,
+       "x1": 252.99,
+       "y1": 486.01
+      },
+      {
+       "page": 28,
+       "x0": 303.12,
+       "y0": 477.06,
+       "x1": 330.24,
+       "y1": 485.8
+      },
+      {
+       "page": 28,
+       "x0": 330.24,
+       "y0": 475.48,
+       "x1": 340.44,
+       "y1": 481.6
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 489.33,
+       "x1": 256.87,
+       "y1": 497.96999999999997
+      },
+      {
+       "page": 28,
+       "x0": 303.12,
+       "y0": 489.01,
+       "x1": 330.24,
+       "y1": 497.75
+      },
+      {
+       "page": 28,
+       "x0": 330.24,
+       "y0": 487.44,
+       "x1": 340.44,
+       "y1": 493.56
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 501.29,
+       "x1": 267.38,
+       "y1": 509.93
+      },
+      {
+       "page": 28,
+       "x0": 299.25,
+       "y0": 500.97,
+       "x1": 334.12,
+       "y1": 509.71000000000004
+      },
+      {
+       "page": 28,
+       "x0": 334.12,
+       "y0": 499.39,
+       "x1": 344.32,
+       "y1": 505.51
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 513.24,
+       "x1": 256.67,
+       "y1": 521.88
+      },
+      {
+       "page": 28,
+       "x0": 296.76,
+       "y0": 512.92,
+       "x1": 336.61,
+       "y1": 521.66
+      },
+      {
+       "page": 28,
+       "x0": 336.61,
+       "y0": 511.35,
+       "x1": 346.81,
+       "y1": 517.47
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 525.2,
+       "x1": 271.34000000000003,
+       "y1": 533.84
+      }
+     ],
+     "quote": "Small 5 × 10 -4",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "5 × 10 -4",
+   "value_norm": 0.0005,
+   "scope": "Small"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Max learning rate for Medium model",
+   "evidence": [
+    {
+     "chunk_id": "b0151",
+     "page": 28,
+     "bbox": {
+      "page": 28,
+      "x0": 233.62,
+      "y0": 448.46,
+      "x1": 360.77,
+      "y1": 533.84
+     },
+     "boxes": [
+      {
+       "page": 28,
+       "x0": 283.3,
+       "y0": 448.46,
+       "x1": 360.77,
+       "y1": 457.09999999999997
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 465.42,
+       "x1": 251.94,
+       "y1": 474.06
+      },
+      {
+       "page": 28,
+       "x0": 299.25,
+       "y0": 465.1,
+       "x1": 334.12,
+       "y1": 473.84000000000003
+      },
+      {
+       "page": 28,
+       "x0": 334.12,
+       "y0": 463.53,
+       "x1": 344.32,
+       "y1": 469.65
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 477.37,
+       "x1": 252.99,
+       "y1": 486.01
+      },
+      {
+       "page": 28,
+       "x0": 303.12,
+       "y0": 477.06,
+       "x1": 330.24,
+       "y1": 485.8
+      },
+      {
+       "page": 28,
+       "x0": 330.24,
+       "y0": 475.48,
+       "x1": 340.44,
+       "y1": 481.6
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 489.33,
+       "x1": 256.87,
+       "y1": 497.96999999999997
+      },
+      {
+       "page": 28,
+       "x0": 303.12,
+       "y0": 489.01,
+       "x1": 330.24,
+       "y1": 497.75
+      },
+      {
+       "page": 28,
+       "x0": 330.24,
+       "y0": 487.44,
+       "x1": 340.44,
+       "y1": 493.56
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 501.29,
+       "x1": 267.38,
+       "y1": 509.93
+      },
+      {
+       "page": 28,
+       "x0": 299.25,
+       "y0": 500.97,
+       "x1": 334.12,
+       "y1": 509.71000000000004
+      },
+      {
+       "page": 28,
+       "x0": 334.12,
+       "y0": 499.39,
+       "x1": 344.32,
+       "y1": 505.51
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 513.24,
+       "x1": 256.67,
+       "y1": 521.88
+      },
+      {
+       "page": 28,
+       "x0": 296.76,
+       "y0": 512.92,
+       "x1": 336.61,
+       "y1": 521.66
+      },
+      {
+       "page": 28,
+       "x0": 336.61,
+       "y0": 511.35,
+       "x1": 346.81,
+       "y1": 517.47
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 525.2,
+       "x1": 271.34000000000003,
+       "y1": 533.84
+      }
+     ],
+     "quote": "Medium 2.5 × 10 -4",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "2.5 × 10 -4",
+   "value_norm": 0.00025,
+   "scope": "Medium"
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Max learning rate for Large model",
+   "evidence": [
+    {
+     "chunk_id": "b0151",
+     "page": 28,
+     "bbox": {
+      "page": 28,
+      "x0": 233.62,
+      "y0": 448.46,
+      "x1": 360.77,
+      "y1": 533.84
+     },
+     "boxes": [
+      {
+       "page": 28,
+       "x0": 283.3,
+       "y0": 448.46,
+       "x1": 360.77,
+       "y1": 457.09999999999997
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 465.42,
+       "x1": 251.94,
+       "y1": 474.06
+      },
+      {
+       "page": 28,
+       "x0": 299.25,
+       "y0": 465.1,
+       "x1": 334.12,
+       "y1": 473.84000000000003
+      },
+      {
+       "page": 28,
+       "x0": 334.12,
+       "y0": 463.53,
+       "x1": 344.32,
+       "y1": 469.65
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 477.37,
+       "x1": 252.99,
+       "y1": 486.01
+      },
+      {
+       "page": 28,
+       "x0": 303.12,
+       "y0": 477.06,
+       "x1": 330.24,
+       "y1": 485.8
+      },
+      {
+       "page": 28,
+       "x0": 330.24,
+       "y0": 475.48,
+       "x1": 340.44,
+       "y1": 481.6
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 489.33,
+       "x1": 256.87,
+       "y1": 497.96999999999997
+      },
+      {
+       "page": 28,
+       "x0": 303.12,
+       "y0": 489.01,
+       "x1": 330.24,
+       "y1": 497.75
+      },
+      {
+       "page": 28,
+       "x0": 330.24,
+       "y0": 487.44,
+       "x1": 340.44,
+       "y1": 493.56
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 501.29,
+       "x1": 267.38,
+       "y1": 509.93
+      },
+      {
+       "page": 28,
+       "x0": 299.25,
+       "y0": 500.97,
+       "x1": 334.12,
+       "y1": 509.71000000000004
+      },
+      {
+       "page": 28,
+       "x0": 334.12,
+       "y0": 499.39,
+       "x1": 344.32,
+       "y1": 505.51
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 513.24,
+       "x1": 256.67,
+       "y1": 521.88
+      },
+      {
+       "page": 28,
+       "x0": 296.76,
+       "y0": 512.92,
+       "x1": 336.61,
+       "y1": 521.66
+      },
+      {
+       "page": 28,
+       "x0": 336.61,
+       "y0": 511.35,
+       "x1": 346.81,
+       "y1": 517.47
+      },
+      {
+       "page": 28,
+       "x0": 233.62,
+       "y0": 525.2,
+       "x1": 271.34000000000003,
+       "y1": 533.84
+      }
+     ],
+     "quote": "Large 1.75 × 10 -4",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "1.75 × 10 -4",
+   "value_norm": 0.000175,
+   "scope": "Large"
+  }
+ ],
+ "compute": [],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "Speech recognition performance is poor for many languages due to a lack of training data.",
+   "evidence": [
+    {
+     "chunk_id": "b0082",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 55.08,
+      "y0": 290.8,
+      "x1": 291.09,
+      "y1": 323.74
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 290.8,
+       "x1": 289.44,
+       "y1": 299.76
+      },
+      {
+       "page": 14,
+       "x0": 55.08,
+       "y0": 303.14,
+       "x1": 291.09,
+       "y1": 311.78
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 315.1,
+       "x1": 243.17,
+       "y1": 323.74
+      }
+     ],
+     "quote": "As Figure 3 shows, Whisper's speech recognition performance is still quite poor on many languages.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Fine-tuning models on supervised datasets or using reinforcement learning to optimize decoding performance.",
+   "evidence": [
+    {
+     "chunk_id": "b0081",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 55.08,
+      "y0": 202.04,
+      "x1": 290.68,
+      "y1": 270.46
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 235.99,
+       "y0": 202.04,
+       "x1": 289.44,
+       "y1": 210.68
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 214.0,
+       "x1": 290.68,
+       "y1": 222.64
+      },
+      {
+       "page": 14,
+       "x0": 55.08,
+       "y0": 225.96,
+       "x1": 289.79,
+       "y1": 234.60000000000002
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 237.91,
+       "x1": 289.44,
+       "y1": 246.55
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 249.87,
+       "x1": 289.44,
+       "y1": 258.51
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 261.82,
+       "x1": 162.76999999999998,
+       "y1": 270.46
+      }
+     ],
+     "quote": "Although the decoding details discussed in Section 4.5 help significantly, we suspect fine-tuning Whisper models on a high-quality supervised dataset and/or using reinforcement learning to more directly optimize for decoding performance could help further reduce these errors.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Targeted efforts to increase the amount of training data for lower-resource languages.",
+   "evidence": [
+    {
+     "chunk_id": "b0082",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 55.44,
+      "y0": 398.78,
+      "x1": 291.1,
+      "y1": 455.24
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 203.44,
+       "y0": 398.78,
+       "x1": 291.1,
+       "y1": 407.41999999999996
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 410.74,
+       "x1": 289.43,
+       "y1": 419.38
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 422.69,
+       "x1": 289.44,
+       "y1": 431.33
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 434.65,
+       "x1": 289.44,
+       "y1": 443.28999999999996
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 446.6,
+       "x1": 137.06,
+       "y1": 455.24
+      }
+     ],
+     "quote": "A targeted effort at increasing the amount of data for these rarer languages could result in a large improvement to average speech recognition performance even with only a small increase in our overall training dataset size.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.2",
+   "value": "Studying fine-tuning to potentially improve results where high-quality supervised speech data exists.",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 55.08,
+      "y0": 511.84,
+      "x1": 291.18,
+      "y1": 556.34
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 104.81,
+       "y0": 511.84,
+       "x1": 289.45,
+       "y1": 520.48
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 523.79,
+       "x1": 289.44,
+       "y1": 532.43
+      },
+      {
+       "page": 14,
+       "x0": 55.08,
+       "y0": 535.75,
+       "x1": 289.43,
+       "y1": 544.39
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 547.7,
+       "x1": 291.18,
+       "y1": 556.34
+      }
+     ],
+     "quote": "While this is a crucial setting to study due to it being representative of general reliability, for many domains where high-quality supervised speech data does exist, it is likely that results can be improved further by fine-tuning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.3",
+   "value": "Investigating whether benefits stem from the encoder, decoder, or both through targeted ablations.",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 55.44,
+      "y0": 70.54,
+      "x1": 541.44,
+      "y1": 717.22
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 164.01,
+       "y0": 672.71,
+       "x1": 289.61,
+       "y1": 681.35
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 684.66,
+       "x1": 289.44,
+       "y1": 693.3
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 696.62,
+       "x1": 289.44,
+       "y1": 705.26
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 708.58,
+       "x1": 289.43,
+       "y1": 717.22
+      },
+      {
+       "page": 14,
+       "x0": 307.44,
+       "y0": 70.54,
+       "x1": 541.44,
+       "y1": 79.18
+      },
+      {
+       "page": 14,
+       "x0": 307.44,
+       "y0": 82.49,
+       "x1": 334.84,
+       "y1": 91.13
+      }
+     ],
+     "quote": "This could be studied by either ablating various design components of Whisper, such as training a decoder-less CTC model, or by studying how the performance of existing speech recognition encoders such as wav2vec 2.0 change when used together with a language model.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/openai/",
+   "evidence": [
+    {
+     "chunk_id": "b0009",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 55.44,
+      "y0": 471.04,
+      "x1": 289.44,
+      "y1": 514.85
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 80.46,
+       "y0": 471.04,
+       "x1": 289.44,
+       "y1": 479.68
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 482.99,
+       "x1": 289.44,
+       "y1": 491.63
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 494.95,
+       "x1": 132.74,
+       "y1": 503.59
+      },
+      {
+       "page": 2,
+       "x0": 93.93,
+       "y0": 507.84,
+       "x1": 99.47000000000001,
+       "y1": 514.85
+      }
+     ],
+     "quote": "To serve as a foundation for further research on robust speech recognition, we release inference code and models at the following URL: https://github.com/openai/ whisper.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "The models generalize well to standard benchmarks and are competitive with prior fully supervised results in a zero-shot setting.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 75.01,
+      "y0": 220.11,
+      "x1": 271.17,
+      "y1": 300.47999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 218.24,
+       "y0": 220.11,
+       "x1": 269.52,
+       "y1": 228.75
+      },
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 232.06,
+       "x1": 269.77,
+       "y1": 240.7
+      },
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 244.02,
+       "x1": 269.52,
+       "y1": 252.66000000000003
+      },
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 255.97,
+       "x1": 269.51,
+       "y1": 264.61
+      },
+      {
+       "page": 1,
+       "x0": 75.01,
+       "y0": 267.93,
+       "x1": 271.17,
+       "y1": 276.57
+      },
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 279.88,
+       "x1": 271.17,
+       "y1": 288.52
+      },
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 291.84,
+       "x1": 103.88000000000001,
+       "y1": 300.47999999999996
+      }
+     ],
+     "quote": "When scaled to 680,000 hours of multilingual and multitask supervision, the resulting models generalize well to standard benchmarks and are often competitive with prior fully supervised results but in a zeroshot transfer setting without the need for any finetuning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "A computer vision model showed a 9.2% increase in object classification accuracy when fine-tuned on ImageNet without improvement on seven other natural image datasets.",
+   "evidence": [
+    {
+     "chunk_id": "b0004",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 307.08,
+      "y0": 226.57,
+      "x1": 543.1,
+      "y1": 306.94
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 378.5,
+       "y0": 226.57,
+       "x1": 543.1,
+       "y1": 235.20999999999998
+      },
+      {
+       "page": 1,
+       "x0": 307.44,
+       "y0": 238.53,
+       "x1": 541.44,
+       "y1": 247.17000000000002
+      },
+      {
+       "page": 1,
+       "x0": 307.44,
+       "y0": 250.48,
+       "x1": 541.44,
+       "y1": 259.12
+      },
+      {
+       "page": 1,
+       "x0": 307.44,
+       "y0": 262.44,
+       "x1": 542.11,
+       "y1": 271.08
+      },
+      {
+       "page": 1,
+       "x0": 307.08,
+       "y0": 274.39,
+       "x1": 541.79,
+       "y1": 283.03
+      },
+      {
+       "page": 1,
+       "x0": 307.08,
+       "y0": 286.35,
+       "x1": 541.44,
+       "y1": 294.99
+      },
+      {
+       "page": 1,
+       "x0": 307.44,
+       "y0": 298.3,
+       "x1": 369.55,
+       "y1": 306.94
+      }
+     ],
+     "quote": "In a particularly disturbing example, Radford et al. ( 2021) documented a 9.2% increase in object classification accuracy when fine-tuning a computer vision model on the ImageNet dataset (Russakovsky et al., 2015) without observing any improvement in average accuracy when classifying the same objects on seven other natural image datasets.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "SpeechStew mixes 7 pre-existing datasets totaling 5,140 hours of supervision.",
+   "evidence": [
+    {
+     "chunk_id": "b0005",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 307.11,
+      "y0": 573.27,
+      "x1": 541.8,
+      "y1": 605.8199999999999
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 493.25,
+       "y0": 573.27,
+       "x1": 541.8,
+       "y1": 581.91
+      },
+      {
+       "page": 1,
+       "x0": 307.11,
+       "y0": 585.23,
+       "x1": 541.44,
+       "y1": 593.87
+      },
+      {
+       "page": 1,
+       "x0": 307.44,
+       "y0": 597.18,
+       "x1": 457.21000000000004,
+       "y1": 605.8199999999999
+      }
+     ],
+     "quote": "SpeechStew (Chan et al., 2021) mixes together 7 pre-existing datasets totalling 5,140 hours of supervision.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

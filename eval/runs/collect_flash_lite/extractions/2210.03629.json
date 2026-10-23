@@ -1,0 +1,1828 @@
+{
+ "metadata": {
+  "title": "REAC T : SYNERGIZING REASONING AND ACTING IN LANGUAGE MODELS",
+  "authors": [
+   "Shunyu Yao",
+   "Jeffrey Zhao",
+   "Dian Yu",
+   "Nan Du",
+   "Izhak Shafran",
+   "Karthik Narasimhan",
+   "Yuan Cao"
+  ],
+  "venue": null,
+  "year": "2023",
+  "arxiv_id": "2210.03629v3[cs.CL]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Reasoning and acting in large language models have primarily been studied separately.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 265.93,
+      "x1": 468.31,
+      "y1": 307.45
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 265.93,
+       "x1": 468.13,
+       "y1": 274.57
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 276.89,
+       "x1": 468.31,
+       "y1": 285.53
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 287.85,
+       "x1": 253.55,
+       "y1": 296.49
+      },
+      {
+       "page": 1,
+       "x0": 257.24,
+       "y0": 287.85,
+       "x1": 439.6,
+       "y1": 296.49
+      },
+      {
+       "page": 1,
+       "x0": 443.29,
+       "y0": 287.85,
+       "x1": 468.13,
+       "y1": 296.49
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 298.81,
+       "x1": 398.56,
+       "y1": 307.45
+      }
+     ],
+     "quote": "While large language models (LLMs) have demonstrated impressive performance across tasks in language understanding and interactive decision making, their abilities for reasoning (e.g. chain-of-thought prompting) and acting (e.g. action plan generation) have primarily been studied as separate topics.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Chain-of-thought reasoning is a static black box ungrounded in the external world.",
+   "evidence": [
+    {
+     "chunk_id": "b0006",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 107.64,
+      "y0": 509.18,
+      "x1": 505.25,
+      "y1": 539.74
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 139.71,
+       "y0": 509.18,
+       "x1": 504.0,
+       "y1": 517.82
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 520.14,
+       "x1": 505.25,
+       "y1": 528.78
+      },
+      {
+       "page": 2,
+       "x0": 107.64,
+       "y0": 531.1,
+       "x1": 376.83,
+       "y1": 539.74
+      }
+     ],
+     "quote": "However, this \"chain-of-thought\" reasoning is a static black box, in that the model uses its own internal representations to generate thoughts and is not grounded in the external world, which limits its ability to reason reactively or update its knowledge.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "problem.2",
+   "value": "Prior action-prediction approaches do not employ language models to perform abstract reasoning or maintain a working memory.",
+   "evidence": [
+    {
+     "chunk_id": "b0006",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 596.85,
+      "x1": 504.01,
+      "y1": 638.37
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 279.93,
+       "y0": 596.85,
+       "x1": 504.01,
+       "y1": 605.49
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 607.81,
+       "x1": 504.0,
+       "y1": 616.4499999999999
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 618.77,
+       "x1": 504.0,
+       "y1": 627.41
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 629.73,
+       "x1": 159.3,
+       "y1": 638.37
+      }
+     ],
+     "quote": "However, they do not employ language models to reason abstractly about high-level goals or maintain a working memory to support acting, barring Huang et al. (2022b) who perform a limited form of verbal reasoning to reiterate spatial facts about the current state.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Introduction of ReAct, a prompt-based paradigm combining reasoning and acting in language models.",
+   "evidence": [
+    {
+     "chunk_id": "b0009",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 107.69,
+      "y0": 266.66,
+      "x1": 505.66,
+      "y1": 319.13
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 107.69,
+       "y0": 266.66,
+       "x1": 505.66,
+       "y1": 275.3
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 277.62,
+       "x1": 504.0,
+       "y1": 286.26
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 288.58,
+       "x1": 504.0,
+       "y1": 297.21999999999997
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 299.54,
+       "x1": 504.0,
+       "y1": 308.18
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 310.49,
+       "x1": 144.94,
+       "y1": 319.13
+      }
+     ],
+     "quote": "(1) we introduce ReAct, a novel promptbased paradigm to synergize reasoning and acting in language models for general task solving;",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Extensive experiments demonstrating ReAct's few-shot learning advantages over isolated reasoning or action generation.",
+   "evidence": [
+    {
+     "chunk_id": "b0009",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 107.69,
+      "y0": 266.66,
+      "x1": 505.66,
+      "y1": 319.13
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 107.69,
+       "y0": 266.66,
+       "x1": 505.66,
+       "y1": 275.3
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 277.62,
+       "x1": 504.0,
+       "y1": 286.26
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 288.58,
+       "x1": 504.0,
+       "y1": 297.21999999999997
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 299.54,
+       "x1": 504.0,
+       "y1": 308.18
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 310.49,
+       "x1": 144.94,
+       "y1": 319.13
+      }
+     ],
+     "quote": "(2) we perform extensive experiments across diverse benchmarks to showcase the advantage of ReAct in a few-shot learning setup over prior approaches that perform either reasoning or action generation in isolation;",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "Systematic ablations and analysis on the importance of acting in reasoning tasks and reasoning in interactive tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0010",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 310.49,
+      "x1": 504.0,
+      "y1": 341.05
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 147.44,
+       "y0": 310.49,
+       "x1": 503.99,
+       "y1": 319.13
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 321.45,
+       "x1": 504.0,
+       "y1": 330.09
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 332.41,
+       "x1": 188.7,
+       "y1": 341.05
+      }
+     ],
+     "quote": "(3) we present systematic ablations and analysis to understand the importance of acting in reasoning tasks, and reasoning in interactive tasks;",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "question answering",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 386.48,
+      "x1": 469.88,
+      "y1": 438.95
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 369.82,
+       "y0": 386.48,
+       "x1": 468.13,
+       "y1": 395.12
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 397.44,
+       "x1": 468.14,
+       "y1": 406.08
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 408.4,
+       "x1": 468.49,
+       "y1": 417.03999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 419.35,
+       "x1": 468.14,
+       "y1": 427.99
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 430.31,
+       "x1": 469.88,
+       "y1": 438.95
+      }
+     ],
+     "quote": "Concretely, on question answering (HotpotQA) and fact verification (Fever), ReAct overcomes prevalent issues of hallucination and error propagation in chain-of-thought reasoning by interacting with a simple Wikipedia API, and generating human-like task-solving trajectories that are more interpretable than baselines without reasoning traces.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "task.1",
+   "value": "fact verification",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 386.48,
+      "x1": 469.88,
+      "y1": 438.95
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 369.82,
+       "y0": 386.48,
+       "x1": 468.13,
+       "y1": 395.12
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 397.44,
+       "x1": 468.14,
+       "y1": 406.08
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 408.4,
+       "x1": 468.49,
+       "y1": 417.03999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 419.35,
+       "x1": 468.14,
+       "y1": 427.99
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 430.31,
+       "x1": 469.88,
+       "y1": 438.95
+      }
+     ],
+     "quote": "Concretely, on question answering (HotpotQA) and fact verification (Fever), ReAct overcomes prevalent issues of hallucination and error propagation in chain-of-thought reasoning by interacting with a simple Wikipedia API, and generating human-like task-solving trajectories that are more interpretable than baselines without reasoning traces.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "task.2",
+   "value": "interactive decision making",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.4,
+      "y0": 441.27,
+      "x1": 468.49,
+      "y1": 482.78999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 441.27,
+       "x1": 468.13,
+       "y1": 449.90999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.4,
+       "y0": 452.23,
+       "x1": 468.49,
+       "y1": 460.87
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 463.19,
+       "x1": 468.14,
+       "y1": 471.83
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 474.15,
+       "x1": 291.78,
+       "y1": 482.78999999999996
+      }
+     ],
+     "quote": "Furthermore, on two interactive decision making benchmarks (ALFWorld and WebShop), ReAct outperforms imitation and reinforcement learning methods by an absolute success rate of 34% and 10% respectively, while being prompted with only one or two in-context examples.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [],
+ "novelty": [],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "HotpotQA is a multi-hop question answering benchmark.",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 400.73,
+      "x1": 505.65,
+      "y1": 453.21
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 155.6,
+       "y0": 400.73,
+       "x1": 505.65,
+       "y1": 409.37
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 411.69,
+       "x1": 504.0,
+       "y1": 420.33
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 422.65,
+       "x1": 504.0,
+       "y1": 431.28999999999996
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 433.61,
+       "x1": 504.0,
+       "y1": 442.25
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 444.57,
+       "x1": 332.84000000000003,
+       "y1": 453.21
+      }
+     ],
+     "quote": "(1) Hot-PotQA (Yang et al., 2018), a multi-hop question answering benchmark that requires reasoning over two or more Wikipedia passages, and",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Hot-PotQA",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "FEVER is a fact verification benchmark.",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 400.73,
+      "x1": 505.65,
+      "y1": 453.21
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 155.6,
+       "y0": 400.73,
+       "x1": 505.65,
+       "y1": 409.37
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 411.69,
+       "x1": 504.0,
+       "y1": 420.33
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 422.65,
+       "x1": 504.0,
+       "y1": 431.28999999999996
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 433.61,
+       "x1": 504.0,
+       "y1": 442.25
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 444.57,
+       "x1": 332.84000000000003,
+       "y1": 453.21
+      }
+     ],
+     "quote": "(2) FEVER (Thorne et al., 2018), a fact verification benchmark where each claim is annotated SUPPORTS, REFUTES, or NOT ENOUGH INFO, based on if there exists a Wikipedia passage to verify the claim.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "FEVER",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "ALFWorld is a synthetic text-based game designed to align with the embodied ALFRED benchmark.",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 311.89,
+      "x1": 504.0,
+      "y1": 331.88
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 311.89,
+       "x1": 504.0,
+       "y1": 320.91999999999996
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 323.24,
+       "x1": 411.5,
+       "y1": 331.88
+      }
+     ],
+     "quote": "ALFWorld (Shridhar et al., 2020b) (Figure 1(2)) is a synthetic text-based game designed to align with the embodied ALFRED benchmark (Shridhar et al., 2020a).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ALFWorld",
+   "split": "unseen evaluation games",
+   "size": "134",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "WebShop is an online shopping website environment.",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 107.64,
+      "y0": 557.93,
+      "x1": 504.0,
+      "y1": 577.53
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 167.53,
+       "y0": 557.93,
+       "x1": 504.0,
+       "y1": 566.5699999999999
+      },
+      {
+       "page": 7,
+       "x0": 107.64,
+       "y0": 568.89,
+       "x1": 428.33,
+       "y1": 577.53
+      }
+     ],
+     "quote": "We investigate WebShop (Yao et al., 2022), a recently proposed online shopping website environment with 1.18M real-world products and 12k human instructions.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "WebShop",
+   "split": "test",
+   "size": "500 test instructions",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Standard prompting",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 313.35,
+      "x1": 505.25,
+      "y1": 344.3
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 313.35,
+       "x1": 504.0,
+       "y1": 322.38
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 324.31,
+       "x1": 505.25,
+       "y1": 333.34
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 335.66,
+       "x1": 287.86,
+       "y1": 344.3
+      }
+     ],
+     "quote": "(a) Standard prompting (Standard), which removes all thoughts, actions, observations in ReAct trajectories.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Chain-of-thought prompting",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 335.27,
+      "x1": 505.25,
+      "y1": 355.26
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 292.33,
+       "y0": 335.27,
+       "x1": 505.25,
+       "y1": 344.29999999999995
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 346.62,
+       "x1": 466.69,
+       "y1": 355.26
+      }
+     ],
+     "quote": "(b) Chain-of-thought prompting (CoT) (Wei et al., 2022), which removes actions and observations and serve as a reasoning-only baseline.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "Self-consistency baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 107.64,
+      "y0": 346.62,
+      "x1": 504.0,
+      "y1": 388.13
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 471.32,
+       "y0": 346.62,
+       "x1": 504.0,
+       "y1": 355.26
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 357.58,
+       "x1": 504.0,
+       "y1": 366.21999999999997
+      },
+      {
+       "page": 5,
+       "x0": 107.64,
+       "y0": 368.54,
+       "x1": 504.0,
+       "y1": 377.18
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 379.49,
+       "x1": 274.90999999999997,
+       "y1": 388.13
+      }
+     ],
+     "quote": "We also build a self-consistency baseline (CoT-SC) (Wang et al., 2022a;b) by sampling 21 CoT trajectories with decoding temperature 0.7 during inference and adopting the majority answer, which is found to consistently boost performance over CoT.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "Acting-only prompt",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 379.1,
+      "x1": 504.01,
+      "y1": 421.01
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 277.41,
+       "y0": 379.1,
+       "x1": 504.01,
+       "y1": 388.13
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 390.45,
+       "x1": 504.0,
+       "y1": 399.09
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 401.41,
+       "x1": 504.0,
+       "y1": 410.05
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 412.37,
+       "x1": 303.89,
+       "y1": 421.01
+      }
+     ],
+     "quote": "(c) Acting-only prompt (Act), which removes thoughts in ReAct trajectories, loosely resembling how WebGPT (Nakano et al., 2021) interacts with the Internet to answer questions, though it operates on a different task and action space, and uses imitation and reinforcement learning instead of prompting.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "BUTLER imitation learning agent",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 509.54,
+      "x1": 504.0,
+      "y1": 529.14
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 232.24,
+       "y0": 509.54,
+       "x1": 504.0,
+       "y1": 518.1800000000001
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 520.18,
+       "x1": 371.28,
+       "y1": 529.14
+      },
+      {
+       "page": 7,
+       "x0": 371.28,
+       "y0": 518.83,
+       "x1": 374.77,
+       "y1": 524.88
+      },
+      {
+       "page": 7,
+       "x0": 375.26,
+       "y0": 520.5,
+       "x1": 377.75,
+       "y1": 529.14
+      }
+     ],
+     "quote": "For baselines, we use BUTLER (Shridhar et al., 2020b), an imitation learning agent trained on 10 expert trajectories for each task type 5 .",
+     "grounding_status": "verified",
+     "match_score": 95.7
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Exact match",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.25,
+      "y0": 108.82,
+      "x1": 411.43,
+      "y1": 171.20999999999998
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 108.25,
+       "y0": 108.82,
+       "x1": 226.6,
+       "y1": 117.46
+      },
+      {
+       "page": 14,
+       "x0": 323.61,
+       "y0": 135.44,
+       "x1": 411.43,
+       "y1": 144.07999999999998
+      },
+      {
+       "page": 14,
+       "x0": 206.46,
+       "y0": 151.61,
+       "x1": 305.36,
+       "y1": 160.25
+      },
+      {
+       "page": 14,
+       "x0": 339.73,
+       "y0": 151.61,
+       "x1": 357.16,
+       "y1": 160.25
+      },
+      {
+       "page": 14,
+       "x0": 389.62,
+       "y0": 151.22,
+       "x1": 407.05,
+       "y1": 160.18
+      },
+      {
+       "page": 14,
+       "x0": 200.57,
+       "y0": 162.57,
+       "x1": 311.26,
+       "y1": 171.20999999999998
+      },
+      {
+       "page": 14,
+       "x0": 339.73,
+       "y0": 162.57,
+       "x1": 357.16,
+       "y1": 171.20999999999998
+      },
+      {
+       "page": 14,
+       "x0": 389.62,
+       "y0": 162.18,
+       "x1": 407.05,
+       "y1": 171.14000000000001
+      }
+     ],
+     "quote": "HotpotQA (exact match) 29.4 30.8",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Success rate percentage",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.25,
+      "y0": 108.82,
+      "x1": 411.43,
+      "y1": 171.20999999999998
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 108.25,
+       "y0": 108.82,
+       "x1": 226.6,
+       "y1": 117.46
+      },
+      {
+       "page": 14,
+       "x0": 323.61,
+       "y0": 135.44,
+       "x1": 411.43,
+       "y1": 144.07999999999998
+      },
+      {
+       "page": 14,
+       "x0": 206.46,
+       "y0": 151.61,
+       "x1": 305.36,
+       "y1": 160.25
+      },
+      {
+       "page": 14,
+       "x0": 339.73,
+       "y0": 151.61,
+       "x1": 357.16,
+       "y1": 160.25
+      },
+      {
+       "page": 14,
+       "x0": 389.62,
+       "y0": 151.22,
+       "x1": 407.05,
+       "y1": 160.18
+      },
+      {
+       "page": 14,
+       "x0": 200.57,
+       "y0": 162.57,
+       "x1": 311.26,
+       "y1": 171.20999999999998
+      },
+      {
+       "page": 14,
+       "x0": 339.73,
+       "y0": 162.57,
+       "x1": 357.16,
+       "y1": 171.20999999999998
+      },
+      {
+       "page": 14,
+       "x0": 389.62,
+       "y0": 162.18,
+       "x1": 407.05,
+       "y1": 171.14000000000001
+      }
+     ],
+     "quote": "ALFWorld (success rate %) 70.9 78.4",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "Average score",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 107.67,
+      "y0": 623.68,
+      "x1": 504.0,
+      "y1": 665.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 348.12,
+       "y0": 623.68,
+       "x1": 504.0,
+       "y1": 632.3199999999999
+      },
+      {
+       "page": 7,
+       "x0": 107.67,
+       "y0": 634.64,
+       "x1": 504.0,
+       "y1": 643.28
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 645.6,
+       "x1": 504.0,
+       "y1": 654.24
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 656.56,
+       "x1": 157.97,
+       "y1": 665.1999999999999
+      }
+     ],
+     "quote": "This task is evaluated by average score (percentage of desired attributes covered by the chosen product averaged across all episodes) and success rate (percentage of episodes where the chosen product satisfies all requirements) on 500 test instructions.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Decoding temperature of 0.7 for CoT-SC",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 107.64,
+      "y0": 346.62,
+      "x1": 504.0,
+      "y1": 388.13
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 471.32,
+       "y0": 346.62,
+       "x1": 504.0,
+       "y1": 355.26
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 357.58,
+       "x1": 504.0,
+       "y1": 366.21999999999997
+      },
+      {
+       "page": 5,
+       "x0": 107.64,
+       "y0": 368.54,
+       "x1": 504.0,
+       "y1": 377.18
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 379.49,
+       "x1": 274.90999999999997,
+       "y1": 388.13
+      }
+     ],
+     "quote": "We also build a self-consistency baseline (CoT-SC) (Wang et al., 2022a;b) by sampling 21 CoT trajectories with decoding temperature 0.7 during inference and adopting the majority answer, which is found to consistently boost performance over CoT.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "decoding temperature",
+   "value_raw": "0.7",
+   "value_norm": 0.7,
+   "scope": "inference"
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Number of steps for HotpotQA when backing off to CoT-SC",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 493.5,
+      "x1": 505.74,
+      "y1": 513.1
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 407.22,
+       "y0": 493.5,
+       "x1": 504.17,
+       "y1": 502.14
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 504.46,
+       "x1": 505.74,
+       "y1": 513.1
+      }
+     ],
+     "quote": "We set 7 and 5 steps for HotpotQA and FEVER respectively as we find more steps will not improve ReAct performancefoot_3 .",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "steps",
+   "value_raw": "7",
+   "value_norm": 7.0,
+   "scope": "HotpotQA"
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Number of steps for FEVER when backing off to CoT-SC",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 493.5,
+      "x1": 505.74,
+      "y1": 513.1
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 407.22,
+       "y0": 493.5,
+       "x1": 504.17,
+       "y1": 502.14
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 504.46,
+       "x1": 505.74,
+       "y1": 513.1
+      }
+     ],
+     "quote": "We set 7 and 5 steps for HotpotQA and FEVER respectively as we find more steps will not improve ReAct performancefoot_3 .",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "steps",
+   "value_raw": "5",
+   "value_norm": 5.0,
+   "scope": "FEVER"
+  }
+ ],
+ "compute": [],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation of ReAct trajectories into standard prompting, chain-of-thought prompting, self-consistency, and acting-only prompt.",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 313.35,
+      "x1": 505.25,
+      "y1": 344.3
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 313.35,
+       "x1": 504.0,
+       "y1": 322.38
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 324.31,
+       "x1": 505.25,
+       "y1": 333.34
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 335.66,
+       "x1": 287.86,
+       "y1": 344.3
+      }
+     ],
+     "quote": "Baselines We systematically ablate ReAct trajectories to build prompts for multiple baselines (with formats as Figure 1(1a-1c)): (a) Standard prompting (Standard), which removes all thoughts, actions, observations in ReAct trajectories.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Ablation experiment using a thought pattern composed of IM-like dense external feedback.",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 107.69,
+      "y0": 613.79,
+      "x1": 504.0,
+      "y1": 644.35
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 107.69,
+       "y0": 613.79,
+       "x1": 503.99,
+       "y1": 622.43
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 624.75,
+       "x1": 504.0,
+       "y1": 633.39
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 635.71,
+       "x1": 317.03,
+       "y1": 644.35
+      }
+     ],
+     "quote": "To demonstrate the differences between ReAct and IM, and to highlight the importance of internal reasoning vs. simple reactions to external feedback, we ran an ablation experiment using a thought pattern composed of IM-like dense external feedback.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "Complex tasks with large action spaces require excessive demonstrations that can exceed the input length limit.",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 683.14,
+      "x1": 504.0,
+      "y1": 713.6999999999999
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 248.25,
+       "y0": 683.14,
+       "x1": 504.0,
+       "y1": 691.78
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 694.1,
+       "x1": 504.0,
+       "y1": 702.74
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 705.06,
+       "x1": 289.89,
+       "y1": 713.6999999999999
+      }
+     ],
+     "quote": "Despite the simplicity of our method, complex tasks with large action spaces require more demonstrations to learn well, which unfortunately can easily go beyond the input length limit of in-context learning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Utilize more high-quality human annotations to improve performance.",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 294.8,
+      "y0": 705.06,
+      "x1": 504.36,
+      "y1": 713.6999999999999
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 294.8,
+       "y0": 705.06,
+       "x1": 504.36,
+       "y1": 713.6999999999999
+      },
+      {
+       "page": 10,
+       "x0": 107.64,
+       "y0": 85.34,
+       "x1": 504.0,
+       "y1": 93.98
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 96.3,
+       "x1": 301.64,
+       "y1": 104.94
+      }
+     ],
+     "quote": "We explore the fine-tuning approach on HotpotQA with initial promising results, but learning from more high-quality human annotations will be the desiderata to further improve the performance.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Scale up ReAct using multi-task training and reinforcement learning.",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 96.3,
+      "x1": 504.17,
+      "y1": 126.86
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 307.48,
+       "y0": 96.3,
+       "x1": 504.01,
+       "y1": 104.94
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 107.26,
+       "x1": 504.17,
+       "y1": 115.9
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 118.22,
+       "x1": 390.51,
+       "y1": 126.86
+      }
+     ],
+     "quote": "Scaling up ReAct with multi-task training and combining it with complementary paradigms like reinforcement learning could result in stronger agents that further unlock the potential of LLMs for more applications.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [
+  {
+   "id": "ethics.0",
+   "value": "Interacting with external environments carries potential dangers such as accessing private information or taking harmful actions.",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 331.77,
+      "x1": 505.65,
+      "y1": 373.28999999999996
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 351.13,
+       "y0": 331.77,
+       "x1": 504.0,
+       "y1": 340.40999999999997
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 342.73,
+       "x1": 505.65,
+       "y1": 351.37
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 353.69,
+       "x1": 239.39,
+       "y1": 362.33
+      },
+      {
+       "page": 10,
+       "x0": 244.16,
+       "y0": 353.69,
+       "x1": 504.0,
+       "y1": 362.33
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 364.65,
+       "x1": 217.59,
+       "y1": 373.28999999999996
+      }
+     ],
+     "quote": "However, hooking up a large language model with an action space to interact with external environments (e.g. the web, physical environments) has potential dangers, e.g. looking up inappropriate or private information, or taking harmful actions in an environment.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "code_urls": [],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "ReAct outperforms imitation and reinforcement learning methods by absolute success rates of 34% and 10% on two interactive decision making benchmarks.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.4,
+      "y0": 441.27,
+      "x1": 468.49,
+      "y1": 482.78999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 441.27,
+       "x1": 468.13,
+       "y1": 449.90999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.4,
+       "y0": 452.23,
+       "x1": 468.49,
+       "y1": 460.87
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 463.19,
+       "x1": 468.14,
+       "y1": 471.83
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 474.15,
+       "x1": 291.78,
+       "y1": 482.78999999999996
+      }
+     ],
+     "quote": "Furthermore, on two interactive decision making benchmarks (ALFWorld and WebShop), ReAct outperforms imitation and reinforcement learning methods by an absolute success rate of 34% and 10% respectively, while being prompted with only one or two in-context examples.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "ReAct demonstrates effectiveness over baselines as well as improved human interpretability and trustworthiness.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 353.6,
+      "x1": 468.29999999999995,
+      "y1": 395.12
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 413.14,
+       "y0": 353.6,
+       "x1": 468.29999999999995,
+       "y1": 362.24
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 364.56,
+       "x1": 468.14,
+       "y1": 373.2
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 375.52,
+       "x1": 468.13,
+       "y1": 384.15999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 386.48,
+       "x1": 363.75,
+       "y1": 395.12
+      }
+     ],
+     "quote": "We apply our approach, named ReAct, to a diverse set of language and decision making tasks and demonstrate its effectiveness over state-of-the-art baselines in addition to improved human interpretability and trustworthiness.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "On ALFWorld and WebShop, ReAct prompting outperforms methods trained with 10^3 to 10^5 task instances with an absolute improvement of 34% and 10% in success rates.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 107.64,
+      "y0": 162.05,
+      "x1": 505.25,
+      "y1": 192.61
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 184.21,
+       "y0": 162.05,
+       "x1": 503.99,
+       "y1": 170.69
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 172.69,
+       "x1": 411.25,
+       "y1": 181.65
+      },
+      {
+       "page": 3,
+       "x0": 411.25,
+       "y0": 171.12,
+       "x1": 415.22,
+       "y1": 177.24
+      },
+      {
+       "page": 3,
+       "x0": 418.7,
+       "y0": 172.69,
+       "x1": 439.4,
+       "y1": 181.43
+      },
+      {
+       "page": 3,
+       "x0": 439.4,
+       "y0": 171.12,
+       "x1": 443.37,
+       "y1": 177.24
+      },
+      {
+       "page": 3,
+       "x0": 446.47,
+       "y0": 173.01,
+       "x1": 505.25,
+       "y1": 181.64999999999998
+      },
+      {
+       "page": 3,
+       "x0": 107.64,
+       "y0": 183.97,
+       "x1": 417.09999999999997,
+       "y1": 192.61
+      }
+     ],
+     "quote": "On ALFWorld and WebShop, two or even one-shot ReAct prompting is able to outperform imitation or reinforcement learning methods trained with 10 3 ∼ 10 5 task instances, with an absolute improvement of 34% and 10% in success rates respectively.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

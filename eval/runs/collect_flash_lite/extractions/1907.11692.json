@@ -1,0 +1,2277 @@
+{
+ "metadata": {
+  "title": "RoBERTa: A Robustly Optimized BERT Pretraining Approach",
+  "authors": [
+   "Yinhan Liu",
+   "Myle Ott",
+   "Naman Goyal",
+   "Jingfei Du",
+   "Mandar Joshi",
+   "Danqi Chen",
+   "Omer Levy",
+   "Mike Lewis",
+   "Luke Zettlemoyer",
+   "Veselin Stoyanov"
+  ],
+  "venue": null,
+  "year": "2019",
+  "arxiv_id": "1907.11692v1[cs.CL]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Comparing different language model pretraining approaches is challenging.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 89.04,
+      "y0": 290.73,
+      "x1": 273.44,
+      "y1": 335.52000000000004
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 89.04,
+       "y0": 290.73,
+       "x1": 273.32,
+       "y1": 299.64000000000004
+      },
+      {
+       "page": 1,
+       "x0": 89.04,
+       "y0": 302.73,
+       "x1": 273.44,
+       "y1": 311.64000000000004
+      },
+      {
+       "page": 1,
+       "x0": 89.04,
+       "y0": 314.61,
+       "x1": 273.32,
+       "y1": 323.52000000000004
+      },
+      {
+       "page": 1,
+       "x0": 89.04,
+       "y0": 326.61,
+       "x1": 121.65,
+       "y1": 335.52000000000004
+      }
+     ],
+     "quote": "Language model pretraining has led to significant performance gains but careful comparison between different approaches is challenging.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Training is computationally expensive and often done on private datasets of varying sizes.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 89.04,
+      "y0": 326.61,
+      "x1": 273.8,
+      "y1": 383.40000000000003
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 129.0,
+       "y0": 326.61,
+       "x1": 273.56,
+       "y1": 335.52000000000004
+      },
+      {
+       "page": 1,
+       "x0": 89.04,
+       "y0": 338.61,
+       "x1": 273.49,
+       "y1": 347.52000000000004
+      },
+      {
+       "page": 1,
+       "x0": 89.04,
+       "y0": 350.49,
+       "x1": 273.8,
+       "y1": 359.40000000000003
+      },
+      {
+       "page": 1,
+       "x0": 89.04,
+       "y0": 362.49,
+       "x1": 273.32,
+       "y1": 371.40000000000003
+      },
+      {
+       "page": 1,
+       "x0": 89.04,
+       "y0": 374.49,
+       "x1": 109.77000000000001,
+       "y1": 383.40000000000003
+      }
+     ],
+     "quote": "Training is computationally expensive, often done on private datasets of different sizes, and, as we will show, hyperparameter choices have significant impact on the final results.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Presented a replication study of BERT pretraining measuring the impact of hyperparameters and training data size.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 89.04,
+      "y0": 374.49,
+      "x1": 273.68,
+      "y1": 419.16
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 113.52,
+       "y0": 374.49,
+       "x1": 273.21,
+       "y1": 383.40000000000003
+      },
+      {
+       "page": 1,
+       "x0": 89.04,
+       "y0": 386.37,
+       "x1": 273.42,
+       "y1": 395.28000000000003
+      },
+      {
+       "page": 1,
+       "x0": 89.04,
+       "y0": 398.37,
+       "x1": 273.68,
+       "y1": 407.28000000000003
+      },
+      {
+       "page": 1,
+       "x0": 89.04,
+       "y0": 410.25,
+       "x1": 195.93,
+       "y1": 419.16
+      }
+     ],
+     "quote": "We present a replication study of BERT pretraining (Devlin et al., 2019) that carefully measures the impact of many key hyperparameters and training data size.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Introduced RoBERTa, an improved recipe for training BERT models.",
+   "evidence": [
+    {
+     "chunk_id": "b0004",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 307.32,
+      "y0": 305.57,
+      "x1": 525.79,
+      "y1": 369.55
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 439.08,
+       "y0": 305.57,
+       "x1": 525.79,
+       "y1": 315.32
+      },
+      {
+       "page": 1,
+       "x0": 307.32,
+       "y0": 319.13,
+       "x1": 525.51,
+       "y1": 328.88
+      },
+      {
+       "page": 1,
+       "x0": 307.32,
+       "y0": 332.69,
+       "x1": 525.41,
+       "y1": 342.44
+      },
+      {
+       "page": 1,
+       "x0": 307.32,
+       "y0": 346.24,
+       "x1": 525.4,
+       "y1": 355.99
+      },
+      {
+       "page": 1,
+       "x0": 307.32,
+       "y0": 359.8,
+       "x1": 525.3299999999999,
+       "y1": 369.55
+      }
+     ],
+     "quote": "We find that BERT was significantly undertrained and propose an improved recipe for training BERT models, which we call RoBERTa, that can match or exceed the performance of all of the post-BERT methods.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "Collected a large new dataset (CC-NEWS) to better control for training set size effects.",
+   "evidence": [
+    {
+     "chunk_id": "b0004",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 307.32,
+      "y0": 441.04,
+      "x1": 525.41,
+      "y1": 491.47
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 489.84,
+       "y0": 441.04,
+       "x1": 525.41,
+       "y1": 450.79
+      },
+      {
+       "page": 1,
+       "x0": 307.32,
+       "y0": 454.6,
+       "x1": 525.39,
+       "y1": 464.35
+      },
+      {
+       "page": 1,
+       "x0": 307.32,
+       "y0": 468.16,
+       "x1": 525.39,
+       "y1": 477.91
+      },
+      {
+       "page": 1,
+       "x0": 307.32,
+       "y0": 481.72,
+       "x1": 458.85,
+       "y1": 491.47
+      }
+     ],
+     "quote": "We also collect a large new dataset (CC-NEWS) of comparable size to other privately used datasets, to better control for training set size effects.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "language model pretraining",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 89.04,
+      "y0": 290.73,
+      "x1": 273.44,
+      "y1": 335.52000000000004
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 89.04,
+       "y0": 290.73,
+       "x1": 273.32,
+       "y1": 299.64000000000004
+      },
+      {
+       "page": 1,
+       "x0": 89.04,
+       "y0": 302.73,
+       "x1": 273.44,
+       "y1": 311.64000000000004
+      },
+      {
+       "page": 1,
+       "x0": 89.04,
+       "y0": 314.61,
+       "x1": 273.32,
+       "y1": 323.52000000000004
+      },
+      {
+       "page": 1,
+       "x0": 89.04,
+       "y0": 326.61,
+       "x1": 121.65,
+       "y1": 335.52000000000004
+      }
+     ],
+     "quote": "Language model pretraining has led to significant performance gains but careful comparison between different approaches is challenging.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "BERT takes a concatenation of two segments as input separated by special tokens.",
+   "evidence": [
+    {
+     "chunk_id": "b0009",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 72.0,
+      "y0": 355.37,
+      "x1": 290.19,
+      "y1": 392.24
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 229.2,
+       "y0": 355.37,
+       "x1": 290.19,
+       "y1": 365.12
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 368.93,
+       "x1": 289.96000000000004,
+       "y1": 378.68
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 382.49,
+       "x1": 290.19,
+       "y1": 392.24
+      }
+     ],
+     "quote": "The two segments are presented as a single input sequence to BERT with special tokens delimiting them:",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "The model utilizes a transformer architecture consisting of L layers, A self-attention heads, and hidden dimension H.",
+   "evidence": [
+    {
+     "chunk_id": "b0014",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 72.0,
+      "y0": 544.97,
+      "x1": 289.84000000000003,
+      "y1": 568.2800000000001
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 144.6,
+       "y0": 544.97,
+       "x1": 289.84000000000003,
+       "y1": 554.72
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 558.09,
+       "x1": 135.57,
+       "y1": 568.2800000000001
+      }
+     ],
+     "quote": "We use a transformer architecture with L layers.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "Pretraining uses two objectives: masked language modeling and next sentence prediction.",
+   "evidence": [
+    {
+     "chunk_id": "b0016",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 72.0,
+      "y0": 612.53,
+      "x1": 290.19,
+      "y1": 649.28
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 612.53,
+       "x1": 289.95,
+       "y1": 622.28
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 626.09,
+       "x1": 290.19,
+       "y1": 635.84
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 639.53,
+       "x1": 104.72999999999999,
+       "y1": 649.28
+      }
+     ],
+     "quote": "During pretraining, BERT uses two objectives: masked language modeling and next sentence prediction.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "Optimization is performed using Adam with specific parameter settings, learning rate warmup, linear decay, and dropout.",
+   "evidence": [
+    {
+     "chunk_id": "b0021",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 307.32,
+      "y0": 386.21,
+      "x1": 525.5699999999999,
+      "y1": 436.87
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 307.32,
+       "y0": 386.21,
+       "x1": 525.5699999999999,
+       "y1": 395.96
+      },
+      {
+       "page": 2,
+       "x0": 307.32,
+       "y0": 399.21,
+       "x1": 487.12,
+       "y1": 409.4
+      },
+      {
+       "page": 2,
+       "x0": 487.08,
+       "y0": 403.4,
+       "x1": 491.31,
+       "y1": 410.69
+      },
+      {
+       "page": 2,
+       "x0": 496.2,
+       "y0": 398.84,
+       "x1": 525.45,
+       "y1": 409.75
+      },
+      {
+       "page": 2,
+       "x0": 307.32,
+       "y0": 412.77,
+       "x1": 313.48,
+       "y1": 422.82
+      },
+      {
+       "page": 2,
+       "x0": 313.44,
+       "y0": 416.96,
+       "x1": 317.67,
+       "y1": 424.25
+      },
+      {
+       "page": 2,
+       "x0": 327.36,
+       "y0": 412.4,
+       "x1": 465.1,
+       "y1": 423.31
+      },
+      {
+       "page": 2,
+       "x0": 465.12,
+       "y0": 413.21,
+       "x1": 525.39,
+       "y1": 424.26
+      },
+      {
+       "page": 2,
+       "x0": 307.32,
+       "y0": 425.96,
+       "x1": 364.28999999999996,
+       "y1": 436.87
+      }
+     ],
+     "quote": "BERT is optimized with Adam (Kingma and Ba, 2015) using the following parameters: β 1 = 0.9, β 2 = 0.999, ǫ = 1e-6 and L 2 weight decay of 0.01.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "novelty": [],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "BOOKCORPUS and English WIKIPEDIA (16GB)",
+   "evidence": [
+    {
+     "chunk_id": "b0033",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 72.0,
+      "y0": 572.84,
+      "x1": 290.09000000000003,
+      "y1": 596.96
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 72.0,
+       "y0": 572.84,
+       "x1": 290.09000000000003,
+       "y1": 583.75
+      },
+      {
+       "page": 3,
+       "x0": 82.68,
+       "y0": 587.21,
+       "x1": 137.61,
+       "y1": 596.96
+      }
+     ],
+     "quote": "• BOOKCORPUS (Zhu et al., 2015) plus English WIKIPEDIA.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "BOOKCORPUS plus English WIKIPEDIA",
+   "split": "",
+   "size": "16GB",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "CC-NEWS CommonCrawl News dataset (76GB)",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 72.0,
+      "y0": 617.6,
+      "x1": 290.32,
+      "y1": 655.28
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 72.0,
+       "y0": 617.6,
+       "x1": 290.31,
+       "y1": 628.51
+      },
+      {
+       "page": 3,
+       "x0": 82.44,
+       "y0": 631.97,
+       "x1": 290.32,
+       "y1": 641.72
+      },
+      {
+       "page": 3,
+       "x0": 82.44,
+       "y0": 645.53,
+       "x1": 183.09,
+       "y1": 655.28
+      }
+     ],
+     "quote": "• CC-NEWS, which we collected from the English portion of the CommonCrawl News dataset (Nagel, 2016).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "CC-NEWS",
+   "split": "",
+   "size": "76GB after filtering",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "OPENWEBTEXT open-source recreation of WebText (38GB)",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 72.0,
+      "y0": 66.53,
+      "x1": 485.85,
+      "y1": 727.04
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 72.0,
+       "y0": 702.92,
+       "x1": 290.25,
+       "y1": 713.8299999999999
+      },
+      {
+       "page": 3,
+       "x0": 82.44,
+       "y0": 717.29,
+       "x1": 290.07,
+       "y1": 727.04
+      },
+      {
+       "page": 3,
+       "x0": 317.76,
+       "y0": 66.53,
+       "x1": 485.85,
+       "y1": 76.28
+      }
+     ],
+     "quote": "• OPENWEBTEXT (Gokaslan and Cohen, 2019), an open-source recreation of the WebText cor-pus described in Radford et al. (2019).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "OPENWEBTEXT",
+   "split": "",
+   "size": "38GB",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "STORIES dataset containing CommonCrawl filtered for story-like style (31GB)",
+   "evidence": [
+    {
+     "chunk_id": "b0036",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 307.32,
+      "y0": 112.4,
+      "x1": 525.64,
+      "y1": 163.52
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 307.32,
+       "y0": 112.4,
+       "x1": 525.64,
+       "y1": 123.31
+      },
+      {
+       "page": 3,
+       "x0": 317.76,
+       "y0": 126.77,
+       "x1": 525.51,
+       "y1": 136.51999999999998
+      },
+      {
+       "page": 3,
+       "x0": 317.76,
+       "y0": 140.21,
+       "x1": 525.51,
+       "y1": 149.96
+      },
+      {
+       "page": 3,
+       "x0": 317.76,
+       "y0": 153.77,
+       "x1": 403.05,
+       "y1": 163.52
+      }
+     ],
+     "quote": "• STORIES, a dataset introduced in Trinh and Le (2018) containing a subset of CommonCrawl data filtered to match the story-like style of Winograd schemas.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "STORIES",
+   "split": "",
+   "size": "31GB",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "GLUE benchmark collection of 9 datasets",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 307.32,
+      "y0": 248.87,
+      "x1": 525.5699999999999,
+      "y1": 299.48
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 307.32,
+       "y0": 248.87,
+       "x1": 525.15,
+       "y1": 258.8
+      },
+      {
+       "page": 3,
+       "x0": 307.32,
+       "y0": 262.61,
+       "x1": 525.5699999999999,
+       "y1": 272.36
+      },
+      {
+       "page": 3,
+       "x0": 307.32,
+       "y0": 276.17,
+       "x1": 525.17,
+       "y1": 285.92
+      },
+      {
+       "page": 3,
+       "x0": 307.32,
+       "y0": 289.73,
+       "x1": 488.49,
+       "y1": 299.48
+      },
+      {
+       "page": 3,
+       "x0": 488.52,
+       "y0": 287.75,
+       "x1": 492.51,
+       "y1": 294.88
+      }
+     ],
+     "quote": "The General Language Understanding Evaluation (GLUE) benchmark (Wang et al., 2019b) is a collection of 9 datasets for evaluating natural language understanding systems.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "GLUE",
+   "split": "training and development data splits",
+   "size": "9 datasets",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "SQuAD V1.1 and V2.0",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 307.32,
+      "y0": 585.88,
+      "x1": 525.53,
+      "y1": 609.19
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 307.32,
+       "y0": 585.88,
+       "x1": 525.53,
+       "y1": 595.63
+      },
+      {
+       "page": 3,
+       "x0": 307.32,
+       "y0": 599.44,
+       "x1": 485.49,
+       "y1": 609.19
+      }
+     ],
+     "quote": "We evaluate on two versions of SQuAD: V1.1 and V2.0 (Rajpurkar et al., 2016(Rajpurkar et al., , 2018)).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "SQuAD",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.6",
+   "value": "RACE reading comprehension dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 72.0,
+      "y0": 210.4,
+      "x1": 290.32,
+      "y1": 274.28
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 113.16,
+       "y0": 210.4,
+       "x1": 290.31,
+       "y1": 220.15
+      },
+      {
+       "page": 4,
+       "x0": 72.0,
+       "y0": 223.96,
+       "x1": 290.32,
+       "y1": 233.71
+      },
+      {
+       "page": 4,
+       "x0": 72.0,
+       "y0": 237.41,
+       "x1": 290.21000000000004,
+       "y1": 247.16
+      },
+      {
+       "page": 4,
+       "x0": 72.0,
+       "y0": 250.97,
+       "x1": 289.97,
+       "y1": 260.72
+      },
+      {
+       "page": 4,
+       "x0": 72.0,
+       "y0": 264.53,
+       "x1": 115.53,
+       "y1": 274.28
+      }
+     ],
+     "quote": "The ReAding Comprehension from Examinations (RACE) (Lai et al., 2017) task is a large-scale reading comprehension dataset with more than 28,000 passages and nearly 100,000 questions.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "RACE",
+   "split": "",
+   "size": "more than 28,000 passages and nearly 100,000 questions",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Original BERT model and its variants",
+   "evidence": [
+    {
+     "chunk_id": "b0027",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 307.32,
+      "y0": 702.53,
+      "x1": 525.5699999999999,
+      "y1": 725.72
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 307.32,
+       "y0": 702.53,
+       "x1": 525.5699999999999,
+       "y1": 712.28
+      },
+      {
+       "page": 2,
+       "x0": 307.32,
+       "y0": 715.97,
+       "x1": 335.37,
+       "y1": 725.72
+      }
+     ],
+     "quote": "We reimplement BERT in FAIRSEQ (Ott et al., 2019).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "XLNet architecture",
+   "evidence": [
+    {
+     "chunk_id": "b0074",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 307.32,
+      "y0": 578.69,
+      "x1": 525.63,
+      "y1": 629.12
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 334.08,
+       "y0": 578.69,
+       "x1": 525.63,
+       "y1": 588.44
+      },
+      {
+       "page": 6,
+       "x0": 307.32,
+       "y0": 592.24,
+       "x1": 525.39,
+       "y1": 601.99
+      },
+      {
+       "page": 6,
+       "x0": 307.32,
+       "y0": 605.81,
+       "x1": 525.27,
+       "y1": 615.56
+      },
+      {
+       "page": 6,
+       "x0": 307.32,
+       "y0": 619.37,
+       "x1": 428.37,
+       "y1": 629.12
+      }
+     ],
+     "quote": "For example, the recently proposed XLNet architecture (Yang et al., 2019) is pretrained using nearly 10 times more data than the original BERT (Devlin et al., 2019).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "F1 score and Exact Match (EM) for SQuAD",
+   "evidence": [
+    {
+     "chunk_id": "b0107",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 72.00018310546875,
+      "y0": 249.9257354736328,
+      "x1": 525.69091796875,
+      "y1": 270.9518737792969
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 308.27984619140625,
+       "y0": 249.9257354736328,
+       "x1": 525.69091796875,
+       "y1": 258.9518737792969
+      },
+      {
+       "page": 5,
+       "x0": 72.00018310546875,
+       "y0": 261.92572021484375,
+       "x1": 144.09092712402344,
+       "y1": 270.9518737792969
+      }
+     ],
+     "quote": "We report F1 for SQuAD and accuracy for MNLI-m, SST-2 and RACE.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Accuracy for classification tasks",
+   "evidence": [
+    {
+     "chunk_id": "b0107",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 72.00018310546875,
+      "y0": 249.9257354736328,
+      "x1": 525.69091796875,
+      "y1": 270.9518737792969
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 308.27984619140625,
+       "y0": 249.9257354736328,
+       "x1": 525.69091796875,
+       "y1": 258.9518737792969
+      },
+      {
+       "page": 5,
+       "x0": 72.00018310546875,
+       "y0": 261.92572021484375,
+       "x1": 144.09092712402344,
+       "y1": 270.9518737792969
+      }
+     ],
+     "quote": "We report F1 for SQuAD and accuracy for MNLI-m, SST-2 and RACE.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Maximum sequence length T = 512 tokens",
+   "evidence": [
+    {
+     "chunk_id": "b0028",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 72.0,
+      "y0": 187.64,
+      "x1": 290.21,
+      "y1": 211.76
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 82.92,
+       "y0": 187.64,
+       "x1": 290.21,
+       "y1": 198.54999999999998
+      },
+      {
+       "page": 3,
+       "x0": 72.0,
+       "y0": 202.01,
+       "x1": 102.81,
+       "y1": 211.76
+      }
+     ],
+     "quote": "We pretrain with sequences of at most T = 512 tokens.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "sequence length",
+   "value_raw": "512",
+   "value_norm": 512.0,
+   "scope": "pretraining"
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Adam beta 2 parameter set to 0.98",
+   "evidence": [
+    {
+     "chunk_id": "b0027",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 72.0,
+      "y0": 147.77,
+      "x1": 290.21,
+      "y1": 184.64
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 173.64,
+       "y0": 147.77,
+       "x1": 289.98,
+       "y1": 157.52
+      },
+      {
+       "page": 3,
+       "x0": 72.0,
+       "y0": 160.89,
+       "x1": 78.16,
+       "y1": 170.94
+      },
+      {
+       "page": 3,
+       "x0": 78.12,
+       "y0": 165.08,
+       "x1": 82.35000000000001,
+       "y1": 172.37
+      },
+      {
+       "page": 3,
+       "x0": 86.04,
+       "y0": 160.52,
+       "x1": 290.21,
+       "y1": 171.43
+      },
+      {
+       "page": 3,
+       "x0": 72.0,
+       "y0": 174.89,
+       "x1": 146.37,
+       "y1": 184.64
+      }
+     ],
+     "quote": "Similarly, we found setting β 2 = 0.98 to improve stability when training with large batch sizes.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "beta 2",
+   "value_raw": "0.98",
+   "value_norm": 0.98,
+   "scope": "pretraining"
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Model parameters for BERT LARGE configuration",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 307.32,
+      "y0": 674.45,
+      "x1": 525.76,
+      "y1": 738.67
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 318.24,
+       "y0": 674.45,
+       "x1": 525.39,
+       "y1": 684.2
+      },
+      {
+       "page": 6,
+       "x0": 307.32,
+       "y0": 687.89,
+       "x1": 525.39,
+       "y1": 697.64
+      },
+      {
+       "page": 6,
+       "x0": 307.32,
+       "y0": 701.45,
+       "x1": 525.76,
+       "y1": 711.2
+      },
+      {
+       "page": 6,
+       "x0": 307.32,
+       "y0": 715.01,
+       "x1": 398.35,
+       "y1": 724.76
+      },
+      {
+       "page": 6,
+       "x0": 398.64,
+       "y0": 719.75,
+       "x1": 421.62,
+       "y1": 725.45
+      },
+      {
+       "page": 6,
+       "x0": 425.88,
+       "y0": 714.2,
+       "x1": 525.45,
+       "y1": 725.11
+      },
+      {
+       "page": 6,
+       "x0": 307.32,
+       "y0": 727.76,
+       "x1": 501.81,
+       "y1": 738.67
+      }
+     ],
+     "quote": "We begin by training RoBERTa following the BERT LARGE architecture (L = 24, H = 1024, A = 16, 355M parameters).",
+     "grounding_status": "verified",
+     "match_score": 99.1
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "model size",
+   "value_raw": "L = 24, H = 1024, A = 16, 355M parameters",
+   "value_norm": null,
+   "scope": "pretraining"
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Batch sizes for fine-tuning on GLUE tasks",
+   "evidence": [
+    {
+     "chunk_id": "b0082",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 307.32,
+      "y0": 467.69,
+      "x1": 525.53,
+      "y1": 558.8
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 353.4,
+       "y0": 467.69,
+       "x1": 525.15,
+       "y1": 477.44
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 480.44,
+       "x1": 525.17,
+       "y1": 491.35
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 494.0,
+       "x1": 525.52,
+       "y1": 504.91
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 508.37,
+       "x1": 525.53,
+       "y1": 518.12
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 521.93,
+       "x1": 525.41,
+       "y1": 531.68
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 535.49,
+       "x1": 525.39,
+       "y1": 545.24
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 549.05,
+       "x1": 429.09,
+       "y1": 558.8
+      }
+     ],
+     "quote": "We consider a limited hyperparameter sweep for each task, with batch sizes ∈ {16, 32} and learning rates ∈ {1e-5, 2e-5, 3e-5}, with a linear warmup for the first 6% of steps followed by a linear decay to 0.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "{16, 32}",
+   "value_norm": null,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Learning rates for fine-tuning on GLUE tasks",
+   "evidence": [
+    {
+     "chunk_id": "b0082",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 307.32,
+      "y0": 467.69,
+      "x1": 525.53,
+      "y1": 558.8
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 353.4,
+       "y0": 467.69,
+       "x1": 525.15,
+       "y1": 477.44
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 480.44,
+       "x1": 525.17,
+       "y1": 491.35
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 494.0,
+       "x1": 525.52,
+       "y1": 504.91
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 508.37,
+       "x1": 525.53,
+       "y1": 518.12
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 521.93,
+       "x1": 525.41,
+       "y1": 531.68
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 535.49,
+       "x1": 525.39,
+       "y1": 545.24
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 549.05,
+       "x1": 429.09,
+       "y1": 558.8
+      }
+     ],
+     "quote": "We consider a limited hyperparameter sweep for each task, with batch sizes ∈ {16, 32} and learning rates ∈ {1e-5, 2e-5, 3e-5}, with a linear warmup for the first 6% of steps followed by a linear decay to 0.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "{1e-5, 2e-5, 3e-5}",
+   "value_norm": null,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Linear warmup percentage for fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0082",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 307.32,
+      "y0": 467.69,
+      "x1": 525.53,
+      "y1": 558.8
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 353.4,
+       "y0": 467.69,
+       "x1": 525.15,
+       "y1": 477.44
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 480.44,
+       "x1": 525.17,
+       "y1": 491.35
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 494.0,
+       "x1": 525.52,
+       "y1": 504.91
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 508.37,
+       "x1": 525.53,
+       "y1": 518.12
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 521.93,
+       "x1": 525.41,
+       "y1": 531.68
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 535.49,
+       "x1": 525.39,
+       "y1": 545.24
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 549.05,
+       "x1": 429.09,
+       "y1": 558.8
+      }
+     ],
+     "quote": "We consider a limited hyperparameter sweep for each task, with batch sizes ∈ {16, 32} and learning rates ∈ {1e-5, 2e-5, 3e-5}, with a linear warmup for the first 6% of steps followed by a linear decay to 0.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "warmup",
+   "value_raw": "first 6% of steps",
+   "value_norm": null,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Number of epochs for fine-tuning on GLUE",
+   "evidence": [
+    {
+     "chunk_id": "b0082",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 307.32,
+      "y0": 467.69,
+      "x1": 525.53,
+      "y1": 558.8
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 353.4,
+       "y0": 467.69,
+       "x1": 525.15,
+       "y1": 477.44
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 480.44,
+       "x1": 525.17,
+       "y1": 491.35
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 494.0,
+       "x1": 525.52,
+       "y1": 504.91
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 508.37,
+       "x1": 525.53,
+       "y1": 518.12
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 521.93,
+       "x1": 525.41,
+       "y1": 531.68
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 535.49,
+       "x1": 525.39,
+       "y1": 545.24
+      },
+      {
+       "page": 7,
+       "x0": 307.32,
+       "y0": 549.05,
+       "x1": 429.09,
+       "y1": 558.8
+      }
+     ],
+     "quote": "We finetune for 10 epochs and perform early stopping based on each task's evaluation metric on the dev set.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "10",
+   "value_norm": 10.0,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Pretraining steps of 100K, 300K, and 500K",
+   "evidence": [
+    {
+     "chunk_id": "b0078",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 72.0,
+      "y0": 566.57,
+      "x1": 290.08000000000004,
+      "y1": 603.44
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 82.92,
+       "y0": 566.57,
+       "x1": 289.85,
+       "y1": 576.32
+      },
+      {
+       "page": 7,
+       "x0": 72.0,
+       "y0": 580.13,
+       "x1": 290.08000000000004,
+       "y1": 589.88
+      },
+      {
+       "page": 7,
+       "x0": 72.0,
+       "y0": 593.69,
+       "x1": 273.33000000000004,
+       "y1": 603.44
+      }
+     ],
+     "quote": "Finally, we pretrain RoBERTa for significantly longer, increasing the number of pretraining steps from 100K to 300K, and then further to 500K.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs/steps",
+   "value_raw": "100K to 300K, and then further to 500K",
+   "value_norm": null,
+   "scope": "pretraining"
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "DGX-1 machines with 8 x 32GB Nvidia V100 GPUs using mixed precision",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 72.0,
+      "y0": 256.13,
+      "x1": 290.24,
+      "y1": 306.56
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 82.92,
+       "y0": 256.13,
+       "x1": 290.07,
+       "y1": 265.88
+      },
+      {
+       "page": 3,
+       "x0": 72.0,
+       "y0": 268.88,
+       "x1": 290.24,
+       "y1": 279.79
+      },
+      {
+       "page": 3,
+       "x0": 72.0,
+       "y0": 283.25,
+       "x1": 290.19,
+       "y1": 293.0
+      },
+      {
+       "page": 3,
+       "x0": 72.0,
+       "y0": 296.81,
+       "x1": 228.21,
+       "y1": 306.56
+      }
+     ],
+     "quote": "We train with mixed precision floating point arithmetic on DGX-1 machines, each with 8 × 32GB Nvidia V100 GPUs interconnected by Infiniband (Micikevicius et al., 2018).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.1",
+   "value": "1024 V100 GPUs for approximately one day",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 72.0,
+      "y0": 341.33,
+      "x1": 290.09000000000003,
+      "y1": 364.64
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 164.52,
+       "y0": 341.33,
+       "x1": 290.09000000000003,
+       "y1": 351.08
+      },
+      {
+       "page": 7,
+       "x0": 72.0,
+       "y0": 354.89,
+       "x1": 269.61,
+       "y1": 364.64
+      }
+     ],
+     "quote": "We pretrain our model using 1024 V100 GPUs for approximately one day.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Median over five random initializations (seeds)",
+   "evidence": [
+    {
+     "chunk_id": "b0107",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 146.4001922607422,
+      "y0": 261.92572021484375,
+      "x1": 280.8776550292969,
+      "y1": 270.9518737792969
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 146.4001922607422,
+       "y0": 261.92572021484375,
+       "x1": 280.8776550292969,
+       "y1": 270.9518737792969
+      }
+     ],
+     "quote": "Reported results are medians over five random initializations (seeds).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation of input formats comparing SEGMENT-PAIR and SENTENCE-PAIR",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 72.0,
+      "y0": 660.89,
+      "x1": 290.25,
+      "y1": 724.76
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 151.44,
+       "y0": 660.89,
+       "x1": 289.95,
+       "y1": 670.64
+      },
+      {
+       "page": 5,
+       "x0": 72.24,
+       "y0": 674.45,
+       "x1": 290.25,
+       "y1": 684.2
+      },
+      {
+       "page": 5,
+       "x0": 72.0,
+       "y0": 687.89,
+       "x1": 290.07,
+       "y1": 697.64
+      },
+      {
+       "page": 5,
+       "x0": 72.0,
+       "y0": 701.45,
+       "x1": 290.19,
+       "y1": 711.2
+      },
+      {
+       "page": 5,
+       "x0": 72.0,
+       "y0": 715.01,
+       "x1": 135.21,
+       "y1": 724.76
+      }
+     ],
+     "quote": "We first compare the original SEGMENT-PAIR input format from Devlin et al. (2019) to the SENTENCE-PAIR format; both formats retain the NSP loss, but the latter uses single sentences.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Ablation comparing training without NSP loss and using text blocks from a single document",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 307.32,
+      "y0": 307.73,
+      "x1": 525.6700000000001,
+      "y1": 344.6
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 318.24,
+       "y0": 307.73,
+       "x1": 525.6700000000001,
+       "y1": 317.48
+      },
+      {
+       "page": 5,
+       "x0": 307.32,
+       "y0": 321.29,
+       "x1": 525.39,
+       "y1": 331.04
+      },
+      {
+       "page": 5,
+       "x0": 307.32,
+       "y0": 334.85,
+       "x1": 460.16999999999996,
+       "y1": 344.6
+      }
+     ],
+     "quote": "We next compare training without the NSP loss and training with blocks of text from a single document (DOC-SENTENCES).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.2",
+   "value": "Ablation comparing DOC-SENTENCES and FULL-SENTENCES sequence restrictions",
+   "evidence": [
+    {
+     "chunk_id": "b0063",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 307.32,
+      "y0": 443.45,
+      "x1": 525.53,
+      "y1": 493.88
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 318.24,
+       "y0": 443.45,
+       "x1": 525.53,
+       "y1": 453.2
+      },
+      {
+       "page": 5,
+       "x0": 307.32,
+       "y0": 457.01,
+       "x1": 524.79,
+       "y1": 466.76
+      },
+      {
+       "page": 5,
+       "x0": 307.32,
+       "y0": 470.57,
+       "x1": 525.16,
+       "y1": 480.32
+      },
+      {
+       "page": 5,
+       "x0": 307.32,
+       "y0": 484.13,
+       "x1": 524.85,
+       "y1": 493.88
+      }
+     ],
+     "quote": "Finally we find that restricting sequences to come from a single document (DOC-SENTENCES) performs slightly better than packing sequences from multiple documents (FULL-SENTENCES).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.3",
+   "value": "Ablation varying pretraining data size and pretraining duration steps",
+   "evidence": [
+    {
+     "chunk_id": "b0108",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 72.0,
+      "y0": 259.64569091796875,
+      "x1": 355.4244079589844,
+      "y1": 268.6718444824219
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 72.0,
+       "y0": 259.64569091796875,
+       "x1": 355.4244079589844,
+       "y1": 268.6718444824219
+      }
+     ],
+     "quote": "Table 4: Development set results for RoBERTa as we pretrain over more data (16GB → 160GB of text) and pretrain for longer (100K → 300K → 500K steps).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Further exploration of the limits of large batch training",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 72.0,
+      "y0": 376.37,
+      "x1": 290.09000000000003,
+      "y1": 413.24
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 251.16,
+       "y0": 376.37,
+       "x1": 290.08,
+       "y1": 386.12
+      },
+      {
+       "page": 6,
+       "x0": 72.0,
+       "y0": 389.93,
+       "x1": 290.09000000000003,
+       "y1": 399.68
+      },
+      {
+       "page": 6,
+       "x0": 72.0,
+       "y0": 403.49,
+       "x1": 173.61,
+       "y1": 413.24
+      }
+     ],
+     "quote": "We leave further exploration of the limits of large batch training to future work.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "A more detailed comparison of BPE encodings",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 307.32,
+      "y0": 311.21,
+      "x1": 525.51,
+      "y1": 348.08
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 472.08,
+       "y0": 311.21,
+       "x1": 525.39,
+       "y1": 320.96
+      },
+      {
+       "page": 6,
+       "x0": 307.32,
+       "y0": 324.77,
+       "x1": 525.51,
+       "y1": 334.52
+      },
+      {
+       "page": 6,
+       "x0": 307.32,
+       "y0": 338.33,
+       "x1": 351.93,
+       "y1": 348.08
+      }
+     ],
+     "quote": "A more detailed comparison of these encodings is left to future work.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/pytorch/fairseq",
+   "evidence": [
+    {
+     "chunk_id": "b0112",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 72.0,
+      "y0": 305.81,
+      "x1": 297.33,
+      "y1": 355.89
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 82.92,
+       "y0": 305.81,
+       "x1": 290.01,
+       "y1": 315.56
+      },
+      {
+       "page": 10,
+       "x0": 72.24,
+       "y0": 319.37,
+       "x1": 290.21,
+       "y1": 329.12
+      },
+      {
+       "page": 10,
+       "x0": 72.0,
+       "y0": 332.93,
+       "x1": 290.19,
+       "y1": 342.68
+      },
+      {
+       "page": 10,
+       "x0": 290.89,
+       "y0": 347.58,
+       "x1": 297.33,
+       "y1": 355.89
+      }
+     ],
+     "quote": "We additionally use a novel dataset, CC-NEWS, and release our models and code for pretraining and finetuning at: https://github.com/pytorch/fairseq.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "The best model achieves state-of-the-art results on GLUE, RACE and SQuAD.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 89.04,
+      "y0": 446.13,
+      "x1": 273.52,
+      "y1": 479.04
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 170.4,
+       "y0": 446.13,
+       "x1": 273.52,
+       "y1": 455.04
+      },
+      {
+       "page": 1,
+       "x0": 89.04,
+       "y0": 458.13,
+       "x1": 273.3,
+       "y1": 467.04
+      },
+      {
+       "page": 1,
+       "x0": 89.04,
+       "y0": 470.13,
+       "x1": 123.69,
+       "y1": 479.04
+      }
+     ],
+     "quote": "Our best model achieves state-of-the-art results on GLUE, RACE and SQuAD.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "The model achieves a score of 88.5 on the public GLUE leaderboard.",
+   "evidence": [
+    {
+     "chunk_id": "b0005",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 307.32,
+      "y0": 536.08,
+      "x1": 525.39,
+      "y1": 586.4
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 307.32,
+       "y0": 536.08,
+       "x1": 525.39,
+       "y1": 545.83
+      },
+      {
+       "page": 1,
+       "x0": 307.32,
+       "y0": 549.64,
+       "x1": 525.28,
+       "y1": 559.39
+      },
+      {
+       "page": 1,
+       "x0": 307.32,
+       "y0": 563.2,
+       "x1": 525.29,
+       "y1": 572.95
+      },
+      {
+       "page": 1,
+       "x0": 307.32,
+       "y0": 576.64,
+       "x1": 405.81,
+       "y1": 586.4
+      }
+     ],
+     "quote": "When trained for longer over additional data, our model achieves a score of 88.5 on the public GLUE leaderboard, matching the 88.4 reported by Yang et al. (2019).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "The model establishes a new state-of-the-art on 4/9 of the GLUE tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0005",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 307.32,
+      "y0": 576.65,
+      "x1": 525.52,
+      "y1": 613.52
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 415.08,
+       "y0": 576.65,
+       "x1": 525.52,
+       "y1": 586.4
+      },
+      {
+       "page": 1,
+       "x0": 307.32,
+       "y0": 590.21,
+       "x1": 525.27,
+       "y1": 599.96
+      },
+      {
+       "page": 1,
+       "x0": 307.32,
+       "y0": 603.77,
+       "x1": 453.45,
+       "y1": 613.52
+      }
+     ],
+     "quote": "Our model establishes a new state-of-the-art on 4/9 of the GLUE tasks: MNLI, QNLI, RTE and STS-B.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

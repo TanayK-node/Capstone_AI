@@ -1,0 +1,1162 @@
+{
+ "metadata": {
+  "title": "Towards Deep Learning Models Resistant to Adversarial Attacks",
+  "authors": [
+   "Aleksander M Ądry",
+   "Mit",
+   "Aleksandar Makelov",
+   "Ludwig Schmidt",
+   "Dimitris Tsipras",
+   "Adrian Vladu"
+  ],
+  "venue": null,
+  "year": "2019",
+  "arxiv_id": "1706.06083v4[stat.ML]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Existing defense mechanisms lack a clear understanding of the guarantees they provide against adversarial attacks.",
+   "evidence": [
+    {
+     "chunk_id": "b0006",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 72.0,
+      "y0": 206.66,
+      "x1": 540.01,
+      "y1": 230.70999999999998
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 303.27,
+       "y0": 206.66,
+       "x1": 540.01,
+       "y1": 217.15
+      },
+      {
+       "page": 2,
+       "x0": 72.0,
+       "y0": 220.07,
+       "x1": 226.53,
+       "y1": 230.70999999999998
+      }
+     ],
+     "quote": "They, however, do not offer a good understanding of the guarantees they provide.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "An experimental study of the optimization landscape for the saddle point formulation showing that first-order methods can reliably solve it.",
+   "evidence": [
+    {
+     "chunk_id": "b0009",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 85.64,
+      "y0": 434.82,
+      "x1": 540.0,
+      "y1": 458.86
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 85.64,
+       "y0": 434.82,
+       "x1": 540.0,
+       "y1": 445.31
+      },
+      {
+       "page": 2,
+       "x0": 99.27,
+       "y0": 448.37,
+       "x1": 225.62,
+       "y1": 458.86
+      }
+     ],
+     "quote": "1. We conduct a careful experimental study of the optimization landscape corresponding to this saddle point formulation.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "An exploration of how network architecture and model capacity impact adversarial robustness.",
+   "evidence": [
+    {
+     "chunk_id": "b0010",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 85.64,
+      "y0": 538.43,
+      "x1": 540.01,
+      "y1": 562.47
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 85.64,
+       "y0": 538.43,
+       "x1": 540.01,
+       "y1": 548.92
+      },
+      {
+       "page": 2,
+       "x0": 99.27,
+       "y0": 551.98,
+       "x1": 291.31,
+       "y1": 562.47
+      }
+     ],
+     "quote": "2. We explore the impact of network architecture on adversarial robustness and find that model capacity plays an important role here.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "Training robust networks on MNIST and CIFAR10 against a wide range of adversarial attacks using projected gradient descent.",
+   "evidence": [
+    {
+     "chunk_id": "b0011",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 85.64,
+      "y0": 614.95,
+      "x1": 540.0,
+      "y1": 638.99
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 85.64,
+       "y0": 614.95,
+       "x1": 540.0,
+       "y1": 625.44
+      },
+      {
+       "page": 2,
+       "x0": 99.27,
+       "y0": 628.5,
+       "x1": 336.39,
+       "y1": 638.99
+      }
+     ],
+     "quote": "3. Building on the above insights, we train networks on MNIST [19] and CIFAR10 [16] that are robust to a wide range of adversarial attacks.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "computer vision",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 72.0,
+      "y0": 518.25,
+      "x1": 540.0,
+      "y1": 542.29
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 72.0,
+       "y0": 518.25,
+       "x1": 540.0,
+       "y1": 528.74
+      },
+      {
+       "page": 1,
+       "x0": 72.0,
+       "y0": 531.8,
+       "x1": 365.78,
+       "y1": 542.29
+      }
+     ],
+     "quote": "Recent breakthroughs in computer vision [17,12] and natural language processing [7] are bringing trained classifiers into the center of security-critical systems.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The proposed approach models adversarial robustness as a saddle point problem combining an inner maximization problem to find adversarial examples and an outer minimization problem to train robust parameters.",
+   "evidence": [
+    {
+     "chunk_id": "b0021",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 72.0,
+      "y0": 620.01,
+      "x1": 540.4300000000001,
+      "y1": 644.4
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 72.0,
+       "y0": 620.01,
+       "x1": 540.4300000000001,
+       "y1": 630.85
+      },
+      {
+       "page": 3,
+       "x0": 72.0,
+       "y0": 633.91,
+       "x1": 189.35,
+       "y1": 644.4
+      }
+     ],
+     "quote": "Instead of feeding samples from the distribution D directly into the loss L, we allow the adversary to perturb the input first.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "The inner maximization problem is solved using projected gradient descent (PGD) as a universal first-order adversary to find adversarial examples within the allowed perturbation set.",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 72.0,
+      "y0": 567.87,
+      "x1": 541.9,
+      "y1": 591.91
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 308.88,
+       "y0": 567.87,
+       "x1": 540.0,
+       "y1": 578.36
+      },
+      {
+       "page": 5,
+       "x0": 72.0,
+       "y0": 581.42,
+       "x1": 541.9,
+       "y1": 591.91
+      }
+     ],
+     "quote": "The main tool in our experiments is projected gradient descent (PGD), since it is the standard method for large-scale constrained optimization.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "The outer minimization problem is optimized using Stochastic Gradient Descent (SGD) based on gradients computed at the inner maximizers, drawing on Danskin's theorem.",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 72.0,
+      "y0": 547.36,
+      "x1": 540.01,
+      "y1": 584.95
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 333.1,
+       "y0": 547.36,
+       "x1": 539.99,
+       "y1": 557.85
+      },
+      {
+       "page": 8,
+       "x0": 72.0,
+       "y0": 560.91,
+       "x1": 540.01,
+       "y1": 571.4
+      },
+      {
+       "page": 8,
+       "x0": 72.0,
+       "y0": 574.46,
+       "x1": 236.38,
+       "y1": 584.95
+      }
+     ],
+     "quote": "By applying SGD using the gradient of the loss at adversarial examples we can consistently reduce the loss of the saddle point problem during training, as can be seen in Figure 5.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "The approach utilizes architectures with substantially increased model capacity to handle the more complex decision boundaries required for robust classification.",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 72.0,
+      "y0": 143.29,
+      "x1": 540.01,
+      "y1": 180.87
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 345.66,
+       "y0": 143.29,
+       "x1": 540.01,
+       "y1": 153.78
+      },
+      {
+       "page": 9,
+       "x0": 72.0,
+       "y0": 156.84,
+       "x1": 540.0,
+       "y1": 167.33
+      },
+      {
+       "page": 9,
+       "x0": 72.0,
+       "y0": 170.38,
+       "x1": 522.79,
+       "y1": 180.87
+      }
+     ],
+     "quote": "At a high level, classifying examples in a robust way requires a stronger classifier, since the presence of adversarial examples changes the decision boundary of the problem to a more complicated one (see Figure 3 for an illustration).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "The authors frame adversarial robustness through the lens of a saddle point optimization problem that unifies prior work by decomposing it into inner attack generation and outer robust training.",
+   "evidence": [
+    {
+     "chunk_id": "b0023",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 72.0,
+      "y0": 116.19,
+      "x1": 540.0,
+      "y1": 140.23000000000002
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 88.94,
+       "y0": 116.19,
+       "x1": 540.0,
+       "y1": 126.67999999999999
+      },
+      {
+       "page": 4,
+       "x0": 72.0,
+       "y0": 129.74,
+       "x1": 186.34,
+       "y1": 140.23000000000002
+      }
+     ],
+     "quote": "First, this formulation gives us a unifying perspective that encompasses much prior work on adversarial robustness.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "The paper demonstrates that despite being non-concave, the inner maximization problem has a tractable structure of local maxima with well-concentrated loss values when explored with PGD.",
+   "evidence": [
+    {
+     "chunk_id": "b0038",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 72.0,
+      "y0": 312.84,
+      "x1": 540.0,
+      "y1": 336.88
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 312.12,
+       "y0": 312.84,
+       "x1": 540.0,
+       "y1": 323.33
+      },
+      {
+       "page": 5,
+       "x0": 72.0,
+       "y0": 326.24,
+       "x1": 390.76,
+       "y1": 336.88
+      }
+     ],
+     "quote": "One of our key contributions is demonstrating that, in practice, one can solve the saddle point problem after all.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "MNIST dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 72.0,
+      "y0": 555.49,
+      "x1": 541.0899999999999,
+      "y1": 579.53
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 88.94,
+       "y0": 555.49,
+       "x1": 541.0899999999999,
+       "y1": 565.98
+      },
+      {
+       "page": 10,
+       "x0": 72.0,
+       "y0": 569.04,
+       "x1": 387.92,
+       "y1": 579.53
+      }
+     ],
+     "quote": "For both MNIST and CIFAR10, the adversary of choice will be projected gradient descent (PGD) starting from a random perturbation around the natural example.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "MNIST",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "CIFAR10 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 72.0,
+      "y0": 555.49,
+      "x1": 541.0899999999999,
+      "y1": 579.53
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 88.94,
+       "y0": 555.49,
+       "x1": 541.0899999999999,
+       "y1": 565.98
+      },
+      {
+       "page": 10,
+       "x0": 72.0,
+       "y0": 569.04,
+       "x1": 387.92,
+       "y1": 579.53
+      }
+     ],
+     "quote": "For both MNIST and CIFAR10, the adversary of choice will be projected gradient descent (PGD) starting from a random perturbation around the natural example.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "CIFAR10",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 510.97,
+      "y0": 679.73,
+      "x1": 540.0,
+      "y1": 690.22
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 510.97,
+       "y0": 679.73,
+       "x1": 540.0,
+       "y1": 690.22
+      },
+      {
+       "page": 12,
+       "x0": 72.0,
+       "y0": 319.74,
+       "x1": 492.08,
+       "y1": 330.23
+      }
+     ],
+     "quote": "When trained with natural examples, this network reaches 99.2% accuracy on the evaluation set.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "PGD step size for MNIST adversary",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 72.0,
+      "y0": 625.53,
+      "x1": 541.37,
+      "y1": 663.12
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 625.62,
+       "x1": 111.91,
+       "y1": 635.85
+      },
+      {
+       "page": 11,
+       "x0": 122.81,
+       "y0": 625.53,
+       "x1": 539.99,
+       "y1": 636.02
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 639.08,
+       "x1": 541.37,
+       "y1": 650.13
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 652.63,
+       "x1": 323.4,
+       "y1": 663.12
+      }
+     ],
+     "quote": "MNIST. We run 40 iterations of projected gradient descent as our adversary, with a step size of 0.01 (we choose to take gradient steps in the ∞ -norm, i.e. adding the sign of the gradient, since this makes the choice of the step size simpler).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "step size",
+   "value_raw": "0.01",
+   "value_norm": 0.01,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Perturbation size epsilon for MNIST",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 72.0,
+      "y0": 652.63,
+      "x1": 539.99,
+      "y1": 676.6800000000001
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 326.77,
+       "y0": 652.63,
+       "x1": 539.99,
+       "y1": 663.12
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 665.84,
+       "x1": 145.48000000000002,
+       "y1": 676.6800000000001
+      }
+     ],
+     "quote": "We train and evaluate against perturbations of size ε = 0.3.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "epsilon",
+   "value_raw": "0.3",
+   "value_norm": 0.3,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "MNIST fully connected layer size",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 72.0,
+      "y0": 666.18,
+      "x1": 540.0,
+      "y1": 690.23
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 150.52,
+       "y0": 666.18,
+       "x1": 540.0,
+       "y1": 676.67
+      },
+      {
+       "page": 11,
+       "x0": 72.0,
+       "y0": 679.39,
+       "x1": 507.56,
+       "y1": 690.23
+      }
+     ],
+     "quote": "We use a network consisting of two convolutional layers with 32 and 64 filters respectively, each followed by 2 × 2 max-pooling, and a fully connected layer of size 1024.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "fully connected layer size",
+   "value_raw": "1024",
+   "value_norm": 1024.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "CIFAR10 PGD step size",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 71.67,
+      "y0": 444.76,
+      "x1": 539.4,
+      "y1": 468.81
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 251.98,
+       "y0": 444.76,
+       "x1": 539.4,
+       "y1": 455.81
+      },
+      {
+       "page": 12,
+       "x0": 71.67,
+       "y0": 457.97,
+       "x1": 463.27000000000004,
+       "y1": 468.81
+      }
+     ],
+     "quote": "We trained the network against a PGD adversary with ∞ projected gradient descent again, this time using 7 steps of size 2, and a total ε = 8.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "step size",
+   "value_raw": "2",
+   "value_norm": 2.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "CIFAR10 total epsilon",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 71.67,
+      "y0": 444.76,
+      "x1": 539.4,
+      "y1": 468.81
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 251.98,
+       "y0": 444.76,
+       "x1": 539.4,
+       "y1": 455.81
+      },
+      {
+       "page": 12,
+       "x0": 71.67,
+       "y0": 457.97,
+       "x1": 463.27000000000004,
+       "y1": 468.81
+      }
+     ],
+     "quote": "We trained the network against a PGD adversary with ∞ projected gradient descent again, this time using 7 steps of size 2, and a total ε = 8.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "epsilon",
+   "value_raw": "8",
+   "value_norm": 8.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "PGD steps for evaluation",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 72.0,
+      "y0": 623.98,
+      "x1": 540.01,
+      "y1": 661.57
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 429.06,
+       "y0": 623.98,
+       "x1": 540.01,
+       "y1": 634.47
+      },
+      {
+       "page": 12,
+       "x0": 72.0,
+       "y0": 637.19,
+       "x1": 540.0,
+       "y1": 648.0300000000001
+      },
+      {
+       "page": 12,
+       "x0": 72.14,
+       "y0": 651.08,
+       "x1": 491.22999999999996,
+       "y1": 661.57
+      }
+     ],
+     "quote": "For all PGD attacks, we use 100 steps and set the step size to be 2.5 • ε/100 to ensure that we can reach the boundary of the ε-ball from any starting point within it (and still allow for movement on the boundary).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "steps",
+   "value_raw": "100",
+   "value_norm": 100.0,
+   "scope": "evaluation"
+  }
+ ],
+ "compute": [],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "Performance on CIFAR10 has not reached the same high level as MNIST yet.",
+   "evidence": [
+    {
+     "chunk_id": "b0099",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 72.0,
+      "y0": 636.24,
+      "x1": 540.0,
+      "y1": 660.27
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 355.54,
+       "y0": 636.24,
+       "x1": 540.0,
+       "y1": 646.73
+      },
+      {
+       "page": 15,
+       "x0": 72.0,
+       "y0": 649.78,
+       "x1": 275.28,
+       "y1": 660.27
+      }
+     ],
+     "quote": "Our experiments on CIFAR10 have not reached the same level of performance yet.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Further explore the approach to build adversarially robust networks for the CIFAR10 dataset.",
+   "evidence": [
+    {
+     "chunk_id": "b0099",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 72.0,
+      "y0": 663.33,
+      "x1": 540.0,
+      "y1": 687.37
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 361.35,
+       "y0": 663.33,
+       "x1": 540.0,
+       "y1": 673.82
+      },
+      {
+       "page": 15,
+       "x0": 72.0,
+       "y0": 676.88,
+       "x1": 396.43,
+       "y1": 687.37
+      }
+     ],
+     "quote": "We believe that further exploring this direction will lead to adversarially robust networks for this dataset.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/MadryLab/mnist_challenge",
+   "evidence": [
+    {
+     "chunk_id": "b0013",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 72.0,
+      "y0": 193.74,
+      "x1": 540.0,
+      "y1": 217.78
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 369.91,
+       "y0": 193.74,
+       "x1": 540.0,
+       "y1": 204.23000000000002
+      },
+      {
+       "page": 3,
+       "x0": 72.0,
+       "y0": 207.29,
+       "x1": 273.91999999999996,
+       "y1": 217.78
+      }
+     ],
+     "quote": "The complete code, along with the description of the challenge, is available at https://github.com/MadryLab/mnist_challenge",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/MadryLab/cifar10_challenge",
+   "evidence": [
+    {
+     "chunk_id": "b0013",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 72.0,
+      "y0": 193.74,
+      "x1": 540.0,
+      "y1": 217.78
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 369.91,
+       "y0": 193.74,
+       "x1": 540.0,
+       "y1": 204.23000000000002
+      },
+      {
+       "page": 3,
+       "x0": 72.0,
+       "y0": 207.29,
+       "x1": 273.91999999999996,
+       "y1": 217.78
+      }
+     ],
+     "quote": "The complete code, along with the description of the challenge, is available at https://github.com/MadryLab/mnist_challenge",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "The best MNIST model achieves over 89% accuracy against the strongest adversaries in the test suite.",
+   "evidence": [
+    {
+     "chunk_id": "b0012",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 99.27,
+      "y0": 655.6,
+      "x1": 541.8100000000001,
+      "y1": 679.63
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 99.27,
+       "y0": 655.6,
+       "x1": 541.8100000000001,
+       "y1": 666.09
+      },
+      {
+       "page": 2,
+       "x0": 99.27,
+       "y0": 669.14,
+       "x1": 210.3,
+       "y1": 679.63
+      }
+     ],
+     "quote": "Our best MNIST model achieves an accuracy of more than 89% against the strongest adversaries in our test suite.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "The CIFAR10 model achieves 46% accuracy against the same adversary.",
+   "evidence": [
+    {
+     "chunk_id": "b0012",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 258.69,
+      "y0": 682.69,
+      "x1": 540.0,
+      "y1": 693.1800000000001
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 258.69,
+       "y0": 682.69,
+       "x1": 540.0,
+       "y1": 693.1800000000001
+      },
+      {
+       "page": 3,
+       "x0": 99.27,
+       "y0": 75.54,
+       "x1": 193.97,
+       "y1": 86.03
+      }
+     ],
+     "quote": "Our CIFAR10 model achieves an accuracy of 46% against the same adversary.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "Against weaker black box/transfer attacks, MNIST and CIFAR10 networks achieve accuracies of over 95% and 64% respectively.",
+   "evidence": [
+    {
+     "chunk_id": "b0012",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 99.27,
+      "y0": 75.4,
+      "x1": 540.34,
+      "y1": 99.58
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 197.4,
+       "y0": 75.4,
+       "x1": 540.34,
+       "y1": 86.04
+      },
+      {
+       "page": 3,
+       "x0": 99.27,
+       "y0": 89.09,
+       "x1": 507.54999999999995,
+       "y1": 99.58
+      }
+     ],
+     "quote": "Furthermore, in case of the weaker black box/transfer attacks, our MNIST and CIFAR10 networks achieve the accuracy of more than 95% and 64%, respectively.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

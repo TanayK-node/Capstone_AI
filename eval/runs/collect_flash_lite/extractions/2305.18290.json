@@ -1,0 +1,2219 @@
+{
+ "metadata": {
+  "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+  "authors": [
+   "Rafael Rafailov",
+   "Archit Sharma",
+   "Eric Mitchell",
+   "Stefano Ermon",
+   "Christopher D Manning",
+   "Chelsea Finn"
+  ],
+  "venue": null,
+  "year": "2024",
+  "arxiv_id": "2305.18290v3[cs.LG]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Achieving precise control over the behavior of large-scale unsupervised language models is difficult.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.4,
+      "y0": 315.4,
+      "x1": 469.78999999999996,
+      "y1": 345.86
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.4,
+       "y0": 315.4,
+       "x1": 469.78999999999996,
+       "y1": 324.03999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 326.31,
+       "x1": 468.13,
+       "y1": 334.95
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 337.22,
+       "x1": 428.04,
+       "y1": 345.86
+      }
+     ],
+     "quote": "While large-scale unsupervised language models (LMs) learn broad world knowledge and some reasoning skills, achieving precise control of their behavior is difficult due to the completely unsupervised nature of their training.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Traditional reinforcement learning from human feedback is a complex and often unstable procedure.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 369.95,
+      "x1": 469.38,
+      "y1": 422.21999999999997
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 431.85,
+       "y0": 369.95,
+       "x1": 469.38,
+       "y1": 378.59
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 380.86,
+       "x1": 468.14,
+       "y1": 389.5
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 391.77,
+       "x1": 468.13,
+       "y1": 400.40999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 402.67,
+       "x1": 468.14,
+       "y1": 411.31
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 413.58,
+       "x1": 268.36,
+       "y1": 422.21999999999997
+      }
+     ],
+     "quote": "However, RLHF is a complex and often unstable procedure, first fitting a reward model that reflects the human preferences, and then fine-tuning the large unsupervised LM using reinforcement learning to maximize this estimated reward without drifting too far from the original model.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Introduction of Direct Preference Optimization (DPO), a simple algorithm to solve the standard RLHF problem with a classification loss.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 413.58,
+      "x1": 468.14,
+      "y1": 454.95
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 271.45,
+       "y0": 413.58,
+       "x1": 468.14,
+       "y1": 422.21999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 424.49,
+       "x1": 468.13,
+       "y1": 433.13
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 435.4,
+       "x1": 468.14,
+       "y1": 444.03999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 446.31,
+       "x1": 247.82,
+       "y1": 454.95
+      }
+     ],
+     "quote": "In this paper we introduce a new parameterization of the reward model in RLHF that enables extraction of the corresponding optimal policy in closed form, allowing us to solve the standard RLHF problem with only a simple classification loss.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "DPO eliminates the need for sampling from the language model or significant hyperparameter tuning during fine-tuning.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 446.13,
+      "x1": 469.78999999999996,
+      "y1": 487.68
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 251.57,
+       "y0": 446.13,
+       "x1": 469.78999999999996,
+       "y1": 454.95
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 457.04,
+       "x1": 469.38,
+       "y1": 465.86
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 468.13,
+       "x1": 468.14,
+       "y1": 476.77
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 479.04,
+       "x1": 280.93,
+       "y1": 487.68
+      }
+     ],
+     "quote": "The resulting algorithm, which we call Direct Preference Optimization (DPO), is stable, performant, and computationally lightweight, eliminating the need for sampling from the LM during fine-tuning or performing significant hyperparameter tuning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Sentiment modulation in language models",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 500.86,
+      "x1": 469.79,
+      "y1": 531.31
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 500.86,
+       "x1": 469.79,
+       "y1": 509.5
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 511.77,
+       "x1": 468.14,
+       "y1": 520.41
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 522.67,
+       "x1": 469.77,
+       "y1": 531.31
+      }
+     ],
+     "quote": "Notably, fine-tuning with DPO exceeds PPO-based RLHF in ability to control sentiment of generations, and matches or improves response quality in summarization and single-turn dialogue while being substantially simpler to implement and train.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "task.1",
+   "value": "Text summarization",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 500.86,
+      "x1": 469.79,
+      "y1": 531.31
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 500.86,
+       "x1": 469.79,
+       "y1": 509.5
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 511.77,
+       "x1": 468.14,
+       "y1": 520.41
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 522.67,
+       "x1": 469.77,
+       "y1": 531.31
+      }
+     ],
+     "quote": "Notably, fine-tuning with DPO exceeds PPO-based RLHF in ability to control sentiment of generations, and matches or improves response quality in summarization and single-turn dialogue while being substantially simpler to implement and train.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "task.2",
+   "value": "Single-turn dialogue generation",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 500.86,
+      "x1": 469.79,
+      "y1": 531.31
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 500.86,
+       "x1": 469.79,
+       "y1": 509.5
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 511.77,
+       "x1": 468.14,
+       "y1": 520.41
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 522.67,
+       "x1": 469.77,
+       "y1": 531.31
+      }
+     ],
+     "quote": "Notably, fine-tuning with DPO exceeds PPO-based RLHF in ability to control sentiment of generations, and matches or improves response quality in summarization and single-turn dialogue while being substantially simpler to implement and train.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The standard RLHF pipeline begins with supervised fine-tuning (SFT) of a pre-trained language model on task-specific data.",
+   "evidence": [
+    {
+     "chunk_id": "b0013",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 409.84,
+      "x1": 504.35,
+      "y1": 429.78
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 409.84,
+       "x1": 504.35,
+       "y1": 418.86999999999995
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 420.82,
+       "x1": 485.3,
+       "y1": 429.78
+      },
+      {
+       "page": 3,
+       "x0": 485.66,
+       "y0": 419.47,
+       "x1": 497.68,
+       "y1": 425.52000000000004
+      },
+      {
+       "page": 3,
+       "x0": 498.17,
+       "y0": 421.14,
+       "x1": 500.66,
+       "y1": 429.78
+      }
+     ],
+     "quote": "SFT: RLHF typically begins by fine-tuning a pre-trained LM with supervised learning on high-quality data for the downstream task(s) of interest (dialogue, summarization, etc.), to obtain a model π SFT .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "In the reward modeling phase, human preferences for model completions are collected and parameterized via models like the Bradley-Terry model to estimate a reward function using maximum likelihood.",
+   "evidence": [
+    {
+     "chunk_id": "b0016",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 107.64,
+      "y0": 572.85,
+      "x1": 368.15,
+      "y1": 583.38
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 107.64,
+       "y0": 574.42,
+       "x1": 349.29,
+       "y1": 583.38
+      },
+      {
+       "page": 3,
+       "x0": 349.29,
+       "y0": 572.85,
+       "x1": 358.34000000000003,
+       "y1": 578.97
+      },
+      {
+       "page": 3,
+       "x0": 358.83,
+       "y0": 574.42,
+       "x1": 368.15,
+       "y1": 583.16
+      }
+     ],
+     "quote": "Assuming access to a static dataset of comparisons D = x (i) , y w , y (i) l N i=1 sampled from p * , we can parametrize a reward model r ϕ (x, y) and estimate the parameters via maximum likelihood.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "The RL optimization phase uses the learned reward function to update the language model policy by maximizing a reward objective with a KL-divergence penalty, typically optimized using PPO.",
+   "evidence": [
+    {
+     "chunk_id": "b0021",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 500.8,
+      "y0": 614.75,
+      "x1": 504.67,
+      "y1": 623.39
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 500.8,
+       "y0": 614.75,
+       "x1": 504.67,
+       "y1": 623.39
+      }
+     ],
+     "quote": "The standard approach [51,40,1,28] has been to construct the reward function r(x, y) = r ϕ (x, y) -β(log π θ (y | x) -log π ref (y | x)), and maximize using PPO [39].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "The proposed DPO method reformulates the RLHF objective by using an analytical mapping from reward functions to optimal policies, transforming a loss function over rewards into a loss function over policies.",
+   "evidence": [
+    {
+     "chunk_id": "b0027",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 246.8,
+      "x1": 504.0,
+      "y1": 288.15999999999997
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 422.75,
+       "y0": 246.8,
+       "x1": 503.99,
+       "y1": 255.44
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 257.71,
+       "x1": 504.0,
+       "y1": 266.34999999999997
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 268.62,
+       "x1": 504.0,
+       "y1": 277.26
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 279.52,
+       "x1": 160.96,
+       "y1": 288.15999999999997
+      }
+     ],
+     "quote": "As we will describe next in detail, our key insight is to leverage an analytical mapping from reward functions to optimal policies, which enables us to transform a loss function over reward functions into a loss function over policies.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "Direct Preference Optimization (DPO) directly optimizes the language model policy on a preference dataset by minimizing a maximum likelihood objective that implicitly represents the reward through the policy itself.",
+   "evidence": [
+    {
+     "chunk_id": "b0021",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 500.8,
+      "y0": 614.75,
+      "x1": 504.67,
+      "y1": 623.39
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 500.8,
+       "y0": 614.75,
+       "x1": 504.67,
+       "y1": 623.39
+      }
+     ],
+     "quote": "Analogous to the reward modeling approach (i.e. Eq. 2), our policy objective becomes: L DPO (π θ ; π ref ) = -E (x,yw,y l )∼D log σ β log π θ (y w | x) π ref (y w | x) -β log π θ (y l | x) π ref (y l | x) .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "Unlike traditional RLHF methods that explicitly learn a standalone reward model and optimize it via reinforcement learning, the proposed approach derives a simple policy optimization method using preferences directly without an RL training loop.",
+   "evidence": [
+    {
+     "chunk_id": "b0027",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 107.75,
+      "y0": 224.98,
+      "x1": 504.01,
+      "y1": 255.44
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 217.18,
+       "y0": 224.98,
+       "x1": 504.01,
+       "y1": 233.62
+      },
+      {
+       "page": 4,
+       "x0": 107.75,
+       "y0": 235.89,
+       "x1": 504.0,
+       "y1": 244.52999999999997
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 246.8,
+       "x1": 418.7,
+       "y1": 255.44
+      }
+     ],
+     "quote": "Unlike prior RLHF methods, which learn a reward and then optimize it via RL, our approach leverages a particular choice of reward model parameterization that enables extraction of its optimal policy in closed form, without an RL training loop.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "The method avoids fitting an explicit, standalone reward model by using a change-of-variables approach based on an analytical mapping from reward functions to optimal policies.",
+   "evidence": [
+    {
+     "chunk_id": "b0027",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 107.64,
+      "y0": 279.52,
+      "x1": 505.75,
+      "y1": 299.07
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 164.05,
+       "y0": 279.52,
+       "x1": 505.25,
+       "y1": 288.15999999999997
+      },
+      {
+       "page": 4,
+       "x0": 107.64,
+       "y0": 290.43,
+       "x1": 505.75,
+       "y1": 299.07
+      }
+     ],
+     "quote": "This change-of-variables approach avoids fitting an explicit, standalone reward model, while still optimizing under existing models of human preferences, such as the Bradley-Terry model.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "IMDb dataset containing movie reviews for controlled sentiment generation",
+   "evidence": [
+    {
+     "chunk_id": "b0077",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 405.22,
+      "x1": 504.34,
+      "y1": 436.06
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 440.72,
+       "y0": 405.22,
+       "x1": 504.0,
+       "y1": 414.25
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 416.12,
+       "x1": 504.34,
+       "y1": 425.15
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 427.1,
+       "x1": 278.57,
+       "y1": 436.06
+      }
+     ],
+     "quote": "In controlled sentiment generation, x is a prefix of a movie review from the IMDb dataset [24], and the policy must generate y with positive sentiment.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "IMDb",
+   "split": "train",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "Reddit TL;DR summarization dataset with human preferences",
+   "evidence": [
+    {
+     "chunk_id": "b0077",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 481.97,
+      "x1": 504.0,
+      "y1": 501.52
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 129.96,
+       "y0": 481.97,
+       "x1": 504.0,
+       "y1": 490.61
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 492.88,
+       "x1": 267.18,
+       "y1": 501.52
+      }
+     ],
+     "quote": "Following prior work, we use the Reddit TL;DR summarization dataset [43] along with human preferences gathered by Stiennon et al..",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Reddit TL;DR summarization",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "Anthropic Helpful and Harmless dialogue dataset containing 170k dialogues",
+   "evidence": [
+    {
+     "chunk_id": "b0077",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 536.19,
+      "x1": 504.25,
+      "y1": 566.97
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 254.57,
+       "y0": 536.19,
+       "x1": 504.0,
+       "y1": 545.1500000000001
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 547.42,
+       "x1": 504.25,
+       "y1": 556.06
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 558.33,
+       "x1": 326.03,
+       "y1": 566.97
+      }
+     ],
+     "quote": "we use the Anthropic Helpful and Harmless dialogue dataset [1], containing 170k dialogues between a human and an automated assistant.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Anthropic Helpful and Harmless dialogue",
+   "split": "",
+   "size": "170k dialogues",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "CNN/DailyMail dataset containing news articles",
+   "evidence": [
+    {
+     "chunk_id": "b0086",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 539.66,
+      "x1": 347.19,
+      "y1": 602.84
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 539.66,
+       "x1": 347.19,
+       "y1": 548.3
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 550.57,
+       "x1": 347.19,
+       "y1": 559.21
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 561.48,
+       "x1": 345.53999999999996,
+       "y1": 570.12
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 572.38,
+       "x1": 345.53,
+       "y1": 581.02
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 583.29,
+       "x1": 347.19,
+       "y1": 591.93
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 594.2,
+       "x1": 240.96,
+       "y1": 602.84
+      }
+     ],
+     "quote": "news articles in the test split of the CNN/DailyMail dataset [26], using the best sampling temperatures from TL;DR (0 and 0.25).",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "CNN/DailyMail",
+   "split": "test",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "DPO",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 228.3677978515625,
+      "x1": 504.0015563964844,
+      "y1": 246.34671020507812
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 381.1584167480469,
+       "y0": 228.3677978515625,
+       "x1": 504.0015563964844,
+       "y1": 236.38375854492188
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 238.33074951171875,
+       "x1": 269.5684509277344,
+       "y1": 246.34671020507812
+      }
+     ],
+     "quote": "DPO provides the highest expected reward for all KL values, demonstrating the quality of the optimization.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "PPO",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 121.25247955322266,
+      "y0": 72.760986328125,
+      "x1": 500.0086975097656,
+      "y1": 217.95492553710938
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 121.25247955322266,
+       "y0": 72.760986328125,
+       "x1": 500.0086975097656,
+       "y1": 217.95492553710938
+      }
+     ],
+     "quote": "DPO exceeds PPO's best-case performance on summarization, while being more robust to changes in the sampling temperature.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0080",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 413.14,
+      "x1": 504.0,
+      "y1": 443.97999999999996
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 134.18,
+       "y0": 413.14,
+       "x1": 504.0,
+       "y1": 422.16999999999996
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 424.05,
+       "x1": 504.0,
+       "y1": 433.08
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 435.34,
+       "x1": 220.07,
+       "y1": 443.97999999999996
+      }
+     ],
+     "quote": "We also consider PPO [39] using a reward function learned from the preference data and PPO-GT, which is an oracle that learns from the ground truth reward function available in the controlled sentiment setting.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "Preferred-FT",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 107.64,
+      "y0": 348.07,
+      "x1": 505.24,
+      "y1": 389.44
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 459.57,
+       "y0": 348.07,
+       "x1": 505.24,
+       "y1": 356.71
+      },
+      {
+       "page": 8,
+       "x0": 107.64,
+       "y0": 358.59,
+       "x1": 504.0,
+       "y1": 367.61999999999995
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 369.57,
+       "x1": 504.0,
+       "y1": 379.21999999999997
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 380.8,
+       "x1": 345.55,
+       "y1": 389.44
+      }
+     ],
+     "quote": "In addition, we evaluate the SFT model as well as Preferred-FT, which is a model fine-tuned with supervised learning on the chosen completion y w from either the SFT model (in controlled sentiment and summarization) or a generic LM (in single-turn dialogue).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "SFT",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 107.64,
+      "y0": 348.07,
+      "x1": 505.24,
+      "y1": 389.44
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 459.57,
+       "y0": 348.07,
+       "x1": 505.24,
+       "y1": 356.71
+      },
+      {
+       "page": 8,
+       "x0": 107.64,
+       "y0": 358.59,
+       "x1": 504.0,
+       "y1": 367.61999999999995
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 369.57,
+       "x1": 504.0,
+       "y1": 379.21999999999997
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 380.8,
+       "x1": 345.55,
+       "y1": 389.44
+      }
+     ],
+     "quote": "In addition, we evaluate the SFT model as well as Preferred-FT, which is a model fine-tuned with supervised learning on the chosen completion y w from either the SFT model (in controlled sentiment and summarization) or a generic LM (in single-turn dialogue).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "GPT-J Best of 128",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 121.25247955322266,
+      "y0": 72.760986328125,
+      "x1": 500.0086975097656,
+      "y1": 217.95492553710938
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 121.25247955322266,
+       "y0": 72.760986328125,
+       "x1": 500.0086975097656,
+       "y1": 217.95492553710938
+      }
+     ],
+     "quote": "GPT-JBestof 128",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "Unlikelihood",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 380.8,
+      "x1": 505.66,
+      "y1": 422.16999999999996
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 349.49,
+       "y0": 380.8,
+       "x1": 504.0,
+       "y1": 389.44
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 391.32,
+       "x1": 504.0,
+       "y1": 401.04
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 402.3,
+       "x1": 505.66,
+       "y1": 411.95
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 413.53,
+       "x1": 129.17000000000002,
+       "y1": 422.16999999999996
+      }
+     ],
+     "quote": "Another pseudo-supervised method is Unlikelihood [46], which simply optimizes the policy to maximize the probability assigned to y w and minimize the probability assigned to y l ; we use an optional coefficient α ∈ [0, 1] on the 'unlikelihood' term.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "Best of N",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 467.68,
+      "x1": 504.0,
+      "y1": 498.53
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 218.97,
+       "y0": 467.68,
+       "x1": 503.99,
+       "y1": 476.71
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 478.98,
+       "x1": 504.0,
+       "y1": 487.62
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 489.89,
+       "x1": 324.53,
+       "y1": 498.53
+      }
+     ],
+     "quote": "Finally, we consider the Best of N baseline, sampling N responses from the SFT model (or Preferred-FT in dialogue) and returning the highest-scoring response according to a reward function learned from the preference dataset.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.7",
+   "value": "Zero-shot prompting with GPT-J",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 336.77,
+      "x1": 504.01,
+      "y1": 356.71
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 239.86,
+       "y0": 336.77,
+       "x1": 504.01,
+       "y1": 345.79999999999995
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 347.68,
+       "x1": 360.09000000000003,
+       "y1": 356.71
+      },
+      {
+       "page": 8,
+       "x0": 362.58,
+       "y0": 348.07,
+       "x1": 456.46999999999997,
+       "y1": 356.71
+      }
+     ],
+     "quote": "Most simply, we explore zero-shot prompting with GPT-J [45] in the summarization task and 2-shot prompting with Pythia-2.8B [3] in the dialogue task.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.8",
+   "value": "2-shot prompting with Pythia-2.8B",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 336.77,
+      "x1": 504.01,
+      "y1": 356.71
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 239.86,
+       "y0": 336.77,
+       "x1": 504.01,
+       "y1": 345.79999999999995
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 347.68,
+       "x1": 360.09000000000003,
+       "y1": 356.71
+      },
+      {
+       "page": 8,
+       "x0": 362.58,
+       "y0": 348.07,
+       "x1": 456.46999999999997,
+       "y1": 356.71
+      }
+     ],
+     "quote": "Most simply, we explore zero-shot prompting with GPT-J [45] in the summarization task and 2-shot prompting with Pythia-2.8B [3] in the dialogue task.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Expected reward vs KL to the reference policy",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 121.25247955322266,
+      "y0": 72.760986328125,
+      "x1": 500.0086975097656,
+      "y1": 217.95492553710938
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 121.25247955322266,
+       "y0": 72.760986328125,
+       "x1": 500.0086975097656,
+       "y1": 217.95492553710938
+      }
+     ],
+     "quote": "Left.The frontier of expected reward vs KL to the reference policy.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "TL;DR summarization win rates vs human-written summaries using GPT-4 as evaluator",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 121.25247955322266,
+      "y0": 72.760986328125,
+      "x1": 500.0086975097656,
+      "y1": 217.95492553710938
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 121.25247955322266,
+       "y0": 72.760986328125,
+       "x1": 500.0086975097656,
+       "y1": 217.95492553710938
+      }
+     ],
+     "quote": "Right.TL;DR summarization win rates vs. human-written summaries, using GPT-4 as evaluator.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "Win rate against a baseline policy using GPT-4 as a proxy for human evaluation",
+   "evidence": [
+    {
+     "chunk_id": "b0079",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 651.08,
+      "x1": 504.0,
+      "y1": 692.4499999999999
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 332.32,
+       "y0": 651.08,
+       "x1": 504.0,
+       "y1": 659.72
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 661.81,
+       "x1": 504.0,
+       "y1": 670.63
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 672.9,
+       "x1": 504.0,
+       "y1": 681.54
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 683.81,
+       "x1": 387.86,
+       "y1": 692.4499999999999
+      }
+     ],
+     "quote": "therefore, we evaluate algorithms with their win rate against a baseline policy, using GPT-4 as a proxy for human evaluation of summary quality and response helpfulness in the summarization and single-turn dialogue settings, respectively.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "Average sequence-level KL with the reference policy",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 107.25,
+      "y0": 635.8,
+      "x1": 504.0,
+      "y1": 678.02
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 460.65,
+       "y0": 635.8,
+       "x1": 504.0,
+       "y1": 644.4399999999999
+      },
+      {
+       "page": 8,
+       "x0": 107.25,
+       "y0": 646.71,
+       "x1": 504.0,
+       "y1": 655.35
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 657.62,
+       "x1": 479.44,
+       "y1": 666.26
+      },
+      {
+       "page": 8,
+       "x0": 479.43,
+       "y0": 655.95,
+       "x1": 482.92,
+       "y1": 662.0
+      },
+      {
+       "page": 8,
+       "x0": 485.93,
+       "y0": 657.62,
+       "x1": 504.0,
+       "y1": 666.26
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 668.21,
+       "x1": 248.97,
+       "y1": 678.02
+      }
+     ],
+     "quote": "computing the average reward under the true reward function as well as the average sequence-level KL 3 with the reference policy KL (π || π ref ).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Target KL hyperparameter for PPO",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 603.07,
+      "x1": 504.17,
+      "y1": 644.4399999999999
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 457.77,
+       "y0": 603.07,
+       "x1": 504.0,
+       "y1": 611.71
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 613.98,
+       "x1": 504.0,
+       "y1": 622.62
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 624.57,
+       "x1": 504.17,
+       "y1": 633.5300000000001
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 635.8,
+       "x1": 298.52,
+       "y1": 644.4399999999999
+      }
+     ],
+     "quote": "We execute multiple training runs for each algorithm, using a different hyperparameter for policy conservativeness in each run (target KL ∈ {3, 6, 9, 12} for PPO, β ∈ {0.05, 0.1, 1, 5}, α ∈ {0.05, 0.1, 0.5, 1} for unlikelihood, random seeds for preferred-FT).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "target KL",
+   "value_raw": "{3, 6, 9, 12}",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Beta hyperparameter for unlikelihood or DPO",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 603.07,
+      "x1": 504.17,
+      "y1": 644.4399999999999
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 457.77,
+       "y0": 603.07,
+       "x1": 504.0,
+       "y1": 611.71
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 613.98,
+       "x1": 504.0,
+       "y1": 622.62
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 624.57,
+       "x1": 504.17,
+       "y1": 633.5300000000001
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 635.8,
+       "x1": 298.52,
+       "y1": 644.4399999999999
+      }
+     ],
+     "quote": "We execute multiple training runs for each algorithm, using a different hyperparameter for policy conservativeness in each run (target KL ∈ {3, 6, 9, 12} for PPO, β ∈ {0.05, 0.1, 1, 5}, α ∈ {0.05, 0.1, 0.5, 1} for unlikelihood, random seeds for preferred-FT).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "β",
+   "value_raw": "{0.05, 0.1, 1, 5}",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Alpha coefficient for unlikelihood term",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 603.07,
+      "x1": 504.17,
+      "y1": 644.4399999999999
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 457.77,
+       "y0": 603.07,
+       "x1": 504.0,
+       "y1": 611.71
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 613.98,
+       "x1": 504.0,
+       "y1": 622.62
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 624.57,
+       "x1": 504.17,
+       "y1": 633.5300000000001
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 635.8,
+       "x1": 298.52,
+       "y1": 644.4399999999999
+      }
+     ],
+     "quote": "We execute multiple training runs for each algorithm, using a different hyperparameter for policy conservativeness in each run (target KL ∈ {3, 6, 9, 12} for PPO, β ∈ {0.05, 0.1, 1, 5}, α ∈ {0.05, 0.1, 0.5, 1} for unlikelihood, random seeds for preferred-FT).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "α",
+   "value_raw": "{0.05, 0.1, 0.5, 1}",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Sampling temperature values",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 195.74,
+      "x1": 503.99,
+      "y1": 215.29000000000002
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 220.64,
+       "y0": 195.74,
+       "x1": 503.99,
+       "y1": 204.38
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 206.65,
+       "x1": 369.03,
+       "y1": 215.29000000000002
+      }
+     ],
+     "quote": "The completions for all methods are sampled at temperatures varying from 0.0 to 1.0, and the win rates are shown in Figure 2 (right).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "sampling temperature",
+   "value_raw": "0.0 to 1.0",
+   "value_norm": null,
+   "scope": ""
+  }
+ ],
+ "compute": [],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Multiple training runs using different hyperparameters for policy conservativeness and random seeds, totaling 22 runs",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 603.07,
+      "x1": 504.17,
+      "y1": 644.4399999999999
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 457.77,
+       "y0": 603.07,
+       "x1": 504.0,
+       "y1": 611.71
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 613.98,
+       "x1": 504.0,
+       "y1": 622.62
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 624.57,
+       "x1": 504.17,
+       "y1": 633.5300000000001
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 635.8,
+       "x1": 298.52,
+       "y1": 644.4399999999999
+      },
+      {
+       "page": 8,
+       "x0": 301.83,
+       "y0": 635.8,
+       "x1": 455.13,
+       "y1": 644.4399999999999
+      }
+     ],
+     "quote": "We execute multiple training runs for each algorithm, using a different hyperparameter for policy conservativeness in each run (target KL ∈ {3, 6, 9, 12} for PPO, β ∈ {0.05, 0.1, 1, 5}, α ∈ {0.05, 0.1, 0.5, 1} for unlikelihood, random seeds for preferred-FT). This sweep includes 22 runs in total.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [],
+ "limitations": [],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Investigate how the DPO policy generalizes out of distribution compared to learning from an explicit reward function.",
+   "evidence": [
+    {
+     "chunk_id": "b0093",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 489.04,
+      "x1": 504.36,
+      "y1": 519.5
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 484.86,
+       "y0": 489.04,
+       "x1": 504.36,
+       "y1": 497.68
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 499.95,
+       "x1": 504.0,
+       "y1": 508.59
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 510.86,
+       "x1": 144.88,
+       "y1": 519.5
+      }
+     ],
+     "quote": "How does the DPO policy generalize out of distribution, compared with learning from an explicit reward function?",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Explore whether training with self-labeling from the DPO policy can make effective use of unlabeled prompts.",
+   "evidence": [
+    {
+     "chunk_id": "b0093",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 521.77,
+      "x1": 503.99,
+      "y1": 541.3199999999999
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 283.99,
+       "y0": 521.77,
+       "x1": 503.99,
+       "y1": 530.41
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 532.68,
+       "x1": 361.74,
+       "y1": 541.3199999999999
+      }
+     ],
+     "quote": "For example, can training with self-labeling from the DPO policy similarly make effective use of unlabeled prompts?",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.2",
+   "value": "Study how reward over-optimization manifests in the direct preference optimization setting.",
+   "evidence": [
+    {
+     "chunk_id": "b0093",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 532.68,
+      "x1": 504.01,
+      "y1": 563.14
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 364.83,
+       "y0": 532.68,
+       "x1": 504.01,
+       "y1": 541.3199999999999
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 543.59,
+       "x1": 504.0,
+       "y1": 552.23
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 554.5,
+       "x1": 313.9,
+       "y1": 563.14
+      }
+     ],
+     "quote": "On another front, how does reward over-optimization manifest in the direct preference optimization setting, and is the slight decrease in performance in Figure 3-right an instance of it?",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.3",
+   "value": "Scale DPO to state-of-the-art models orders of magnitude larger than 6B parameters.",
+   "evidence": [
+    {
+     "chunk_id": "b0093",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 554.5,
+      "x1": 504.0,
+      "y1": 584.9499999999999
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 318.15,
+       "y0": 554.5,
+       "x1": 504.0,
+       "y1": 563.14
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 565.4,
+       "x1": 504.0,
+       "y1": 574.04
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 576.31,
+       "x1": 258.96000000000004,
+       "y1": 584.9499999999999
+      }
+     ],
+     "quote": "Additionally, while we evaluate models up to 6B parameters, exploration of scaling DPO to state-of-the-art models orders of magnitude larger is an exciting direction for future work.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.4",
+   "value": "Determine the best way to elicit high-quality judgments from automated systems like GPT-4.",
+   "evidence": [
+    {
+     "chunk_id": "b0093",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 576.31,
+      "x1": 504.34,
+      "y1": 606.77
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 262.52,
+       "y0": 576.31,
+       "x1": 504.0,
+       "y1": 584.9499999999999
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 587.22,
+       "x1": 504.34,
+       "y1": 595.86
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 598.13,
+       "x1": 248.28,
+       "y1": 606.77
+      }
+     ],
+     "quote": "Regarding evaluations, we find that the win rates computed by GPT-4 are impacted by the prompt; future work may study the best way to elicit high-quality judgments from automated systems.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.5",
+   "value": "Apply DPO to generative models in modalities other than language model preference training.",
+   "evidence": [
+    {
+     "chunk_id": "b0093",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 598.13,
+      "x1": 505.75,
+      "y1": 617.68
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 251.27,
+       "y0": 598.13,
+       "x1": 504.0,
+       "y1": 606.77
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 609.04,
+       "x1": 505.75,
+       "y1": 617.68
+      }
+     ],
+     "quote": "Finally, many possible applications of DPO exist beyond training language models from human preferences, including training generative models in other modalities.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://huggingface.co/CarperAI/openai_summarize_tldr_sft",
+   "evidence": [
+    {
+     "chunk_id": "b0181",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 124.13999938964844,
+      "y0": 714.5215454101562,
+      "x1": 392.44195556640625,
+      "y1": 721.9905395507812
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 124.13999938964844,
+       "y0": 714.5215454101562,
+       "x1": 392.44195556640625,
+       "y1": 721.9905395507812
+      }
+     ],
+     "quote": "https://huggingface.co/CarperAI/openai_summarize_tldr_sft",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://huggingface.co/reciprocate/ppo_hh_pythia-6B",
+   "evidence": [
+    {
+     "chunk_id": "b0185",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 124.13999938964844,
+      "y0": 703.6705322265625,
+      "x1": 364.69989013671875,
+      "y1": 711.1395263671875
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 124.13999938964844,
+       "y0": 703.6705322265625,
+       "x1": 364.69989013671875,
+       "y1": 711.1395263671875
+      }
+     ],
+     "quote": "https://huggingface.co/reciprocate/ppo_hh_pythia-6B",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.2",
+   "value": "https://github.com/CarperAI/trlx/tree/main/examples/hh",
+   "evidence": [
+    {
+     "chunk_id": "b0186",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 124.13999938964844,
+      "y0": 714.5215454101562,
+      "x1": 378.3198547363281,
+      "y1": 721.9905395507812
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 124.13999938964844,
+       "y0": 714.5215454101562,
+       "x1": 378.3198547363281,
+       "y1": 721.9905395507812
+      }
+     ],
+     "quote": "https://github.com/CarperAI/trlx/tree/main/examples/hh",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "DPO fine-tunes language models to align with human preferences as well as or better than existing methods.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 479.04,
+      "x1": 469.88,
+      "y1": 498.59
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 284.04,
+       "y0": 479.04,
+       "x1": 468.13,
+       "y1": 487.68
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 489.95,
+       "x1": 469.88,
+       "y1": 498.59
+      }
+     ],
+     "quote": "Our experiments show that DPO can fine-tune LMs to align with human preferences as well as or better than existing methods.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "DPO works with language models having up to 6B parameters.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 539.58,
+      "x1": 505.74,
+      "y1": 570.03
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 285.82,
+       "y0": 539.58,
+       "x1": 504.0,
+       "y1": 548.22
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 550.48,
+       "x1": 504.0,
+       "y1": 559.12
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 561.39,
+       "x1": 505.74,
+       "y1": 570.03
+      }
+     ],
+     "quote": "Our experiments show that DPO is at least as effective as existing methods, including PPO-based RLHF, for learning from preferences in tasks such as sentiment modulation, summarization, and dialogue, using language models with up to 6B parameters.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

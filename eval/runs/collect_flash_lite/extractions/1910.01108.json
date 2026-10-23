@@ -1,0 +1,1229 @@
+{
+ "metadata": {
+  "title": "DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter",
+  "authors": [
+   "Victor Sanh",
+   "Lysandre Debut",
+   "Julien Chaumond",
+   "Thomas Wolf"
+  ],
+  "venue": null,
+  "year": "2020",
+  "arxiv_id": "1910.01108v4[cs.CL]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Operating large pre-trained language models in constrained computational environments remains challenging.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 268.14,
+      "x1": 469.79,
+      "y1": 309.51
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 268.14,
+       "x1": 468.13,
+       "y1": 276.78
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 279.05,
+       "x1": 469.79,
+       "y1": 287.69
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 289.96,
+       "x1": 468.14,
+       "y1": 298.59999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 300.87,
+       "x1": 193.83,
+       "y1": 309.51
+      }
+     ],
+     "quote": "As Transfer Learning from large-scale pre-trained models becomes more prevalent in Natural Language Processing (NLP), operating these large models in on-theedge and/or under constrained computational training or inference budgets remains challenging.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "The growing computational and memory requirements of expanding models hamper their adoption for on-device, real-time applications.",
+   "evidence": [
+    {
+     "chunk_id": "b0005",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 667.06,
+      "x1": 504.0,
+      "y1": 697.52
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 306.27,
+       "y0": 667.06,
+       "x1": 504.0,
+       "y1": 675.6999999999999
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 677.97,
+       "x1": 504.0,
+       "y1": 686.61
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 688.88,
+       "x1": 486.28,
+       "y1": 697.52
+      }
+     ],
+     "quote": "Second, while operating these models on-device in real-time has the potential to enable novel and interesting language processing applications, the growing computational and memory requirements of these models may hamper wide adoption.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "We propose DistilBERT, a method to pre-train a smaller general-purpose language representation model using knowledge distillation.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 300.87,
+      "x1": 469.88,
+      "y1": 331.33
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 198.88,
+       "y0": 300.87,
+       "x1": 469.78,
+       "y1": 309.51
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 311.78,
+       "x1": 469.79,
+       "y1": 320.41999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 322.69,
+       "x1": 469.88,
+       "y1": 331.33
+      }
+     ],
+     "quote": "In this work, we propose a method to pre-train a smaller general-purpose language representation model, called DistilBERT, which can then be finetuned with good performances on a wide range of tasks like its larger counterparts.",
+     "grounding_status": "partial",
+     "match_score": 99.6
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "We introduce a triple loss combining language modeling, distillation, and cosine-distance losses during pre-training.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 366.32,
+      "x1": 468.14,
+      "y1": 396.78
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 406.16,
+       "y0": 366.32,
+       "x1": 468.13,
+       "y1": 374.96
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 377.23,
+       "x1": 468.14,
+       "y1": 385.87
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 388.14,
+       "x1": 448.37,
+       "y1": 396.78
+      }
+     ],
+     "quote": "To leverage the inductive biases learned by larger models during pre-training, we introduce a triple loss combining language modeling, distillation and cosine-distance losses.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "We release the trained weights and training code in the Transformers library.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 107.53,
+      "y0": 195.53,
+      "x1": 500.02,
+      "y1": 215.07999999999998
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 107.53,
+       "y0": 195.53,
+       "x1": 500.02,
+       "y1": 204.23
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 206.44,
+       "x1": 290.49,
+       "y1": 215.07999999999998
+      }
+     ],
+     "quote": "We have made the trained weights available along with the training code in the Transformersfoot_1 library from HuggingFace [Wolf et al., 2019].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Natural Language Processing",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 268.14,
+      "x1": 469.79,
+      "y1": 309.51
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 268.14,
+       "x1": 468.13,
+       "y1": 276.78
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 279.05,
+       "x1": 469.79,
+       "y1": 287.69
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 289.96,
+       "x1": 468.14,
+       "y1": 298.59999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 300.87,
+       "x1": 193.83,
+       "y1": 309.51
+      }
+     ],
+     "quote": "As Transfer Learning from large-scale pre-trained models becomes more prevalent in Natural Language Processing (NLP), operating these large models in on-theedge and/or under constrained computational training or inference budgets remains challenging.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The student model (DistilBERT) shares the general architecture of BERT but reduces the number of layers by half, while removing token-type embeddings and the pooler.",
+   "evidence": [
+    {
+     "chunk_id": "b0016",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 524.69,
+      "x1": 505.65,
+      "y1": 568.99
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 524.69,
+       "x1": 328.9,
+       "y1": 535.44
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 549.06,
+       "x1": 505.65,
+       "y1": 558.0899999999999
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 560.35,
+       "x1": 164.47,
+       "y1": 568.99
+      }
+     ],
+     "quote": "In the present work, the student -DistilBERT -has the same general architecture as BERT.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "The student is trained using a distillation loss over the soft target probabilities of the teacher, along with a masked language modeling loss and a cosine embedding loss.",
+   "evidence": [
+    {
+     "chunk_id": "b0015",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 107.69,
+      "y0": 465.13,
+      "x1": 504.0,
+      "y1": 485.69
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 107.69,
+       "y0": 465.13,
+       "x1": 504.0,
+       "y1": 474.78
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 476.04,
+       "x1": 454.93,
+       "y1": 485.69
+      }
+     ],
+     "quote": "The final training objective is a linear combination of the distillation loss L ce with the supervised training loss, in our case the masked language modeling loss L mlm [Devlin et al., 2018].",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "The student network is initialized by taking every other layer from the teacher model.",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 107.64,
+      "y0": 653.11,
+      "x1": 505.24,
+      "y1": 672.66
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 149.88,
+       "y0": 653.11,
+       "x1": 505.24,
+       "y1": 661.75
+      },
+      {
+       "page": 2,
+       "x0": 107.64,
+       "y0": 664.02,
+       "x1": 395.3,
+       "y1": 672.66
+      }
+     ],
+     "quote": "Taking advantage of the common dimensionality between teacher and student networks, we initialize the student from the teacher by taking one layer out of two.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "GLUE benchmark, a collection of 9 datasets for evaluating natural language understanding systems",
+   "evidence": [
+    {
+     "chunk_id": "b0022",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 456.72,
+      "x1": 505.74,
+      "y1": 487.57
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 456.72,
+       "x1": 505.65,
+       "y1": 465.75
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 467.84,
+       "x1": 504.24,
+       "y1": 476.65999999999997
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 478.93,
+       "x1": 505.74,
+       "y1": 487.57
+      }
+     ],
+     "quote": "General Language Understanding We assess the language understanding and generalization capabilities of DistilBERT on the General Language Understanding Evaluation (GLUE) benchmark [Wang et al., 2018], a collection of 9 datasets for evaluating natural language understanding systems.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "GLUE",
+   "split": "development sets",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "IMDb sentiment classification task",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 616.61,
+      "x1": 505.74,
+      "y1": 647.4499999999999
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 616.61,
+       "x1": 504.0,
+       "y1": 625.64
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 627.9,
+       "x1": 505.74,
+       "y1": 636.54
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 638.81,
+       "x1": 422.59,
+       "y1": 647.4499999999999
+      }
+     ],
+     "quote": "Downstream tasks We further study the performances of DistilBERT on several downstream tasks under efficient inference constraints: a classification task (IMDb sentiment classification - Maas et al. [2011]) and a question answering task (SQuAD v1.1 -Rajpurkar et al. [2016]).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "IMDb",
+   "split": "test",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "SQuAD v1.1 question answering task",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 616.61,
+      "x1": 505.74,
+      "y1": 647.4499999999999
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 616.61,
+       "x1": 504.0,
+       "y1": 625.64
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 627.9,
+       "x1": 505.74,
+       "y1": 636.54
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 638.81,
+       "x1": 422.59,
+       "y1": 647.4499999999999
+      }
+     ],
+     "quote": "Downstream tasks We further study the performances of DistilBERT on several downstream tasks under efficient inference constraints: a classification task (IMDb sentiment classification - Maas et al. [2011]) and a question answering task (SQuAD v1.1 -Rajpurkar et al. [2016]).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "SQuAD v1.1",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "ELMo encoder followed by two BiLSTMs",
+   "evidence": [
+    {
+     "chunk_id": "b0022",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 511.65,
+      "x1": 504.0,
+      "y1": 531.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 137.22,
+       "y0": 511.65,
+       "x1": 504.0,
+       "y1": 520.29
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 522.56,
+       "x1": 306.05,
+       "y1": 531.1999999999999
+      },
+      {
+       "page": 3,
+       "x0": 306.05,
+       "y0": 520.89,
+       "x1": 309.54,
+       "y1": 526.9399999999999
+      }
+     ],
+     "quote": "We compare the results to the baseline provided by the authors of GLUE: an ELMo (Peters et al. [2018]) encoder followed by two BiLSTMs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "BERT / BERT-base",
+   "evidence": [
+    {
+     "chunk_id": "b0022",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 560.77,
+      "x1": 503.99,
+      "y1": 580.3199999999999
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 312.18,
+       "y0": 560.77,
+       "x1": 503.99,
+       "y1": 569.41
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 571.68,
+       "x1": 386.13,
+       "y1": 580.3199999999999
+      }
+     ],
+     "quote": "DistilBERT also compares surprisingly well to BERT, retaining 97% of the performance with 40% fewer parameters.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0022",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 549.86,
+      "x1": 504.0,
+      "y1": 569.41
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 186.25,
+       "y0": 549.86,
+       "x1": 504.0,
+       "y1": 558.5
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 560.77,
+       "x1": 309.27,
+       "y1": 569.41
+      }
+     ],
+     "quote": "Among the 9 tasks, DistilBERT is always on par or improving over the ELMo baseline (up to 19 points of accuracy on STS-B).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "F1 score",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 107.75,
+      "y0": 210.66,
+      "x1": 504.0,
+      "y1": 230.20999999999998
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 210.66,
+       "x1": 504.0,
+       "y1": 219.3
+      },
+      {
+       "page": 4,
+       "x0": 107.75,
+       "y0": 221.57,
+       "x1": 294.32,
+       "y1": 230.20999999999998
+      }
+     ],
+     "quote": "In this case, we were able to reach interesting performances given the size of the model: 79.8 F1 and 70.4 EM, i.e. within 3 points of the full model.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "Exact Match (EM)",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 107.75,
+      "y0": 210.66,
+      "x1": 504.0,
+      "y1": 230.20999999999998
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 210.66,
+       "x1": 504.0,
+       "y1": 219.3
+      },
+      {
+       "page": 4,
+       "x0": 107.75,
+       "y0": 221.57,
+       "x1": 294.32,
+       "y1": 230.20999999999998
+      }
+     ],
+     "quote": "In this case, we were able to reach interesting performances given the size of the model: 79.8 F1 and 70.4 EM, i.e. within 3 points of the full model.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "macro-score (average of individual scores on GLUE)",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 328.37,
+      "y0": 402.6,
+      "x1": 473.44,
+      "y1": 411.24
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 328.37,
+       "y0": 402.6,
+       "x1": 473.44,
+       "y1": 411.24
+      }
+     ],
+     "quote": "We report the macro-score on GLUE.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "batch size of 1 for CPU inference time evaluation",
+   "evidence": [
+    {
+     "chunk_id": "b0031",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 107.69,
+      "y0": 254.35,
+      "x1": 505.74,
+      "y1": 295.71999999999997
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 107.69,
+       "y0": 254.35,
+       "x1": 504.17,
+       "y1": 262.99
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 265.26,
+       "x1": 505.65,
+       "y1": 273.9
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 276.17,
+       "x1": 505.74,
+       "y1": 284.81
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 287.08,
+       "x1": 429.69,
+       "y1": 295.71999999999997
+      }
+     ],
+     "quote": "To further investigate the speed-up/size trade-off of DistilBERT, we compare (in Table 3) the number of parameters of each model along with the inference time needed to do a full pass on the STS-B development set on CPU (Intel Xeon E5-2690 v3 Haswell @2.9GHz) using a batch size of 1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "1",
+   "value_norm": 1.0,
+   "scope": "inference"
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "CPU (Intel Xeon E5-2690 v3 Haswell @2.9GHz)",
+   "evidence": [
+    {
+     "chunk_id": "b0031",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 107.69,
+      "y0": 254.35,
+      "x1": 505.74,
+      "y1": 295.71999999999997
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 107.69,
+       "y0": 254.35,
+       "x1": 504.17,
+       "y1": 262.99
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 265.26,
+       "x1": 505.65,
+       "y1": 273.9
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 276.17,
+       "x1": 505.74,
+       "y1": 284.81
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 287.08,
+       "x1": 429.69,
+       "y1": 295.71999999999997
+      }
+     ],
+     "quote": "To further investigate the speed-up/size trade-off of DistilBERT, we compare (in Table 3) the number of parameters of each model along with the inference time needed to do a full pass on the STS-B development set on CPU (Intel Xeon E5-2690 v3 Haswell @2.9GHz) using a batch size of 1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.1",
+   "value": "Smartphone (iPhone 7 Plus)",
+   "evidence": [
+    {
+     "chunk_id": "b0032",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 314.37,
+      "x1": 504.0,
+      "y1": 344.83
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 335.26,
+       "y0": 314.37,
+       "x1": 504.0,
+       "y1": 323.01
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 325.28,
+       "x1": 504.0,
+       "y1": 333.91999999999996
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 336.19,
+       "x1": 166.91,
+       "y1": 344.83
+      }
+     ],
+     "quote": "We compare the average inference time on a recent smartphone (iPhone 7 Plus) against our previously trained question answering model based on BERT-base.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Medians of 5 runs with different seeds",
+   "evidence": [
+    {
+     "chunk_id": "b0044",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 83.01837158203125,
+      "x1": 503.9964599609375,
+      "y1": 102.83393096923828
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 353.9628601074219,
+       "y0": 83.01837158203125,
+       "x1": 503.9964599609375,
+       "y1": 91.92493438720703
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 93.9273681640625,
+       "x1": 235.8599853515625,
+       "y1": 102.83393096923828
+      }
+     ],
+     "quote": "BERT and DistilBERT results are the medians of 5 runs with different seeds.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation study varying components of the triple loss and the student initialization",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 391.69,
+      "x1": 504.0,
+      "y1": 411.24
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 391.69,
+       "x1": 504.0,
+       "y1": 400.33
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 402.6,
+       "x1": 325.4,
+       "y1": 411.24
+      }
+     ],
+     "quote": "In this section, we investigate the influence of various components of the triple loss and the student initialization on the performances of the distilled model.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/huggingface/transformers",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 124.13999938964844,
+      "y0": 683.144775390625,
+      "x1": 283.8315734863281,
+      "y1": 691.1607666015625
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 124.13999938964844,
+       "y0": 683.144775390625,
+       "x1": 283.8315734863281,
+       "y1": 691.1607666015625
+      }
+     ],
+     "quote": "https://github.com/huggingface/transformers",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/huggingface/swift-coreml-transformers",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 124.13999938964844,
+      "y0": 713.9207763671875,
+      "x1": 332.6356506347656,
+      "y1": 721.936767578125
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 124.13999938964844,
+       "y0": 713.9207763671875,
+       "x1": 332.6356506347656,
+       "y1": 721.936767578125
+      }
+     ],
+     "quote": "https://github.com/huggingface/swift-coreml-transformers",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "DistilBERT reduces model size by 40% while retaining 97% of language understanding capabilities and running 60% faster.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.4,
+      "y0": 333.6,
+      "x1": 468.97,
+      "y1": 374.96
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.4,
+       "y0": 333.6,
+       "x1": 468.14,
+       "y1": 342.24
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 344.51,
+       "x1": 468.5,
+       "y1": 353.15
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 355.41,
+       "x1": 468.97,
+       "y1": 364.05
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 366.32,
+       "x1": 402.99,
+       "y1": 374.96
+      }
+     ],
+     "quote": "While most prior work investigated the use of distillation for building task-specific models, we leverage knowledge distillation during the pre-training phase and show that it is possible to reduce the size of a BERT model by 40%, while retaining 97% of its language understanding capabilities and being 60% faster.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "Smaller language models pre-trained with knowledge distillation can reach similar performance on many downstream tasks while being lighter and faster.",
+   "evidence": [
+    {
+     "chunk_id": "b0006",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 75.48,
+      "x1": 504.0,
+      "y1": 116.84
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 75.48,
+       "x1": 504.0,
+       "y1": 84.12
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 86.39,
+       "x1": 504.0,
+       "y1": 95.03
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 97.3,
+       "x1": 504.0,
+       "y1": 105.94
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 108.2,
+       "x1": 136.82,
+       "y1": 116.84
+      }
+     ],
+     "quote": "In this paper, we show that it is possible to reach similar performances on many downstream-tasks using much smaller language models pre-trained with knowledge distillation, resulting in models that are lighter and faster at inference time, while also requiring a smaller computational training budget.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

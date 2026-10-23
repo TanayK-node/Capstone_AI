@@ -1,0 +1,3623 @@
+{
+ "metadata": {
+  "title": "QLORA: Efficient Finetuning of Quantized LLMs",
+  "authors": [
+   "Tim Dettmers",
+   "Artidoro Pagnoni",
+   "Ari Holtzman",
+   "Luke Zettlemoyer"
+  ],
+  "venue": null,
+  "year": "2023",
+  "arxiv_id": "2305.14314v1[cs.LG]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Finetuning very large language models is prohibitively expensive in terms of GPU memory.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 592.54,
+      "x1": 505.25,
+      "y1": 623.0
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 466.51,
+       "y0": 592.54,
+       "x1": 505.25,
+       "y1": 601.18
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 603.45,
+       "x1": 504.0,
+       "y1": 612.09
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 614.36,
+       "x1": 390.91,
+       "y1": 623.0
+      }
+     ],
+     "quote": "However, finetuning very large models is prohibitively expensive; regular 16-bit finetuning of a LLaMA 65B parameter model [57] requires more than 780 GB of GPU memory.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Existing quantization methods only work for inference and fail during training.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 614.36,
+      "x1": 504.17,
+      "y1": 644.8199999999999
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 397.07,
+       "y0": 614.36,
+       "x1": 503.99,
+       "y1": 623.0
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 625.27,
+       "x1": 504.17,
+       "y1": 633.91
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 636.18,
+       "x1": 294.5,
+       "y1": 644.8199999999999
+      }
+     ],
+     "quote": "While recent quantization methods can reduce the memory footprint of LLMs [14,13,18,66], such techniques only work for inference and break down during training [65].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Introduction of 4-bit NormalFloat (NF4), an information-theoretically optimal data type for normally distributed weights.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.51,
+      "y0": 361.72,
+      "x1": 468.48,
+      "y1": 414.0
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 217.22,
+       "y0": 361.72,
+       "x1": 468.48,
+       "y1": 370.36
+      },
+      {
+       "page": 1,
+       "x0": 143.51,
+       "y0": 372.63,
+       "x1": 468.14,
+       "y1": 381.27
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 383.54,
+       "x1": 468.13,
+       "y1": 392.18
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 394.45,
+       "x1": 468.14,
+       "y1": 403.09
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 405.36,
+       "x1": 398.31,
+       "y1": 414.0
+      }
+     ],
+     "quote": "QLORA introduces a number of innovations to save memory without sacrificing performance: (a) 4-bit NormalFloat (NF4), a new data type that is information theoretically optimal for normally distributed weights",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Double Quantization to reduce the average memory footprint by quantizing the quantization constants.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.51,
+      "y0": 361.72,
+      "x1": 468.48,
+      "y1": 414.0
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 217.22,
+       "y0": 361.72,
+       "x1": 468.48,
+       "y1": 370.36
+      },
+      {
+       "page": 1,
+       "x0": 143.51,
+       "y0": 372.63,
+       "x1": 468.14,
+       "y1": 381.27
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 383.54,
+       "x1": 468.13,
+       "y1": 392.18
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 394.45,
+       "x1": 468.14,
+       "y1": 403.09
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 405.36,
+       "x1": 398.31,
+       "y1": 414.0
+      }
+     ],
+     "quote": "(b) Double Quantization to reduce the average memory footprint by quantizing the quantization constants, and (c) Paged Optimizers to manage memory spikes.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "Paged Optimizers to manage memory spikes.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.51,
+      "y0": 361.72,
+      "x1": 468.48,
+      "y1": 414.0
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 217.22,
+       "y0": 361.72,
+       "x1": 468.48,
+       "y1": 370.36
+      },
+      {
+       "page": 1,
+       "x0": 143.51,
+       "y0": 372.63,
+       "x1": 468.14,
+       "y1": 381.27
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 383.54,
+       "x1": 468.13,
+       "y1": 392.18
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 394.45,
+       "x1": 468.14,
+       "y1": 403.09
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 405.36,
+       "x1": 398.31,
+       "y1": 414.0
+      }
+     ],
+     "quote": "(b) Double Quantization to reduce the average memory footprint by quantizing the quantization constants, and (c) Paged Optimizers to manage memory spikes.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "instruction following and chatbot performance evaluation",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 405.36,
+      "x1": 468.31,
+      "y1": 457.63
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 401.39,
+       "y0": 405.36,
+       "x1": 468.27,
+       "y1": 414.0
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 416.27,
+       "x1": 468.13,
+       "y1": 424.90999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 427.17,
+       "x1": 468.14,
+       "y1": 435.81
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 438.08,
+       "x1": 468.31,
+       "y1": 446.71999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 448.99,
+       "x1": 205.68,
+       "y1": 457.63
+      },
+      {
+       "page": 1,
+       "x0": 208.92,
+       "y0": 448.99,
+       "x1": 343.54999999999995,
+       "y1": 457.63
+      }
+     ],
+     "quote": "We use QLORA to finetune more than 1,000 models, providing a detailed analysis of instruction following and chatbot performance across 8 instruction datasets, multiple model types (LLaMA, T5), and model scales that would be infeasible to run with regular finetuning (e.g. 33B and 65B parameter models).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "QLORA utilizes a 4-bit NormalFloat (NF4) storage data type for base model weights and a BFloat16 data type for computations, dequantizing weights to 16-bit for matrix multiplication during forward and backward passes.",
+   "evidence": [
+    {
+     "chunk_id": "b0027",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 286.51,
+      "x1": 504.0,
+      "y1": 306.06
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.25,
+       "y0": 286.51,
+       "x1": 504.0,
+       "y1": 295.15
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 297.42,
+       "x1": 224.39,
+       "y1": 306.06
+      }
+     ],
+     "quote": "QLORA has one low-precision storage data type, in our case usually 4-bit, and one computation data type that is usually BFloat16.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "Double Quantization is applied to the quantization constants to further reduce their memory footprint by treating them as inputs to a second quantization step.",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 206.83,
+      "x1": 504.0,
+      "y1": 228.04000000000002
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 208.18,
+       "x1": 392.0,
+       "y1": 217.14000000000001
+      },
+      {
+       "page": 5,
+       "x0": 392.0,
+       "y0": 206.83,
+       "x1": 406.73,
+       "y1": 212.88000000000002
+      },
+      {
+       "page": 5,
+       "x0": 392.0,
+       "y0": 212.76,
+       "x1": 395.97,
+       "y1": 218.88
+      },
+      {
+       "page": 5,
+       "x0": 409.73,
+       "y0": 208.5,
+       "x1": 504.0,
+       "y1": 217.14
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 219.4,
+       "x1": 250.31,
+       "y1": 228.04000000000002
+      }
+     ],
+     "quote": "More specifically, Double Quantization treats quantization constants c 2 FP32 of the first quantization as inputs to a second quantization.",
+     "grounding_status": "verified",
+     "match_score": 98.6
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "Paged Optimizers are employed using NVIDIA unified memory to automatically page optimizer states between GPU and CPU RAM, preventing out-of-memory errors during gradient checkpointing spikes.",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 313.46,
+      "x1": 504.0,
+      "y1": 344.3
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 313.46,
+       "x1": 504.0,
+       "y1": 322.48999999999995
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 324.76,
+       "x1": 504.0,
+       "y1": 333.4
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 335.66,
+       "x1": 239.6,
+       "y1": 344.3
+      }
+     ],
+     "quote": "Paged Optimizers use the NVIDIA unified memoryfoot_0 feature wich does automatic page-to-page transfers between the CPU and GPU for error-free GPU processing in the scenario where the GPU occasionally runs out-of-memory.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "The approach integrates Low-rank Adapters (LoRA) where only the adapter parameters receive weight gradients while the base model weights remain fixed and quantized.",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 107.69,
+      "y0": 576.12,
+      "x1": 504.0,
+      "y1": 595.67
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 107.69,
+       "y0": 576.12,
+       "x1": 504.0,
+       "y1": 584.76
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 587.03,
+       "x1": 145.54,
+       "y1": 595.67
+      }
+     ],
+     "quote": "To summarize, QLORA has one storage data type (usually 4-bit NormalFloat) and a computation data type .",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "The introduction of the 4-bit NormalFloat (NF4) data type, which is information-theoretically optimal for zero-centered normally distributed weights.",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 107.67,
+      "y0": 236.92,
+      "x1": 504.0,
+      "y1": 256.47
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.25,
+       "y0": 236.92,
+       "x1": 504.0,
+       "y1": 245.56
+      },
+      {
+       "page": 4,
+       "x0": 107.67,
+       "y0": 247.83,
+       "x1": 296.28000000000003,
+       "y1": 256.47
+      }
+     ],
+     "quote": "QLORA achieves high-fidelity 4-bit finetuning via two techniques we propose-4-bit NormalFloat (NF4) quantization and Double Quantization.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "The use of Double Quantization to reduce the memory overhead introduced by quantization constants.",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 247.83,
+      "x1": 504.0,
+      "y1": 278.28999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 302.33,
+       "y0": 247.83,
+       "x1": 504.0,
+       "y1": 256.47
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 258.74,
+       "x1": 504.0,
+       "y1": 267.38
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 269.65,
+       "x1": 409.47,
+       "y1": 278.28999999999996
+      }
+     ],
+     "quote": "Additionally, we introduce Paged Optimizers, to prevent memory spikes during gradient checkpointing from causing out-of-memory errors that have traditionally made finetuning on a single machine difficult for large models.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.8,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.2",
+   "value": "The employment of Paged Optimizers to manage memory spikes and prevent out-of-memory errors during single-machine large model finetuning.",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 247.83,
+      "x1": 504.0,
+      "y1": 278.28999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 302.33,
+       "y0": 247.83,
+       "x1": 504.0,
+       "y1": 256.47
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 258.74,
+       "x1": 504.0,
+       "y1": 267.38
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 269.65,
+       "x1": 409.47,
+       "y1": 278.28999999999996
+      }
+     ],
+     "quote": "Additionally, we introduce Paged Optimizers, to prevent memory spikes during gradient checkpointing from causing out-of-memory errors that have traditionally made finetuning on a single machine difficult for large models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "GLUE benchmark with RoBERTa-large",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 86.39,
+      "x1": 504.66,
+      "y1": 127.75
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 488.99,
+       "y0": 86.39,
+       "x1": 504.17,
+       "y1": 95.03
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 97.3,
+       "x1": 504.66,
+       "y1": 105.94
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 108.2,
+       "x1": 504.0,
+       "y1": 116.84
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 119.11,
+       "x1": 127.27,
+       "y1": 127.75
+      }
+     ],
+     "quote": "Our evaluations include GLUE [58] with RoBERTa-large [38], Super-NaturalInstructions (TKInstruct) [61] with T5 [49], and 5-shot MMLU [24] after finetuning LLaMA on Flan v2 [39] and Alpaca [55].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "GLUE",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "Super-NaturalInstructions with T5",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 86.39,
+      "x1": 504.66,
+      "y1": 127.75
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 488.99,
+       "y0": 86.39,
+       "x1": 504.17,
+       "y1": 95.03
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 97.3,
+       "x1": 504.66,
+       "y1": 105.94
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 108.2,
+       "x1": 504.0,
+       "y1": 116.84
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 119.11,
+       "x1": 127.27,
+       "y1": 127.75
+      }
+     ],
+     "quote": "Our evaluations include GLUE [58] with RoBERTa-large [38], Super-NaturalInstructions (TKInstruct) [61] with T5 [49], and 5-shot MMLU [24] after finetuning LLaMA on Flan v2 [39] and Alpaca [55].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Super-NaturalInstructions",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "MMLU benchmark using LLaMA finetuned on Flan v2 and Alpaca",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 86.39,
+      "x1": 504.66,
+      "y1": 127.75
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 488.99,
+       "y0": 86.39,
+       "x1": 504.17,
+       "y1": 95.03
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 97.3,
+       "x1": 504.66,
+       "y1": 105.94
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 108.2,
+       "x1": 504.0,
+       "y1": 116.84
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 119.11,
+       "x1": 127.27,
+       "y1": 127.75
+      }
+     ],
+     "quote": "Our evaluations include GLUE [58] with RoBERTa-large [38], Super-NaturalInstructions (TKInstruct) [61] with T5 [49], and 5-shot MMLU [24] after finetuning LLaMA on Flan v2 [39] and Alpaca [55].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "MMLU",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "OPT models for zero-shot accuracy and perplexity",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 107.25,
+      "y0": 119.11,
+      "x1": 505.66,
+      "y1": 160.48000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 130.73,
+       "y0": 119.11,
+       "x1": 504.0,
+       "y1": 127.75
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 130.02,
+       "x1": 504.35,
+       "y1": 138.66000000000003
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 140.93,
+       "x1": 505.66,
+       "y1": 149.57
+      },
+      {
+       "page": 6,
+       "x0": 107.25,
+       "y0": 151.84,
+       "x1": 126.03999999999999,
+       "y1": 160.48000000000002
+      }
+     ],
+     "quote": "To additionally study the advantages of NF4 over other 4-bit data types, we use the setup of Dettmers and Zettlemoyer [13] and measure post-quantization zero-shot accuracy and perplexity across different models (OPT [72], LLaMA [57], BLOOM [52], Pythia [7]) for model sizes 125m -13B.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "OPT",
+   "split": "",
+   "size": "125m -13B",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "LLaMA models for zero-shot accuracy and perplexity",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 107.25,
+      "y0": 119.11,
+      "x1": 505.66,
+      "y1": 160.48000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 130.73,
+       "y0": 119.11,
+       "x1": 504.0,
+       "y1": 127.75
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 130.02,
+       "x1": 504.35,
+       "y1": 138.66000000000003
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 140.93,
+       "x1": 505.66,
+       "y1": 149.57
+      },
+      {
+       "page": 6,
+       "x0": 107.25,
+       "y0": 151.84,
+       "x1": 126.03999999999999,
+       "y1": 160.48000000000002
+      }
+     ],
+     "quote": "To additionally study the advantages of NF4 over other 4-bit data types, we use the setup of Dettmers and Zettlemoyer [13] and measure post-quantization zero-shot accuracy and perplexity across different models (OPT [72], LLaMA [57], BLOOM [52], Pythia [7]) for model sizes 125m -13B.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "LLaMA",
+   "split": "",
+   "size": "125m -13B",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "BLOOM models for zero-shot accuracy and perplexity",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 107.25,
+      "y0": 119.11,
+      "x1": 505.66,
+      "y1": 160.48000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 130.73,
+       "y0": 119.11,
+       "x1": 504.0,
+       "y1": 127.75
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 130.02,
+       "x1": 504.35,
+       "y1": 138.66000000000003
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 140.93,
+       "x1": 505.66,
+       "y1": 149.57
+      },
+      {
+       "page": 6,
+       "x0": 107.25,
+       "y0": 151.84,
+       "x1": 126.03999999999999,
+       "y1": 160.48000000000002
+      }
+     ],
+     "quote": "To additionally study the advantages of NF4 over other 4-bit data types, we use the setup of Dettmers and Zettlemoyer [13] and measure post-quantization zero-shot accuracy and perplexity across different models (OPT [72], LLaMA [57], BLOOM [52], Pythia [7]) for model sizes 125m -13B.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "BLOOM",
+   "split": "",
+   "size": "125m -13B",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.6",
+   "value": "Pythia models for zero-shot accuracy and perplexity",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 107.25,
+      "y0": 119.11,
+      "x1": 505.66,
+      "y1": 160.48000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 130.73,
+       "y0": 119.11,
+       "x1": 504.0,
+       "y1": 127.75
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 130.02,
+       "x1": 504.35,
+       "y1": 138.66000000000003
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 140.93,
+       "x1": 505.66,
+       "y1": 149.57
+      },
+      {
+       "page": 6,
+       "x0": 107.25,
+       "y0": 151.84,
+       "x1": 126.03999999999999,
+       "y1": 160.48000000000002
+      }
+     ],
+     "quote": "To additionally study the advantages of NF4 over other 4-bit data types, we use the setup of Dettmers and Zettlemoyer [13] and measure post-quantization zero-shot accuracy and perplexity across different models (OPT [72], LLaMA [57], BLOOM [52], Pythia [7]) for model sizes 125m -13B.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Pythia",
+   "split": "",
+   "size": "125m -13B",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.7",
+   "value": "Alpaca dataset for instruction finetuning",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 405.66,
+      "x1": 471.78,
+      "y1": 436.12
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 302.18,
+       "y0": 405.66,
+       "x1": 363.36,
+       "y1": 414.3
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 416.57,
+       "x1": 363.36,
+       "y1": 425.21
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 427.48,
+       "x1": 471.78,
+       "y1": 436.12
+      }
+     ],
+     "quote": "To this end, we finetune LLaMA 7B through 65B on two instruction following datasets, Alpaca and FLAN v2, and evaluate on the MMLU benchmark via 5-shot accuracy.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Alpaca",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.8",
+   "value": "FLAN v2 dataset for instruction finetuning",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 405.66,
+      "x1": 471.78,
+      "y1": 436.12
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 302.18,
+       "y0": 405.66,
+       "x1": 363.36,
+       "y1": 414.3
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 416.57,
+       "x1": 363.36,
+       "y1": 425.21
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 427.48,
+       "x1": 471.78,
+       "y1": 436.12
+      }
+     ],
+     "quote": "To this end, we finetune LLaMA 7B through 65B on two instruction following datasets, Alpaca and FLAN v2, and evaluate on the MMLU benchmark via 5-shot accuracy.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "FLAN v2",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.9",
+   "value": "OASST1 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0065",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 277.09,
+      "x1": 505.65,
+      "y1": 318.46
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 231.56,
+       "y0": 277.09,
+       "x1": 505.24,
+       "y1": 285.72999999999996
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 288.0,
+       "x1": 505.65,
+       "y1": 296.64
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 298.91,
+       "x1": 505.65,
+       "y1": 307.55
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 309.82,
+       "x1": 152.26,
+       "y1": 318.46
+      }
+     ],
+     "quote": "We include datasets obtained through crowd-sourcing (OASST1 [31], HH-RLHF [4]), distillation from instruction-tuned models (Alpaca [55], self-instruct [59], unnaturalinstructions [26]), corpora aggregations (FLAN v2 [12]), as well as hybrids (Chip2 [32], Longform [30]).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "OASST1",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.10",
+   "value": "HH-RLHF dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0065",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 277.09,
+      "x1": 505.65,
+      "y1": 318.46
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 231.56,
+       "y0": 277.09,
+       "x1": 505.24,
+       "y1": 285.72999999999996
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 288.0,
+       "x1": 505.65,
+       "y1": 296.64
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 298.91,
+       "x1": 505.65,
+       "y1": 307.55
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 309.82,
+       "x1": 152.26,
+       "y1": 318.46
+      }
+     ],
+     "quote": "We include datasets obtained through crowd-sourcing (OASST1 [31], HH-RLHF [4]), distillation from instruction-tuned models (Alpaca [55], self-instruct [59], unnaturalinstructions [26]), corpora aggregations (FLAN v2 [12]), as well as hybrids (Chip2 [32], Longform [30]).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "HH-RLHF",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.11",
+   "value": "Self-instruct dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0065",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 277.09,
+      "x1": 505.65,
+      "y1": 318.46
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 231.56,
+       "y0": 277.09,
+       "x1": 505.24,
+       "y1": 285.72999999999996
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 288.0,
+       "x1": 505.65,
+       "y1": 296.64
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 298.91,
+       "x1": 505.65,
+       "y1": 307.55
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 309.82,
+       "x1": 152.26,
+       "y1": 318.46
+      }
+     ],
+     "quote": "We include datasets obtained through crowd-sourcing (OASST1 [31], HH-RLHF [4]), distillation from instruction-tuned models (Alpaca [55], self-instruct [59], unnaturalinstructions [26]), corpora aggregations (FLAN v2 [12]), as well as hybrids (Chip2 [32], Longform [30]).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "self-instruct",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.12",
+   "value": "Unnatural instructions dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0065",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 277.09,
+      "x1": 505.65,
+      "y1": 318.46
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 231.56,
+       "y0": 277.09,
+       "x1": 505.24,
+       "y1": 285.72999999999996
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 288.0,
+       "x1": 505.65,
+       "y1": 296.64
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 298.91,
+       "x1": 505.65,
+       "y1": 307.55
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 309.82,
+       "x1": 152.26,
+       "y1": 318.46
+      }
+     ],
+     "quote": "We include datasets obtained through crowd-sourcing (OASST1 [31], HH-RLHF [4]), distillation from instruction-tuned models (Alpaca [55], self-instruct [59], unnaturalinstructions [26]), corpora aggregations (FLAN v2 [12]), as well as hybrids (Chip2 [32], Longform [30]).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "unnaturalinstructions",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.13",
+   "value": "Chip2 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0065",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 277.09,
+      "x1": 505.65,
+      "y1": 318.46
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 231.56,
+       "y0": 277.09,
+       "x1": 505.24,
+       "y1": 285.72999999999996
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 288.0,
+       "x1": 505.65,
+       "y1": 296.64
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 298.91,
+       "x1": 505.65,
+       "y1": 307.55
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 309.82,
+       "x1": 152.26,
+       "y1": 318.46
+      }
+     ],
+     "quote": "We include datasets obtained through crowd-sourcing (OASST1 [31], HH-RLHF [4]), distillation from instruction-tuned models (Alpaca [55], self-instruct [59], unnaturalinstructions [26]), corpora aggregations (FLAN v2 [12]), as well as hybrids (Chip2 [32], Longform [30]).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Chip2",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.14",
+   "value": "Longform dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0065",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 277.09,
+      "x1": 505.65,
+      "y1": 318.46
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 231.56,
+       "y0": 277.09,
+       "x1": 505.24,
+       "y1": 285.72999999999996
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 288.0,
+       "x1": 505.65,
+       "y1": 296.64
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 298.91,
+       "x1": 505.65,
+       "y1": 307.55
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 309.82,
+       "x1": 152.26,
+       "y1": 318.46
+      }
+     ],
+     "quote": "We include datasets obtained through crowd-sourcing (OASST1 [31], HH-RLHF [4]), distillation from instruction-tuned models (Alpaca [55], self-instruct [59], unnaturalinstructions [26]), corpora aggregations (FLAN v2 [12]), as well as hybrids (Chip2 [32], Longform [30]).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Longform",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.15",
+   "value": "Vicuna prompts benchmark dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 97.3,
+      "x1": 504.0,
+      "y1": 116.84
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 300.54,
+       "y0": 97.3,
+       "x1": 504.0,
+       "y1": 105.94
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 108.2,
+       "x1": 366.44,
+       "y1": 116.84
+      }
+     ],
+     "quote": "The OASST1 dataset is a multilingual collection of crowd-sourced multiturn dialogs between a user and an assistant.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Vicuna prompts",
+   "split": "",
+   "size": "80 prompts",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.16",
+   "value": "OASST1 validation dataset for chatbot evaluation",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 107.75,
+      "y0": 108.2,
+      "x1": 503.99,
+      "y1": 127.75
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 369.53,
+       "y0": 108.2,
+       "x1": 503.99,
+       "y1": 116.84
+      },
+      {
+       "page": 9,
+       "x0": 107.75,
+       "y0": 119.11,
+       "x1": 388.99,
+       "y1": 127.75
+      }
+     ],
+     "quote": "We select all user messages in the validation dataset as queries and include previous turns in the prompt.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "OASST1 validation dataset",
+   "split": "validation",
+   "size": "953 unique user queries",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.17",
+   "value": "Pile Common Crawl dataset for language modeling perplexity",
+   "evidence": [
+    {
+     "chunk_id": "b0154",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 373.02,
+      "y0": 290.29876708984375,
+      "x1": 505.11,
+      "y1": 330.2027282714844
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 373.02,
+       "y0": 290.29876708984375,
+       "x1": 505.11,
+       "y1": 300.3147277832031
+      },
+      {
+       "page": 7,
+       "x0": 373.02,
+       "y0": 300.26177978515625,
+       "x1": 505.11,
+       "y1": 310.2777404785156
+      },
+      {
+       "page": 7,
+       "x0": 373.02,
+       "y0": 310.2247619628906,
+       "x1": 505.11,
+       "y1": 320.24072265625
+      },
+      {
+       "page": 7,
+       "x0": 373.02,
+       "y0": 320.186767578125,
+       "x1": 505.11,
+       "y1": 330.2027282714844
+      }
+     ],
+     "quote": "Table 2: Pile Common Crawl mean perplexity for different data types for 125M to 13B OPT, BLOOM, LLaMA, and Pythia models.",
+     "grounding_status": "verified",
+     "match_score": 95.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Pile Common Crawl",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.18",
+   "value": "CrowS dataset for evaluation of biases",
+   "evidence": [
+    {
+     "chunk_id": "b0160",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 107.7040023803711,
+      "y0": 79.76118469238281,
+      "x1": 300.1629943847656,
+      "y1": 87.8847427368164
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 107.7040023803711,
+       "y0": 79.76118469238281,
+       "x1": 300.1629943847656,
+       "y1": 87.8847427368164
+      }
+     ],
+     "quote": "Table 8: Evaluation of biases on the CrowS dataset.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "CrowS dataset",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Vicuna chatbot system",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 454.83,
+      "x1": 504.0,
+      "y1": 474.76
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 454.83,
+       "x1": 504.0,
+       "y1": 463.85999999999996
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 466.12,
+       "x1": 383.93,
+       "y1": 474.76
+      }
+     ],
+     "quote": "We compare our models to both research (Vicuna [10] and Open Assistant [31]) and commercial (GPT-4 [42], GPT-3.5-turbo and Bard) chatbot systems.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Open Assistant chatbot system",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 454.83,
+      "x1": 504.0,
+      "y1": 474.76
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 454.83,
+       "x1": 504.0,
+       "y1": 463.85999999999996
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 466.12,
+       "x1": 383.93,
+       "y1": 474.76
+      }
+     ],
+     "quote": "We compare our models to both research (Vicuna [10] and Open Assistant [31]) and commercial (GPT-4 [42], GPT-3.5-turbo and Bard) chatbot systems.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "GPT-4 commercial chatbot system",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 454.83,
+      "x1": 504.0,
+      "y1": 474.76
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 454.83,
+       "x1": 504.0,
+       "y1": 463.85999999999996
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 466.12,
+       "x1": 383.93,
+       "y1": 474.76
+      }
+     ],
+     "quote": "We compare our models to both research (Vicuna [10] and Open Assistant [31]) and commercial (GPT-4 [42], GPT-3.5-turbo and Bard) chatbot systems.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "GPT-3.5-turbo commercial chatbot system",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 454.83,
+      "x1": 504.0,
+      "y1": 474.76
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 454.83,
+       "x1": 504.0,
+       "y1": 463.85999999999996
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 466.12,
+       "x1": 383.93,
+       "y1": 474.76
+      }
+     ],
+     "quote": "We compare our models to both research (Vicuna [10] and Open Assistant [31]) and commercial (GPT-4 [42], GPT-3.5-turbo and Bard) chatbot systems.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "Bard commercial chatbot system",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 454.83,
+      "x1": 504.0,
+      "y1": 474.76
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 454.83,
+       "x1": 504.0,
+       "y1": 463.85999999999996
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 466.12,
+       "x1": 383.93,
+       "y1": 474.76
+      }
+     ],
+     "quote": "We compare our models to both research (Vicuna [10] and Open Assistant [31]) and commercial (GPT-4 [42], GPT-3.5-turbo and Bard) chatbot systems.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Perplexity",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 107.25,
+      "y0": 119.11,
+      "x1": 505.66,
+      "y1": 160.48000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 130.73,
+       "y0": 119.11,
+       "x1": 504.0,
+       "y1": 127.75
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 130.02,
+       "x1": 504.35,
+       "y1": 138.66000000000003
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 140.93,
+       "x1": 505.66,
+       "y1": 149.57
+      },
+      {
+       "page": 6,
+       "x0": 107.25,
+       "y0": 151.84,
+       "x1": 126.03999999999999,
+       "y1": 160.48000000000002
+      }
+     ],
+     "quote": "To additionally study the advantages of NF4 over other 4-bit data types, we use the setup of Dettmers and Zettlemoyer [13] and measure post-quantization zero-shot accuracy and perplexity across different models (OPT [72], LLaMA [57], BLOOM [52], Pythia [7]) for model sizes 125m -13B.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Zero-shot accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 107.25,
+      "y0": 119.11,
+      "x1": 505.66,
+      "y1": 160.48000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 130.73,
+       "y0": 119.11,
+       "x1": 504.0,
+       "y1": 127.75
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 130.02,
+       "x1": 504.35,
+       "y1": 138.66000000000003
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 140.93,
+       "x1": 505.66,
+       "y1": 149.57
+      },
+      {
+       "page": 6,
+       "x0": 107.25,
+       "y0": 151.84,
+       "x1": 126.03999999999999,
+       "y1": 160.48000000000002
+      }
+     ],
+     "quote": "To additionally study the advantages of NF4 over other 4-bit data types, we use the setup of Dettmers and Zettlemoyer [13] and measure post-quantization zero-shot accuracy and perplexity across different models (OPT [72], LLaMA [57], BLOOM [52], Pythia [7]) for model sizes 125m -13B.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "5-shot MMLU test accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 405.66,
+      "x1": 471.78,
+      "y1": 436.12
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 302.18,
+       "y0": 405.66,
+       "x1": 363.36,
+       "y1": 414.3
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 416.57,
+       "x1": 363.36,
+       "y1": 425.21
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 427.48,
+       "x1": 471.78,
+       "y1": 436.12
+      }
+     ],
+     "quote": "To this end, we finetune LLaMA 7B through 65B on two instruction following datasets, Alpaca and FLAN v2, and evaluate on the MMLU benchmark via 5-shot accuracy.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "Score out of ten assigned by GPT-4 relative to ChatGPT",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 169.58,
+      "x1": 504.01,
+      "y1": 189.13
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 186.2,
+       "y0": 169.58,
+       "x1": 504.01,
+       "y1": 178.22000000000003
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 180.49,
+       "x1": 393.87,
+       "y1": 189.13
+      }
+     ],
+     "quote": "Given a query along with ChatGPT's and a model's responses, GPT-4 is prompted to assign a score out of ten to both responses and provide an explanation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.4",
+   "value": "Elo rating",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 362.95,
+      "x1": 504.0,
+      "y1": 382.89
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 362.95,
+       "x1": 504.0,
+       "y1": 371.97999999999996
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 374.25,
+       "x1": 322.33000000000004,
+       "y1": 382.89
+      }
+     ],
+     "quote": "With both human and automated pairwise comparisons, we create a tournament-style competition where models compete against each other.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.5",
+   "value": "GLUE accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0153",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 116.4583511352539,
+      "y0": 112.44922637939453,
+      "x1": 498.0586242675781,
+      "y1": 123.34563446044922
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 116.4583511352539,
+       "y0": 112.44922637939453,
+       "x1": 498.0586242675781,
+       "y1": 123.34563446044922
+      }
+     ],
+     "quote": "Dataset | GLUE (Acc.) |  |  | Super-NaturalInstructions | (RougeL) |",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.6",
+   "value": "Super-NaturalInstructions RougeL",
+   "evidence": [
+    {
+     "chunk_id": "b0153",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 116.4583511352539,
+      "y0": 112.44922637939453,
+      "x1": 498.0586242675781,
+      "y1": 123.34563446044922
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 116.4583511352539,
+       "y0": 112.44922637939453,
+       "x1": 498.0586242675781,
+       "y1": 123.34563446044922
+      }
+     ],
+     "quote": "Dataset | GLUE (Acc.) |  |  | Super-NaturalInstructions | (RougeL) |",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Learning rate search range for fully finetuned baselines",
+   "evidence": [
+    {
+     "chunk_id": "b0054",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 468.06,
+      "x1": 311.53,
+      "y1": 498.52
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 276.64,
+       "y0": 468.06,
+       "x1": 309.78999999999996,
+       "y1": 476.7
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 478.97,
+       "x1": 309.78,
+       "y1": 487.61
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 489.88,
+       "x1": 311.53,
+       "y1": 498.52
+      }
+     ],
+     "quote": "We do a hyperparameter search over learning rates 1e-6 to 5e-5 and batch sizes 8 to 128 to find robust baselines.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "1e-6 to 5e-5",
+   "value_norm": null,
+   "scope": "baseline fine-tuning"
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Batch size search range for fully finetuned baselines",
+   "evidence": [
+    {
+     "chunk_id": "b0054",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 468.06,
+      "x1": 311.53,
+      "y1": 498.52
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 276.64,
+       "y0": 468.06,
+       "x1": 309.78999999999996,
+       "y1": 476.7
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 478.97,
+       "x1": 309.78,
+       "y1": 487.61
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 489.88,
+       "x1": 311.53,
+       "y1": 498.52
+      }
+     ],
+     "quote": "We do a hyperparameter search over learning rates 1e-6 to 5e-5 and batch sizes 8 to 128 to find robust baselines.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "8 to 128",
+   "value_norm": null,
+   "scope": "baseline fine-tuning"
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Nucleus sampling parameter p",
+   "evidence": [
+    {
+     "chunk_id": "b0070",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 691.7,
+      "x1": 504.0,
+      "y1": 722.15
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 296.75,
+       "y0": 691.7,
+       "x1": 325.62,
+       "y1": 700.34
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 702.29,
+       "x1": 504.0,
+       "y1": 711.25
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 713.51,
+       "x1": 131.51,
+       "y1": 722.15
+      }
+     ],
+     "quote": "We describe below our proposed setup, using nucleus sampling with p = 0.9 and temperature 0.7 in all cases.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "nucleus sampling p",
+   "value_raw": "0.9",
+   "value_norm": 0.9,
+   "scope": "inference"
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Nucleus sampling temperature",
+   "evidence": [
+    {
+     "chunk_id": "b0070",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 691.7,
+      "x1": 504.0,
+      "y1": 722.15
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 296.75,
+       "y0": 691.7,
+       "x1": 325.62,
+       "y1": 700.34
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 702.29,
+       "x1": 504.0,
+       "y1": 711.25
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 713.51,
+       "x1": 131.51,
+       "y1": 722.15
+      }
+     ],
+     "quote": "We describe below our proposed setup, using nucleus sampling with p = 0.9 and temperature 0.7 in all cases.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "temperature",
+   "value_raw": "0.7",
+   "value_norm": 0.7,
+   "scope": "inference"
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Elo rating K factor",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 314.63,
+      "y0": 483.02,
+      "x1": 505.74,
+      "y1": 491.97999999999996
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 314.63,
+       "y0": 483.02,
+       "x1": 505.74,
+       "y1": 491.97999999999996
+      }
+     ],
+     "quote": "We start with a score of 1,000 and use K = 32.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "K",
+   "value_raw": "32",
+   "value_norm": 32.0,
+   "scope": "Elo rating"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "LoRA dropout search space",
+   "evidence": [
+    {
+     "chunk_id": "b0164",
+     "page": 22,
+     "bbox": {
+      "page": 22,
+      "x0": 107.53,
+      "y0": 93.8,
+      "x1": 505.24,
+      "y1": 139.86
+     },
+     "boxes": [
+      {
+       "page": 22,
+       "x0": 108.0,
+       "y0": 93.8,
+       "x1": 263.01,
+       "y1": 102.75999999999999
+      },
+      {
+       "page": 22,
+       "x0": 107.53,
+       "y0": 109.4,
+       "x1": 505.24,
+       "y1": 118.04
+      },
+      {
+       "page": 22,
+       "x0": 108.0,
+       "y0": 119.99,
+       "x1": 505.24,
+       "y1": 128.95
+      },
+      {
+       "page": 22,
+       "x0": 108.0,
+       "y0": 131.22,
+       "x1": 272.81,
+       "y1": 139.86
+      }
+     ],
+     "quote": "A.1 Hyperparameters for QLORA We do a hyperparameter search for LoRA over the following variables: LoRA dropout { 0.0, 0.05, 0.1}, LoRA r { 8, 16, 32, 64, 128, 256}, LoRA layers {key+query, all attention layers, all FFN layers, all layers, attention + FFN output layers}.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "LoRA dropout",
+   "value_raw": "{ 0.0, 0.05, 0.1}",
+   "value_norm": null,
+   "scope": "QLoRA"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "LoRA r search space",
+   "evidence": [
+    {
+     "chunk_id": "b0164",
+     "page": 22,
+     "bbox": {
+      "page": 22,
+      "x0": 107.53,
+      "y0": 93.8,
+      "x1": 505.24,
+      "y1": 139.86
+     },
+     "boxes": [
+      {
+       "page": 22,
+       "x0": 108.0,
+       "y0": 93.8,
+       "x1": 263.01,
+       "y1": 102.75999999999999
+      },
+      {
+       "page": 22,
+       "x0": 107.53,
+       "y0": 109.4,
+       "x1": 505.24,
+       "y1": 118.04
+      },
+      {
+       "page": 22,
+       "x0": 108.0,
+       "y0": 119.99,
+       "x1": 505.24,
+       "y1": 128.95
+      },
+      {
+       "page": 22,
+       "x0": 108.0,
+       "y0": 131.22,
+       "x1": 272.81,
+       "y1": 139.86
+      }
+     ],
+     "quote": "A.1 Hyperparameters for QLORA We do a hyperparameter search for LoRA over the following variables: LoRA dropout { 0.0, 0.05, 0.1}, LoRA r { 8, 16, 32, 64, 128, 256}, LoRA layers {key+query, all attention layers, all FFN layers, all layers, attention + FFN output layers}.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "LoRA r",
+   "value_raw": "{ 8, 16, 32, 64, 128, 256}",
+   "value_norm": null,
+   "scope": "QLoRA"
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "LoRA layers search space",
+   "evidence": [
+    {
+     "chunk_id": "b0164",
+     "page": 22,
+     "bbox": {
+      "page": 22,
+      "x0": 107.53,
+      "y0": 93.8,
+      "x1": 505.24,
+      "y1": 139.86
+     },
+     "boxes": [
+      {
+       "page": 22,
+       "x0": 108.0,
+       "y0": 93.8,
+       "x1": 263.01,
+       "y1": 102.75999999999999
+      },
+      {
+       "page": 22,
+       "x0": 107.53,
+       "y0": 109.4,
+       "x1": 505.24,
+       "y1": 118.04
+      },
+      {
+       "page": 22,
+       "x0": 108.0,
+       "y0": 119.99,
+       "x1": 505.24,
+       "y1": 128.95
+      },
+      {
+       "page": 22,
+       "x0": 108.0,
+       "y0": 131.22,
+       "x1": 272.81,
+       "y1": 139.86
+      }
+     ],
+     "quote": "A.1 Hyperparameters for QLORA We do a hyperparameter search for LoRA over the following variables: LoRA dropout { 0.0, 0.05, 0.1}, LoRA r { 8, 16, 32, 64, 128, 256}, LoRA layers {key+query, all attention layers, all FFN layers, all layers, attention + FFN output layers}.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "LoRA layers",
+   "value_raw": "{key+query, all attention layers, all FFN layers, all layers, attention + FFN output layers}",
+   "value_norm": null,
+   "scope": "QLoRA"
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "LoRA r set for experiments",
+   "evidence": [
+    {
+     "chunk_id": "b0171",
+     "page": 23,
+     "bbox": {
+      "page": 23,
+      "x0": 108.0,
+      "y0": 581.11,
+      "x1": 504.01,
+      "y1": 600.98
+     },
+     "boxes": [
+      {
+       "page": 23,
+       "x0": 199.12,
+       "y0": 581.11,
+       "x1": 504.01,
+       "y1": 590.07
+      },
+      {
+       "page": 23,
+       "x0": 108.0,
+       "y0": 592.34,
+       "x1": 170.65,
+       "y1": 600.98
+      }
+     ],
+     "quote": "We set LoRA r = 64, α = 16, and add LoRA modules on all linear layers of the base model.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "LoRA r",
+   "value_raw": "64",
+   "value_norm": 64.0,
+   "scope": "QLoRA"
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "LoRA alpha set for experiments",
+   "evidence": [
+    {
+     "chunk_id": "b0171",
+     "page": 23,
+     "bbox": {
+      "page": 23,
+      "x0": 108.0,
+      "y0": 581.11,
+      "x1": 504.01,
+      "y1": 600.98
+     },
+     "boxes": [
+      {
+       "page": 23,
+       "x0": 199.12,
+       "y0": 581.11,
+       "x1": 504.01,
+       "y1": 590.07
+      },
+      {
+       "page": 23,
+       "x0": 108.0,
+       "y0": 592.34,
+       "x1": 170.65,
+       "y1": 600.98
+      }
+     ],
+     "quote": "We set LoRA r = 64, α = 16, and add LoRA modules on all linear layers of the base model.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "LoRA alpha",
+   "value_raw": "16",
+   "value_norm": 16.0,
+   "scope": "QLoRA"
+  },
+  {
+   "id": "hyperparameters.10",
+   "value": "Adam beta2",
+   "evidence": [
+    {
+     "chunk_id": "b0171",
+     "page": 23,
+     "bbox": {
+      "page": 23,
+      "x0": 108.0,
+      "y0": 592.34,
+      "x1": 504.75,
+      "y1": 611.89
+     },
+     "boxes": [
+      {
+       "page": 23,
+       "x0": 173.74,
+       "y0": 592.34,
+       "x1": 504.75,
+       "y1": 600.98
+      },
+      {
+       "page": 23,
+       "x0": 108.0,
+       "y0": 603.25,
+       "x1": 338.83000000000004,
+       "y1": 611.89
+      }
+     ],
+     "quote": "We also use Adam beta2 of 0.999, max grad norm of 0.3 and LoRA dropout of 0.1 for models up to 13B and 0.05 for 33B and 65B models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Adam beta2",
+   "value_raw": "0.999",
+   "value_norm": 0.999,
+   "scope": "QLoRA"
+  },
+  {
+   "id": "hyperparameters.11",
+   "value": "Max grad norm",
+   "evidence": [
+    {
+     "chunk_id": "b0171",
+     "page": 23,
+     "bbox": {
+      "page": 23,
+      "x0": 108.0,
+      "y0": 592.34,
+      "x1": 504.75,
+      "y1": 611.89
+     },
+     "boxes": [
+      {
+       "page": 23,
+       "x0": 173.74,
+       "y0": 592.34,
+       "x1": 504.75,
+       "y1": 600.98
+      },
+      {
+       "page": 23,
+       "x0": 108.0,
+       "y0": 603.25,
+       "x1": 338.83000000000004,
+       "y1": 611.89
+      }
+     ],
+     "quote": "We also use Adam beta2 of 0.999, max grad norm of 0.3 and LoRA dropout of 0.1 for models up to 13B and 0.05 for 33B and 65B models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "max grad norm",
+   "value_raw": "0.3",
+   "value_norm": 0.3,
+   "scope": "QLoRA"
+  },
+  {
+   "id": "hyperparameters.12",
+   "value": "LoRA dropout for models up to 13B",
+   "evidence": [
+    {
+     "chunk_id": "b0171",
+     "page": 23,
+     "bbox": {
+      "page": 23,
+      "x0": 108.0,
+      "y0": 592.34,
+      "x1": 504.75,
+      "y1": 611.89
+     },
+     "boxes": [
+      {
+       "page": 23,
+       "x0": 173.74,
+       "y0": 592.34,
+       "x1": 504.75,
+       "y1": 600.98
+      },
+      {
+       "page": 23,
+       "x0": 108.0,
+       "y0": 603.25,
+       "x1": 338.83000000000004,
+       "y1": 611.89
+      }
+     ],
+     "quote": "We also use Adam beta2 of 0.999, max grad norm of 0.3 and LoRA dropout of 0.1 for models up to 13B and 0.05 for 33B and 65B models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "LoRA dropout",
+   "value_raw": "0.1",
+   "value_norm": 0.1,
+   "scope": "QLoRA (models up to 13B)"
+  },
+  {
+   "id": "hyperparameters.13",
+   "value": "LoRA dropout for 33B and 65B models",
+   "evidence": [
+    {
+     "chunk_id": "b0171",
+     "page": 23,
+     "bbox": {
+      "page": 23,
+      "x0": 108.0,
+      "y0": 592.34,
+      "x1": 504.75,
+      "y1": 611.89
+     },
+     "boxes": [
+      {
+       "page": 23,
+       "x0": 173.74,
+       "y0": 592.34,
+       "x1": 504.75,
+       "y1": 600.98
+      },
+      {
+       "page": 23,
+       "x0": 108.0,
+       "y0": 603.25,
+       "x1": 338.83000000000004,
+       "y1": 611.89
+      }
+     ],
+     "quote": "We also use Adam beta2 of 0.999, max grad norm of 0.3 and LoRA dropout of 0.1 for models up to 13B and 0.05 for 33B and 65B models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "LoRA dropout",
+   "value_raw": "0.05",
+   "value_norm": 0.05,
+   "scope": "QLoRA (33B and 65B models)"
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Training of 33B Guanaco on 24 GB consumer GPUs in less than 12 hours",
+   "evidence": [
+    {
+     "chunk_id": "b0081",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 596.04,
+      "x1": 504.18,
+      "y1": 615.59
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 436.17,
+       "y0": 596.04,
+       "x1": 504.18,
+       "y1": 604.68
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 606.95,
+       "x1": 426.96,
+       "y1": 615.59
+      }
+     ],
+     "quote": "Furthermore, our 33B Guanaco can be trained on 24 GB consumer GPUs in less than 12 hours.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Repeated tournament procedure 10,000 times with different random seeds",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 494.25,
+      "x1": 504.0,
+      "y1": 513.8000000000001
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 494.25,
+       "x1": 504.0,
+       "y1": 502.89
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 505.16,
+       "x1": 475.85,
+       "y1": 513.8000000000001
+      }
+     ],
+     "quote": "Similar to Chiang et al. [10], we repeat this procedure 10,000 times with different random seeds to control for ordering effects, e.g., the effect of which model pairs compete with each other first.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation studying whether to finetune only on the response vs on instruction and response",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 349.79,
+      "x1": 505.75,
+      "y1": 369.34
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 349.5,
+       "y0": 349.79,
+       "x1": 504.0,
+       "y1": 358.43
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 360.7,
+       "x1": 505.75,
+       "y1": 369.34
+      }
+     ],
+     "quote": "For datasets that have a clear distinction between instruction and response, we finetune only on the response (see ablations in Appendix B).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Ablation subsampling large datasets into sizes of 50,000, 100,000 and 150,000 to examine quality vs size",
+   "evidence": [
+    {
+     "chunk_id": "b0174",
+     "page": 24,
+     "bbox": {
+      "page": 24,
+      "x0": 107.67,
+      "y0": 203.03,
+      "x1": 504.0,
+      "y1": 244.39999999999998
+     },
+     "boxes": [
+      {
+       "page": 24,
+       "x0": 358.96,
+       "y0": 203.03,
+       "x1": 504.0,
+       "y1": 211.67000000000002
+      },
+      {
+       "page": 24,
+       "x0": 108.0,
+       "y0": 213.94,
+       "x1": 504.0,
+       "y1": 222.57999999999998
+      },
+      {
+       "page": 24,
+       "x0": 107.67,
+       "y0": 224.85,
+       "x1": 504.0,
+       "y1": 233.49
+      },
+      {
+       "page": 24,
+       "x0": 108.0,
+       "y0": 235.76,
+       "x1": 320.22,
+       "y1": 244.39999999999998
+      }
+     ],
+     "quote": "To understand the effects of dataset quality vs. dataset size, we experiment with subsampling large datasets with at least 150,000 samples (Chip2, FLAN v2, Unnatural Instructions), into datasets of size 50,000, 100,000 and 150,000 and examine the resulting trends, as shown in Table 11.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "Inability to establish that QLORA matches full 16-bit finetuning at 33B and 65B scales due to resource costs.",
+   "evidence": [
+    {
+     "chunk_id": "b0137",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 108.0,
+      "y0": 431.41,
+      "x1": 504.0,
+      "y1": 450.96
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 335.66,
+       "y0": 431.41,
+       "x1": 504.0,
+       "y1": 440.05
+      },
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 442.32,
+       "x1": 453.7,
+       "y1": 450.96
+      }
+     ],
+     "quote": "Despite this evidence, we did not establish that QLORA can match full 16-bit finetuning performance at 33B and 65B scales.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.1",
+   "value": "Lack of evaluation on other benchmarks such as BigBench, RAFT, and HELM.",
+   "evidence": [
+    {
+     "chunk_id": "b0138",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 108.0,
+      "y0": 470.9,
+      "x1": 504.0,
+      "y1": 512.27
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 385.11,
+       "y0": 470.9,
+       "x1": 504.0,
+       "y1": 479.53999999999996
+      },
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 481.81,
+       "x1": 504.0,
+       "y1": 490.45
+      },
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 492.72,
+       "x1": 504.0,
+       "y1": 501.36
+      },
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 503.63,
+       "x1": 157.62,
+       "y1": 512.27
+      }
+     ],
+     "quote": "While we provide evaluations on MMLU, the Vicuna benchmark, and the OA benchmark, we did not evaluate on other benchmarks such as BigBench, RAFT, and HELM, and it is not ensured that our evaluations generalize to these benchmarks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.2",
+   "value": "Only a limited responsible AI evaluation of Guanaco was conducted.",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 107.53,
+      "y0": 648.06,
+      "x1": 504.0,
+      "y1": 667.61
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 107.53,
+       "y0": 648.06,
+       "x1": 504.0,
+       "y1": 656.6999999999999
+      },
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 658.97,
+       "x1": 328.72,
+       "y1": 667.61
+      }
+     ],
+     "quote": "While we provide a detailed evaluation for general chatbot performance, another limitation is that we only do a limited responsible AI evaluation of Guanaco.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.3",
+   "value": "Failure to evaluate different bit-precisions like 3-bit base models or different adapter methods.",
+   "evidence": [
+    {
+     "chunk_id": "b0141",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 107.64,
+      "y0": 75.48,
+      "x1": 504.0,
+      "y1": 95.03
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 107.64,
+       "y0": 75.48,
+       "x1": 504.0,
+       "y1": 84.12
+      },
+      {
+       "page": 16,
+       "x0": 108.0,
+       "y0": 86.39,
+       "x1": 255.2,
+       "y1": 95.03
+      }
+     ],
+     "quote": "An additional limitation is that we did not evaluate different bit-precisions, such as using 3-bit base models, or different adapter methods.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Future work should use HC and Psychology to address subjective preferences in chatbot evaluation.",
+   "evidence": [
+    {
+     "chunk_id": "b0125",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 230.12,
+      "x1": 504.0,
+      "y1": 260.58
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 218.89,
+       "y0": 230.12,
+       "x1": 504.0,
+       "y1": 238.76
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 241.03,
+       "x1": 504.0,
+       "y1": 249.67000000000002
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 251.94,
+       "x1": 293.85,
+       "y1": 260.58
+      }
+     ],
+     "quote": "Future work should investigate approaches to mitigate these problems drawing from disciplines that developed mechanisms to deal with subjective preferences, such as Human-Computer Interaction and Psychology.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Future work should examine potential biases in automated evaluation systems and mitigation strategies.",
+   "evidence": [
+    {
+     "chunk_id": "b0126",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 334.08,
+      "x1": 504.0,
+      "y1": 353.63
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 343.11,
+       "y0": 334.08,
+       "x1": 504.0,
+       "y1": 342.71999999999997
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 344.99,
+       "x1": 474.51,
+       "y1": 353.63
+      }
+     ],
+     "quote": "Future work should examine the presence of potential biases in automated evaluation systems as well as possible mitigation strategies.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.2",
+   "value": "Investigate how multilingual training improves performance in languages other than English.",
+   "evidence": [
+    {
+     "chunk_id": "b0128",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 107.25,
+      "y0": 373.9,
+      "x1": 505.65,
+      "y1": 415.27
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 450.0,
+       "y0": 373.9,
+       "x1": 504.0,
+       "y1": 382.53999999999996
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 384.81,
+       "x1": 504.0,
+       "y1": 393.45
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 395.72,
+       "x1": 505.65,
+       "y1": 404.36
+      },
+      {
+       "page": 14,
+       "x0": 107.25,
+       "y0": 406.63,
+       "x1": 475.47,
+       "y1": 415.27
+      }
+     ],
+     "quote": "We leave it to future work to investigate the degree to which such multilingual training improves performance on instructions in languages other than English and whether this explains the larger gap between Vicuna-13B model (only trained on English data) and Guanaco 33B and 65B on the OA benchmark.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.3",
+   "value": "Further study the performance matching at 33B and 65B scales compared to full 16-bit finetuning.",
+   "evidence": [
+    {
+     "chunk_id": "b0137",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 108.0,
+      "y0": 442.32,
+      "x1": 504.0,
+      "y1": 461.87
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 459.78,
+       "y0": 442.32,
+       "x1": 504.0,
+       "y1": 450.96
+      },
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 453.23,
+       "x1": 345.23,
+       "y1": 461.87
+      }
+     ],
+     "quote": "Due to the immense resource costs, we leave this study to future work.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.4",
+   "value": "Further evaluation of analyzing biases in Guanaco and similar chatbots.",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 108.0,
+      "y0": 702.61,
+      "x1": 504.0,
+      "y1": 722.15
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 490.98,
+       "y0": 702.61,
+       "x1": 504.0,
+       "y1": 711.25
+      },
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 713.51,
+       "x1": 473.38,
+       "y1": 722.15
+      }
+     ],
+     "quote": "We leave further evaluation of analyzing biases in Guanaco and similar chatbots to future work.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [
+  {
+   "id": "ethics.0",
+   "value": "Finetuning is a dual-use technology that can be abused to cause harm.",
+   "evidence": [
+    {
+     "chunk_id": "b0145",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 108.0,
+      "y0": 399.66,
+      "x1": 426.51,
+      "y1": 408.3
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 108.0,
+       "y0": 399.66,
+       "x1": 426.51,
+       "y1": 408.3
+      }
+     ],
+     "quote": "However, finetuning is a dual-use technology that can be abused to cause harm.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.1",
+   "value": "Equalizing access to LLM technology allows for better and more independent analysis.",
+   "evidence": [
+    {
+     "chunk_id": "b0145",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 108.0,
+      "y0": 399.66,
+      "x1": 504.35,
+      "y1": 441.03
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 429.62,
+       "y0": 399.66,
+       "x1": 504.0,
+       "y1": 408.3
+      },
+      {
+       "page": 16,
+       "x0": 108.0,
+       "y0": 410.57,
+       "x1": 504.35,
+       "y1": 419.21
+      },
+      {
+       "page": 16,
+       "x0": 108.0,
+       "y0": 421.48,
+       "x1": 504.0,
+       "y1": 430.12
+      },
+      {
+       "page": 16,
+       "x0": 108.0,
+       "y0": 432.39,
+       "x1": 460.32,
+       "y1": 441.03
+      }
+     ],
+     "quote": "Widespread use of LLMs has known dangers [8,6], but we believe that equalizing access to a technology that is quickly becoming ubiquitous will allow for better more independent analysis than keeping the power of LLMs in the hands of large corporations that do not release models or source code for auditing.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.2",
+   "value": "QLORA may enable privacy-preserving usage of LLMs on devices like mobile phones.",
+   "evidence": [
+    {
+     "chunk_id": "b0144",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 108.0,
+      "y0": 361.48,
+      "x1": 504.15,
+      "y1": 391.94
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 469.74,
+       "y0": 361.48,
+       "x1": 504.15,
+       "y1": 370.12
+      },
+      {
+       "page": 16,
+       "x0": 108.0,
+       "y0": 372.39,
+       "x1": 504.0,
+       "y1": 381.03
+      },
+      {
+       "page": 16,
+       "x0": 108.0,
+       "y0": 383.3,
+       "x1": 370.69,
+       "y1": 391.94
+      }
+     ],
+     "quote": "QLORA can help enable privacy-preserving usage of LLMs, where users can own and manage their own data and models, while simultaneously making LLMs easier to deploy.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "code_urls": [],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "The best model family, Guanaco, reaches 99.3% of ChatGPT's performance level on the Vicuna benchmark with 24 hours of finetuning.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 328.6,
+      "x1": 468.97,
+      "y1": 370.36
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 218.15,
+       "y0": 328.6,
+       "x1": 468.13,
+       "y1": 337.63
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 339.9,
+       "x1": 468.97,
+       "y1": 348.53999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 350.81,
+       "x1": 468.14,
+       "y1": 359.45
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 361.72,
+       "x1": 214.15,
+       "y1": 370.36
+      }
+     ],
+     "quote": "Our best model family, which we name Guanaco, outperforms all previous openly released models on the Vicuna benchmark, reaching 99.3% of the performance level of ChatGPT while only requiring 24 hours of finetuning on a single GPU.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "QLORA reduces average memory requirements for finetuning a 65B model from over 780 GB to under 48 GB.",
+   "evidence": [
+    {
+     "chunk_id": "b0006",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 105.45,
+      "x1": 430.48,
+      "y1": 170.88
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 413.32,
+       "y0": 162.24,
+       "x1": 430.48,
+       "y1": 170.88
+      },
+      {
+       "page": 2,
+       "x0": 108.25,
+       "y0": 105.45,
+       "x1": 315.46000000000004,
+       "y1": 114.09
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 116.04,
+       "x1": 315.45,
+       "y1": 125.0
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 126.95,
+       "x1": 315.45,
+       "y1": 135.91
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 138.18,
+       "x1": 317.11,
+       "y1": 146.82
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 149.09,
+       "x1": 216.94,
+       "y1": 157.73000000000002
+      }
+     ],
+     "quote": "QLORA reduces the average memory requirements of finetuning a 65B parameter model from >780GB of GPU memory to <48GB without degrading the runtime or predictive performance compared to a 16bit fully finetuned baseline.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

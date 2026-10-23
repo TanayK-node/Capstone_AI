@@ -1,0 +1,1995 @@
+{
+ "metadata": {
+  "title": "SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS",
+  "authors": [
+   "Thomas N Kipf",
+   "Max Welling"
+  ],
+  "venue": null,
+  "year": "2017",
+  "arxiv_id": "1609.02907v4[cs.LG]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Graph edges do not necessarily encode node similarity and may contain additional information, which can restrict modeling capacity when using explicit graph-based regularization.",
+   "evidence": [
+    {
+     "chunk_id": "b0006",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 558.0,
+      "x1": 504.0,
+      "y1": 588.55
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 336.15,
+       "y0": 558.0,
+       "x1": 504.0,
+       "y1": 566.64
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 568.96,
+       "x1": 504.0,
+       "y1": 577.6
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 579.91,
+       "x1": 199.88,
+       "y1": 588.55
+      }
+     ],
+     "quote": "This assumption, however, might restrict modeling capacity, as graph edges need not necessarily encode node similarity, but could contain additional information.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Introduction of a simple and well-behaved layer-wise propagation rule for neural networks operating directly on graphs, motivated by a first-order approximation of spectral graph convolutions.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 657.62,
+      "x1": 504.01,
+      "y1": 688.18
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 239.55,
+       "y0": 657.62,
+       "x1": 504.01,
+       "y1": 666.26
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 668.58,
+       "x1": 504.0,
+       "y1": 677.22
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 679.54,
+       "x1": 504.0,
+       "y1": 688.18
+      }
+     ],
+     "quote": "Firstly, we introduce a simple and well-behaved layer-wise propagation rule for neural network models which operate directly on graphs and show how it can be motivated from a first-order approximation of spectral graph convolutions (Hammond et al., 2011).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Demonstration that graph-based neural network models can be utilized for fast and scalable semi-supervised classification of nodes in a graph.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 690.5,
+      "x1": 504.0,
+      "y1": 710.1
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 690.5,
+       "x1": 504.0,
+       "y1": 699.14
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 701.46,
+       "x1": 382.82,
+       "y1": 710.1
+      }
+     ],
+     "quote": "Secondly, we demonstrate how this form of a graph-based neural network model can be used for fast and scalable semi-supervised classification of nodes in a graph.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Semi-supervised learning on graph-structured data and node classification.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 398.06,
+      "x1": 504.0,
+      "y1": 417.65999999999997
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 398.06,
+       "x1": 504.0,
+       "y1": 406.7
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 409.02,
+       "x1": 386.55,
+       "y1": 417.65999999999997
+      }
+     ],
+     "quote": "We consider the problem of classifying nodes (such as documents) in a graph (such as a citation network), where labels are only available for a small subset of nodes.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The proposed approach uses a multi-layer Graph Convolutional Network with a specific layer-wise propagation rule involving normalized adjacency matrices and trainable weight matrices.",
+   "evidence": [
+    {
+     "chunk_id": "b0010",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 120.13,
+      "x1": 504.0,
+      "y1": 161.91
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 312.46,
+       "y0": 120.13,
+       "x1": 504.0,
+       "y1": 128.76999999999998
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 131.09,
+       "x1": 363.34000000000003,
+       "y1": 139.73000000000002
+      },
+      {
+       "page": 2,
+       "x0": 364.49,
+       "y0": 150.58,
+       "x1": 370.35,
+       "y1": 157.55
+      },
+      {
+       "page": 2,
+       "x0": 380.12,
+       "y0": 151.95,
+       "x1": 382.89,
+       "y1": 161.91
+      }
+     ],
+     "quote": "We consider a multi-layer Graph Convolutional Network (GCN) with the following layer-wise propagation rule: l) .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "The model uses a linear formulation of graph convolutions by limiting the layer-wise convolution operation to K = 1 and applying a renormalization trick to avoid numerical instabilities.",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 384.43,
+      "x1": 504.0,
+      "y1": 405.71999999999997
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 438.54,
+       "y0": 384.43,
+       "x1": 504.0,
+       "y1": 393.07
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 396.9,
+       "x1": 341.85,
+       "y1": 405.71999999999997
+      }
+     ],
+     "quote": "To alleviate this problem, we introduce the following renormalization trick:",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "novelty": [],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "Citeseer citation network dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0127",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 132.6759033203125,
+      "y0": 664.5364379882812,
+      "x1": 479.32470703125,
+      "y1": 721.6226806640625
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 132.6759033203125,
+       "y0": 664.5364379882812,
+       "x1": 479.32470703125,
+       "y1": 721.6226806640625
+      }
+     ],
+     "quote": "In the citation network datasets-Citeseer, Cora and Pubmed(Sen et al., 2008)-nodes are documents and edges are citation links.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "Citeseer",
+   "split": "",
+   "size": "3,327 nodes",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "Cora citation network dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0127",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 132.6759033203125,
+      "y0": 664.5364379882812,
+      "x1": 479.32470703125,
+      "y1": 721.6226806640625
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 132.6759033203125,
+       "y0": 664.5364379882812,
+       "x1": 479.32470703125,
+       "y1": 721.6226806640625
+      }
+     ],
+     "quote": "In the citation network datasets-Citeseer, Cora and Pubmed(Sen et al., 2008)-nodes are documents and edges are citation links.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "Cora",
+   "split": "",
+   "size": "2,708 nodes",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "Pubmed citation network dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0127",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 132.6759033203125,
+      "y0": 664.5364379882812,
+      "x1": 479.32470703125,
+      "y1": 721.6226806640625
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 132.6759033203125,
+       "y0": 664.5364379882812,
+       "x1": 479.32470703125,
+       "y1": 721.6226806640625
+      }
+     ],
+     "quote": "In the citation network datasets-Citeseer, Cora and Pubmed(Sen et al., 2008)-nodes are documents and edges are citation links.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "Pubmed",
+   "split": "",
+   "size": "19,717 nodes",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "NELL knowledge graph dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0127",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 132.6759033203125,
+      "y0": 664.5364379882812,
+      "x1": 479.32470703125,
+      "y1": 721.6226806640625
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 132.6759033203125,
+       "y0": 664.5364379882812,
+       "x1": 479.32470703125,
+       "y1": 721.6226806640625
+      }
+     ],
+     "quote": "NELL(Carlson et al., 2010;Yang et al., 2016) is a bipartite graph dataset extracted from a knowledge graph with 55,864 relation nodes and 9,891 entity nodes.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "NELL",
+   "split": "",
+   "size": "65,755 nodes",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "Random graph datasets",
+   "evidence": [
+    {
+     "chunk_id": "b0064",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 268.15,
+      "x1": 504.0,
+      "y1": 288.14
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 268.15,
+       "x1": 504.0,
+       "y1": 277.17999999999995
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 279.5,
+       "x1": 240.7,
+       "y1": 288.14
+      }
+     ],
+     "quote": "We simulate random graph datasets of various sizes for experiments where we measure training time per epoch.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Random graphs",
+   "split": "",
+   "size": "",
+   "public": "unknown"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Label propagation",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 547.04,
+      "x1": 504.0,
+      "y1": 588.55
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 547.04,
+       "x1": 504.0,
+       "y1": 555.68
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 558.0,
+       "x1": 504.0,
+       "y1": 566.64
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 568.96,
+       "x1": 504.0,
+       "y1": 577.6
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 579.91,
+       "x1": 194.0,
+       "y1": 588.55
+      }
+     ],
+     "quote": "We compare against the same baseline methods as in Yang et al. (2016), i.e. label propagation (LP) (Zhu et al., 2003), semi-supervised embedding (SemiEmb) (Weston et al., 2012), manifold regularization (ManiReg) (Belkin et al., 2006) and skip-gram based graph embeddings (DeepWalk) (Perozzi et al., 2014).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Semi-supervised embedding",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 547.04,
+      "x1": 504.0,
+      "y1": 588.55
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 547.04,
+       "x1": 504.0,
+       "y1": 555.68
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 558.0,
+       "x1": 504.0,
+       "y1": 566.64
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 568.96,
+       "x1": 504.0,
+       "y1": 577.6
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 579.91,
+       "x1": 194.0,
+       "y1": 588.55
+      }
+     ],
+     "quote": "We compare against the same baseline methods as in Yang et al. (2016), i.e. label propagation (LP) (Zhu et al., 2003), semi-supervised embedding (SemiEmb) (Weston et al., 2012), manifold regularization (ManiReg) (Belkin et al., 2006) and skip-gram based graph embeddings (DeepWalk) (Perozzi et al., 2014).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "Manifold regularization",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 547.04,
+      "x1": 504.0,
+      "y1": 588.55
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 547.04,
+       "x1": 504.0,
+       "y1": 555.68
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 558.0,
+       "x1": 504.0,
+       "y1": 566.64
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 568.96,
+       "x1": 504.0,
+       "y1": 577.6
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 579.91,
+       "x1": 194.0,
+       "y1": 588.55
+      }
+     ],
+     "quote": "We compare against the same baseline methods as in Yang et al. (2016), i.e. label propagation (LP) (Zhu et al., 2003), semi-supervised embedding (SemiEmb) (Weston et al., 2012), manifold regularization (ManiReg) (Belkin et al., 2006) and skip-gram based graph embeddings (DeepWalk) (Perozzi et al., 2014).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "DeepWalk",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 547.04,
+      "x1": 504.0,
+      "y1": 588.55
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 547.04,
+       "x1": 504.0,
+       "y1": 555.68
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 558.0,
+       "x1": 504.0,
+       "y1": 566.64
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 568.96,
+       "x1": 504.0,
+       "y1": 577.6
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 579.91,
+       "x1": 194.0,
+       "y1": 588.55
+      }
+     ],
+     "quote": "We compare against the same baseline methods as in Yang et al. (2016), i.e. label propagation (LP) (Zhu et al., 2003), semi-supervised embedding (SemiEmb) (Weston et al., 2012), manifold regularization (ManiReg) (Belkin et al., 2006) and skip-gram based graph embeddings (DeepWalk) (Perozzi et al., 2014).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "Iterative classification algorithm",
+   "evidence": [
+    {
+     "chunk_id": "b0070",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 607.81,
+      "x1": 504.0,
+      "y1": 649.33
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 607.81,
+       "x1": 504.0,
+       "y1": 616.4499999999999
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 618.77,
+       "x1": 504.0,
+       "y1": 627.41
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 629.73,
+       "x1": 504.0,
+       "y1": 638.37
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 640.69,
+       "x1": 180.31,
+       "y1": 649.33
+      }
+     ],
+     "quote": "We further compare against the iterative classification algorithm (ICA) proposed in Lu & Getoor (2003) in conjunction with two logistic regression classifiers, one for local node features alone and one for relational classification using local features and an aggregation operator as described in Sen et al. (2008).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "Planetoid",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 712.42,
+      "x1": 504.0,
+      "y1": 732.02
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 712.42,
+       "x1": 504.0,
+       "y1": 721.06
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 723.38,
+       "x1": 375.89,
+       "y1": 732.02
+      }
+     ],
+     "quote": "Lastly, we compare against Planetoid (Yang et al., 2016), where we always choose their bestperforming model variant (transductive vs. inductive) as a baseline.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Classification accuracy in percent",
+   "evidence": [
+    {
+     "chunk_id": "b0074",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 129.52,
+      "x1": 487.31,
+      "y1": 138.16000000000003
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 129.52,
+       "x1": 487.31,
+       "y1": 138.16000000000003
+      }
+     ],
+     "quote": "Reported numbers denote classification accuracy in percent.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Dropout rate for Citeseer, Cora and Pubmed",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 368.43,
+      "x1": 504.0,
+      "y1": 409.94
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 301.23,
+       "y0": 368.43,
+       "x1": 504.0,
+       "y1": 377.07
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 378.4,
+       "x1": 320.15,
+       "y1": 388.35999999999996
+      },
+      {
+       "page": 7,
+       "x0": 320.15,
+       "y0": 377.49,
+       "x1": 330.34999999999997,
+       "y1": 383.61
+      },
+      {
+       "page": 7,
+       "x0": 333.39,
+       "y0": 378.4,
+       "x1": 504.0,
+       "y1": 388.35999999999996
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 389.36,
+       "x1": 310.15999999999997,
+       "y1": 399.32
+      },
+      {
+       "page": 7,
+       "x0": 310.16,
+       "y0": 388.45,
+       "x1": 320.36,
+       "y1": 394.57
+      },
+      {
+       "page": 7,
+       "x0": 323.25,
+       "y0": 389.36,
+       "x1": 504.0,
+       "y1": 399.32
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 401.3,
+       "x1": 133.19,
+       "y1": 409.94
+      }
+     ],
+     "quote": "We used the following sets of hyperparameters for Citeseer, Cora and Pubmed: 0.5 (dropout rate), 5 • 10 -4 (L2 regularization) and 16 (number of hidden units); and for NELL: 0.1 (dropout rate), 1 • 10 -5 (L2 regularization) and 64 (number of hidden units).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "dropout rate",
+   "value_raw": "0.5",
+   "value_norm": 0.5,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "L2 regularization factor for Citeseer, Cora and Pubmed",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 368.43,
+      "x1": 504.0,
+      "y1": 409.94
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 301.23,
+       "y0": 368.43,
+       "x1": 504.0,
+       "y1": 377.07
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 378.4,
+       "x1": 320.15,
+       "y1": 388.35999999999996
+      },
+      {
+       "page": 7,
+       "x0": 320.15,
+       "y0": 377.49,
+       "x1": 330.34999999999997,
+       "y1": 383.61
+      },
+      {
+       "page": 7,
+       "x0": 333.39,
+       "y0": 378.4,
+       "x1": 504.0,
+       "y1": 388.35999999999996
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 389.36,
+       "x1": 310.15999999999997,
+       "y1": 399.32
+      },
+      {
+       "page": 7,
+       "x0": 310.16,
+       "y0": 388.45,
+       "x1": 320.36,
+       "y1": 394.57
+      },
+      {
+       "page": 7,
+       "x0": 323.25,
+       "y0": 389.36,
+       "x1": 504.0,
+       "y1": 399.32
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 401.3,
+       "x1": 133.19,
+       "y1": 409.94
+      }
+     ],
+     "quote": "We used the following sets of hyperparameters for Citeseer, Cora and Pubmed: 0.5 (dropout rate), 5 • 10 -4 (L2 regularization) and 16 (number of hidden units); and for NELL: 0.1 (dropout rate), 1 • 10 -5 (L2 regularization) and 64 (number of hidden units).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "L2 regularization",
+   "value_raw": "5 • 10 -4",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Number of hidden units for Citeseer, Cora and Pubmed",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 368.43,
+      "x1": 504.0,
+      "y1": 409.94
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 301.23,
+       "y0": 368.43,
+       "x1": 504.0,
+       "y1": 377.07
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 378.4,
+       "x1": 320.15,
+       "y1": 388.35999999999996
+      },
+      {
+       "page": 7,
+       "x0": 320.15,
+       "y0": 377.49,
+       "x1": 330.34999999999997,
+       "y1": 383.61
+      },
+      {
+       "page": 7,
+       "x0": 333.39,
+       "y0": 378.4,
+       "x1": 504.0,
+       "y1": 388.35999999999996
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 389.36,
+       "x1": 310.15999999999997,
+       "y1": 399.32
+      },
+      {
+       "page": 7,
+       "x0": 310.16,
+       "y0": 388.45,
+       "x1": 320.36,
+       "y1": 394.57
+      },
+      {
+       "page": 7,
+       "x0": 323.25,
+       "y0": 389.36,
+       "x1": 504.0,
+       "y1": 399.32
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 401.3,
+       "x1": 133.19,
+       "y1": 409.94
+      }
+     ],
+     "quote": "We used the following sets of hyperparameters for Citeseer, Cora and Pubmed: 0.5 (dropout rate), 5 • 10 -4 (L2 regularization) and 16 (number of hidden units); and for NELL: 0.1 (dropout rate), 1 • 10 -5 (L2 regularization) and 64 (number of hidden units).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "number of hidden units",
+   "value_raw": "16",
+   "value_norm": 16.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Dropout rate for NELL",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 368.43,
+      "x1": 504.0,
+      "y1": 409.94
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 301.23,
+       "y0": 368.43,
+       "x1": 504.0,
+       "y1": 377.07
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 378.4,
+       "x1": 320.15,
+       "y1": 388.35999999999996
+      },
+      {
+       "page": 7,
+       "x0": 320.15,
+       "y0": 377.49,
+       "x1": 330.34999999999997,
+       "y1": 383.61
+      },
+      {
+       "page": 7,
+       "x0": 333.39,
+       "y0": 378.4,
+       "x1": 504.0,
+       "y1": 388.35999999999996
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 389.36,
+       "x1": 310.15999999999997,
+       "y1": 399.32
+      },
+      {
+       "page": 7,
+       "x0": 310.16,
+       "y0": 388.45,
+       "x1": 320.36,
+       "y1": 394.57
+      },
+      {
+       "page": 7,
+       "x0": 323.25,
+       "y0": 389.36,
+       "x1": 504.0,
+       "y1": 399.32
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 401.3,
+       "x1": 133.19,
+       "y1": 409.94
+      }
+     ],
+     "quote": "We used the following sets of hyperparameters for Citeseer, Cora and Pubmed: 0.5 (dropout rate), 5 • 10 -4 (L2 regularization) and 16 (number of hidden units); and for NELL: 0.1 (dropout rate), 1 • 10 -5 (L2 regularization) and 64 (number of hidden units).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "dropout rate",
+   "value_raw": "0.1",
+   "value_norm": 0.1,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "L2 regularization factor for NELL",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 368.43,
+      "x1": 504.0,
+      "y1": 409.94
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 301.23,
+       "y0": 368.43,
+       "x1": 504.0,
+       "y1": 377.07
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 378.4,
+       "x1": 320.15,
+       "y1": 388.35999999999996
+      },
+      {
+       "page": 7,
+       "x0": 320.15,
+       "y0": 377.49,
+       "x1": 330.34999999999997,
+       "y1": 383.61
+      },
+      {
+       "page": 7,
+       "x0": 333.39,
+       "y0": 378.4,
+       "x1": 504.0,
+       "y1": 388.35999999999996
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 389.36,
+       "x1": 310.15999999999997,
+       "y1": 399.32
+      },
+      {
+       "page": 7,
+       "x0": 310.16,
+       "y0": 388.45,
+       "x1": 320.36,
+       "y1": 394.57
+      },
+      {
+       "page": 7,
+       "x0": 323.25,
+       "y0": 389.36,
+       "x1": 504.0,
+       "y1": 399.32
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 401.3,
+       "x1": 133.19,
+       "y1": 409.94
+      }
+     ],
+     "quote": "We used the following sets of hyperparameters for Citeseer, Cora and Pubmed: 0.5 (dropout rate), 5 • 10 -4 (L2 regularization) and 16 (number of hidden units); and for NELL: 0.1 (dropout rate), 1 • 10 -5 (L2 regularization) and 64 (number of hidden units).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "L2 regularization",
+   "value_raw": "1 • 10 -5",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Number of hidden units for NELL",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 368.43,
+      "x1": 504.0,
+      "y1": 409.94
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 301.23,
+       "y0": 368.43,
+       "x1": 504.0,
+       "y1": 377.07
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 378.4,
+       "x1": 320.15,
+       "y1": 388.35999999999996
+      },
+      {
+       "page": 7,
+       "x0": 320.15,
+       "y0": 377.49,
+       "x1": 330.34999999999997,
+       "y1": 383.61
+      },
+      {
+       "page": 7,
+       "x0": 333.39,
+       "y0": 378.4,
+       "x1": 504.0,
+       "y1": 388.35999999999996
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 389.36,
+       "x1": 310.15999999999997,
+       "y1": 399.32
+      },
+      {
+       "page": 7,
+       "x0": 310.16,
+       "y0": 388.45,
+       "x1": 320.36,
+       "y1": 394.57
+      },
+      {
+       "page": 7,
+       "x0": 323.25,
+       "y0": 389.36,
+       "x1": 504.0,
+       "y1": 399.32
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 401.3,
+       "x1": 133.19,
+       "y1": 409.94
+      }
+     ],
+     "quote": "We used the following sets of hyperparameters for Citeseer, Cora and Pubmed: 0.5 (dropout rate), 5 • 10 -4 (L2 regularization) and 16 (number of hidden units); and for NELL: 0.1 (dropout rate), 1 • 10 -5 (L2 regularization) and 64 (number of hidden units).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "number of hidden units",
+   "value_raw": "64",
+   "value_norm": 64.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Maximum training epochs",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 443.65,
+      "x1": 504.01,
+      "y1": 485.16999999999996
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 268.67,
+       "y0": 443.65,
+       "x1": 504.01,
+       "y1": 452.28999999999996
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 453.63,
+       "x1": 503.99,
+       "y1": 463.59
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 464.59,
+       "x1": 504.0,
+       "y1": 474.54999999999995
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 476.53,
+       "x1": 138.16,
+       "y1": 485.16999999999996
+      }
+     ],
+     "quote": "We train all models for a maximum of 200 epochs (training iterations) using Adam (Kingma & Ba, 2015) with a learning rate of 0.01 and early stopping with a window size of 10, i.e. we stop training if the validation loss does not decrease for 10 consecutive epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "200",
+   "value_norm": 200.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Optimizer used for training",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 443.65,
+      "x1": 504.01,
+      "y1": 485.16999999999996
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 268.67,
+       "y0": 443.65,
+       "x1": 504.01,
+       "y1": 452.28999999999996
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 453.63,
+       "x1": 503.99,
+       "y1": 463.59
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 464.59,
+       "x1": 504.0,
+       "y1": 474.54999999999995
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 476.53,
+       "x1": 138.16,
+       "y1": 485.16999999999996
+      }
+     ],
+     "quote": "We train all models for a maximum of 200 epochs (training iterations) using Adam (Kingma & Ba, 2015) with a learning rate of 0.01 and early stopping with a window size of 10, i.e. we stop training if the validation loss does not decrease for 10 consecutive epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "Adam",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "Learning rate for training",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 443.65,
+      "x1": 504.01,
+      "y1": 485.16999999999996
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 268.67,
+       "y0": 443.65,
+       "x1": 504.01,
+       "y1": 452.28999999999996
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 453.63,
+       "x1": 503.99,
+       "y1": 463.59
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 464.59,
+       "x1": 504.0,
+       "y1": 474.54999999999995
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 476.53,
+       "x1": 138.16,
+       "y1": 485.16999999999996
+      }
+     ],
+     "quote": "We train all models for a maximum of 200 epochs (training iterations) using Adam (Kingma & Ba, 2015) with a learning rate of 0.01 and early stopping with a window size of 10, i.e. we stop training if the validation loss does not decrease for 10 consecutive epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.01",
+   "value_norm": 0.01,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "Early stopping window size",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 443.65,
+      "x1": 504.01,
+      "y1": 485.16999999999996
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 268.67,
+       "y0": 443.65,
+       "x1": 504.01,
+       "y1": 452.28999999999996
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 453.63,
+       "x1": 503.99,
+       "y1": 463.59
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 464.59,
+       "x1": 504.0,
+       "y1": 474.54999999999995
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 476.53,
+       "x1": 138.16,
+       "y1": 485.16999999999996
+      }
+     ],
+     "quote": "We train all models for a maximum of 200 epochs (training iterations) using Adam (Kingma & Ba, 2015) with a learning rate of 0.01 and early stopping with a window size of 10, i.e. we stop training if the validation loss does not decrease for 10 consecutive epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "early stopping window size",
+   "value_raw": "10",
+   "value_norm": 10.0,
+   "scope": ""
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "GPU-based implementation using TensorFlow",
+   "evidence": [
+    {
+     "chunk_id": "b0050",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 520.04,
+      "x1": 504.0,
+      "y1": 539.64
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 520.04,
+       "x1": 504.0,
+       "y1": 528.68
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 531.0,
+       "x1": 362.85,
+       "y1": 539.64
+      }
+     ],
+     "quote": "In practice, we make use of TensorFlow (Abadi et al., 2015) for an efficient GPU-based implementationfoot_1 of Eq. 9 using sparse-dense matrix multiplications.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Mean accuracy of 100 runs with random node orderings for ICA",
+   "evidence": [
+    {
+     "chunk_id": "b0074",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 129.52,
+      "x1": 504.0,
+      "y1": 149.12
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 490.31,
+       "y0": 129.52,
+       "x1": 504.0,
+       "y1": 138.16000000000003
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 140.48,
+       "x1": 418.03,
+       "y1": 149.12
+      }
+     ],
+     "quote": "For ICA, we report the mean accuracy of 100 runs with random node orderings.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "seeds_and_runs.1",
+   "value": "Mean accuracy of 100 runs with random weight initializations",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 346.51,
+      "x1": 504.0,
+      "y1": 377.07
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 460.88,
+       "y0": 346.51,
+       "x1": 504.0,
+       "y1": 355.15
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 357.47,
+       "x1": 504.0,
+       "y1": 366.11
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 368.43,
+       "x1": 297.21000000000004,
+       "y1": 377.07
+      }
+     ],
+     "quote": "We trained and tested our model on the same dataset splits as in Yang et al. (2016) and report mean accuracy of 100 runs with random weight initializations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Comparison of different per-layer propagation models",
+   "evidence": [
+    {
+     "chunk_id": "b0078",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 485.69,
+      "x1": 504.0,
+      "y1": 505.28999999999996
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 485.69,
+       "x1": 504.0,
+       "y1": 494.33
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 496.65,
+       "x1": 142.03,
+       "y1": 505.28999999999996
+      }
+     ],
+     "quote": "We compare different variants of our proposed per-layer propagation model on the citation network datasets.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "Memory usage grows linearly with the size of the dataset when using full-batch gradient descent.",
+   "evidence": [
+    {
+     "chunk_id": "b0086",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 494.94,
+      "x1": 504.0,
+      "y1": 514.54
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 209.66,
+       "y0": 494.94,
+       "x1": 504.0,
+       "y1": 503.58
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 505.9,
+       "x1": 266.41999999999996,
+       "y1": 514.54
+      }
+     ],
+     "quote": "In the current setup with full-batch gradient descent, memory requirement grows linearly in the size of the dataset.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.1",
+   "value": "The current framework does not naturally support edge features and is limited to undirected graphs.",
+   "evidence": [
+    {
+     "chunk_id": "b0087",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 583.9,
+      "x1": 504.0,
+      "y1": 603.89
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 583.9,
+       "x1": 504.0,
+       "y1": 592.93
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 595.25,
+       "x1": 387.35,
+       "y1": 603.89
+      }
+     ],
+     "quote": "Our framework currently does not naturally support edge features and is limited to undirected graphs (weighted or unweighted).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Mini-batch stochastic gradient descent can be used to alleviate memory issues.",
+   "evidence": [
+    {
+     "chunk_id": "b0086",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 516.86,
+      "x1": 504.0,
+      "y1": 536.46
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 331.58,
+       "y0": 516.86,
+       "x1": 504.0,
+       "y1": 525.5
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 527.82,
+       "x1": 182.56,
+       "y1": 536.46
+      }
+     ],
+     "quote": "Mini-batch stochastic gradient descent can alleviate this issue.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/tkipf/gcn",
+   "evidence": [
+    {
+     "chunk_id": "b0125",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 223.60328674316406,
+      "y0": 723.7827758789062,
+      "x1": 456.7635803222656,
+      "y1": 761.9019165039062
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 223.60328674316406,
+       "y0": 723.7827758789062,
+       "x1": 456.7635803222656,
+       "y1": 731.7987670898438
+      },
+      {
+       "page": 4,
+       "x0": 303.50897216796875,
+       "y0": 752.995361328125,
+       "x1": 308.4902648925781,
+       "y1": 761.9019165039062
+      }
+     ],
+     "quote": "Code to reproduce our experiments is available at https://github.com/tkipf/gcn.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/kimiyoung/planetoid",
+   "evidence": [
+    {
+     "chunk_id": "b0130",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 124.13899993896484,
+      "y0": 724.2579956054688,
+      "x1": 328.5730285644531,
+      "y1": 731.1800537109375
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 124.13899993896484,
+       "y0": 724.2579956054688,
+       "x1": 328.5730285644531,
+       "y1": 731.1800537109375
+      }
+     ],
+     "quote": "https://github.com/kimiyoung/planetoid",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "The proposed approach outperforms related methods by a significant margin on citation networks and a knowledge graph dataset.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 294.91,
+      "x1": 468.14,
+      "y1": 336.43
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 459.84,
+       "y0": 294.91,
+       "x1": 468.14,
+       "y1": 303.55
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 305.87,
+       "x1": 468.14,
+       "y1": 314.51
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 316.83,
+       "x1": 468.14,
+       "y1": 325.46999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 327.79,
+       "x1": 174.41,
+       "y1": 336.43
+      }
+     ],
+     "quote": "In a number of experiments on citation networks and on a knowledge graph dataset we demonstrate that our approach outperforms related methods by a significant margin.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "The model compares favorably against state-of-the-art semi-supervised learning methods in classification accuracy and efficiency.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 701.46,
+      "x1": 504.0,
+      "y1": 732.02
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 387.9,
+       "y0": 701.46,
+       "x1": 504.0,
+       "y1": 710.1
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 712.42,
+       "x1": 504.0,
+       "y1": 721.06
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 723.38,
+       "x1": 503.62,
+       "y1": 732.02
+      }
+     ],
+     "quote": "Experiments on a number of datasets demonstrate that our model compares favorably both in classification accuracy and efficiency (measured in wall-clock time) against state-of-the-art methods for semi-supervised learning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

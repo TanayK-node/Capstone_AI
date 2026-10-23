@@ -1,0 +1,1484 @@
+{
+ "metadata": {
+  "title": "VERY DEEP CONVOLUTIONAL NETWORKS FOR LARGE-SCALE IMAGE RECOGNITION",
+  "authors": [
+   "Karen Simonyan",
+   "Andrew Zisserman"
+  ],
+  "venue": null,
+  "year": "2015",
+  "arxiv_id": "1409.1556v6[cs.CV]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Investigating the effect of convolutional network depth on accuracy in large-scale image recognition.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.88,
+      "y0": 226.12,
+      "x1": 468.15999999999997,
+      "y1": 246.01
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.88,
+       "y0": 226.12,
+       "x1": 468.15999999999997,
+       "y1": 235.09
+      },
+      {
+       "page": 1,
+       "x0": 143.88,
+       "y0": 237.04,
+       "x1": 361.40999999999997,
+       "y1": 246.01
+      }
+     ],
+     "quote": "In this work we investigate the effect of the convolutional network depth on its accuracy in the large-scale image recognition setting.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Evaluation of networks of increasing depth using very small convolution filters.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.88,
+      "y0": 237.04,
+      "x1": 468.61,
+      "y1": 289.93
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 367.32,
+       "y0": 237.04,
+       "x1": 468.15999999999997,
+       "y1": 246.01
+      },
+      {
+       "page": 1,
+       "x0": 143.88,
+       "y0": 248.08,
+       "x1": 468.18,
+       "y1": 257.05
+      },
+      {
+       "page": 1,
+       "x0": 143.88,
+       "y0": 258.33,
+       "x1": 468.61,
+       "y1": 268.28999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.88,
+       "y0": 269.92,
+       "x1": 468.42,
+       "y1": 278.89000000000004
+      },
+      {
+       "page": 1,
+       "x0": 143.88,
+       "y0": 280.96,
+       "x1": 200.97,
+       "y1": 289.93
+      }
+     ],
+     "quote": "Our main contribution is a thorough evaluation of networks of increasing depth using an architecture with very small (3 × 3) convolution filters, which shows that a significant improvement on the prior-art configurations can be achieved by pushing the depth to 16-19 weight layers.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Making two best-performing ConvNet models publicly available.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.88,
+      "y0": 313.84,
+      "x1": 468.2,
+      "y1": 344.65000000000003
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 455.16,
+       "y0": 313.84,
+       "x1": 468.1,
+       "y1": 322.81
+      },
+      {
+       "page": 1,
+       "x0": 143.88,
+       "y0": 324.76,
+       "x1": 468.2,
+       "y1": 333.73
+      },
+      {
+       "page": 1,
+       "x0": 143.88,
+       "y0": 335.68,
+       "x1": 467.37,
+       "y1": 344.65000000000003
+      }
+     ],
+     "quote": "We have made our two best-performing ConvNet models publicly available to facilitate further research on the use of deep visual representations in computer vision.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Large-scale image recognition and classification.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.88,
+      "y0": 226.12,
+      "x1": 468.15999999999997,
+      "y1": 246.01
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.88,
+       "y0": 226.12,
+       "x1": 468.15999999999997,
+       "y1": 235.09
+      },
+      {
+       "page": 1,
+       "x0": 143.88,
+       "y0": 237.04,
+       "x1": 361.40999999999997,
+       "y1": 246.01
+      }
+     ],
+     "quote": "In this work we investigate the effect of the convolutional network depth on its accuracy in the large-scale image recognition setting.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The network architecture consists of a stack of convolutional layers using small 3x3 receptive fields and spatial max-pooling, followed by three fully-connected layers and a final soft-max layer.",
+   "evidence": [
+    {
+     "chunk_id": "b0010",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 276.52,
+      "x1": 504.33,
+      "y1": 307.45000000000005
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 276.52,
+       "x1": 347.6,
+       "y1": 285.49
+      },
+      {
+       "page": 2,
+       "x0": 350.28,
+       "y0": 276.52,
+       "x1": 504.17999999999995,
+       "y1": 285.49
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 286.77,
+       "x1": 504.33,
+       "y1": 296.72999999999996
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 298.48,
+       "x1": 138.32999999999998,
+       "y1": 307.45000000000005
+      }
+     ],
+     "quote": "The image is passed through a stack of convolutional (conv.) layers, where we use filters with a very small receptive field: 3 × 3 (which is the smallest size to capture the notion of left/right, up/down, center).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "All hidden layers are equipped with ReLU non-linearity, and training is regularized with weight decay and dropout on the first two fully-connected layers.",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 272.22,
+      "x1": 504.21000000000004,
+      "y1": 292.77
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 187.08,
+       "y0": 272.22,
+       "x1": 503.94000000000005,
+       "y1": 281.73
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 282.81,
+       "x1": 128.46,
+       "y1": 292.77
+      },
+      {
+       "page": 4,
+       "x0": 128.52,
+       "y0": 283.44,
+       "x1": 138.73000000000002,
+       "y1": 288.43
+      },
+      {
+       "page": 4,
+       "x0": 138.96,
+       "y0": 282.81,
+       "x1": 504.21000000000004,
+       "y1": 292.77
+      }
+     ],
+     "quote": "The training was regularised by weight decay (the L 2 penalty multiplier set to 5 • 10 -4 ) and dropout regularisation for the first two fully-connected layers (dropout ratio set to 0.5).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "Training is performed via mini-batch gradient descent with momentum by optimizing the multinomial logistic regression objective.",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 239.56,
+      "x1": 504.17999999999995,
+      "y1": 270.49
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 383.28,
+       "y0": 239.56,
+       "x1": 504.17999999999995,
+       "y1": 248.53
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 250.6,
+       "x1": 504.13,
+       "y1": 259.57
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 261.52,
+       "x1": 378.33,
+       "y1": 270.49
+      }
+     ],
+     "quote": "Namely, the training is carried out by optimising the multinomial logistic regression objective using mini-batch gradient descent (based on back-propagation (LeCun et al., 1989)) with momentum.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "Data augmentation during training includes random image cropping, horizontal flipping, and RGB colour shifts, alongside scaling approaches such as single-scale and multi-scale training.",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 492.63,
+      "x1": 504.1,
+      "y1": 512.52
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 343.32,
+       "y0": 492.63,
+       "x1": 504.1,
+       "y1": 501.6
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 503.55,
+       "x1": 504.09,
+       "y1": 512.52
+      }
+     ],
+     "quote": "To further augment the training set, the crops underwent random horizontal flipping and random RGB colour shift (Krizhevsky et al., 2012).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "At test time, fully-connected layers are converted to convolutional layers to perform dense evaluation over whole images combined with image flipping for score averaging.",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 197.44,
+      "x1": 504.21,
+      "y1": 228.57000000000002
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 470.64,
+       "y0": 197.44,
+       "x1": 504.21,
+       "y1": 206.41
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 207.69,
+       "x1": 503.94,
+       "y1": 217.65
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 219.28,
+       "x1": 129.09,
+       "y1": 228.25
+      },
+      {
+       "page": 5,
+       "x0": 132.0,
+       "y0": 218.61,
+       "x1": 308.25,
+       "y1": 228.57000000000002
+      },
+      {
+       "page": 5,
+       "x0": 311.16,
+       "y0": 219.28,
+       "x1": 340.89000000000004,
+       "y1": 228.25
+      }
+     ],
+     "quote": "Namely, the fully-connected layers are first converted to convolutional layers (the first FC layer to a 7 × 7 conv. layer, the last two FC layers to 1 × 1 conv. layers).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "ILSVRC validation and test sets",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 112.96,
+      "x1": 398.85,
+      "y1": 121.92999999999999
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 112.96,
+       "x1": 398.85,
+       "y1": 121.92999999999999
+      }
+     ],
+     "quote": "For the majority of experiments, we used the validation set as the test set.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ILSVRC",
+   "split": "validation / test",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "GoogLeNet",
+   "evidence": [
+    {
+     "chunk_id": "b0056",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 263.8,
+      "x1": 504.06,
+      "y1": 294.93
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 133.32,
+       "y0": 263.8,
+       "x1": 503.94,
+       "y1": 272.77000000000004
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 274.05,
+       "x1": 504.06,
+       "y1": 284.01
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 284.97,
+       "x1": 370.77,
+       "y1": 294.93
+      }
+     ],
+     "quote": "Our result is also competitive with respect to the classification task winner (GoogLeNet with 6.7% error) and substantially outperforms the ILSVRC-2013 winning submission Clarifai, which achieved 11.2% with outside training data and 11.7% without it.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Clarifai",
+   "evidence": [
+    {
+     "chunk_id": "b0056",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 263.8,
+      "x1": 504.06,
+      "y1": 294.93
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 133.32,
+       "y0": 263.8,
+       "x1": 503.94,
+       "y1": 272.77000000000004
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 274.05,
+       "x1": 504.06,
+       "y1": 284.01
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 284.97,
+       "x1": 370.77,
+       "y1": 294.93
+      }
+     ],
+     "quote": "Our result is also competitive with respect to the classification task winner (GoogLeNet with 6.7% error) and substantially outperforms the ILSVRC-2013 winning submission Clarifai, which achieved 11.2% with outside training data and 11.7% without it.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "MSRA",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 110.4000015258789,
+      "y0": 448.5984191894531,
+      "x1": 230.38633728027344,
+      "y1": 460.5595703125
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 110.4000015258789,
+       "y0": 448.5984191894531,
+       "x1": 230.38633728027344,
+       "y1": 460.5595703125
+      }
+     ],
+     "quote": "MSRA (He et al., 2014) (11 nets)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "Zeiler & Fergus",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 110.4000015258789,
+      "y0": 488.9984130859375,
+      "x1": 512.7456665039062,
+      "y1": 502.9595642089844
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 110.4000015258789,
+       "y0": 488.9984130859375,
+       "x1": 512.7456665039062,
+       "y1": 502.9595642089844
+      }
+     ],
+     "quote": "Zeiler & Fergus (Zeiler & Fergus, 2013) (6 nets)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "OverFeat",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 110.4000015258789,
+      "y0": 509.7584228515625,
+      "x1": 512.7456665039062,
+      "y1": 523.7195434570312
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 110.4000015258789,
+       "y0": 509.7584228515625,
+       "x1": 512.7456665039062,
+       "y1": 523.7195434570312
+      }
+     ],
+     "quote": "OverFeat (Sermanet et al., 2014) (7 nets)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "Krizhevsky et al.",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 110.4000015258789,
+      "y0": 530.5184326171875,
+      "x1": 512.7456665039062,
+      "y1": 544.4795532226562
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 110.4000015258789,
+       "y0": 530.5184326171875,
+       "x1": 512.7456665039062,
+       "y1": 544.4795532226562
+      }
+     ],
+     "quote": "Krizhevsky et al. (Krizhevsky et al., 2012) (5 nets)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "top-1 validation error",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 96.04,
+      "x1": 504.26,
+      "y1": 137.89
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 445.44,
+       "y0": 96.04,
+       "x1": 504.1,
+       "y1": 105.01
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 106.96,
+       "x1": 503.98,
+       "y1": 115.92999999999999
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 117.21,
+       "x1": 504.26,
+       "y1": 127.16999999999999
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 128.92,
+       "x1": 303.69,
+       "y1": 137.89
+      }
+     ],
+     "quote": "Our best single-network performance on the validation set is 24.8%/7.5% top-1/top-5 error (highlighted in bold in Table 4).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "top-5 validation error",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 96.04,
+      "x1": 504.26,
+      "y1": 137.89
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 445.44,
+       "y0": 96.04,
+       "x1": 504.1,
+       "y1": 105.01
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 106.96,
+       "x1": 503.98,
+       "y1": 115.92999999999999
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 117.21,
+       "x1": 504.26,
+       "y1": 127.16999999999999
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 128.92,
+       "x1": 303.69,
+       "y1": 137.89
+      }
+     ],
+     "quote": "Our best single-network performance on the validation set is 24.8%/7.5% top-1/top-5 error (highlighted in bold in Table 4).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "top-5 test error",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 128.25,
+      "x1": 504.14,
+      "y1": 148.81
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 306.72,
+       "y0": 128.25,
+       "x1": 504.14,
+       "y1": 138.21
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 139.84,
+       "x1": 152.97,
+       "y1": 148.81
+      }
+     ],
+     "quote": "On the test set, the configuration E achieves 7.3% top-5 error.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "momentum",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 260.85,
+      "x1": 504.21,
+      "y1": 281.72999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 382.32,
+       "y0": 260.85,
+       "x1": 504.21,
+       "y1": 270.81
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 271.77,
+       "x1": 182.49,
+       "y1": 281.72999999999996
+      }
+     ],
+     "quote": "The batch size was set to 256, momentum to 0.9.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "momentum",
+   "value_raw": "0.9",
+   "value_norm": 0.9,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "batch size",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 260.85,
+      "x1": 504.21,
+      "y1": 281.72999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 382.32,
+       "y0": 260.85,
+       "x1": 504.21,
+       "y1": 270.81
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 271.77,
+       "x1": 182.49,
+       "y1": 281.72999999999996
+      }
+     ],
+     "quote": "The batch size was set to 256, momentum to 0.9.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "256",
+   "value_norm": 256.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "weight decay L2 penalty multiplier",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 272.22,
+      "x1": 504.21000000000004,
+      "y1": 292.77
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 187.08,
+       "y0": 272.22,
+       "x1": 503.94000000000005,
+       "y1": 281.73
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 282.81,
+       "x1": 128.46,
+       "y1": 292.77
+      },
+      {
+       "page": 4,
+       "x0": 128.52,
+       "y0": 283.44,
+       "x1": 138.73000000000002,
+       "y1": 288.43
+      },
+      {
+       "page": 4,
+       "x0": 138.96,
+       "y0": 282.81,
+       "x1": 504.21000000000004,
+       "y1": 292.77
+      }
+     ],
+     "quote": "The training was regularised by weight decay (the L 2 penalty multiplier set to 5 • 10 -4 ) and dropout regularisation for the first two fully-connected layers (dropout ratio set to 0.5).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "5 • 10 -4",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "dropout ratio",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 272.22,
+      "x1": 504.21000000000004,
+      "y1": 292.77
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 187.08,
+       "y0": 272.22,
+       "x1": 503.94000000000005,
+       "y1": 281.73
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 282.81,
+       "x1": 128.46,
+       "y1": 292.77
+      },
+      {
+       "page": 4,
+       "x0": 128.52,
+       "y0": 283.44,
+       "x1": 138.73000000000002,
+       "y1": 288.43
+      },
+      {
+       "page": 4,
+       "x0": 138.96,
+       "y0": 282.81,
+       "x1": 504.21000000000004,
+       "y1": 292.77
+      }
+     ],
+     "quote": "The training was regularised by weight decay (the L 2 penalty multiplier set to 5 • 10 -4 ) and dropout regularisation for the first two fully-connected layers (dropout ratio set to 0.5).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "dropout ratio",
+   "value_raw": "0.5",
+   "value_norm": 0.5,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "initial learning rate",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 293.73,
+      "x1": 504.18,
+      "y1": 314.29
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 293.73,
+       "x1": 263.7,
+       "y1": 303.69
+      },
+      {
+       "page": 4,
+       "x0": 263.76,
+       "y0": 294.36,
+       "x1": 273.96999999999997,
+       "y1": 299.35
+      },
+      {
+       "page": 4,
+       "x0": 274.32,
+       "y0": 293.73,
+       "x1": 504.18,
+       "y1": 303.69
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 305.32,
+       "x1": 238.05,
+       "y1": 314.29
+      }
+     ],
+     "quote": "The learning rate was initially set to 10 -2 , and then decreased by a factor of 10 when the validation set accuracy stopped improving.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "10 -2",
+   "value_norm": 0.01,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "epochs",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 305.32,
+      "x1": 504.18,
+      "y1": 325.65
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 241.68,
+       "y0": 305.32,
+       "x1": 504.18,
+       "y1": 314.29
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 315.69,
+       "x1": 296.01,
+       "y1": 325.65
+      }
+     ],
+     "quote": "In total, the learning rate was decreased 3 times, and the learning was stopped after 370K iterations (74 epochs).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "74",
+   "value_norm": 74.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "iterations",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 305.32,
+      "x1": 504.18,
+      "y1": 325.65
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 241.68,
+       "y0": 305.32,
+       "x1": 504.18,
+       "y1": 314.29
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 315.69,
+       "x1": 296.01,
+       "y1": 325.65
+      }
+     ],
+     "quote": "In total, the learning rate was decreased 3 times, and the learning was stopped after 370K iterations (74 epochs).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "iterations",
+   "value_raw": "370K",
+   "value_norm": 370000.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "initial learning rate for S = 384",
+   "evidence": [
+    {
+     "chunk_id": "b0032",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 661.65,
+      "x1": 504.15999999999997,
+      "y1": 682.5300000000001
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 176.76,
+       "y0": 661.65,
+       "x1": 504.15999999999997,
+       "y1": 671.61
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 672.57,
+       "x1": 403.86,
+       "y1": 682.5300000000001
+      },
+      {
+       "page": 4,
+       "x0": 403.92,
+       "y0": 673.2,
+       "x1": 414.13,
+       "y1": 678.19
+      },
+      {
+       "page": 4,
+       "x0": 414.48,
+       "y0": 673.23,
+       "x1": 416.97,
+       "y1": 682.2
+      }
+     ],
+     "quote": "To speed-up training of the S = 384 network, it was initialised with the weights pre-trained with S = 256, and we used a smaller initial learning rate of 10 -3 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "10 -3",
+   "value_norm": 0.001,
+   "scope": ""
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "four NVIDIA Titan Black GPUs",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 606.63,
+      "x1": 504.21,
+      "y1": 626.64
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 394.8,
+       "y0": 606.63,
+       "x1": 503.94,
+       "y1": 615.6
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 617.67,
+       "x1": 504.21,
+       "y1": 626.64
+      }
+     ],
+     "quote": "On a system equipped with four NVIDIA Titan Black GPUs, training a single net took 2-3 weeks depending on the architecture.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "compute.1",
+   "value": "training time of 2-3 weeks",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 606.63,
+      "x1": 504.21,
+      "y1": 626.64
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 394.8,
+       "y0": 606.63,
+       "x1": 503.94,
+       "y1": 615.6
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 617.67,
+       "x1": 504.21,
+       "y1": 626.64
+      }
+     ],
+     "quote": "On a system equipped with four NVIDIA Titan Black GPUs, training a single net took 2-3 weeks depending on the architecture.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "ConvNet depth varying from 11 to 19 layers",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 259.12,
+      "x1": 504.19,
+      "y1": 290.37
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 259.12,
+       "x1": 504.19,
+       "y1": 268.09000000000003
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 270.16,
+       "x1": 504.06,
+       "y1": 279.13000000000005
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 280.41,
+       "x1": 211.53,
+       "y1": 290.37
+      }
+     ],
+     "quote": "Second, we observe that the classification error decreases with the increased ConvNet depth: from 11 layers in A to 19 layers in E.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Comparison of configuration C with 1x1 conv layers and configuration D with 3x3 conv layers",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 259.12,
+      "x1": 504.33000000000004,
+      "y1": 300.97
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 259.12,
+       "x1": 504.19,
+       "y1": 268.09000000000003
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 270.16,
+       "x1": 504.06,
+       "y1": 279.13000000000005
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 280.41,
+       "x1": 211.53,
+       "y1": 290.37
+      },
+      {
+       "page": 6,
+       "x0": 213.72,
+       "y0": 280.41,
+       "x1": 504.33000000000004,
+       "y1": 290.37
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 292.0,
+       "x1": 230.37,
+       "y1": 300.97
+      }
+     ],
+     "quote": "Notably, in spite of the same depth, the configuration C (which contains three 1 × 1 conv. layers), performs worse than the configuration D, which uses 3 × 3 conv. layers throughout the network.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [],
+ "ethics": [],
+ "code_urls": [],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "Secured first and second places in localisation and classification tracks of ImageNet Challenge 2014.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.88,
+      "y0": 280.96,
+      "x1": 468.3,
+      "y1": 311.77000000000004
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 207.24,
+       "y0": 280.96,
+       "x1": 468.3,
+       "y1": 289.93
+      },
+      {
+       "page": 1,
+       "x0": 143.88,
+       "y0": 291.88,
+       "x1": 468.2,
+       "y1": 300.85
+      },
+      {
+       "page": 1,
+       "x0": 143.88,
+       "y0": 302.8,
+       "x1": 311.13,
+       "y1": 311.77000000000004
+      }
+     ],
+     "quote": "These findings were the basis of our ImageNet Challenge 2014 submission, where our team secured the first and the second places in the localisation and classification tracks respectively.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

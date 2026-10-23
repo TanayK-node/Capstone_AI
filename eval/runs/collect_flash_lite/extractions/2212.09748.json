@@ -1,0 +1,1929 @@
+{
+ "metadata": {
+  "title": "Scalable Diffusion Models with Transformers",
+  "authors": [
+   "William Peebles",
+   "Saining Xie"
+  ],
+  "venue": null,
+  "year": "2023",
+  "arxiv_id": "2212.09748v2[cs.CV]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Transformers have been widely adopted in autoregressive models but remain underutilized in other generative frameworks like diffusion models, which traditionally rely on convolutional U-Net architectures.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 308.86,
+      "y0": 592.78,
+      "x1": 545.11,
+      "y1": 649.24
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 391.73,
+       "y0": 592.78,
+       "x1": 545.11,
+       "y1": 601.42
+      },
+      {
+       "page": 1,
+       "x0": 308.86,
+       "y0": 604.73,
+       "x1": 545.11,
+       "y1": 613.37
+      },
+      {
+       "page": 1,
+       "x0": 308.86,
+       "y0": 616.69,
+       "x1": 545.11,
+       "y1": 625.33
+      },
+      {
+       "page": 1,
+       "x0": 308.86,
+       "y0": 628.64,
+       "x1": 545.11,
+       "y1": 637.28
+      },
+      {
+       "page": 1,
+       "x0": 308.86,
+       "y0": 640.6,
+       "x1": 420.19,
+       "y1": 649.24
+      }
+     ],
+     "quote": "Many classes of image-level generative models remain holdouts to the trend, though-while transformers see widespread use in autoregressive models [3,6,43,47], they have seen less adoption in other generative modeling frameworks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Demystify architectural choices in diffusion models and provide empirical baselines using standard transformer designs.",
+   "evidence": [
+    {
+     "chunk_id": "b0005",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 50.11,
+      "y0": 500.58,
+      "x1": 286.37,
+      "y1": 533.13
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 62.07,
+       "y0": 500.58,
+       "x1": 286.37,
+       "y1": 509.21999999999997
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 512.53,
+       "x1": 286.36,
+       "y1": 521.17
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 524.49,
+       "x1": 267.83,
+       "y1": 533.13
+      }
+     ],
+     "quote": "With this work, we aim to demystify the significance of architectural choices in diffusion models and offer empirical baselines for future generative modeling research.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Introduce Diffusion Transformers (DiTs), a new class of diffusion models based on Vision Transformers.",
+   "evidence": [
+    {
+     "chunk_id": "b0006",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 50.11,
+      "y0": 644.74,
+      "x1": 286.37,
+      "y1": 665.33
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 62.07,
+       "y0": 644.74,
+       "x1": 286.37,
+       "y1": 653.38
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 656.69,
+       "x1": 141.42000000000002,
+       "y1": 665.33
+      }
+     ],
+     "quote": "In this paper, we focus on a new class of diffusion models based on transformers.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "Study the scaling behavior of transformers regarding network complexity versus sample quality under the Latent Diffusion Models framework.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 308.86,
+      "y0": 332.51,
+      "x1": 545.12,
+      "y1": 364.83
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 320.82,
+       "y0": 332.51,
+       "x1": 545.12,
+       "y1": 341.15
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 344.28,
+       "x1": 545.11,
+       "y1": 353.09999999999997
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 356.24,
+       "x1": 339.03000000000003,
+       "y1": 364.83
+      }
+     ],
+     "quote": "More specifically, we study the scaling behavior of transformers with respect to network complexity vs. sample quality.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "image-level generative modeling",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 308.86,
+      "y0": 592.78,
+      "x1": 545.11,
+      "y1": 649.24
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 391.73,
+       "y0": 592.78,
+       "x1": 545.11,
+       "y1": 601.42
+      },
+      {
+       "page": 1,
+       "x0": 308.86,
+       "y0": 604.73,
+       "x1": 545.11,
+       "y1": 613.37
+      },
+      {
+       "page": 1,
+       "x0": 308.86,
+       "y0": 616.69,
+       "x1": 545.11,
+       "y1": 625.33
+      },
+      {
+       "page": 1,
+       "x0": 308.86,
+       "y0": 628.64,
+       "x1": 545.11,
+       "y1": 637.28
+      },
+      {
+       "page": 1,
+       "x0": 308.86,
+       "y0": 640.6,
+       "x1": 420.19,
+       "y1": 649.24
+      }
+     ],
+     "quote": "Many classes of image-level generative models remain holdouts to the trend, though-while transformers see widespread use in autoregressive models [3,6,43,47], they have seen less adoption in other generative modeling frameworks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The approach applies Diffusion Transformers (DiTs) to latent space by combining off-the-shelf convolutional VAEs with transformer-based DDPMs.",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 50.11,
+      "y0": 500.41,
+      "x1": 286.37,
+      "y1": 532.96
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 155.37,
+       "y0": 500.41,
+       "x1": 286.37,
+       "y1": 509.05
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 512.36,
+       "x1": 286.36,
+       "y1": 521.0
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 524.32,
+       "x1": 164.87,
+       "y1": 532.96
+      }
+     ],
+     "quote": "In this paper, we apply DiTs to latent space, although they could be applied to pixel space without modification as well.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "The model uses a patchify first layer to convert spatial representations into a sequence of tokens, combined with frequency-based positional embeddings.",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 341.73,
+      "x1": 545.11,
+      "y1": 386.24
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 529.62,
+       "y0": 341.73,
+       "x1": 545.11,
+       "y1": 350.37
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 353.69,
+       "x1": 545.11,
+       "y1": 362.33
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 365.33,
+       "x1": 545.11,
+       "y1": 374.28999999999996
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 377.6,
+       "x1": 499.13,
+       "y1": 386.24
+      }
+     ],
+     "quote": "The first layer of DiT is \"patchify,\" which converts the spatial input into a sequence of T tokens, each of dimension d, by linearly embedding each patch in the input.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "The architecture processes conditional inputs such as timesteps and class labels using four explored variants of transformer blocks (in-context conditioning, cross-attention, adaLN, and adaLN-Zero).",
+   "evidence": [
+    {
+     "chunk_id": "b0028",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 553.45,
+      "x1": 545.11,
+      "y1": 586.0
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 500.24,
+       "y0": 553.45,
+       "x1": 545.11,
+       "y1": 562.09
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 565.4,
+       "x1": 545.11,
+       "y1": 574.04
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 577.36,
+       "x1": 379.75,
+       "y1": 586.0
+      }
+     ],
+     "quote": "We explore four variants of transformer blocks that process conditional inputs differently.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "Model scaling is handled via standard transformer configs (DiT-S, DiT-B, DiT-L, and DiT-XL) that jointly scale depth, hidden dimension, and attention heads.",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 308.86,
+      "y0": 304.1,
+      "x1": 545.11,
+      "y1": 336.65
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 483.93,
+       "y0": 304.1,
+       "x1": 545.11,
+       "y1": 312.74
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 315.73,
+       "x1": 545.11,
+       "y1": 324.69
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 327.69,
+       "x1": 435.36,
+       "y1": 336.65
+      }
+     ],
+     "quote": "Following ViT, we use standard transformer configs that jointly scale N , d and attention heads [10,63].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "A standard linear decoder is used after the final DiT block to map the output sequence back into noise and covariance predictions matching the original spatial shape.",
+   "evidence": [
+    {
+     "chunk_id": "b0038",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 308.86,
+      "y0": 456.31,
+      "x1": 545.12,
+      "y1": 500.82
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 352.33,
+       "y0": 456.31,
+       "x1": 545.12,
+       "y1": 464.95
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 468.27,
+       "x1": 545.11,
+       "y1": 476.90999999999997
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 479.9,
+       "x1": 545.11,
+       "y1": 488.85999999999996
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 492.18,
+       "x1": 512.19,
+       "y1": 500.82
+      }
+     ],
+     "quote": "We use a standard linear decoder to do this; we apply the final layer norm (adaptive if using adaLN) and linearly decode each token into a p×p×2C tensor, where C is the number of channels in the spatial input to DiT.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "The authors introduce Diffusion Transformers (DiTs) as a new architecture for diffusion models that stays faithful to the standard vision transformer (ViT) architecture to retain scaling properties.",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 50.11,
+      "y0": 588.48,
+      "x1": 286.37,
+      "y1": 609.0699999999999
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 62.07,
+       "y0": 588.48,
+       "x1": 286.37,
+       "y1": 597.12
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 600.43,
+       "x1": 176.09,
+       "y1": 609.0699999999999
+      }
+     ],
+     "quote": "We introduce Diffusion Transformers (DiTs), a new architecture for diffusion models.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "ImageNet dataset for class-conditional generative modeling at 256x256 and 512x512 resolutions",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 308.86,
+      "y0": 644.74,
+      "x1": 545.12,
+      "y1": 689.24
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 358.08,
+       "y0": 644.74,
+       "x1": 545.12,
+       "y1": 653.38
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 656.37,
+       "x1": 545.11,
+       "y1": 665.33
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 668.65,
+       "x1": 545.11,
+       "y1": 677.29
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 680.6,
+       "x1": 379.13,
+       "y1": 689.24
+      }
+     ],
+     "quote": "We train class-conditional latent DiT models at 256 × 256 and 512 × 512 image resolution on the Ima-geNet dataset [31], a highly-competitive generative modeling benchmark.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ImageNet",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "BigGAN-deep",
+   "evidence": [
+    {
+     "chunk_id": "b0060",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 56.769378662109375,
+      "y0": 98.88247680664062,
+      "x1": 313.8473205566406,
+      "y1": 107.37540435791016
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 56.769378662109375,
+       "y0": 98.88247680664062,
+       "x1": 313.8473205566406,
+       "y1": 107.37540435791016
+      }
+     ],
+     "quote": "BigGAN-deep [2] | 6.95 | 7.36 | 171.4 | 0.87 | 0.28",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "StyleGAN-XL",
+   "evidence": [
+    {
+     "chunk_id": "b0060",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 56.769378662109375,
+      "y0": 107.75845336914062,
+      "x1": 313.8473205566406,
+      "y1": 116.25138092041016
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 56.769378662109375,
+       "y0": 107.75845336914062,
+       "x1": 313.8473205566406,
+       "y1": 116.25138092041016
+      }
+     ],
+     "quote": "StyleGAN-XL [53] | 2.30 | 4.02 | 265.12 | 0.78 | 0.53",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "ADM",
+   "evidence": [
+    {
+     "chunk_id": "b0060",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 56.769378662109375,
+      "y0": 119.53988647460938,
+      "x1": 313.8473205566406,
+      "y1": 128.0328140258789
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 56.769378662109375,
+       "y0": 119.53988647460938,
+       "x1": 313.8473205566406,
+       "y1": 128.0328140258789
+      }
+     ],
+     "quote": "ADM [9] | 10.94 | 6.02 | 100.98 | 0.69 | 0.63",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0060",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 56.769378662109375,
+      "y0": 128.41586303710938,
+      "x1": 313.8473205566406,
+      "y1": 136.90878295898438
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 56.769378662109375,
+       "y0": 128.41586303710938,
+       "x1": 313.8473205566406,
+       "y1": 136.90878295898438
+      }
+     ],
+     "quote": "ADM-U | 7.49 | 5.13 | 127.49 | 0.72 | 0.63",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0060",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 56.769378662109375,
+      "y0": 137.29263305664062,
+      "x1": 313.8473205566406,
+      "y1": 145.78555297851562
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 56.769378662109375,
+       "y0": 137.29263305664062,
+       "x1": 313.8473205566406,
+       "y1": 145.78555297851562
+      }
+     ],
+     "quote": "ADM-G | 4.59 | 5.25 | 186.70 | 0.82 | 0.52",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0060",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 56.769378662109375,
+      "y0": 146.16940307617188,
+      "x1": 313.8473205566406,
+      "y1": 154.66232299804688
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 56.769378662109375,
+       "y0": 146.16940307617188,
+       "x1": 313.8473205566406,
+       "y1": 154.66232299804688
+      }
+     ],
+     "quote": "ADM-G, ADM-U | 3.94 | 6.14 | 215.84 | 0.83 | 0.53",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "CDM",
+   "evidence": [
+    {
+     "chunk_id": "b0060",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 56.769378662109375,
+      "y0": 158.93667602539062,
+      "x1": 313.8473205566406,
+      "y1": 167.42959594726562
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 56.769378662109375,
+       "y0": 158.93667602539062,
+       "x1": 313.8473205566406,
+       "y1": 167.42959594726562
+      }
+     ],
+     "quote": "CDM [20] | 4.88 | - | 158.71 | - | -",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "LDM-8",
+   "evidence": [
+    {
+     "chunk_id": "b0060",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 56.769378662109375,
+      "y0": 171.70306396484375,
+      "x1": 313.8473205566406,
+      "y1": 180.19598388671875
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 56.769378662109375,
+       "y0": 171.70306396484375,
+       "x1": 313.8473205566406,
+       "y1": 180.19598388671875
+      }
+     ],
+     "quote": "LDM-8 [48] | 15.51 | - | 79.03 | 0.65 | 0.63",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0060",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 56.769378662109375,
+      "y0": 180.579833984375,
+      "x1": 313.8473205566406,
+      "y1": 189.07275390625
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 56.769378662109375,
+       "y0": 180.579833984375,
+       "x1": 313.8473205566406,
+       "y1": 189.07275390625
+      }
+     ],
+     "quote": "LDM-8-G | 7.76 | - | 209.52 | 0.84 | 0.35",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "LDM-4",
+   "evidence": [
+    {
+     "chunk_id": "b0060",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 56.769378662109375,
+      "y0": 189.45660400390625,
+      "x1": 313.8473205566406,
+      "y1": 197.94952392578125
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 56.769378662109375,
+       "y0": 189.45660400390625,
+       "x1": 313.8473205566406,
+       "y1": 197.94952392578125
+      }
+     ],
+     "quote": "LDM-4 | 10.56 | - | 103.49 | 0.71 | 0.62",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0060",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 56.769378662109375,
+      "y0": 198.33340454101562,
+      "x1": 313.8473205566406,
+      "y1": 206.82632446289062
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 56.769378662109375,
+       "y0": 198.33340454101562,
+       "x1": 313.8473205566406,
+       "y1": 206.82632446289062
+      }
+     ],
+     "quote": "LDM-4-G (cfg=1.25) | 3.95 | - | 178.22 | 0.81 | 0.55",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Fréchet Inception Distance (FID)",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11,
+      "y0": 680.6,
+      "x1": 286.36,
+      "y1": 713.15
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 145.77,
+       "y0": 680.6,
+       "x1": 286.36,
+       "y1": 689.24
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 692.56,
+       "x1": 286.36,
+       "y1": 701.1999999999999
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 704.51,
+       "x1": 252.01999999999998,
+       "y1": 713.15
+      }
+     ],
+     "quote": "We measure scaling performance with Fréchet Inception Distance (FID) [18], the standard metric for evaluating generative models of images.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Inception Score",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 401.88,
+      "x1": 545.11,
+      "y1": 434.43
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 455.51,
+       "y0": 401.88,
+       "x1": 545.11,
+       "y1": 410.52
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 413.84,
+       "x1": 545.11,
+       "y1": 422.47999999999996
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 425.79,
+       "x1": 394.35,
+       "y1": 434.43
+      }
+     ],
+     "quote": "We additionally report Inception Score [51], sFID [34] and Precision/Recall [32] as secondary metrics.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "sFID",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 401.88,
+      "x1": 545.11,
+      "y1": 434.43
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 455.51,
+       "y0": 401.88,
+       "x1": 545.11,
+       "y1": 410.52
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 413.84,
+       "x1": 545.11,
+       "y1": 422.47999999999996
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 425.79,
+       "x1": 394.35,
+       "y1": 434.43
+      }
+     ],
+     "quote": "We additionally report Inception Score [51], sFID [34] and Precision/Recall [32] as secondary metrics.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "Precision",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 401.88,
+      "x1": 545.11,
+      "y1": 434.43
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 455.51,
+       "y0": 401.88,
+       "x1": 545.11,
+       "y1": 410.52
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 413.84,
+       "x1": 545.11,
+       "y1": 422.47999999999996
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 425.79,
+       "x1": 394.35,
+       "y1": 434.43
+      }
+     ],
+     "quote": "We additionally report Inception Score [51], sFID [34] and Precision/Recall [32] as secondary metrics.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.4",
+   "value": "Recall",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 401.88,
+      "x1": 545.11,
+      "y1": 434.43
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 455.51,
+       "y0": 401.88,
+       "x1": 545.11,
+       "y1": 410.52
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 413.84,
+       "x1": 545.11,
+       "y1": 422.47999999999996
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 425.79,
+       "x1": 394.35,
+       "y1": 434.43
+      }
+     ],
+     "quote": "We additionally report Inception Score [51], sFID [34] and Precision/Recall [32] as secondary metrics.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Optimizer set to AdamW",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 378.05,
+      "y0": 704.51,
+      "x1": 545.11,
+      "y1": 713.15
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 378.05,
+       "y0": 704.51,
+       "x1": 545.11,
+       "y1": 713.15
+      }
+     ],
+     "quote": "We train all models with AdamW [29,33].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "AdamW",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Constant learning rate of 1e-4",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11,
+      "y0": 316.3,
+      "x1": 286.36,
+      "y1": 338.78999999999996
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 317.88,
+       "x1": 215.51,
+       "y1": 326.84
+      },
+      {
+       "page": 6,
+       "x0": 215.51,
+       "y0": 316.3,
+       "x1": 225.70999999999998,
+       "y1": 322.42
+      },
+      {
+       "page": 6,
+       "x0": 226.21,
+       "y0": 318.2,
+       "x1": 286.36,
+       "y1": 326.84
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 330.15,
+       "x1": 166.12,
+       "y1": 338.78999999999996
+      }
+     ],
+     "quote": "We use a constant learning rate of 1 × 10 -4 , no weight decay and a batch size of 256.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "1 × 10 -4",
+   "value_norm": 0.0001,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "No weight decay",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11,
+      "y0": 316.3,
+      "x1": 286.36,
+      "y1": 338.78999999999996
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 317.88,
+       "x1": 215.51,
+       "y1": 326.84
+      },
+      {
+       "page": 6,
+       "x0": 215.51,
+       "y0": 316.3,
+       "x1": 225.70999999999998,
+       "y1": 322.42
+      },
+      {
+       "page": 6,
+       "x0": 226.21,
+       "y0": 318.2,
+       "x1": 286.36,
+       "y1": 326.84
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 330.15,
+       "x1": 166.12,
+       "y1": 338.78999999999996
+      }
+     ],
+     "quote": "We use a constant learning rate of 1 × 10 -4 , no weight decay and a batch size of 256.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "no weight decay",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Batch size of 256",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11,
+      "y0": 316.3,
+      "x1": 286.36,
+      "y1": 338.78999999999996
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 317.88,
+       "x1": 215.51,
+       "y1": 326.84
+      },
+      {
+       "page": 6,
+       "x0": 215.51,
+       "y0": 316.3,
+       "x1": 225.70999999999998,
+       "y1": 322.42
+      },
+      {
+       "page": 6,
+       "x0": 226.21,
+       "y0": 318.2,
+       "x1": 286.36,
+       "y1": 326.84
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 330.15,
+       "x1": 166.12,
+       "y1": 338.78999999999996
+      }
+     ],
+     "quote": "We use a constant learning rate of 1 × 10 -4 , no weight decay and a batch size of 256.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "256",
+   "value_norm": 256.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Exponential moving average (EMA) decay of 0.9999",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11,
+      "y0": 401.88,
+      "x1": 286.36,
+      "y1": 446.39
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 255.21,
+       "y0": 401.88,
+       "x1": 286.36,
+       "y1": 410.52
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 413.84,
+       "x1": 286.36,
+       "y1": 422.47999999999996
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 425.79,
+       "x1": 286.36,
+       "y1": 434.43
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 437.75,
+       "x1": 237.82999999999998,
+       "y1": 446.39
+      }
+     ],
+     "quote": "Following common practice in the generative modeling literature, we maintain an exponential moving average (EMA) of DiT weights over training with a decay of 0.9999.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "EMA decay",
+   "value_raw": "0.9999",
+   "value_norm": 0.9999,
+   "scope": ""
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "TPU-v3 pods",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 457.95,
+      "x1": 545.12,
+      "y1": 478.55
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 360.61,
+       "y0": 457.95,
+       "x1": 545.12,
+       "y1": 466.59
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 469.91,
+       "x1": 414.83000000000004,
+       "y1": 478.55
+      }
+     ],
+     "quote": "We implement all models in JAX [1] and train them using TPU-v3 pods.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation of block designs: in-context, cross-attention, adaptive layer norm (adaLN), and adaLN-zero",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 540.75,
+      "x1": 545.11,
+      "y1": 597.22
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 397.27,
+       "y0": 540.75,
+       "x1": 545.11,
+       "y1": 549.39
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 552.71,
+       "x1": 545.11,
+       "y1": 561.35
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 564.66,
+       "x1": 378.99,
+       "y1": 573.3
+      },
+      {
+       "page": 6,
+       "x0": 383.12,
+       "y0": 564.66,
+       "x1": 545.11,
+       "y1": 573.3
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 576.62,
+       "x1": 545.11,
+       "y1": 585.26
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 588.58,
+       "x1": 368.92,
+       "y1": 597.22
+      }
+     ],
+     "quote": "We train four of our highest Gflop DiT-XL/2 models, each using a different block designin-context (119.4 Gflops), cross-attention (137.6 Gflops), adaptive layer norm (adaLN, 118.6 Gflops) or adaLN-zero (118.6 Gflops).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Ablation of model configs (S, B, L, XL) and patch sizes (8, 4, 2)",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 299.65,
+      "x1": 286.36,
+      "y1": 332.2
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 200.2,
+       "y0": 299.65,
+       "x1": 286.36,
+       "y1": 308.28999999999996
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 311.6,
+       "x1": 286.36,
+       "y1": 320.24
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 323.56,
+       "x1": 104.81,
+       "y1": 332.2
+      }
+     ],
+     "quote": "We train 12 DiT models, sweeping over model configs (S, B, L, XL) and patch sizes (8,4,2).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.2",
+   "value": "Ablation of three VAE decoders (original LDM decoder and two fine-tuned decoders used by Stable Diffusion)",
+   "evidence": [
+    {
+     "chunk_id": "b0077",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 159.74,
+      "y0": 618.29,
+      "x1": 545.11,
+      "y1": 713.15
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 159.74,
+       "y0": 704.51,
+       "x1": 286.36,
+       "y1": 713.15
+      },
+      {
+       "page": 13,
+       "x0": 308.86,
+       "y0": 618.29,
+       "x1": 545.11,
+       "y1": 626.93
+      },
+      {
+       "page": 13,
+       "x0": 308.86,
+       "y0": 630.24,
+       "x1": 545.11,
+       "y1": 638.88
+      },
+      {
+       "page": 13,
+       "x0": 308.86,
+       "y0": 642.2,
+       "x1": 349.29,
+       "y1": 650.84
+      }
+     ],
+     "quote": "In this section, we ablate three different choices of the VAE decoder; the original one used by LDM and the two fine-tuned decoders used by Stable Diffusion.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Continue scaling Diffusion Transformers to larger model sizes and token counts",
+   "evidence": [
+    {
+     "chunk_id": "b0065",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 308.86,
+      "y0": 594.49,
+      "x1": 545.12,
+      "y1": 627.04
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 505.17,
+       "y0": 594.49,
+       "x1": 545.12,
+       "y1": 603.13
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 606.44,
+       "x1": 545.11,
+       "y1": 615.08
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 618.4,
+       "x1": 545.11,
+       "y1": 627.04
+      }
+     ],
+     "quote": "Given the promising scaling results in this paper, future work should continue to scale DiTs to larger models and token counts.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Explore DiT as a drop-in backbone for text-to-image models like DALL•E 2 and Stable Diffusion",
+   "evidence": [
+    {
+     "chunk_id": "b0065",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 308.86,
+      "y0": 630.35,
+      "x1": 545.11,
+      "y1": 650.9499999999999
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 630.35,
+       "x1": 545.11,
+       "y1": 638.99
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 642.31,
+       "x1": 525.06,
+       "y1": 650.9499999999999
+      }
+     ],
+     "quote": "DiT could also be explored as a drop-in backbone for textto-image models like DALL•E 2 and Stable Diffusion.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.2",
+   "value": "Explore further why applying classifier-free guidance to a subset of elements yields good performance",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 308.86,
+      "y0": 528.81,
+      "x1": 545.11,
+      "y1": 573.31
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 404.06,
+       "y0": 528.81,
+       "x1": 545.11,
+       "y1": 537.4499999999999
+      },
+      {
+       "page": 12,
+       "x0": 308.86,
+       "y0": 540.76,
+       "x1": 545.11,
+       "y1": 549.4
+      },
+      {
+       "page": 12,
+       "x0": 308.86,
+       "y0": 552.72,
+       "x1": 545.11,
+       "y1": 561.36
+      },
+      {
+       "page": 12,
+       "x0": 308.86,
+       "y0": 564.67,
+       "x1": 391.87,
+       "y1": 573.31
+      }
+     ],
+     "quote": "It is somewhat interesting that applying guidance to a subset of elements can still yield good performance, and we leave it to future work to explore this phenomenon further.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "The U-Net inductive bias is not crucial to diffusion model performance and can be replaced with transformers.",
+   "evidence": [
+    {
+     "chunk_id": "b0005",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 50.11,
+      "y0": 524.49,
+      "x1": 286.36,
+      "y1": 568.99
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 273.33,
+       "y0": 524.49,
+       "x1": 286.35999999999996,
+       "y1": 533.13
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 536.26,
+       "x1": 286.35,
+       "y1": 545.08
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 548.4,
+       "x1": 286.36,
+       "y1": 557.04
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 560.35,
+       "x1": 259.9,
+       "y1": 568.99
+      }
+     ],
+     "quote": "We show that the U-Net inductive bias is not crucial to the performance of diffusion models, and they can be readily replaced with standard designs such as transformers.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "There is a strong correlation between DiT network complexity (measured in Gflops) and sample quality (measured by FID).",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 308.86,
+      "y0": 404.24,
+      "x1": 545.12,
+      "y1": 460.7
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 502.38,
+       "y0": 404.24,
+       "x1": 545.12,
+       "y1": 412.88
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 416.19,
+       "x1": 545.11,
+       "y1": 424.83
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 428.15,
+       "x1": 545.11,
+       "y1": 436.78999999999996
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 439.92,
+       "x1": 545.11,
+       "y1": 448.74
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 452.06,
+       "x1": 344.15000000000003,
+       "y1": 460.7
+      }
+     ],
+     "quote": "We further show that DiTs are scalable architectures for diffusion models: there is a strong correlation between the network complexity (measured by Gflops) vs. sample quality (measured by FID).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "Scaling up DiT with a high-capacity backbone (118.6 Gflops) achieves a state-of-the-art result of 2.27 FID on class-conditional 256x256 ImageNet generation.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 308.86,
+      "y0": 452.06,
+      "x1": 545.12,
+      "y1": 496.56
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 347.62,
+       "y0": 452.06,
+       "x1": 545.12,
+       "y1": 460.7
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 464.01,
+       "x1": 545.11,
+       "y1": 472.65
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 475.97,
+       "x1": 545.11,
+       "y1": 484.61
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 487.6,
+       "x1": 533.81,
+       "y1": 496.56
+      }
+     ],
+     "quote": "By simply scaling-up DiT and training an LDM with a high-capacity backbone (118.6 Gflops), we are able to achieve a state-of-the-art result of 2.27 FID on the classconditional 256 × 256 ImageNet generation benchmark.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

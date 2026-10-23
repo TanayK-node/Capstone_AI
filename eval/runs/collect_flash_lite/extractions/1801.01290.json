@@ -1,0 +1,1664 @@
+{
+ "metadata": {
+  "title": "Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor",
+  "authors": [
+   "Tuomas Haarnoja",
+   "Aurick Zhou",
+   "Pieter Abbeel",
+   "Sergey Levine"
+  ],
+  "venue": null,
+  "year": "2018",
+  "arxiv_id": "1801.01290v2[cs.LG]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Model-free deep RL methods suffer from very high sample complexity and brittle convergence properties.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 75.37,
+      "y0": 268.38,
+      "x1": 271.18,
+      "y1": 312.88
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 268.38,
+       "x1": 269.51,
+       "y1": 277.02
+      },
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 280.33,
+       "x1": 269.87,
+       "y1": 288.96999999999997
+      },
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 292.29,
+       "x1": 271.18,
+       "y1": 300.93
+      },
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 304.24,
+       "x1": 234.93,
+       "y1": 312.88
+      }
+     ],
+     "quote": "However, these methods typically suffer from two major challenges: very high sample complexity and brittle convergence properties, which necessitate meticulous hyperparameter tuning.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "We propose soft actor-critic, an off-policy actor-critic deep RL algorithm based on maximum entropy reinforcement learning.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 75.01,
+      "y0": 340.11,
+      "x1": 271.17,
+      "y1": 384.61
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 340.11,
+       "x1": 271.17,
+       "y1": 348.75
+      },
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 352.06,
+       "x1": 269.51,
+       "y1": 360.7
+      },
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 364.02,
+       "x1": 271.17,
+       "y1": 372.65999999999997
+      },
+      {
+       "page": 1,
+       "x0": 75.01,
+       "y0": 375.97,
+       "x1": 98.17,
+       "y1": 384.61
+      }
+     ],
+     "quote": "In this paper, we propose soft actor-critic, an offpolicy actor-critic deep RL algorithm based on the maximum entropy reinforcement learning framework.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "We present a convergence proof for policy iteration in the maximum entropy framework and introduce a practically implementable algorithm.",
+   "evidence": [
+    {
+     "chunk_id": "b0006",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 55.44,
+      "y0": 423.22,
+      "x1": 291.09000000000003,
+      "y1": 479.68
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 113.34,
+       "y0": 423.22,
+       "x1": 289.78999999999996,
+       "y1": 431.86
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 435.17,
+       "x1": 291.09000000000003,
+       "y1": 443.81
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 447.13,
+       "x1": 289.44,
+       "y1": 455.77
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 459.08,
+       "x1": 289.44,
+       "y1": 467.71999999999997
+      },
+      {
+       "page": 2,
+       "x0": 55.44,
+       "y0": 471.04,
+       "x1": 242.72,
+       "y1": 479.68
+      }
+     ],
+     "quote": "We present a convergence proof for policy iteration in the maximum entropy framework, and then introduce a new algorithm based on an approximation to this procedure that can be practically implemented with deep neural networks, which we call soft actor-critic.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Continuous decision making and control tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 75.37,
+      "y0": 232.51,
+      "x1": 271.26,
+      "y1": 265.06
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 232.51,
+       "x1": 271.17,
+       "y1": 241.14999999999998
+      },
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 244.47,
+       "x1": 269.52,
+       "y1": 253.11
+      },
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 256.42,
+       "x1": 271.26,
+       "y1": 265.06
+      }
+     ],
+     "quote": "Model-free deep reinforcement learning (RL) algorithms have been demonstrated on a range of challenging decision making and control tasks.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The approach introduces a soft policy iteration algorithm for learning maximum entropy policies by alternating between soft policy evaluation and soft policy improvement steps.",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 54.97,
+      "y0": 89.19,
+      "x1": 291.09000000000003,
+      "y1": 133.7
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 54.97,
+       "y0": 89.19,
+       "x1": 291.09000000000003,
+       "y1": 97.83
+      },
+      {
+       "page": 4,
+       "x0": 55.44,
+       "y0": 101.15,
+       "x1": 289.44,
+       "y1": 109.79
+      },
+      {
+       "page": 4,
+       "x0": 55.44,
+       "y0": 113.1,
+       "x1": 291.09000000000003,
+       "y1": 121.74
+      },
+      {
+       "page": 4,
+       "x0": 55.44,
+       "y0": 125.06,
+       "x1": 227.38,
+       "y1": 133.7
+      }
+     ],
+     "quote": "We will begin by deriving soft policy iteration, a general algorithm for learning optimal maximum entropy policies that alternates between policy evaluation and policy improvement in the maximum entropy framework.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "The practical deep reinforcement learning algorithm uses function approximators for a parameterized state value function, two Q-functions, and a tractable policy network.",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 307.08,
+      "y0": 571.09,
+      "x1": 543.18,
+      "y1": 611.06
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 528.47,
+       "y0": 571.09,
+       "x1": 541.44,
+       "y1": 579.73
+      },
+      {
+       "page": 4,
+       "x0": 307.08,
+       "y0": 582.06,
+       "x1": 518.35,
+       "y1": 592.02
+      },
+      {
+       "page": 4,
+       "x0": 518.35,
+       "y0": 586.26,
+       "x1": 523.62,
+       "y1": 592.38
+      },
+      {
+       "page": 4,
+       "x0": 524.37,
+       "y0": 582.06,
+       "x1": 532.76,
+       "y1": 592.02
+      },
+      {
+       "page": 4,
+       "x0": 532.76,
+       "y0": 586.26,
+       "x1": 535.77,
+       "y1": 592.38
+      },
+      {
+       "page": 4,
+       "x0": 536.27,
+       "y0": 582.06,
+       "x1": 542.68,
+       "y1": 592.02
+      },
+      {
+       "page": 4,
+       "x0": 307.44,
+       "y0": 594.02,
+       "x1": 377.6,
+       "y1": 603.98
+      },
+      {
+       "page": 4,
+       "x0": 377.6,
+       "y0": 598.22,
+       "x1": 381.39000000000004,
+       "y1": 604.34
+      },
+      {
+       "page": 4,
+       "x0": 382.11,
+       "y0": 594.02,
+       "x1": 390.5,
+       "y1": 603.98
+      },
+      {
+       "page": 4,
+       "x0": 390.5,
+       "y0": 598.22,
+       "x1": 393.51,
+       "y1": 604.34
+      },
+      {
+       "page": 4,
+       "x0": 394.01,
+       "y0": 594.02,
+       "x1": 407.02,
+       "y1": 604.34
+      },
+      {
+       "page": 4,
+       "x0": 407.52,
+       "y0": 594.02,
+       "x1": 507.84,
+       "y1": 603.98
+      },
+      {
+       "page": 4,
+       "x0": 507.83,
+       "y0": 598.22,
+       "x1": 512.62,
+       "y1": 604.34
+      },
+      {
+       "page": 4,
+       "x0": 513.12,
+       "y0": 594.02,
+       "x1": 522.5600000000001,
+       "y1": 603.98
+      },
+      {
+       "page": 4,
+       "x0": 522.57,
+       "y0": 598.22,
+       "x1": 525.58,
+       "y1": 604.34
+      },
+      {
+       "page": 4,
+       "x0": 526.07,
+       "y0": 593.77,
+       "x1": 533.36,
+       "y1": 611.06
+      },
+      {
+       "page": 4,
+       "x0": 533.36,
+       "y0": 598.22,
+       "x1": 536.37,
+       "y1": 604.34
+      },
+      {
+       "page": 4,
+       "x0": 536.87,
+       "y0": 594.02,
+       "x1": 543.18,
+       "y1": 603.98
+      }
+     ],
+     "quote": "We will consider a parameterized state value function V ψ (s t ), soft Q-function Q θ (s t , a t ), and a tractable policy π φ (a t |s t ).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "The networks are trained using stochastic gradient descent on objectives derived from the soft Bellman residual, soft value function squared error, and expected KL-divergence for the policy.",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 307.44,
+      "y0": 523.27,
+      "x1": 543.09,
+      "y1": 579.73
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 531.23,
+       "y0": 523.27,
+       "x1": 541.44,
+       "y1": 531.91
+      },
+      {
+       "page": 4,
+       "x0": 307.44,
+       "y0": 535.23,
+       "x1": 541.44,
+       "y1": 543.87
+      },
+      {
+       "page": 4,
+       "x0": 307.44,
+       "y0": 547.18,
+       "x1": 541.44,
+       "y1": 555.8199999999999
+      },
+      {
+       "page": 4,
+       "x0": 307.44,
+       "y0": 559.14,
+       "x1": 543.09,
+       "y1": 567.78
+      },
+      {
+       "page": 4,
+       "x0": 307.44,
+       "y0": 571.09,
+       "x1": 525.37,
+       "y1": 579.73
+      }
+     ],
+     "quote": "To that end, we will use function approximators for both the Q-function and the policy, and instead of running evaluation and improvement to convergence, alternate between optimizing both networks with stochastic gradient descent.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "The policy is reparameterized using a neural network transformation with input noise to enable a low-variance gradient estimator.",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.97899627685547,
+      "y0": 69.83979797363281,
+      "x1": 406.2193908691406,
+      "y1": 715.4596557617188
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.97899627685547,
+       "y0": 685.3473510742188,
+       "x1": 249.43173217773438,
+       "y1": 694.25390625
+      },
+      {
+       "page": 5,
+       "x0": 140.91600036621094,
+       "y0": 704.5599365234375,
+       "x1": 146.48509216308594,
+       "y1": 713.40673828125
+      },
+      {
+       "page": 5,
+       "x0": 146.48500061035156,
+       "y0": 708.129150390625,
+       "x1": 149.4976806640625,
+       "y1": 714.3218994140625
+      },
+      {
+       "page": 5,
+       "x0": 149.4976806640625,
+       "y0": 704.0020751953125,
+       "x1": 168.1576690673828,
+       "y1": 715.4596557617188
+      },
+      {
+       "page": 5,
+       "x0": 168.1540069580078,
+       "y0": 708.129150390625,
+       "x1": 172.94500732421875,
+       "y1": 714.3218994140625
+      },
+      {
+       "page": 5,
+       "x0": 173.44200134277344,
+       "y0": 704.0020751953125,
+       "x1": 181.36181640625,
+       "y1": 713.9646606445312
+      },
+      {
+       "page": 5,
+       "x0": 181.3610076904297,
+       "y0": 708.129150390625,
+       "x1": 184.37368774414062,
+       "y1": 714.3218994140625
+      },
+      {
+       "page": 5,
+       "x0": 184.86801147460938,
+       "y0": 704.0020751953125,
+       "x1": 193.81903076171875,
+       "y1": 713.9646606445312
+      },
+      {
+       "page": 5,
+       "x0": 193.81500244140625,
+       "y0": 708.129150390625,
+       "x1": 196.8276824951172,
+       "y1": 714.3218994140625
+      },
+      {
+       "page": 5,
+       "x0": 197.322998046875,
+       "y0": 704.0020751953125,
+       "x1": 203.9665985107422,
+       "y1": 713.9646606445312
+      },
+      {
+       "page": 5,
+       "x0": 272.8429870605469,
+       "y0": 704.7193603515625,
+       "x1": 289.4406433105469,
+       "y1": 713.6259155273438
+      },
+      {
+       "page": 5,
+       "x0": 307.0820007324219,
+       "y0": 69.83979797363281,
+       "x1": 406.2193908691406,
+       "y1": 78.86591339111328
+      }
+     ],
+     "quote": "To that end, we reparameterize the policy using a neural network transformation a t = f φ ( t ; s t ),(11)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "Two independently trained Q-functions are utilized, and their minimum is used for value and policy gradients to mitigate positive bias.",
+   "evidence": [
+    {
+     "chunk_id": "b0068",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 307.44,
+      "y0": 541.2,
+      "x1": 543.1,
+      "y1": 574.45
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 423.65,
+       "y0": 541.2,
+       "x1": 541.4399999999999,
+       "y1": 549.84
+      },
+      {
+       "page": 5,
+       "x0": 307.44,
+       "y0": 552.17,
+       "x1": 451.86,
+       "y1": 562.13
+      },
+      {
+       "page": 5,
+       "x0": 451.86,
+       "y0": 553.16,
+       "x1": 543.1,
+       "y1": 562.49
+      },
+      {
+       "page": 5,
+       "x0": 307.44,
+       "y0": 564.13,
+       "x1": 400.57,
+       "y1": 574.09
+      },
+      {
+       "page": 5,
+       "x0": 400.57,
+       "y0": 568.33,
+       "x1": 406.84,
+       "y1": 574.45
+      },
+      {
+       "page": 5,
+       "x0": 407.34,
+       "y0": 564.13,
+       "x1": 415.89,
+       "y1": 574.09
+      },
+      {
+       "page": 5,
+       "x0": 415.89,
+       "y0": 568.33,
+       "x1": 418.71,
+       "y1": 574.45
+      },
+      {
+       "page": 5,
+       "x0": 419.21,
+       "y0": 564.13,
+       "x1": 425.52,
+       "y1": 574.09
+      }
+     ],
+     "quote": "In particular, we parameterize two Q-functions, with parameters θ i , and train them independently to optimize J Q (θ i ).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "The authors state that this is the first off-policy actor-critic method within the maximum entropy reinforcement learning framework.",
+   "evidence": [
+    {
+     "chunk_id": "b0019",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 307.44,
+      "y0": 551.05,
+      "x1": 543.14,
+      "y1": 595.55
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 339.72,
+       "y0": 551.05,
+       "x1": 543.09,
+       "y1": 559.6899999999999
+      },
+      {
+       "page": 3,
+       "x0": 307.44,
+       "y0": 563.0,
+       "x1": 541.44,
+       "y1": 571.64
+      },
+      {
+       "page": 3,
+       "x0": 307.44,
+       "y0": 574.96,
+       "x1": 541.44,
+       "y1": 583.6
+      },
+      {
+       "page": 3,
+       "x0": 307.44,
+       "y0": 586.91,
+       "x1": 543.14,
+       "y1": 595.55
+      }
+     ],
+     "quote": "Though such algorithms have previously been proposed for conventional reinforcement learning, our method is, to our knowledge, the first off-policy actor-critic method in the maximum entropy reinforcement learning framework.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "OpenAI gym continuous control benchmark tasks",
+   "evidence": [
+    {
+     "chunk_id": "b0070",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 55.44,
+      "y0": 524.22,
+      "x1": 291.1,
+      "y1": 580.68
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 187.53,
+       "y0": 524.22,
+       "x1": 289.43,
+       "y1": 532.86
+      },
+      {
+       "page": 6,
+       "x0": 55.44,
+       "y0": 536.18,
+       "x1": 289.44,
+       "y1": 544.8199999999999
+      },
+      {
+       "page": 6,
+       "x0": 55.44,
+       "y0": 548.13,
+       "x1": 291.1,
+       "y1": 556.77
+      },
+      {
+       "page": 6,
+       "x0": 55.44,
+       "y0": 560.09,
+       "x1": 289.44,
+       "y1": 568.73
+      },
+      {
+       "page": 6,
+       "x0": 55.44,
+       "y0": 572.04,
+       "x1": 209.23,
+       "y1": 580.68
+      }
+     ],
+     "quote": "We compare our method to prior techniques on a range of challenging continuous control tasks from the OpenAI gym benchmark suite (Brockman et al., 2016) and also on the rllab implementation of the Humanoid task (Duan et al., 2016).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "OpenAI gym benchmark suite",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "Humanoid task from rllab implementation",
+   "evidence": [
+    {
+     "chunk_id": "b0070",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 55.44,
+      "y0": 524.22,
+      "x1": 291.1,
+      "y1": 580.68
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 187.53,
+       "y0": 524.22,
+       "x1": 289.43,
+       "y1": 532.86
+      },
+      {
+       "page": 6,
+       "x0": 55.44,
+       "y0": 536.18,
+       "x1": 289.44,
+       "y1": 544.8199999999999
+      },
+      {
+       "page": 6,
+       "x0": 55.44,
+       "y0": 548.13,
+       "x1": 291.1,
+       "y1": 556.77
+      },
+      {
+       "page": 6,
+       "x0": 55.44,
+       "y0": 560.09,
+       "x1": 289.44,
+       "y1": 568.73
+      },
+      {
+       "page": 6,
+       "x0": 55.44,
+       "y0": 572.04,
+       "x1": 209.23,
+       "y1": 580.68
+      }
+     ],
+     "quote": "We compare our method to prior techniques on a range of challenging continuous control tasks from the OpenAI gym benchmark suite (Brockman et al., 2016) and also on the rllab implementation of the Humanoid task (Duan et al., 2016).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "rllab implementation of the Humanoid task",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Deep deterministic policy gradient (DDPG)",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 306.97,
+      "y0": 392.6,
+      "x1": 543.09,
+      "y1": 484.91999999999996
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 306.97,
+       "y0": 392.6,
+       "x1": 543.09,
+       "y1": 401.24
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 404.55,
+       "x1": 541.44,
+       "y1": 413.19
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 416.51,
+       "x1": 541.44,
+       "y1": 425.15
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 428.46,
+       "x1": 543.09,
+       "y1": 437.09999999999997
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 440.42,
+       "x1": 541.44,
+       "y1": 449.06
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 452.37,
+       "x1": 541.44,
+       "y1": 461.01
+      },
+      {
+       "page": 6,
+       "x0": 307.11,
+       "y0": 464.33,
+       "x1": 541.44,
+       "y1": 472.96999999999997
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 476.28,
+       "x1": 470.91999999999996,
+       "y1": 484.91999999999996
+      }
+     ],
+     "quote": "We compare our method to deep deterministic policy gradient (DDPG) (Lillicrap et al., 2015), an algorithm that is regarded as one of the more efficient off-policy deep RL methods (Duan et al., 2016); proximal policy optimization (PPO) (Schulman et al., 2017b), a stable and effective on-policy policy gradient algorithm; and soft Q-learning (SQL) (Haarnoja et al., 2017), a recent off-policy algorithm for learning maximum entropy policies.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Proximal policy optimization (PPO)",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 306.97,
+      "y0": 392.6,
+      "x1": 543.09,
+      "y1": 484.91999999999996
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 306.97,
+       "y0": 392.6,
+       "x1": 543.09,
+       "y1": 401.24
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 404.55,
+       "x1": 541.44,
+       "y1": 413.19
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 416.51,
+       "x1": 541.44,
+       "y1": 425.15
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 428.46,
+       "x1": 543.09,
+       "y1": 437.09999999999997
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 440.42,
+       "x1": 541.44,
+       "y1": 449.06
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 452.37,
+       "x1": 541.44,
+       "y1": 461.01
+      },
+      {
+       "page": 6,
+       "x0": 307.11,
+       "y0": 464.33,
+       "x1": 541.44,
+       "y1": 472.96999999999997
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 476.28,
+       "x1": 470.91999999999996,
+       "y1": 484.91999999999996
+      }
+     ],
+     "quote": "We compare our method to deep deterministic policy gradient (DDPG) (Lillicrap et al., 2015), an algorithm that is regarded as one of the more efficient off-policy deep RL methods (Duan et al., 2016); proximal policy optimization (PPO) (Schulman et al., 2017b), a stable and effective on-policy policy gradient algorithm; and soft Q-learning (SQL) (Haarnoja et al., 2017), a recent off-policy algorithm for learning maximum entropy policies.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "Soft Q-learning (SQL)",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 306.97,
+      "y0": 392.6,
+      "x1": 543.09,
+      "y1": 484.91999999999996
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 306.97,
+       "y0": 392.6,
+       "x1": 543.09,
+       "y1": 401.24
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 404.55,
+       "x1": 541.44,
+       "y1": 413.19
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 416.51,
+       "x1": 541.44,
+       "y1": 425.15
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 428.46,
+       "x1": 543.09,
+       "y1": 437.09999999999997
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 440.42,
+       "x1": 541.44,
+       "y1": 449.06
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 452.37,
+       "x1": 541.44,
+       "y1": 461.01
+      },
+      {
+       "page": 6,
+       "x0": 307.11,
+       "y0": 464.33,
+       "x1": 541.44,
+       "y1": 472.96999999999997
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 476.28,
+       "x1": 470.91999999999996,
+       "y1": 484.91999999999996
+      }
+     ],
+     "quote": "We compare our method to deep deterministic policy gradient (DDPG) (Lillicrap et al., 2015), an algorithm that is regarded as one of the more efficient off-policy deep RL methods (Duan et al., 2016); proximal policy optimization (PPO) (Schulman et al., 2017b), a stable and effective on-policy policy gradient algorithm; and soft Q-learning (SQL) (Haarnoja et al., 2017), a recent off-policy algorithm for learning maximum entropy policies.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "Twin delayed deep deterministic policy gradient algorithm (TD3)",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 307.44,
+      "y0": 500.19,
+      "x1": 543.09,
+      "y1": 544.6999999999999
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 507.45,
+       "y0": 500.19,
+       "x1": 543.09,
+       "y1": 508.83
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 512.15,
+       "x1": 541.78,
+       "y1": 520.79
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 524.1,
+       "x1": 541.44,
+       "y1": 532.74
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 536.06,
+       "x1": 456.64,
+       "y1": 544.6999999999999
+      }
+     ],
+     "quote": "We additionally compare to twin delayed deep deterministic policy gradient algorithm (TD3) (Fujimoto et al., 2018), using the author-provided implementation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "Trust region path consistency learning (Trust-PCL)",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 307.44,
+      "y0": 571.92,
+      "x1": 543.09,
+      "y1": 628.38
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 438.1,
+       "y0": 571.92,
+       "x1": 543.09,
+       "y1": 580.56
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 583.88,
+       "x1": 542.6800000000001,
+       "y1": 592.52
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 595.83,
+       "x1": 541.44,
+       "y1": 604.47
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 607.79,
+       "x1": 541.44,
+       "y1": 616.43
+      },
+      {
+       "page": 6,
+       "x0": 307.44,
+       "y0": 619.74,
+       "x1": 345.46,
+       "y1": 628.38
+      }
+     ],
+     "quote": "We have included trust region path consistency learning (Trust-PCL) (Nachum et al., 2017b) and two other variants of SAC in Appendix E.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Total average return of evaluation rollouts",
+   "evidence": [
+    {
+     "chunk_id": "b0074",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 55.44,
+      "y0": 89.19,
+      "x1": 289.44,
+      "y1": 109.79
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 55.44,
+       "y0": 89.19,
+       "x1": 289.44,
+       "y1": 97.83
+      },
+      {
+       "page": 7,
+       "x0": 55.44,
+       "y0": 101.15,
+       "x1": 231.41,
+       "y1": 109.79
+      }
+     ],
+     "quote": "Figure 1 shows the total average return of evaluation rollouts during training for DDPG, PPO, and TD3.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Target value network update smoothing constant tau",
+   "evidence": [
+    {
+     "chunk_id": "b0086",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 55.44,
+      "y0": 527.67,
+      "x1": 289.44,
+      "y1": 560.22
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 170.32,
+       "y0": 527.67,
+       "x1": 289.44,
+       "y1": 536.31
+      },
+      {
+       "page": 8,
+       "x0": 55.44,
+       "y0": 538.64,
+       "x1": 289.44,
+       "y1": 548.6
+      },
+      {
+       "page": 8,
+       "x0": 55.44,
+       "y0": 551.58,
+       "x1": 240.55,
+       "y1": 560.22
+      }
+     ],
+     "quote": "However, we found the range of suitable values of τ to be relatively wide and we used the same value (0.005) across all of the tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "target value update smoothing constant tau",
+   "value_raw": "0.005",
+   "value_norm": 0.005,
+   "scope": ""
+  }
+ ],
+ "compute": [],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Five different instances with different random seeds",
+   "evidence": [
+    {
+     "chunk_id": "b0074",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 54.69,
+      "y0": 101.15,
+      "x1": 289.78999999999996,
+      "y1": 145.64999999999998
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 236.41,
+       "y0": 101.15,
+       "x1": 289.43,
+       "y1": 109.79
+      },
+      {
+       "page": 7,
+       "x0": 55.44,
+       "y0": 113.1,
+       "x1": 289.44,
+       "y1": 121.74
+      },
+      {
+       "page": 7,
+       "x0": 55.44,
+       "y0": 125.06,
+       "x1": 289.78999999999996,
+       "y1": 133.7
+      },
+      {
+       "page": 7,
+       "x0": 54.69,
+       "y0": 137.01,
+       "x1": 149.45,
+       "y1": 145.64999999999998
+      }
+     ],
+     "quote": "We train five different instances of each algorithm with different random seeds, with each performing one evaluation rollout every 1000 environment steps.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Deterministic variant of SAC",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 55.13,
+      "y0": 624.89,
+      "x1": 291.09000000000003,
+      "y1": 705.26
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 55.13,
+       "y0": 624.89,
+       "x1": 289.79,
+       "y1": 633.53
+      },
+      {
+       "page": 7,
+       "x0": 55.44,
+       "y0": 636.84,
+       "x1": 289.44,
+       "y1": 645.48
+      },
+      {
+       "page": 7,
+       "x0": 55.44,
+       "y0": 648.8,
+       "x1": 291.09000000000003,
+       "y1": 657.4399999999999
+      },
+      {
+       "page": 7,
+       "x0": 55.44,
+       "y0": 660.75,
+       "x1": 289.44,
+       "y1": 669.39
+      },
+      {
+       "page": 7,
+       "x0": 55.44,
+       "y0": 672.71,
+       "x1": 289.44,
+       "y1": 681.35
+      },
+      {
+       "page": 7,
+       "x0": 55.44,
+       "y0": 684.66,
+       "x1": 289.44,
+       "y1": 693.3
+      },
+      {
+       "page": 7,
+       "x0": 55.44,
+       "y0": 696.62,
+       "x1": 156.05,
+       "y1": 705.26
+      }
+     ],
+     "quote": "To compare how the stochasticity of the policy and entropy maximization affects the performance, we compare to a deterministic variant of SAC that does not maximize the entropy and that closely resembles DDPG, with the exception of having two Q-functions, using hard target updates, not having a separate target actor, and using fixed rather than learned exploration noise.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "SAC variant with periodic direct target network weight copies instead of exponential moving average",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 55.11,
+      "y0": 101.87,
+      "x1": 541.44,
+      "y1": 170.27999999999997
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 480.59,
+       "y0": 101.87,
+       "x1": 541.4399999999999,
+       "y1": 110.51
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 113.82,
+       "x1": 88.94,
+       "y1": 122.46
+      },
+      {
+       "page": 14,
+       "x0": 108.9,
+       "y0": 113.82,
+       "x1": 541.44,
+       "y1": 122.46
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 125.78,
+       "x1": 541.44,
+       "y1": 134.42000000000002
+      },
+      {
+       "page": 14,
+       "x0": 55.11,
+       "y0": 137.73,
+       "x1": 541.4399999999999,
+       "y1": 146.37
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 149.69,
+       "x1": 541.44,
+       "y1": 158.32999999999998
+      },
+      {
+       "page": 14,
+       "x0": 55.44,
+       "y0": 161.64,
+       "x1": 87.19,
+       "y1": 170.27999999999997
+      }
+     ],
+     "quote": "The figure also includes variants of SAC: a variant that periodically copies the target value network weights directly instead of using exponentially moving average, and a deterministic ablation which assumes a deterministic policy in the value update (Equation 6) and the policy update (Equation 13), and thus strongly resembles DDPG with the exception of having two Q-functions, using hard target updates, not having a separate target actor, and using fixed exploration noise rather than learned.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Further explore maximum entropy methods, including second-order information and more expressive policy classes.",
+   "evidence": [
+    {
+     "chunk_id": "b0088",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 307.44,
+      "y0": 445.9,
+      "x1": 543.09,
+      "y1": 526.27
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 325.39,
+       "y0": 445.9,
+       "x1": 541.43,
+       "y1": 454.53999999999996
+      },
+      {
+       "page": 8,
+       "x0": 307.44,
+       "y0": 457.86,
+       "x1": 541.44,
+       "y1": 466.5
+      },
+      {
+       "page": 8,
+       "x0": 307.44,
+       "y0": 469.81,
+       "x1": 541.61,
+       "y1": 478.45
+      },
+      {
+       "page": 8,
+       "x0": 307.44,
+       "y0": 481.77,
+       "x1": 543.09,
+       "y1": 490.40999999999997
+      },
+      {
+       "page": 8,
+       "x0": 307.44,
+       "y0": 493.72,
+       "x1": 541.44,
+       "y1": 502.36
+      },
+      {
+       "page": 8,
+       "x0": 307.44,
+       "y0": 505.68,
+       "x1": 541.79,
+       "y1": 514.32
+      },
+      {
+       "page": 8,
+       "x0": 307.44,
+       "y0": 517.63,
+       "x1": 486.68,
+       "y1": 526.27
+      }
+     ],
+     "quote": "Our results suggest that stochastic, entropy maximizing reinforcement learning algorithms can provide a promising avenue for improved robustness and stability, and further exploration of maximum entropy methods, including methods that incorporate second order information (e.g., trust regions (Schulman et al., 2015)) or more expressive policy classes is an exciting avenue for future work.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "The proposed method achieves state-of-the-art performance on continuous control benchmark tasks and outperforms prior methods.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 75.37,
+      "y0": 435.75,
+      "x1": 271.18,
+      "y1": 504.16999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 171.18,
+       "y0": 435.75,
+       "x1": 269.87,
+       "y1": 444.39
+      },
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 447.71,
+       "x1": 271.17,
+       "y1": 456.34999999999997
+      },
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 459.66,
+       "x1": 271.17,
+       "y1": 468.3
+      },
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 471.62,
+       "x1": 271.18,
+       "y1": 480.26
+      },
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 483.57,
+       "x1": 269.52,
+       "y1": 492.21
+      },
+      {
+       "page": 1,
+       "x0": 75.37,
+       "y0": 495.53,
+       "x1": 151.74,
+       "y1": 504.16999999999996
+      }
+     ],
+     "quote": "By combining off-policy updates with a stable stochastic actor-critic formulation, our method achieves state-of-the-art performance on a range of continuous control benchmark tasks, outperforming prior on-policy and off-policy methods.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

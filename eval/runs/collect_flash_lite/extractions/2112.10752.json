@@ -1,0 +1,3755 @@
+{
+ "metadata": {
+  "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+  "authors": [
+   "Robin Rombach",
+   "Andreas Blattmann",
+   "Dominik Lorenz",
+   "Patrick Esser",
+   "Björn Ommer"
+  ],
+  "venue": null,
+  "year": "2022",
+  "arxiv_id": "2112.10752v2[cs.CV]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Diffusion models typically operate directly in pixel space, making optimization consume hundreds of GPU days and inference expensive.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 265.36,
+      "x1": 286.37,
+      "y1": 321.77
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 200.01,
+       "y0": 265.36,
+       "x1": 286.37,
+       "y1": 273.95
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 277.32,
+       "x1": 286.36,
+       "y1": 285.90999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 289.27,
+       "x1": 286.36,
+       "y1": 297.85999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 301.23,
+       "x1": 286.36,
+       "y1": 309.82
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 313.18,
+       "x1": 76.96000000000001,
+       "y1": 321.77
+      }
+     ],
+     "quote": "However, since these models typically operate directly in pixel space, optimization of powerful DMs often consumes hundreds of GPU days and inference is expensive due to sequential evaluations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "High-resolution synthesis of complex scenes is computationally demanding and requires massive resources only available to a small fraction of the field.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 577.27,
+      "x1": 286.36,
+      "y1": 633.74
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 263.68,
+       "y0": 577.27,
+       "x1": 286.36,
+       "y1": 585.91
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 589.23,
+       "x1": 286.36,
+       "y1": 597.87
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 601.19,
+       "x1": 286.36,
+       "y1": 609.83
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 613.14,
+       "x1": 286.36,
+       "y1": 621.78
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 625.1,
+       "x1": 191.57999999999998,
+       "y1": 633.74
+      }
+     ],
+     "quote": "Especially high-resolution synthesis of complex, natural scenes is presently dominated by scaling up likelihood-based models, potentially containing billions of parameters in autoregressive (AR) transformers [66,67].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Our method scales more gracefully to higher dimensional data and can be efficiently applied to high-resolution synthesis of megapixel images.",
+   "evidence": [
+    {
+     "chunk_id": "b0009",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 50.11,
+      "y0": 230.48,
+      "x1": 545.11,
+      "y1": 725.11
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 62.07,
+       "y0": 668.65,
+       "x1": 286.37,
+       "y1": 677.29
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 680.6,
+       "x1": 286.36,
+       "y1": 689.24
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 692.56,
+       "x1": 286.36,
+       "y1": 701.1999999999999
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 704.51,
+       "x1": 286.36,
+       "y1": 713.15
+      },
+      {
+       "page": 2,
+       "x0": 50.11,
+       "y0": 716.47,
+       "x1": 286.36,
+       "y1": 725.11
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 230.48,
+       "x1": 545.11,
+       "y1": 238.25
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 241.44,
+       "x1": 519.7,
+       "y1": 249.21
+      }
+     ],
+     "quote": "(i) In contrast to purely transformer-based approaches [23,66], our method scales more graceful to higher dimensional data and can thus (a) work on a compression level which provides more faithful and detailed reconstructions than previous work (see Fig. 1) and (b) can be efficiently Figure 2. Illustrating perceptual and semantic compression: Most bits of a digital image correspond to imperceptible details.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "We achieve competitive performance on multiple tasks while significantly lowering computational and inference costs.",
+   "evidence": [
+    {
+     "chunk_id": "b0011",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 308.86,
+      "y0": 364.54,
+      "x1": 545.12,
+      "y1": 409.03999999999996
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 320.82,
+       "y0": 364.54,
+       "x1": 545.12,
+       "y1": 373.18
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 376.49,
+       "x1": 545.11,
+       "y1": 385.13
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 388.45,
+       "x1": 545.11,
+       "y1": 397.09
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 400.4,
+       "x1": 390.36,
+       "y1": 409.03999999999996
+      }
+     ],
+     "quote": "(ii) We achieve competitive performance on multiple tasks (unconditional image synthesis, inpainting, stochastic super-resolution) and datasets while significantly lowering computational costs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "Our approach does not require a delicate weighting of reconstruction and generative abilities, ensuring faithful reconstructions and little regularization.",
+   "evidence": [
+    {
+     "chunk_id": "b0012",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 308.86,
+      "y0": 425.03,
+      "x1": 545.12,
+      "y1": 481.49
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 320.82,
+       "y0": 425.03,
+       "x1": 545.12,
+       "y1": 433.66999999999996
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 436.98,
+       "x1": 545.11,
+       "y1": 445.62
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 448.94,
+       "x1": 545.11,
+       "y1": 457.58
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 460.89,
+       "x1": 545.11,
+       "y1": 469.53
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 472.85,
+       "x1": 342.90000000000003,
+       "y1": 481.49
+      }
+     ],
+     "quote": "(iii) We show that, in contrast to previous work [93] which learns both an encoder/decoder architecture and a score-based prior simultaneously, our approach does not require a delicate weighting of reconstruction and generative abilities.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.3",
+   "value": "Our model can be applied in a convolutional fashion for densely conditioned tasks to render large, consistent images.",
+   "evidence": [
+    {
+     "chunk_id": "b0013",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 308.86,
+      "y0": 497.48,
+      "x1": 545.12,
+      "y1": 541.98
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 320.82,
+       "y0": 497.48,
+       "x1": 545.12,
+       "y1": 506.12
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 509.43,
+       "x1": 545.11,
+       "y1": 518.07
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 521.39,
+       "x1": 545.11,
+       "y1": 530.03
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 533.02,
+       "x1": 447.86,
+       "y1": 541.98
+      },
+      {
+       "page": 2,
+       "x0": 447.87,
+       "y0": 531.45,
+       "x1": 451.84000000000003,
+       "y1": 537.57
+      },
+      {
+       "page": 2,
+       "x0": 454.83,
+       "y0": 533.34,
+       "x1": 467.28,
+       "y1": 541.98
+      }
+     ],
+     "quote": "(iv) We find that for densely conditioned tasks such as super-resolution, inpainting and semantic synthesis, our model can be applied in a convolutional fashion and render large, consistent images of ∼ 1024 2 px.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.4",
+   "value": "We design a general-purpose conditioning mechanism based on cross-attention, enabling multi-modal training.",
+   "evidence": [
+    {
+     "chunk_id": "b0014",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 308.86,
+      "y0": 546.01,
+      "x1": 545.12,
+      "y1": 578.56
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 320.82,
+       "y0": 546.01,
+       "x1": 545.12,
+       "y1": 554.65
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 557.97,
+       "x1": 545.11,
+       "y1": 566.61
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 569.92,
+       "x1": 342.34000000000003,
+       "y1": 578.56
+      }
+     ],
+     "quote": "(v) Moreover, we design a general-purpose conditioning mechanism based on cross-attention, enabling multi-modal training.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.5",
+   "value": "We release pretrained latent diffusion and autoencoding models that might be reusable for various tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0015",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 308.86,
+      "y0": 594.55,
+      "x1": 545.12,
+      "y1": 639.06
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 320.82,
+       "y0": 594.55,
+       "x1": 545.12,
+       "y1": 603.1899999999999
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 606.51,
+       "x1": 545.11,
+       "y1": 615.15
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 618.46,
+       "x1": 545.11,
+       "y1": 627.1
+      },
+      {
+       "page": 2,
+       "x0": 308.86,
+       "y0": 630.42,
+       "x1": 537.15,
+       "y1": 639.06
+      }
+     ],
+     "quote": "(vi) Finally, we release pretrained latent diffusion and autoencoding models at https : / / github . com/CompVis/latent-diffusion which might be reusable for a various tasks besides training of DMs [81].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "image inpainting",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 444.69,
+      "x1": 286.36,
+      "y1": 525.01
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 205.01,
+       "y0": 444.69,
+       "x1": 286.36,
+       "y1": 453.28
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 456.65,
+       "x1": 286.36,
+       "y1": 465.23999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 468.6,
+       "x1": 286.36,
+       "y1": 477.19
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 480.56,
+       "x1": 286.36,
+       "y1": 489.15
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 492.51,
+       "x1": 286.36,
+       "y1": 501.09999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 504.47,
+       "x1": 286.36,
+       "y1": 513.0600000000001
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 516.42,
+       "x1": 252.66000000000003,
+       "y1": 525.01
+      }
+     ],
+     "quote": "Our latent diffusion models (LDMs) achieve new state-of-the-art scores for image inpainting and class-conditional image synthesis and highly competitive performance on various tasks, including text-to-image synthesis, unconditional image generation and super-resolution, while significantly reducing computational requirements compared to pixel-based DMs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "task.1",
+   "value": "class-conditional image synthesis",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 444.69,
+      "x1": 286.36,
+      "y1": 525.01
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 205.01,
+       "y0": 444.69,
+       "x1": 286.36,
+       "y1": 453.28
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 456.65,
+       "x1": 286.36,
+       "y1": 465.23999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 468.6,
+       "x1": 286.36,
+       "y1": 477.19
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 480.56,
+       "x1": 286.36,
+       "y1": 489.15
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 492.51,
+       "x1": 286.36,
+       "y1": 501.09999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 504.47,
+       "x1": 286.36,
+       "y1": 513.0600000000001
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 516.42,
+       "x1": 252.66000000000003,
+       "y1": 525.01
+      }
+     ],
+     "quote": "Our latent diffusion models (LDMs) achieve new state-of-the-art scores for image inpainting and class-conditional image synthesis and highly competitive performance on various tasks, including text-to-image synthesis, unconditional image generation and super-resolution, while significantly reducing computational requirements compared to pixel-based DMs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "task.2",
+   "value": "text-to-image synthesis",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 444.69,
+      "x1": 286.36,
+      "y1": 525.01
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 205.01,
+       "y0": 444.69,
+       "x1": 286.36,
+       "y1": 453.28
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 456.65,
+       "x1": 286.36,
+       "y1": 465.23999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 468.6,
+       "x1": 286.36,
+       "y1": 477.19
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 480.56,
+       "x1": 286.36,
+       "y1": 489.15
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 492.51,
+       "x1": 286.36,
+       "y1": 501.09999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 504.47,
+       "x1": 286.36,
+       "y1": 513.0600000000001
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 516.42,
+       "x1": 252.66000000000003,
+       "y1": 525.01
+      }
+     ],
+     "quote": "Our latent diffusion models (LDMs) achieve new state-of-the-art scores for image inpainting and class-conditional image synthesis and highly competitive performance on various tasks, including text-to-image synthesis, unconditional image generation and super-resolution, while significantly reducing computational requirements compared to pixel-based DMs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "task.3",
+   "value": "unconditional image generation",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 444.69,
+      "x1": 286.36,
+      "y1": 525.01
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 205.01,
+       "y0": 444.69,
+       "x1": 286.36,
+       "y1": 453.28
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 456.65,
+       "x1": 286.36,
+       "y1": 465.23999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 468.6,
+       "x1": 286.36,
+       "y1": 477.19
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 480.56,
+       "x1": 286.36,
+       "y1": 489.15
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 492.51,
+       "x1": 286.36,
+       "y1": 501.09999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 504.47,
+       "x1": 286.36,
+       "y1": 513.0600000000001
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 516.42,
+       "x1": 252.66000000000003,
+       "y1": 525.01
+      }
+     ],
+     "quote": "Our latent diffusion models (LDMs) achieve new state-of-the-art scores for image inpainting and class-conditional image synthesis and highly competitive performance on various tasks, including text-to-image synthesis, unconditional image generation and super-resolution, while significantly reducing computational requirements compared to pixel-based DMs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "task.4",
+   "value": "super-resolution",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 444.69,
+      "x1": 286.36,
+      "y1": 525.01
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 205.01,
+       "y0": 444.69,
+       "x1": 286.36,
+       "y1": 453.28
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 456.65,
+       "x1": 286.36,
+       "y1": 465.23999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 468.6,
+       "x1": 286.36,
+       "y1": 477.19
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 480.56,
+       "x1": 286.36,
+       "y1": 489.15
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 492.51,
+       "x1": 286.36,
+       "y1": 501.09999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 504.47,
+       "x1": 286.36,
+       "y1": 513.0600000000001
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 516.42,
+       "x1": 252.66000000000003,
+       "y1": 525.01
+      }
+     ],
+     "quote": "Our latent diffusion models (LDMs) achieve new state-of-the-art scores for image inpainting and class-conditional image synthesis and highly competitive performance on various tasks, including text-to-image synthesis, unconditional image generation and super-resolution, while significantly reducing computational requirements compared to pixel-based DMs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "An autoencoder is used to compress images into a low-dimensional latent space using a perceptual loss and a patch-based adversarial objective.",
+   "evidence": [
+    {
+     "chunk_id": "b0027",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 308.86,
+      "y0": 620.13,
+      "x1": 545.12,
+      "y1": 664.64
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 320.82,
+       "y0": 620.13,
+       "x1": 545.12,
+       "y1": 628.77
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 632.09,
+       "x1": 545.11,
+       "y1": 640.73
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 644.04,
+       "x1": 545.11,
+       "y1": 652.68
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 656.0,
+       "x1": 445.48,
+       "y1": 664.64
+      }
+     ],
+     "quote": "Our perceptual compression model is based on previous work [23] and consists of an autoencoder trained by combination of a perceptual loss [106] and a patch-based [33] adversarial objective [20,23,103].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "The latent space is regularized using either a KL-penalty or a vector quantization layer to avoid arbitrarily high-variance latent spaces.",
+   "evidence": [
+    {
+     "chunk_id": "b0030",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 50.11,
+      "y0": 135.59,
+      "x1": 286.37,
+      "y1": 156.19
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 62.07,
+       "y0": 135.59,
+       "x1": 286.37,
+       "y1": 144.23000000000002
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 147.55,
+       "x1": 286.36,
+       "y1": 156.19
+      }
+     ],
+     "quote": "In order to order to avoid arbitrarily high-variance latent spaces, we experiment with two different kinds of regularizations.",
+     "grounding_status": "verified",
+     "match_score": 96.3
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "A diffusion model is trained in the learned latent space using a reweighted variant of the variational lower bound to predict a denoised variant.",
+   "evidence": [
+    {
+     "chunk_id": "b0032",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 50.11,
+      "y0": 413.9,
+      "x1": 286.36,
+      "y1": 446.46
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 413.9,
+       "x1": 286.36,
+       "y1": 422.53999999999996
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 425.86,
+       "x1": 286.36,
+       "y1": 434.5
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 437.5,
+       "x1": 286.36,
+       "y1": 446.46
+      }
+     ],
+     "quote": "For image synthesis, the most successful models [15,30,72] rely on a reweighted variant of the variational lower bound on p(x), which mirrors denoising score-matching [85].",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "The neural backbone of the model is a time-conditional UNet that uses cross-attention mechanisms to incorporate conditioning inputs from various modalities.",
+   "evidence": [
+    {
+     "chunk_id": "b0038",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 314.6,
+      "x1": 545.11,
+      "y1": 335.51
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 314.6,
+       "x1": 545.11,
+       "y1": 324.25
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 326.87,
+       "x1": 422.46000000000004,
+       "y1": 335.51
+      }
+     ],
+     "quote": "The neural backbone θ (•, t) of our model is realized as a time-conditional UNet [71].",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "The approach explicitly separates the compressive learning phase from the generative learning phase.",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 308.86,
+      "y0": 368.58,
+      "x1": 545.12,
+      "y1": 401.13
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 320.82,
+       "y0": 368.58,
+       "x1": 545.12,
+       "y1": 377.21999999999997
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 380.53,
+       "x1": 545.11,
+       "y1": 389.16999999999996
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 392.49,
+       "x1": 435.65000000000003,
+       "y1": 401.13
+      }
+     ],
+     "quote": "We propose to circumvent this drawback by introducing an explicit separation of the compressive from the generative learning phase (see Fig. 2).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "Unlike previous works that used an arbitrary 1D ordering, this method preserves the 2D spatial structure of the learned latent space using mild compression rates.",
+   "evidence": [
+    {
+     "chunk_id": "b0030",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 50.11,
+      "y0": 255.14,
+      "x1": 286.37,
+      "y1": 311.59999999999997
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 258.44,
+       "y0": 255.14,
+       "x1": 286.37,
+       "y1": 263.78
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 267.1,
+       "x1": 286.36,
+       "y1": 275.74
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 278.73,
+       "x1": 286.36,
+       "y1": 287.69
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 291.01,
+       "x1": 286.36,
+       "y1": 299.65
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 302.64,
+       "x1": 157.06,
+       "y1": 311.59999999999997
+      }
+     ],
+     "quote": "This is in contrast to previous works [23,66], which relied on an arbitrary 1D ordering of the learned space z to model its distribution autoregressively and thereby ignored much of the inherent structure of z.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.2",
+   "value": "Unlike previous work relying on autoregressive transformers in a discrete latent space, this approach exploits image-specific inductive biases via a UNet.",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 50.11,
+      "y0": 668.65,
+      "x1": 286.37,
+      "y1": 713.15
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 62.07,
+       "y0": 668.65,
+       "x1": 286.37,
+       "y1": 677.29
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 680.6,
+       "x1": 286.36,
+       "y1": 689.24
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 692.56,
+       "x1": 286.36,
+       "y1": 701.1999999999999
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 704.51,
+       "x1": 264.63,
+       "y1": 713.15
+      }
+     ],
+     "quote": "Unlike previous work that relied on autoregressive, attention-based transformer models in a highly compressed, discrete latent space [23,66,103], we can take advantage of image-specific inductive biases that our model offers.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "ImageNet class-conditional image generation dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0056",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 308.86,
+      "y0": 241.96,
+      "x1": 545.11,
+      "y1": 274.51
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 393.83,
+       "y0": 241.96,
+       "x1": 545.11,
+       "y1": 250.60000000000002
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 253.92,
+       "x1": 545.11,
+       "y1": 262.56
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 265.87,
+       "x1": 459.46000000000004,
+       "y1": 274.51
+      }
+     ],
+     "quote": "Fig. 6 shows sample quality as a function of training progress for 2M steps of class-conditional models on the ImageNet [12] dataset.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "ImageNet",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "CelebA-HQ dataset for unconditional models",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 308.86,
+      "y0": 595.02,
+      "x1": 545.11,
+      "y1": 653.38
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 320.82,
+       "y0": 596.6,
+       "x1": 490.02,
+       "y1": 605.5600000000001
+      },
+      {
+       "page": 5,
+       "x0": 490.02,
+       "y0": 595.02,
+       "x1": 493.99,
+       "y1": 601.14
+      },
+      {
+       "page": 5,
+       "x0": 500.71,
+       "y0": 596.92,
+       "x1": 545.11,
+       "y1": 605.56
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 608.87,
+       "x1": 545.11,
+       "y1": 617.51
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 620.83,
+       "x1": 545.11,
+       "y1": 629.47
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 632.78,
+       "x1": 545.11,
+       "y1": 641.42
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 644.74,
+       "x1": 428.23,
+       "y1": 653.38
+      }
+     ],
+     "quote": "We train unconditional models of 256 2 images on CelebA-HQ [39], FFHQ [41], LSUN-Churches and -Bedrooms [102] and evaluate the i) sample quality and ii) their coverage of the data manifold using ii) FID [29] and ii) Precision-and-Recall [50].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "CelebA-HQ",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "FFHQ dataset for unconditional models",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 308.86,
+      "y0": 595.02,
+      "x1": 545.11,
+      "y1": 653.38
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 320.82,
+       "y0": 596.6,
+       "x1": 490.02,
+       "y1": 605.5600000000001
+      },
+      {
+       "page": 5,
+       "x0": 490.02,
+       "y0": 595.02,
+       "x1": 493.99,
+       "y1": 601.14
+      },
+      {
+       "page": 5,
+       "x0": 500.71,
+       "y0": 596.92,
+       "x1": 545.11,
+       "y1": 605.56
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 608.87,
+       "x1": 545.11,
+       "y1": 617.51
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 620.83,
+       "x1": 545.11,
+       "y1": 629.47
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 632.78,
+       "x1": 545.11,
+       "y1": 641.42
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 644.74,
+       "x1": 428.23,
+       "y1": 653.38
+      }
+     ],
+     "quote": "We train unconditional models of 256 2 images on CelebA-HQ [39], FFHQ [41], LSUN-Churches and -Bedrooms [102] and evaluate the i) sample quality and ii) their coverage of the data manifold using ii) FID [29] and ii) Precision-and-Recall [50].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "FFHQ",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "LSUN-Churches dataset for unconditional models",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 308.86,
+      "y0": 595.02,
+      "x1": 545.11,
+      "y1": 653.38
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 320.82,
+       "y0": 596.6,
+       "x1": 490.02,
+       "y1": 605.5600000000001
+      },
+      {
+       "page": 5,
+       "x0": 490.02,
+       "y0": 595.02,
+       "x1": 493.99,
+       "y1": 601.14
+      },
+      {
+       "page": 5,
+       "x0": 500.71,
+       "y0": 596.92,
+       "x1": 545.11,
+       "y1": 605.56
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 608.87,
+       "x1": 545.11,
+       "y1": 617.51
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 620.83,
+       "x1": 545.11,
+       "y1": 629.47
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 632.78,
+       "x1": 545.11,
+       "y1": 641.42
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 644.74,
+       "x1": 428.23,
+       "y1": 653.38
+      }
+     ],
+     "quote": "We train unconditional models of 256 2 images on CelebA-HQ [39], FFHQ [41], LSUN-Churches and -Bedrooms [102] and evaluate the i) sample quality and ii) their coverage of the data manifold using ii) FID [29] and ii) Precision-and-Recall [50].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "LSUN-Churches",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "LSUN-Bedrooms dataset for unconditional models",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 308.86,
+      "y0": 595.02,
+      "x1": 545.11,
+      "y1": 653.38
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 320.82,
+       "y0": 596.6,
+       "x1": 490.02,
+       "y1": 605.5600000000001
+      },
+      {
+       "page": 5,
+       "x0": 490.02,
+       "y0": 595.02,
+       "x1": 493.99,
+       "y1": 601.14
+      },
+      {
+       "page": 5,
+       "x0": 500.71,
+       "y0": 596.92,
+       "x1": 545.11,
+       "y1": 605.56
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 608.87,
+       "x1": 545.11,
+       "y1": 617.51
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 620.83,
+       "x1": 545.11,
+       "y1": 629.47
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 632.78,
+       "x1": 545.11,
+       "y1": 641.42
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 644.74,
+       "x1": 428.23,
+       "y1": 653.38
+      }
+     ],
+     "quote": "We train unconditional models of 256 2 images on CelebA-HQ [39], FFHQ [41], LSUN-Churches and -Bedrooms [102] and evaluate the i) sample quality and ii) their coverage of the data manifold using ii) FID [29] and ii) Precision-and-Recall [50].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "LSUN-Bedrooms",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "LAION database for text-to-image synthesis",
+   "evidence": [
+    {
+     "chunk_id": "b0060",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11,
+      "y0": 275.55,
+      "x1": 517.32,
+      "y1": 665.21
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 133.31,
+       "y0": 275.55,
+       "x1": 329.64,
+       "y1": 283.61
+      },
+      {
+       "page": 6,
+       "x0": 332.42,
+       "y0": 275.55,
+       "x1": 517.32,
+       "y1": 283.61
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 644.61,
+       "x1": 286.36,
+       "y1": 653.25
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 656.57,
+       "x1": 286.36,
+       "y1": 665.21
+      }
+     ],
+     "quote": "Samples generated with 200 DDIM steps and η = 1.0. We use unconditional guidance [32] with s = 10.0. and avoid the difficulty of weighing reconstruction quality against learning the prior over the latent space, see Fig. 12.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "LAION",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.6",
+   "value": "LAION-400M database for text-to-image modeling",
+   "evidence": [
+    {
+     "chunk_id": "b0065",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 50.11,
+      "y0": 315.19,
+      "x1": 286.36,
+      "y1": 360.08
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 250.13,
+       "y0": 315.19,
+       "x1": 286.36,
+       "y1": 324.21999999999997
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 327.15,
+       "x1": 286.36,
+       "y1": 336.17999999999995
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 339.31,
+       "x1": 286.36,
+       "y1": 348.13
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 351.44,
+       "x1": 130.75,
+       "y1": 360.08
+      }
+     ],
+     "quote": "For textto-image image modeling, we train a 1.45B parameter KL-regularized LDM conditioned on language prompts on LAION-400M [78].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "LAION-400M",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.7",
+   "value": "MS-COCO validation set for evaluating text-to-image generation",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 50.11,
+      "y0": 435.13,
+      "x1": 286.37,
+      "y1": 539.41
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 435.13,
+       "x1": 286.36,
+       "y1": 443.77
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 447.09,
+       "x1": 286.36,
+       "y1": 455.72999999999996
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 459.04,
+       "x1": 286.36,
+       "y1": 467.68
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 470.82,
+       "x1": 190.05,
+       "y1": 479.64
+      },
+      {
+       "page": 7,
+       "x0": 192.3,
+       "y0": 471.0,
+       "x1": 286.37,
+       "y1": 479.64
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 482.95,
+       "x1": 286.36,
+       "y1": 491.59
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 494.73,
+       "x1": 286.36,
+       "y1": 503.55
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 506.86,
+       "x1": 286.36,
+       "y1": 515.5
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 518.82,
+       "x1": 286.36,
+       "y1": 527.46
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 530.77,
+       "x1": 145.92000000000002,
+       "y1": 539.41
+      }
+     ],
+     "quote": "For quantitative analysis, we follow prior work and evaluate text-to-image generation on the MS-COCO [51] validation set, where our model improves upon powerful AR [17,66] and GAN-based [109] methods, cf . Tab. 2.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0066",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 50.11,
+      "y0": 111.28,
+      "x1": 541.33,
+      "y1": 575.28
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 148.89,
+       "y0": 530.77,
+       "x1": 286.36,
+       "y1": 539.41
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 542.73,
+       "x1": 286.36,
+       "y1": 551.37
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 554.29,
+       "x1": 286.36,
+       "y1": 563.3199999999999
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 566.25,
+       "x1": 286.36,
+       "y1": 575.28
+      },
+      {
+       "page": 7,
+       "x0": 503.73,
+       "y0": 111.28,
+       "x1": 541.33,
+       "y1": 115.81
+      }
+     ],
+     "quote": "To further analyze the flexibility of the cross-attention based conditioning mechanism we also train models to synthesize images based on semantic layouts on OpenImages [49], and finetune on COCO [4], see c.f.g [32], s = 1.5",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "MS-COCO",
+   "split": "validation",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.8",
+   "value": "OpenImages dataset for semantic layouts",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 50.11,
+      "y0": 111.28,
+      "x1": 541.33,
+      "y1": 575.28
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 148.89,
+       "y0": 530.77,
+       "x1": 286.36,
+       "y1": 539.41
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 542.73,
+       "x1": 286.36,
+       "y1": 551.37
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 554.29,
+       "x1": 286.36,
+       "y1": 563.3199999999999
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 566.25,
+       "x1": 286.36,
+       "y1": 575.28
+      },
+      {
+       "page": 7,
+       "x0": 503.73,
+       "y0": 111.28,
+       "x1": 541.33,
+       "y1": 115.81
+      }
+     ],
+     "quote": "To further analyze the flexibility of the cross-attention based conditioning mechanism we also train models to synthesize images based on semantic layouts on OpenImages [49], and finetune on COCO [4], see c.f.g [32], s = 1.5",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "OpenImages",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.9",
+   "value": "Places dataset for inpainting evaluation",
+   "evidence": [
+    {
+     "chunk_id": "b0079",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 308.86,
+      "y0": 354.12,
+      "x1": 545.11,
+      "y1": 374.71999999999997
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 431.79,
+       "y0": 354.12,
+       "x1": 545.11,
+       "y1": 362.76
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 366.08,
+       "x1": 503.94000000000005,
+       "y1": 374.71999999999997
+      },
+      {
+       "page": 8,
+       "x0": 506.43,
+       "y0": 366.08,
+       "x1": 529.95,
+       "y1": 374.71999999999997
+      }
+     ],
+     "quote": "The exact training & evaluation protocol on Places [108] is described in Sec. E.2.2.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "Places",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "DC-VAE",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 312.24761962890625,
+      "y0": 322.7734069824219,
+      "x1": 541.7227783203125,
+      "y1": 328.80950927734375
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 312.24761962890625,
+       "y0": 322.7734069824219,
+       "x1": 541.7227783203125,
+       "y1": 328.80950927734375
+      }
+     ],
+     "quote": "DC-VAE [63] | 15.8 | - | - |  | ImageBART [21] | 9.57 | - | -",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "VQGAN+T.",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 312.24761962890625,
+      "y0": 328.1348571777344,
+      "x1": 541.7227783203125,
+      "y1": 334.17095947265625
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 312.24761962890625,
+       "y0": 328.1348571777344,
+       "x1": 541.7227783203125,
+       "y1": 334.17095947265625
+      }
+     ],
+     "quote": "VQGAN+T. [23] (k=400) | 10.2 | - | - |  | U-Net GAN (+aug) [77] | 10.9 (7.6) | - | -",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "PGGAN",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 312.24761962890625,
+      "y0": 333.4957275390625,
+      "x1": 541.7227783203125,
+      "y1": 339.5318298339844
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 312.24761962890625,
+       "y0": 333.4957275390625,
+       "x1": 541.7227783203125,
+       "y1": 339.5318298339844
+      }
+     ],
+     "quote": "PGGAN [39] | 8.0 | - | - |  | UDM [43] | 5.54 | - | -",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "LSGM",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 312.24761962890625,
+      "y0": 338.857177734375,
+      "x1": 541.7227783203125,
+      "y1": 344.8932800292969
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 312.24761962890625,
+       "y0": 338.857177734375,
+       "x1": 541.7227783203125,
+       "y1": 344.8932800292969
+      }
+     ],
+     "quote": "LSGM [93] | 7.22 | - | - |  | StyleGAN [41] | 4.16 | 0.71 | 0.46",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "UDM",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 312.24761962890625,
+      "y0": 344.21807861328125,
+      "x1": 541.7227783203125,
+      "y1": 350.2541809082031
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 312.24761962890625,
+       "y0": 344.21807861328125,
+       "x1": 541.7227783203125,
+       "y1": 350.2541809082031
+      }
+     ],
+     "quote": "UDM [43] | 7.16 | - | - |  | ProjectedGAN [76] | 3.08 | 0.65 | 0.46",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "ImageBART",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 312.24761962890625,
+      "y0": 322.7734069824219,
+      "x1": 541.7227783203125,
+      "y1": 328.80950927734375
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 312.24761962890625,
+       "y0": 322.7734069824219,
+       "x1": 541.7227783203125,
+       "y1": 328.80950927734375
+      }
+     ],
+     "quote": "ImageBART [21] | 9.57 | - | -",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "U-Net GAN (+aug)",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 312.24761962890625,
+      "y0": 328.1348571777344,
+      "x1": 541.7227783203125,
+      "y1": 334.17095947265625
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 312.24761962890625,
+       "y0": 328.1348571777344,
+       "x1": 541.7227783203125,
+       "y1": 334.17095947265625
+      }
+     ],
+     "quote": "U-Net GAN (+aug) [77] | 10.9 (7.6) | - | -",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.7",
+   "value": "StyleGAN",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 312.24761962890625,
+      "y0": 338.857177734375,
+      "x1": 541.7227783203125,
+      "y1": 344.8932800292969
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 312.24761962890625,
+       "y0": 338.857177734375,
+       "x1": 541.7227783203125,
+       "y1": 344.8932800292969
+      }
+     ],
+     "quote": "StyleGAN [41] | 4.16 | 0.71 | 0.46",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0061",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 312.24761962890625,
+      "y0": 397.94305419921875,
+      "x1": 541.7227783203125,
+      "y1": 404.35772705078125
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 312.24761962890625,
+       "y0": 397.94305419921875,
+       "x1": 541.7227783203125,
+       "y1": 404.35772705078125
+      }
+     ],
+     "quote": "StyleGAN2 [42] | 3.86 | - |  | - | StyleGAN [41] | 2.35 | 0.59 | 0.48",
+     "grounding_status": "verified",
+     "match_score": 92.6
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.8",
+   "value": "ProjectedGAN",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 312.24761962890625,
+      "y0": 344.21807861328125,
+      "x1": 541.7227783203125,
+      "y1": 350.2541809082031
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 312.24761962890625,
+       "y0": 344.21807861328125,
+       "x1": 541.7227783203125,
+       "y1": 350.2541809082031
+      }
+     ],
+     "quote": "ProjectedGAN [76] | 3.08 | 0.65 | 0.46",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.9",
+   "value": "DDPM",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 312.24761962890625,
+      "y0": 380.351318359375,
+      "x1": 541.7227783203125,
+      "y1": 386.7659912109375
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 312.24761962890625,
+       "y0": 380.351318359375,
+       "x1": 541.7227783203125,
+       "y1": 386.7659912109375
+      }
+     ],
+     "quote": "DDPM [30] | 7.89 | - |  | - | ImageBART [21] | 5.51 | - | -",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.10",
+   "value": "ADM",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 312.24761962890625,
+      "y0": 403.8074035644531,
+      "x1": 541.7227783203125,
+      "y1": 410.2220764160156
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 312.24761962890625,
+       "y0": 403.8074035644531,
+       "x1": 541.7227783203125,
+       "y1": 410.2220764160156
+      }
+     ],
+     "quote": "ADM [15] | 1.90 | 0.66 | 0.51",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.11",
+   "value": "CogView",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 313.20086669921875,
+      "y0": 511.4676513671875,
+      "x1": 540.7678833007812,
+      "y1": 566.0352172851562
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 313.20086669921875,
+       "y0": 511.4676513671875,
+       "x1": 540.7678833007812,
+       "y1": 566.0352172851562
+      }
+     ],
+     "quote": "CogView^† [17] | 27.10 | 18.20 | 4B | self-ranking, rejection rate 0.017",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.12",
+   "value": "LAFITE",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 313.20086669921875,
+      "y0": 511.4676513671875,
+      "x1": 540.7678833007812,
+      "y1": 566.0352172851562
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 313.20086669921875,
+       "y0": 511.4676513671875,
+       "x1": 540.7678833007812,
+       "y1": 566.0352172851562
+      }
+     ],
+     "quote": "LAFITE^† [109] | 26.94 | 26.02 | 75M |",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.13",
+   "value": "GLIDE",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 313.20086669921875,
+      "y0": 511.4676513671875,
+      "x1": 540.7678833007812,
+      "y1": 566.0352172851562
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 313.20086669921875,
+       "y0": 511.4676513671875,
+       "x1": 540.7678833007812,
+       "y1": 566.0352172851562
+      }
+     ],
+     "quote": "GLIDE^∗ [59] | 12.24 | - | 6B | 277 DDIM steps, c.f.g. [32] s = 3",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.14",
+   "value": "Make-A-Scene",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 313.20086669921875,
+      "y0": 511.4676513671875,
+      "x1": 540.7678833007812,
+      "y1": 566.0352172851562
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 313.20086669921875,
+       "y0": 511.4676513671875,
+       "x1": 540.7678833007812,
+       "y1": 566.0352172851562
+      }
+     ],
+     "quote": "Make-A-Scene^∗ [26] | 11.84 | - | 4B | c.f.g for AR models [98] s = 5",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.15",
+   "value": "Image Regression",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 312.79351806640625,
+      "y0": 73.71251678466797,
+      "x1": 541.17919921875,
+      "y1": 80.39859771728516
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 312.79351806640625,
+       "y0": 73.71251678466797,
+       "x1": 541.17919921875,
+       "y1": 80.39859771728516
+      }
+     ],
+     "quote": "Image Regression [72] | 15.2 | 121.1 | 27.9 | 0.801 | 625M | N/A",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.16",
+   "value": "SR3",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 312.79351806640625,
+      "y0": 79.93669891357422,
+      "x1": 541.17919921875,
+      "y1": 86.6227798461914
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 312.79351806640625,
+       "y0": 79.93669891357422,
+       "x1": 541.17919921875,
+       "y1": 86.6227798461914
+      }
+     ],
+     "quote": "SR3 [72] | 5.2 | 180.1 | 26.4 | 0.762 | 625M | N/A",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.17",
+   "value": "LaMa",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 314.49017333984375,
+      "y0": 73.44599151611328,
+      "x1": 539.4850463867188,
+      "y1": 192.52052307128906
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 314.49017333984375,
+       "y0": 73.44599151611328,
+       "x1": 539.4850463867188,
+       "y1": 192.52052307128906
+      }
+     ],
+     "quote": "LaMa [88]^† | 12.31 | 0.243± | 0.038 | 2.23 | 0.134± | 0.080",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.18",
+   "value": "CoModGAN",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 314.49017333984375,
+      "y0": 158.08078002929688,
+      "x1": 539.4850463867188,
+      "y1": 166.78907775878906
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 314.49017333984375,
+       "y0": 158.08078002929688,
+       "x1": 539.4850463867188,
+       "y1": 166.78907775878906
+      }
+     ],
+     "quote": "CoModGAN [107] | 10.4 | 0.26 |  | 1.82 | 0.15 |",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.19",
+   "value": "RegionWise",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 314.49017333984375,
+      "y0": 166.99093627929688,
+      "x1": 539.4850463867188,
+      "y1": 175.69923400878906
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 314.49017333984375,
+       "y0": 166.99093627929688,
+       "x1": 539.4850463867188,
+       "y1": 175.69923400878906
+      }
+     ],
+     "quote": "RegionWise [52] | 21.3 | 0.27 |  | 4.75 | 0.15 |",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.20",
+   "value": "DeepFill v2",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 314.49017333984375,
+      "y0": 175.90206909179688,
+      "x1": 539.4850463867188,
+      "y1": 184.61036682128906
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 314.49017333984375,
+       "y0": 175.90206909179688,
+       "x1": 539.4850463867188,
+       "y1": 184.61036682128906
+      }
+     ],
+     "quote": "DeepFill v2 [104] | 22.1 | 0.28 |  | 5.20 | 0.16 |",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.21",
+   "value": "EdgeConnect",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 314.49017333984375,
+      "y0": 184.81222534179688,
+      "x1": 539.4850463867188,
+      "y1": 193.52052307128906
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 314.49017333984375,
+       "y0": 184.81222534179688,
+       "x1": 539.4850463867188,
+       "y1": 193.52052307128906
+      }
+     ],
+     "quote": "EdgeConnect [58] | 30.5 | 0.28 |  | 8.37 | 0.16 |",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Fréchet Inception Distance",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 308.86,
+      "y0": 595.02,
+      "x1": 545.11,
+      "y1": 653.38
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 320.82,
+       "y0": 596.6,
+       "x1": 490.02,
+       "y1": 605.5600000000001
+      },
+      {
+       "page": 5,
+       "x0": 490.02,
+       "y0": 595.02,
+       "x1": 493.99,
+       "y1": 601.14
+      },
+      {
+       "page": 5,
+       "x0": 500.71,
+       "y0": 596.92,
+       "x1": 545.11,
+       "y1": 605.56
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 608.87,
+       "x1": 545.11,
+       "y1": 617.51
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 620.83,
+       "x1": 545.11,
+       "y1": 629.47
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 632.78,
+       "x1": 545.11,
+       "y1": 641.42
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 644.74,
+       "x1": 428.23,
+       "y1": 653.38
+      }
+     ],
+     "quote": "We train unconditional models of 256 2 images on CelebA-HQ [39], FFHQ [41], LSUN-Churches and -Bedrooms [102] and evaluate the i) sample quality and ii) their coverage of the data manifold using ii) FID [29] and ii) Precision-and-Recall [50].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Precision",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 308.86,
+      "y0": 595.02,
+      "x1": 545.11,
+      "y1": 653.38
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 320.82,
+       "y0": 596.6,
+       "x1": 490.02,
+       "y1": 605.5600000000001
+      },
+      {
+       "page": 5,
+       "x0": 490.02,
+       "y0": 595.02,
+       "x1": 493.99,
+       "y1": 601.14
+      },
+      {
+       "page": 5,
+       "x0": 500.71,
+       "y0": 596.92,
+       "x1": 545.11,
+       "y1": 605.56
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 608.87,
+       "x1": 545.11,
+       "y1": 617.51
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 620.83,
+       "x1": 545.11,
+       "y1": 629.47
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 632.78,
+       "x1": 545.11,
+       "y1": 641.42
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 644.74,
+       "x1": 428.23,
+       "y1": 653.38
+      }
+     ],
+     "quote": "We train unconditional models of 256 2 images on CelebA-HQ [39], FFHQ [41], LSUN-Churches and -Bedrooms [102] and evaluate the i) sample quality and ii) their coverage of the data manifold using ii) FID [29] and ii) Precision-and-Recall [50].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "Recall",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 308.86,
+      "y0": 595.02,
+      "x1": 545.11,
+      "y1": 653.38
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 320.82,
+       "y0": 596.6,
+       "x1": 490.02,
+       "y1": 605.5600000000001
+      },
+      {
+       "page": 5,
+       "x0": 490.02,
+       "y0": 595.02,
+       "x1": 493.99,
+       "y1": 601.14
+      },
+      {
+       "page": 5,
+       "x0": 500.71,
+       "y0": 596.92,
+       "x1": 545.11,
+       "y1": 605.56
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 608.87,
+       "x1": 545.11,
+       "y1": 617.51
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 620.83,
+       "x1": 545.11,
+       "y1": 629.47
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 632.78,
+       "x1": 545.11,
+       "y1": 641.42
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 644.74,
+       "x1": 428.23,
+       "y1": 653.38
+      }
+     ],
+     "quote": "We train unconditional models of 256 2 images on CelebA-HQ [39], FFHQ [41], LSUN-Churches and -Bedrooms [102] and evaluate the i) sample quality and ii) their coverage of the data manifold using ii) FID [29] and ii) Precision-and-Recall [50].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "Inception Score",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 313.20086669921875,
+      "y0": 511.4676513671875,
+      "x1": 540.7678833007812,
+      "y1": 566.0352172851562
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 313.20086669921875,
+       "y0": 511.4676513671875,
+       "x1": 540.7678833007812,
+       "y1": 566.0352172851562
+      }
+     ],
+     "quote": "CogView^† [17] | 27.10 | 18.20 | 4B | self-ranking, rejection rate 0.017",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.4",
+   "value": "Peak Signal-to-Noise Ratio",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 312.79351806640625,
+      "y0": 64.13506317138672,
+      "x1": 541.17919921875,
+      "y1": 70.84734344482422
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 312.79351806640625,
+       "y0": 64.13506317138672,
+       "x1": 541.17919921875,
+       "y1": 70.84734344482422
+      }
+     ],
+     "quote": "Method | FID ↓ | IS ↑ | PSNR ↑ | SSIM ↑ | Nparams | [ sampless ](∗ )",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.5",
+   "value": "Structural Similarity Index",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 312.79351806640625,
+      "y0": 64.13506317138672,
+      "x1": 541.17919921875,
+      "y1": 70.84734344482422
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 312.79351806640625,
+       "y0": 64.13506317138672,
+       "x1": 541.17919921875,
+       "y1": 70.84734344482422
+      }
+     ],
+     "quote": "Method | FID ↓ | IS ↑ | PSNR ↑ | SSIM ↑ | Nparams | [ sampless ](∗ )",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.6",
+   "value": "Learned Perceptual Image Patch Similarity",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 314.49017333984375,
+      "y0": 85.87903594970703,
+      "x1": 539.4850463867188,
+      "y1": 94.62484741210938
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 314.49017333984375,
+       "y0": 85.87903594970703,
+       "x1": 539.4850463867188,
+       "y1": 94.62484741210938
+      }
+     ],
+     "quote": "Method | FID ↓ | LPIPS | ↓ | FID ↓ | LPIPS | ↓",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Model parameter count for text-to-image KL-regularized LDM",
+   "evidence": [
+    {
+     "chunk_id": "b0065",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 50.11,
+      "y0": 315.19,
+      "x1": 286.36,
+      "y1": 360.08
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 250.13,
+       "y0": 315.19,
+       "x1": 286.36,
+       "y1": 324.21999999999997
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 327.15,
+       "x1": 286.36,
+       "y1": 336.17999999999995
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 339.31,
+       "x1": 286.36,
+       "y1": 348.13
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 351.44,
+       "x1": 130.75,
+       "y1": 360.08
+      }
+     ],
+     "quote": "For textto-image image modeling, we train a 1.45B parameter KL-regularized LDM conditioned on language prompts on LAION-400M [78].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "parameters",
+   "value_raw": "1.45B",
+   "value_norm": 1450000000.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Model parameter count for larger diffusion inpainting model",
+   "evidence": [
+    {
+     "chunk_id": "b0082",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 308.86,
+      "y0": 668.65,
+      "x1": 545.11,
+      "y1": 713.15
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 481.38,
+       "y0": 668.65,
+       "x1": 545.11,
+       "y1": 677.29
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 680.6,
+       "x1": 545.11,
+       "y1": 689.24
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 692.56,
+       "x1": 545.11,
+       "y1": 701.1999999999999
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 704.51,
+       "x1": 545.11,
+       "y1": 713.15
+      }
+     ],
+     "quote": "Following [15], the UNet of this diffusion model uses attention layers on three levels of its feature hierarchy, the BigGAN [3] residual block for up-and downsampling and has 387M parameters",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "name": "parameters",
+   "value_raw": "387M",
+   "value_norm": 387000000.0,
+   "scope": ""
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Single NVIDIA A100 GPU used for experiments",
+   "evidence": [
+    {
+     "chunk_id": "b0055",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 50.11,
+      "y0": 644.35,
+      "x1": 286.36,
+      "y1": 688.85
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 81.4,
+       "y0": 644.35,
+       "x1": 286.36,
+       "y1": 652.99
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 656.3,
+       "x1": 286.36,
+       "y1": 664.9399999999999
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 668.26,
+       "x1": 286.36,
+       "y1": 676.9
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 680.21,
+       "x1": 280.86,
+       "y1": 688.85
+      }
+     ],
+     "quote": "To obtain a comparable test-field, we fix the computational resources to a single NVIDIA A100 for all experiments in this section and train all models for the same number of steps and with the same number of parameters.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation on downsampling factor f for LDM",
+   "evidence": [
+    {
+     "chunk_id": "b0055",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 50.11,
+      "y0": 608.48,
+      "x1": 286.37,
+      "y1": 652.99
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 62.07,
+       "y0": 608.48,
+       "x1": 286.37,
+       "y1": 617.12
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 620.12,
+       "x1": 286.36,
+       "y1": 629.08
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 632.21,
+       "x1": 286.36,
+       "y1": 641.0300000000001
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 644.35,
+       "x1": 75.84,
+       "y1": 652.99
+      }
+     ],
+     "quote": "This section analyzes the behavior of our LDMs with different downsampling factors f ∈ {1, 2, 4, 8, 16, 32} (abbreviated as LDM-f , where LDM-1 corresponds to pixel-based DMs).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Ablation on first stage regularization schemes (KL vs VQ) and attention mechanisms",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 308.86,
+      "y0": 391.22,
+      "x1": 545.12,
+      "y1": 459.64
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 371.44,
+       "y0": 391.22,
+       "x1": 545.12,
+       "y1": 399.86
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 403.0,
+       "x1": 545.11,
+       "y1": 411.82
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 414.95,
+       "x1": 545.11,
+       "y1": 423.77
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 426.91,
+       "x1": 545.11,
+       "y1": 435.73
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 439.04,
+       "x1": 545.11,
+       "y1": 447.68
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 451.0,
+       "x1": 355.08000000000004,
+       "y1": 459.64
+      }
+     ],
+     "quote": "In particular, we compare the inpainting efficiency of LDM-1 (i.e. a pixel-based conditional DM) with LDM-4, for both KL and VQ regularizations, as well as VQ-LDM-4 without any attention in the first stage (see Tab. 8), where the latter reduces GPU memory for decoding at high resolutions.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "Sequential sampling is slower than GANs.",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 50.11,
+      "y0": 576.24,
+      "x1": 286.36,
+      "y1": 621.14
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 576.24,
+       "x1": 286.36,
+       "y1": 585.27
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 588.58,
+       "x1": 286.36,
+       "y1": 597.22
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 600.54,
+       "x1": 286.36,
+       "y1": 609.18
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 612.5,
+       "x1": 90.25,
+       "y1": 621.14
+      }
+     ],
+     "quote": "While LDMs significantly reduce computational requirements compared to pixel-based approaches, their sequential sampling process is still slower than that of GANs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.1",
+   "value": "Reconstruction capability can bottleneck tasks requiring fine pixel-space accuracy.",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 50.11,
+      "y0": 612.5,
+      "x1": 286.36,
+      "y1": 680.91
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 97.56,
+       "y0": 612.5,
+       "x1": 286.36,
+       "y1": 621.14
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 624.45,
+       "x1": 286.36,
+       "y1": 633.09
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 636.09,
+       "x1": 286.36,
+       "y1": 645.0500000000001
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 648.36,
+       "x1": 286.36,
+       "y1": 657.0
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 660.32,
+       "x1": 286.36,
+       "y1": 668.96
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 672.27,
+       "x1": 98.44,
+       "y1": 680.91
+      }
+     ],
+     "quote": "Moreover, the use of LDMs can be questionable when high precision is required: although the loss of image quality is very small in our f = 4 autoencoding models (see Fig. 1), their reconstruction capability can become a bottleneck for tasks that require fine-grained accuracy in pixel space.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Perform a more detailed analysis of modifying the UNet architecture by conditioning on the time step.",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 26,
+     "bbox": {
+      "page": 26,
+      "x0": 50.11,
+      "y0": 99.39,
+      "x1": 545.11,
+      "y1": 119.98
+     },
+     "boxes": [
+      {
+       "page": 26,
+       "x0": 295.17,
+       "y0": 99.39,
+       "x1": 545.11,
+       "y1": 108.03
+      },
+      {
+       "page": 26,
+       "x0": 50.11,
+       "y0": 111.34,
+       "x1": 72.97,
+       "y1": 119.98
+      }
+     ],
+     "quote": "We leave a more detailed analysis of this modification to future work.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "ethics": [
+  {
+   "id": "ethics.0",
+   "value": "Generative models can facilitate the creation of manipulated data or spam.",
+   "evidence": [
+    {
+     "chunk_id": "b0086",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 308.86,
+      "y0": 304.22,
+      "x1": 545.11,
+      "y1": 336.77
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 470.61,
+       "y0": 304.22,
+       "x1": 545.11,
+       "y1": 312.86
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 316.18,
+       "x1": 545.11,
+       "y1": 324.82
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 328.13,
+       "x1": 545.11,
+       "y1": 336.77
+      }
+     ],
+     "quote": "On the other hand, it also means that it becomes easier to create and disseminate manipulated data or spread misinformation and spam.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.1",
+   "value": "Deep fakes disproportionately affect women.",
+   "evidence": [
+    {
+     "chunk_id": "b0088",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 308.86,
+      "y0": 340.09,
+      "x1": 545.11,
+      "y1": 372.64
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 340.09,
+       "x1": 545.11,
+       "y1": 348.72999999999996
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 352.04,
+       "x1": 545.11,
+       "y1": 360.68
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 364.0,
+       "x1": 527.37,
+       "y1": 372.64
+      }
+     ],
+     "quote": "In particular, the deliberate manipulation of images (\"deep fakes\") is a common problem in this context, and women in particular are disproportionately affected by it [13,24].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.2",
+   "value": "Generative models can reveal sensitive training data collected without consent.",
+   "evidence": [
+    {
+     "chunk_id": "b0088",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 308.86,
+      "y0": 375.95,
+      "x1": 545.12,
+      "y1": 420.46
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 320.82,
+       "y0": 375.95,
+       "x1": 545.12,
+       "y1": 384.59
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 387.91,
+       "x1": 545.11,
+       "y1": 396.55
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 399.86,
+       "x1": 545.11,
+       "y1": 408.5
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 411.82,
+       "x1": 389.41,
+       "y1": 420.46
+      }
+     ],
+     "quote": "Generative models can also reveal their training data [5,90], which is of great concern when the data contain sensitive or personal information and were collected without explicit consent.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.3",
+   "value": "Deep learning modules tend to reproduce or exacerbate existing data biases.",
+   "evidence": [
+    {
+     "chunk_id": "b0089",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 308.86,
+      "y0": 435.73,
+      "x1": 545.12,
+      "y1": 468.28
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 320.82,
+       "y0": 435.73,
+       "x1": 545.12,
+       "y1": 444.37
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 447.69,
+       "x1": 545.11,
+       "y1": 456.33
+      },
+      {
+       "page": 9,
+       "x0": 308.86,
+       "y0": 459.64,
+       "x1": 324.63,
+       "y1": 468.28
+      }
+     ],
+     "quote": "Finally, deep learning modules tend to reproduce or exacerbate biases that are already present in the data [22,38,91].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/lucidrains/x-transformers",
+   "evidence": [
+    {
+     "chunk_id": "b0165",
+     "page": 24,
+     "bbox": {
+      "page": 24,
+      "x0": 64.45800018310547,
+      "y0": 705.5962524414062,
+      "x1": 319.6289367675781,
+      "y1": 712.7215576171875
+     },
+     "boxes": [
+      {
+       "page": 24,
+       "x0": 64.45800018310547,
+       "y0": 705.5962524414062,
+       "x1": 319.6289367675781,
+       "y1": 712.7215576171875
+      }
+     ],
+     "quote": "adapted from https://github.com/lucidrains/x-transformers",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://huggingface.co/transformers/model_doc/bert.html",
+   "evidence": [
+    {
+     "chunk_id": "b0166",
+     "page": 26,
+     "bbox": {
+      "page": 26,
+      "x0": 64.45800018310547,
+      "y0": 706.0186767578125,
+      "x1": 413.5487976074219,
+      "y1": 712.171630859375
+     },
+     "boxes": [
+      {
+       "page": 26,
+       "x0": 64.45800018310547,
+       "y0": 706.0186767578125,
+       "x1": 413.5487976074219,
+       "y1": 712.171630859375
+      }
+     ],
+     "quote": "https://huggingface.co/transformers/model_doc/bert.html#berttokenizerfast",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "Our latent diffusion models achieve new state-of-the-art scores for image inpainting and class-conditional image synthesis.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 444.69,
+      "x1": 286.36,
+      "y1": 525.01
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 205.01,
+       "y0": 444.69,
+       "x1": 286.36,
+       "y1": 453.28
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 456.65,
+       "x1": 286.36,
+       "y1": 465.23999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 468.6,
+       "x1": 286.36,
+       "y1": 477.19
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 480.56,
+       "x1": 286.36,
+       "y1": 489.15
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 492.51,
+       "x1": 286.36,
+       "y1": 501.09999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 504.47,
+       "x1": 286.36,
+       "y1": 513.0600000000001
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 516.42,
+       "x1": 252.66000000000003,
+       "y1": 525.01
+      }
+     ],
+     "quote": "Our latent diffusion models (LDMs) achieve new state-of-the-art scores for image inpainting and class-conditional image synthesis and highly competitive performance on various tasks, including text-to-image synthesis, unconditional image generation and super-resolution, while significantly reducing computational requirements compared to pixel-based DMs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

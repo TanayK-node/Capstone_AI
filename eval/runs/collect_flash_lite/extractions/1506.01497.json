@@ -1,0 +1,1842 @@
+{
+ "metadata": {
+  "title": "Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks",
+  "authors": [
+   "Shaoqing Ren",
+   "Kaiming He",
+   "Ross Girshick",
+   "Jian Sun",
+   "• R Girshick"
+  ],
+  "venue": null,
+  "year": "2016",
+  "arxiv_id": "1506.01497v3[cs.CV]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Region proposal computation has become a computational bottleneck in state-of-the-art object detection networks.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 56.83,
+      "y0": 169.33,
+      "x1": 505.32,
+      "y1": 187.02
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 56.83,
+       "y0": 169.33,
+       "x1": 505.32,
+       "y1": 176.70000000000002
+      },
+      {
+       "page": 1,
+       "x0": 56.83,
+       "y0": 179.65,
+       "x1": 195.49,
+       "y1": 187.02
+      }
+     ],
+     "quote": "Advances like SPPnet [1] and Fast R-CNN [2] have reduced the running time of these detection networks, exposing region proposal computation as a bottleneck.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Introduction of a Region Proposal Network (RPN) that shares full-image convolutional features with the detection network for nearly cost-free region proposals.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 56.83,
+      "y0": 179.65,
+      "x1": 505.33000000000004,
+      "y1": 197.33
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 198.86,
+       "y0": 179.65,
+       "x1": 505.33000000000004,
+       "y1": 187.02
+      },
+      {
+       "page": 1,
+       "x0": 56.83,
+       "y0": 189.96,
+       "x1": 396.84,
+       "y1": 197.33
+      }
+     ],
+     "quote": "In this work, we introduce a Region Proposal Network (RPN) that shares full-image convolutional features with the detection network, thus enabling nearly cost-free region proposals.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Merging RPN and Fast R-CNN into a single network that shares convolutional features.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 56.83,
+      "y0": 210.58,
+      "x1": 505.32000000000005,
+      "y1": 238.57
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 361.04,
+       "y0": 210.58,
+       "x1": 505.32000000000005,
+       "y1": 217.95000000000002
+      },
+      {
+       "page": 1,
+       "x0": 56.83,
+       "y0": 220.89,
+       "x1": 505.32,
+       "y1": 228.26
+      },
+      {
+       "page": 1,
+       "x0": 56.83,
+       "y0": 231.2,
+       "x1": 364.95,
+       "y1": 238.57
+      }
+     ],
+     "quote": "We further merge RPN and Fast R-CNN into a single network by sharing their convolutional features-using the recently popular terminology of neural networks with \"attention\" mechanisms, the RPN component tells the unified network where to look.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "Introduction of novel anchor boxes as references at multiple scales and aspect ratios to efficiently predict region proposals.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 287.06,
+      "y0": 727.81,
+      "x1": 526.17,
+      "y1": 749.34
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 517.01,
+       "y0": 727.81,
+       "x1": 526.17,
+       "y1": 737.39
+      },
+      {
+       "page": 1,
+       "x0": 287.06,
+       "y0": 739.76,
+       "x1": 526.16,
+       "y1": 749.34
+      },
+      {
+       "page": 2,
+       "x0": 36.0,
+       "y0": 219.19,
+       "x1": 275.1,
+       "y1": 228.77
+      },
+      {
+       "page": 2,
+       "x0": 36.0,
+       "y0": 231.14,
+       "x1": 275.1,
+       "y1": 240.72
+      },
+      {
+       "page": 2,
+       "x0": 36.0,
+       "y0": 243.1,
+       "x1": 275.1,
+       "y1": 252.68
+      },
+      {
+       "page": 2,
+       "x0": 36.0,
+       "y0": 255.05,
+       "x1": 63.22,
+       "y1": 264.63
+      }
+     ],
+     "quote": "In contrast to prevalent methods [8], [9], [1], [2] that use pyramids of images (Figure 1, a) or pyramids of filters (Figure 1, b), we introduce novel \"anchor\" boxes that serve as references at multiple scales and aspect ratios.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Object detection",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 56.83,
+      "y0": 231.2,
+      "x1": 505.33000000000004,
+      "y1": 259.2
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 368.25,
+       "y0": 231.2,
+       "x1": 505.33000000000004,
+       "y1": 238.57
+      },
+      {
+       "page": 1,
+       "x0": 56.83,
+       "y0": 241.51,
+       "x1": 505.32,
+       "y1": 248.88
+      },
+      {
+       "page": 1,
+       "x0": 56.83,
+       "y0": 251.83,
+       "x1": 420.76,
+       "y1": 259.2
+      }
+     ],
+     "quote": "For the very deep VGG-16 model [3], our detection system has a frame rate of 5fps (including all steps) on a GPU, while achieving state-of-the-art object detection accuracy on PASCAL VOC 2007, 2012, and MS COCO datasets with only 300 proposals per image.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The object detection system consists of a Region Proposal Network (RPN) that proposes regions and a Fast R-CNN detector that uses these proposals, forming a single unified network.",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 36.0,
+      "y0": 691.94,
+      "x1": 275.1,
+      "y1": 713.48
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 36.0,
+       "y0": 691.94,
+       "x1": 275.1,
+       "y1": 701.5200000000001
+      },
+      {
+       "page": 3,
+       "x0": 36.0,
+       "y0": 703.9,
+       "x1": 156.18,
+       "y1": 713.48
+      }
+     ],
+     "quote": "Our object detection system, called Faster R-CNN, is composed of two modules.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "The RPN slides a small network over convolutional feature maps and maps each window to lower-dimensional features fed into box-regression and box-classification layers.",
+   "evidence": [
+    {
+     "chunk_id": "b0021",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 287.06,
+      "y0": 322.77,
+      "x1": 526.16,
+      "y1": 356.26
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 297.02,
+       "y0": 322.77,
+       "x1": 526.16,
+       "y1": 332.34999999999997
+      },
+      {
+       "page": 3,
+       "x0": 287.06,
+       "y0": 334.72,
+       "x1": 526.16,
+       "y1": 344.3
+      },
+      {
+       "page": 3,
+       "x0": 287.06,
+       "y0": 346.68,
+       "x1": 471.43,
+       "y1": 356.26
+      }
+     ],
+     "quote": "To generate region proposals, we slide a small network over the convolutional feature map output by the last shared convolutional layer.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "Anchor boxes of multiple scales and aspect ratios are used at each sliding-window position to simultaneously predict region proposals and handle multiple scales efficiently.",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 36.0,
+      "y0": 263.0,
+      "x1": 275.1,
+      "y1": 296.49
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 73.1,
+       "y0": 263.0,
+       "x1": 275.1,
+       "y1": 272.58
+      },
+      {
+       "page": 4,
+       "x0": 36.0,
+       "y0": 274.96,
+       "x1": 275.1,
+       "y1": 284.53999999999996
+      },
+      {
+       "page": 4,
+       "x0": 36.0,
+       "y0": 286.91,
+       "x1": 128.1,
+       "y1": 296.49
+      }
+     ],
+     "quote": "An anchor is centered at the sliding window in question, and is associated with a scale and aspect ratio (Figure 3, left).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "The training objective minimizes a multi-task loss function combining classification log loss and smooth L1 bounding box regression loss.",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 36.0,
+      "y0": 178.21,
+      "x1": 275.1,
+      "y1": 211.70000000000002
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 45.96,
+       "y0": 178.21,
+       "x1": 275.09999999999997,
+       "y1": 187.79000000000002
+      },
+      {
+       "page": 5,
+       "x0": 36.0,
+       "y0": 190.16,
+       "x1": 275.1,
+       "y1": 199.74
+      },
+      {
+       "page": 5,
+       "x0": 36.0,
+       "y0": 202.12,
+       "x1": 50.11,
+       "y1": 211.70000000000002
+      }
+     ],
+     "quote": "With these definitions, we minimize an objective function following the multi-task loss in Fast R-CNN [2].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "Shared features between RPN and Fast R-CNN are learned using a pragmatic 4-step alternating optimization training algorithm.",
+   "evidence": [
+    {
+     "chunk_id": "b0055",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 36.0,
+      "y0": 596.3,
+      "x1": 275.1,
+      "y1": 629.7900000000001
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 169.56,
+       "y0": 596.3,
+       "x1": 275.1,
+       "y1": 605.88
+      },
+      {
+       "page": 6,
+       "x0": 36.0,
+       "y0": 608.26,
+       "x1": 275.1,
+       "y1": 617.84
+      },
+      {
+       "page": 6,
+       "x0": 36.0,
+       "y0": 620.21,
+       "x1": 201.3,
+       "y1": 629.7900000000001
+      }
+     ],
+     "quote": "In this paper, we adopt a pragmatic 4-step training algorithm to learn shared features via alternating optimization.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "Unlike non-translation-invariant methods such as MultiBox, the proposed approach is fully translation invariant in both anchors and proposal computation functions.",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 36.0,
+      "y0": 366.94,
+      "x1": 275.1,
+      "y1": 412.38
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 45.96,
+       "y0": 366.94,
+       "x1": 275.09999999999997,
+       "y1": 376.52
+      },
+      {
+       "page": 4,
+       "x0": 36.0,
+       "y0": 378.76,
+       "x1": 275.1,
+       "y1": 388.46999999999997
+      },
+      {
+       "page": 4,
+       "x0": 36.0,
+       "y0": 390.85,
+       "x1": 275.1,
+       "y1": 400.43
+      },
+      {
+       "page": 4,
+       "x0": 36.0,
+       "y0": 402.8,
+       "x1": 91.1,
+       "y1": 412.38
+      }
+     ],
+     "quote": "An important property of our approach is that it is translation invariant, both in terms of the anchors and the functions that compute proposals relative to the anchors.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "The anchor-based multi-scale design uses a pyramid of anchors instead of traditional image/feature pyramids or filter pyramids, which is more cost-efficient.",
+   "evidence": [
+    {
+     "chunk_id": "b0033",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 287.06,
+      "y0": 477.73,
+      "x1": 526.1700000000001,
+      "y1": 499.26
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 297.02,
+       "y0": 477.73,
+       "x1": 526.16,
+       "y1": 487.31
+      },
+      {
+       "page": 4,
+       "x0": 287.06,
+       "y0": 489.55,
+       "x1": 526.1700000000001,
+       "y1": 499.26
+      }
+     ],
+     "quote": "As a comparison, our anchor-based method is built on a pyramid of anchors, which is more cost-efficient.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "PASCAL VOC 2007 detection benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 36.0,
+      "y0": 492.6,
+      "x1": 275.1,
+      "y1": 514.13
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 36.0,
+       "y0": 492.6,
+       "x1": 275.1,
+       "y1": 502.18
+      },
+      {
+       "page": 7,
+       "x0": 36.0,
+       "y0": 504.55,
+       "x1": 251.11,
+       "y1": 514.13
+      }
+     ],
+     "quote": "We comprehensively evaluate our method on the PASCAL VOC 2007 detection benchmark [11].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "PASCAL VOC 2007",
+   "split": "trainval and test",
+   "size": "about 5k trainval images and 5k test images over 20 object categories",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "PASCAL VOC 2012 benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 36.0,
+      "y0": 528.46,
+      "x1": 275.1,
+      "y1": 561.95
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 203.1,
+       "y0": 528.46,
+       "x1": 275.1,
+       "y1": 538.0400000000001
+      },
+      {
+       "page": 7,
+       "x0": 36.0,
+       "y0": 540.42,
+       "x1": 275.1,
+       "y1": 550.0
+      },
+      {
+       "page": 7,
+       "x0": 36.0,
+       "y0": 552.37,
+       "x1": 91.50999999999999,
+       "y1": 561.95
+      }
+     ],
+     "quote": "We also provide results on the PASCAL VOC 2012 benchmark for a few models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "PASCAL VOC 2012",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "Microsoft COCO object detection dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0078",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 287.06,
+      "y0": 368.62,
+      "x1": 526.16,
+      "y1": 390.15999999999997
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 287.06,
+       "y0": 368.62,
+       "x1": 526.16,
+       "y1": 378.2
+      },
+      {
+       "page": 10,
+       "x0": 287.06,
+       "y0": 380.58,
+       "x1": 414.49,
+       "y1": 390.15999999999997
+      }
+     ],
+     "quote": "We present more results on the Microsoft COCO object detection dataset [12].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Microsoft COCO",
+   "split": "training set, validation set, and test-dev set",
+   "size": "80k images on the training set, 40k images on the validation set, and 20k images on the test-dev set",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Selective Search",
+   "evidence": [
+    {
+     "chunk_id": "b0063",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 36.0,
+      "y0": 683.76,
+      "x1": 275.1,
+      "y1": 717.25
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 217.48,
+       "y0": 683.76,
+       "x1": 275.09999999999997,
+       "y1": 693.34
+      },
+      {
+       "page": 7,
+       "x0": 36.0,
+       "y0": 695.72,
+       "x1": 275.1,
+       "y1": 705.3000000000001
+      },
+      {
+       "page": 7,
+       "x0": 36.0,
+       "y0": 707.67,
+       "x1": 109.41,
+       "y1": 717.25
+      }
+     ],
+     "quote": "For Selective Search (SS) [4], we generate about 2000 proposals by the \"fast\" mode.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "EdgeBoxes",
+   "evidence": [
+    {
+     "chunk_id": "b0063",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 36.0,
+      "y0": 304.8,
+      "x1": 306.1,
+      "y1": 748.78
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 112.54,
+       "y0": 707.67,
+       "x1": 275.1,
+       "y1": 717.25
+      },
+      {
+       "page": 7,
+       "x0": 36.0,
+       "y0": 719.63,
+       "x1": 275.1,
+       "y1": 729.21
+      },
+      {
+       "page": 7,
+       "x0": 43.97,
+       "y0": 740.77,
+       "x1": 232.04,
+       "y1": 748.78
+      },
+      {
+       "page": 7,
+       "x0": 287.06,
+       "y0": 304.8,
+       "x1": 306.1,
+       "y1": 314.38
+      }
+     ],
+     "quote": "For EdgeBoxes (EB) [6], we generate the proposals by the default EB setting tuned for 0.7 7. www.robots.ox.ac.uk/ ∼ vgg/research/very deep/ IoU.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "OverFeat",
+   "evidence": [
+    {
+     "chunk_id": "b0074",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 36.0,
+      "y0": 294.81,
+      "x1": 275.1,
+      "y1": 328.3
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 73.11,
+       "y0": 294.81,
+       "x1": 275.1,
+       "y1": 304.39
+      },
+      {
+       "page": 10,
+       "x0": 36.0,
+       "y0": 306.77,
+       "x1": 275.1,
+       "y1": 316.34999999999997
+      },
+      {
+       "page": 10,
+       "x0": 36.0,
+       "y0": 318.72,
+       "x1": 230.53,
+       "y1": 328.3
+      }
+     ],
+     "quote": "The OverFeat paper [9] proposes a detection method that uses regressors and classifiers on sliding windows over convolutional feature maps.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "detection mean Average Precision",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 36.0,
+      "y0": 600.19,
+      "x1": 275.1,
+      "y1": 657.59
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 261.28,
+       "y0": 600.19,
+       "x1": 275.09999999999997,
+       "y1": 609.7700000000001
+      },
+      {
+       "page": 7,
+       "x0": 36.0,
+       "y0": 612.15,
+       "x1": 275.1,
+       "y1": 621.73
+      },
+      {
+       "page": 7,
+       "x0": 36.0,
+       "y0": 624.1,
+       "x1": 275.1,
+       "y1": 633.6800000000001
+      },
+      {
+       "page": 7,
+       "x0": 36.0,
+       "y0": 636.06,
+       "x1": 275.1,
+       "y1": 645.64
+      },
+      {
+       "page": 7,
+       "x0": 36.0,
+       "y0": 648.01,
+       "x1": 103.46,
+       "y1": 657.59
+      }
+     ],
+     "quote": "We primarily evaluate detection mean Average Precision (mAP), because this is the actual metric for object detection (rather than focusing on object proposal proxy metrics).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Recall-to-IoU",
+   "evidence": [
+    {
+     "chunk_id": "b0073",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 287.06,
+      "y0": 584.3,
+      "x1": 526.1700000000001,
+      "y1": 617.7900000000001
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 415.12,
+       "y0": 584.3,
+       "x1": 526.16,
+       "y1": 593.88
+      },
+      {
+       "page": 9,
+       "x0": 287.06,
+       "y0": 596.13,
+       "x1": 526.1700000000001,
+       "y1": 605.84
+      },
+      {
+       "page": 9,
+       "x0": 287.06,
+       "y0": 608.21,
+       "x1": 348.65,
+       "y1": 617.7900000000001
+      }
+     ],
+     "quote": "It is more appropriate to use this metric to diagnose the proposal method than to evaluate it.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "mAP averaged for IoU in [0.5 : 0.05 : 0.95] and mAP@0.5",
+   "evidence": [
+    {
+     "chunk_id": "b0078",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 287.06,
+      "y0": 416.44,
+      "x1": 526.16,
+      "y1": 461.89
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 453.34,
+       "y0": 416.44,
+       "x1": 526.16,
+       "y1": 426.02
+      },
+      {
+       "page": 10,
+       "x0": 287.06,
+       "y0": 428.37,
+       "x1": 526.16,
+       "y1": 437.98
+      },
+      {
+       "page": 10,
+       "x0": 287.06,
+       "y0": 440.35,
+       "x1": 526.16,
+       "y1": 449.93
+      },
+      {
+       "page": 10,
+       "x0": 287.06,
+       "y0": 452.31,
+       "x1": 465.6,
+       "y1": 461.89
+      }
+     ],
+     "quote": "We evaluate the mAP averaged for IoU ∈ [0.5 : 0.05 : 0.95] (COCO's standard metric, simply denoted as mAP@[.5, .95]) and mAP@0.5 (PASCAL VOC's metric).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "balancing parameter lambda for normalization terms",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 36.0,
+      "y0": 535.15,
+      "x1": 275.1,
+      "y1": 556.82
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 36.0,
+       "y0": 535.15,
+       "x1": 275.1,
+       "y1": 544.86
+      },
+      {
+       "page": 5,
+       "x0": 36.0,
+       "y0": 547.11,
+       "x1": 226.39,
+       "y1": 556.82
+      }
+     ],
+     "quote": "By default we set λ = 10, and thus both cls and reg terms are roughly equally weighted.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "lambda",
+   "value_raw": "10",
+   "value_norm": 10.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "learning rate for PASCAL VOC",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 287.06,
+      "y0": 527.68,
+      "x1": 526.16,
+      "y1": 561.1700000000001
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 387.5,
+       "y0": 527.68,
+       "x1": 526.16,
+       "y1": 537.26
+      },
+      {
+       "page": 5,
+       "x0": 287.06,
+       "y0": 539.63,
+       "x1": 526.16,
+       "y1": 549.21
+      },
+      {
+       "page": 5,
+       "x0": 287.06,
+       "y0": 551.59,
+       "x1": 481.68,
+       "y1": 561.1700000000001
+      }
+     ],
+     "quote": "We use a learning rate of 0.001 for 60k mini-batches, and 0.0001 for the next 20k mini-batches on the PASCAL VOC dataset.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.001 for 60k mini-batches, and 0.0001 for the next 20k mini-batches",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "momentum",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 287.06,
+      "y0": 551.59,
+      "x1": 526.17,
+      "y1": 573.12
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 485.24,
+       "y0": 551.59,
+       "x1": 526.17,
+       "y1": 561.1700000000001
+      },
+      {
+       "page": 5,
+       "x0": 287.06,
+       "y0": 563.54,
+       "x1": 526.16,
+       "y1": 573.12
+      }
+     ],
+     "quote": "We use a momentum of 0.9 and a weight decay of 0.0005 [37].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "momentum",
+   "value_raw": "0.9",
+   "value_norm": 0.9,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "weight decay",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 287.06,
+      "y0": 551.59,
+      "x1": 526.17,
+      "y1": 573.12
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 485.24,
+       "y0": 551.59,
+       "x1": 526.17,
+       "y1": 561.1700000000001
+      },
+      {
+       "page": 5,
+       "x0": 287.06,
+       "y0": 563.54,
+       "x1": 526.16,
+       "y1": 573.12
+      }
+     ],
+     "quote": "We use a momentum of 0.9 and a weight decay of 0.0005 [37].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "0.0005",
+   "value_norm": 0.0005,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "learning rate for MS COCO",
+   "evidence": [
+    {
+     "chunk_id": "b0079",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 287.06,
+      "y0": 512.62,
+      "x1": 526.16,
+      "y1": 546.11
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 347.09,
+       "y0": 512.62,
+       "x1": 526.16,
+       "y1": 522.2
+      },
+      {
+       "page": 10,
+       "x0": 287.06,
+       "y0": 524.57,
+       "x1": 526.16,
+       "y1": 534.1500000000001
+      },
+      {
+       "page": 10,
+       "x0": 287.06,
+       "y0": 536.53,
+       "x1": 508.14,
+       "y1": 546.11
+      }
+     ],
+     "quote": "The RPN step and Fast R-CNN step are both trained for 240k iterations with a learning rate of 0.003 and then for 80k iterations with 0.0003.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.003 for 240k iterations and then 0.0003 for 80k iterations",
+   "value_norm": null,
+   "scope": ""
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "8-GPU implementation",
+   "evidence": [
+    {
+     "chunk_id": "b0079",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 287.06,
+      "y0": 476.75,
+      "x1": 526.16,
+      "y1": 522.2
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 364.03,
+       "y0": 476.75,
+       "x1": 526.16,
+       "y1": 486.33
+      },
+      {
+       "page": 10,
+       "x0": 287.06,
+       "y0": 488.71,
+       "x1": 526.16,
+       "y1": 498.28999999999996
+      },
+      {
+       "page": 10,
+       "x0": 287.06,
+       "y0": 500.66,
+       "x1": 526.16,
+       "y1": 510.24
+      },
+      {
+       "page": 10,
+       "x0": 287.06,
+       "y0": 512.62,
+       "x1": 343.81,
+       "y1": 522.2
+      }
+     ],
+     "quote": "We train our models on an 8-GPU implementation, and the effective mini-batch size becomes 8 for RPN (1 per GPU) and 16 for Fast R-CNN (2 per GPU).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Sharing convolutional layers between the RPN and Fast R-CNN detection network",
+   "evidence": [
+    {
+     "chunk_id": "b0064",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 287.06,
+      "y0": 428.98,
+      "x1": 526.16,
+      "y1": 462.46999999999997
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 400.26,
+       "y0": 428.98,
+       "x1": 526.16,
+       "y1": 438.56
+      },
+      {
+       "page": 7,
+       "x0": 287.06,
+       "y0": 440.93,
+       "x1": 526.16,
+       "y1": 450.51
+      },
+      {
+       "page": 7,
+       "x0": 287.06,
+       "y0": 452.89,
+       "x1": 431.81,
+       "y1": 462.46999999999997
+      }
+     ],
+     "quote": "First, we show the effect of sharing convolutional layers between the RPN and Fast R-CNN detection network.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Disentangling the RPN's influence on training the Fast R-CNN detection network by changing proposal regions used at test-time",
+   "evidence": [
+    {
+     "chunk_id": "b0065",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 287.06,
+      "y0": 536.22,
+      "x1": 526.16,
+      "y1": 557.76
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 297.02,
+       "y0": 536.22,
+       "x1": 526.16,
+       "y1": 545.8000000000001
+      },
+      {
+       "page": 7,
+       "x0": 287.06,
+       "y0": 548.18,
+       "x1": 465.1,
+       "y1": 557.76
+      }
+     ],
+     "quote": "Next, we disentangle the RPN's influence on training the Fast R-CNN detection network.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.2",
+   "value": "Investigating the roles of RPN's cls and reg outputs by turning off either of them at test-time",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 36.0,
+      "y0": 506.28,
+      "x1": 275.1,
+      "y1": 539.7700000000001
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 45.96,
+       "y0": 506.28,
+       "x1": 275.09999999999997,
+       "y1": 515.86
+      },
+      {
+       "page": 8,
+       "x0": 36.0,
+       "y0": 518.11,
+       "x1": 275.1,
+       "y1": 527.82
+      },
+      {
+       "page": 8,
+       "x0": 36.0,
+       "y0": 530.19,
+       "x1": 90.08,
+       "y1": 539.7700000000001
+      }
+     ],
+     "quote": "Next, we separately investigate the roles of RPN's cls and reg outputs by turning off either of them at test-time.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.3",
+   "value": "Evaluating the effects of more powerful networks on the proposal quality of RPN alone using VGG-16",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 36.0,
+      "y0": 703.9,
+      "x1": 275.09999999999997,
+      "y1": 725.4300000000001
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 45.96,
+       "y0": 703.9,
+       "x1": 275.09999999999997,
+       "y1": 713.48
+      },
+      {
+       "page": 8,
+       "x0": 36.0,
+       "y0": 715.85,
+       "x1": 239.21,
+       "y1": 725.4300000000001
+      }
+     ],
+     "quote": "We also evaluate the effects of more powerful networks on the proposal quality of RPN alone.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.4",
+   "value": "Investigating settings of anchors with different scales and aspect ratios",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 36.0,
+      "y0": 727.81,
+      "x1": 275.1,
+      "y1": 749.34
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 205.99,
+       "y0": 727.81,
+       "x1": 275.1,
+       "y1": 737.39
+      },
+      {
+       "page": 9,
+       "x0": 36.0,
+       "y0": 739.76,
+       "x1": 190.86,
+       "y1": 749.34
+      }
+     ],
+     "quote": "In Table 8 we investigate the settings of anchors.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.5",
+   "value": "Comparing different values of lambda in Equation 1",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 287.06,
+      "y0": 435.78,
+      "x1": 526.16,
+      "y1": 457.34999999999997
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 297.02,
+       "y0": 435.78,
+       "x1": 526.16,
+       "y1": 445.39
+      },
+      {
+       "page": 9,
+       "x0": 287.06,
+       "y0": 447.77,
+       "x1": 322.58,
+       "y1": 457.34999999999997
+      }
+     ],
+     "quote": "In Table 9 we compare different values of λ in Equation (1).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.6",
+   "value": "Comparing one-stage and two-stage detection systems",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 36.0,
+      "y0": 535.22,
+      "x1": 275.11,
+      "y1": 580.6700000000001
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 45.96,
+       "y0": 535.22,
+       "x1": 275.09999999999997,
+       "y1": 544.8000000000001
+      },
+      {
+       "page": 10,
+       "x0": 36.0,
+       "y0": 547.05,
+       "x1": 275.11,
+       "y1": 556.76
+      },
+      {
+       "page": 10,
+       "x0": 36.0,
+       "y0": 559.13,
+       "x1": 275.1,
+       "y1": 568.71
+      },
+      {
+       "page": 10,
+       "x0": 36.0,
+       "y0": 570.96,
+       "x1": 134.01,
+       "y1": 580.6700000000001
+      }
+     ],
+     "quote": "To compare the one-stage and two-stage systems, we emulate the OverFeat system (and thus also circumvent other differences of implementation details) by one-stage Fast R-CNN.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/shaoqingren/faster_",
+   "evidence": [
+    {
+     "chunk_id": "b0010",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 36.0,
+      "y0": 578.75,
+      "x1": 275.11,
+      "y1": 624.2
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 95.57,
+       "y0": 578.75,
+       "x1": 275.11,
+       "y1": 588.33
+      },
+      {
+       "page": 2,
+       "x0": 36.0,
+       "y0": 590.71,
+       "x1": 44.230000000000004,
+       "y1": 600.2900000000001
+      },
+      {
+       "page": 2,
+       "x0": 66.65,
+       "y0": 602.66,
+       "x1": 154.79000000000002,
+       "y1": 612.24
+      },
+      {
+       "page": 2,
+       "x0": 189.92,
+       "y0": 614.62,
+       "x1": 243.07,
+       "y1": 624.2
+      }
+     ],
+     "quote": "Code has been made publicly available at https://github.com/shaoqingren/faster_ rcnn (in MATLAB) and https://github.com/ rbgirshick/py-faster-rcnn (in Python).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/rbgirshick/py-faster-rcnn",
+   "evidence": [
+    {
+     "chunk_id": "b0010",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 36.0,
+      "y0": 578.75,
+      "x1": 275.11,
+      "y1": 624.2
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 95.57,
+       "y0": 578.75,
+       "x1": 275.11,
+       "y1": 588.33
+      },
+      {
+       "page": 2,
+       "x0": 36.0,
+       "y0": 590.71,
+       "x1": 44.230000000000004,
+       "y1": 600.2900000000001
+      },
+      {
+       "page": 2,
+       "x0": 66.65,
+       "y0": 602.66,
+       "x1": 154.79000000000002,
+       "y1": 612.24
+      },
+      {
+       "page": 2,
+       "x0": 189.92,
+       "y0": 614.62,
+       "x1": 243.07,
+       "y1": 624.2
+      }
+     ],
+     "quote": "Code has been made publicly available at https://github.com/shaoqingren/faster_ rcnn (in MATLAB) and https://github.com/ rbgirshick/py-faster-rcnn (in Python).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "The detection system achieves a frame rate of 5fps on a GPU while achieving state-of-the-art accuracy.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 56.83,
+      "y0": 231.2,
+      "x1": 505.33000000000004,
+      "y1": 259.2
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 368.25,
+       "y0": 231.2,
+       "x1": 505.33000000000004,
+       "y1": 238.57
+      },
+      {
+       "page": 1,
+       "x0": 56.83,
+       "y0": 241.51,
+       "x1": 505.32,
+       "y1": 248.88
+      },
+      {
+       "page": 1,
+       "x0": 56.83,
+       "y0": 251.83,
+       "x1": 420.76,
+       "y1": 259.2
+      }
+     ],
+     "quote": "For the very deep VGG-16 model [3], our detection system has a frame rate of 5fps (including all steps) on a GPU, while achieving state-of-the-art object detection accuracy on PASCAL VOC 2007, 2012, and MS COCO datasets with only 300 proposals per image.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "Faster R-CNN and RPN formed the foundation of several 1st-place winning entries in ILSVRC and COCO 2015 competitions.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 56.83,
+      "y0": 251.83,
+      "x1": 505.33,
+      "y1": 269.51
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 423.75,
+       "y0": 251.83,
+       "x1": 505.33,
+       "y1": 259.2
+      },
+      {
+       "page": 1,
+       "x0": 56.83,
+       "y0": 262.14,
+       "x1": 449.84,
+       "y1": 269.51
+      }
+     ],
+     "quote": "In ILSVRC and COCO 2015 competitions, Faster R-CNN and RPN are the foundations of the 1st-place winning entries in several tracks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "The marginal cost for computing proposals is small, such as 10ms per image.",
+   "evidence": [
+    {
+     "chunk_id": "b0006",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 287.06,
+      "y0": 548.48,
+      "x1": 526.17,
+      "y1": 581.97
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 407.89,
+       "y0": 548.48,
+       "x1": 526.17,
+       "y1": 558.0600000000001
+      },
+      {
+       "page": 1,
+       "x0": 287.06,
+       "y0": 560.44,
+       "x1": 526.16,
+       "y1": 570.0200000000001
+      },
+      {
+       "page": 1,
+       "x0": 287.06,
+       "y0": 572.39,
+       "x1": 425.53999999999996,
+       "y1": 581.97
+      }
+     ],
+     "quote": "By sharing convolutions at test-time, the marginal cost for computing proposals is small (e.g., 10ms per image).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

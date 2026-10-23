@@ -1,0 +1,2489 @@
+{
+ "metadata": {
+  "title": "ELECTRA: PRE-TRAINING TEXT ENCODERS AS DISCRIMINATORS RATHER THAN GENERATORS",
+  "authors": [
+   "Kevin Clark",
+   "Minh-Thang Luong",
+   "Quoc V Le",
+   "Christopher D Manning"
+  ],
+  "venue": null,
+  "year": "2020",
+  "arxiv_id": "2003.10555v1[cs.CL]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Masked language modeling methods generally require large amounts of compute to be effective.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 297.62,
+      "x1": 468.14,
+      "y1": 328.18
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 265.8,
+       "y0": 297.62,
+       "x1": 468.14,
+       "y1": 306.26
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 308.58,
+       "x1": 468.14,
+       "y1": 317.21999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 319.54,
+       "x1": 180.56,
+       "y1": 328.18
+      }
+     ],
+     "quote": "While they produce good results when transferred to downstream NLP tasks, they generally require large amounts of compute to be effective.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Current pre-training methods incur a substantial compute cost because the network only learns from 15% of the tokens per example.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 585.89,
+      "x1": 504.01,
+      "y1": 616.4499999999999
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 167.84,
+       "y0": 585.89,
+       "x1": 504.01,
+       "y1": 594.53
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 596.85,
+       "x1": 504.0,
+       "y1": 605.49
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 607.81,
+       "x1": 456.55,
+       "y1": 616.4499999999999
+      }
+     ],
+     "quote": "While more effective than conventional language-model pre-training due to learning bidirectional representations, these masked language modeling (MLM) approaches incur a substantial compute cost because the network only learns from 15% of the tokens per example.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "problem.2",
+   "value": "Current pre-training methods raise concerns about their cost and accessibility due to large compute requirements.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 419.02,
+      "x1": 504.0,
+      "y1": 438.62
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 419.02,
+       "x1": 504.0,
+       "y1": 427.65999999999997
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 429.98,
+       "x1": 267.84000000000003,
+       "y1": 438.62
+      }
+     ],
+     "quote": "Most current pre-training methods require large amounts of compute to be effective, raising concerns about their cost and accessibility.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "We propose a more sample-efficient pre-training task called replaced token detection.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 319.54,
+      "x1": 468.13,
+      "y1": 339.14
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 184.23,
+       "y0": 319.54,
+       "x1": 468.13,
+       "y1": 328.18
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 330.5,
+       "x1": 271.3,
+       "y1": 339.14
+      }
+     ],
+     "quote": "As an alternative, we propose a more sample-efficient pre-training task called replaced token detection.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "We call our approach ELECTRA for Efficiently Learning an Encoder that Classifies Token Replacements Accurately.",
+   "evidence": [
+    {
+     "chunk_id": "b0006",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 358.25,
+      "x1": 504.0,
+      "y1": 377.84999999999997
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 358.25,
+       "x1": 504.0,
+       "y1": 366.89
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 369.21,
+       "x1": 206.66,
+       "y1": 377.84999999999997
+      }
+     ],
+     "quote": "We call our approach ELECTRAfoot_0 for \"Efficiently Learning an Encoder that Classifies Token Replacements Accurately.\"",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "language representation learning and downstream NLP tasks",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 297.62,
+      "x1": 468.14,
+      "y1": 328.18
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 265.8,
+       "y0": 297.62,
+       "x1": 468.14,
+       "y1": 306.26
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 308.58,
+       "x1": 468.14,
+       "y1": 317.21999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 319.54,
+       "x1": 180.56,
+       "y1": 328.18
+      }
+     ],
+     "quote": "While they produce good results when transferred to downstream NLP tasks, they generally require large amounts of compute to be effective.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The approach trains a generator G and a discriminator D jointly, where the generator produces a distribution over tokens using a masked language model.",
+   "evidence": [
+    {
+     "chunk_id": "b0009",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 195.84,
+      "x1": 504.0,
+      "y1": 226.39999999999998
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 318.03,
+       "y0": 195.84,
+       "x1": 504.0,
+       "y1": 204.48000000000002
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 206.8,
+       "x1": 504.0,
+       "y1": 215.44
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 217.76,
+       "x1": 230.57,
+       "y1": 226.39999999999998
+      }
+     ],
+     "quote": "The generator can be any model that produces an output distribution over tokens, but we usually use a small masked language model that is trained jointly with the discriminator.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "The generator is trained with maximum likelihood to perform masked language modeling by predicting original identities of masked-out tokens.",
+   "evidence": [
+    {
+     "chunk_id": "b0014",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 425.62,
+      "x1": 411.86,
+      "y1": 434.26
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 425.62,
+       "x1": 411.86,
+       "y1": 434.26
+      }
+     ],
+     "quote": "The generator is trained to perform masked language modeling (MLM).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "The discriminator is trained to distinguish whether tokens in a corrupted example match the original input data or were replaced by generator samples.",
+   "evidence": [
+    {
+     "chunk_id": "b0014",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 469.45,
+      "x1": 504.01,
+      "y1": 489.05
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 292.81,
+       "y0": 469.45,
+       "x1": 504.01,
+       "y1": 478.09
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 480.41,
+       "x1": 379.28,
+       "y1": 489.05
+      }
+     ],
+     "quote": "The discriminator is trained to distinguish tokens in the data from tokens that have been replaced by generator samples.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "The combined loss function of MLM loss and discriminator loss is minimized over a large corpus of raw text, and the generator is discarded after pre-training.",
+   "evidence": [
+    {
+     "chunk_id": "b0009",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 239.68,
+      "x1": 504.01,
+      "y1": 259.27
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 143.42,
+       "y0": 239.68,
+       "x1": 504.01,
+       "y1": 248.32
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 250.63,
+       "x1": 271.84000000000003,
+       "y1": 259.27
+      }
+     ],
+     "quote": "After pre-training, we throw out the generator and only fine-tune the discriminator (the ELECTRA model) on downstream tasks.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "General Language Understanding Evaluation (GLUE) benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 277.9,
+      "x1": 504.0,
+      "y1": 297.5
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 277.9,
+       "x1": 504.0,
+       "y1": 286.53999999999996
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 288.86,
+       "x1": 438.72,
+       "y1": 297.5
+      }
+     ],
+     "quote": "We evaluate on the General Language Understanding Evaluation (GLUE) benchmark (Wang et al., 2019) and Stanford Question Answering (SQuAD) dataset (Rajpurkar et al., 2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "General Language Understanding Evaluation (GLUE)",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "Stanford Question Answering (SQuAD) dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 277.9,
+      "x1": 504.0,
+      "y1": 297.5
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 277.9,
+       "x1": 504.0,
+       "y1": 286.53999999999996
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 288.86,
+       "x1": 438.72,
+       "y1": 297.5
+      }
+     ],
+     "quote": "We evaluate on the General Language Understanding Evaluation (GLUE) benchmark (Wang et al., 2019) and Stanford Question Answering (SQuAD) dataset (Rajpurkar et al., 2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Stanford Question Answering (SQuAD)",
+   "split": "1.1, 2.0",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "Wikipedia and BooksCorpus for pre-training",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 376.53,
+      "x1": 504.01,
+      "y1": 396.13
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 193.81,
+       "y0": 376.53,
+       "x1": 504.01,
+       "y1": 385.16999999999996
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 387.49,
+       "x1": 406.0,
+       "y1": 396.13
+      }
+     ],
+     "quote": "For most experiments we pre-train on the same data as BERT, which consists of 3.3 Billion tokens from Wikipedia and BooksCorpus (Zhu et al., 2015).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Wikipedia and BooksCorpus",
+   "split": "",
+   "size": "3.3 Billion tokens",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "XLNet pre-training data including ClueWeb, CommonCrawl, and Gigaword",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 387.49,
+      "x1": 504.01,
+      "y1": 429.01
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 409.83,
+       "y0": 387.49,
+       "x1": 504.01,
+       "y1": 396.13
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 398.45,
+       "x1": 504.0,
+       "y1": 407.09
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 409.41,
+       "x1": 504.0,
+       "y1": 418.05
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 420.37,
+       "x1": 233.45999999999998,
+       "y1": 429.01
+      }
+     ],
+     "quote": "However, for our Large model we pre-trained on the data used for XLNet (Yang et al., 2019), which extends the BERT dataset to 33B tokens by including data from ClueWeb (Callan et al., 2009), CommonCrawl, and Gigaword (Parker et al., 2011).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "XLNet pre-training data",
+   "split": "",
+   "size": "33B tokens",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "BERT",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 507.17,
+      "x1": 504.0,
+      "y1": 537.73
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 221.99,
+       "y0": 507.17,
+       "x1": 504.0,
+       "y1": 515.8100000000001
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 518.13,
+       "x1": 504.0,
+       "y1": 526.77
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 529.09,
+       "x1": 158.07999999999998,
+       "y1": 537.73
+      },
+      {
+       "page": 6,
+       "x0": 158.08,
+       "y0": 527.42,
+       "x1": 161.57000000000002,
+       "y1": 533.4699999999999
+      }
+     ],
+     "quote": "In addition to BERT, we compare against two less resource-intensive pre-training methods based on language modeling: ELMo (Peters et al., 2018) and GPT (Radford et al., 2018).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "ELMo",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 507.17,
+      "x1": 504.0,
+      "y1": 537.73
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 221.99,
+       "y0": 507.17,
+       "x1": 504.0,
+       "y1": 515.8100000000001
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 518.13,
+       "x1": 504.0,
+       "y1": 526.77
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 529.09,
+       "x1": 158.07999999999998,
+       "y1": 537.73
+      },
+      {
+       "page": 6,
+       "x0": 158.08,
+       "y0": 527.42,
+       "x1": 161.57000000000002,
+       "y1": 533.4699999999999
+      }
+     ],
+     "quote": "In addition to BERT, we compare against two less resource-intensive pre-training methods based on language modeling: ELMo (Peters et al., 2018) and GPT (Radford et al., 2018).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "GPT",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 507.17,
+      "x1": 504.0,
+      "y1": 537.73
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 221.99,
+       "y0": 507.17,
+       "x1": 504.0,
+       "y1": 515.8100000000001
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 518.13,
+       "x1": 504.0,
+       "y1": 526.77
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 529.09,
+       "x1": 158.07999999999998,
+       "y1": 537.73
+      },
+      {
+       "page": 6,
+       "x0": 158.08,
+       "y0": 527.42,
+       "x1": 161.57000000000002,
+       "y1": 533.4699999999999
+      }
+     ],
+     "quote": "In addition to BERT, we compare against two less resource-intensive pre-training methods based on language modeling: ELMo (Peters et al., 2018) and GPT (Radford et al., 2018).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "RoBERTa",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 475.99,
+      "x1": 504.0,
+      "y1": 495.59
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 437.82,
+       "y0": 475.99,
+       "x1": 504.0,
+       "y1": 484.63
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 486.95,
+       "x1": 432.55,
+       "y1": 495.59
+      }
+     ],
+     "quote": "Our ELECTRA-Large models are the same size as BERT-Large but are trained for much longer.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "XLNet",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 508.87,
+      "x1": 504.0,
+      "y1": 528.47
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 423.74,
+       "y0": 508.87,
+       "x1": 504.0,
+       "y1": 517.51
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 519.83,
+       "x1": 262.16999999999996,
+       "y1": 528.47
+      }
+     ],
+     "quote": "We use a batch size 2048 and the XLNet pre-training data.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "SpanBERT",
+   "evidence": [
+    {
+     "chunk_id": "b0103",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 109.49400329589844,
+      "y0": 131.28076171875,
+      "x1": 502.5099182128906,
+      "y1": 141.29672241210938
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 109.49400329589844,
+       "y0": 131.28076171875,
+       "x1": 502.5099182128906,
+       "y1": 141.29672241210938
+      }
+     ],
+     "quote": "SpanBERT | 7.1e20 (1x) | 335M | 88.8 | 94.6 | 85.7 | 88.7 | 85.7 | 88.7",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "ALBERT",
+   "evidence": [
+    {
+     "chunk_id": "b0102",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 110.49099731445312,
+      "y0": 300.5487976074219,
+      "x1": 499.2653503417969,
+      "y1": 310.56475830078125
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 110.49099731445312,
+       "y0": 300.5487976074219,
+       "x1": 499.2653503417969,
+       "y1": 310.56475830078125
+      }
+     ],
+     "quote": "ALBERT | 3.1e22 (10x) | 69.1 | 97.1 | 91.2 | 92.0 | 90.5 | 91.3 | – | 89.2 | 91.8 | 89.0 | –",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Spearman correlation",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 321.74,
+      "x1": 504.0,
+      "y1": 352.3
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 444.98,
+       "y0": 321.74,
+       "x1": 504.0,
+       "y1": 330.38
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 332.7,
+       "x1": 504.0,
+       "y1": 341.34
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 343.66,
+       "x1": 389.2,
+       "y1": 352.3
+      }
+     ],
+     "quote": "Our evaluation metrics are Spearman correlation for STS, Matthews correlation for CoLA, and accuracy for the other GLUE tasks; we generally report the average score over all tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Matthews correlation",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 321.74,
+      "x1": 504.0,
+      "y1": 352.3
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 444.98,
+       "y0": 321.74,
+       "x1": 504.0,
+       "y1": 330.38
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 332.7,
+       "x1": 504.0,
+       "y1": 341.34
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 343.66,
+       "x1": 389.2,
+       "y1": 352.3
+      }
+     ],
+     "quote": "Our evaluation metrics are Spearman correlation for STS, Matthews correlation for CoLA, and accuracy for the other GLUE tasks; we generally report the average score over all tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 321.74,
+      "x1": 504.0,
+      "y1": 352.3
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 444.98,
+       "y0": 321.74,
+       "x1": 504.0,
+       "y1": 330.38
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 332.7,
+       "x1": 504.0,
+       "y1": 341.34
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 343.66,
+       "x1": 389.2,
+       "y1": 352.3
+      }
+     ],
+     "quote": "Our evaluation metrics are Spearman correlation for STS, Matthews correlation for CoLA, and accuracy for the other GLUE tasks; we generally report the average score over all tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "Exact-Match (EM)",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 365.57,
+      "x1": 504.0,
+      "y1": 385.16999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 284.0,
+       "y0": 365.57,
+       "x1": 504.0,
+       "y1": 374.21
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 376.53,
+       "x1": 190.03,
+       "y1": 385.16999999999996
+      }
+     ],
+     "quote": "We use the standard evaluation metrics of Exact-Match (EM) and F1 scores.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.4",
+   "value": "F1 score",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 365.57,
+      "x1": 504.0,
+      "y1": 385.16999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 284.0,
+       "y0": 365.57,
+       "x1": 504.0,
+       "y1": 374.21
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 376.53,
+       "x1": 190.03,
+       "y1": 385.16999999999996
+      }
+     ],
+     "quote": "We use the standard evaluation metrics of Exact-Match (EM) and F1 scores.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "sequence length for small model",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 452.38,
+      "x1": 504.01,
+      "y1": 482.94
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 250.03,
+       "y0": 452.38,
+       "x1": 504.01,
+       "y1": 461.02
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 463.34,
+       "x1": 504.0,
+       "y1": 471.97999999999996
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 474.3,
+       "x1": 490.71,
+       "y1": 482.94
+      }
+     ],
+     "quote": "Starting with the BERT-Base hyperparameters, we shortened the sequence length (from 512 to 128), reduced the batch size (from 256 to 128), reduced the model's hidden dimension size (from 768 to 256), and used smaller token embeddings (from 768 to 128).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "sequence length",
+   "value_raw": "128",
+   "value_norm": 128.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "batch size for small model",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 452.38,
+      "x1": 504.01,
+      "y1": 482.94
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 250.03,
+       "y0": 452.38,
+       "x1": 504.01,
+       "y1": 461.02
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 463.34,
+       "x1": 504.0,
+       "y1": 471.97999999999996
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 474.3,
+       "x1": 490.71,
+       "y1": 482.94
+      }
+     ],
+     "quote": "Starting with the BERT-Base hyperparameters, we shortened the sequence length (from 512 to 128), reduced the batch size (from 256 to 128), reduced the model's hidden dimension size (from 768 to 256), and used smaller token embeddings (from 768 to 128).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "128",
+   "value_norm": 128.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "hidden dimension size for small model",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 452.38,
+      "x1": 504.01,
+      "y1": 482.94
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 250.03,
+       "y0": 452.38,
+       "x1": 504.01,
+       "y1": 461.02
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 463.34,
+       "x1": 504.0,
+       "y1": 471.97999999999996
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 474.3,
+       "x1": 490.71,
+       "y1": 482.94
+      }
+     ],
+     "quote": "Starting with the BERT-Base hyperparameters, we shortened the sequence length (from 512 to 128), reduced the batch size (from 256 to 128), reduced the model's hidden dimension size (from 768 to 256), and used smaller token embeddings (from 768 to 128).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "hidden dimension size",
+   "value_raw": "256",
+   "value_norm": 256.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "token embeddings size for small model",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 452.38,
+      "x1": 504.01,
+      "y1": 482.94
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 250.03,
+       "y0": 452.38,
+       "x1": 504.01,
+       "y1": 461.02
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 463.34,
+       "x1": 504.0,
+       "y1": 471.97999999999996
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 474.3,
+       "x1": 490.71,
+       "y1": 482.94
+      }
+     ],
+     "quote": "Starting with the BERT-Base hyperparameters, we shortened the sequence length (from 512 to 128), reduced the batch size (from 256 to 128), reduced the model's hidden dimension size (from 768 to 256), and used smaller token embeddings (from 768 to 128).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "token embeddings",
+   "value_raw": "128",
+   "value_norm": 128.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "training steps for BERT-Small",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 485.26,
+      "x1": 504.0,
+      "y1": 515.8100000000001
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 490.97,
+       "y0": 485.26,
+       "x1": 504.0,
+       "y1": 493.9
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 496.22,
+       "x1": 504.0,
+       "y1": 504.86
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 507.17,
+       "x1": 212.34,
+       "y1": 515.8100000000001
+      },
+      {
+       "page": 6,
+       "x0": 212.33,
+       "y0": 505.5,
+       "x1": 215.82000000000002,
+       "y1": 511.55
+      }
+     ],
+     "quote": "We train BERT-Small for 1.5M steps, so it uses the same training FLOPs as ELECTRA-Small, which was trained for 1M steps. 5",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "training steps",
+   "value_raw": "1.5M",
+   "value_norm": 1500000.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "training steps for ELECTRA-Small",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 485.26,
+      "x1": 504.0,
+      "y1": 515.8100000000001
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 490.97,
+       "y0": 485.26,
+       "x1": 504.0,
+       "y1": 493.9
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 496.22,
+       "x1": 504.0,
+       "y1": 504.86
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 507.17,
+       "x1": 212.34,
+       "y1": 515.8100000000001
+      },
+      {
+       "page": 6,
+       "x0": 212.33,
+       "y0": 505.5,
+       "x1": 215.82000000000002,
+       "y1": 511.55
+      }
+     ],
+     "quote": "We train BERT-Small for 1.5M steps, so it uses the same training FLOPs as ELECTRA-Small, which was trained for 1M steps. 5",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "training steps",
+   "value_raw": "1M",
+   "value_norm": 1000000.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "training steps for large ELECTRA model",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 486.95,
+      "x1": 504.0,
+      "y1": 517.51
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 437.46,
+       "y0": 486.95,
+       "x1": 504.0,
+       "y1": 495.59
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 497.91,
+       "x1": 504.0,
+       "y1": 506.55
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 508.87,
+       "x1": 290.68,
+       "y1": 517.51
+      },
+      {
+       "page": 7,
+       "x0": 293.8,
+       "y0": 508.87,
+       "x1": 418.8,
+       "y1": 517.51
+      }
+     ],
+     "quote": "In particular, we train a model for 400k steps (ELECTRA-400K; roughly 1/4 the pre-training compute of RoBERTa) and one for 1.75M steps (ELECTRA-1.75M; similar compute to RoBERTa).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "training steps",
+   "value_raw": "400k",
+   "value_norm": 400000.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "training steps for ELECTRA-1.75M",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 486.95,
+      "x1": 504.0,
+      "y1": 517.51
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 437.46,
+       "y0": 486.95,
+       "x1": 504.0,
+       "y1": 495.59
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 497.91,
+       "x1": 504.0,
+       "y1": 506.55
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 508.87,
+       "x1": 290.68,
+       "y1": 517.51
+      },
+      {
+       "page": 7,
+       "x0": 293.8,
+       "y0": 508.87,
+       "x1": 418.8,
+       "y1": 517.51
+      }
+     ],
+     "quote": "In particular, we train a model for 400k steps (ELECTRA-400K; roughly 1/4 the pre-training compute of RoBERTa) and one for 1.75M steps (ELECTRA-1.75M; similar compute to RoBERTa).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "training steps",
+   "value_raw": "1.75M",
+   "value_norm": 1750000.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "batch size for large ELECTRA model",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 508.87,
+      "x1": 504.0,
+      "y1": 528.47
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 423.74,
+       "y0": 508.87,
+       "x1": 504.0,
+       "y1": 517.51
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 519.83,
+       "x1": 262.16999999999996,
+       "y1": 528.47
+      }
+     ],
+     "quote": "We use a batch size 2048 and the XLNet pre-training data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "2048",
+   "value_norm": 2048.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "masked token percentage",
+   "evidence": [
+    {
+     "chunk_id": "b0095",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 124.14,
+      "y0": 723.74,
+      "x1": 351.02,
+      "y1": 731.8
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 124.14,
+       "y0": 723.74,
+       "x1": 351.02,
+       "y1": 731.8
+      }
+     ],
+     "quote": "Typically k = 0.15n , i.e., 15% of the tokens are masked out.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "masked token percentage",
+   "value_raw": "15%",
+   "value_norm": 15.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.10",
+   "value": "training steps for models trained for 500k steps",
+   "evidence": [
+    {
+     "chunk_id": "b0030",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 692.65,
+      "x1": 262.53,
+      "y1": 701.29
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 692.65,
+       "x1": 262.53,
+       "y1": 701.29
+      }
+     ],
+     "quote": "We train these models for 500k steps.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "training steps",
+   "value_raw": "500k",
+   "value_norm": 500000.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.11",
+   "value": "extended training steps for ELECTRA-Base++ and ELECTRA-Small++",
+   "evidence": [
+    {
+     "chunk_id": "b0115",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 108.0,
+      "y0": 570.63,
+      "x1": 504.0,
+      "y1": 601.1899999999999
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 570.63,
+       "x1": 504.0,
+       "y1": 579.27
+      },
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 581.59,
+       "x1": 504.0,
+       "y1": 590.23
+      },
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 592.55,
+       "x1": 345.46000000000004,
+       "y1": 601.1899999999999
+      }
+     ],
+     "quote": "Furthermore, we push the limits of base-sized and small-sized models by training them on the XLNet data instead of wikibooks and for much longer (4e6 train steps); these models are called ELECTRA-Base++ and ELECTRA-Small++ in the table.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "training steps",
+   "value_raw": "4e6",
+   "value_norm": 4000000.0,
+   "scope": "pre-training"
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "single GPU for small model training",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 441.42,
+      "x1": 504.0,
+      "y1": 461.02
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 441.42,
+       "x1": 504.0,
+       "y1": 450.06
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 452.38,
+       "x1": 247.95,
+       "y1": 461.02
+      }
+     ],
+     "quote": "As a goal of this work is to improve the efficiency of pre-training, we develop a small model that can be quickly trained on a single GPU.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.1",
+   "value": "training time for ELMo",
+   "evidence": [
+    {
+     "chunk_id": "b0098",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 112.78199768066406,
+      "y0": 101.39276885986328,
+      "x1": 496.9743957519531,
+      "y1": 111.40872955322266
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 112.78199768066406,
+       "y0": 101.39276885986328,
+       "x1": 496.9743957519531,
+       "y1": 111.40872955322266
+      }
+     ],
+     "quote": "ELMo | 3.3e18 / 2.6e10 | 19x / 1.2x | 96M | 14d on 3 GTX 1080 GPUs | 71.2",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.2",
+   "value": "training time for GPT",
+   "evidence": [
+    {
+     "chunk_id": "b0098",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 112.78199768066406,
+      "y0": 111.35578155517578,
+      "x1": 496.9743957519531,
+      "y1": 121.37174224853516
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 112.78199768066406,
+       "y0": 111.35578155517578,
+       "x1": 496.9743957519531,
+       "y1": 121.37174224853516
+      }
+     ],
+     "quote": "GPT | 4.0e19 / 3.0e10 | 1.6x / 0.97x | 117M | 25d on 8 P6000 GPUs | 78.8",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.3",
+   "value": "training time for BERT-Small",
+   "evidence": [
+    {
+     "chunk_id": "b0098",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 112.78199768066406,
+      "y0": 121.31775665283203,
+      "x1": 496.9743957519531,
+      "y1": 131.33370971679688
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 112.78199768066406,
+       "y0": 121.31775665283203,
+       "x1": 496.9743957519531,
+       "y1": 131.33370971679688
+      }
+     ],
+     "quote": "BERT-Small | 1.4e18 / 3.7e9 | 45x / 8x | 14M | 4d on 1 V100 GPU | 75.1",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.4",
+   "value": "training time for BERT-Base",
+   "evidence": [
+    {
+     "chunk_id": "b0098",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 112.78199768066406,
+      "y0": 131.28076171875,
+      "x1": 496.9743957519531,
+      "y1": 141.29672241210938
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 112.78199768066406,
+       "y0": 131.28076171875,
+       "x1": 496.9743957519531,
+       "y1": 141.29672241210938
+      }
+     ],
+     "quote": "BERT-Base | 6.4e19 / 2.9e10 | 1x / 1x | 110M | 4d on 16 TPUv3s | 82.2",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.5",
+   "value": "training time for ELECTRA-Small",
+   "evidence": [
+    {
+     "chunk_id": "b0098",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 112.78199768066406,
+      "y0": 146.40374755859375,
+      "x1": 496.9743957519531,
+      "y1": 156.41970825195312
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 112.78199768066406,
+       "y0": 146.40374755859375,
+       "x1": 496.9743957519531,
+       "y1": 156.41970825195312
+      }
+     ],
+     "quote": "ELECTRA-Small | 1.4e18 / 3.7e9 | 45x / 8x | 14M | 4d on 1 V100 GPU | 79.9",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.6",
+   "value": "training time for ELECTRA-Base",
+   "evidence": [
+    {
+     "chunk_id": "b0098",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 112.78199768066406,
+      "y0": 196.21673583984375,
+      "x1": 496.9743957519531,
+      "y1": 206.23269653320312
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 112.78199768066406,
+       "y0": 196.21673583984375,
+       "x1": 496.9743957519531,
+       "y1": 206.23269653320312
+      }
+     ],
+     "quote": "ELECTRA-Base | 6.4e19 / 2.9e10 | 1x / 1x | 110M | 4d on 16 TPUv3s | 85.1",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "10 fine-tuning runs from the same pre-training checkpoint",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 503.06,
+      "x1": 504.0,
+      "y1": 533.62
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 490.97,
+       "y0": 503.06,
+       "x1": 504.0,
+       "y1": 511.7
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 514.02,
+       "x1": 504.0,
+       "y1": 522.66
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 524.98,
+       "x1": 132.63,
+       "y1": 533.62
+      }
+     ],
+     "quote": "We therefore report the median of 10 fine-tuning runs from the same pre-trained checkpoint for each result.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "seeds_and_runs.1",
+   "value": "ensemble the best 10 of 30 models fine-tuned with different random seeds",
+   "evidence": [
+    {
+     "chunk_id": "b0112",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 133.9,
+      "y0": 680.34,
+      "x1": 504.0,
+      "y1": 700.26
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 133.9,
+       "y0": 680.34,
+       "x1": 504.0,
+       "y1": 689.3000000000001
+      },
+      {
+       "page": 14,
+       "x0": 143.87,
+       "y0": 691.62,
+       "x1": 353.12,
+       "y1": 700.26
+      }
+     ],
+     "quote": "• For each task we ensemble the best 10 of 30 models fine-tuned with different random seeds but initialized from the same pre-trained checkpoint.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Weight Sharing strategies between generator and discriminator",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 681.69,
+      "x1": 504.0,
+      "y1": 690.33
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 681.69,
+       "x1": 504.0,
+       "y1": 690.33
+      }
+     ],
+     "quote": "We compare the weight tying strategies when the generator is the same size as the discriminator.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Different generator and discriminator sizes",
+   "evidence": [
+    {
+     "chunk_id": "b0031",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 430.37,
+      "x1": 504.0,
+      "y1": 449.96999999999997
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 230.41,
+       "y0": 430.37,
+       "x1": 504.0,
+       "y1": 439.01
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 441.33,
+       "x1": 227.95,
+       "y1": 449.96999999999997
+      }
+     ],
+     "quote": "GLUE scores for differently-sized generators and discriminators are shown in the left of Figure 3.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.2",
+   "value": "Training Algorithms including joint training, two-stage training, and adversarial training",
+   "evidence": [
+    {
+     "chunk_id": "b0032",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 523.63,
+      "x1": 504.0,
+      "y1": 543.61
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 523.63,
+       "x1": 504.0,
+       "y1": 532.66
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 534.97,
+       "x1": 243.06,
+       "y1": 543.61
+      }
+     ],
+     "quote": "Lastly, we explore other training algorithms for ELECTRA, although these did not end up improving results.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "More analysis is required to fully explain the parameter efficiency of ELECTRA.",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 435.47,
+      "x1": 504.0,
+      "y1": 476.97999999999996
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 451.41,
+       "y0": 435.47,
+       "x1": 504.0,
+       "y1": 444.11
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 446.43,
+       "x1": 504.0,
+       "y1": 455.07
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 457.39,
+       "x1": 504.0,
+       "y1": 466.03
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 468.34,
+       "x1": 275.58000000000004,
+       "y1": 476.97999999999996
+      }
+     ],
+     "quote": "We speculate that ELECTRA is more parameter-efficient than BERT because it does not have to model the full distribution of possible tokens at each position, but we believe more analysis is needed to completely explain ELECTRA's parameter efficiency.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Future NLP pre-training research should consider efficiency alongside absolute performance and report compute usage and parameter counts.",
+   "evidence": [
+    {
+     "chunk_id": "b0056",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 436.69,
+      "x1": 504.0,
+      "y1": 467.25
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 298.83,
+       "y0": 436.69,
+       "x1": 504.0,
+       "y1": 445.33
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 447.65,
+       "x1": 504.0,
+       "y1": 456.28999999999996
+      },
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 458.61,
+       "x1": 341.02,
+       "y1": 467.25
+      }
+     ],
+     "quote": "We also hope more future work on NLP pre-training will consider efficiency as well as absolute performance, and follow our effort in reporting compute usage and parameter counts along with evaluation metrics.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Comparing MLM predictions of BERT and ELECTRA could be an interesting way to understand the differences between their encoders in future research.",
+   "evidence": [
+    {
+     "chunk_id": "b0087",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 108.0,
+      "y0": 241.75,
+      "x1": 504.01,
+      "y1": 272.31
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 180.66,
+       "y0": 241.75,
+       "x1": 504.01,
+       "y1": 250.39
+      },
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 252.71,
+       "x1": 504.0,
+       "y1": 261.35
+      },
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 263.67,
+       "x1": 157.15,
+       "y1": 272.31
+      }
+     ],
+     "quote": "We think comparisons of BERT's and ELECTRA's MLM predictions might be an interesting way to uncover more about the differences between ELECTRA and BERT encoders in future work.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/google-research/",
+   "evidence": [
+    {
+     "chunk_id": "b0092",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.00001525878906,
+      "y0": 702.94580078125,
+      "x1": 504.00494384765625,
+      "y1": 720.3050537109375
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 124.13899993896484,
+       "y0": 702.94580078125,
+       "x1": 504.00494384765625,
+       "y1": 710.9617919921875
+      },
+      {
+       "page": 2,
+       "x0": 108.00001525878906,
+       "y0": 713.3829956054688,
+       "x1": 145.65887451171875,
+       "y1": 720.3050537109375
+      }
+     ],
+     "quote": "Code and pre-trained weights will be released at https://github.com/google-research/ electra",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "ELECTRA-Small outperforms a comparably small BERT model by 5 points on GLUE and outperforms GPT.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 506.69,
+      "x1": 504.01,
+      "y1": 548.21
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 329.27,
+       "y0": 506.69,
+       "x1": 504.0,
+       "y1": 515.33
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 517.65,
+       "x1": 293.08000000000004,
+       "y1": 526.29
+      },
+      {
+       "page": 2,
+       "x0": 293.07,
+       "y0": 515.98,
+       "x1": 296.56,
+       "y1": 522.03
+      },
+      {
+       "page": 2,
+       "x0": 300.47,
+       "y0": 517.65,
+       "x1": 504.01,
+       "y1": 526.29
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 528.61,
+       "x1": 504.0,
+       "y1": 537.25
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 539.57,
+       "x1": 160.32,
+       "y1": 548.21
+      }
+     ],
+     "quote": "2 ELECTRA-Small outperforms a comparably small BERT model by 5 points on GLUE, and even outperforms the much larger GPT model (Radford et al., 2018).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "ELECTRA-Large performs comparably to RoBERTa and XLNet while using 1/4 of the compute.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 539.57,
+      "x1": 504.0,
+      "y1": 570.13
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 166.77,
+       "y0": 539.57,
+       "x1": 504.0,
+       "y1": 548.21
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 550.53,
+       "x1": 504.0,
+       "y1": 559.17
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 561.49,
+       "x1": 393.54,
+       "y1": 570.13
+      }
+     ],
+     "quote": "Our approach also works well at large scale, where we train an ELECTRA-Large model that performs comparably to RoBERTa (Liu et al., 2019) and XLNet (Yang et al., 2019), despite having fewer parameters and using 1/4 of the compute for training.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "ELECTRA-Large outperforms ALBERT on GLUE and sets a new state-of-the-art for SQuAD 2.0.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 561.49,
+      "x1": 504.01,
+      "y1": 592.05
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 396.56,
+       "y0": 561.49,
+       "x1": 504.01,
+       "y1": 570.13
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 572.45,
+       "x1": 504.0,
+       "y1": 581.09
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 583.41,
+       "x1": 293.47,
+       "y1": 592.05
+      }
+     ],
+     "quote": "Training ELECTRA-Large further results in an even stronger model that outperforms ALBERT (Lan et al., 2019) on GLUE and sets a new state-of-the-art for SQuAD 2.0.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

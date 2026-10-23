@@ -1,0 +1,2151 @@
+{
+ "metadata": {
+  "title": "LORA: LOW-RANK ADAPTATION OF LARGE LAN-GUAGE MODELS",
+  "authors": [
+   "Edward Hu",
+   "Yelong Shen",
+   "Phillip Wallis",
+   "Zeyuan Allen-Zhu",
+   "Yuanzhi Li",
+   "Shean Wang",
+   "Lu Wang",
+   "Weizhu Chen"
+  ],
+  "venue": null,
+  "year": "2021",
+  "arxiv_id": "2106.09685v2[cs.CL]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Full fine-tuning of large pre-trained language models like GPT-3 175B becomes prohibitively expensive and logistically difficult.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 301.26,
+      "x1": 468.14,
+      "y1": 331.82
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 239.26,
+       "y0": 301.26,
+       "x1": 468.14,
+       "y1": 309.9
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 312.22,
+       "x1": 468.14,
+       "y1": 320.86
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 323.18,
+       "x1": 185.65,
+       "y1": 331.82
+      }
+     ],
+     "quote": "Using GPT-3 175B as an example -deploying independent instances of fine-tuned models, each with 175B parameters, is prohibitively expensive.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Existing parameter-efficient adaptation methods often introduce inference latency or reduce the usable sequence length.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 262.43,
+      "y0": 674.61,
+      "x1": 379.2,
+      "y1": 683.25
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 262.43,
+       "y0": 674.61,
+       "x1": 379.2,
+       "y1": 683.25
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 85.34,
+       "x1": 504.0,
+       "y1": 93.98
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 96.3,
+       "x1": 504.0,
+       "y1": 104.94
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 107.26,
+       "x1": 323.21000000000004,
+       "y1": 115.9
+      }
+     ],
+     "quote": "However, existing techniques often introduce inference latency (Houlsby et al., 2019;Rebuffi et al., 2017) by extending model depth or reduce the model's usable sequence length (Li & Liang, 2021;Lester et al., 2021;Hambardzumyan et al., 2020;Liu et al., 2021) (Section 3).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "problem.2",
+   "value": "Prior efficient adaptation methods often fail to match full fine-tuning baselines.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 107.26,
+      "x1": 504.0,
+      "y1": 126.86
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 326.65,
+       "y0": 107.26,
+       "x1": 504.0,
+       "y1": 115.9
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 118.22,
+       "x1": 461.14,
+       "y1": 126.86
+      }
+     ],
+     "quote": "More importantly, these method often fail to match the fine-tuning baselines, posing a trade-off between efficiency and model quality.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Proposing Low-Rank Adaptation (LoRA), which freezes pretrained model weights and injects trainable rank decomposition matrices into Transformer layers.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 322.79,
+      "x1": 468.14,
+      "y1": 364.69
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 190.07,
+       "y0": 322.79,
+       "x1": 468.13,
+       "y1": 331.82
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 334.14,
+       "x1": 468.14,
+       "y1": 342.78
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 345.09,
+       "x1": 468.14,
+       "y1": 353.72999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 356.05,
+       "x1": 268.11,
+       "y1": 364.69
+      }
+     ],
+     "quote": "We propose Low-Rank Adaptation, or LoRA, which freezes the pretrained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture, greatly reducing the number of trainable parameters for downstream tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Providing an empirical investigation into rank-deficiency in language model adaptation.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 410.85,
+      "x1": 468.14,
+      "y1": 441.40999999999997
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 276.87,
+       "y0": 410.85,
+       "x1": 468.14,
+       "y1": 419.49
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 421.81,
+       "x1": 468.14,
+       "y1": 430.45
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 432.77,
+       "x1": 171.27,
+       "y1": 441.40999999999997
+      }
+     ],
+     "quote": "We also provide an empirical investigation into rank-deficiency in language model adaptation, which sheds light on the efficacy of LoRA.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "Releasing a software package to integrate LoRA with PyTorch models along with implementations and checkpoints.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 120.65,
+      "y0": 432.77,
+      "x1": 468.14,
+      "y1": 706.5
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 173.43,
+       "y0": 432.77,
+       "x1": 468.14,
+       "y1": 441.40999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 443.72,
+       "x1": 468.14,
+       "y1": 452.36
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 454.68,
+       "x1": 241.72,
+       "y1": 463.32
+      },
+      {
+       "page": 1,
+       "x0": 438.08,
+       "y0": 455.62,
+       "x1": 443.96,
+       "y1": 462.63
+      },
+      {
+       "page": 1,
+       "x0": 121.1,
+       "y0": 690.26,
+       "x1": 123.64999999999999,
+       "y1": 695.5
+      },
+      {
+       "page": 1,
+       "x0": 124.14,
+       "y0": 692.31,
+       "x1": 193.2,
+       "y1": 700.0799999999999
+      },
+      {
+       "page": 1,
+       "x0": 120.65,
+       "y0": 701.32,
+       "x1": 123.64,
+       "y1": 706.5
+      }
+     ],
+     "quote": "We release a package that facilitates the integration of LoRA with PyTorch models and provide our implementations and model checkpoints for RoBERTa, DeBERTa, and GPT-2 at https://github.com/microsoft/LoRA.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Adaptation of large-scale pre-trained language models to downstream tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 268.38,
+      "x1": 468.14,
+      "y1": 287.97999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 268.38,
+       "x1": 468.14,
+       "y1": 277.02
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 279.34,
+       "x1": 453.99,
+       "y1": 287.97999999999996
+      }
+     ],
+     "quote": "An important paradigm of natural language processing consists of large-scale pretraining on general domain data and adaptation to particular tasks or domains.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The proposed method uses a low-rank decomposition to represent weight updates, constraining the weight matrix update as W 0 + BA where A and B are trainable low-rank matrices and the original pre-trained weight W 0 is frozen.",
+   "evidence": [
+    {
+     "chunk_id": "b0033",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 390.12,
+      "x1": 504.01,
+      "y1": 421.35999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 436.99,
+       "y0": 390.12,
+       "x1": 504.0,
+       "y1": 398.76
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 400.76,
+       "x1": 202.68,
+       "y1": 410.40999999999997
+      },
+      {
+       "page": 4,
+       "x0": 202.68,
+       "y0": 399.18,
+       "x1": 217.29000000000002,
+       "y1": 405.3
+      },
+      {
+       "page": 4,
+       "x0": 217.96,
+       "y0": 401.07,
+       "x1": 504.01,
+       "y1": 409.71
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 411.71,
+       "x1": 321.68,
+       "y1": 421.35999999999996
+      },
+      {
+       "page": 4,
+       "x0": 321.68,
+       "y0": 410.14,
+       "x1": 335.75,
+       "y1": 416.26
+      },
+      {
+       "page": 4,
+       "x0": 336.46,
+       "y0": 411.71,
+       "x1": 368.46,
+       "y1": 421.01
+      },
+      {
+       "page": 4,
+       "x0": 368.46,
+       "y0": 410.14,
+       "x1": 382.84,
+       "y1": 416.26
+      },
+      {
+       "page": 4,
+       "x0": 383.5,
+       "y0": 411.71,
+       "x1": 445.54,
+       "y1": 420.66999999999996
+      },
+      {
+       "page": 4,
+       "x0": 462.04,
+       "y0": 411.71,
+       "x1": 504.0,
+       "y1": 420.45
+      }
+     ],
+     "quote": "For a pre-trained weight matrix W 0 ∈ R d×k , we constrain its update by representing the latter with a low-rank decomposition W 0 + ∆W = W 0 + BA, where B ∈ R d×r , A ∈ R r×k , and the rank r min(d, k).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "The method applies a random Gaussian initialization for matrix A and zero for matrix B so that the update term starts at zero, and scales the product by a constant alpha divided by r.",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 484.26,
+      "x1": 504.0,
+      "y1": 504.18
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 300.74,
+       "y0": 484.26,
+       "x1": 504.0,
+       "y1": 493.21999999999997
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 495.22,
+       "x1": 357.13,
+       "y1": 504.18
+      }
+     ],
+     "quote": "We use a random Gaussian initialization for A and zero for B, so ∆W = BA is zero at the beginning of training.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "The authors focus on applying LoRA specifically to the attention weights within Transformer language models while freezing the MLP modules.",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 185.87,
+      "x1": 504.0,
+      "y1": 227.77999999999997
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 195.04,
+       "y0": 185.87,
+       "x1": 504.0,
+       "y1": 194.9
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 197.22,
+       "x1": 504.0,
+       "y1": 205.86
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 208.18,
+       "x1": 504.0,
+       "y1": 216.82
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 219.14,
+       "x1": 271.05,
+       "y1": 227.77999999999997
+      }
+     ],
+     "quote": "We limit our study to only adapting the attention weights for downstream tasks and freeze the MLP modules (so they are not trained in downstream tasks) both for simplicity and parameter-efficiency.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "Unlike full fine-tuning which learns a full-dimension parameter update for each task, the proposed approach is parameter-efficient and uses a low-rank representation to encode weight updates.",
+   "evidence": [
+    {
+     "chunk_id": "b0021",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 205.99,
+      "x1": 504.0,
+      "y1": 214.63
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 205.99,
+       "x1": 504.0,
+       "y1": 214.63
+      }
+     ],
+     "quote": "In this paper, we adopt a more parameter-efficient approach, where the task-specific parameter",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "LoRA does not require accumulated gradient updates to have full rank during adaptation, recovering the expressiveness of full fine-tuning as the rank increases without introducing additional inference latency.",
+   "evidence": [
+    {
+     "chunk_id": "b0036",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 572.82,
+      "x1": 504.0,
+      "y1": 592.42
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 264.54,
+       "y0": 572.82,
+       "x1": 504.0,
+       "y1": 581.46
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 583.78,
+       "x1": 412.79,
+       "y1": 592.42
+      }
+     ],
+     "quote": "LoRA takes a step further and does not require the accumulated gradient update to weight matrices to have full-rank during adaptation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "GLUE benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 509.87,
+      "x1": 504.0,
+      "y1": 529.47
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 224.34,
+       "y0": 509.87,
+       "x1": 504.0,
+       "y1": 518.51
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 520.83,
+       "x1": 224.15,
+       "y1": 529.47
+      }
+     ],
+     "quote": "Specifically, we evaluate on the GLUE (Wang et al., 2019) benchmark for RoBERTa and DeBERTa.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "GLUE",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "WikiSQL dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 520.83,
+      "x1": 504.0,
+      "y1": 551.39
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 227.24,
+       "y0": 520.83,
+       "x1": 504.0,
+       "y1": 529.47
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 531.79,
+       "x1": 504.0,
+       "y1": 540.43
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 542.75,
+       "x1": 414.66,
+       "y1": 551.39
+      }
+     ],
+     "quote": "We follow the setup of Li & Liang (2021) on GPT-2 for a direct comparison and add WikiSQL (Zhong et al., 2017) (NL to SQL queries) and SAMSum (Gliwa et al., 2019) (conversation summarization) for large-scale experiments on GPT-3.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "WikiSQL",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "SAMSum dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 520.83,
+      "x1": 504.0,
+      "y1": 551.39
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 227.24,
+       "y0": 520.83,
+       "x1": 504.0,
+       "y1": 529.47
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 531.79,
+       "x1": 504.0,
+       "y1": 540.43
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 542.75,
+       "x1": 414.66,
+       "y1": 551.39
+      }
+     ],
+     "quote": "We follow the setup of Li & Liang (2021) on GPT-2 for a direct comparison and add WikiSQL (Zhong et al., 2017) (NL to SQL queries) and SAMSum (Gliwa et al., 2019) (conversation summarization) for large-scale experiments on GPT-3.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "SAMSum",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "E2E NLG Challenge dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 690.5,
+      "x1": 504.01000000000005,
+      "y1": 710.1
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 487.41,
+       "y0": 690.5,
+       "x1": 504.01000000000005,
+       "y1": 699.14
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 701.46,
+       "x1": 504.0,
+       "y1": 710.1
+      }
+     ],
+     "quote": "Due to space constraint, we only present our result on E2E NLG Challenge (Table 3) in this section.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "E2E NLG Challenge",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "WebNLG dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 712.42,
+      "x1": 485.68,
+      "y1": 721.06
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 712.42,
+       "x1": 485.68,
+       "y1": 721.06
+      }
+     ],
+     "quote": "See Section F.1 for results on WebNLG (Gardent et al., 2017) and DART (Nan et al., 2020).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "WebNLG",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "DART dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 712.42,
+      "x1": 485.68,
+      "y1": 721.06
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 712.42,
+       "x1": 485.68,
+       "y1": 721.06
+      }
+     ],
+     "quote": "See Section F.1 for results on WebNLG (Gardent et al., 2017) and DART (Nan et al., 2020).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "DART",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Fine-Tuning (FT)",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 638.3,
+      "x1": 332.40999999999997,
+      "y1": 647.3299999999999
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 638.3,
+       "x1": 332.40999999999997,
+       "y1": 647.3299999999999
+      }
+     ],
+     "quote": "Fine-Tuning (FT) is a common approach for adaptation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "FT Top2",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 660.61,
+      "x1": 504.0,
+      "y1": 681.4399999999999
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 349.32,
+       "y0": 660.61,
+       "x1": 504.0,
+       "y1": 669.25
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 672.8,
+       "x1": 447.79,
+       "y1": 681.4399999999999
+      },
+      {
+       "page": 5,
+       "x0": 447.79,
+       "y0": 670.24,
+       "x1": 462.65000000000003,
+       "y1": 676.51
+      },
+      {
+       "page": 5,
+       "x0": 463.15,
+       "y0": 672.8,
+       "x1": 468.96,
+       "y1": 681.4399999999999
+      }
+     ],
+     "quote": "We include one such baseline reported in prior work (Li & Liang, 2021) on GPT-2, which adapts just the last two layers (FT Top2 ).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "Bias-only or BitFit",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 392.46,
+      "x1": 504.0,
+      "y1": 401.48999999999995
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 392.46,
+       "x1": 504.0,
+       "y1": 401.48999999999995
+      }
+     ],
+     "quote": "Bias-only or BitFit is a baseline where we only train the bias vectors while freezing everything else.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "Prefix-embedding tuning (PreEmbed)",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 420.35,
+      "x1": 456.59,
+      "y1": 429.38
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 420.35,
+       "x1": 456.59,
+       "y1": 429.38
+      }
+     ],
+     "quote": "Prefix-embedding tuning (PreEmbed) inserts special tokens among the input tokens.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "Prefix-layer tuning (PreLayer)",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 492.09,
+      "x1": 410.42,
+      "y1": 501.11999999999995
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 492.09,
+       "x1": 410.42,
+       "y1": 501.11999999999995
+      }
+     ],
+     "quote": "Prefix-layer tuning (PreLayer) is an extension to prefix-embedding tuning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "Adapter H",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 575.16,
+      "x1": 504.0,
+      "y1": 608.29
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 456.25,
+       "y0": 575.16,
+       "x1": 504.0,
+       "y1": 583.8
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 587.02,
+       "x1": 207.31,
+       "y1": 596.05
+      },
+      {
+       "page": 6,
+       "x0": 207.31,
+       "y0": 584.68,
+       "x1": 212.74,
+       "y1": 590.9499999999999
+      },
+      {
+       "page": 6,
+       "x0": 213.23,
+       "y0": 587.41,
+       "x1": 504.0,
+       "y1": 596.05
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 599.65,
+       "x1": 397.09,
+       "y1": 608.29
+      }
+     ],
+     "quote": "We call this original design Adapter H .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "Adapter L",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 575.16,
+      "x1": 504.0,
+      "y1": 608.29
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 456.25,
+       "y0": 575.16,
+       "x1": 504.0,
+       "y1": 583.8
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 587.02,
+       "x1": 207.31,
+       "y1": 596.05
+      },
+      {
+       "page": 6,
+       "x0": 207.31,
+       "y0": 584.68,
+       "x1": 212.74,
+       "y1": 590.9499999999999
+      },
+      {
+       "page": 6,
+       "x0": 213.23,
+       "y0": 587.41,
+       "x1": 504.0,
+       "y1": 596.05
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 599.65,
+       "x1": 397.09,
+       "y1": 608.29
+      }
+     ],
+     "quote": "Recently, Lin et al. (2020) proposed a more efficient design with the adapter layer applied only after the MLP module and after a LayerNorm.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.7",
+   "value": "Adapter P",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 599.65,
+      "x1": 504.0,
+      "y1": 620.54
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 486.29,
+       "y0": 599.65,
+       "x1": 504.0,
+       "y1": 608.29
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 611.51,
+       "x1": 462.18,
+       "y1": 620.54
+      },
+      {
+       "page": 6,
+       "x0": 462.18,
+       "y0": 609.17,
+       "x1": 466.44,
+       "y1": 615.4399999999999
+      },
+      {
+       "page": 6,
+       "x0": 466.94,
+       "y0": 611.9,
+       "x1": 469.43,
+       "y1": 620.54
+      }
+     ],
+     "quote": "This is very similar to another deign proposed in Pfeiffer et al. (2021), which we call Adapter P .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.8",
+   "value": "AdapterDrop (Adapter D )",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 611.9,
+      "x1": 504.0,
+      "y1": 643.74
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 472.5,
+       "y0": 611.9,
+       "x1": 504.0,
+       "y1": 620.54
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 622.86,
+       "x1": 504.0,
+       "y1": 631.5
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 635.1,
+       "x1": 219.14,
+       "y1": 643.74
+      },
+      {
+       "page": 6,
+       "x0": 219.14,
+       "y0": 632.37,
+       "x1": 224.17999999999998,
+       "y1": 638.64
+      },
+      {
+       "page": 6,
+       "x0": 224.67,
+       "y0": 635.1,
+       "x1": 230.48,
+       "y1": 643.74
+      }
+     ],
+     "quote": "We also include another baseline call AdapterDrop (Rücklé et al., 2020) which drops some adapter layers for greater efficiency (Adapter D ).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "BLEU score",
+   "evidence": [
+    {
+     "chunk_id": "b0137",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 155.4020538330078,
+      "y0": 281.495361328125,
+      "x1": 282.5348205566406,
+      "y1": 290.40191650390625
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 155.4020538330078,
+       "y0": 281.495361328125,
+       "x1": 282.5348205566406,
+       "y1": 290.40191650390625
+      }
+     ],
+     "quote": "For all metrics, higher is better.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "NIST score",
+   "evidence": [
+    {
+     "chunk_id": "b0137",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 155.4020538330078,
+      "y0": 281.495361328125,
+      "x1": 282.5348205566406,
+      "y1": 290.40191650390625
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 155.4020538330078,
+       "y0": 281.495361328125,
+       "x1": 282.5348205566406,
+       "y1": 290.40191650390625
+      }
+     ],
+     "quote": "For all metrics, higher is better.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "MET score",
+   "evidence": [
+    {
+     "chunk_id": "b0137",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 155.4020538330078,
+      "y0": 281.495361328125,
+      "x1": 282.5348205566406,
+      "y1": 290.40191650390625
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 155.4020538330078,
+       "y0": 281.495361328125,
+       "x1": 282.5348205566406,
+       "y1": 290.40191650390625
+      }
+     ],
+     "quote": "For all metrics, higher is better.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "ROUGE-L score",
+   "evidence": [
+    {
+     "chunk_id": "b0137",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 155.4020538330078,
+      "y0": 281.495361328125,
+      "x1": 282.5348205566406,
+      "y1": 290.40191650390625
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 155.4020538330078,
+       "y0": 281.495361328125,
+       "x1": 282.5348205566406,
+       "y1": 290.40191650390625
+      }
+     ],
+     "quote": "For all metrics, higher is better.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.4",
+   "value": "CIDEr score",
+   "evidence": [
+    {
+     "chunk_id": "b0137",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 155.4020538330078,
+      "y0": 281.495361328125,
+      "x1": 282.5348205566406,
+      "y1": 290.40191650390625
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 155.4020538330078,
+       "y0": 281.495361328125,
+       "x1": 282.5348205566406,
+       "y1": 290.40191650390625
+      }
+     ],
+     "quote": "For all metrics, higher is better.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.5",
+   "value": "Logical form validation accuracy on WikiSQL",
+   "evidence": [
+    {
+     "chunk_id": "b0138",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 221.4683837890625,
+      "x1": 504.0032958984375,
+      "y1": 241.33392333984375
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 396.7858581542969,
+       "y0": 221.4683837890625,
+       "x1": 504.0032958984375,
+       "y1": 230.37493896484375
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 232.4273681640625,
+       "x1": 337.5382385253906,
+       "y1": 241.33392333984375
+      }
+     ],
+     "quote": "We report the logical form validation accuracy on WikiSQL, validation accuracy on MultiNLI-matched, and Rouge-1/2/L on SAMSum.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.6",
+   "value": "Validation accuracy on MultiNLI-matched",
+   "evidence": [
+    {
+     "chunk_id": "b0138",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 221.4683837890625,
+      "x1": 504.0032958984375,
+      "y1": 241.33392333984375
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 396.7858581542969,
+       "y0": 221.4683837890625,
+       "x1": 504.0032958984375,
+       "y1": 230.37493896484375
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 232.4273681640625,
+       "x1": 337.5382385253906,
+       "y1": 241.33392333984375
+      }
+     ],
+     "quote": "We report the logical form validation accuracy on WikiSQL, validation accuracy on MultiNLI-matched, and Rouge-1/2/L on SAMSum.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.7",
+   "value": "Rouge-1/2/L on SAMSum",
+   "evidence": [
+    {
+     "chunk_id": "b0138",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 221.4683837890625,
+      "x1": 504.0032958984375,
+      "y1": 241.33392333984375
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 396.7858581542969,
+       "y0": 221.4683837890625,
+       "x1": 504.0032958984375,
+       "y1": 230.37493896484375
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 232.4273681640625,
+       "x1": 337.5382385253906,
+       "y1": 241.33392333984375
+      }
+     ],
+     "quote": "We report the logical form validation accuracy on WikiSQL, validation accuracy on MultiNLI-matched, and Rouge-1/2/L on SAMSum.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Sequence length of 128",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 466.68,
+      "x1": 504.0,
+      "y1": 486.28
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 213.81,
+       "y0": 466.68,
+       "x1": 504.0,
+       "y1": 475.32
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 477.64,
+       "x1": 260.15999999999997,
+       "y1": 486.28
+      }
+     ],
+     "quote": "First, we use the same batch size for all tasks and use a sequence length of 128 to match the adapter baselines.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "sequence length",
+   "value_raw": "128",
+   "value_norm": 128.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Rank r equals 4",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 296.91,
+      "x1": 504.0,
+      "y1": 316.83
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 141.69,
+       "y0": 296.91,
+       "x1": 504.0,
+       "y1": 305.87
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 308.19,
+       "x1": 358.94,
+       "y1": 316.83
+      }
+     ],
+     "quote": "With r = 4 and only the query and value projection matrices being adapted, the checkpoint size is reduced by roughly 10,000× (from 350GB to 35MB)foot_2 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "r",
+   "value_raw": "4",
+   "value_norm": 4.0,
+   "scope": ""
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "NVIDIA Quadro RTX8000 GPU",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 195.70077514648438,
+      "y0": 188.59136962890625,
+      "x1": 349.5631103515625,
+      "y1": 197.4979248046875
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 195.70077514648438,
+       "y0": 188.59136962890625,
+       "x1": 349.5631103515625,
+       "y1": 197.4979248046875
+      }
+     ],
+     "quote": "We use an NVIDIA Quadro RTX8000.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.1",
+   "value": "NVIDIA Tesla V100 GPU",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 253.58,
+      "y0": 553.71,
+      "x1": 448.37,
+      "y1": 562.35
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 253.58,
+       "y0": 553.71,
+       "x1": 448.37,
+       "y1": 562.35
+      }
+     ],
+     "quote": "We use NVIDIA Tesla V100 for all experiments.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Averaged over 100 trials",
+   "evidence": [
+    {
+     "chunk_id": "b0029",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 177.63238525390625,
+      "x1": 382.9577941894531,
+      "y1": 186.5389404296875
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 177.63238525390625,
+       "x1": 382.9577941894531,
+       "y1": 186.5389404296875
+      }
+     ],
+     "quote": "Table 1: Infernece latency of a single forward pass in GPT-2 medium measured in milliseconds, averaged over 100 trials.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation on different rank r values",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 108.0,
+      "y0": 595.6453857421875,
+      "x1": 427.5186462402344,
+      "y1": 604.5519409179688
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 108.0,
+       "y0": 595.6453857421875,
+       "x1": 427.5186462402344,
+       "y1": 604.5519409179688
+      }
+     ],
+     "quote": "Table 6: Validation accuracy on WikiSQL and MultiNLI with different rank r.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "A small rank may not be effective for every task or dataset, such as when a downstream task uses a different language than pre-training.",
+   "evidence": [
+    {
+     "chunk_id": "b0141",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 124.13899993896484,
+      "y0": 703.8567504882812,
+      "x1": 327.52020263671875,
+      "y1": 711.8727416992188
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 124.13899993896484,
+       "y0": 703.8567504882812,
+       "x1": 327.52020263671875,
+       "y1": 711.8727416992188
+      }
+     ],
+     "quote": "However, we do not expect a small r to work for every task or dataset.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Combine LoRA with other efficient adaptation methods to potentially provide orthogonal improvements.",
+   "evidence": [
+    {
+     "chunk_id": "b0096",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 108.0,
+      "y0": 690.5,
+      "x1": 504.0,
+      "y1": 710.1
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 286.75,
+       "y0": 690.5,
+       "x1": 504.0,
+       "y1": 699.14
+      },
+      {
+       "page": 12,
+       "x0": 108.0,
+       "y0": 701.46,
+       "x1": 351.4,
+       "y1": 710.1
+      }
+     ],
+     "quote": "1) LoRA can be combined with other efficient adaptation methods, potentially providing orthogonal improvement.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Investigate the underlying mechanism of how features learned during pre-training are transformed for downstream tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0097",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 108.0,
+      "y0": 701.46,
+      "x1": 504.0,
+      "y1": 732.02
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 354.45,
+       "y0": 701.46,
+       "x1": 504.0,
+       "y1": 710.1
+      },
+      {
+       "page": 12,
+       "x0": 108.0,
+       "y0": 712.42,
+       "x1": 504.0,
+       "y1": 721.06
+      },
+      {
+       "page": 12,
+       "x0": 108.0,
+       "y0": 723.38,
+       "x1": 196.44,
+       "y1": 732.02
+      }
+     ],
+     "quote": "2) The mechanism behind fine-tuning or LoRA is far from clear -how are features learned during pre-training transformed to do well on downstream tasks?",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.2",
+   "value": "Find more principled ways to select which weight matrices to apply LoRA to, rather than relying on heuristics.",
+   "evidence": [
+    {
+     "chunk_id": "b0097",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 141.77,
+      "y0": 85.34,
+      "x1": 483.25,
+      "y1": 93.98
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 141.77,
+       "y0": 85.34,
+       "x1": 483.25,
+       "y1": 93.98
+      }
+     ],
+     "quote": "3) We mostly depend on heuristics to select the weight matrices to apply LoRA to.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.3",
+   "value": "Explore whether the rank-deficiency of the adaptation matrix implies that pre-trained model weights could be rank-deficient as well.",
+   "evidence": [
+    {
+     "chunk_id": "b0097",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 108.0,
+      "y0": 95.98,
+      "x1": 504.0,
+      "y1": 115.9
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 257.49,
+       "y0": 95.98,
+       "x1": 504.0,
+       "y1": 104.94
+      },
+      {
+       "page": 13,
+       "x0": 108.0,
+       "y0": 107.26,
+       "x1": 442.67,
+       "y1": 115.9
+      }
+     ],
+     "quote": "4) Finally, the rank-deficiency of ∆W suggests that W could be rank-deficient as well, which can also be a source of inspiration for future works.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/microsoft/LoRA",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 120.65,
+      "y0": 432.77,
+      "x1": 468.14,
+      "y1": 706.5
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 173.43,
+       "y0": 432.77,
+       "x1": 468.14,
+       "y1": 441.40999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 443.72,
+       "x1": 468.14,
+       "y1": 452.36
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 454.68,
+       "x1": 241.72,
+       "y1": 463.32
+      },
+      {
+       "page": 1,
+       "x0": 438.08,
+       "y0": 455.62,
+       "x1": 443.96,
+       "y1": 462.63
+      },
+      {
+       "page": 1,
+       "x0": 121.1,
+       "y0": 690.26,
+       "x1": 123.64999999999999,
+       "y1": 695.5
+      },
+      {
+       "page": 1,
+       "x0": 124.14,
+       "y0": 692.31,
+       "x1": 193.2,
+       "y1": 700.0799999999999
+      },
+      {
+       "page": 1,
+       "x0": 120.65,
+       "y0": 701.32,
+       "x1": 123.64,
+       "y1": 706.5
+      }
+     ],
+     "quote": "We release a package that facilitates the integration of LoRA with PyTorch models and provide our implementations and model checkpoints for RoBERTa, DeBERTa, and GPT-2 at https://github.com/microsoft/LoRA. * Equal contribution. 0",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "LoRA can drastically reduce the number of trainable parameters and GPU memory requirements compared to fine-tuned GPT-3 175B.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 356.05,
+      "x1": 468.14,
+      "y1": 386.61
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 271.2,
+       "y0": 356.05,
+       "x1": 468.14,
+       "y1": 364.69
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 367.01,
+       "x1": 468.14,
+       "y1": 375.65
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 377.97,
+       "x1": 296.70000000000005,
+       "y1": 386.61
+      }
+     ],
+     "quote": "Compared to GPT-3 175B fine-tuned with Adam, LoRA can reduce the number of trainable parameters by 10,000 times and the GPU memory requirement by 3 times.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "LoRA performs on-par or better than fine-tuning while offering higher training throughput and no inference latency.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 377.97,
+      "x1": 468.14,
+      "y1": 419.26
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 299.82,
+       "y0": 377.97,
+       "x1": 468.14,
+       "y1": 386.61
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 388.93,
+       "x1": 468.14,
+       "y1": 397.57
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 399.89,
+       "x1": 468.14,
+       "y1": 408.53
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 410.67,
+       "x1": 272.01,
+       "y1": 419.26
+      }
+     ],
+     "quote": "LoRA performs on-par or better than finetuning in model quality on RoBERTa, DeBERTa, GPT-2, and GPT-3, despite having fewer trainable parameters, a higher training throughput, and, unlike adapters, no additional inference latency.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

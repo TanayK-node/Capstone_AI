@@ -1,0 +1,1658 @@
+{
+ "metadata": {
+  "title": "DECOUPLED WEIGHT DECAY REGULARIZATION",
+  "authors": [
+   "Ilya Loshchilov",
+   "Frank Hutter"
+  ],
+  "venue": null,
+  "year": "2019",
+  "arxiv_id": "1711.05101v3[cs.LG]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "L2 regularization and weight decay are not equivalent for adaptive gradient algorithms like Adam, unlike in standard SGD.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 239.21,
+      "x1": 468.14000000000004,
+      "y1": 302.64
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 443.79,
+       "y0": 239.21,
+       "x1": 468.14000000000004,
+       "y1": 247.85000000000002
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 250.17,
+       "x1": 468.14,
+       "y1": 259.5
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 261.13,
+       "x1": 468.14,
+       "y1": 269.77
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 272.08,
+       "x1": 468.14,
+       "y1": 280.71999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 282.86,
+       "x1": 468.14,
+       "y1": 291.68
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 294.0,
+       "x1": 284.72,
+       "y1": 302.64
+      }
+     ],
+     "quote": "While common implementations of these algorithms employ L 2 regularization (often calling it \"weight decay\" in what may be misleading due to the inequivalence we expose), we propose a simple modification to recover the original formulation of weight decay regularization by decoupling the weight decay from the optimization steps taken w.r.t. the loss function.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Adaptive gradient methods often generalize worse than SGD with momentum on various deep learning tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 497.69,
+      "x1": 504.0,
+      "y1": 539.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 308.21,
+       "y0": 497.69,
+       "x1": 504.0,
+       "y1": 506.33
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 508.64,
+       "x1": 504.0,
+       "y1": 517.28
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 519.6,
+       "x1": 504.0,
+       "y1": 528.24
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 530.56,
+       "x1": 210.17000000000002,
+       "y1": 539.1999999999999
+      }
+     ],
+     "quote": "Furthermore, Wilson et al. (2017) suggested that adaptive gradient methods do not generalize as well as SGD with momentum when tested on a diverse set of deep learning tasks, such as image classification, character-level language modeling and constituency parsing.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Proposing a modification to decouple weight decay from gradient-based updates in Adam to improve regularization.",
+   "evidence": [
+    {
+     "chunk_id": "b0009",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 230.57,
+      "x1": 504.0,
+      "y1": 250.11
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 230.57,
+       "x1": 504.0,
+       "y1": 239.39
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 241.52,
+       "x1": 260.12,
+       "y1": 250.11
+      }
+     ],
+     "quote": "The main contribution of this paper is to improve regularization in Adam by decoupling the weight decay from the gradient-based update.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "image classification",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 294.0,
+      "x1": 468.14,
+      "y1": 379.34999999999997
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 289.29,
+       "y0": 294.0,
+       "x1": 468.14,
+       "y1": 302.64
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 304.96,
+       "x1": 468.14,
+       "y1": 313.59999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 315.92,
+       "x1": 468.14,
+       "y1": 324.56
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 326.88,
+       "x1": 468.14,
+       "y1": 335.52
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 337.84,
+       "x1": 468.14,
+       "y1": 346.47999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 348.8,
+       "x1": 292.9,
+       "y1": 357.44
+      },
+      {
+       "page": 1,
+       "x0": 297.15,
+       "y0": 348.8,
+       "x1": 468.14,
+       "y1": 357.44
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 359.76,
+       "x1": 468.14,
+       "y1": 368.4
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 370.71,
+       "x1": 468.14,
+       "y1": 379.34999999999997
+      }
+     ],
+     "quote": "Our empirical evidence that our proposed modification (i) decouples the optimal choice of weight decay factor from the setting of the learning rate for both standard SGD and Adam and (ii) substantially improves Adam's generalization performance, allowing it to compete with SGD with momentum on image classification datasets (on which it was previously typically outperformed by the latter).",
+     "grounding_status": "verified",
+     "match_score": 99.2
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "Decouple the weight decay step from the gradient-based updates for SGD to form SGDW, allowing explicit separation of the weight decay rate and learning rate.",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 618.77,
+      "x1": 504.0,
+      "y1": 639.06
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 618.77,
+       "x1": 504.0,
+       "y1": 627.41
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 629.38,
+       "x1": 358.06,
+       "y1": 639.06
+      }
+     ],
+     "quote": "Looking first at the case of SGD, we propose to decay the weights simultaneously with the update of θ t based on gradient information in Line 9 of Algorithm 1.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "Modify Adam to decouple weight decay and loss-based gradient updates, resulting in the AdamW optimization method.",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 585.89,
+      "x1": 504.0,
+      "y1": 605.49
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 585.89,
+       "x1": 504.0,
+       "y1": 594.53
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 596.85,
+       "x1": 456.83,
+       "y1": 605.49
+      }
+     ],
+     "quote": "We decouple weight decay and loss-based gradient updates in Adam as shown in line 12 of Algorithm 2; this gives rise to our variant of Adam with decoupled weight decay (AdamW).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "Incorporate a schedule multiplier via a user-defined procedure to account for scheduling of both the learning rate and weight decay.",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 662.29,
+      "x1": 504.0,
+      "y1": 682.89
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 235.63,
+       "y0": 662.29,
+       "x1": 504.0,
+       "y1": 671.25
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 673.24,
+       "x1": 491.21,
+       "y1": 682.89
+      }
+     ],
+     "quote": "In order to account for a possible scheduling of both α and λ, we introduce a scaling factor η t delivered by a user-defined procedure SetScheduleM ultiplier(t).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "Demonstrating that the equivalence between L2 regularization and weight decay does not hold for adaptive gradient methods.",
+   "evidence": [
+    {
+     "chunk_id": "b0017",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 547.04,
+      "x1": 504.01,
+      "y1": 566.6400000000001
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 244.86,
+       "y0": 547.04,
+       "x1": 504.01,
+       "y1": 555.68
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 557.82,
+       "x1": 309.51,
+       "y1": 566.6400000000001
+      }
+     ],
+     "quote": "However, as we will demonstrate later in this section, this equivalence does not hold for adaptive gradient methods.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "CIFAR-10 dataset used for image classification experiments and baseline evaluations.",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 527.2,
+      "x1": 504.0,
+      "y1": 568.71
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 230.63,
+       "y0": 527.2,
+       "x1": 504.0,
+       "y1": 535.84
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 538.15,
+       "x1": 504.0,
+       "y1": 547.48
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 549.11,
+       "x1": 504.0,
+       "y1": 557.75
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 560.07,
+       "x1": 219.12,
+       "y1": 568.71
+      }
+     ],
+     "quote": "Our experimental setup follows that of Gastaldi (2017), who proposed, in addition to L 2 regularization, to apply the new Shake-Shake regularization to a 3-branch residual DNN that allowed to achieve new state-of-the-art results of 2.86% on the CIFAR-10 dataset (Krizhevsky, 2009).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "CIFAR-10",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "ImageNet32x32 dataset containing 1.2 million downsampled 32x32 pixel images.",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 614.87,
+      "x1": 504.0,
+      "y1": 645.42
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 341.7,
+       "y0": 614.87,
+       "x1": 504.0,
+       "y1": 623.51
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 625.83,
+       "x1": 504.0,
+       "y1": 634.47
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 636.78,
+       "x1": 291.61,
+       "y1": 645.42
+      }
+     ],
+     "quote": "We also perform experiments on the Im-ageNet32x32 dataset (Chrabaszcz et al., 2017), a downsampled version of the original ImageNet dataset with 1.2 million 32×32 pixels images.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ImageNet32x32",
+   "split": "",
+   "size": "1.2 million 32×32 pixels images",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "WIDER FACE dataset used for evaluating face detection architectures.",
+   "evidence": [
+    {
+     "chunk_id": "b0070",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 548.03,
+      "x1": 504.01,
+      "y1": 589.55
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 463.59,
+       "y0": 548.03,
+       "x1": 504.01,
+       "y1": 556.67
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 558.99,
+       "x1": 504.0,
+       "y1": 567.63
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 569.95,
+       "x1": 504.0,
+       "y1": 578.59
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 580.91,
+       "x1": 380.27,
+       "y1": 589.55
+      }
+     ],
+     "quote": "For example, Wang et al. (2018) used AdamW to train a novel architecture for face detection on the standard WIDER FACE dataset (Yang et al., 2016), obtaining almost 10x faster predictions than the previous state of the art algorithms while achieving comparable performance.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "WIDER FACE",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Standard SGD with L2 regularization",
+   "evidence": [
+    {
+     "chunk_id": "b0014",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 458.62,
+      "x1": 490.86,
+      "y1": 483.15000000000003
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 235.38,
+       "y0": 458.62,
+       "x1": 490.86,
+       "y1": 467.95
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 473.43,
+       "x1": 338.13,
+       "y1": 483.15000000000003
+      }
+     ],
+     "quote": "For standard SGD, it is equivalent to standard L 2 regularization: Proposition 1 (Weight decay = L 2 reg for standard SGD).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0055",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 693.01,
+      "x1": 504.0,
+      "y1": 712.93
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 693.01,
+       "x1": 504.0,
+       "y1": 702.66
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 704.29,
+       "x1": 504.0,
+       "y1": 712.93
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 380.05,
+       "x1": 392.97,
+       "y1": 388.69
+      }
+     ],
+     "quote": "In our first experiment, we compare Adam with L 2 regularization to Adam with decoupled weight decay (AdamW), using three different learning rate schedules: a fixed learning rate, a drop-step schedule, and a cosine annealing schedule (Loshchilov & Hutter, 2016).",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Test error",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 428.04,
+      "x1": 504.0,
+      "y1": 458.59999999999997
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 475.23,
+       "y0": 428.04,
+       "x1": 504.0,
+       "y1": 436.68
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 438.82,
+       "x1": 504.0,
+       "y1": 447.64
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 449.78,
+       "x1": 485.74,
+       "y1": 458.59999999999997
+      }
+     ],
+     "quote": "For the default learning rate of 0.001, AdamW achieved 15% relative improvement in test error compared to Adam both on CIFAR-10 (also see SuppFigure 5) and ImageNet32x32 (also see SuppFigure 6).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Test set accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 635.71,
+      "x1": 504.0,
+      "y1": 666.26
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 213.35,
+       "y0": 635.71,
+       "x1": 504.0,
+       "y1": 644.35
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 646.66,
+       "x1": 504.0,
+       "y1": 655.3
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 657.62,
+       "x1": 305.91999999999996,
+       "y1": 666.26
+      }
+     ],
+     "quote": "AdamW with the same hyperparameter setting as Adam yielded higher test set accuracy on Deep4Net (73.68% versus 71.37%) and statistically significantly higher test set accuracy on ResNet (72.04% versus 61.34%).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "Cross-entropy training loss",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 611.97,
+      "x1": 504.0,
+      "y1": 632.26
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 157.48,
+       "y0": 611.97,
+       "x1": 504.0,
+       "y1": 620.61
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 622.93,
+       "x1": 430.8,
+       "y1": 632.26
+      }
+     ],
+     "quote": "The qualitative results are identical: weight decay leads to better training loss (crossentropy) than L 2 regularization, and to an even greater improvement of test error.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Batch size set to 128 for CIFAR datasets",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 560.07,
+      "x1": 504.0,
+      "y1": 590.63
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 490.97,
+       "y0": 560.07,
+       "x1": 504.0,
+       "y1": 568.71
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 571.03,
+       "x1": 504.0,
+       "y1": 579.67
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 581.99,
+       "x1": 164.11,
+       "y1": 590.63
+      }
+     ],
+     "quote": "We always used a batch size of 128 and applied the regular data augmentation procedure for the CI-FAR datasets.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "128",
+   "value_norm": 128.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Initial learning rate set to 0.001 for Adam",
+   "evidence": [
+    {
+     "chunk_id": "b0065",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 646.66,
+      "x1": 504.0,
+      "y1": 666.26
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 646.66,
+       "x1": 504.0,
+       "y1": 655.3
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 657.62,
+       "x1": 394.0,
+       "y1": 666.26
+      }
+     ],
+     "quote": "We fixed the initial learning rate to 0.001 which represents both the default learning rate for Adam and the one which showed reasonably good results in our experiments.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "initial learning rate",
+   "value_raw": "0.001",
+   "value_norm": 0.001,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Momentum factor beta1 for Adam",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 219.21,
+      "x1": 504.0,
+      "y1": 338.34999999999997
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 133.21,
+       "y0": 219.21,
+       "x1": 238.74,
+       "y1": 227.25
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 231.18,
+       "x1": 234.29000000000002,
+       "y1": 239.3
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 241.14,
+       "x1": 240.74,
+       "y1": 249.26
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 272.51,
+       "x1": 492.04,
+       "y1": 282.23
+      },
+      {
+       "page": 3,
+       "x0": 111.78,
+       "y0": 290.38,
+       "x1": 298.46000000000004,
+       "y1": 298.5
+      },
+      {
+       "page": 3,
+       "x0": 298.47,
+       "y0": 288.68,
+       "x1": 307.88000000000005,
+       "y1": 293.92
+      },
+      {
+       "page": 3,
+       "x0": 308.38,
+       "y0": 290.45,
+       "x1": 337.21,
+       "y1": 298.31
+      },
+      {
+       "page": 3,
+       "x0": 111.78,
+       "y0": 300.35,
+       "x1": 321.40999999999997,
+       "y1": 308.47
+      },
+      {
+       "page": 3,
+       "x0": 321.41,
+       "y0": 298.64,
+       "x1": 326.01000000000005,
+       "y1": 303.88
+      },
+      {
+       "page": 3,
+       "x0": 326.51,
+       "y0": 300.36,
+       "x1": 504.0,
+       "y1": 308.46000000000004
+      },
+      {
+       "page": 3,
+       "x0": 123.24,
+       "y0": 310.33,
+       "x1": 295.4,
+       "y1": 318.43
+      },
+      {
+       "page": 3,
+       "x0": 111.78,
+       "y0": 320.27,
+       "x1": 147.48000000000002,
+       "y1": 328.39
+      },
+      {
+       "page": 3,
+       "x0": 111.78,
+       "y0": 330.58,
+       "x1": 118.76,
+       "y1": 338.34999999999997
+      }
+     ],
+     "quote": "given α = 0.001, β1 = 0.9, β2 = 0.999, = 10 -8 , λ ∈ IR",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "beta1",
+   "value_raw": "0.9",
+   "value_norm": 0.9,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Momentum factor beta2 for Adam",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 219.21,
+      "x1": 504.0,
+      "y1": 338.34999999999997
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 133.21,
+       "y0": 219.21,
+       "x1": 238.74,
+       "y1": 227.25
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 231.18,
+       "x1": 234.29000000000002,
+       "y1": 239.3
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 241.14,
+       "x1": 240.74,
+       "y1": 249.26
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 272.51,
+       "x1": 492.04,
+       "y1": 282.23
+      },
+      {
+       "page": 3,
+       "x0": 111.78,
+       "y0": 290.38,
+       "x1": 298.46000000000004,
+       "y1": 298.5
+      },
+      {
+       "page": 3,
+       "x0": 298.47,
+       "y0": 288.68,
+       "x1": 307.88000000000005,
+       "y1": 293.92
+      },
+      {
+       "page": 3,
+       "x0": 308.38,
+       "y0": 290.45,
+       "x1": 337.21,
+       "y1": 298.31
+      },
+      {
+       "page": 3,
+       "x0": 111.78,
+       "y0": 300.35,
+       "x1": 321.40999999999997,
+       "y1": 308.47
+      },
+      {
+       "page": 3,
+       "x0": 321.41,
+       "y0": 298.64,
+       "x1": 326.01000000000005,
+       "y1": 303.88
+      },
+      {
+       "page": 3,
+       "x0": 326.51,
+       "y0": 300.36,
+       "x1": 504.0,
+       "y1": 308.46000000000004
+      },
+      {
+       "page": 3,
+       "x0": 123.24,
+       "y0": 310.33,
+       "x1": 295.4,
+       "y1": 318.43
+      },
+      {
+       "page": 3,
+       "x0": 111.78,
+       "y0": 320.27,
+       "x1": 147.48000000000002,
+       "y1": 328.39
+      },
+      {
+       "page": 3,
+       "x0": 111.78,
+       "y0": 330.58,
+       "x1": 118.76,
+       "y1": 338.34999999999997
+      }
+     ],
+     "quote": "given α = 0.001, β1 = 0.9, β2 = 0.999, = 10 -8 , λ ∈ IR",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "beta2",
+   "value_raw": "0.999",
+   "value_norm": 0.999,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Epsilon parameter for Adam",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 219.21,
+      "x1": 504.0,
+      "y1": 338.34999999999997
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 133.21,
+       "y0": 219.21,
+       "x1": 238.74,
+       "y1": 227.25
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 231.18,
+       "x1": 234.29000000000002,
+       "y1": 239.3
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 241.14,
+       "x1": 240.74,
+       "y1": 249.26
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 272.51,
+       "x1": 492.04,
+       "y1": 282.23
+      },
+      {
+       "page": 3,
+       "x0": 111.78,
+       "y0": 290.38,
+       "x1": 298.46000000000004,
+       "y1": 298.5
+      },
+      {
+       "page": 3,
+       "x0": 298.47,
+       "y0": 288.68,
+       "x1": 307.88000000000005,
+       "y1": 293.92
+      },
+      {
+       "page": 3,
+       "x0": 308.38,
+       "y0": 290.45,
+       "x1": 337.21,
+       "y1": 298.31
+      },
+      {
+       "page": 3,
+       "x0": 111.78,
+       "y0": 300.35,
+       "x1": 321.40999999999997,
+       "y1": 308.47
+      },
+      {
+       "page": 3,
+       "x0": 321.41,
+       "y0": 298.64,
+       "x1": 326.01000000000005,
+       "y1": 303.88
+      },
+      {
+       "page": 3,
+       "x0": 326.51,
+       "y0": 300.36,
+       "x1": 504.0,
+       "y1": 308.46000000000004
+      },
+      {
+       "page": 3,
+       "x0": 123.24,
+       "y0": 310.33,
+       "x1": 295.4,
+       "y1": 318.43
+      },
+      {
+       "page": 3,
+       "x0": 111.78,
+       "y0": 320.27,
+       "x1": 147.48000000000002,
+       "y1": 328.39
+      },
+      {
+       "page": 3,
+       "x0": 111.78,
+       "y0": 330.58,
+       "x1": 118.76,
+       "y1": 338.34999999999997
+      }
+     ],
+     "quote": "given α = 0.001, β1 = 0.9, β2 = 0.999, = 10 -8 , λ ∈ IR",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epsilon",
+   "value_raw": "10 -8",
+   "value_norm": 1e-8,
+   "scope": ""
+  }
+ ],
+ "compute": [],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Comparison of different learning rate schedules including fixed learning rate, drop-step schedule, and cosine annealing schedule.",
+   "evidence": [
+    {
+     "chunk_id": "b0055",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 693.01,
+      "x1": 504.0,
+      "y1": 712.93
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 693.01,
+       "x1": 504.0,
+       "y1": 702.66
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 704.29,
+       "x1": 504.0,
+       "y1": 712.93
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 380.05,
+       "x1": 392.97,
+       "y1": 388.69
+      }
+     ],
+     "quote": "In our first experiment, we compare Adam with L 2 regularization to Adam with decoupled weight decay (AdamW), using three different learning rate schedules: a fixed learning rate, a drop-step schedule, and a cosine annealing schedule (Loshchilov & Hutter, 2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "Results need verification on a wider range of tasks, especially where regularization is important.",
+   "evidence": [
+    {
+     "chunk_id": "b0074",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 181.22,
+      "x1": 504.0,
+      "y1": 200.82
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 181.22,
+       "x1": 504.0,
+       "y1": 189.86
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 192.18,
+       "x1": 409.67,
+       "y1": 200.82
+      }
+     ],
+     "quote": "Our results obtained on image classification datasets must be verified on a wider range of tasks, especially ones where the use of regularization is expected to be important.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Integrate findings on weight decay into other methods that attempt to improve Adam.",
+   "evidence": [
+    {
+     "chunk_id": "b0074",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 192.18,
+      "x1": 504.0,
+      "y1": 222.74
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 413.46,
+       "y0": 192.18,
+       "x1": 504.0,
+       "y1": 200.82
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 203.14,
+       "x1": 504.0,
+       "y1": 211.77999999999997
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 214.1,
+       "x1": 352.35,
+       "y1": 222.74
+      }
+     ],
+     "quote": "It would be interesting to integrate our findings on weight decay into other methods which attempt to improve Adam, e.g, normalized direction-preserving Adam (Zhang et al., 2017).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/xgastaldi/shake-shake",
+   "evidence": [
+    {
+     "chunk_id": "b0097",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 124.13903045654297,
+      "y0": 723.7827758789062,
+      "x1": 270.2555236816406,
+      "y1": 731.7987670898438
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 124.13903045654297,
+       "y0": 723.7827758789062,
+       "x1": 270.2555236816406,
+       "y1": 731.7987670898438
+      }
+     ],
+     "quote": "https://github.com/xgastaldi/shake-shake",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/pytorch/pytorch/pull/4429",
+   "evidence": [
+    {
+     "chunk_id": "b0104",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 143.87,
+      "y0": 355.01,
+      "x1": 504.0,
+      "y1": 374.59999999999997
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 243.12,
+       "y0": 355.01,
+       "x1": 504.0,
+       "y1": 363.65
+      },
+      {
+       "page": 9,
+       "x0": 143.87,
+       "y0": 365.96,
+       "x1": 206.16,
+       "y1": 374.59999999999997
+      },
+      {
+       "page": 9,
+       "x0": 469.05,
+       "y0": 366.9,
+       "x1": 474.97,
+       "y1": 373.90999999999997
+      }
+     ],
+     "quote": "Robin Schirrmeister, and Kashif Rasul for their implementations in PyTorch (see https://github.com/pytorch/pytorch/pull/4429)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.2",
+   "value": "https://github.com/sgugger/Adam-experiments",
+   "evidence": [
+    {
+     "chunk_id": "b0104",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 143.87,
+      "y0": 355.01,
+      "x1": 504.0,
+      "y1": 374.59999999999997
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 243.12,
+       "y0": 355.01,
+       "x1": 504.0,
+       "y1": 363.65
+      },
+      {
+       "page": 9,
+       "x0": 143.87,
+       "y0": 365.96,
+       "x1": 206.16,
+       "y1": 374.59999999999997
+      },
+      {
+       "page": 9,
+       "x0": 469.05,
+       "y0": 366.9,
+       "x1": 474.97,
+       "y1": 373.90999999999997
+      }
+     ],
+     "quote": "Robin Schirrmeister, and Kashif Rasul for their implementations in PyTorch (see https://github.com/pytorch/pytorch/pull/4429)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.3",
+   "value": "https://github.com/GLambard/AdamW_Keras",
+   "evidence": [
+    {
+     "chunk_id": "b0104",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 143.87,
+      "y0": 355.01,
+      "x1": 504.0,
+      "y1": 374.59999999999997
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 243.12,
+       "y0": 355.01,
+       "x1": 504.0,
+       "y1": 363.65
+      },
+      {
+       "page": 9,
+       "x0": 143.87,
+       "y0": 365.96,
+       "x1": 206.16,
+       "y1": 374.59999999999997
+      },
+      {
+       "page": 9,
+       "x0": 469.05,
+       "y0": 366.9,
+       "x1": 474.97,
+       "y1": 373.90999999999997
+      }
+     ],
+     "quote": "Robin Schirrmeister, and Kashif Rasul for their implementations in PyTorch (see https://github.com/pytorch/pytorch/pull/4429)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.4",
+   "value": "https://github.com/Yagami123/Caffe-AdamW-AdamWR",
+   "evidence": [
+    {
+     "chunk_id": "b0104",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 143.87,
+      "y0": 355.01,
+      "x1": 504.0,
+      "y1": 374.59999999999997
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 243.12,
+       "y0": 355.01,
+       "x1": 504.0,
+       "y1": 363.65
+      },
+      {
+       "page": 9,
+       "x0": 143.87,
+       "y0": 365.96,
+       "x1": 206.16,
+       "y1": 374.59999999999997
+      },
+      {
+       "page": 9,
+       "x0": 469.05,
+       "y0": 366.9,
+       "x1": 474.97,
+       "y1": 373.90999999999997
+      }
+     ],
+     "quote": "Robin Schirrmeister, and Kashif Rasul for their implementations in PyTorch (see https://github.com/pytorch/pytorch/pull/4429)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "Adam with decoupled weight decay achieves a 15 percent relative improvement in test error.",
+   "evidence": [
+    {
+     "chunk_id": "b0009",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 241.7,
+      "x1": 504.01,
+      "y1": 294.18
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 263.09,
+       "y0": 241.7,
+       "x1": 504.01,
+       "y1": 250.33999999999997
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 252.66,
+       "x1": 504.0,
+       "y1": 261.99
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 263.62,
+       "x1": 504.0,
+       "y1": 272.26
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 274.58,
+       "x1": 504.0,
+       "y1": 283.21999999999997
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 285.54,
+       "x1": 383.18,
+       "y1": 294.18
+      }
+     ],
+     "quote": "In a comprehensive analysis, we show that Adam generalizes substantially better with decoupled weight decay than with L 2 regularization, achieving 15% relative improvement in test error (see Figures 2 and3); this holds true for various image recognition datasets (CIFAR-10 and ImageNet32x32), training budgets (ranging from 100 to 1800 epochs), and learning rate schedules (fixed, drop-step, and cosine annealing; see Figure 1).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

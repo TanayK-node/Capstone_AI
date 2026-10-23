@@ -1,0 +1,2194 @@
+{
+ "metadata": {
+  "title": null,
+  "authors": [
+   "Yuqi Nie",
+   "Nam H Nguyen",
+   "Phanwadee Sinthong",
+   "Jayant Kalagnanam"
+  ],
+  "venue": null,
+  "year": "2023",
+  "arxiv_id": "2211.14730v2[cs.LG]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Recent findings challenge the usefulness of Transformer models for time series forecasting because a simple linear model can outperform them.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 593.5,
+      "x1": 504.0,
+      "y1": 635.01
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 299.87,
+       "y0": 593.5,
+       "x1": 504.0,
+       "y1": 602.14
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 604.46,
+       "x1": 504.0,
+       "y1": 613.1
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 615.42,
+       "x1": 504.0,
+       "y1": 624.06
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 626.37,
+       "x1": 378.41,
+       "y1": 635.01
+      }
+     ],
+     "quote": "Unfortunately, regardless of the complicated design of Transformer-based models, it is shown in the recent paper (Zeng et al., 2022) that a very simple linear model can outperform all of the previous models on a variety of common benchmarks and it challenges the usefulness of Transformer for time series forecasting.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Proposing the segmentation of time series into subseries-level patches as input tokens for Transformers.",
+   "evidence": [
+    {
+     "chunk_id": "b0000",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 254.26,
+      "x1": 468.14,
+      "y1": 306.74
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 414.67,
+       "y0": 254.26,
+       "x1": 468.14,
+       "y1": 262.9
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 265.22,
+       "x1": 468.14,
+       "y1": 273.86
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 276.18,
+       "x1": 468.14,
+       "y1": 284.82
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 287.14,
+       "x1": 468.14,
+       "y1": 295.78
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 298.1,
+       "x1": 356.47,
+       "y1": 306.74
+      }
+     ],
+     "quote": "It is based on two key components: (i) segmentation of time series into subseries-level patches which are served as input tokens to Transformer; (ii) channel-independence where each channel contains a single univariate time series that shares the same embedding and Transformer weights across all the series.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Introducing channel-independence where each channel contains a single univariate time series sharing embedding and weights.",
+   "evidence": [
+    {
+     "chunk_id": "b0000",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 254.26,
+      "x1": 468.14,
+      "y1": 306.74
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 414.67,
+       "y0": 254.26,
+       "x1": 468.14,
+       "y1": 262.9
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 265.22,
+       "x1": 468.14,
+       "y1": 273.86
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 276.18,
+       "x1": 468.14,
+       "y1": 284.82
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 287.14,
+       "x1": 468.14,
+       "y1": 295.78
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 298.1,
+       "x1": 356.47,
+       "y1": 306.74
+      }
+     ],
+     "quote": "It is based on two key components: (i) segmentation of time series into subseries-level patches which are served as input tokens to Transformer; (ii) channel-independence where each channel contains a single univariate time series that shares the same embedding and Transformer weights across all the series.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Multivariate time series forecasting",
+   "evidence": [
+    {
+     "chunk_id": "b0000",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 243.3,
+      "x1": 468.14,
+      "y1": 262.9
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 243.3,
+       "x1": 468.14,
+       "y1": 251.94
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 254.26,
+       "x1": 410.98,
+       "y1": 262.9
+      }
+     ],
+     "quote": "We propose an efficient design of Transformer-based models for multivariate time series forecasting and self-supervised representation learning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "task.1",
+   "value": "Self-supervised representation learning",
+   "evidence": [
+    {
+     "chunk_id": "b0000",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 243.3,
+      "x1": 468.14,
+      "y1": 262.9
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 243.3,
+       "x1": 468.14,
+       "y1": 251.94
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 254.26,
+       "x1": 410.98,
+       "y1": 262.9
+      }
+     ],
+     "quote": "We propose an efficient design of Transformer-based models for multivariate time series forecasting and self-supervised representation learning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The model utilizes a vanilla Transformer encoder as its core architecture under a channel-independence setting.",
+   "evidence": [
+    {
+     "chunk_id": "b0019",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 669.15,
+      "x1": 504.0,
+      "y1": 688.75
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 309.17,
+       "y0": 669.15,
+       "x1": 504.0,
+       "y1": 677.79
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 680.11,
+       "x1": 411.63,
+       "y1": 688.75
+      }
+     ],
+     "quote": "Our PatchTST is illustrated in Figure 1 where the model makes use of the vanilla Transformer encoder as its core architecture.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "Input univariate time series are divided into patches to reduce the number of input tokens and computational complexity.",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 518.21,
+      "x1": 504.0,
+      "y1": 539.71
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 153.53,
+       "y0": 519.76,
+       "x1": 296.95,
+       "y1": 528.75
+      },
+      {
+       "page": 4,
+       "x0": 296.94,
+       "y0": 518.21,
+       "x1": 305.99,
+       "y1": 524.33
+      },
+      {
+       "page": 4,
+       "x0": 309.83,
+       "y0": 520.11,
+       "x1": 504.0,
+       "y1": 528.75
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 531.07,
+       "x1": 231.26999999999998,
+       "y1": 539.71
+      }
+     ],
+     "quote": "Each input univariate time series x (i) is first divided into patches which can be either overlapped or non-overlapped.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "Patches are mapped to the Transformer latent space using a trainable linear projection and combined with a learnable additive position encoding.",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 658.77,
+      "x1": 504.0,
+      "y1": 693.09
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 198.1,
+       "y0": 658.77,
+       "x1": 504.0,
+       "y1": 667.73
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 669.7,
+       "x1": 248.52,
+       "y1": 679.38
+      },
+      {
+       "page": 4,
+       "x0": 248.52,
+       "y0": 668.15,
+       "x1": 266.55,
+       "y1": 674.27
+      },
+      {
+       "page": 4,
+       "x0": 268.12,
+       "y0": 669.7,
+       "x1": 483.49,
+       "y1": 679.5400000000001
+      },
+      {
+       "page": 4,
+       "x0": 483.49,
+       "y0": 668.15,
+       "x1": 502.76,
+       "y1": 674.27
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 684.45,
+       "x1": 314.34000000000003,
+       "y1": 693.09
+      }
+     ],
+     "quote": "The patches are mapped to the Transformer latent space of dimension D via a trainable linear projection W p ∈ R D×P , and a learnable additive position encoding W pos ∈ R D×N is applied to monitor the temporal order of patches:",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "Mean squared error (MSE) loss is employed to measure discrepancy and optimize the model.",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 197.89,
+      "x1": 504.0,
+      "y1": 217.49
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 174.06,
+       "y0": 197.89,
+       "x1": 504.0,
+       "y1": 206.52999999999997
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 208.85,
+       "x1": 192.63,
+       "y1": 217.49
+      }
+     ],
+     "quote": "We choose to use the MSE loss to measure the discrepancy between the prediction and the ground truth.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "Instance normalization is applied before patching to mitigate distribution shift between training and testing data.",
+   "evidence": [
+    {
+     "chunk_id": "b0036",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 260.41,
+      "x1": 491.55999999999995,
+      "y1": 270.94
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 261.95,
+       "x1": 302.7,
+       "y1": 270.94
+      },
+      {
+       "page": 5,
+       "x0": 302.7,
+       "y0": 260.41,
+       "x1": 311.75,
+       "y1": 266.53000000000003
+      },
+      {
+       "page": 5,
+       "x0": 315.09,
+       "y0": 262.3,
+       "x1": 491.55999999999995,
+       "y1": 270.94
+      }
+     ],
+     "quote": "It simply normalizes each time series instance x (i) with zero mean and unit standard deviation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "Patching univariate time series to reduce memory usage and computational complexity while allowing the model to process longer historical sequences.",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 598.32,
+      "x1": 504.0,
+      "y1": 639.83
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 598.32,
+       "x1": 504.0,
+       "y1": 606.96
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 608.95,
+       "x1": 504.0,
+       "y1": 617.9100000000001
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 620.23,
+       "x1": 504.0,
+       "y1": 628.87
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 631.19,
+       "x1": 333.78999999999996,
+       "y1": 639.83
+      }
+     ],
+     "quote": "Thus constrained on the training time and GPU memory, patch design can allow the model to see the longer historical sequence, which can significantly improve the forecasting performance, as demonstrated in Table 1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "PatchTST naturally overcomes previous issues by masking patches rather than single time steps and removing the prediction head in favor of a D x P linear layer during self-supervised pre-training.",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 600.46,
+      "x1": 411.0,
+      "y1": 609.1
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 600.46,
+       "x1": 411.0,
+       "y1": 609.1
+      }
+     ],
+     "quote": "Our proposed PatchTST can naturally overcome the aforementioned issues.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "Traffic dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 145.03,
+      "x1": 504.0,
+      "y1": 164.63
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 480.21,
+       "y0": 145.03,
+       "x1": 504.0,
+       "y1": 153.67000000000002
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 155.99,
+       "x1": 504.0,
+       "y1": 164.63
+      }
+     ],
+     "quote": "These datasets have been extensively utilized for benchmarking and publicly available on (Wu et al., 2021).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Traffic",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "Electricity dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 145.03,
+      "x1": 504.0,
+      "y1": 164.63
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 480.21,
+       "y0": 145.03,
+       "x1": 504.0,
+       "y1": 153.67000000000002
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 155.99,
+       "x1": 504.0,
+       "y1": 164.63
+      }
+     ],
+     "quote": "These datasets have been extensively utilized for benchmarking and publicly available on (Wu et al., 2021).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Electricity",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "Weather dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 145.03,
+      "x1": 504.0,
+      "y1": 164.63
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 480.21,
+       "y0": 145.03,
+       "x1": 504.0,
+       "y1": 153.67000000000002
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 155.99,
+       "x1": 504.0,
+       "y1": 164.63
+      }
+     ],
+     "quote": "These datasets have been extensively utilized for benchmarking and publicly available on (Wu et al., 2021).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Weather",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "ILI dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 145.03,
+      "x1": 504.0,
+      "y1": 164.63
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 480.21,
+       "y0": 145.03,
+       "x1": 504.0,
+       "y1": 153.67000000000002
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 155.99,
+       "x1": 504.0,
+       "y1": 164.63
+      }
+     ],
+     "quote": "These datasets have been extensively utilized for benchmarking and publicly available on (Wu et al., 2021).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ILI",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "ETTh1 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 133.75,
+      "x1": 504.0,
+      "y1": 153.67000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 149.83,
+       "y0": 133.75,
+       "x1": 504.0,
+       "y1": 142.71
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 145.03,
+       "x1": 473.75,
+       "y1": 153.67000000000002
+      }
+     ],
+     "quote": "We evaluate the performance of our proposed PatchTST on 8 popular datasets, including Weather, Traffic, Electricity, ILI and4 ETT datasets (ETTh1, ETTh2, ETTm1, ETTm2).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ETTh1",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "ETTh2 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 133.75,
+      "x1": 504.0,
+      "y1": 153.67000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 149.83,
+       "y0": 133.75,
+       "x1": 504.0,
+       "y1": 142.71
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 145.03,
+       "x1": 473.75,
+       "y1": 153.67000000000002
+      }
+     ],
+     "quote": "We evaluate the performance of our proposed PatchTST on 8 popular datasets, including Weather, Traffic, Electricity, ILI and4 ETT datasets (ETTh1, ETTh2, ETTm1, ETTm2).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ETTh2",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.6",
+   "value": "ETTm1 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 133.75,
+      "x1": 504.0,
+      "y1": 153.67000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 149.83,
+       "y0": 133.75,
+       "x1": 504.0,
+       "y1": 142.71
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 145.03,
+       "x1": 473.75,
+       "y1": 153.67000000000002
+      }
+     ],
+     "quote": "We evaluate the performance of our proposed PatchTST on 8 popular datasets, including Weather, Traffic, Electricity, ILI and4 ETT datasets (ETTh1, ETTh2, ETTm1, ETTm2).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ETTm1",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.7",
+   "value": "ETTm2 dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 133.75,
+      "x1": 504.0,
+      "y1": 153.67000000000002
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 149.83,
+       "y0": 133.75,
+       "x1": 504.0,
+       "y1": 142.71
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 145.03,
+       "x1": 473.75,
+       "y1": 153.67000000000002
+      }
+     ],
+     "quote": "We evaluate the performance of our proposed PatchTST on 8 popular datasets, including Weather, Traffic, Electricity, ILI and4 ETT datasets (ETTh1, ETTh2, ETTm1, ETTm2).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ETTm2",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "FEDformer baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 286.92,
+      "x1": 504.0,
+      "y1": 328.44
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 272.43,
+       "y0": 286.92,
+       "x1": 504.0,
+       "y1": 295.56
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 297.88,
+       "x1": 504.0,
+       "y1": 306.52
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 308.84,
+       "x1": 504.0,
+       "y1": 317.47999999999996
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 319.8,
+       "x1": 217.09,
+       "y1": 328.44
+      }
+     ],
+     "quote": "We choose the SOTA Transformer-based models, including FEDformer (Zhou et al., 2022), Autoformer (Wu et al., 2021), Informer (Zhou et al., 2021), Pyraformer (Liu et al., 2022), LogTrans (Li et al., 2019), and a recent non-Transformer-based model DLinear (Zeng et al., 2022)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Autoformer baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 286.92,
+      "x1": 504.0,
+      "y1": 328.44
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 272.43,
+       "y0": 286.92,
+       "x1": 504.0,
+       "y1": 295.56
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 297.88,
+       "x1": 504.0,
+       "y1": 306.52
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 308.84,
+       "x1": 504.0,
+       "y1": 317.47999999999996
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 319.8,
+       "x1": 217.09,
+       "y1": 328.44
+      }
+     ],
+     "quote": "We choose the SOTA Transformer-based models, including FEDformer (Zhou et al., 2022), Autoformer (Wu et al., 2021), Informer (Zhou et al., 2021), Pyraformer (Liu et al., 2022), LogTrans (Li et al., 2019), and a recent non-Transformer-based model DLinear (Zeng et al., 2022)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "Informer baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 286.92,
+      "x1": 504.0,
+      "y1": 328.44
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 272.43,
+       "y0": 286.92,
+       "x1": 504.0,
+       "y1": 295.56
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 297.88,
+       "x1": 504.0,
+       "y1": 306.52
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 308.84,
+       "x1": 504.0,
+       "y1": 317.47999999999996
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 319.8,
+       "x1": 217.09,
+       "y1": 328.44
+      }
+     ],
+     "quote": "We choose the SOTA Transformer-based models, including FEDformer (Zhou et al., 2022), Autoformer (Wu et al., 2021), Informer (Zhou et al., 2021), Pyraformer (Liu et al., 2022), LogTrans (Li et al., 2019), and a recent non-Transformer-based model DLinear (Zeng et al., 2022)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "Pyraformer baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 286.92,
+      "x1": 504.0,
+      "y1": 328.44
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 272.43,
+       "y0": 286.92,
+       "x1": 504.0,
+       "y1": 295.56
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 297.88,
+       "x1": 504.0,
+       "y1": 306.52
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 308.84,
+       "x1": 504.0,
+       "y1": 317.47999999999996
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 319.8,
+       "x1": 217.09,
+       "y1": 328.44
+      }
+     ],
+     "quote": "We choose the SOTA Transformer-based models, including FEDformer (Zhou et al., 2022), Autoformer (Wu et al., 2021), Informer (Zhou et al., 2021), Pyraformer (Liu et al., 2022), LogTrans (Li et al., 2019), and a recent non-Transformer-based model DLinear (Zeng et al., 2022)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "LogTrans baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 286.92,
+      "x1": 504.0,
+      "y1": 328.44
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 272.43,
+       "y0": 286.92,
+       "x1": 504.0,
+       "y1": 295.56
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 297.88,
+       "x1": 504.0,
+       "y1": 306.52
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 308.84,
+       "x1": 504.0,
+       "y1": 317.47999999999996
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 319.8,
+       "x1": 217.09,
+       "y1": 328.44
+      }
+     ],
+     "quote": "We choose the SOTA Transformer-based models, including FEDformer (Zhou et al., 2022), Autoformer (Wu et al., 2021), Informer (Zhou et al., 2021), Pyraformer (Liu et al., 2022), LogTrans (Li et al., 2019), and a recent non-Transformer-based model DLinear (Zeng et al., 2022)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "DLinear baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 286.92,
+      "x1": 504.0,
+      "y1": 328.44
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 272.43,
+       "y0": 286.92,
+       "x1": 504.0,
+       "y1": 295.56
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 297.88,
+       "x1": 504.0,
+       "y1": 306.52
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 308.84,
+       "x1": 504.0,
+       "y1": 317.47999999999996
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 319.8,
+       "x1": 217.09,
+       "y1": 328.44
+      }
+     ],
+     "quote": "We choose the SOTA Transformer-based models, including FEDformer (Zhou et al., 2022), Autoformer (Wu et al., 2021), Informer (Zhou et al., 2021), Pyraformer (Liu et al., 2022), LogTrans (Li et al., 2019), and a recent non-Transformer-based model DLinear (Zeng et al., 2022)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "BTSF baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 408.96,
+      "x1": 504.0,
+      "y1": 450.46999999999997
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 325.56,
+       "y0": 408.96,
+       "x1": 504.0,
+       "y1": 417.59999999999997
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 419.92,
+       "x1": 504.0,
+       "y1": 428.56
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 430.87,
+       "x1": 504.0,
+       "y1": 439.51
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 441.83,
+       "x1": 212.56,
+       "y1": 450.46999999999997
+      }
+     ],
+     "quote": "We compare our self-supervised model with BTSF (Yang & Hong, 2022), TS2Vec (Yue et al., 2022), TNC (Tonekaboni et al., 2021), and TS-TCC (Eldele et al., 2021) which are among the state-of-the-art contrastive learning representation methods for time seriesfoot_2 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.7",
+   "value": "TS2Vec baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 408.96,
+      "x1": 504.0,
+      "y1": 450.46999999999997
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 325.56,
+       "y0": 408.96,
+       "x1": 504.0,
+       "y1": 417.59999999999997
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 419.92,
+       "x1": 504.0,
+       "y1": 428.56
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 430.87,
+       "x1": 504.0,
+       "y1": 439.51
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 441.83,
+       "x1": 212.56,
+       "y1": 450.46999999999997
+      }
+     ],
+     "quote": "We compare our self-supervised model with BTSF (Yang & Hong, 2022), TS2Vec (Yue et al., 2022), TNC (Tonekaboni et al., 2021), and TS-TCC (Eldele et al., 2021) which are among the state-of-the-art contrastive learning representation methods for time seriesfoot_2 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.8",
+   "value": "TNC baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 408.96,
+      "x1": 504.0,
+      "y1": 450.46999999999997
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 325.56,
+       "y0": 408.96,
+       "x1": 504.0,
+       "y1": 417.59999999999997
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 419.92,
+       "x1": 504.0,
+       "y1": 428.56
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 430.87,
+       "x1": 504.0,
+       "y1": 439.51
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 441.83,
+       "x1": 212.56,
+       "y1": 450.46999999999997
+      }
+     ],
+     "quote": "We compare our self-supervised model with BTSF (Yang & Hong, 2022), TS2Vec (Yue et al., 2022), TNC (Tonekaboni et al., 2021), and TS-TCC (Eldele et al., 2021) which are among the state-of-the-art contrastive learning representation methods for time seriesfoot_2 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.9",
+   "value": "TS-TCC baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 408.96,
+      "x1": 504.0,
+      "y1": 450.46999999999997
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 325.56,
+       "y0": 408.96,
+       "x1": 504.0,
+       "y1": 417.59999999999997
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 419.92,
+       "x1": 504.0,
+       "y1": 428.56
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 430.87,
+       "x1": 504.0,
+       "y1": 439.51
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 441.83,
+       "x1": 212.56,
+       "y1": 450.46999999999997
+      }
+     ],
+     "quote": "We compare our self-supervised model with BTSF (Yang & Hong, 2022), TS2Vec (Yue et al., 2022), TNC (Tonekaboni et al., 2021), and TS-TCC (Eldele et al., 2021) which are among the state-of-the-art contrastive learning representation methods for time seriesfoot_2 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Mean Squared Error",
+   "evidence": [
+    {
+     "chunk_id": "b0005",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 125.6791000366211,
+      "y0": 84.50106048583984,
+      "x1": 494.6880187988281,
+      "y1": 92.73565673828125
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 125.6791000366211,
+       "y0": 84.50106048583984,
+       "x1": 494.6880187988281,
+       "y1": 92.73565673828125
+      }
+     ],
+     "quote": "Models | L | N | patch | method | MSE |  |  |  |",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Mean Absolute Error",
+   "evidence": [
+    {
+     "chunk_id": "b0105",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 122.83204650878906,
+      "y0": 90.66574096679688,
+      "x1": 491.17877197265625,
+      "y1": 98.26235961914062
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 122.83204650878906,
+       "y0": 90.66574096679688,
+       "x1": 491.17877197265625,
+       "y1": 98.26235961914062
+      }
+     ],
+     "quote": "Metric | MSE | MAE | MSE | MAE | MSE | MAE | MSE | MAE | MSE | MAE | MSE | MAE | MSE | MAE | MSE | MAE",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Input sequence length",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 613.79,
+      "x1": 504.0,
+      "y1": 633.39
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 232.53,
+       "y0": 613.79,
+       "x1": 504.0,
+       "y1": 622.43
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 624.43,
+       "x1": 504.0,
+       "y1": 633.39
+      }
+     ],
+     "quote": "Otherwise stated, across all representation learning experiments the input sequence length is chosen to be 512 and patch size is set to 12, which results in 42 patches.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "input sequence length",
+   "value_raw": "512",
+   "value_norm": 512.0,
+   "scope": "representation learning"
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Patch size",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 613.79,
+      "x1": 504.0,
+      "y1": 633.39
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 232.53,
+       "y0": 613.79,
+       "x1": 504.0,
+       "y1": 622.43
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 624.43,
+       "x1": 504.0,
+       "y1": 633.39
+      }
+     ],
+     "quote": "Otherwise stated, across all representation learning experiments the input sequence length is chosen to be 512 and patch size is set to 12, which results in 42 patches.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "patch size",
+   "value_raw": "12",
+   "value_norm": 12.0,
+   "scope": "representation learning"
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Masking ratio",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 635.39,
+      "x1": 467.11,
+      "y1": 644.35
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 635.39,
+       "x1": 467.11,
+       "y1": 644.35
+      }
+     ],
+     "quote": "We consider high masking ratio where 40% of the patches are masked with zero values.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "masking ratio",
+   "value_raw": "40%",
+   "value_norm": 40.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Pre-training epochs",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 635.7,
+      "x1": 504.0,
+      "y1": 655.3000000000001
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 472.28,
+       "y0": 635.7,
+       "x1": 504.0,
+       "y1": 644.34
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 646.34,
+       "x1": 477.9,
+       "y1": 655.3000000000001
+      }
+     ],
+     "quote": "We first apply self-supervised pre-training on the datasets mentioned in Section 4.1 for 100 epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "100",
+   "value_norm": 100.0,
+   "scope": "self-supervised pre-training"
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Supervised training epochs for option (a)",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 668.58,
+      "x1": 504.01,
+      "y1": 710.1
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 468.54,
+       "y0": 668.58,
+       "x1": 504.01,
+       "y1": 677.22
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 679.22,
+       "x1": 504.0,
+       "y1": 688.1800000000001
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 690.18,
+       "x1": 504.0,
+       "y1": 699.14
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 701.14,
+       "x1": 227.45,
+       "y1": 710.1
+      }
+     ],
+     "quote": "With (a), we only train the model head for 20 epochs while freezing the rest of the network; With (b), we apply linear probing for 10 epochs to update the model head and then end-to-end fine-tuning the entire network for 20 epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "20",
+   "value_norm": 20.0,
+   "scope": "linear probing option (a)"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Linear probing epochs for option (b)",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 668.58,
+      "x1": 504.01,
+      "y1": 710.1
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 468.54,
+       "y0": 668.58,
+       "x1": 504.01,
+       "y1": 677.22
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 679.22,
+       "x1": 504.0,
+       "y1": 688.1800000000001
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 690.18,
+       "x1": 504.0,
+       "y1": 699.14
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 701.14,
+       "x1": 227.45,
+       "y1": 710.1
+      }
+     ],
+     "quote": "With (a), we only train the model head for 20 epochs while freezing the rest of the network; With (b), we apply linear probing for 10 epochs to update the model head and then end-to-end fine-tuning the entire network for 20 epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "10",
+   "value_norm": 10.0,
+   "scope": "linear probing option (b)"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "End-to-end fine-tuning epochs for option (b)",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 668.58,
+      "x1": 504.01,
+      "y1": 710.1
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 468.54,
+       "y0": 668.58,
+       "x1": 504.01,
+       "y1": 677.22
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 679.22,
+       "x1": 504.0,
+       "y1": 688.1800000000001
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 690.18,
+       "x1": 504.0,
+       "y1": 699.14
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 701.14,
+       "x1": 227.45,
+       "y1": 710.1
+      }
+     ],
+     "quote": "With (a), we only train the model head for 20 epochs while freezing the rest of the network; With (b), we apply linear probing for 10 epochs to update the model head and then end-to-end fine-tuning the entire network for 20 epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "20",
+   "value_norm": 20.0,
+   "scope": "end-to-end fine-tuning option (b)"
+  }
+ ],
+ "compute": [],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation study on patching and channel-independence",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 532.44,
+      "x1": 504.01,
+      "y1": 552.03
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 269.04,
+       "y0": 532.44,
+       "x1": 504.01,
+       "y1": 541.08
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 543.39,
+       "x1": 149.89,
+       "y1": 552.03
+      }
+     ],
+     "quote": "We study the effects of patching and channel-independence in Table 7.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Model cross-channel dependencies properly by further exploiting channel-independence.",
+   "evidence": [
+    {
+     "chunk_id": "b0055",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 712.42,
+      "x1": 504.01,
+      "y1": 732.02
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 497.92,
+       "y0": 712.42,
+       "x1": 504.01,
+       "y1": 721.06
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 723.38,
+       "x1": 446.47,
+       "y1": 732.02
+      }
+     ],
+     "quote": "It would be an important future step to model the cross-channel dependencies properly.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/zhouhaoyi/ETDataset",
+   "evidence": [
+    {
+     "chunk_id": "b0115",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 124.13899993896484,
+      "y0": 712.9077758789062,
+      "x1": 269.3946533203125,
+      "y1": 720.9237670898438
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 124.13899993896484,
+       "y0": 712.9077758789062,
+       "x1": 269.3946533203125,
+       "y1": 720.9237670898438
+      }
+     ],
+     "quote": "https://github.com/zhouhaoyi/ETDataset",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/laiguokun/multivariate-time-series-data",
+   "evidence": [
+    {
+     "chunk_id": "b0116",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 124.13899993896484,
+      "y0": 723.7827758789062,
+      "x1": 333.2890930175781,
+      "y1": 731.7987670898438
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 124.13899993896484,
+       "y0": 723.7827758789062,
+       "x1": 333.2890930175781,
+       "y1": 731.7987670898438
+      }
+     ],
+     "quote": "https://github.com/laiguokun/multivariate-time-series-data",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "PatchTST improves long-term forecasting accuracy significantly compared to state-of-the-art Transformer-based models.",
+   "evidence": [
+    {
+     "chunk_id": "b0000",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 330.97,
+      "x1": 468.14,
+      "y1": 372.49
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 452.65,
+       "y0": 330.97,
+       "x1": 468.14,
+       "y1": 339.61
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 341.93,
+       "x1": 468.14,
+       "y1": 350.57
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 352.89,
+       "x1": 468.14,
+       "y1": 361.53
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 363.85,
+       "x1": 254.81,
+       "y1": 372.49
+      }
+     ],
+     "quote": "Our channel-independent patch time series Transformer (PatchTST) can improve the long-term forecasting accuracy significantly when compared with that of SOTA Transformer-based models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "Training time is reduced by as much as 22 times on large datasets using patching.",
+   "evidence": [
+    {
+     "chunk_id": "b0009",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 132.91,
+      "y0": 456.21,
+      "x1": 504.0,
+      "y1": 476.13
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 243.84,
+       "y0": 456.21,
+       "x1": 504.0,
+       "y1": 465.16999999999996
+      },
+      {
+       "page": 2,
+       "x0": 132.91,
+       "y0": 467.17,
+       "x1": 443.75,
+       "y1": 476.13
+      }
+     ],
+     "quote": "By setting patch length P = 16 and stride S = 8 with L = 336, the training time is significantly reduced as much as 22 time on large datasets.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "Increasing the look-back window L from 96 to 336 reduces MSE from 0.518 to 0.397.",
+   "evidence": [
+    {
+     "chunk_id": "b0010",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 120.45,
+      "y0": 485.84,
+      "x1": 504.0,
+      "y1": 505.44
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 120.45,
+       "y0": 485.84,
+       "x1": 504.0,
+       "y1": 494.47999999999996
+      },
+      {
+       "page": 2,
+       "x0": 132.91,
+       "y0": 496.48,
+       "x1": 432.57000000000005,
+       "y1": 505.44
+      }
+     ],
+     "quote": "Table 1 shows that by increasing lookback window L from 96 to 336, MSE can be reduced from 0.518 to 0.397.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.3",
+   "value": "MSE score is further reduced with patching when L equals 336.",
+   "evidence": [
+    {
+     "chunk_id": "b0010",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 132.91,
+      "y0": 628.31,
+      "x1": 504.0,
+      "y1": 647.9100000000001
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 461.46,
+       "y0": 628.31,
+       "x1": 504.0,
+       "y1": 636.9499999999999
+      },
+      {
+       "page": 2,
+       "x0": 132.91,
+       "y0": 638.95,
+       "x1": 497.77,
+       "y1": 647.9100000000001
+      }
+     ],
+     "quote": "As evident in Table 1, MSE score is further reduced from 0.397 to 0.367 with patching when L = 336.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": " quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

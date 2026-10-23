@@ -1,0 +1,2413 @@
+{
+ "metadata": {
+  "title": "Visual Instruction Tuning",
+  "authors": [
+   "Haotian Liu",
+   "Chunyuan Li",
+   "Qingyang Wu",
+   "Yong Jae Lee",
+   "-Madison",
+   "Microsoft Research"
+  ],
+  "venue": null,
+  "year": null,
+  "arxiv_id": null,
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Instruction tuning using machine-generated data is less explored in the multimodal field.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 248.4,
+      "x1": 468.13,
+      "y1": 278.86
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 248.4,
+       "x1": 468.13,
+       "y1": 257.04
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 259.31,
+       "x1": 468.13,
+       "y1": 267.95
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 270.22,
+       "x1": 402.9,
+       "y1": 278.86
+      }
+     ],
+     "quote": "Instruction tuning large language models (LLMs) using machine-generated instruction-following data has been shown to improve zero-shot capabilities on new tasks, but the idea is less explored in the multimodal field.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "There is a general lack of vision-language instruction-following data.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 129.26,
+      "y0": 151.89,
+      "x1": 504.0,
+      "y1": 171.44
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 297.68,
+       "y0": 151.89,
+       "x1": 504.0,
+       "y1": 160.52999999999997
+      },
+      {
+       "page": 2,
+       "x0": 129.26,
+       "y0": 162.8,
+       "x1": 236.73,
+       "y1": 171.44
+      }
+     ],
+     "quote": "One key challenge is the lack of vision-language instruction-following data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "We present a pipeline to convert image-text pairs into an instruction-following format using GPT models.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 129.26,
+      "y0": 162.8,
+      "x1": 504.0,
+      "y1": 182.35000000000002
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 239.82,
+       "y0": 162.8,
+       "x1": 504.0,
+       "y1": 171.44
+      },
+      {
+       "page": 2,
+       "x0": 129.26,
+       "y0": 173.71,
+       "x1": 485.46,
+       "y1": 182.35000000000002
+      }
+     ],
+     "quote": "We present a data reformation perspective and pipeline to convert image-text pairs into an appropriate instruction-following format, using ChatGPT/GPT-4.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "We develop a large multimodal model by connecting a visual encoder with a language decoder and fine-tuning it end-to-end.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 129.26,
+      "y0": 186.61,
+      "x1": 504.0,
+      "y1": 217.07
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 238.78,
+       "y0": 186.61,
+       "x1": 503.99,
+       "y1": 195.25
+      },
+      {
+       "page": 2,
+       "x0": 129.26,
+       "y0": 197.52,
+       "x1": 504.0,
+       "y1": 206.16000000000003
+      },
+      {
+       "page": 2,
+       "x0": 129.26,
+       "y0": 208.43,
+       "x1": 383.02,
+       "y1": 217.07
+      }
+     ],
+     "quote": "We develop a large multimodal model (LMM), by connecting the open-set visual encoder of CLIP [40] with the language decoder Vicuna [9], and fine-tuning end-to-end on our generated instructional vision-language data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "We introduce LLaVA-Bench with two challenging benchmarks and diverse annotations.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 129.26,
+      "y0": 254.06,
+      "x1": 503.99,
+      "y1": 273.61
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 313.46,
+       "y0": 254.06,
+       "x1": 503.99,
+       "y1": 262.7
+      },
+      {
+       "page": 2,
+       "x0": 129.26,
+       "y0": 264.97,
+       "x1": 497.98,
+       "y1": 273.61
+      }
+     ],
+     "quote": "We present LLaVA-Bench with two challenging benchmarks, with a diverse selection of paired images, instructions and detailed annotations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.3",
+   "value": "We release the generated multimodal instruction data, codebase, model checkpoints, and demo to the public.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 129.26,
+      "y0": 277.87,
+      "x1": 504.0,
+      "y1": 297.41999999999996
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 184.71,
+       "y0": 277.87,
+       "x1": 504.0,
+       "y1": 286.51
+      },
+      {
+       "page": 2,
+       "x0": 129.26,
+       "y0": 288.78,
+       "x1": 395.43,
+       "y1": 297.41999999999996
+      }
+     ],
+     "quote": "We release the following assets to the public: the generated multimodal instruction data, the codebase, the model checkpoints, and a visual chat demo.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Multimodal language-image instruction-following and general-purpose visual and language understanding.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 292.04,
+      "x1": 469.79,
+      "y1": 333.4
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 255.9,
+       "y0": 292.04,
+       "x1": 469.78999999999996,
+       "y1": 300.68
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 302.56,
+       "x1": 468.14,
+       "y1": 311.59
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 313.85,
+       "x1": 469.79,
+       "y1": 322.49
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 324.76,
+       "x1": 317.58000000000004,
+       "y1": 333.4
+      }
+     ],
+     "quote": "By instruction tuning on such generated data, we introduce LLaVA: Large Language and Vision Assistant, an end-to-end trained large multimodal model that connects a vision encoder and an LLM for generalpurpose visual and language understanding.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "We choose Vicuna as our language model and the pre-trained CLIP visual encoder ViT-L/14 to extract visual features.",
+   "evidence": [
+    {
+     "chunk_id": "b0023",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 250.94,
+      "x1": 505.16999999999996,
+      "y1": 282.39
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 341.67,
+       "y0": 250.94,
+       "x1": 488.58000000000004,
+       "y1": 260.9
+      },
+      {
+       "page": 4,
+       "x0": 488.58,
+       "y0": 251.61,
+       "x1": 505.16999999999996,
+       "y1": 261.26
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 262.49,
+       "x1": 503.99,
+       "y1": 271.48
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 273.75,
+       "x1": 275.23,
+       "y1": 282.39
+      }
+     ],
+     "quote": "We choose Vicuna [9] as our LLM f ϕ (•) parameterized by ϕ, as it has the best instruction following capabilities in language tasks among publicly available checkpoints [48,9,38].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "A simple linear projection layer connects image features into the word embedding space by applying a trainable matrix W.",
+   "evidence": [
+    {
+     "chunk_id": "b0027",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 433.21,
+      "x1": 504.0,
+      "y1": 464.65
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 217.82,
+       "y0": 433.21,
+       "x1": 482.15999999999997,
+       "y1": 443.16999999999996
+      },
+      {
+       "page": 4,
+       "x0": 482.16,
+       "y0": 434.19,
+       "x1": 504.0,
+       "y1": 443.71999999999997
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 444.12,
+       "x1": 230.56,
+       "y1": 454.08
+      },
+      {
+       "page": 4,
+       "x0": 230.56,
+       "y0": 445.1,
+       "x1": 504.0,
+       "y1": 454.63
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 456.01,
+       "x1": 199.04000000000002,
+       "y1": 464.65
+      }
+     ],
+     "quote": "Specifically, we apply a trainable projection matrix W to convert Z v into language embedding tokens H v , which have the same dimensionality as the word embedding space in the language model:",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "The model is trained using the original auto-regressive training objective of the LLM on the prediction tokens of the assistant answers.",
+   "evidence": [
+    {
+     "chunk_id": "b0035",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 652.01,
+      "x1": 504.0,
+      "y1": 671.55
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 146.6,
+       "y0": 652.01,
+       "x1": 504.0,
+       "y1": 660.65
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 662.91,
+       "x1": 242.9,
+       "y1": 671.55
+      }
+     ],
+     "quote": "We perform instruction-tuning of the LLM on the prediction tokens, using its original auto-regressive training objective.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "Stage 1 pre-training freezes both the visual encoder and LLM weights, optimizing only the projection matrix for feature alignment using filtered image-text pairs.",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 325.97,
+      "x1": 504.67,
+      "y1": 356.43
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 249.52,
+       "y0": 325.97,
+       "x1": 504.0,
+       "y1": 334.61
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 335.9,
+       "x1": 504.67,
+       "y1": 345.85999999999996
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 347.79,
+       "x1": 127.62,
+       "y1": 356.43
+      }
+     ],
+     "quote": "In training, we keep both the visual encoder and LLM weights frozen, and maximize the likelihood of (3) with trainable parameters θ = W (the projection matrix) only.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "Stage 2 fine-tuning keeps the visual encoder frozen while updating both the projection layer and the LLM weights end-to-end on multimodal instruction-following data.",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 381.61,
+      "x1": 504.01,
+      "y1": 412.07
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 256.34,
+       "y0": 381.61,
+       "x1": 504.01,
+       "y1": 390.25
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 392.52,
+       "x1": 504.0,
+       "y1": 401.15999999999997
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 403.08,
+       "x1": 248.38,
+       "y1": 412.07
+      }
+     ],
+     "quote": "We always keep the visual encoder weights frozen, and continue to update both the pre-trained weights of the projection layer and LLM in LLaVA; i.e., the trainable parameters are θ = {W, ϕ} in (3).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "Filtered CC-595K subset for pre-training",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 582.01,
+      "x1": 504.0,
+      "y1": 623.38
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 409.1,
+       "y0": 582.01,
+       "x1": 503.99,
+       "y1": 590.65
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 592.92,
+       "x1": 504.0,
+       "y1": 601.56
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 603.83,
+       "x1": 504.0,
+       "y1": 612.47
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 614.74,
+       "x1": 180.20999999999998,
+       "y1": 623.38
+      }
+     ],
+     "quote": "We pre-train our model on the filtered CC-595K subset for 1 epoch with a learning rate of 2e-3 and a batch size of 128, and fine-tune on the proposed LLaVA-Instruct-158K dataset for 3 epochs, with a learning rate of 2e-5 and a batch size of 32.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "CC-595K",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "LLaVA-Instruct-158K dataset for fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 582.01,
+      "x1": 504.0,
+      "y1": 623.38
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 409.1,
+       "y0": 582.01,
+       "x1": 503.99,
+       "y1": 590.65
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 592.92,
+       "x1": 504.0,
+       "y1": 601.56
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 603.83,
+       "x1": 504.0,
+       "y1": 612.47
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 614.74,
+       "x1": 180.20999999999998,
+       "y1": 623.38
+      }
+     ],
+     "quote": "We pre-train our model on the filtered CC-595K subset for 1 epoch with a learning rate of 2e-3 and a batch size of 128, and fine-tune on the proposed LLaVA-Instruct-158K dataset for 3 epochs, with a learning rate of 2e-5 and a batch size of 32.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "LLaVA-Instruct-158K",
+   "split": "",
+   "size": "",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.2",
+   "value": "COCO images for instruction-following data generation",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 575.13,
+      "x1": 504.0,
+      "y1": 594.68
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 490.94,
+       "y0": 575.13,
+       "x1": 504.0,
+       "y1": 583.77
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 586.04,
+       "x1": 414.76,
+       "y1": 594.68
+      }
+     ],
+     "quote": "We use COCO images [31] and generate three types of instruction-following data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "COCO images",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "COCO-Val-2014 for LLaVA-Bench",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 356.0,
+      "x1": 504.66,
+      "y1": 386.46
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 223.5,
+       "y0": 356.0,
+       "x1": 504.0,
+       "y1": 364.64
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 366.91,
+       "x1": 504.66,
+       "y1": 375.55
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 377.82,
+       "x1": 406.96,
+       "y1": 386.46
+      }
+     ],
+     "quote": "We randomly select 30 images from COCO-Val-2014, and for each image, we generate three types of questions (conversation, detailed description, complex reasoning) using the proposed data generation pipeline in Sec. 3, totaling 90 questions.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "COCO-Val-2014",
+   "split": "",
+   "size": "30 images",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "ScienceQA dataset for multimodal multiple choice questions",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 107.75,
+      "y0": 478.94,
+      "x1": 505.25,
+      "y1": 498.49
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 324.93,
+       "y0": 478.94,
+       "x1": 505.25,
+       "y1": 487.58
+      },
+      {
+       "page": 8,
+       "x0": 107.75,
+       "y0": 489.85,
+       "x1": 429.31,
+       "y1": 498.49
+      }
+     ],
+     "quote": "The benchmark dataset is split into training, validation, and test splits with 12726, 4241, and 4241 examples, respectively.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ScienceQA",
+   "split": "training, validation, and test",
+   "size": "21k",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "BLIP-2",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 691.7,
+      "x1": 504.0,
+      "y1": 722.15
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 380.62,
+       "y0": 691.7,
+       "x1": 504.0,
+       "y1": 700.34
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 702.61,
+       "x1": 504.0,
+       "y1": 711.25
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 713.51,
+       "x1": 268.49,
+       "y1": 722.15
+      }
+     ],
+     "quote": "For comparisons, we quote the prompt and response of the multimodal GPT-4 from their paper, and query BLIP-2 and OpenFlamingo model checkpoints to get their response.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "OpenFlamingo",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 691.7,
+      "x1": 504.0,
+      "y1": 722.15
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 380.62,
+       "y0": 691.7,
+       "x1": 504.0,
+       "y1": 700.34
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 702.61,
+       "x1": 504.0,
+       "y1": 711.25
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 713.51,
+       "x1": 268.49,
+       "y1": 722.15
+      }
+     ],
+     "quote": "For comparisons, we quote the prompt and response of the multimodal GPT-4 from their paper, and query BLIP-2 and OpenFlamingo model checkpoints to get their response.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "GPT-3.5 model with and without CoT",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 107.64,
+      "y0": 489.85,
+      "x1": 505.65,
+      "y1": 531.22
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 434.65,
+       "y0": 489.85,
+       "x1": 504.01,
+       "y1": 498.49
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 500.76,
+       "x1": 505.65,
+       "y1": 509.4
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 511.67,
+       "x1": 505.24,
+       "y1": 520.3100000000001
+      },
+      {
+       "page": 8,
+       "x0": 107.64,
+       "y0": 522.58,
+       "x1": 306.22,
+       "y1": 531.22
+      }
+     ],
+     "quote": "We consider two representative methods, including GPT-3.5 model (text-davinci-002) with and without chainof-thought (CoT), LLaMA-Adapter [59], as well as multimodal chain-of-thought (MM-CoT) [61], which is the current SoTA method on this dataset.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "LLaMA-Adapter",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 107.64,
+      "y0": 489.85,
+      "x1": 505.65,
+      "y1": 531.22
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 434.65,
+       "y0": 489.85,
+       "x1": 504.01,
+       "y1": 498.49
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 500.76,
+       "x1": 505.65,
+       "y1": 509.4
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 511.67,
+       "x1": 505.24,
+       "y1": 520.3100000000001
+      },
+      {
+       "page": 8,
+       "x0": 107.64,
+       "y0": 522.58,
+       "x1": 306.22,
+       "y1": 531.22
+      }
+     ],
+     "quote": "We consider two representative methods, including GPT-3.5 model (text-davinci-002) with and without chainof-thought (CoT), LLaMA-Adapter [59], as well as multimodal chain-of-thought (MM-CoT) [61], which is the current SoTA method on this dataset.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "Multimodal chain-of-thought (MM-CoT)",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 107.64,
+      "y0": 489.85,
+      "x1": 505.65,
+      "y1": 531.22
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 434.65,
+       "y0": 489.85,
+       "x1": 504.01,
+       "y1": 498.49
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 500.76,
+       "x1": 505.65,
+       "y1": 509.4
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 511.67,
+       "x1": 505.24,
+       "y1": 520.3100000000001
+      },
+      {
+       "page": 8,
+       "x0": 107.64,
+       "y0": 522.58,
+       "x1": 306.22,
+       "y1": 531.22
+      }
+     ],
+     "quote": "We consider two representative methods, including GPT-3.5 model (text-davinci-002) with and without chainof-thought (CoT), LLaMA-Adapter [59], as well as multimodal chain-of-thought (MM-CoT) [61], which is the current SoTA method on this dataset.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Overall score on a scale of 1 to 10 evaluated by GPT-4",
+   "evidence": [
+    {
+     "chunk_id": "b0065",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 680.79,
+      "x1": 504.0,
+      "y1": 711.25
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 442.58,
+       "y0": 680.79,
+       "x1": 504.0,
+       "y1": 689.43
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 691.7,
+       "x1": 504.0,
+       "y1": 700.34
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 702.61,
+       "x1": 485.19,
+       "y1": 711.25
+      }
+     ],
+     "quote": "It evaluates the helpfulness, relevance, accuracy, and level of detail of the responses from the assistants, and gives an overall score on a scale of 1 to 10, where a higher score indicates better overall performance.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Accuracy percentage",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 549.88,
+      "x1": 504.83,
+      "y1": 569.43
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 437.82,
+       "y0": 549.88,
+       "x1": 504.83,
+       "y1": 558.52
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 560.79,
+       "x1": 315.31,
+       "y1": 569.43
+      }
+     ],
+     "quote": "It yields 90.92% accuracy, which is quite close to the SoTA 91.68%.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Pre-training learning rate",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 582.01,
+      "x1": 504.0,
+      "y1": 623.38
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 409.1,
+       "y0": 582.01,
+       "x1": 503.99,
+       "y1": 590.65
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 592.92,
+       "x1": 504.0,
+       "y1": 601.56
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 603.83,
+       "x1": 504.0,
+       "y1": 612.47
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 614.74,
+       "x1": 180.20999999999998,
+       "y1": 623.38
+      }
+     ],
+     "quote": "We pre-train our model on the filtered CC-595K subset for 1 epoch with a learning rate of 2e-3 and a batch size of 128, and fine-tune on the proposed LLaVA-Instruct-158K dataset for 3 epochs, with a learning rate of 2e-5 and a batch size of 32.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "2e-3",
+   "value_norm": 0.002,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Pre-training batch size",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 582.01,
+      "x1": 504.0,
+      "y1": 623.38
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 409.1,
+       "y0": 582.01,
+       "x1": 503.99,
+       "y1": 590.65
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 592.92,
+       "x1": 504.0,
+       "y1": 601.56
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 603.83,
+       "x1": 504.0,
+       "y1": 612.47
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 614.74,
+       "x1": 180.20999999999998,
+       "y1": 623.38
+      }
+     ],
+     "quote": "We pre-train our model on the filtered CC-595K subset for 1 epoch with a learning rate of 2e-3 and a batch size of 128, and fine-tune on the proposed LLaVA-Instruct-158K dataset for 3 epochs, with a learning rate of 2e-5 and a batch size of 32.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "128",
+   "value_norm": 128.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Pre-training epochs",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 582.01,
+      "x1": 504.0,
+      "y1": 623.38
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 409.1,
+       "y0": 582.01,
+       "x1": 503.99,
+       "y1": 590.65
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 592.92,
+       "x1": 504.0,
+       "y1": 601.56
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 603.83,
+       "x1": 504.0,
+       "y1": 612.47
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 614.74,
+       "x1": 180.20999999999998,
+       "y1": 623.38
+      }
+     ],
+     "quote": "We pre-train our model on the filtered CC-595K subset for 1 epoch with a learning rate of 2e-3 and a batch size of 128, and fine-tune on the proposed LLaVA-Instruct-158K dataset for 3 epochs, with a learning rate of 2e-5 and a batch size of 32.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "1",
+   "value_norm": 1.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Fine-tuning learning rate",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 582.01,
+      "x1": 504.0,
+      "y1": 623.38
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 409.1,
+       "y0": 582.01,
+       "x1": 503.99,
+       "y1": 590.65
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 592.92,
+       "x1": 504.0,
+       "y1": 601.56
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 603.83,
+       "x1": 504.0,
+       "y1": 612.47
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 614.74,
+       "x1": 180.20999999999998,
+       "y1": 623.38
+      }
+     ],
+     "quote": "We pre-train our model on the filtered CC-595K subset for 1 epoch with a learning rate of 2e-3 and a batch size of 128, and fine-tune on the proposed LLaVA-Instruct-158K dataset for 3 epochs, with a learning rate of 2e-5 and a batch size of 32.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "2e-5",
+   "value_norm": 0.00002,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Fine-tuning batch size",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 582.01,
+      "x1": 504.0,
+      "y1": 623.38
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 409.1,
+       "y0": 582.01,
+       "x1": 503.99,
+       "y1": 590.65
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 592.92,
+       "x1": 504.0,
+       "y1": 601.56
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 603.83,
+       "x1": 504.0,
+       "y1": 612.47
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 614.74,
+       "x1": 180.20999999999998,
+       "y1": 623.38
+      }
+     ],
+     "quote": "We pre-train our model on the filtered CC-595K subset for 1 epoch with a learning rate of 2e-3 and a batch size of 128, and fine-tune on the proposed LLaVA-Instruct-158K dataset for 3 epochs, with a learning rate of 2e-5 and a batch size of 32.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "32",
+   "value_norm": 32.0,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Fine-tuning epochs",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 582.01,
+      "x1": 504.0,
+      "y1": 623.38
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 409.1,
+       "y0": 582.01,
+       "x1": 503.99,
+       "y1": 590.65
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 592.92,
+       "x1": 504.0,
+       "y1": 601.56
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 603.83,
+       "x1": 504.0,
+       "y1": 612.47
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 614.74,
+       "x1": 180.20999999999998,
+       "y1": 623.38
+      }
+     ],
+     "quote": "We pre-train our model on the filtered CC-595K subset for 1 epoch with a learning rate of 2e-3 and a batch size of 128, and fine-tune on the proposed LLaVA-Instruct-158K dataset for 3 epochs, with a learning rate of 2e-5 and a batch size of 32.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "3",
+   "value_norm": 3.0,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "ScienceQA training epochs",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 538.97,
+      "x1": 504.25,
+      "y1": 558.52
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 250.48,
+       "y0": 538.97,
+       "x1": 504.25,
+       "y1": 547.61
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 549.88,
+       "x1": 434.42,
+       "y1": 558.52
+      }
+     ],
+     "quote": "For LLaVA, we use the visual features before the last layer, ask the model to first predict reasons and then the answer, and train it for 12 epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "12",
+   "value_norm": 12.0,
+   "scope": "ScienceQA training"
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Optimizer",
+   "evidence": [
+    {
+     "chunk_id": "b0174",
+     "page": 20,
+     "bbox": {
+      "page": 20,
+      "x0": 107.64,
+      "y0": 120.33,
+      "x1": 504.0,
+      "y1": 139.88
+     },
+     "boxes": [
+      {
+       "page": 20,
+       "x0": 284.53,
+       "y0": 120.33,
+       "x1": 504.0,
+       "y1": 128.97
+      },
+      {
+       "page": 20,
+       "x0": 107.64,
+       "y0": 131.24,
+       "x1": 378.34,
+       "y1": 139.88
+      }
+     ],
+     "quote": "Following Vicuna, we use the Adam optimizer with no weight decay and a cosine learning rate with a warmup ratio of 3%.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "Adam",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "Weight decay",
+   "evidence": [
+    {
+     "chunk_id": "b0174",
+     "page": 20,
+     "bbox": {
+      "page": 20,
+      "x0": 107.64,
+      "y0": 120.33,
+      "x1": 504.0,
+      "y1": 139.88
+     },
+     "boxes": [
+      {
+       "page": 20,
+       "x0": 284.53,
+       "y0": 120.33,
+       "x1": 504.0,
+       "y1": 128.97
+      },
+      {
+       "page": 20,
+       "x0": 107.64,
+       "y0": 131.24,
+       "x1": 378.34,
+       "y1": 139.88
+      }
+     ],
+     "quote": "Following Vicuna, we use the Adam optimizer with no weight decay and a cosine learning rate with a warmup ratio of 3%.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "no weight decay",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "Warmup ratio",
+   "evidence": [
+    {
+     "chunk_id": "b0174",
+     "page": 20,
+     "bbox": {
+      "page": 20,
+      "x0": 107.64,
+      "y0": 120.33,
+      "x1": 504.0,
+      "y1": 139.88
+     },
+     "boxes": [
+      {
+       "page": 20,
+       "x0": 284.53,
+       "y0": 120.33,
+       "x1": 504.0,
+       "y1": 128.97
+      },
+      {
+       "page": 20,
+       "x0": 107.64,
+       "y0": 131.24,
+       "x1": 378.34,
+       "y1": 139.88
+      }
+     ],
+     "quote": "Following Vicuna, we use the Adam optimizer with no weight decay and a cosine learning rate with a warmup ratio of 3%.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "warmup ratio",
+   "value_raw": "3%",
+   "value_norm": 3.0,
+   "scope": ""
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Hardware used for training models",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 571.1,
+      "x1": 504.0,
+      "y1": 590.65
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 491.12,
+       "y0": 571.1,
+       "x1": 504.0,
+       "y1": 579.74
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 582.01,
+       "x1": 405.84,
+       "y1": 590.65
+      }
+     ],
+     "quote": "We train all models with 8× A100s, following Vicuna's hyperparameters [9].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.1",
+   "value": "Pre-training completion time",
+   "evidence": [
+    {
+     "chunk_id": "b0175",
+     "page": 20,
+     "bbox": {
+      "page": 20,
+      "x0": 254.5,
+      "y0": 169.45,
+      "x1": 457.75,
+      "y1": 178.08999999999997
+     },
+     "boxes": [
+      {
+       "page": 20,
+       "x0": 254.5,
+       "y0": 169.45,
+       "x1": 457.75,
+       "y1": 178.08999999999997
+      }
+     ],
+     "quote": "Pretraining on CC-595K completes within 4 hours.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.2",
+   "value": "Instruct-158K finetuning completion time",
+   "evidence": [
+    {
+     "chunk_id": "b0175",
+     "page": 20,
+     "bbox": {
+      "page": 20,
+      "x0": 108.0,
+      "y0": 169.45,
+      "x1": 504.0,
+      "y1": 189.0
+     },
+     "boxes": [
+      {
+       "page": 20,
+       "x0": 460.87,
+       "y0": 169.45,
+       "x1": 504.0,
+       "y1": 178.08999999999997
+      },
+      {
+       "page": 20,
+       "x0": 108.0,
+       "y0": 180.36,
+       "x1": 286.76,
+       "y1": 189.0
+      }
+     ],
+     "quote": "Finetuning on Instruct-158K completes within 10 hours.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.3",
+   "value": "ScienceQA finetuning completion time",
+   "evidence": [
+    {
+     "chunk_id": "b0175",
+     "page": 20,
+     "bbox": {
+      "page": 20,
+      "x0": 289.85,
+      "y0": 180.36,
+      "x1": 498.78000000000003,
+      "y1": 189.0
+     },
+     "boxes": [
+      {
+       "page": 20,
+       "x0": 289.85,
+       "y0": 180.36,
+       "x1": 498.78000000000003,
+       "y1": 189.0
+      }
+     ],
+     "quote": "Finetuning on ScienceQA completes within 4 hours.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Number of inference runs for evaluation",
+   "evidence": [
+    {
+     "chunk_id": "b0065",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 271.52,
+      "x1": 504.0,
+      "y1": 291.07
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 348.64,
+       "y0": 271.52,
+       "x1": 504.0,
+       "y1": 280.15999999999997
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 282.43,
+       "x1": 165.85,
+       "y1": 291.07
+      }
+     ],
+     "quote": "For the first three rows, we report three inference runs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation on different training data types",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 388.73,
+      "x1": 504.0,
+      "y1": 430.09
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 422.22,
+       "y0": 388.73,
+       "x1": 504.0,
+       "y1": 397.37
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 399.63,
+       "x1": 504.0,
+       "y1": 408.27
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 410.54,
+       "x1": 504.0,
+       "y1": 419.18
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 421.45,
+       "x1": 231.36,
+       "y1": 430.09
+      }
+     ],
+     "quote": "We vary the training datasets to study the effectiveness of different types of instruction-following data, and show the results in Table 4.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "Assessment challenges due to combining language and visual tasks",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 386.69,
+      "x1": 504.0,
+      "y1": 406.24
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 221.71,
+       "y0": 386.69,
+       "x1": 504.0,
+       "y1": 395.33
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 397.6,
+       "x1": 215.16,
+       "y1": 406.24
+      }
+     ],
+     "quote": "Assessing the performance of LLaVA is challenging as it involves both language and visual tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Inspiration for future research on more capable multimodal models",
+   "evidence": [
+    {
+     "chunk_id": "b0078",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 108.0,
+      "y0": 675.31,
+      "x1": 504.0,
+      "y1": 694.86
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 325.6,
+       "y0": 675.31,
+       "x1": 504.0,
+       "y1": 683.9499999999999
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 686.22,
+       "x1": 291.55,
+       "y1": 694.86
+      }
+     ],
+     "quote": "We hope our work can inspire future research on building more capable multimodal models.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Evaluating robustness and unexplored aspects of GPT-4 based multimodal evaluation",
+   "evidence": [
+    {
+     "chunk_id": "b0085",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 107.53,
+      "y0": 430.33,
+      "x1": 504.16,
+      "y1": 460.78
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 107.53,
+       "y0": 430.33,
+       "x1": 503.99,
+       "y1": 438.96999999999997
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 441.23,
+       "x1": 504.16,
+       "y1": 449.87
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 452.14,
+       "x1": 157.15,
+       "y1": 460.78
+      }
+     ],
+     "quote": "While text-only GPT-4 based multimodal evaluation is consistent and accurate in our study, its robustness in different situations and capability to evaluate other unexplored aspects are subjects for future work.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [
+  {
+   "id": "ethics.0",
+   "value": "Deployment and release of LLaVA bring both potential benefits and risks",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 107.69,
+      "y0": 99.54,
+      "x1": 504.0,
+      "y1": 119.09
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 107.69,
+       "y0": 99.54,
+       "x1": 504.0,
+       "y1": 108.18
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 110.45,
+       "x1": 284.91999999999996,
+       "y1": 119.09
+      }
+     ],
+     "quote": "The broader impact of LLaVA, a general-purpose visual assistant, has potential benefits and risks associated with its deployment and release.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.1",
+   "value": "Precautionary measures used to minimize malicious input risks",
+   "evidence": [
+    {
+     "chunk_id": "b0081",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 178.79,
+      "x1": 505.65000000000003,
+      "y1": 231.07
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 188.55,
+       "y0": 178.79,
+       "x1": 505.65000000000003,
+       "y1": 187.43
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 189.52,
+       "x1": 504.17,
+       "y1": 198.34
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 200.43,
+       "x1": 504.0,
+       "y1": 209.25
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 211.52,
+       "x1": 504.0,
+       "y1": 220.16000000000003
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 222.43,
+       "x1": 161.69,
+       "y1": 231.07
+      }
+     ],
+     "quote": "To minimize potential misuse and harmful consequences, we employ two precautionary measures for LLaVA: (1) OpenAI Filter API for user input text to prevent harmful or inappropriate text instructions from being processed by the model, and (2) NSFW Filter for uploaded user images to detect and block Not Safe For Work (NSFW) content or any other potentially harmful image inputs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.2",
+   "value": "Hallucination concerns in critical applications",
+   "evidence": [
+    {
+     "chunk_id": "b0082",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 258.04,
+      "x1": 505.74,
+      "y1": 277.59
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 166.06,
+       "y0": 258.04,
+       "x1": 505.74,
+       "y1": 266.68
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 268.95,
+       "x1": 145.35,
+       "y1": 277.59
+      }
+     ],
+     "quote": "This raises concerns about inferences made, especially in critical applications (e.g., medical).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.3",
+   "value": "Transfer of bias from base models leading to unfair representations",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 107.67,
+      "y0": 293.65,
+      "x1": 504.16999999999996,
+      "y1": 313.2
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 147.6,
+       "y0": 293.65,
+       "x1": 504.16999999999996,
+       "y1": 302.28999999999996
+      },
+      {
+       "page": 14,
+       "x0": 107.67,
+       "y0": 304.56,
+       "x1": 321.25,
+       "y1": 313.2
+      }
+     ],
+     "quote": "Bias can be transferred from the base models to LLaVA, both from the vision encoder (CLIP) and the language decoder (LLaMA/Vicuna).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.4",
+   "value": "Energy consumption concerns when scaling up datasets or model sizes",
+   "evidence": [
+    {
+     "chunk_id": "b0084",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 108.0,
+      "y0": 340.17,
+      "x1": 505.61,
+      "y1": 370.63
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 210.52,
+       "y0": 340.17,
+       "x1": 504.0,
+       "y1": 348.81
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 351.08,
+       "x1": 301.05,
+       "y1": 359.71999999999997
+      },
+      {
+       "page": 14,
+       "x0": 303.6,
+       "y0": 351.08,
+       "x1": 504.0,
+       "y1": 359.71999999999997
+      },
+      {
+       "page": 14,
+       "x0": 108.0,
+       "y0": 361.99,
+       "x1": 505.61,
+       "y1": 370.63
+      }
+     ],
+     "quote": "Though energy consumption is not a primary concern for LLaVA due to a smaller pretraining dataset (see details in Sec. C), it may become a concern when scaling up the pretraining dataset or increasing the model size, e.g., to a larger LLaMA version like the 65B model.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "code_urls": [],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "LLaVA yields an 85.1% relative score compared with GPT-4 on a synthetic multimodal instruction-following dataset.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 346.58,
+      "x1": 469.79,
+      "y1": 398.86
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 299.36,
+       "y0": 346.58,
+       "x1": 469.79,
+       "y1": 355.21999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 357.49,
+       "x1": 468.13,
+       "y1": 366.13
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 368.4,
+       "x1": 469.79,
+       "y1": 377.03999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 379.31,
+       "x1": 468.14,
+       "y1": 387.95
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 390.22,
+       "x1": 174.63,
+       "y1": 398.86
+      }
+     ],
+     "quote": "Our experiments show that LLaVA demonstrates impressive multimodal chat abilities, sometimes exhibiting the behaviors of multimodal GPT-4 on unseen images/instructions, and yields a 85.1% relative score compared with GPT-4 on a synthetic multimodal instruction-following dataset.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "When fine-tuned on Science QA, LLaVA and GPT-4 achieve a new state-of-the-art accuracy of 92.53%.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 390.22,
+      "x1": 468.13,
+      "y1": 409.77
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 181.53,
+       "y0": 390.22,
+       "x1": 468.13,
+       "y1": 398.86
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 401.13,
+       "x1": 354.69,
+       "y1": 409.77
+      }
+     ],
+     "quote": "When fine-tuned on Science QA, the synergy of LLaVA and GPT-4 achieves a new state-of-the-art accuracy of 92.53%.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "LLaVA demonstrates impressive multimodal chat abilities and exhibits behaviors of multimodal GPT-4 on unseen images/instructions.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 346.58,
+      "x1": 469.79,
+      "y1": 398.86
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 299.36,
+       "y0": 346.58,
+       "x1": 469.79,
+       "y1": 355.21999999999997
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 357.49,
+       "x1": 468.13,
+       "y1": 366.13
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 368.4,
+       "x1": 469.79,
+       "y1": 377.03999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 379.31,
+       "x1": 468.14,
+       "y1": 387.95
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 390.22,
+       "x1": 174.63,
+       "y1": 398.86
+      }
+     ],
+     "quote": "Our experiments show that LLaVA demonstrates impressive multimodal chat abilities, sometimes exhibiting the behaviors of multimodal GPT-4 on unseen images/instructions, and yields a 85.1% relative score compared with GPT-4 on a synthetic multimodal instruction-following dataset.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

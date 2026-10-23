@@ -1,0 +1,2606 @@
+{
+ "metadata": {
+  "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
+  "authors": [
+   "Colin Raffel",
+   "Noam Shazeer",
+   "Adam Roberts",
+   "Sharan Narang",
+   "Michael Matena",
+   "Wei Li",
+   "Peter J Liu",
+   "Colin ©2020",
+   "Noam Raffel",
+   "Adam Shazeer",
+   "Katherine Roberts",
+   "Sharan Lee",
+   "Michael Narang",
+   "Yanqi Matena",
+   "Wei Zhou",
+   "Peter J Li",
+   "Liu"
+  ],
+  "venue": null,
+  "year": "2023",
+  "arxiv_id": "1910.10683v4[cs.LG]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "The rapid progress and diversity of transfer learning techniques in NLP make it difficult to compare different algorithms and understand existing methods.",
+   "evidence": [
+    {
+     "chunk_id": "b0005",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 90.0,
+      "y0": 490.06,
+      "x1": 523.54,
+      "y1": 541.61
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 336.06,
+       "y0": 490.06,
+       "x1": 522.4200000000001,
+       "y1": 500.97
+      },
+      {
+       "page": 2,
+       "x0": 90.0,
+       "y0": 503.61,
+       "x1": 523.54,
+       "y1": 514.52
+      },
+      {
+       "page": 2,
+       "x0": 90.0,
+       "y0": 517.16,
+       "x1": 522.25,
+       "y1": 528.0699999999999
+      },
+      {
+       "page": 2,
+       "x0": 90.0,
+       "y0": 530.7,
+       "x1": 169.45,
+       "y1": 541.61
+      }
+     ],
+     "quote": "The rapid rate of progress and diversity of techniques in this burgeoning field can make it difficult to compare different algorithms, tease apart the effects of new contributions, and understand the space of existing methods for transfer learning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Introducing a unified framework that converts all text-based language problems into a text-to-text format.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 109.93,
+      "y0": 437.03,
+      "x1": 502.28,
+      "y1": 470.9
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 284.44,
+       "y0": 437.03,
+       "x1": 502.28,
+       "y1": 446.98999999999995
+      },
+      {
+       "page": 1,
+       "x0": 109.93,
+       "y0": 448.98,
+       "x1": 502.08,
+       "y1": 458.94
+      },
+      {
+       "page": 1,
+       "x0": 109.93,
+       "y0": 460.94,
+       "x1": 306.72,
+       "y1": 470.9
+      }
+     ],
+     "quote": "In this paper, we explore the landscape of transfer learning techniques for NLP by introducing a unified framework that converts all text-based language problems into a text-to-text format.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Conducting a systematic study comparing pre-training objectives, architectures, unlabeled data sets, and transfer approaches.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 109.93,
+      "y0": 460.94,
+      "x1": 502.08,
+      "y1": 494.81
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 311.13,
+       "y0": 460.94,
+       "x1": 502.08,
+       "y1": 470.9
+      },
+      {
+       "page": 1,
+       "x0": 109.93,
+       "y0": 472.89,
+       "x1": 502.08,
+       "y1": 482.84999999999997
+      },
+      {
+       "page": 1,
+       "x0": 109.93,
+       "y0": 484.85,
+       "x1": 287.5,
+       "y1": 494.81
+      }
+     ],
+     "quote": "Our systematic study compares pre-training objectives, architectures, unlabeled data sets, transfer approaches, and other factors on dozens of language understanding tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.2",
+   "value": "Releasing the Colossal Clean Crawled Corpus data set, pre-trained models, and code.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 109.57,
+      "y0": 484.85,
+      "x1": 502.08,
+      "y1": 530.6700000000001
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 291.92,
+       "y0": 484.85,
+       "x1": 502.07000000000005,
+       "y1": 494.81
+      },
+      {
+       "page": 1,
+       "x0": 109.57,
+       "y0": 496.8,
+       "x1": 502.07,
+       "y1": 506.76
+      },
+      {
+       "page": 1,
+       "x0": 109.93,
+       "y0": 508.76,
+       "x1": 502.08,
+       "y1": 518.72
+      },
+      {
+       "page": 1,
+       "x0": 109.93,
+       "y0": 520.71,
+       "x1": 134.8,
+       "y1": 530.6700000000001
+      }
+     ],
+     "quote": "By combining the insights from our exploration with scale and our new \"Colossal Clean Crawled Corpus\", we achieve state-of-the-art results on many benchmarks covering summarization, question answering, text classification, and more.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "summarization",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 109.57,
+      "y0": 484.85,
+      "x1": 502.08,
+      "y1": 530.6700000000001
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 291.92,
+       "y0": 484.85,
+       "x1": 502.07000000000005,
+       "y1": 494.81
+      },
+      {
+       "page": 1,
+       "x0": 109.57,
+       "y0": 496.8,
+       "x1": 502.07,
+       "y1": 506.76
+      },
+      {
+       "page": 1,
+       "x0": 109.93,
+       "y0": 508.76,
+       "x1": 502.08,
+       "y1": 518.72
+      },
+      {
+       "page": 1,
+       "x0": 109.93,
+       "y0": 520.71,
+       "x1": 134.8,
+       "y1": 530.6700000000001
+      }
+     ],
+     "quote": "By combining the insights from our exploration with scale and our new \"Colossal Clean Crawled Corpus\", we achieve state-of-the-art results on many benchmarks covering summarization, question answering, text classification, and more.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "task.1",
+   "value": "question answering",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 109.57,
+      "y0": 484.85,
+      "x1": 502.08,
+      "y1": 530.6700000000001
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 291.92,
+       "y0": 484.85,
+       "x1": 502.07000000000005,
+       "y1": 494.81
+      },
+      {
+       "page": 1,
+       "x0": 109.57,
+       "y0": 496.8,
+       "x1": 502.07,
+       "y1": 506.76
+      },
+      {
+       "page": 1,
+       "x0": 109.93,
+       "y0": 508.76,
+       "x1": 502.08,
+       "y1": 518.72
+      },
+      {
+       "page": 1,
+       "x0": 109.93,
+       "y0": 520.71,
+       "x1": 134.8,
+       "y1": 530.6700000000001
+      }
+     ],
+     "quote": "By combining the insights from our exploration with scale and our new \"Colossal Clean Crawled Corpus\", we achieve state-of-the-art results on many benchmarks covering summarization, question answering, text classification, and more.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "task.2",
+   "value": "text classification",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 109.57,
+      "y0": 484.85,
+      "x1": 502.08,
+      "y1": 530.6700000000001
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 291.92,
+       "y0": 484.85,
+       "x1": 502.07000000000005,
+       "y1": 494.81
+      },
+      {
+       "page": 1,
+       "x0": 109.57,
+       "y0": 496.8,
+       "x1": 502.07,
+       "y1": 506.76
+      },
+      {
+       "page": 1,
+       "x0": 109.93,
+       "y0": 508.76,
+       "x1": 502.08,
+       "y1": 518.72
+      },
+      {
+       "page": 1,
+       "x0": 109.93,
+       "y0": 520.71,
+       "x1": 134.8,
+       "y1": 530.6700000000001
+      }
+     ],
+     "quote": "By combining the insights from our exploration with scale and our new \"Colossal Clean Crawled Corpus\", we achieve state-of-the-art results on many benchmarks covering summarization, question answering, text classification, and more.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [],
+ "novelty": [],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "C4: Colossal Clean Crawled Corpus, a scraped web text dataset derived from Common Crawl, used for pre-training",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 90.0,
+      "y0": 229.9,
+      "x1": 522.0,
+      "y1": 254.35999999999999
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 351.61,
+       "y0": 229.9,
+       "x1": 522.0,
+       "y1": 240.81
+      },
+      {
+       "page": 7,
+       "x0": 90.0,
+       "y0": 243.45,
+       "x1": 517.5,
+       "y1": 254.35999999999999
+      },
+      {
+       "page": 7,
+       "x0": 517.48,
+       "y0": 242.18,
+       "x1": 521.71,
+       "y1": 249.22
+      }
+     ],
+     "quote": "We dub this data set the \"Colossal Clean Crawled Corpus\" (or C4 for short) and release it as part of TensorFlow Datasets.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "Colossal Clean Crawled Corpus",
+   "split": "",
+   "size": "about 750 GB",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "GLUE text classification meta-benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 90.0,
+      "y0": 332.89,
+      "x1": 523.54,
+      "y1": 384.45000000000005
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 447.86,
+       "y0": 332.89,
+       "x1": 522.02,
+       "y1": 343.8
+      },
+      {
+       "page": 7,
+       "x0": 90.0,
+       "y0": 346.44,
+       "x1": 523.54,
+       "y1": 357.35
+      },
+      {
+       "page": 7,
+       "x0": 90.0,
+       "y0": 359.99,
+       "x1": 522.02,
+       "y1": 370.90000000000003
+      },
+      {
+       "page": 7,
+       "x0": 90.0,
+       "y0": 373.54,
+       "x1": 323.69,
+       "y1": 384.45000000000005
+      }
+     ],
+     "quote": "Specifically, we measure performance on the GLUE and SuperGLUE text classification meta-benchmarks; CNN/Daily Mail abstractive summarization; SQuAD question answering; and WMT English to German, French, and Romanian translation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "GLUE",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "SuperGLUE text classification meta-benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 90.0,
+      "y0": 332.89,
+      "x1": 523.54,
+      "y1": 384.45000000000005
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 447.86,
+       "y0": 332.89,
+       "x1": 522.02,
+       "y1": 343.8
+      },
+      {
+       "page": 7,
+       "x0": 90.0,
+       "y0": 346.44,
+       "x1": 523.54,
+       "y1": 357.35
+      },
+      {
+       "page": 7,
+       "x0": 90.0,
+       "y0": 359.99,
+       "x1": 522.02,
+       "y1": 370.90000000000003
+      },
+      {
+       "page": 7,
+       "x0": 90.0,
+       "y0": 373.54,
+       "x1": 323.69,
+       "y1": 384.45000000000005
+      }
+     ],
+     "quote": "Specifically, we measure performance on the GLUE and SuperGLUE text classification meta-benchmarks; CNN/Daily Mail abstractive summarization; SQuAD question answering; and WMT English to German, French, and Romanian translation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "SuperGLUE",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "CNN/Daily Mail abstractive summarization dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 90.0,
+      "y0": 332.89,
+      "x1": 523.54,
+      "y1": 384.45000000000005
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 447.86,
+       "y0": 332.89,
+       "x1": 522.02,
+       "y1": 343.8
+      },
+      {
+       "page": 7,
+       "x0": 90.0,
+       "y0": 346.44,
+       "x1": 523.54,
+       "y1": 357.35
+      },
+      {
+       "page": 7,
+       "x0": 90.0,
+       "y0": 359.99,
+       "x1": 522.02,
+       "y1": 370.90000000000003
+      },
+      {
+       "page": 7,
+       "x0": 90.0,
+       "y0": 373.54,
+       "x1": 323.69,
+       "y1": 384.45000000000005
+      }
+     ],
+     "quote": "Specifically, we measure performance on the GLUE and SuperGLUE text classification meta-benchmarks; CNN/Daily Mail abstractive summarization; SQuAD question answering; and WMT English to German, French, and Romanian translation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "CNN/Daily Mail",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "SQuAD question answering benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 90.0,
+      "y0": 332.89,
+      "x1": 523.54,
+      "y1": 384.45000000000005
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 447.86,
+       "y0": 332.89,
+       "x1": 522.02,
+       "y1": 343.8
+      },
+      {
+       "page": 7,
+       "x0": 90.0,
+       "y0": 346.44,
+       "x1": 523.54,
+       "y1": 357.35
+      },
+      {
+       "page": 7,
+       "x0": 90.0,
+       "y0": 359.99,
+       "x1": 522.02,
+       "y1": 370.90000000000003
+      },
+      {
+       "page": 7,
+       "x0": 90.0,
+       "y0": 373.54,
+       "x1": 323.69,
+       "y1": 384.45000000000005
+      }
+     ],
+     "quote": "Specifically, we measure performance on the GLUE and SuperGLUE text classification meta-benchmarks; CNN/Daily Mail abstractive summarization; SQuAD question answering; and WMT English to German, French, and Romanian translation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "SQuAD",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "WMT English to German translation dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0039",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 90.0,
+      "y0": 332.89,
+      "x1": 523.54,
+      "y1": 384.45000000000005
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 447.86,
+       "y0": 332.89,
+       "x1": 522.02,
+       "y1": 343.8
+      },
+      {
+       "page": 7,
+       "x0": 90.0,
+       "y0": 346.44,
+       "x1": 523.54,
+       "y1": 357.35
+      },
+      {
+       "page": 7,
+       "x0": 90.0,
+       "y0": 359.99,
+       "x1": 522.02,
+       "y1": 370.90000000000003
+      },
+      {
+       "page": 7,
+       "x0": 90.0,
+       "y0": 373.54,
+       "x1": 323.69,
+       "y1": 384.45000000000005
+      }
+     ],
+     "quote": "Specifically, we measure performance on the GLUE and SuperGLUE text classification meta-benchmarks; CNN/Daily Mail abstractive summarization; SQuAD question answering; and WMT English to German, French, and Romanian translation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "WMT English to German",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.6",
+   "value": "CoLA sentence acceptability judgment dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 103.33,
+      "y0": 440.54,
+      "x1": 424.8,
+      "y1": 451.45000000000005
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 103.33,
+       "y0": 440.54,
+       "x1": 424.8,
+       "y1": 451.45000000000005
+      }
+     ],
+     "quote": "Sentence acceptability judgment (CoLA (Warstadt et al., 2018))",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "CoLA",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.7",
+   "value": "SST-2 sentiment analysis dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 103.33,
+      "y0": 466.12,
+      "x1": 347.44,
+      "y1": 477.03000000000003
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 103.33,
+       "y0": 466.12,
+       "x1": 347.44,
+       "y1": 477.03000000000003
+      }
+     ],
+     "quote": "Sentiment analysis (SST-2 (Socher et al., 2013))",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "SST-2",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.8",
+   "value": "MRPC paraphrasing/sentence similarity dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 103.33,
+      "y0": 491.71,
+      "x1": 522.23,
+      "y1": 516.17
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 103.33,
+       "y0": 491.71,
+       "x1": 522.23,
+       "y1": 502.62
+      },
+      {
+       "page": 7,
+       "x0": 117.27,
+       "y0": 505.26,
+       "x1": 296.54,
+       "y1": 516.17
+      }
+     ],
+     "quote": "Paraphrasing/sentence similarity (MRPC (Dolan and Brockett, 2005), STS-B (Cer et al., 2017), QQP (Iyer et al., 2017))",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "MRPC",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.9",
+   "value": "STS-B paraphrasing/sentence similarity dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 103.33,
+      "y0": 491.71,
+      "x1": 522.23,
+      "y1": 516.17
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 103.33,
+       "y0": 491.71,
+       "x1": 522.23,
+       "y1": 502.62
+      },
+      {
+       "page": 7,
+       "x0": 117.27,
+       "y0": 505.26,
+       "x1": 296.54,
+       "y1": 516.17
+      }
+     ],
+     "quote": "Paraphrasing/sentence similarity (MRPC (Dolan and Brockett, 2005), STS-B (Cer et al., 2017), QQP (Iyer et al., 2017))",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "STS-B",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.10",
+   "value": "QQP paraphrasing/sentence similarity dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 103.33,
+      "y0": 491.71,
+      "x1": 522.23,
+      "y1": 516.17
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 103.33,
+       "y0": 491.71,
+       "x1": 522.23,
+       "y1": 502.62
+      },
+      {
+       "page": 7,
+       "x0": 117.27,
+       "y0": 505.26,
+       "x1": 296.54,
+       "y1": 516.17
+      }
+     ],
+     "quote": "Paraphrasing/sentence similarity (MRPC (Dolan and Brockett, 2005), STS-B (Cer et al., 2017), QQP (Iyer et al., 2017))",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "QQP",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.11",
+   "value": "MNLI natural language inference dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 103.33,
+      "y0": 530.85,
+      "x1": 523.52,
+      "y1": 555.31
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 103.33,
+       "y0": 530.85,
+       "x1": 523.52,
+       "y1": 541.76
+      },
+      {
+       "page": 7,
+       "x0": 117.0,
+       "y0": 544.4,
+       "x1": 420.21,
+       "y1": 555.31
+      }
+     ],
+     "quote": "Natural language inference (MNLI (Williams et al., 2017), QNLI (Rajpurkar et al., 2016), RTE (Dagan et al., 2005), CB (De Marneff et al., 2019))",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "MNLI",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.12",
+   "value": "QNLI natural language inference dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 103.33,
+      "y0": 530.85,
+      "x1": 523.52,
+      "y1": 555.31
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 103.33,
+       "y0": 530.85,
+       "x1": 523.52,
+       "y1": 541.76
+      },
+      {
+       "page": 7,
+       "x0": 117.0,
+       "y0": 544.4,
+       "x1": 420.21,
+       "y1": 555.31
+      }
+     ],
+     "quote": "Natural language inference (MNLI (Williams et al., 2017), QNLI (Rajpurkar et al., 2016), RTE (Dagan et al., 2005), CB (De Marneff et al., 2019))",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "QNLI",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.13",
+   "value": "RTE natural language inference dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 103.33,
+      "y0": 530.85,
+      "x1": 523.52,
+      "y1": 555.31
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 103.33,
+       "y0": 530.85,
+       "x1": 523.52,
+       "y1": 541.76
+      },
+      {
+       "page": 7,
+       "x0": 117.0,
+       "y0": 544.4,
+       "x1": 420.21,
+       "y1": 555.31
+      }
+     ],
+     "quote": "Natural language inference (MNLI (Williams et al., 2017), QNLI (Rajpurkar et al., 2016), RTE (Dagan et al., 2005), CB (De Marneff et al., 2019))",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "RTE",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.14",
+   "value": "CB natural language inference dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0043",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 103.33,
+      "y0": 530.85,
+      "x1": 523.52,
+      "y1": 555.31
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 103.33,
+       "y0": 530.85,
+       "x1": 523.52,
+       "y1": 541.76
+      },
+      {
+       "page": 7,
+       "x0": 117.0,
+       "y0": 544.4,
+       "x1": 420.21,
+       "y1": 555.31
+      }
+     ],
+     "quote": "Natural language inference (MNLI (Williams et al., 2017), QNLI (Rajpurkar et al., 2016), RTE (Dagan et al., 2005), CB (De Marneff et al., 2019))",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "CB",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.15",
+   "value": "WNLI coreference resolution dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0044",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 103.33,
+      "y0": 569.98,
+      "x1": 426.89,
+      "y1": 580.89
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 103.33,
+       "y0": 569.98,
+       "x1": 426.89,
+       "y1": 580.89
+      }
+     ],
+     "quote": "Coreference resolution (WNLI and WSC (Levesque et al., 2012))",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "WNLI",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.16",
+   "value": "WSC coreference resolution dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0044",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 103.33,
+      "y0": 569.98,
+      "x1": 426.89,
+      "y1": 580.89
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 103.33,
+       "y0": 569.98,
+       "x1": 426.89,
+       "y1": 580.89
+      }
+     ],
+     "quote": "Coreference resolution (WNLI and WSC (Levesque et al., 2012))",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "WSC",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.17",
+   "value": "COPA sentence completion dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 103.33,
+      "y0": 595.57,
+      "x1": 375.76,
+      "y1": 606.48
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 103.33,
+       "y0": 595.57,
+       "x1": 375.76,
+       "y1": 606.48
+      }
+     ],
+     "quote": "Sentence completion (COPA (Roemmele et al., 2011))",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "COPA",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.18",
+   "value": "WIC word sense disambiguation dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 103.33,
+      "y0": 621.15,
+      "x1": 474.75,
+      "y1": 632.06
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 103.33,
+       "y0": 621.15,
+       "x1": 474.75,
+       "y1": 632.06
+      }
+     ],
+     "quote": "Word sense disambiguation (WIC (Pilehvar and Camacho-Collados, 2018))",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "WIC",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.19",
+   "value": "MultiRC question answering dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 103.33,
+      "y0": 646.74,
+      "x1": 523.53,
+      "y1": 671.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 103.33,
+       "y0": 646.74,
+       "x1": 523.53,
+       "y1": 657.65
+      },
+      {
+       "page": 7,
+       "x0": 117.27,
+       "y0": 660.29,
+       "x1": 246.85000000000002,
+       "y1": 671.1999999999999
+      },
+      {
+       "page": 8,
+       "x0": 89.44,
+       "y0": 93.64,
+       "x1": 496.87,
+       "y1": 104.55
+      }
+     ],
+     "quote": "Question answering (MultiRC (Khashabi et al., 2018), ReCoRD (Zhang et al., 2018), BoolQ (Clark et al., 2019))",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "MultiRC",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.20",
+   "value": "ReCoRD question answering dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 103.33,
+      "y0": 646.74,
+      "x1": 523.53,
+      "y1": 671.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 103.33,
+       "y0": 646.74,
+       "x1": 523.53,
+       "y1": 657.65
+      },
+      {
+       "page": 7,
+       "x0": 117.27,
+       "y0": 660.29,
+       "x1": 246.85000000000002,
+       "y1": 671.1999999999999
+      },
+      {
+       "page": 8,
+       "x0": 89.44,
+       "y0": 93.64,
+       "x1": 496.87,
+       "y1": 104.55
+      }
+     ],
+     "quote": "Question answering (MultiRC (Khashabi et al., 2018), ReCoRD (Zhang et al., 2018), BoolQ (Clark et al., 2019))",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "ReCoRD",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.21",
+   "value": "BoolQ question answering dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 103.33,
+      "y0": 646.74,
+      "x1": 523.53,
+      "y1": 671.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 103.33,
+       "y0": 646.74,
+       "x1": 523.53,
+       "y1": 657.65
+      },
+      {
+       "page": 7,
+       "x0": 117.27,
+       "y0": 660.29,
+       "x1": 246.85000000000002,
+       "y1": 671.1999999999999
+      },
+      {
+       "page": 8,
+       "x0": 89.44,
+       "y0": 93.64,
+       "x1": 496.87,
+       "y1": 104.55
+      }
+     ],
+     "quote": "Question answering (MultiRC (Khashabi et al., 2018), ReCoRD (Zhang et al., 2018), BoolQ (Clark et al., 2019))",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "BoolQ",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.22",
+   "value": "Definite Pronoun Resolution (DPR) dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0047",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 90.0,
+      "y0": 120.74,
+      "x1": 523.3,
+      "y1": 158.75
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 509.29,
+       "y0": 120.74,
+       "x1": 522.03,
+       "y1": 131.65
+      },
+      {
+       "page": 8,
+       "x0": 90.0,
+       "y0": 134.29,
+       "x1": 523.3,
+       "y1": 145.2
+      },
+      {
+       "page": 8,
+       "x0": 90.0,
+       "y0": 147.84,
+       "x1": 416.46,
+       "y1": 158.75
+      }
+     ],
+     "quote": "As suggested by Kocijan et al. (2019) we also include the Definite Pronoun Resolution (DPR) data set (Rahman and Ng, 2012) in the combined SuperGLUE task.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "Definite Pronoun Resolution",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "BLEU score for machine translation",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 88.72,
+      "y0": 409.26,
+      "x1": 522.02,
+      "y1": 447.27000000000004
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 273.85,
+       "y0": 409.26,
+       "x1": 522.02,
+       "y1": 420.17
+      },
+      {
+       "page": 14,
+       "x0": 88.72,
+       "y0": 422.81,
+       "x1": 522.01,
+       "y1": 433.72
+      },
+      {
+       "page": 14,
+       "x0": 90.0,
+       "y0": 436.36,
+       "x1": 200.55,
+       "y1": 447.27000000000004
+      }
+     ],
+     "quote": "For all translation tasks, we report the BLEU score (Papineni et al., 2002) as provided by SacreBLEU v1.3.0 (Post, 2018) with \"exp\" smoothing and \"intl\" tokenization.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "ROUGE-2-F score for text summarization",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 90.0,
+      "y0": 490.55,
+      "x1": 524.08,
+      "y1": 515.01
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 205.21,
+       "y0": 490.55,
+       "x1": 524.08,
+       "y1": 501.46000000000004
+      },
+      {
+       "page": 14,
+       "x0": 90.0,
+       "y0": 504.1,
+       "x1": 500.91,
+       "y1": 515.01
+      }
+     ],
+     "quote": "Similarly, for SQuAD we find the performance of the \"exact match\" and \"F1\" scores to be highly correlated so we report the \"exact match\" score alone.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "Exact match score for question answering",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 90.0,
+      "y0": 490.55,
+      "x1": 524.08,
+      "y1": 515.01
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 205.21,
+       "y0": 490.55,
+       "x1": 524.08,
+       "y1": 501.46000000000004
+      },
+      {
+       "page": 14,
+       "x0": 90.0,
+       "y0": 504.1,
+       "x1": 500.91,
+       "y1": 515.01
+      }
+     ],
+     "quote": "Similarly, for SQuAD we find the performance of the \"exact match\" and \"F1\" scores to be highly correlated so we report the \"exact match\" score alone.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Dropout probability",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 90.0,
+      "y0": 549.01,
+      "x1": 522.01,
+      "y1": 573.4699999999999
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 114.31,
+       "y0": 549.01,
+       "x1": 522.01,
+       "y1": 559.92
+      },
+      {
+       "page": 11,
+       "x0": 90.0,
+       "y0": 562.56,
+       "x1": 153.32999999999998,
+       "y1": 573.4699999999999
+      }
+     ],
+     "quote": "For regularization, we use a dropout probability of 0.1 everywhere dropout is applied in the model.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "dropout",
+   "value_raw": "0.1",
+   "value_norm": 0.1,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Pre-training steps",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 106.94,
+      "y0": 679.86,
+      "x1": 471.36,
+      "y1": 692.04
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 106.94,
+       "y0": 681.13,
+       "x1": 254.87,
+       "y1": 692.04
+      },
+      {
+       "page": 11,
+       "x0": 254.86,
+       "y0": 679.86,
+       "x1": 263.33000000000004,
+       "y1": 686.9
+      },
+      {
+       "page": 11,
+       "x0": 267.52,
+       "y0": 681.13,
+       "x1": 471.36,
+       "y1": 692.04
+      }
+     ],
+     "quote": "We pre-train each model for 2 19 = 524,288 steps on C4 before fine-tuning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "pre-training steps",
+   "value_raw": "2 19 = 524,288",
+   "value_norm": null,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Maximum sequence length",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 90.0,
+      "y0": 681.13,
+      "x1": 522.01,
+      "y1": 705.5899999999999
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 477.39,
+       "y0": 681.13,
+       "x1": 522.01,
+       "y1": 692.04
+      },
+      {
+       "page": 11,
+       "x0": 90.0,
+       "y0": 694.68,
+       "x1": 423.81,
+       "y1": 705.5899999999999
+      }
+     ],
+     "quote": "We use a maximum sequence length of 512 and a batch size of 128 sequences.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "maximum sequence length",
+   "value_raw": "512",
+   "value_norm": 512.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Batch size in sequences",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 90.0,
+      "y0": 681.13,
+      "x1": 522.01,
+      "y1": 705.5899999999999
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 477.39,
+       "y0": 681.13,
+       "x1": 522.01,
+       "y1": 692.04
+      },
+      {
+       "page": 11,
+       "x0": 90.0,
+       "y0": 694.68,
+       "x1": 423.81,
+       "y1": 705.5899999999999
+      }
+     ],
+     "quote": "We use a maximum sequence length of 512 and a batch size of 128 sequences.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "128 sequences",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Number of warm-up steps",
+   "evidence": [
+    {
+     "chunk_id": "b0070",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 89.61,
+      "y0": 202.42,
+      "x1": 522.0,
+      "y1": 240.43
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 106.94,
+       "y0": 202.42,
+       "x1": 459.9,
+       "y1": 213.32999999999998
+      },
+      {
+       "page": 12,
+       "x0": 475.62,
+       "y0": 202.42,
+       "x1": 522.0,
+       "y1": 213.32999999999998
+      },
+      {
+       "page": 12,
+       "x0": 89.61,
+       "y0": 215.97,
+       "x1": 517.5699999999999,
+       "y1": 226.88
+      },
+      {
+       "page": 12,
+       "x0": 517.56,
+       "y0": 214.7,
+       "x1": 521.79,
+       "y1": 221.73999999999998
+      },
+      {
+       "page": 12,
+       "x0": 90.0,
+       "y0": 229.52,
+       "x1": 214.72,
+       "y1": 240.43
+      }
+     ],
+     "quote": "During pre-training, we use an \"inverse square root\" learning rate schedule: 1 max(n, k) where n is the current training iteration and k is the number of warm-up steps (set to 10 4 in all of our experiments).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "warm-up steps",
+   "value_raw": "10 4",
+   "value_norm": null,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Constant learning rate during initial steps",
+   "evidence": [
+    {
+     "chunk_id": "b0070",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 90.0,
+      "y0": 228.25,
+      "x1": 523.52,
+      "y1": 253.98
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 219.57,
+       "y0": 229.52,
+       "x1": 488.28,
+       "y1": 240.43
+      },
+      {
+       "page": 12,
+       "x0": 488.28,
+       "y0": 228.25,
+       "x1": 492.51,
+       "y1": 235.29
+      },
+      {
+       "page": 12,
+       "x0": 496.65,
+       "y0": 229.52,
+       "x1": 523.52,
+       "y1": 240.43
+      },
+      {
+       "page": 12,
+       "x0": 90.0,
+       "y0": 243.07,
+       "x1": 414.22,
+       "y1": 253.98
+      }
+     ],
+     "quote": "This sets a constant learning rate of 0.01 for the first 10 4 steps, then exponentially decays the learning rate until pre-training is over.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.01",
+   "value_norm": 0.01,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Fine-tuning steps",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 106.94,
+      "y0": 309.93,
+      "x1": 410.11,
+      "y1": 322.11
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 106.94,
+       "y0": 311.2,
+       "x1": 260.37,
+       "y1": 322.11
+      },
+      {
+       "page": 12,
+       "x0": 260.36,
+       "y0": 309.93,
+       "x1": 268.83000000000004,
+       "y1": 316.97
+      },
+      {
+       "page": 12,
+       "x0": 272.36,
+       "y0": 311.2,
+       "x1": 410.11,
+       "y1": 322.11
+      }
+     ],
+     "quote": "Our models are fine-tuned for 2 18 = 262,144 steps on all tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "fine-tuning steps",
+   "value_raw": "2 18 = 262,144",
+   "value_norm": null,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Constant learning rate during fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0071",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 199.45,
+      "y0": 365.4,
+      "x1": 478.59,
+      "y1": 376.31
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 199.45,
+       "y0": 365.4,
+       "x1": 478.59,
+       "y1": 376.31
+      }
+     ],
+     "quote": "We use a constant learning rate of 0.001 when fine-tuning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.001",
+   "value_norm": 0.001,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "Vocabulary size",
+   "evidence": [
+    {
+     "chunk_id": "b0073",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 89.61,
+      "y0": 493.28,
+      "x1": 522.27,
+      "y1": 517.74
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 271.64,
+       "y0": 493.28,
+       "x1": 522.27,
+       "y1": 504.19
+      },
+      {
+       "page": 12,
+       "x0": 89.61,
+       "y0": 506.83,
+       "x1": 145.04,
+       "y1": 517.74
+      }
+     ],
+     "quote": "For all experiments, we use a vocabulary of 32,000 wordpieces.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "vocabulary size",
+   "value_raw": "32,000",
+   "value_norm": 32000.0,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "Token dropout percentage",
+   "evidence": [
+    {
+     "chunk_id": "b0077",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 88.45,
+      "y0": 442.77,
+      "x1": 522.3100000000001,
+      "y1": 480.78000000000003
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 191.86,
+       "y0": 442.77,
+       "x1": 522.03,
+       "y1": 453.68
+      },
+      {
+       "page": 13,
+       "x0": 88.45,
+       "y0": 456.32,
+       "x1": 522.3100000000001,
+       "y1": 467.23
+      },
+      {
+       "page": 13,
+       "x0": 90.0,
+       "y0": 469.87,
+       "x1": 446.12,
+       "y1": 480.78000000000003
+      }
+     ],
+     "quote": "Inspired by BERT's \"masked language modeling\" objective and the \"word dropout\" regularization technique (Bowman et al., 2015), we design an objective that randomly samples and then drops out 15% of tokens in the input sequence.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "name": "token dropout percentage",
+   "value_raw": "15%",
+   "value_norm": 15.0,
+   "scope": "pre-training"
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Cloud TPU Pods containing TPU v3 chips and Mesh TensorFlow library",
+   "evidence": [
+    {
+     "chunk_id": "b0023",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 90.0,
+      "y0": 515.07,
+      "x1": 522.02,
+      "y1": 566.62
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 169.65,
+       "y0": 515.07,
+       "x1": 522.02,
+       "y1": 525.98
+      },
+      {
+       "page": 5,
+       "x0": 90.0,
+       "y0": 528.62,
+       "x1": 276.68,
+       "y1": 539.53
+      },
+      {
+       "page": 5,
+       "x0": 276.67,
+       "y0": 527.35,
+       "x1": 280.90000000000003,
+       "y1": 534.39
+      },
+      {
+       "page": 5,
+       "x0": 286.28,
+       "y0": 528.62,
+       "x1": 522.01,
+       "y1": 539.53
+      },
+      {
+       "page": 5,
+       "x0": 90.0,
+       "y0": 542.16,
+       "x1": 522.02,
+       "y1": 553.0699999999999
+      },
+      {
+       "page": 5,
+       "x0": 90.0,
+       "y0": 555.71,
+       "x1": 243.06,
+       "y1": 566.62
+      }
+     ],
+     "quote": "As a result, we use a combination of model and data parallelism and train models on \"slices\" of Cloud TPU Pods.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Trained baseline model 10 times from scratch with different random initializations and data set shuffling",
+   "evidence": [
+    {
+     "chunk_id": "b0079",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 89.72,
+      "y0": 259.77,
+      "x1": 522.27,
+      "y1": 311.33000000000004
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 246.93,
+       "y0": 259.77,
+       "x1": 522.27,
+       "y1": 270.68
+      },
+      {
+       "page": 14,
+       "x0": 90.0,
+       "y0": 273.32,
+       "x1": 522.02,
+       "y1": 284.23
+      },
+      {
+       "page": 14,
+       "x0": 90.0,
+       "y0": 286.87,
+       "x1": 522.02,
+       "y1": 297.78000000000003
+      },
+      {
+       "page": 14,
+       "x0": 89.72,
+       "y0": 300.42,
+       "x1": 126.86,
+       "y1": 311.33000000000004
+      }
+     ],
+     "quote": "As a cheaper alternative, we train our baseline model 10 times from scratch (i.e. with different random initializations and data set shuffling) and assume that the variance over these runs of the base model also applies to each experimental variant.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "English-only pre-training failed to achieve state-of-the-art results on translation tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0223",
+     "page": 43,
+     "bbox": {
+      "page": 43,
+      "x0": 117.27,
+      "y0": 626.93,
+      "x1": 522.02,
+      "y1": 651.39
+     },
+     "boxes": [
+      {
+       "page": 43,
+       "x0": 237.97,
+       "y0": 626.93,
+       "x1": 522.02,
+       "y1": 637.8399999999999
+      },
+      {
+       "page": 43,
+       "x0": 117.27,
+       "y0": 640.48,
+       "x1": 479.57,
+       "y1": 651.39
+      }
+     ],
+     "quote": "We were disappointed to find that English-only pre-training did not achieve state-of-the-art results on the translation tasks we studied.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Explore entirely different ways of leveraging unlabeled data instead of minor variations in objectives.",
+   "evidence": [
+    {
+     "chunk_id": "b0135",
+     "page": 24,
+     "bbox": {
+      "page": 24,
+      "x0": 90.0,
+      "y0": 605.03,
+      "x1": 522.01,
+      "y1": 629.48
+     },
+     "boxes": [
+      {
+       "page": 24,
+       "x0": 153.64,
+       "y0": 605.03,
+       "x1": 522.01,
+       "y1": 615.9399999999999
+      },
+      {
+       "page": 24,
+       "x0": 90.0,
+       "y0": 618.57,
+       "x1": 163.64,
+       "y1": 629.48
+      }
+     ],
+     "quote": "Instead, it may be fortuitous to explore entirely different ways of leveraging unlabeled data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Research methods to achieve stronger performance with cheaper models for transfer learning.",
+   "evidence": [
+    {
+     "chunk_id": "b0218",
+     "page": 43,
+     "bbox": {
+      "page": 43,
+      "x0": 116.87,
+      "y0": 261.99,
+      "x1": 522.03,
+      "y1": 300.0
+     },
+     "boxes": [
+      {
+       "page": 43,
+       "x0": 116.87,
+       "y0": 261.99,
+       "x1": 522.03,
+       "y1": 272.90000000000003
+      },
+      {
+       "page": 43,
+       "x0": 116.88,
+       "y0": 275.54,
+       "x1": 522.02,
+       "y1": 286.45000000000005
+      },
+      {
+       "page": 43,
+       "x0": 117.27,
+       "y0": 289.09,
+       "x1": 180.28,
+       "y1": 300.0
+      }
+     ],
+     "quote": "As a result, we advocate for research on methods that achieve stronger performance with cheaper models so that transfer learning can be applied where it will have the most impact.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.2",
+   "value": "Investigate more efficient ways to provide general-purpose knowledge without requiring 1 trillion tokens of text.",
+   "evidence": [
+    {
+     "chunk_id": "b0220",
+     "page": 43,
+     "bbox": {
+      "page": 43,
+      "x0": 117.27,
+      "y0": 406.22,
+      "x1": 522.02,
+      "y1": 444.23
+     },
+     "boxes": [
+      {
+       "page": 43,
+       "x0": 287.37,
+       "y0": 406.22,
+       "x1": 522.02,
+       "y1": 417.13000000000005
+      },
+      {
+       "page": 43,
+       "x0": 117.27,
+       "y0": 419.77,
+       "x1": 522.0,
+       "y1": 430.68
+      },
+      {
+       "page": 43,
+       "x0": 117.27,
+       "y0": 433.32,
+       "x1": 211.2,
+       "y1": 444.23
+      }
+     ],
+     "quote": "More concretely, it would be useful to be able to attain good fine-tuning performance without needing to train our models on 1 trillion tokens of text first.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.3",
+   "value": "Formulate a more rigorous notion of task similarity between pre-training and downstream tasks.",
+   "evidence": [
+    {
+     "chunk_id": "b0221",
+     "page": 43,
+     "bbox": {
+      "page": 43,
+      "x0": 115.72,
+      "y0": 523.35,
+      "x1": 522.03,
+      "y1": 561.36
+     },
+     "boxes": [
+      {
+       "page": 43,
+       "x0": 226.05,
+       "y0": 523.35,
+       "x1": 522.03,
+       "y1": 534.26
+      },
+      {
+       "page": 43,
+       "x0": 115.72,
+       "y0": 536.9,
+       "x1": 522.02,
+       "y1": 547.81
+      },
+      {
+       "page": 43,
+       "x0": 117.27,
+       "y0": 550.45,
+       "x1": 449.25,
+       "y1": 561.36
+      }
+     ],
+     "quote": "It would be useful to formulate a more rigorous notion of the \"similarity\" between the pre-training and downstream tasks, so that we could make more principled choices about what source of unlabeled data to use.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.4",
+   "value": "Further investigate language-agnostic models to handle NLP tasks regardless of the language.",
+   "evidence": [
+    {
+     "chunk_id": "b0223",
+     "page": 43,
+     "bbox": {
+      "page": 43,
+      "x0": 117.27,
+      "y0": 667.58,
+      "x1": 522.02,
+      "y1": 705.5899999999999
+     },
+     "boxes": [
+      {
+       "page": 43,
+       "x0": 311.66,
+       "y0": 667.58,
+       "x1": 522.02,
+       "y1": 678.49
+      },
+      {
+       "page": 43,
+       "x0": 117.27,
+       "y0": 681.13,
+       "x1": 522.01,
+       "y1": 692.04
+      },
+      {
+       "page": 43,
+       "x0": 117.27,
+       "y0": 694.68,
+       "x1": 425.14,
+       "y1": 705.5899999999999
+      }
+     ],
+     "quote": "To address these issues, we are interested in further investigating language-agnostic models, i.e. models that can perform a given NLP task with good performance regardless of the text's language.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words",
+   "evidence": [
+    {
+     "chunk_id": "b0036",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 93.68,
+      "y0": 663.39,
+      "x1": 522.03,
+      "y1": 693.65
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 229.91,
+       "y0": 663.39,
+       "x1": 522.03,
+       "y1": 674.3
+      },
+      {
+       "page": 6,
+       "x0": 93.68,
+       "y0": 685.73,
+       "x1": 100.85000000000001,
+       "y1": 693.65
+      }
+     ],
+     "quote": "Our heuristics are inspired by past work on using Common 6. https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/jcpeterson/openwebtext13",
+   "evidence": [
+    {
+     "chunk_id": "b0262",
+     "page": 27,
+     "bbox": {
+      "page": 27,
+      "x0": 99.14199829101562,
+      "y0": 96.27515411376953,
+      "x1": 502.859130859375,
+      "y1": 175.41844177246094
+     },
+     "boxes": [
+      {
+       "page": 27,
+       "x0": 99.14199829101562,
+       "y0": 96.27515411376953,
+       "x1": 502.859130859375,
+       "y1": 175.41844177246094
+      }
+     ],
+     "quote": "Table 8: 12. https://github.com/jcpeterson/openwebtext13. https://www.tensorflow.org/datasets/catalog/wikipediaPerformance resulting from pre-training on different data sets.The first four variants are based on our new C4 data set.produced a SuperGLUE score of 73.24, beating our baseline's score (using C4) of 71.36.This is almost entirely attributable to a boost in performance from 25.78 (baseline, C4) to 50.93 (Wikipedia + TBC) on the Exact Match score for MultiRC (see Table 16).MultiRC is a reading comprehension data set whose largest source of data comes from fiction books, which is exactly the domain covered by TBC.Similarly, using the RealNews-like data set for pre-training conferred an increase from 68.16 to 73.72 on the Exact Match score for ReCoRD, a data set that measures reading comprehension on news articles.As a final example, using data from Wikipedia produced significant (but less dramatic) gains on SQuAD, which is a question-answering data set with passages sourced from Wikipedia.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.2",
+   "value": "https://github.com/google-research/bert/blob/master/multilingual.md",
+   "evidence": [
+    {
+     "chunk_id": "b0266",
+     "page": 31,
+     "bbox": {
+      "page": 31,
+      "x0": 100.85484313964844,
+      "y0": 697.482177734375,
+      "x1": 416.1233215332031,
+      "y1": 704.8525390625
+     },
+     "boxes": [
+      {
+       "page": 31,
+       "x0": 100.85484313964844,
+       "y0": 697.482177734375,
+       "x1": 416.1233215332031,
+       "y1": 704.8525390625
+      }
+     ],
+     "quote": "https://github.com/google-research/bert/blob/master/multilingual.md",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "Achieved state-of-the-art results on many benchmarks covering summarization, question answering, text classification, and others.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 109.57,
+      "y0": 484.85,
+      "x1": 502.08,
+      "y1": 530.6700000000001
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 291.92,
+       "y0": 484.85,
+       "x1": 502.07000000000005,
+       "y1": 494.81
+      },
+      {
+       "page": 1,
+       "x0": 109.57,
+       "y0": 496.8,
+       "x1": 502.07,
+       "y1": 506.76
+      },
+      {
+       "page": 1,
+       "x0": 109.93,
+       "y0": 508.76,
+       "x1": 502.08,
+       "y1": 518.72
+      },
+      {
+       "page": 1,
+       "x0": 109.93,
+       "y0": 520.71,
+       "x1": 134.8,
+       "y1": 530.6700000000001
+      }
+     ],
+     "quote": "By combining the insights from our exploration with scale and our new \"Colossal Clean Crawled Corpus\", we achieve state-of-the-art results on many benchmarks covering summarization, question answering, text classification, and more.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "Trained models up to 11 billion parameters.",
+   "evidence": [
+    {
+     "chunk_id": "b0015",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 90.0,
+      "y0": 477.69,
+      "x1": 522.02,
+      "y1": 502.15000000000003
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 342.08,
+       "y0": 477.69,
+       "x1": 522.02,
+       "y1": 488.6
+      },
+      {
+       "page": 3,
+       "x0": 90.0,
+       "y0": 491.24,
+       "x1": 424.31,
+       "y1": 502.15000000000003
+      }
+     ],
+     "quote": "As such, our work primarily comprises a survey, exploration, and empirical comparison of existing techniques.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

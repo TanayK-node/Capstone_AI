@@ -1,0 +1,3036 @@
+{
+ "metadata": {
+  "title": "A Simple Framework for Contrastive Learning of Visual Representations",
+  "authors": [
+   "Ting Chen",
+   "Simon Kornblith",
+   "Mohammad Norouzi",
+   "Geoffrey Hinton"
+  ],
+  "venue": null,
+  "year": null,
+  "arxiv_id": null,
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Learning effective visual representations without human supervision is difficult.",
+   "evidence": [
+    {
+     "chunk_id": "b0004",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 55.44,
+      "y0": 569.15,
+      "x1": 289.44,
+      "y1": 589.75
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 55.44,
+       "y0": 569.15,
+       "x1": 289.44,
+       "y1": 577.79
+      },
+      {
+       "page": 1,
+       "x0": 55.44,
+       "y0": 581.11,
+       "x1": 215.64,
+       "y1": 589.75
+      }
+     ],
+     "quote": "Learning effective visual representations without human supervision is a long-standing problem.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "Pixel-level generation methods are computationally expensive and potentially unnecessary for representation learning.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 307.44,
+      "y0": 410.67,
+      "x1": 543.1800000000001,
+      "y1": 431.27
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 307.44,
+       "y0": 410.67,
+       "x1": 543.09,
+       "y1": 419.31
+      },
+      {
+       "page": 1,
+       "x0": 307.44,
+       "y0": 422.63,
+       "x1": 543.1800000000001,
+       "y1": 431.27
+      }
+     ],
+     "quote": "However, pixel-level generation is computationally expensive and may not be necessary for representation learning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "problem.2",
+   "value": "Heuristic-based pretext tasks can restrict the generality of learned representations.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 307.44,
+      "y0": 470.45,
+      "x1": 542.22,
+      "y1": 526.91
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 519.16,
+       "y0": 470.45,
+       "x1": 541.79,
+       "y1": 479.09
+      },
+      {
+       "page": 1,
+       "x0": 307.44,
+       "y0": 482.4,
+       "x1": 541.44,
+       "y1": 491.03999999999996
+      },
+      {
+       "page": 1,
+       "x0": 307.44,
+       "y0": 494.36,
+       "x1": 542.22,
+       "y1": 503.0
+      },
+      {
+       "page": 1,
+       "x0": 307.44,
+       "y0": 506.31,
+       "x1": 541.44,
+       "y1": 514.95
+      },
+      {
+       "page": 1,
+       "x0": 307.44,
+       "y0": 518.27,
+       "x1": 476.0,
+       "y1": 526.91
+      }
+     ],
+     "quote": "Many such approaches have relied on heuristics to design pretext tasks (Doersch et al., 2015;Zhang et al., 2016;Noroozi & Favaro, 2016;Gidaris et al., 2018), which could limit the generality of the learned representations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "The introduction of SimCLR, a simple framework for contrastive learning of visual representations.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 75.36,
+      "y0": 199.01,
+      "x1": 271.26,
+      "y1": 219.79000000000002
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 75.36,
+       "y0": 199.01,
+       "x1": 269.77,
+       "y1": 207.82999999999998
+      },
+      {
+       "page": 1,
+       "x0": 75.36,
+       "y0": 211.15,
+       "x1": 271.26,
+       "y1": 219.79000000000002
+      }
+     ],
+     "quote": "This paper presents SimCLR: a simple framework for contrastive learning of visual representations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "A systematic study of the major components of the proposed contrastive learning framework.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 75.0,
+      "y0": 247.01,
+      "x1": 270.76,
+      "y1": 303.46999999999997
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 261.06,
+       "y0": 247.01,
+       "x1": 269.52,
+       "y1": 255.64999999999998
+      },
+      {
+       "page": 1,
+       "x0": 75.36,
+       "y0": 258.97,
+       "x1": 269.52,
+       "y1": 267.61
+      },
+      {
+       "page": 1,
+       "x0": 75.36,
+       "y0": 270.92,
+       "x1": 270.76,
+       "y1": 279.56
+      },
+      {
+       "page": 1,
+       "x0": 75.0,
+       "y0": 282.88,
+       "x1": 269.52,
+       "y1": 291.52
+      },
+      {
+       "page": 1,
+       "x0": 75.36,
+       "y0": 294.83,
+       "x1": 136.67000000000002,
+       "y1": 303.46999999999997
+      }
+     ],
+     "quote": "In order to understand what enables the contrastive prediction tasks to learn useful representations, we systematically study the major components of our framework.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "contrastive learning of visual representations",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 75.36,
+      "y0": 199.01,
+      "x1": 271.26,
+      "y1": 219.79000000000002
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 75.36,
+       "y0": 199.01,
+       "x1": 269.77,
+       "y1": 207.82999999999998
+      },
+      {
+       "page": 1,
+       "x0": 75.36,
+       "y0": 211.15,
+       "x1": 271.26,
+       "y1": 219.79000000000002
+      }
+     ],
+     "quote": "This paper presents SimCLR: a simple framework for contrastive learning of visual representations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "SimCLR uses a stochastic data augmentation module to transform data examples into two correlated views considered as positive pairs.",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 58.43,
+      "y0": 543.28,
+      "x1": 291.09,
+      "y1": 588.11
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 58.43,
+       "y0": 543.28,
+       "x1": 289.44,
+       "y1": 552.24
+      },
+      {
+       "page": 2,
+       "x0": 68.39,
+       "y0": 555.56,
+       "x1": 291.09,
+       "y1": 564.1999999999999
+      },
+      {
+       "page": 2,
+       "x0": 68.39,
+       "y0": 567.06,
+       "x1": 290.68,
+       "y1": 576.16
+      },
+      {
+       "page": 2,
+       "x0": 68.03,
+       "y0": 579.47,
+       "x1": 218.56,
+       "y1": 588.11
+      }
+     ],
+     "quote": "A stochastic data augmentation module that transforms any given data example randomly resulting in two correlated views of the same example, denoted xi and xj , which we consider as a positive pair.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "A base encoder network, such as ResNet, extracts representation vectors from the augmented data examples.",
+   "evidence": [
+    {
+     "chunk_id": "b0019",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 58.43,
+      "y0": 654.87,
+      "x1": 291.09,
+      "y1": 675.78
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 58.43,
+       "y0": 654.87,
+       "x1": 291.09,
+       "y1": 663.83
+      },
+      {
+       "page": 2,
+       "x0": 68.39,
+       "y0": 667.14,
+       "x1": 269.99,
+       "y1": 675.78
+      }
+     ],
+     "quote": "A neural network base encoder f (•) that extracts representation vectors from augmented data examples.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "A small neural network projection head with a nonlinear MLP maps representations to the latent space where the contrastive loss is applied.",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 310.43,
+      "y0": 347.53,
+      "x1": 541.44,
+      "y1": 380.4
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 310.43,
+       "y0": 347.53,
+       "x1": 541.44,
+       "y1": 356.48999999999995
+      },
+      {
+       "page": 2,
+       "x0": 320.39,
+       "y0": 359.81,
+       "x1": 541.44,
+       "y1": 368.45
+      },
+      {
+       "page": 2,
+       "x0": 320.39,
+       "y0": 371.76,
+       "x1": 352.34,
+       "y1": 380.4
+      }
+     ],
+     "quote": "A small neural network projection head g(•) that maps representations to the space where contrastive loss is applied.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "The framework optimizes the model using the normalized temperature-scaled cross entropy loss (NT-Xent).",
+   "evidence": [
+    {
+     "chunk_id": "b0030",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 307.44,
+      "y0": 672.71,
+      "x1": 542.69,
+      "y1": 717.22
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 427.91,
+       "y0": 672.71,
+       "x1": 541.44,
+       "y1": 681.35
+      },
+      {
+       "page": 2,
+       "x0": 307.44,
+       "y0": 684.66,
+       "x1": 542.69,
+       "y1": 693.3
+      },
+      {
+       "page": 2,
+       "x0": 307.44,
+       "y0": 696.44,
+       "x1": 541.44,
+       "y1": 705.2600000000001
+      },
+      {
+       "page": 2,
+       "x0": 307.44,
+       "y0": 708.58,
+       "x1": 462.83,
+       "y1": 717.22
+      }
+     ],
+     "quote": "This loss has been used in previous work (Sohn, 2016;Wu et al., 2018;Oord et al., 2018); for convenience, we term it NT-Xent (the normalized temperature-scaled cross entropy loss).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "The model is trained using large batch sizes and the LARS optimizer, along with global batch normalization across all distributed devices.",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 55.44,
+      "y0": 473.61,
+      "x1": 290.69,
+      "y1": 506.15999999999997
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 278.95,
+       "y0": 473.61,
+       "x1": 289.45,
+       "y1": 482.25
+      },
+      {
+       "page": 3,
+       "x0": 55.44,
+       "y0": 485.57,
+       "x1": 290.69,
+       "y1": 494.21
+      },
+      {
+       "page": 3,
+       "x0": 55.44,
+       "y0": 497.52,
+       "x1": 156.99,
+       "y1": 506.15999999999997
+      }
+     ],
+     "quote": "To stabilize the training, we use the LARS optimizer (You et al., 2017) for all batch sizes.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "The authors note that most individual components have appeared in previous work, and the improved performance stems from the specific combination of design choices.",
+   "evidence": [
+    {
+     "chunk_id": "b0145",
+     "page": 19,
+     "bbox": {
+      "page": 19,
+      "x0": 55.08,
+      "y0": 428.8,
+      "x1": 541.44,
+      "y1": 449.39
+     },
+     "boxes": [
+      {
+       "page": 19,
+       "x0": 55.08,
+       "y0": 428.8,
+       "x1": 541.44,
+       "y1": 437.44
+      },
+      {
+       "page": 19,
+       "x0": 55.44,
+       "y0": 440.75,
+       "x1": 354.0,
+       "y1": 449.39
+      }
+     ],
+     "quote": "As we have noted in the main text, most individual components of SimCLR have appeared in previous work, and the improved performance is a result of a combination of these design choices.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "ImageNet",
+   "evidence": [
+    {
+     "chunk_id": "b0073",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 55.44,
+      "y0": 609.89,
+      "x1": 289.44,
+      "y1": 630.48
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 215.27,
+       "y0": 609.89,
+       "x1": 289.44,
+       "y1": 618.53
+      },
+      {
+       "page": 7,
+       "x0": 55.44,
+       "y0": 621.84,
+       "x1": 234.18,
+       "y1": 630.48
+      },
+      {
+       "page": 8,
+       "x0": 65.1,
+       "y0": 675.32,
+       "x1": 71.08,
+       "y1": 680.5
+      },
+      {
+       "page": 8,
+       "x0": 71.58,
+       "y0": 677.18,
+       "x1": 289.44,
+       "y1": 684.9499999999999
+      },
+      {
+       "page": 8,
+       "x0": 285.76,
+       "y0": 687.14,
+       "x1": 289.42,
+       "y1": 694.91
+      }
+     ],
+     "quote": "1 The details of sampling and exact subsets can be found in https://www.tensorflow.org/datasets/catalog/imagenet2012_subset.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ImageNet",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "Food-101",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 55.44,
+      "y0": 571.09,
+      "x1": 542.69,
+      "y1": 627.55
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 101.37,
+       "y0": 571.09,
+       "x1": 541.44,
+       "y1": 579.73
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 583.05,
+       "x1": 542.6800000000001,
+       "y1": 591.6899999999999
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 595.0,
+       "x1": 541.44,
+       "y1": 603.64
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 606.96,
+       "x1": 542.69,
+       "y1": 615.6
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 618.91,
+       "x1": 440.29,
+       "y1": 627.55
+      }
+     ],
+     "quote": "We investigated transfer learning performance on the Food-101 dataset (Bossard et al., 2014), CIFAR-10 and CIFAR-100 (Krizhevsky & Hinton, 2009), Birdsnap (Berg et al., 2014), the SUN397 scene dataset (Xiao et al., 2010), Stanford Cars (Krause et al., 2013), FGVC Aircraft (Maji et al., 2013), the PASCAL VOC 2007 classification task (Everingham et al., 2010), the Describable Textures Dataset (DTD) (Cimpoi et al., 2014), Oxford-IIIT Pets (Parkhi et al., 2012), Caltech-101 (Fei-Fei et al., 2004), and Oxford 102 Flowers (Nilsback & Zisserman, 2008).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Food-101",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "CIFAR-10",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 55.44,
+      "y0": 571.09,
+      "x1": 542.69,
+      "y1": 627.55
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 101.37,
+       "y0": 571.09,
+       "x1": 541.44,
+       "y1": 579.73
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 583.05,
+       "x1": 542.6800000000001,
+       "y1": 591.6899999999999
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 595.0,
+       "x1": 541.44,
+       "y1": 603.64
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 606.96,
+       "x1": 542.69,
+       "y1": 615.6
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 618.91,
+       "x1": 440.29,
+       "y1": 627.55
+      }
+     ],
+     "quote": "We investigated transfer learning performance on the Food-101 dataset (Bossard et al., 2014), CIFAR-10 and CIFAR-100 (Krizhevsky & Hinton, 2009), Birdsnap (Berg et al., 2014), the SUN397 scene dataset (Xiao et al., 2010), Stanford Cars (Krause et al., 2013), FGVC Aircraft (Maji et al., 2013), the PASCAL VOC 2007 classification task (Everingham et al., 2010), the Describable Textures Dataset (DTD) (Cimpoi et al., 2014), Oxford-IIIT Pets (Parkhi et al., 2012), Caltech-101 (Fei-Fei et al., 2004), and Oxford 102 Flowers (Nilsback & Zisserman, 2008).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "CIFAR-10",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "CIFAR-100",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 55.44,
+      "y0": 571.09,
+      "x1": 542.69,
+      "y1": 627.55
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 101.37,
+       "y0": 571.09,
+       "x1": 541.44,
+       "y1": 579.73
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 583.05,
+       "x1": 542.6800000000001,
+       "y1": 591.6899999999999
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 595.0,
+       "x1": 541.44,
+       "y1": 603.64
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 606.96,
+       "x1": 542.69,
+       "y1": 615.6
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 618.91,
+       "x1": 440.29,
+       "y1": 627.55
+      }
+     ],
+     "quote": "We investigated transfer learning performance on the Food-101 dataset (Bossard et al., 2014), CIFAR-10 and CIFAR-100 (Krizhevsky & Hinton, 2009), Birdsnap (Berg et al., 2014), the SUN397 scene dataset (Xiao et al., 2010), Stanford Cars (Krause et al., 2013), FGVC Aircraft (Maji et al., 2013), the PASCAL VOC 2007 classification task (Everingham et al., 2010), the Describable Textures Dataset (DTD) (Cimpoi et al., 2014), Oxford-IIIT Pets (Parkhi et al., 2012), Caltech-101 (Fei-Fei et al., 2004), and Oxford 102 Flowers (Nilsback & Zisserman, 2008).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "CIFAR-100",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "Birdsnap",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 55.44,
+      "y0": 571.09,
+      "x1": 542.69,
+      "y1": 627.55
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 101.37,
+       "y0": 571.09,
+       "x1": 541.44,
+       "y1": 579.73
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 583.05,
+       "x1": 542.6800000000001,
+       "y1": 591.6899999999999
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 595.0,
+       "x1": 541.44,
+       "y1": 603.64
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 606.96,
+       "x1": 542.69,
+       "y1": 615.6
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 618.91,
+       "x1": 440.29,
+       "y1": 627.55
+      }
+     ],
+     "quote": "We investigated transfer learning performance on the Food-101 dataset (Bossard et al., 2014), CIFAR-10 and CIFAR-100 (Krizhevsky & Hinton, 2009), Birdsnap (Berg et al., 2014), the SUN397 scene dataset (Xiao et al., 2010), Stanford Cars (Krause et al., 2013), FGVC Aircraft (Maji et al., 2013), the PASCAL VOC 2007 classification task (Everingham et al., 2010), the Describable Textures Dataset (DTD) (Cimpoi et al., 2014), Oxford-IIIT Pets (Parkhi et al., 2012), Caltech-101 (Fei-Fei et al., 2004), and Oxford 102 Flowers (Nilsback & Zisserman, 2008).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Birdsnap",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "SUN397",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 55.44,
+      "y0": 571.09,
+      "x1": 542.69,
+      "y1": 627.55
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 101.37,
+       "y0": 571.09,
+       "x1": 541.44,
+       "y1": 579.73
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 583.05,
+       "x1": 542.6800000000001,
+       "y1": 591.6899999999999
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 595.0,
+       "x1": 541.44,
+       "y1": 603.64
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 606.96,
+       "x1": 542.69,
+       "y1": 615.6
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 618.91,
+       "x1": 440.29,
+       "y1": 627.55
+      }
+     ],
+     "quote": "We investigated transfer learning performance on the Food-101 dataset (Bossard et al., 2014), CIFAR-10 and CIFAR-100 (Krizhevsky & Hinton, 2009), Birdsnap (Berg et al., 2014), the SUN397 scene dataset (Xiao et al., 2010), Stanford Cars (Krause et al., 2013), FGVC Aircraft (Maji et al., 2013), the PASCAL VOC 2007 classification task (Everingham et al., 2010), the Describable Textures Dataset (DTD) (Cimpoi et al., 2014), Oxford-IIIT Pets (Parkhi et al., 2012), Caltech-101 (Fei-Fei et al., 2004), and Oxford 102 Flowers (Nilsback & Zisserman, 2008).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "SUN397",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.6",
+   "value": "Stanford Cars",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 55.44,
+      "y0": 571.09,
+      "x1": 542.69,
+      "y1": 627.55
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 101.37,
+       "y0": 571.09,
+       "x1": 541.44,
+       "y1": 579.73
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 583.05,
+       "x1": 542.6800000000001,
+       "y1": 591.6899999999999
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 595.0,
+       "x1": 541.44,
+       "y1": 603.64
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 606.96,
+       "x1": 542.69,
+       "y1": 615.6
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 618.91,
+       "x1": 440.29,
+       "y1": 627.55
+      }
+     ],
+     "quote": "We investigated transfer learning performance on the Food-101 dataset (Bossard et al., 2014), CIFAR-10 and CIFAR-100 (Krizhevsky & Hinton, 2009), Birdsnap (Berg et al., 2014), the SUN397 scene dataset (Xiao et al., 2010), Stanford Cars (Krause et al., 2013), FGVC Aircraft (Maji et al., 2013), the PASCAL VOC 2007 classification task (Everingham et al., 2010), the Describable Textures Dataset (DTD) (Cimpoi et al., 2014), Oxford-IIIT Pets (Parkhi et al., 2012), Caltech-101 (Fei-Fei et al., 2004), and Oxford 102 Flowers (Nilsback & Zisserman, 2008).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Stanford Cars",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.7",
+   "value": "FGVC Aircraft",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 55.44,
+      "y0": 571.09,
+      "x1": 542.69,
+      "y1": 627.55
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 101.37,
+       "y0": 571.09,
+       "x1": 541.44,
+       "y1": 579.73
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 583.05,
+       "x1": 542.6800000000001,
+       "y1": 591.6899999999999
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 595.0,
+       "x1": 541.44,
+       "y1": 603.64
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 606.96,
+       "x1": 542.69,
+       "y1": 615.6
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 618.91,
+       "x1": 440.29,
+       "y1": 627.55
+      }
+     ],
+     "quote": "We investigated transfer learning performance on the Food-101 dataset (Bossard et al., 2014), CIFAR-10 and CIFAR-100 (Krizhevsky & Hinton, 2009), Birdsnap (Berg et al., 2014), the SUN397 scene dataset (Xiao et al., 2010), Stanford Cars (Krause et al., 2013), FGVC Aircraft (Maji et al., 2013), the PASCAL VOC 2007 classification task (Everingham et al., 2010), the Describable Textures Dataset (DTD) (Cimpoi et al., 2014), Oxford-IIIT Pets (Parkhi et al., 2012), Caltech-101 (Fei-Fei et al., 2004), and Oxford 102 Flowers (Nilsback & Zisserman, 2008).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "FGVC Aircraft",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.8",
+   "value": "PASCAL VOC 2007",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 55.44,
+      "y0": 571.09,
+      "x1": 542.69,
+      "y1": 627.55
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 101.37,
+       "y0": 571.09,
+       "x1": 541.44,
+       "y1": 579.73
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 583.05,
+       "x1": 542.6800000000001,
+       "y1": 591.6899999999999
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 595.0,
+       "x1": 541.44,
+       "y1": 603.64
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 606.96,
+       "x1": 542.69,
+       "y1": 615.6
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 618.91,
+       "x1": 440.29,
+       "y1": 627.55
+      }
+     ],
+     "quote": "We investigated transfer learning performance on the Food-101 dataset (Bossard et al., 2014), CIFAR-10 and CIFAR-100 (Krizhevsky & Hinton, 2009), Birdsnap (Berg et al., 2014), the SUN397 scene dataset (Xiao et al., 2010), Stanford Cars (Krause et al., 2013), FGVC Aircraft (Maji et al., 2013), the PASCAL VOC 2007 classification task (Everingham et al., 2010), the Describable Textures Dataset (DTD) (Cimpoi et al., 2014), Oxford-IIIT Pets (Parkhi et al., 2012), Caltech-101 (Fei-Fei et al., 2004), and Oxford 102 Flowers (Nilsback & Zisserman, 2008).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "PASCAL VOC 2007",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.9",
+   "value": "Describable Textures Dataset (DTD)",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 55.44,
+      "y0": 571.09,
+      "x1": 542.69,
+      "y1": 627.55
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 101.37,
+       "y0": 571.09,
+       "x1": 541.44,
+       "y1": 579.73
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 583.05,
+       "x1": 542.6800000000001,
+       "y1": 591.6899999999999
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 595.0,
+       "x1": 541.44,
+       "y1": 603.64
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 606.96,
+       "x1": 542.69,
+       "y1": 615.6
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 618.91,
+       "x1": 440.29,
+       "y1": 627.55
+      }
+     ],
+     "quote": "We investigated transfer learning performance on the Food-101 dataset (Bossard et al., 2014), CIFAR-10 and CIFAR-100 (Krizhevsky & Hinton, 2009), Birdsnap (Berg et al., 2014), the SUN397 scene dataset (Xiao et al., 2010), Stanford Cars (Krause et al., 2013), FGVC Aircraft (Maji et al., 2013), the PASCAL VOC 2007 classification task (Everingham et al., 2010), the Describable Textures Dataset (DTD) (Cimpoi et al., 2014), Oxford-IIIT Pets (Parkhi et al., 2012), Caltech-101 (Fei-Fei et al., 2004), and Oxford 102 Flowers (Nilsback & Zisserman, 2008).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Describable Textures Dataset (DTD)",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.10",
+   "value": "Oxford-IIIT Pets",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 55.44,
+      "y0": 571.09,
+      "x1": 542.69,
+      "y1": 627.55
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 101.37,
+       "y0": 571.09,
+       "x1": 541.44,
+       "y1": 579.73
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 583.05,
+       "x1": 542.6800000000001,
+       "y1": 591.6899999999999
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 595.0,
+       "x1": 541.44,
+       "y1": 603.64
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 606.96,
+       "x1": 542.69,
+       "y1": 615.6
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 618.91,
+       "x1": 440.29,
+       "y1": 627.55
+      }
+     ],
+     "quote": "We investigated transfer learning performance on the Food-101 dataset (Bossard et al., 2014), CIFAR-10 and CIFAR-100 (Krizhevsky & Hinton, 2009), Birdsnap (Berg et al., 2014), the SUN397 scene dataset (Xiao et al., 2010), Stanford Cars (Krause et al., 2013), FGVC Aircraft (Maji et al., 2013), the PASCAL VOC 2007 classification task (Everingham et al., 2010), the Describable Textures Dataset (DTD) (Cimpoi et al., 2014), Oxford-IIIT Pets (Parkhi et al., 2012), Caltech-101 (Fei-Fei et al., 2004), and Oxford 102 Flowers (Nilsback & Zisserman, 2008).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Oxford-IIIT Pets",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.11",
+   "value": "Caltech-101",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 55.44,
+      "y0": 571.09,
+      "x1": 542.69,
+      "y1": 627.55
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 101.37,
+       "y0": 571.09,
+       "x1": 541.44,
+       "y1": 579.73
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 583.05,
+       "x1": 542.6800000000001,
+       "y1": 591.6899999999999
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 595.0,
+       "x1": 541.44,
+       "y1": 603.64
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 606.96,
+       "x1": 542.69,
+       "y1": 615.6
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 618.91,
+       "x1": 440.29,
+       "y1": 627.55
+      }
+     ],
+     "quote": "We investigated transfer learning performance on the Food-101 dataset (Bossard et al., 2014), CIFAR-10 and CIFAR-100 (Krizhevsky & Hinton, 2009), Birdsnap (Berg et al., 2014), the SUN397 scene dataset (Xiao et al., 2010), Stanford Cars (Krause et al., 2013), FGVC Aircraft (Maji et al., 2013), the PASCAL VOC 2007 classification task (Everingham et al., 2010), the Describable Textures Dataset (DTD) (Cimpoi et al., 2014), Oxford-IIIT Pets (Parkhi et al., 2012), Caltech-101 (Fei-Fei et al., 2004), and Oxford 102 Flowers (Nilsback & Zisserman, 2008).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Caltech-101",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.12",
+   "value": "Oxford 102 Flowers",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 55.44,
+      "y0": 571.09,
+      "x1": 542.69,
+      "y1": 627.55
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 101.37,
+       "y0": 571.09,
+       "x1": 541.44,
+       "y1": 579.73
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 583.05,
+       "x1": 542.6800000000001,
+       "y1": 591.6899999999999
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 595.0,
+       "x1": 541.44,
+       "y1": 603.64
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 606.96,
+       "x1": 542.69,
+       "y1": 615.6
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 618.91,
+       "x1": 440.29,
+       "y1": 627.55
+      }
+     ],
+     "quote": "We investigated transfer learning performance on the Food-101 dataset (Bossard et al., 2014), CIFAR-10 and CIFAR-100 (Krizhevsky & Hinton, 2009), Birdsnap (Berg et al., 2014), the SUN397 scene dataset (Xiao et al., 2010), Stanford Cars (Krause et al., 2013), FGVC Aircraft (Maji et al., 2013), the PASCAL VOC 2007 classification task (Everingham et al., 2010), the Describable Textures Dataset (DTD) (Cimpoi et al., 2014), Oxford-IIIT Pets (Parkhi et al., 2012), Caltech-101 (Fei-Fei et al., 2004), and Oxford 102 Flowers (Nilsback & Zisserman, 2008).",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Oxford 102 Flowers",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Supervised baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0126",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 315.04901123046875,
+      "y0": 319.46978759765625,
+      "x1": 533.523681640625,
+      "y1": 329.4857482910156
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 315.04901123046875,
+       "y0": 319.46978759765625,
+       "x1": 533.523681640625,
+       "y1": 329.4857482910156
+      }
+     ],
+     "quote": "Supervised baseline | ResNet-50 | 48.4 | 80.4",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Local Aggregation",
+   "evidence": [
+    {
+     "chunk_id": "b0125",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 312.62298583984375,
+      "y0": 95.46576690673828,
+      "x1": 535.5725708007812,
+      "y1": 105.48172760009766
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 312.62298583984375,
+       "y0": 95.46576690673828,
+       "x1": 535.5725708007812,
+       "y1": 105.48172760009766
+      }
+     ],
+     "quote": "Local Agg. | ResNet-50 |  | 24 | 60.2 | -",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "MoCo",
+   "evidence": [
+    {
+     "chunk_id": "b0125",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 312.62298583984375,
+      "y0": 105.42877960205078,
+      "x1": 535.5725708007812,
+      "y1": 115.44474029541016
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 312.62298583984375,
+       "y0": 105.42877960205078,
+       "x1": 535.5725708007812,
+       "y1": 115.44474029541016
+      }
+     ],
+     "quote": "MoCo | ResNet-50 |  | 24 | 60.6 | -",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "PIRL",
+   "evidence": [
+    {
+     "chunk_id": "b0125",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 312.62298583984375,
+      "y0": 115.39075469970703,
+      "x1": 535.5725708007812,
+      "y1": 125.4067153930664
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 312.62298583984375,
+       "y0": 115.39075469970703,
+       "x1": 535.5725708007812,
+       "y1": 125.4067153930664
+      }
+     ],
+     "quote": "PIRL | ResNet-50 |  | 24 | 63.6 | -",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "CPC v2",
+   "evidence": [
+    {
+     "chunk_id": "b0125",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 312.62298583984375,
+      "y0": 125.35376739501953,
+      "x1": 535.5725708007812,
+      "y1": 135.36972045898438
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 312.62298583984375,
+       "y0": 125.35376739501953,
+       "x1": 535.5725708007812,
+       "y1": 135.36972045898438
+      }
+     ],
+     "quote": "CPC v2 | ResNet-50 |  | 24 | 63.8 | 85.3",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "Rotation",
+   "evidence": [
+    {
+     "chunk_id": "b0125",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 312.62298583984375,
+      "y0": 160.2427978515625,
+      "x1": 535.5725708007812,
+      "y1": 170.25875854492188
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 312.62298583984375,
+       "y0": 160.2427978515625,
+       "x1": 535.5725708007812,
+       "y1": 170.25875854492188
+      }
+     ],
+     "quote": "Rotation | RevNet-50 (4×) |  | 86 | 55.4 | -",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "BigBiGAN",
+   "evidence": [
+    {
+     "chunk_id": "b0125",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 312.62298583984375,
+      "y0": 170.20477294921875,
+      "x1": 535.5725708007812,
+      "y1": 180.22073364257812
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 312.62298583984375,
+       "y0": 170.20477294921875,
+       "x1": 535.5725708007812,
+       "y1": 180.22073364257812
+      }
+     ],
+     "quote": "BigBiGAN | RevNet-50 (4×) |  | 86 | 61.3 | 81.9",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.7",
+   "value": "AMDIM",
+   "evidence": [
+    {
+     "chunk_id": "b0125",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 312.62298583984375,
+      "y0": 180.16778564453125,
+      "x1": 535.5725708007812,
+      "y1": 190.18374633789062
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 312.62298583984375,
+       "y0": 180.16778564453125,
+       "x1": 535.5725708007812,
+       "y1": 190.18374633789062
+      }
+     ],
+     "quote": "AMDIM | Custom-ResNet |  | 626 | 68.1 | -",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.8",
+   "value": "CMC",
+   "evidence": [
+    {
+     "chunk_id": "b0125",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 312.62298583984375,
+      "y0": 190.1297607421875,
+      "x1": 535.5725708007812,
+      "y1": 200.14572143554688
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 312.62298583984375,
+       "y0": 190.1297607421875,
+       "x1": 535.5725708007812,
+       "y1": 200.14572143554688
+      }
+     ],
+     "quote": "CMC | ResNet-50 (2×) |  | 188 | 68.4 | 88.2",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.9",
+   "value": "Pseudo-label",
+   "evidence": [
+    {
+     "chunk_id": "b0126",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 315.04901123046875,
+      "y0": 344.3957824707031,
+      "x1": 533.523681640625,
+      "y1": 354.4117431640625
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 315.04901123046875,
+       "y0": 344.3957824707031,
+       "x1": 533.523681640625,
+       "y1": 354.4117431640625
+      }
+     ],
+     "quote": "Pseudo-label | ResNet-50 | 51.6 | 82.4",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.10",
+   "value": "VAT+Entropy Min.",
+   "evidence": [
+    {
+     "chunk_id": "b0126",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 315.04901123046875,
+      "y0": 354.3577880859375,
+      "x1": 533.523681640625,
+      "y1": 364.3737487792969
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 315.04901123046875,
+       "y0": 354.3577880859375,
+       "x1": 533.523681640625,
+       "y1": 364.3737487792969
+      }
+     ],
+     "quote": "VAT+Entropy Min. | ResNet-50 | 47.0 | 83.4",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.11",
+   "value": "UDA (w. RandAug)",
+   "evidence": [
+    {
+     "chunk_id": "b0126",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 315.04901123046875,
+      "y0": 364.32080078125,
+      "x1": 533.523681640625,
+      "y1": 374.3367614746094
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 315.04901123046875,
+       "y0": 364.32080078125,
+       "x1": 533.523681640625,
+       "y1": 374.3367614746094
+      }
+     ],
+     "quote": "UDA (w. RandAug) | ResNet-50 | - | 88.5",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.12",
+   "value": "FixMatch (w. RandAug)",
+   "evidence": [
+    {
+     "chunk_id": "b0126",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 315.04901123046875,
+      "y0": 374.2838134765625,
+      "x1": 533.523681640625,
+      "y1": 384.2997741699219
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 315.04901123046875,
+       "y0": 374.2838134765625,
+       "x1": 533.523681640625,
+       "y1": 384.2997741699219
+      }
+     ],
+     "quote": "FixMatch (w. RandAug) | ResNet-50 | - | 89.1",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.13",
+   "value": "S4L (Rot+VAT+En. M.)",
+   "evidence": [
+    {
+     "chunk_id": "b0126",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 315.04901123046875,
+      "y0": 384.2458190917969,
+      "x1": 533.523681640625,
+      "y1": 394.26177978515625
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 315.04901123046875,
+       "y0": 384.2458190917969,
+       "x1": 533.523681640625,
+       "y1": 394.26177978515625
+      }
+     ],
+     "quote": "S4L (Rot+VAT+En. M.) | ResNet-50 (4×) | - | 91.2",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.14",
+   "value": "InstDisc",
+   "evidence": [
+    {
+     "chunk_id": "b0126",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 315.04901123046875,
+      "y0": 409.1717834472656,
+      "x1": 533.523681640625,
+      "y1": 419.187744140625
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 315.04901123046875,
+       "y0": 409.1717834472656,
+       "x1": 533.523681640625,
+       "y1": 419.187744140625
+      }
+     ],
+     "quote": "InstDisc | ResNet-50 | 39.2 | 77.4",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Top-1 accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0050",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 306.94,
+      "y0": 475.66,
+      "x1": 542.9300000000001,
+      "y1": 505.34
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 306.94,
+       "y0": 475.66,
+       "x1": 542.9300000000001,
+       "y1": 483.43
+      },
+      {
+       "page": 4,
+       "x0": 307.44,
+       "y0": 486.62,
+       "x1": 541.44,
+       "y1": 494.39
+      },
+      {
+       "page": 4,
+       "x0": 307.44,
+       "y0": 497.57,
+       "x1": 350.39,
+       "y1": 505.34
+      }
+     ],
+     "quote": "Figure 5. Linear evaluation (ImageNet top-1 accuracy) under individual or composition of data augmentations, applied only to one branch.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0125",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 312.62298583984375,
+      "y0": 70.53980255126953,
+      "x1": 535.5725708007812,
+      "y1": 80.5557632446289
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 312.62298583984375,
+       "y0": 70.53980255126953,
+       "x1": 535.5725708007812,
+       "y1": 80.5557632446289
+      }
+     ],
+     "quote": "Method | Architecture |  | Param (M) | Top 1 | Top 5",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Top 5 accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0125",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 312.62298583984375,
+      "y0": 70.53980255126953,
+      "x1": 535.5725708007812,
+      "y1": 80.5557632446289
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 312.62298583984375,
+       "y0": 70.53980255126953,
+       "x1": 535.5725708007812,
+       "y1": 80.5557632446289
+      }
+     ],
+     "quote": "Method | Architecture |  | Param (M) | Top 1 | Top 5",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "mean per-class accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 55.44,
+      "y0": 618.91,
+      "x1": 542.69,
+      "y1": 663.42
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 443.38,
+       "y0": 618.91,
+       "x1": 541.43,
+       "y1": 627.55
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 630.69,
+       "x1": 542.69,
+       "y1": 639.5100000000001
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 642.82,
+       "x1": 542.6800000000001,
+       "y1": 651.46
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 654.78,
+       "x1": 525.02,
+       "y1": 663.42
+      }
+     ],
+     "quote": "We follow the evaluation protocols in the papers introducing these datasets, i.e., we report top-1 accuracy for Food-101, CIFAR-10, CIFAR-100, Birdsnap, SUN397, Stanford Cars, and DTD; mean per-class accuracy for FGVC Aircraft, Oxford-IIIT Pets, Caltech-101, and Oxford 102 Flowers; and the 11-point mAP metric as defined in Everingham et al. (2010) for PASCAL VOC 2007.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "11-point mAP",
+   "evidence": [
+    {
+     "chunk_id": "b0140",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 55.44,
+      "y0": 618.91,
+      "x1": 542.69,
+      "y1": 663.42
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 443.38,
+       "y0": 618.91,
+       "x1": 541.43,
+       "y1": 627.55
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 630.69,
+       "x1": 542.69,
+       "y1": 639.5100000000001
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 642.82,
+       "x1": 542.6800000000001,
+       "y1": 651.46
+      },
+      {
+       "page": 16,
+       "x0": 55.44,
+       "y0": 654.78,
+       "x1": 525.02,
+       "y1": 663.42
+      }
+     ],
+     "quote": "We follow the evaluation protocols in the papers introducing these datasets, i.e., we report top-1 accuracy for Food-101, CIFAR-10, CIFAR-100, Birdsnap, SUN397, Stanford Cars, and DTD; mean per-class accuracy for FGVC Aircraft, Oxford-IIIT Pets, Caltech-101, and Oxford 102 Flowers; and the 11-point mAP metric as defined in Everingham et al. (2010) for PASCAL VOC 2007.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Batch size ranging from 256 to 8192",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 55.44,
+      "y0": 413.83,
+      "x1": 289.79,
+      "y1": 434.43
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 222.11,
+       "y0": 413.83,
+       "x1": 289.79,
+       "y1": 422.46999999999997
+      },
+      {
+       "page": 3,
+       "x0": 55.44,
+       "y0": 425.47,
+       "x1": 234.63,
+       "y1": 434.43
+      }
+     ],
+     "quote": "Instead, we vary the training batch size N from 256 to 8192.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "256 to 8192",
+   "value_norm": null,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Optimizer set to LARS",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 55.44,
+      "y0": 473.61,
+      "x1": 290.69,
+      "y1": 506.15999999999997
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 278.95,
+       "y0": 473.61,
+       "x1": 289.45,
+       "y1": 482.25
+      },
+      {
+       "page": 3,
+       "x0": 55.44,
+       "y0": 485.57,
+       "x1": 290.69,
+       "y1": 494.21
+      },
+      {
+       "page": 3,
+       "x0": 55.44,
+       "y0": 497.52,
+       "x1": 156.99,
+       "y1": 506.15999999999997
+      }
+     ],
+     "quote": "To stabilize the training, we use the LARS optimizer (You et al., 2017) for all batch sizes.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "LARS",
+   "value_norm": null,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Learning rate of 4.8",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 306.94,
+      "y0": 510.86,
+      "x1": 541.44,
+      "y1": 555.37
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 514.55,
+       "y0": 510.86,
+       "x1": 541.4399999999999,
+       "y1": 519.5
+      },
+      {
+       "page": 3,
+       "x0": 307.44,
+       "y0": 522.82,
+       "x1": 541.44,
+       "y1": 531.46
+      },
+      {
+       "page": 3,
+       "x0": 307.44,
+       "y0": 534.46,
+       "x1": 541.44,
+       "y1": 543.4200000000001
+      },
+      {
+       "page": 3,
+       "x0": 306.94,
+       "y0": 546.41,
+       "x1": 316.9,
+       "y1": 555.15
+      },
+      {
+       "page": 3,
+       "x0": 316.91,
+       "y0": 544.84,
+       "x1": 327.11,
+       "y1": 550.96
+      },
+      {
+       "page": 3,
+       "x0": 327.6,
+       "y0": 546.73,
+       "x1": 330.14000000000004,
+       "y1": 555.37
+      }
+     ],
+     "quote": "As the loss, we use NT-Xent, optimized using LARS with learning rate of 4.8 (= 0.3 × BatchSize/256) and weight decay of 10 -6 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "4.8",
+   "value_norm": 4.8,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Weight decay of 10^-6",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 306.94,
+      "y0": 510.86,
+      "x1": 541.44,
+      "y1": 555.37
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 514.55,
+       "y0": 510.86,
+       "x1": 541.4399999999999,
+       "y1": 519.5
+      },
+      {
+       "page": 3,
+       "x0": 307.44,
+       "y0": 522.82,
+       "x1": 541.44,
+       "y1": 531.46
+      },
+      {
+       "page": 3,
+       "x0": 307.44,
+       "y0": 534.46,
+       "x1": 541.44,
+       "y1": 543.4200000000001
+      },
+      {
+       "page": 3,
+       "x0": 306.94,
+       "y0": 546.41,
+       "x1": 316.9,
+       "y1": 555.15
+      },
+      {
+       "page": 3,
+       "x0": 316.91,
+       "y0": 544.84,
+       "x1": 327.11,
+       "y1": 550.96
+      },
+      {
+       "page": 3,
+       "x0": 327.6,
+       "y0": 546.73,
+       "x1": 330.14000000000004,
+       "y1": 555.37
+      }
+     ],
+     "quote": "As the loss, we use NT-Xent, optimized using LARS with learning rate of 4.8 (= 0.3 × BatchSize/256) and weight decay of 10 -6 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "10 -6",
+   "value_norm": 1e-6,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Batch size of 4096",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 335.44,
+      "y0": 545.06,
+      "x1": 520.0,
+      "y1": 555.37
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 335.44,
+       "y0": 546.73,
+       "x1": 516.51,
+       "y1": 555.37
+      },
+      {
+       "page": 3,
+       "x0": 516.51,
+       "y0": 545.06,
+       "x1": 520.0,
+       "y1": 551.1099999999999
+      }
+     ],
+     "quote": "We train at batch size 4096 for 100 epochs. 3",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "4096",
+   "value_norm": 4096.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "100 epochs",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 335.44,
+      "y0": 545.06,
+      "x1": 520.0,
+      "y1": 555.37
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 335.44,
+       "y0": 546.73,
+       "x1": 516.51,
+       "y1": 555.37
+      },
+      {
+       "page": 3,
+       "x0": 516.51,
+       "y0": 545.06,
+       "x1": 520.0,
+       "y1": 551.1099999999999
+      }
+     ],
+     "quote": "We train at batch size 4096 for 100 epochs. 3",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "100",
+   "value_norm": 100.0,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Linear warmup for 10 epochs",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 307.08,
+      "y0": 546.73,
+      "x1": 543.0999999999999,
+      "y1": 591.24
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 525.8,
+       "y0": 546.73,
+       "x1": 543.0999999999999,
+       "y1": 555.37
+      },
+      {
+       "page": 3,
+       "x0": 307.44,
+       "y0": 558.69,
+       "x1": 542.69,
+       "y1": 567.33
+      },
+      {
+       "page": 3,
+       "x0": 307.44,
+       "y0": 570.64,
+       "x1": 541.44,
+       "y1": 579.28
+      },
+      {
+       "page": 3,
+       "x0": 307.08,
+       "y0": 582.6,
+       "x1": 488.17999999999995,
+       "y1": 591.24
+      }
+     ],
+     "quote": "Furthermore, we use linear warmup for the first 10 epochs, and decay the learning rate with the cosine decay schedule without restarts (Loshchilov & Hutter, 2016).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "warmup",
+   "value_raw": "first 10 epochs",
+   "value_norm": null,
+   "scope": "pre-training"
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Batch size of 4096 for fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0092",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 55.44,
+      "y0": 262.78,
+      "x1": 541.44,
+      "y1": 283.77
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 55.44,
+       "y0": 262.78,
+       "x1": 541.44,
+       "y1": 271.80999999999995
+      },
+      {
+       "page": 15,
+       "x0": 55.44,
+       "y0": 274.81,
+       "x1": 449.82,
+       "y1": 283.77
+      }
+     ],
+     "quote": "Fine-tuning Procedure We fine-tune using the Nesterov momentum optimizer with a batch size of 4096, momentum of 0.9, and a learning rate of 0.8 (following LearningRate = 0.05 × BatchSize/256) without warmup.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "4096",
+   "value_norm": 4096.0,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "Nesterov momentum optimizer for fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0092",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 55.44,
+      "y0": 262.78,
+      "x1": 541.44,
+      "y1": 283.77
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 55.44,
+       "y0": 262.78,
+       "x1": 541.44,
+       "y1": 271.80999999999995
+      },
+      {
+       "page": 15,
+       "x0": 55.44,
+       "y0": 274.81,
+       "x1": 449.82,
+       "y1": 283.77
+      }
+     ],
+     "quote": "Fine-tuning Procedure We fine-tune using the Nesterov momentum optimizer with a batch size of 4096, momentum of 0.9, and a learning rate of 0.8 (following LearningRate = 0.05 × BatchSize/256) without warmup.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "Nesterov momentum",
+   "value_norm": null,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "Momentum of 0.9 for fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0092",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 55.44,
+      "y0": 262.78,
+      "x1": 541.44,
+      "y1": 283.77
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 55.44,
+       "y0": 262.78,
+       "x1": 541.44,
+       "y1": 271.80999999999995
+      },
+      {
+       "page": 15,
+       "x0": 55.44,
+       "y0": 274.81,
+       "x1": 449.82,
+       "y1": 283.77
+      }
+     ],
+     "quote": "Fine-tuning Procedure We fine-tune using the Nesterov momentum optimizer with a batch size of 4096, momentum of 0.9, and a learning rate of 0.8 (following LearningRate = 0.05 × BatchSize/256) without warmup.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "momentum",
+   "value_raw": "0.9",
+   "value_norm": 0.9,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.10",
+   "value": "Learning rate of 0.8 for fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0092",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 55.44,
+      "y0": 262.78,
+      "x1": 541.44,
+      "y1": 283.77
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 55.44,
+       "y0": 262.78,
+       "x1": 541.44,
+       "y1": 271.80999999999995
+      },
+      {
+       "page": 15,
+       "x0": 55.44,
+       "y0": 274.81,
+       "x1": 449.82,
+       "y1": 283.77
+      }
+     ],
+     "quote": "Fine-tuning Procedure We fine-tune using the Nesterov momentum optimizer with a batch size of 4096, momentum of 0.9, and a learning rate of 0.8 (following LearningRate = 0.05 × BatchSize/256) without warmup.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.8",
+   "value_norm": 0.8,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.11",
+   "value": "Fine-tuning epochs for 1 percent labeled data",
+   "evidence": [
+    {
+     "chunk_id": "b0092",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 55.44,
+      "y0": 299.04,
+      "x1": 541.44,
+      "y1": 319.63
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 162.44,
+       "y0": 299.04,
+       "x1": 541.44,
+       "y1": 307.68
+      },
+      {
+       "page": 15,
+       "x0": 55.44,
+       "y0": 310.99,
+       "x1": 85.6,
+       "y1": 319.63
+      }
+     ],
+     "quote": "For 1% labeled data we fine-tune for 60 epochs, and for 10% labeled data we fine-tune for 30 epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "60",
+   "value_norm": 60.0,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.12",
+   "value": "Fine-tuning epochs for 10 percent labeled data",
+   "evidence": [
+    {
+     "chunk_id": "b0092",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 55.44,
+      "y0": 299.04,
+      "x1": 541.44,
+      "y1": 319.63
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 162.44,
+       "y0": 299.04,
+       "x1": 541.44,
+       "y1": 307.68
+      },
+      {
+       "page": 15,
+       "x0": 55.44,
+       "y0": 310.99,
+       "x1": 85.6,
+       "y1": 319.63
+      }
+     ],
+     "quote": "For 1% labeled data we fine-tune for 60 epochs, and for 10% labeled data we fine-tune for 30 epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "30",
+   "value_norm": 30.0,
+   "scope": "fine-tuning"
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Cloud TPUs using 32 to 128 cores",
+   "evidence": [
+    {
+     "chunk_id": "b0041",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 55.13,
+      "y0": 497.52,
+      "x1": 289.44,
+      "y1": 535.98
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 161.25,
+       "y0": 497.52,
+       "x1": 289.44,
+       "y1": 506.15999999999997
+      },
+      {
+       "page": 3,
+       "x0": 55.13,
+       "y0": 509.48,
+       "x1": 283.69,
+       "y1": 518.12
+      },
+      {
+       "page": 3,
+       "x0": 283.69,
+       "y0": 507.81,
+       "x1": 287.18,
+       "y1": 513.86
+      },
+      {
+       "page": 3,
+       "x0": 55.44,
+       "y0": 527.02,
+       "x1": 107.38,
+       "y1": 535.98
+      }
+     ],
+     "quote": "We train our model with Cloud TPUs, using 32 to 128 cores depending on the batch size.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.1",
+   "value": "Training time of approximately 1.5 hours using 128 TPU v3 cores",
+   "evidence": [
+    {
+     "chunk_id": "b0042",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 55.44,
+      "y0": 664.73,
+      "x1": 289.59,
+      "y1": 684.3299999999999
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 68.09,
+       "y0": 664.73,
+       "x1": 71.08,
+       "y1": 669.91
+      },
+      {
+       "page": 3,
+       "x0": 71.58,
+       "y0": 666.31,
+       "x1": 289.59,
+       "y1": 674.3699999999999
+      },
+      {
+       "page": 3,
+       "x0": 55.44,
+       "y0": 676.56,
+       "x1": 243.7,
+       "y1": 684.3299999999999
+      }
+     ],
+     "quote": "2 With 128 TPU v3 cores, it takes ∼1.5 hours to train our ResNet-50 with a batch size of 4096 for 100 epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [],
+ "limitations": [],
+ "future_work": [],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/google-research/simclr",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 68.09,
+      "y0": 707.36,
+      "x1": 287.73,
+      "y1": 716.99
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 68.09,
+       "y0": 707.36,
+       "x1": 71.08,
+       "y1": 712.54
+      },
+      {
+       "page": 1,
+       "x0": 71.58,
+       "y0": 709.22,
+       "x1": 133.43,
+       "y1": 716.99
+      },
+      {
+       "page": 1,
+       "x0": 284.11,
+       "y0": 709.22,
+       "x1": 287.73,
+       "y1": 716.99
+      }
+     ],
+     "quote": "1 Code available at https://github.com/google-research/simclr.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "A linear classifier trained on self-supervised representations learned by SimCLR achieves 76.5% top-1 accuracy on ImageNet.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 75.11,
+      "y0": 426.34,
+      "x1": 271.17,
+      "y1": 494.76
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 168.42,
+       "y0": 426.34,
+       "x1": 269.52,
+       "y1": 434.97999999999996
+      },
+      {
+       "page": 1,
+       "x0": 75.36,
+       "y0": 438.29,
+       "x1": 271.17,
+       "y1": 446.93
+      },
+      {
+       "page": 1,
+       "x0": 75.36,
+       "y0": 450.25,
+       "x1": 269.52,
+       "y1": 458.89
+      },
+      {
+       "page": 1,
+       "x0": 75.11,
+       "y0": 462.2,
+       "x1": 271.17,
+       "y1": 470.84
+      },
+      {
+       "page": 1,
+       "x0": 75.36,
+       "y0": 474.16,
+       "x1": 269.52,
+       "y1": 482.8
+      },
+      {
+       "page": 1,
+       "x0": 75.36,
+       "y0": 486.12,
+       "x1": 121.36,
+       "y1": 494.76
+      }
+     ],
+     "quote": "A linear classifier trained on self-supervised representations learned by Sim-CLR achieves 76.5% top-1 accuracy, which is a 7% relative improvement over previous state-ofthe-art, matching the performance of a supervised ResNet-50.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "Fine-tuning on only 1% of the labels achieves 85.8% top-5 accuracy.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 75.36,
+      "y0": 486.12,
+      "x1": 271.18,
+      "y1": 518.67
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 125.11,
+       "y0": 486.12,
+       "x1": 269.52,
+       "y1": 494.76
+      },
+      {
+       "page": 1,
+       "x0": 75.36,
+       "y0": 498.07,
+       "x1": 271.18,
+       "y1": 506.71
+      },
+      {
+       "page": 1,
+       "x0": 75.36,
+       "y0": 510.03,
+       "x1": 242.07999999999998,
+       "y1": 518.67
+      },
+      {
+       "page": 1,
+       "x0": 244.57,
+       "y0": 508.36,
+       "x1": 248.06,
+       "y1": 514.41
+      }
+     ],
+     "quote": "When fine-tuned on only 1% of the labels, we achieve 85.8% top-5 accuracy, outperforming AlexNet with 100× fewer labels.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "SimCLR outperforms previous work while remaining simpler without specialized architectures or a memory bank.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 307.11,
+      "y0": 607.93,
+      "x1": 543.09,
+      "y1": 664.39
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 344.7,
+       "y0": 607.93,
+       "x1": 541.69,
+       "y1": 616.5699999999999
+      },
+      {
+       "page": 1,
+       "x0": 307.11,
+       "y0": 619.89,
+       "x1": 543.09,
+       "y1": 628.53
+      },
+      {
+       "page": 1,
+       "x0": 307.44,
+       "y0": 631.84,
+       "x1": 542.11,
+       "y1": 640.48
+      },
+      {
+       "page": 1,
+       "x0": 307.44,
+       "y0": 643.8,
+       "x1": 541.44,
+       "y1": 652.4399999999999
+      },
+      {
+       "page": 1,
+       "x0": 307.44,
+       "y0": 655.75,
+       "x1": 485.38,
+       "y1": 664.39
+      }
+     ],
+     "quote": "Not only does SimCLR outperform previous work (Figure 1), but it is also simpler, requiring neither specialized architectures (Bachman et al., 2019;Hénaff et al., 2019) nor a memory bank (Wu et al., 2018;Tian et al., 2019;He et al., 2019;Misra & van der Maaten, 2019).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

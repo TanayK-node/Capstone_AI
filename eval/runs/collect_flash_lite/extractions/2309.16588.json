@@ -1,0 +1,1256 @@
+{
+ "metadata": {
+  "title": null,
+  "authors": [
+   "Timothée Darcet",
+   "Maxime Oquab",
+   "Julien Mairal",
+   "Piotr Bojanowski"
+  ],
+  "venue": null,
+  "year": "2024",
+  "arxiv_id": "2309.16588v2[cs.CV]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Vision Transformers exhibit artifacts in feature maps characterized by high-norm tokens in low-informative background areas.",
+   "evidence": [
+    {
+     "chunk_id": "b0000",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 233.44,
+      "x1": 468.14,
+      "y1": 253.04000000000002
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 198.33,
+       "y0": 233.44,
+       "x1": 468.14,
+       "y1": 242.07999999999998
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 244.4,
+       "x1": 357.28999999999996,
+       "y1": 253.04000000000002
+      }
+     ],
+     "quote": "In this paper, we identify and characterize artifacts in feature maps of both supervised and self-supervised ViT networks.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "DINOv2 is surprisingly incompatible with unsupervised object discovery methods like LOST.",
+   "evidence": [
+    {
+     "chunk_id": "b0006",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 536.08,
+      "x1": 504.0,
+      "y1": 566.64
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 376.29,
+       "y0": 536.08,
+       "x1": 504.0,
+       "y1": 544.72
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 547.04,
+       "x1": 504.0,
+       "y1": 555.68
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 558.0,
+       "x1": 130.96,
+       "y1": 566.64
+      }
+     ],
+     "quote": "When used to extract features, it delivers disappointing performance, only on par with supervised alternative backbones in this scenario.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Proposing a simple solution based on providing additional tokens to the input sequence to fill the role of outlier tokens.",
+   "evidence": [
+    {
+     "chunk_id": "b0000",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 266.32,
+      "x1": 468.14,
+      "y1": 296.88
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 421.62,
+       "y0": 266.32,
+       "x1": 468.14,
+       "y1": 274.96
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 277.28,
+       "x1": 468.14,
+       "y1": 285.91999999999996
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 288.24,
+       "x1": 339.06,
+       "y1": 296.88
+      }
+     ],
+     "quote": "We propose a simple yet effective solution based on providing additional tokens to the input sequence of the Vision Transformer to fill that role.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "learning visual representations with Vision Transformers",
+   "evidence": [
+    {
+     "chunk_id": "b0000",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 222.48,
+      "x1": 468.14,
+      "y1": 242.07999999999998
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 222.48,
+       "x1": 468.14,
+       "y1": 231.12
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 233.44,
+       "x1": 193.95,
+       "y1": 242.07999999999998
+      }
+     ],
+     "quote": "Transformers have recently emerged as a powerful tool for learning visual representations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "Adding learnable register tokens to the vision transformer sequence after the patch embedding layer to act as memory slots.",
+   "evidence": [
+    {
+     "chunk_id": "b0028",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 531.22,
+      "x1": 504.0,
+      "y1": 550.8199999999999
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 531.22,
+       "x1": 504.0,
+       "y1": 539.86
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 542.18,
+       "x1": 261.71000000000004,
+       "y1": 550.8199999999999
+      }
+     ],
+     "quote": "We therefore propose a simple fix to this issue: we explicitly add new tokens to the sequence, that the model can learn to use as registers.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "Evaluating the approach across three distinct training paradigms: supervised (DeiT-III), text-supervised (OpenCLIP), and self-supervised (DINOv2).",
+   "evidence": [
+    {
+     "chunk_id": "b0031",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 283.69,
+      "x1": 504.0,
+      "y1": 303.28999999999996
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 140.1,
+       "y0": 283.69,
+       "x1": 504.0,
+       "y1": 292.33
+      },
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 294.65,
+       "x1": 314.34000000000003,
+       "y1": 303.28999999999996
+      }
+     ],
+     "quote": "We try it on three different state-of-the-art training methods for supervised, text-supervised, and unsupervised learning, shortly described below.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "Discarding the register tokens at the end of the transformer while retaining the patch and class tokens for final image representation.",
+   "evidence": [
+    {
+     "chunk_id": "b0028",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 553.14,
+      "x1": 504.01,
+      "y1": 572.73
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 294.89,
+       "y0": 553.14,
+       "x1": 504.01,
+       "y1": 561.78
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 564.09,
+       "x1": 482.92,
+       "y1": 572.73
+      }
+     ],
+     "quote": "At the end of the vision transformer, these tokens are discarded, and the [CLS] token and patch tokens are used as image representations, as usual.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "Identifying that attention map artifacts in vision transformers are actually high-norm outlier tokens that store global information.",
+   "evidence": [
+    {
+     "chunk_id": "b0015",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 533.57,
+      "x1": 277.36,
+      "y1": 542.5300000000001
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 533.57,
+       "x1": 277.36,
+       "y1": 542.5300000000001
+      }
+     ],
+     "quote": "Artifacts are high-norm outlier tokens.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "Adapting the memory transformer mechanism of extra tokens to vision transformers to resolve interpretability and local feature degradation issues.",
+   "evidence": [
+    {
+     "chunk_id": "b0028",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 586.01,
+      "x1": 504.01,
+      "y1": 605.61
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 161.86,
+       "y0": 586.01,
+       "x1": 504.01,
+       "y1": 594.65
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 596.97,
+       "x1": 462.61,
+       "y1": 605.61
+      }
+     ],
+     "quote": "Interestingly, we show here that this mechanism admits a natural justification for vision transformers, fixing an interpretability and performance issue that was present otherwise.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "Aircraft dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 108.0,
+      "y0": 147.95,
+      "x1": 504.01,
+      "y1": 167.54000000000002
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 132.61,
+       "y0": 147.95,
+       "x1": 504.01,
+       "y1": 156.58999999999997
+      },
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 158.9,
+       "x1": 208.43,
+       "y1": 167.54000000000002
+      }
+     ],
+     "quote": "4: Linear probing of models with and without registers on the Aircraft dataset, using various tokens as representation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "Aircraft",
+   "split": "",
+   "size": "",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.1",
+   "value": "ImageNet-22k random subset",
+   "evidence": [
+    {
+     "chunk_id": "b0064",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 108.0,
+      "y0": 568.96,
+      "x1": 504.01,
+      "y1": 588.55
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 138.52,
+       "y0": 568.96,
+       "x1": 504.01,
+       "y1": 577.6
+      },
+      {
+       "page": 15,
+       "x0": 108.0,
+       "y0": 579.91,
+       "x1": 391.77,
+       "y1": 588.55
+      }
+     ],
+     "quote": "We produce these plots by running the model on a random subset of ImageNet-22k, and averaging the attention maps for the corresponding tokens at the last layer.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0076",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 661.19,
+      "x1": 504.0,
+      "y1": 691.75
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 661.19,
+       "x1": 504.0,
+       "y1": 691.75
+      }
+     ],
+     "quote": "| ImageNet ADE20k NYUd |  |",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ImageNet-22k",
+   "split": "random subset",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "ADE20k",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 661.19,
+      "x1": 504.0,
+      "y1": 691.75
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 661.19,
+       "x1": 504.0,
+       "y1": 691.75
+      }
+     ],
+     "quote": "| ImageNet ADE20k NYUd |  |",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "ADE20k",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "NYUd",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 661.19,
+      "x1": 504.0,
+      "y1": 691.75
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 661.19,
+       "x1": 504.0,
+       "y1": 691.75
+      }
+     ],
+     "quote": "| ImageNet ADE20k NYUd |  |",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "NYUd",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "PASCAL Unsupervised Object Discovery VOC 2007",
+   "evidence": [
+    {
+     "chunk_id": "b0081",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 185.80599975585938,
+      "y0": 86.36334228515625,
+      "x1": 426.1935729980469,
+      "y1": 176.0299072265625
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 185.80599975585938,
+       "y0": 86.36334228515625,
+       "x1": 426.1935729980469,
+       "y1": 176.0299072265625
+      }
+     ],
+     "quote": "We run object discovery on PASCAL Unsupervised Object Discovery using LOST",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "VOC 2007",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "PASCAL Unsupervised Object Discovery VOC 2012",
+   "evidence": [
+    {
+     "chunk_id": "b0081",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 185.80599975585938,
+      "y0": 86.36334228515625,
+      "x1": 426.1935729980469,
+      "y1": 176.0299072265625
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 185.80599975585938,
+       "y0": 86.36334228515625,
+       "x1": 426.1935729980469,
+       "y1": 176.0299072265625
+      }
+     ],
+     "quote": "We run object discovery on PASCAL Unsupervised Object Discovery using LOST",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "VOC 2012",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.6",
+   "value": "PASCAL Unsupervised Object Discovery COCO 20k",
+   "evidence": [
+    {
+     "chunk_id": "b0081",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 185.80599975585938,
+      "y0": 86.36334228515625,
+      "x1": 426.1935729980469,
+      "y1": 176.0299072265625
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 185.80599975585938,
+       "y0": 86.36334228515625,
+       "x1": 426.1935729980469,
+       "y1": 176.0299072265625
+      }
+     ],
+     "quote": "We run object discovery on PASCAL Unsupervised Object Discovery using LOST",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm",
+   "name": "COCO 20k",
+   "split": "",
+   "size": "20k",
+   "public": "yes"
+  }
+ ],
+ "baselines": [],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Top-1 accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0063",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 164.32,
+      "y0": 268.81,
+      "x1": 447.68,
+      "y1": 315.33
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 303.73,
+       "y0": 268.81,
+       "x1": 447.68,
+       "y1": 277.45
+      },
+      {
+       "page": 15,
+       "x0": 164.32,
+       "y0": 279.77,
+       "x1": 291.08,
+       "y1": 288.40999999999997
+      },
+      {
+       "page": 15,
+       "x0": 322.83,
+       "y0": 279.77,
+       "x1": 359.62,
+       "y1": 288.40999999999997
+      },
+      {
+       "page": 15,
+       "x0": 398.99,
+       "y0": 279.45,
+       "x1": 439.38,
+       "y1": 288.40999999999997
+      },
+      {
+       "page": 15,
+       "x0": 181.12,
+       "y0": 295.73,
+       "x1": 186.1,
+       "y1": 304.37
+      },
+      {
+       "page": 15,
+       "x0": 229.24,
+       "y0": 295.73,
+       "x1": 277.39,
+       "y1": 304.37
+      },
+      {
+       "page": 15,
+       "x0": 332.51,
+       "y0": 295.73,
+       "x1": 349.94,
+       "y1": 304.37
+      },
+      {
+       "page": 15,
+       "x0": 410.47,
+       "y0": 295.73,
+       "x1": 427.90000000000003,
+       "y1": 304.37
+      },
+      {
+       "page": 15,
+       "x0": 181.12,
+       "y0": 306.69,
+       "x1": 186.1,
+       "y1": 315.33
+      },
+      {
+       "page": 15,
+       "x0": 214.85,
+       "y0": 306.69,
+       "x1": 291.77,
+       "y1": 315.33
+      },
+      {
+       "page": 15,
+       "x0": 332.51,
+       "y0": 306.69,
+       "x1": 349.94,
+       "y1": 315.33
+      },
+      {
+       "page": 15,
+       "x0": 410.47,
+       "y0": 306.69,
+       "x1": 427.90000000000003,
+       "y1": 315.33
+      }
+     ],
+     "quote": "position prediction reconstruction #registers patches considered top-1 acc L2 error ↓",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "L2 error",
+   "evidence": [
+    {
+     "chunk_id": "b0063",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 164.32,
+      "y0": 268.81,
+      "x1": 447.68,
+      "y1": 315.33
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 303.73,
+       "y0": 268.81,
+       "x1": 447.68,
+       "y1": 277.45
+      },
+      {
+       "page": 15,
+       "x0": 164.32,
+       "y0": 279.77,
+       "x1": 291.08,
+       "y1": 288.40999999999997
+      },
+      {
+       "page": 15,
+       "x0": 322.83,
+       "y0": 279.77,
+       "x1": 359.62,
+       "y1": 288.40999999999997
+      },
+      {
+       "page": 15,
+       "x0": 398.99,
+       "y0": 279.45,
+       "x1": 439.38,
+       "y1": 288.40999999999997
+      },
+      {
+       "page": 15,
+       "x0": 181.12,
+       "y0": 295.73,
+       "x1": 186.1,
+       "y1": 304.37
+      },
+      {
+       "page": 15,
+       "x0": 229.24,
+       "y0": 295.73,
+       "x1": 277.39,
+       "y1": 304.37
+      },
+      {
+       "page": 15,
+       "x0": 332.51,
+       "y0": 295.73,
+       "x1": 349.94,
+       "y1": 304.37
+      },
+      {
+       "page": 15,
+       "x0": 410.47,
+       "y0": 295.73,
+       "x1": 427.90000000000003,
+       "y1": 304.37
+      },
+      {
+       "page": 15,
+       "x0": 181.12,
+       "y0": 306.69,
+       "x1": 186.1,
+       "y1": 315.33
+      },
+      {
+       "page": 15,
+       "x0": 214.85,
+       "y0": 306.69,
+       "x1": 291.77,
+       "y1": 315.33
+      },
+      {
+       "page": 15,
+       "x0": 332.51,
+       "y0": 306.69,
+       "x1": 349.94,
+       "y1": 315.33
+      },
+      {
+       "page": 15,
+       "x0": 410.47,
+       "y0": 306.69,
+       "x1": 427.90000000000003,
+       "y1": 315.33
+      }
+     ],
+     "quote": "position prediction reconstruction #registers patches considered top-1 acc L2 error ↓",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "Top-1",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 661.19,
+      "x1": 504.0,
+      "y1": 691.75
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 661.19,
+       "x1": 504.0,
+       "y1": 691.75
+      }
+     ],
+     "quote": "| Top-1 | mIoU | rmse ↓",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "mIoU",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 661.19,
+      "x1": 504.0,
+      "y1": 691.75
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 661.19,
+       "x1": 504.0,
+       "y1": 691.75
+      }
+     ],
+     "quote": "| Top-1 | mIoU | rmse ↓",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.4",
+   "value": "rmse",
+   "evidence": [
+    {
+     "chunk_id": "b0076",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 108.0,
+      "y0": 661.19,
+      "x1": 504.0,
+      "y1": 691.75
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 108.0,
+       "y0": 661.19,
+       "x1": 504.0,
+       "y1": 691.75
+      }
+     ],
+     "quote": "| Top-1 | mIoU | rmse ↓",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [],
+ "compute": [],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "The random choice of token used in the evaluation introduces a significant source of variance.",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 108.0,
+      "y0": 690.5,
+      "x1": 504.0,
+      "y1": 710.1
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 108.0,
+       "y0": 690.5,
+       "x1": 504.0,
+       "y1": 699.14
+      },
+      {
+       "page": 16,
+       "x0": 108.0,
+       "y0": 701.46,
+       "x1": 135.96,
+       "y1": 710.1
+      }
+     ],
+     "quote": "The results presented in table 1 are obtained by taking a random patch token, either normal or outlier.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.9,
+   "source": "llm"
+  }
+ ],
+ "future_work": [],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/facebookresearch/deit",
+   "evidence": [
+    {
+     "chunk_id": "b0077",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 124.13899993896484,
+      "y0": 702.5089721679688,
+      "x1": 339.3327331542969,
+      "y1": 709.4310302734375
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 124.13899993896484,
+       "y0": 702.5089721679688,
+       "x1": 339.3327331542969,
+       "y1": 709.4310302734375
+      }
+     ],
+     "quote": "https://github.com/facebookresearch/deit",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0079",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 124.13899993896484,
+      "y0": 724.2579956054688,
+      "x1": 350.0924377441406,
+      "y1": 731.1800537109375
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 124.13899993896484,
+       "y0": 724.2579956054688,
+       "x1": 350.0924377441406,
+       "y1": 731.1800537109375
+      }
+     ],
+     "quote": "https://github.com/facebookresearch/dinov2",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/mlfoundations/open_clip",
+   "evidence": [
+    {
+     "chunk_id": "b0078",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 124.13899993896484,
+      "y0": 713.3829956054688,
+      "x1": 350.0924377441406,
+      "y1": 720.3050537109375
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 124.13899993896484,
+       "y0": 713.3829956054688,
+       "x1": 350.0924377441406,
+       "y1": 720.3050537109375
+      }
+     ],
+     "quote": "https://github.com/mlfoundations/open_clip",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "The proposed solution fixes the outlier problem entirely for both supervised and self-supervised models.",
+   "evidence": [
+    {
+     "chunk_id": "b0000",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 288.24,
+      "x1": 468.14,
+      "y1": 340.71
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 342.12,
+       "y0": 288.24,
+       "x1": 468.14,
+       "y1": 296.88
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 299.2,
+       "x1": 468.14,
+       "y1": 307.84
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 310.16,
+       "x1": 468.14,
+       "y1": 318.8
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 321.11,
+       "x1": 468.14,
+       "y1": 329.75
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 332.07,
+       "x1": 461.55,
+       "y1": 340.71
+      }
+     ],
+     "quote": "We show that this solution fixes that problem entirely for both supervised and self-supervised models, sets a new state of the art for self-supervised visual models on dense visual prediction tasks, enables object discovery methods with larger models, and most importantly leads to smoother feature maps and attention maps for downstream visual processing.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "Outlier tokens have roughly 10x higher norm at the output and correspond to around 2% of the total sequence.",
+   "evidence": [
+    {
+     "chunk_id": "b0007",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 640.69,
+      "x1": 504.0,
+      "y1": 660.29
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 145.43,
+       "y0": 640.69,
+       "x1": 504.0,
+       "y1": 649.33
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 651.65,
+       "x1": 318.90999999999997,
+       "y1": 660.29
+      }
+     ],
+     "quote": "We observe that they are tokens with roughly 10x higher norm at the output and correspond to a small fraction of the total sequence (around 2%).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "The proportion of tokens with norm larger than 150 is measured at 2.37% for DINOv2.",
+   "evidence": [
+    {
+     "chunk_id": "b0008",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 202.72,
+      "y0": 205.09,
+      "x1": 496.6,
+      "y1": 213.73000000000002
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 202.72,
+       "y0": 205.09,
+       "x1": 496.6,
+       "y1": 213.73000000000002
+      }
+     ],
+     "quote": "We measure the proportion of tokens with norm larger than 150 at 2.37%.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

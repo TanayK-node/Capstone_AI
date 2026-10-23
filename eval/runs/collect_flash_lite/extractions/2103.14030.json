@@ -1,0 +1,3472 @@
+{
+ "metadata": {
+  "title": "Swin Transformer: Hierarchical Vision Transformer using Shifted Windows",
+  "authors": [
+   "Ze Liu",
+   "Yutong Lin",
+   "Yue Cao",
+   "Han Hu",
+   "Yixuan Wei",
+   "Zheng Zhang",
+   "Stephen Lin",
+   "Baining Guo"
+  ],
+  "venue": null,
+  "year": "2021",
+  "arxiv_id": "2103.14030v2[cs.CV]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Large variations in the scale of visual entities and high pixel resolution in images pose challenges for adapting Transformers from language to vision.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 279.51,
+      "x1": 286.36,
+      "y1": 335.91999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 188.65,
+       "y0": 279.51,
+       "x1": 286.36,
+       "y1": 288.09999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 291.47,
+       "x1": 286.36,
+       "y1": 300.06
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 303.42,
+       "x1": 286.36,
+       "y1": 312.01
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 315.38,
+       "x1": 286.36,
+       "y1": 323.96999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 327.33,
+       "x1": 207.99,
+       "y1": 335.91999999999996
+      }
+     ],
+     "quote": "Challenges in adapting Transformer from language to vision arise from differences between the two domains, such as large variations in the scale of visual entities and the high resolution of pixels in images compared to words in text.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "We propose a hierarchical Transformer called Swin Transformer whose representation is computed with Shifted windows.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 327.33,
+      "x1": 286.37,
+      "y1": 359.99
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 216.84,
+       "y0": 327.33,
+       "x1": 286.37,
+       "y1": 335.91999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 339.29,
+       "x1": 286.36,
+       "y1": 347.88
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 351.05,
+       "x1": 260.95,
+       "y1": 359.99
+      }
+     ],
+     "quote": "To address these differences, we propose a hierarchical Transformer whose representation is computed with Shifted windows.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "image classification",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 422.97,
+      "x1": 286.37,
+      "y1": 503.28999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 162.96,
+       "y0": 422.97,
+       "x1": 286.37,
+       "y1": 431.56
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 434.93,
+       "x1": 286.36,
+       "y1": 443.52
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 446.88,
+       "x1": 286.36,
+       "y1": 455.46999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 458.84,
+       "x1": 286.36,
+       "y1": 467.42999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 470.79,
+       "x1": 286.36,
+       "y1": 479.38
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 482.75,
+       "x1": 286.36,
+       "y1": 491.34
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 494.7,
+       "x1": 68.09,
+       "y1": 503.28999999999996
+      }
+     ],
+     "quote": "These qualities of Swin Transformer make it compatible with a broad range of vision tasks, including image classification (87.3 top-1 accuracy on ImageNet-1K) and dense prediction tasks such as object detection (58.7 box AP and 51.1 mask AP on COCO testdev) and semantic segmentation (53.5 mIoU on ADE20K val).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "task.1",
+   "value": "object detection",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 422.97,
+      "x1": 286.37,
+      "y1": 503.28999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 162.96,
+       "y0": 422.97,
+       "x1": 286.37,
+       "y1": 431.56
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 434.93,
+       "x1": 286.36,
+       "y1": 443.52
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 446.88,
+       "x1": 286.36,
+       "y1": 455.46999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 458.84,
+       "x1": 286.36,
+       "y1": 467.42999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 470.79,
+       "x1": 286.36,
+       "y1": 479.38
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 482.75,
+       "x1": 286.36,
+       "y1": 491.34
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 494.7,
+       "x1": 68.09,
+       "y1": 503.28999999999996
+      }
+     ],
+     "quote": "These qualities of Swin Transformer make it compatible with a broad range of vision tasks, including image classification (87.3 top-1 accuracy on ImageNet-1K) and dense prediction tasks such as object detection (58.7 box AP and 51.1 mask AP on COCO testdev) and semantic segmentation (53.5 mIoU on ADE20K val).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "task.2",
+   "value": "semantic segmentation",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 422.97,
+      "x1": 286.37,
+      "y1": 503.28999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 162.96,
+       "y0": 422.97,
+       "x1": 286.37,
+       "y1": 431.56
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 434.93,
+       "x1": 286.36,
+       "y1": 443.52
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 446.88,
+       "x1": 286.36,
+       "y1": 455.46999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 458.84,
+       "x1": 286.36,
+       "y1": 467.42999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 470.79,
+       "x1": 286.36,
+       "y1": 479.38
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 482.75,
+       "x1": 286.36,
+       "y1": 491.34
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 494.7,
+       "x1": 68.09,
+       "y1": 503.28999999999996
+      }
+     ],
+     "quote": "These qualities of Swin Transformer make it compatible with a broad range of vision tasks, including image classification (87.3 top-1 accuracy on ImageNet-1K) and dense prediction tasks such as object detection (58.7 box AP and 51.1 mask AP on COCO testdev) and semantic segmentation (53.5 mIoU on ADE20K val).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "An input RGB image is split into non-overlapping patches by a patch splitting module, and a linear embedding layer projects these raw features to an arbitrary dimension C.",
+   "evidence": [
+    {
+     "chunk_id": "b0020",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 308.86,
+      "y0": 391.86,
+      "x1": 545.12,
+      "y1": 412.46
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 323.64,
+       "y0": 391.86,
+       "x1": 545.12,
+       "y1": 400.5
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 403.82,
+       "x1": 489.42,
+       "y1": 412.46
+      }
+     ],
+     "quote": "It first splits an input RGB image into non-overlapping patches by a patch splitting module, like ViT.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "Hierarchical representations are produced by reducing the number of tokens using patch merging layers as the network gets deeper through four stages.",
+   "evidence": [
+    {
+     "chunk_id": "b0022",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 308.86,
+      "y0": 549.1,
+      "x1": 545.12,
+      "y1": 581.65
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 320.82,
+       "y0": 549.1,
+       "x1": 545.12,
+       "y1": 557.74
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 561.05,
+       "x1": 545.11,
+       "y1": 569.6899999999999
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 573.01,
+       "x1": 356.15000000000003,
+       "y1": 581.65
+      }
+     ],
+     "quote": "To produce a hierarchical representation, the number of tokens is reduced by patch merging layers as the network gets deeper.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "Swin Transformer blocks replace standard multi-head self-attention with a module based on shifted windows, followed by a 2-layer MLP with GELU nonlinearity.",
+   "evidence": [
+    {
+     "chunk_id": "b0024",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 50.11,
+      "y0": 406.54,
+      "x1": 286.37,
+      "y1": 451.05
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 133.43,
+       "y0": 406.54,
+       "x1": 286.37,
+       "y1": 415.18
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 418.5,
+       "x1": 286.36,
+       "y1": 427.14
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 430.45,
+       "x1": 286.36,
+       "y1": 439.09
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 442.41,
+       "x1": 133.66,
+       "y1": 451.05
+      }
+     ],
+     "quote": "As illustrated in Figure 3(b), a Swin Transformer block consists of a shifted window based MSA module, followed by a 2-layer MLP with GELU nonlinearity in between.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "Self-attention is computed efficiently within local non-overlapping windows to achieve linear computational complexity relative to the image patch number.",
+   "evidence": [
+    {
+     "chunk_id": "b0027",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 50.11,
+      "y0": 644.35,
+      "x1": 286.36,
+      "y1": 677.29
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 644.35,
+       "x1": 286.36,
+       "y1": 653.38
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 656.69,
+       "x1": 286.36,
+       "y1": 665.33
+      },
+      {
+       "page": 4,
+       "x0": 50.11,
+       "y0": 668.65,
+       "x1": 102.43,
+       "y1": 677.29
+      }
+     ],
+     "quote": "For efficient modeling, we propose to compute self-attention within local windows.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.4",
+   "value": "A shifted window partitioning approach alternates between regular and shifted window configurations in consecutive blocks to introduce cross-window connections.",
+   "evidence": [
+    {
+     "chunk_id": "b0032",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 412.91,
+      "x1": 545.12,
+      "y1": 481.32
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 510.29,
+       "y0": 412.91,
+       "x1": 545.12,
+       "y1": 421.55
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 424.86,
+       "x1": 545.11,
+       "y1": 433.5
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 436.82,
+       "x1": 545.11,
+       "y1": 445.46
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 448.77,
+       "x1": 545.11,
+       "y1": 457.40999999999997
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 460.73,
+       "x1": 545.11,
+       "y1": 469.37
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 472.68,
+       "x1": 389.3,
+       "y1": 481.32
+      }
+     ],
+     "quote": "To introduce cross-window connections while maintaining the efficient computation of non-overlapping windows, we propose a shifted window partitioning approach which alternates between two partitioning configurations in consecutive Swin Transformer blocks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.5",
+   "value": "A batch computation approach using cyclic-shifting toward the top-left direction handles shifted windows efficiently while maintaining the number of batched windows.",
+   "evidence": [
+    {
+     "chunk_id": "b0036",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 50.11,
+      "y0": 410.65,
+      "x1": 286.36,
+      "y1": 443.37
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 410.65,
+       "x1": 286.36,
+       "y1": 419.46999999999997
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 422.6,
+       "x1": 286.36,
+       "y1": 431.42
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 434.73,
+       "x1": 131.54000000000002,
+       "y1": 443.37
+      }
+     ],
+     "quote": "Here, we propose a more efficient batch computation approach by cyclic-shifting toward the top-left direction, as illustrated in Figure 4.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "Computing self-attention within local windows reduces computational complexity from quadratic to linear compared to global self-attention.",
+   "evidence": [
+    {
+     "chunk_id": "b0030",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 338.58,
+      "x1": 545.12,
+      "y1": 371.13
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 518.0,
+       "y0": 338.58,
+       "x1": 545.12,
+       "y1": 347.21999999999997
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 350.53,
+       "x1": 545.11,
+       "y1": 359.16999999999996
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 362.17,
+       "x1": 545.11,
+       "y1": 371.13
+      }
+     ],
+     "quote": "Global self-attention computation is generally unaffordable for a large hw, while the window based self-attention is scalable.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "The shifted window partitioning approach introduces cross-window connections while maintaining the efficiency of non-overlapping windows.",
+   "evidence": [
+    {
+     "chunk_id": "b0032",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 308.86,
+      "y0": 412.91,
+      "x1": 545.12,
+      "y1": 481.32
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 510.29,
+       "y0": 412.91,
+       "x1": 545.12,
+       "y1": 421.55
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 424.86,
+       "x1": 545.11,
+       "y1": 433.5
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 436.82,
+       "x1": 545.11,
+       "y1": 445.46
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 448.77,
+       "x1": 545.11,
+       "y1": 457.40999999999997
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 460.73,
+       "x1": 545.11,
+       "y1": 469.37
+      },
+      {
+       "page": 4,
+       "x0": 308.86,
+       "y0": 472.68,
+       "x1": 389.3,
+       "y1": 481.32
+      }
+     ],
+     "quote": "To introduce cross-window connections while maintaining the efficient computation of non-overlapping windows, we propose a shifted window partitioning approach which alternates between two partitioning configurations in consecutive Swin Transformer blocks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "ImageNet-1K image classification dataset containing 1.28M training and 50K validation images from 1,000 classes",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 308.86,
+      "y0": 589.16,
+      "x1": 545.11,
+      "y1": 634.05
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 589.16,
+       "x1": 545.11,
+       "y1": 598.1899999999999
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 601.5,
+       "x1": 545.11,
+       "y1": 610.14
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 613.46,
+       "x1": 545.11,
+       "y1": 622.1
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 625.41,
+       "x1": 388.26,
+       "y1": 634.05
+      }
+     ],
+     "quote": "For image classification, we benchmark the proposed Swin Transformer on ImageNet-1K [19], which contains 1.28M training images and 50K validation images from 1,000 classes.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ImageNet-1K",
+   "split": "",
+   "size": "1.28M training images and 50K validation images",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "COCO object detection dataset with 2017 version containing 118K training, 5K validation and 20K test-dev images",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 486.41,
+      "x1": 545.11,
+      "y1": 519.35
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 486.41,
+       "x1": 545.11,
+       "y1": 495.44
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 498.76,
+       "x1": 545.11,
+       "y1": 507.4
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 510.71,
+       "x1": 529.08,
+       "y1": 519.35
+      }
+     ],
+     "quote": "Settings Object detection and instance segmentation experiments are conducted on COCO 2017, which contains 118K training, 5K validation and 20K test-dev images.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "COCO 2017",
+   "split": "training, validation, test-dev",
+   "size": "118K training, 5K validation and 20K test-dev images",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "ADE20K semantic segmentation dataset covering 150 semantic categories with 25K total images",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 308.86,
+      "y0": 692.17,
+      "x1": 545.11,
+      "y1": 713.15
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 692.17,
+       "x1": 545.11,
+       "y1": 701.1999999999999
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 704.51,
+       "x1": 545.11,
+       "y1": 713.15
+      },
+      {
+       "page": 8,
+       "x0": 72.31,
+       "y0": 174.77,
+       "x1": 286.36,
+       "y1": 182.70000000000002
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 185.89,
+       "x1": 286.36,
+       "y1": 193.66
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 196.85,
+       "x1": 138.42000000000002,
+       "y1": 204.62
+      }
+     ],
+     "quote": "ADE20K [83] is a widely-used semantic segmentation dataset, covering a broad range of 150 semantic 4. Ablation study on the shifted windows approach and different position embedding methods on three benchmarks, using the Swin-T architecture.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ADE20K",
+   "split": "training, validation, testing",
+   "size": "25K images in total",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "Larger ImageNet-22K dataset containing 14.2 million images and 22K classes",
+   "evidence": [
+    {
+     "chunk_id": "b0103",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.03700256347656,
+      "y0": 173.93145751953125,
+      "x1": 286.3648681640625,
+      "y1": 206.748046875
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 156.30291748046875,
+       "y0": 173.93145751953125,
+       "x1": 172.35267639160156,
+       "y1": 182.8380126953125
+      },
+      {
+       "page": 6,
+       "x0": 180.98028564453125,
+       "y0": 173.93145751953125,
+       "x1": 215.2815399169922,
+       "y1": 182.8380126953125
+      },
+      {
+       "page": 6,
+       "x0": 223.90914916992188,
+       "y0": 173.93145751953125,
+       "x1": 233.87173461914062,
+       "y1": 182.8380126953125
+      },
+      {
+       "page": 6,
+       "x0": 242.4993438720703,
+       "y0": 173.93145751953125,
+       "x1": 254.67364501953125,
+       "y1": 182.8380126953125
+      },
+      {
+       "page": 6,
+       "x0": 263.31121826171875,
+       "y0": 173.93145751953125,
+       "x1": 286.3646545410156,
+       "y1": 182.8380126953125
+      },
+      {
+       "page": 6,
+       "x0": 70.03700256347656,
+       "y0": 185.886474609375,
+       "x1": 286.3648681640625,
+       "y1": 194.79302978515625
+      },
+      {
+       "page": 6,
+       "x0": 70.03700256347656,
+       "y0": 197.84149169921875,
+       "x1": 100.86127471923828,
+       "y1": 206.748046875
+      }
+     ],
+     "quote": "We also pre-train on the larger ImageNet-22K dataset, which contains 14.2 million images and 22K classes.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ImageNet-22K",
+   "split": "",
+   "size": "14.2 million images and 22K classes",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "RegNet and EfficientNet state-of-the-art ConvNets",
+   "evidence": [
+    {
+     "chunk_id": "b0050",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11,
+      "y0": 453.08,
+      "x1": 286.37,
+      "y1": 485.63
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 62.07,
+       "y0": 453.08,
+       "x1": 262.3,
+       "y1": 461.71999999999997
+      },
+      {
+       "page": 6,
+       "x0": 267.15,
+       "y0": 453.08,
+       "x1": 286.37,
+       "y1": 461.71999999999997
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 465.03,
+       "x1": 286.36,
+       "y1": 473.66999999999996
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 476.99,
+       "x1": 260.06,
+       "y1": 485.63
+      }
+     ],
+     "quote": "Compared with the state-of-the-art ConvNets, i.e. Reg-Net [48] and EfficientNet [58], the Swin Transformer achieves a slightly better speed-accuracy trade-off.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Cascade Mask R-CNN, ATSS, RepPoints v2, and Sparse RCNN object detection frameworks",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 534.62,
+      "x1": 545.12,
+      "y1": 591.08
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 515.32,
+       "y0": 534.62,
+       "x1": 545.12,
+       "y1": 543.26
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 546.58,
+       "x1": 545.11,
+       "y1": 555.22
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 558.53,
+       "x1": 545.11,
+       "y1": 567.17
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 570.49,
+       "x1": 545.11,
+       "y1": 579.13
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 582.44,
+       "x1": 346.74,
+       "y1": 591.08
+      }
+     ],
+     "quote": "For the ablation study, we consider four typical object detection frameworks: Cascade Mask R-CNN [29,6], ATSS [79], RepPoints v2 [12], and Sparse RCNN [56] in mmdetection [10].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "Improved HTC (denoted as HTC++)",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 642.22,
+      "x1": 545.11,
+      "y1": 698.68
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 444.22,
+       "y0": 642.22,
+       "x1": 545.11,
+       "y1": 650.86
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 654.18,
+       "x1": 545.11,
+       "y1": 662.8199999999999
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 666.13,
+       "x1": 545.11,
+       "y1": 674.77
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 678.09,
+       "x1": 545.11,
+       "y1": 686.73
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 690.04,
+       "x1": 446.1,
+       "y1": 698.68
+      }
+     ],
+     "quote": "For system-level comparison, we adopt an improved HTC [9] (denoted as HTC++) with instaboost [22], stronger multi-scale training [7], 6x schedule (72 epochs), soft-NMS [5], and ImageNet-22K pre-trained model as initialization.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "ResNe(X)t and DeiT",
+   "evidence": [
+    {
+     "chunk_id": "b0054",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 320.82,
+      "y0": 704.51,
+      "x1": 545.12,
+      "y1": 713.15
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 320.82,
+       "y0": 704.51,
+       "x1": 545.12,
+       "y1": 713.15
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 521.24,
+       "x1": 90.56,
+       "y1": 529.88
+      },
+      {
+       "page": 7,
+       "x0": 93.77,
+       "y0": 521.24,
+       "x1": 286.37,
+       "y1": 529.88
+      },
+      {
+       "page": 7,
+       "x0": 50.11,
+       "y0": 533.19,
+       "x1": 64.5,
+       "y1": 541.83
+      },
+      {
+       "page": 7,
+       "x0": 67.41,
+       "y0": 533.19,
+       "x1": 89.64,
+       "y1": 541.83
+      }
+     ],
+     "quote": "We compare our Swin Transformer to standard Con- vNets, i.e. ResNe(X)t, and previous Transformer networks, e.g. DeiT.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "ResNeXt101-64x4d",
+   "evidence": [
+    {
+     "chunk_id": "b0054",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 308.86,
+      "y0": 339.46,
+      "x1": 545.12,
+      "y1": 383.96999999999997
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 334.53,
+       "y0": 339.46,
+       "x1": 545.12,
+       "y1": 348.09999999999997
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 351.42,
+       "x1": 545.11,
+       "y1": 360.06
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 363.37,
+       "x1": 545.11,
+       "y1": 372.01
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 375.33,
+       "x1": 545.11,
+       "y1": 383.96999999999997
+      }
+     ],
+     "quote": "Swin Transformer achieves a high detection accuracy of 51.9 box AP and 45.0 mask AP, which are significant gains of +3.6 box AP and +3.3 mask AP over ResNeXt101-64x4d, which has similar model size, FLOPs and latency.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "DeiT-S",
+   "evidence": [
+    {
+     "chunk_id": "b0056",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 308.86,
+      "y0": 521.21,
+      "x1": 545.12,
+      "y1": 565.71
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 347.84,
+       "y0": 521.21,
+       "x1": 545.12,
+       "y1": 529.85
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 533.16,
+       "x1": 545.11,
+       "y1": 541.8
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 545.12,
+       "x1": 545.11,
+       "y1": 553.76
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 557.07,
+       "x1": 340.69,
+       "y1": 565.71
+      },
+      {
+       "page": 7,
+       "x0": 343.04,
+       "y0": 557.07,
+       "x1": 365.47,
+       "y1": 565.71
+      }
+     ],
+     "quote": "The results of Swin-T are +2.5 box AP and +2.3 mask AP higher than DeiT-S with similar model size (86M vs. 80M) and significantly higher inference speed (15.3 FPS vs. 10.4 FPS).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "ResNet-101 and ResNeSt-101",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 383.54,
+      "x1": 286.36,
+      "y1": 404.13
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 383.54,
+       "x1": 286.36,
+       "y1": 392.18
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 395.49,
+       "x1": 202.52999999999997,
+       "y1": 404.13
+      }
+     ],
+     "quote": "It is also +4.4 mIoU higher than ResNet-101, and +2.4 mIoU higher than ResNeSt-101 [78].",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.7",
+   "value": "SETR",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 395.49,
+      "x1": 286.37,
+      "y1": 440.0
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 208.91,
+       "y0": 395.49,
+       "x1": 286.37,
+       "y1": 404.13
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 407.45,
+       "x1": 286.36,
+       "y1": 416.09
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 419.4,
+       "x1": 286.36,
+       "y1": 428.03999999999996
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 431.36,
+       "x1": 281.24,
+       "y1": 440.0
+      }
+     ],
+     "quote": "Our Swin-L model with ImageNet-22K pre-training achieves 53.5 mIoU on the val set, surpassing the previous best model by +3.2 mIoU (50.3 mIoU by SETR [81] which has a larger model size).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.8",
+   "value": "Performer",
+   "evidence": [
+    {
+     "chunk_id": "b0070",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 308.86,
+      "y0": 590.5,
+      "x1": 545.12,
+      "y1": 658.91
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 320.82,
+       "y0": 590.5,
+       "x1": 545.12,
+       "y1": 599.14
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 602.27,
+       "x1": 545.11,
+       "y1": 611.09
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 614.23,
+       "x1": 545.11,
+       "y1": 623.0500000000001
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 626.36,
+       "x1": 545.11,
+       "y1": 635.0
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 638.32,
+       "x1": 545.11,
+       "y1": 646.96
+      },
+      {
+       "page": 8,
+       "x0": 308.86,
+       "y0": 650.27,
+       "x1": 531.61,
+       "y1": 658.91
+      }
+     ],
+     "quote": "Compared to Performer [14], which is one of the fastest Transformer architectures (see [60]), the proposed shifted window based self-attention computation and the overall Swin Transformer architectures are slightly faster (see Table 5), while achieving +2.3% top-1 accuracy compared to Performer on ImageNet-1K using Swin-T (see Table 6).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Top-1 accuracy on a single crop for image classification",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 308.86,
+      "y0": 625.41,
+      "x1": 545.12,
+      "y1": 646.01
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 395.07,
+       "y0": 625.41,
+       "x1": 545.12,
+       "y1": 634.05
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 637.37,
+       "x1": 353.68,
+       "y1": 646.01
+      }
+     ],
+     "quote": "The top-1 accuracy on a single crop is reported.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Box AP and mask AP for object detection and instance segmentation",
+   "evidence": [
+    {
+     "chunk_id": "b0054",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 308.86,
+      "y0": 339.46,
+      "x1": 545.12,
+      "y1": 383.96999999999997
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 334.53,
+       "y0": 339.46,
+       "x1": 545.12,
+       "y1": 348.09999999999997
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 351.42,
+       "x1": 545.11,
+       "y1": 360.06
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 363.37,
+       "x1": 545.11,
+       "y1": 372.01
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 375.33,
+       "x1": 545.11,
+       "y1": 383.96999999999997
+      }
+     ],
+     "quote": "Swin Transformer achieves a high detection accuracy of 51.9 box AP and 45.0 mask AP, which are significant gains of +3.6 box AP and +3.3 mask AP over ResNeXt101-64x4d, which has similar model size, FLOPs and latency.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "mIoU for semantic segmentation",
+   "evidence": [
+    {
+     "chunk_id": "b0061",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 347.67,
+      "x1": 286.37,
+      "y1": 380.21999999999997
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 264.78,
+       "y0": 347.67,
+       "x1": 286.36999999999995,
+       "y1": 356.31
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 359.63,
+       "x1": 286.36,
+       "y1": 368.27
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 371.58,
+       "x1": 109.97,
+       "y1": 380.21999999999997
+      },
+      {
+       "page": 8,
+       "x0": 112.82,
+       "y0": 371.58,
+       "x1": 286.37,
+       "y1": 380.21999999999997
+      }
+     ],
+     "quote": "From these results, it can be seen that Swin-S is +5.3 mIoU higher (49.3 vs. 44.0) than DeiT-S with similar computation cost.",
+     "grounding_status": "unsupported",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Optimizer for regular ImageNet-1K training",
+   "evidence": [
+    {
+     "chunk_id": "b0050",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 328.79,
+      "y0": 668.65,
+      "x1": 545.12,
+      "y1": 701.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 387.01,
+       "y0": 668.65,
+       "x1": 545.12,
+       "y1": 677.29
+      },
+      {
+       "page": 5,
+       "x0": 328.79,
+       "y0": 680.6,
+       "x1": 545.12,
+       "y1": 689.24
+      },
+      {
+       "page": 5,
+       "x0": 328.79,
+       "y0": 692.56,
+       "x1": 507.77,
+       "y1": 701.1999999999999
+      }
+     ],
+     "quote": "We employ an AdamW [37] optimizer for 300 epochs using a cosine decay learning rate scheduler and 20 epochs of linear warm-up.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "AdamW",
+   "value_norm": null,
+   "scope": "Regular ImageNet-1K training"
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Number of epochs for regular ImageNet-1K training",
+   "evidence": [
+    {
+     "chunk_id": "b0050",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 328.79,
+      "y0": 668.65,
+      "x1": 545.12,
+      "y1": 701.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 387.01,
+       "y0": 668.65,
+       "x1": 545.12,
+       "y1": 677.29
+      },
+      {
+       "page": 5,
+       "x0": 328.79,
+       "y0": 680.6,
+       "x1": 545.12,
+       "y1": 689.24
+      },
+      {
+       "page": 5,
+       "x0": 328.79,
+       "y0": 692.56,
+       "x1": 507.77,
+       "y1": 701.1999999999999
+      }
+     ],
+     "quote": "We employ an AdamW [37] optimizer for 300 epochs using a cosine decay learning rate scheduler and 20 epochs of linear warm-up.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "300",
+   "value_norm": 300.0,
+   "scope": "Regular ImageNet-1K training"
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Warm-up epochs for regular ImageNet-1K training",
+   "evidence": [
+    {
+     "chunk_id": "b0050",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 328.79,
+      "y0": 668.65,
+      "x1": 545.12,
+      "y1": 701.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 387.01,
+       "y0": 668.65,
+       "x1": 545.12,
+       "y1": 677.29
+      },
+      {
+       "page": 5,
+       "x0": 328.79,
+       "y0": 680.6,
+       "x1": 545.12,
+       "y1": 689.24
+      },
+      {
+       "page": 5,
+       "x0": 328.79,
+       "y0": 692.56,
+       "x1": 507.77,
+       "y1": 701.1999999999999
+      }
+     ],
+     "quote": "We employ an AdamW [37] optimizer for 300 epochs using a cosine decay learning rate scheduler and 20 epochs of linear warm-up.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "warmup",
+   "value_raw": "20",
+   "value_norm": 20.0,
+   "scope": "Regular ImageNet-1K training"
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Batch size for regular ImageNet-1K training",
+   "evidence": [
+    {
+     "chunk_id": "b0050",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 328.79,
+      "y0": 692.56,
+      "x1": 545.12,
+      "y1": 713.15
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 513.11,
+       "y0": 692.56,
+       "x1": 545.12,
+       "y1": 701.1999999999999
+      },
+      {
+       "page": 5,
+       "x0": 328.79,
+       "y0": 704.51,
+       "x1": 545.12,
+       "y1": 713.15
+      },
+      {
+       "page": 6,
+       "x0": 70.04,
+       "y0": 75.48,
+       "x1": 197.98000000000002,
+       "y1": 84.12
+      }
+     ],
+     "quote": "A batch size of 1024, an initial learning rate of 0.001, and a weight decay of 0.05 are used.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "1024",
+   "value_norm": 1024.0,
+   "scope": "Regular ImageNet-1K training"
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Initial learning rate for regular ImageNet-1K training",
+   "evidence": [
+    {
+     "chunk_id": "b0050",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 328.79,
+      "y0": 692.56,
+      "x1": 545.12,
+      "y1": 713.15
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 513.11,
+       "y0": 692.56,
+       "x1": 545.12,
+       "y1": 701.1999999999999
+      },
+      {
+       "page": 5,
+       "x0": 328.79,
+       "y0": 704.51,
+       "x1": 545.12,
+       "y1": 713.15
+      },
+      {
+       "page": 6,
+       "x0": 70.04,
+       "y0": 75.48,
+       "x1": 197.98000000000002,
+       "y1": 84.12
+      }
+     ],
+     "quote": "A batch size of 1024, an initial learning rate of 0.001, and a weight decay of 0.05 are used.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.001",
+   "value_norm": 0.001,
+   "scope": "Regular ImageNet-1K training"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Weight decay for regular ImageNet-1K training",
+   "evidence": [
+    {
+     "chunk_id": "b0050",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 328.79,
+      "y0": 692.56,
+      "x1": 545.12,
+      "y1": 713.15
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 513.11,
+       "y0": 692.56,
+       "x1": 545.12,
+       "y1": 701.1999999999999
+      },
+      {
+       "page": 5,
+       "x0": 328.79,
+       "y0": 704.51,
+       "x1": 545.12,
+       "y1": 713.15
+      },
+      {
+       "page": 6,
+       "x0": 70.04,
+       "y0": 75.48,
+       "x1": 197.98000000000002,
+       "y1": 84.12
+      }
+     ],
+     "quote": "A batch size of 1024, an initial learning rate of 0.001, and a weight decay of 0.05 are used.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "0.05",
+   "value_norm": 0.05,
+   "scope": "Regular ImageNet-1K training"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Optimizer for object detection and instance segmentation frameworks",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 582.44,
+      "x1": 545.12,
+      "y1": 650.86
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 352.23,
+       "y0": 582.44,
+       "x1": 545.12,
+       "y1": 591.08
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 594.4,
+       "x1": 545.11,
+       "y1": 603.04
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 606.36,
+       "x1": 545.11,
+       "y1": 615.0
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 618.31,
+       "x1": 545.11,
+       "y1": 626.9499999999999
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 630.27,
+       "x1": 545.11,
+       "y1": 638.91
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 642.22,
+       "x1": 441.26,
+       "y1": 650.86
+      }
+     ],
+     "quote": "For these four frameworks, we utilize the same settings: multi-scale training [8,56] (resizing the input such that the shorter side is between 480 and 800 while the longer side is at most 1333), AdamW [44] optimizer (initial learning rate of 0.0001, weight decay of 0.05, and batch size of 16), and 3x schedule (36 epochs).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "AdamW",
+   "value_norm": null,
+   "scope": "Object detection and instance segmentation"
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Initial learning rate for object detection and instance segmentation",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 582.44,
+      "x1": 545.12,
+      "y1": 650.86
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 352.23,
+       "y0": 582.44,
+       "x1": 545.12,
+       "y1": 591.08
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 594.4,
+       "x1": 545.11,
+       "y1": 603.04
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 606.36,
+       "x1": 545.11,
+       "y1": 615.0
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 618.31,
+       "x1": 545.11,
+       "y1": 626.9499999999999
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 630.27,
+       "x1": 545.11,
+       "y1": 638.91
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 642.22,
+       "x1": 441.26,
+       "y1": 650.86
+      }
+     ],
+     "quote": "For these four frameworks, we utilize the same settings: multi-scale training [8,56] (resizing the input such that the shorter side is between 480 and 800 while the longer side is at most 1333), AdamW [44] optimizer (initial learning rate of 0.0001, weight decay of 0.05, and batch size of 16), and 3x schedule (36 epochs).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.0001",
+   "value_norm": 0.0001,
+   "scope": "Object detection and instance segmentation"
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "Weight decay for object detection and instance segmentation",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 582.44,
+      "x1": 545.12,
+      "y1": 650.86
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 352.23,
+       "y0": 582.44,
+       "x1": 545.12,
+       "y1": 591.08
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 594.4,
+       "x1": 545.11,
+       "y1": 603.04
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 606.36,
+       "x1": 545.11,
+       "y1": 615.0
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 618.31,
+       "x1": 545.11,
+       "y1": 626.9499999999999
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 630.27,
+       "x1": 545.11,
+       "y1": 638.91
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 642.22,
+       "x1": 441.26,
+       "y1": 650.86
+      }
+     ],
+     "quote": "For these four frameworks, we utilize the same settings: multi-scale training [8,56] (resizing the input such that the shorter side is between 480 and 800 while the longer side is at most 1333), AdamW [44] optimizer (initial learning rate of 0.0001, weight decay of 0.05, and batch size of 16), and 3x schedule (36 epochs).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "0.05",
+   "value_norm": 0.05,
+   "scope": "Object detection and instance segmentation"
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "Batch size for object detection and instance segmentation",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 582.44,
+      "x1": 545.12,
+      "y1": 650.86
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 352.23,
+       "y0": 582.44,
+       "x1": 545.12,
+       "y1": 591.08
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 594.4,
+       "x1": 545.11,
+       "y1": 603.04
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 606.36,
+       "x1": 545.11,
+       "y1": 615.0
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 618.31,
+       "x1": 545.11,
+       "y1": 626.9499999999999
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 630.27,
+       "x1": 545.11,
+       "y1": 638.91
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 642.22,
+       "x1": 441.26,
+       "y1": 650.86
+      }
+     ],
+     "quote": "For these four frameworks, we utilize the same settings: multi-scale training [8,56] (resizing the input such that the shorter side is between 480 and 800 while the longer side is at most 1333), AdamW [44] optimizer (initial learning rate of 0.0001, weight decay of 0.05, and batch size of 16), and 3x schedule (36 epochs).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "16",
+   "value_norm": 16.0,
+   "scope": "Object detection and instance segmentation"
+  },
+  {
+   "id": "hyperparameters.10",
+   "value": "Schedule/epochs for object detection and instance segmentation",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 582.44,
+      "x1": 545.12,
+      "y1": 650.86
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 352.23,
+       "y0": 582.44,
+       "x1": 545.12,
+       "y1": 591.08
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 594.4,
+       "x1": 545.11,
+       "y1": 603.04
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 606.36,
+       "x1": 545.11,
+       "y1": 615.0
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 618.31,
+       "x1": 545.11,
+       "y1": 626.9499999999999
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 630.27,
+       "x1": 545.11,
+       "y1": 638.91
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 642.22,
+       "x1": 441.26,
+       "y1": 650.86
+      }
+     ],
+     "quote": "For these four frameworks, we utilize the same settings: multi-scale training [8,56] (resizing the input such that the shorter side is between 480 and 800 while the longer side is at most 1333), AdamW [44] optimizer (initial learning rate of 0.0001, weight decay of 0.05, and batch size of 16), and 3x schedule (36 epochs).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "36",
+   "value_norm": 36.0,
+   "scope": "Object detection and instance segmentation"
+  },
+  {
+   "id": "hyperparameters.11",
+   "value": "Optimizer for ImageNet-22K pre-training",
+   "evidence": [
+    {
+     "chunk_id": "b0103",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.03700256347656,
+      "y0": 197.84149169921875,
+      "x1": 286.3648681640625,
+      "y1": 218.70306396484375
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 211.60556030273438,
+       "y0": 197.84149169921875,
+       "x1": 286.3648681640625,
+       "y1": 206.748046875
+      },
+      {
+       "page": 6,
+       "x0": 70.03700256347656,
+       "y0": 209.7965087890625,
+       "x1": 258.69879150390625,
+       "y1": 218.70306396484375
+      }
+     ],
+     "quote": "We employ an AdamW optimizer for 90 epochs using a linear decay learning rate scheduler with a 5-epoch linear warm-up.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "AdamW",
+   "value_norm": null,
+   "scope": "Pre-training on ImageNet-22K"
+  },
+  {
+   "id": "hyperparameters.12",
+   "value": "Epochs for ImageNet-22K pre-training",
+   "evidence": [
+    {
+     "chunk_id": "b0103",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.03700256347656,
+      "y0": 197.84149169921875,
+      "x1": 286.3648681640625,
+      "y1": 218.70306396484375
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 211.60556030273438,
+       "y0": 197.84149169921875,
+       "x1": 286.3648681640625,
+       "y1": 206.748046875
+      },
+      {
+       "page": 6,
+       "x0": 70.03700256347656,
+       "y0": 209.7965087890625,
+       "x1": 258.69879150390625,
+       "y1": 218.70306396484375
+      }
+     ],
+     "quote": "We employ an AdamW optimizer for 90 epochs using a linear decay learning rate scheduler with a 5-epoch linear warm-up.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "90",
+   "value_norm": 90.0,
+   "scope": "Pre-training on ImageNet-22K"
+  },
+  {
+   "id": "hyperparameters.13",
+   "value": "Warm-up epochs for ImageNet-22K pre-training",
+   "evidence": [
+    {
+     "chunk_id": "b0103",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.03700256347656,
+      "y0": 197.84149169921875,
+      "x1": 286.3648681640625,
+      "y1": 218.70306396484375
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 211.60556030273438,
+       "y0": 197.84149169921875,
+       "x1": 286.3648681640625,
+       "y1": 206.748046875
+      },
+      {
+       "page": 6,
+       "x0": 70.03700256347656,
+       "y0": 209.7965087890625,
+       "x1": 258.69879150390625,
+       "y1": 218.70306396484375
+      }
+     ],
+     "quote": "We employ an AdamW optimizer for 90 epochs using a linear decay learning rate scheduler with a 5-epoch linear warm-up.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "warmup",
+   "value_raw": "5",
+   "value_norm": 5.0,
+   "scope": "Pre-training on ImageNet-22K"
+  },
+  {
+   "id": "hyperparameters.14",
+   "value": "Batch size for ImageNet-22K pre-training",
+   "evidence": [
+    {
+     "chunk_id": "b0103",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.03700256347656,
+      "y0": 221.75152587890625,
+      "x1": 286.36492919921875,
+      "y1": 242.61407470703125
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 270.8730773925781,
+       "y0": 221.75152587890625,
+       "x1": 286.36492919921875,
+       "y1": 230.6580810546875
+      },
+      {
+       "page": 6,
+       "x0": 70.03700256347656,
+       "y0": 233.70751953125,
+       "x1": 286.3648681640625,
+       "y1": 242.61407470703125
+      }
+     ],
+     "quote": "A batch size of 4096, an initial learning rate of 0.001, and a weight decay of 0.01 are used.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "4096",
+   "value_norm": 4096.0,
+   "scope": "Pre-training on ImageNet-22K"
+  },
+  {
+   "id": "hyperparameters.15",
+   "value": "Initial learning rate for ImageNet-22K pre-training",
+   "evidence": [
+    {
+     "chunk_id": "b0103",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.03700256347656,
+      "y0": 221.75152587890625,
+      "x1": 286.36492919921875,
+      "y1": 242.61407470703125
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 270.8730773925781,
+       "y0": 221.75152587890625,
+       "x1": 286.36492919921875,
+       "y1": 230.6580810546875
+      },
+      {
+       "page": 6,
+       "x0": 70.03700256347656,
+       "y0": 233.70751953125,
+       "x1": 286.3648681640625,
+       "y1": 242.61407470703125
+      }
+     ],
+     "quote": "A batch size of 4096, an initial learning rate of 0.001, and a weight decay of 0.01 are used.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "0.001",
+   "value_norm": 0.001,
+   "scope": "Pre-training on ImageNet-22K"
+  },
+  {
+   "id": "hyperparameters.16",
+   "value": "Weight decay for ImageNet-22K pre-training",
+   "evidence": [
+    {
+     "chunk_id": "b0103",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 70.03700256347656,
+      "y0": 221.75152587890625,
+      "x1": 286.36492919921875,
+      "y1": 242.61407470703125
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 270.8730773925781,
+       "y0": 221.75152587890625,
+       "x1": 286.36492919921875,
+       "y1": 230.6580810546875
+      },
+      {
+       "page": 6,
+       "x0": 70.03700256347656,
+       "y0": 233.70751953125,
+       "x1": 286.3648681640625,
+       "y1": 242.61407470703125
+      }
+     ],
+     "quote": "A batch size of 4096, an initial learning rate of 0.001, and a weight decay of 0.01 are used.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "0.01",
+   "value_norm": 0.01,
+   "scope": "Pre-training on ImageNet-22K"
+  },
+  {
+   "id": "hyperparameters.17",
+   "value": "Epochs for ImageNet-1K fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0103",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11201477050781,
+      "y0": 341.6805419921875,
+      "x1": 286.36505126953125,
+      "y1": 388.2190856933594
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 50.11201477050781,
+       "y0": 341.6805419921875,
+       "x1": 286.36505126953125,
+       "y1": 388.2190856933594
+      }
+     ],
+     "quote": "In ImageNet-1K fine-tuning, we train the models for 30 epochs with a batch size of 1024, a constant learning rate of 10 -5 , and a weight decay of 10 -8 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "30",
+   "value_norm": 30.0,
+   "scope": "ImageNet-1K fine-tuning"
+  },
+  {
+   "id": "hyperparameters.18",
+   "value": "Batch size for ImageNet-1K fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0103",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11201477050781,
+      "y0": 341.6805419921875,
+      "x1": 286.36505126953125,
+      "y1": 388.2190856933594
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 50.11201477050781,
+       "y0": 341.6805419921875,
+       "x1": 286.36505126953125,
+       "y1": 388.2190856933594
+      }
+     ],
+     "quote": "In ImageNet-1K fine-tuning, we train the models for 30 epochs with a batch size of 1024, a constant learning rate of 10 -5 , and a weight decay of 10 -8 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "1024",
+   "value_norm": 1024.0,
+   "scope": "ImageNet-1K fine-tuning"
+  },
+  {
+   "id": "hyperparameters.19",
+   "value": "Constant learning rate for ImageNet-1K fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0103",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11201477050781,
+      "y0": 341.6805419921875,
+      "x1": 286.36505126953125,
+      "y1": 388.2190856933594
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 50.11201477050781,
+       "y0": 341.6805419921875,
+       "x1": 286.36505126953125,
+       "y1": 388.2190856933594
+      }
+     ],
+     "quote": "In ImageNet-1K fine-tuning, we train the models for 30 epochs with a batch size of 1024, a constant learning rate of 10 -5 , and a weight decay of 10 -8 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "10 -5",
+   "value_norm": 0.00001,
+   "scope": "ImageNet-1K fine-tuning"
+  },
+  {
+   "id": "hyperparameters.20",
+   "value": "Weight decay for ImageNet-1K fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0103",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11201477050781,
+      "y0": 341.6805419921875,
+      "x1": 286.36505126953125,
+      "y1": 388.2190856933594
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 50.11201477050781,
+       "y0": 341.6805419921875,
+       "x1": 286.36505126953125,
+       "y1": 388.2190856933594
+      }
+     ],
+     "quote": "In ImageNet-1K fine-tuning, we train the models for 30 epochs with a batch size of 1024, a constant learning rate of 10 -5 , and a weight decay of 10 -8 .",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "10 -8",
+   "value_norm": 1e-8,
+   "scope": "ImageNet-1K fine-tuning"
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Throughput measured using a V100 GPU",
+   "evidence": [
+    {
+     "chunk_id": "b0050",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 419.18,
+      "x1": 545.11,
+      "y1": 437.90999999999997
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 349.62,
+       "y0": 419.18,
+       "x1": 545.11,
+       "y1": 426.95
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 430.14,
+       "x1": 455.81,
+       "y1": 437.90999999999997
+      }
+     ],
+     "quote": "Throughput is measured using the GitHub repository of [68] and a V100 GPU, following [63].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablation study on the shifted windows approach and different position embedding methods",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 308.86,
+      "y0": 692.17,
+      "x1": 545.11,
+      "y1": 713.15
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 692.17,
+       "x1": 545.11,
+       "y1": 701.1999999999999
+      },
+      {
+       "page": 7,
+       "x0": 308.86,
+       "y0": 704.51,
+       "x1": 545.11,
+       "y1": 713.15
+      },
+      {
+       "page": 8,
+       "x0": 72.31,
+       "y0": 174.77,
+       "x1": 286.36,
+       "y1": 182.70000000000002
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 185.89,
+       "x1": 286.36,
+       "y1": 193.66
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 196.85,
+       "x1": 138.42000000000002,
+       "y1": 204.62
+      }
+     ],
+     "quote": "4. Ablation study on the shifted windows approach and different position embedding methods on three benchmarks, using the Swin-T architecture.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Ablations of the shifted window approach on the three tasks",
+   "evidence": [
+    {
+     "chunk_id": "b0064",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 533.07,
+      "x1": 286.36,
+      "y1": 601.87
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 533.07,
+       "x1": 286.36,
+       "y1": 542.1
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 545.41,
+       "x1": 286.36,
+       "y1": 554.05
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 557.37,
+       "x1": 286.36,
+       "y1": 566.01
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 569.32,
+       "x1": 286.36,
+       "y1": 577.96
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 581.28,
+       "x1": 286.36,
+       "y1": 589.92
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 593.23,
+       "x1": 253.8,
+       "y1": 601.87
+      }
+     ],
+     "quote": "Ablations of the shifted window approach on the three tasks are reported in Table 4.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Investigate applying the shifted window based self-attention to natural language processing",
+   "evidence": [
+    {
+     "chunk_id": "b0072",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 50.11,
+      "y0": 254.06,
+      "x1": 286.37,
+      "y1": 298.74
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 62.07,
+       "y0": 254.06,
+       "x1": 286.37,
+       "y1": 262.88
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 266.01,
+       "x1": 286.36,
+       "y1": 274.83
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 278.14,
+       "x1": 286.36,
+       "y1": 286.78
+      },
+      {
+       "page": 9,
+       "x0": 50.11,
+       "y0": 290.1,
+       "x1": 259.52,
+       "y1": 298.74
+      }
+     ],
+     "quote": "As a key element of Swin Transformer, the shifted window based self-attention is shown to be effective and efficient on vision problems, and we look forward to investigating its use in natural language processing as well.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/microsoft/Swin-Transformer",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 255.6,
+      "x1": 286.37,
+      "y1": 586.51
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 62.07,
+       "y0": 255.6,
+       "x1": 286.37,
+       "y1": 264.19
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 267.55,
+       "x1": 286.36,
+       "y1": 276.14
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 279.51,
+       "x1": 178.32999999999998,
+       "y1": 288.09999999999997
+      },
+      {
+       "page": 1,
+       "x0": 188.65,
+       "y0": 279.51,
+       "x1": 286.36,
+       "y1": 288.09999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 291.47,
+       "x1": 286.36,
+       "y1": 300.06
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 303.42,
+       "x1": 286.36,
+       "y1": 312.01
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 315.38,
+       "x1": 286.36,
+       "y1": 323.96999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 327.33,
+       "x1": 207.99,
+       "y1": 335.91999999999996
+      },
+      {
+       "page": 1,
+       "x0": 216.84,
+       "y0": 327.33,
+       "x1": 286.37,
+       "y1": 335.91999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 339.29,
+       "x1": 286.36,
+       "y1": 347.88
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 351.05,
+       "x1": 260.95,
+       "y1": 359.99
+      },
+      {
+       "page": 1,
+       "x0": 271.42,
+       "y0": 351.24,
+       "x1": 286.36,
+       "y1": 359.83
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 363.2,
+       "x1": 286.36,
+       "y1": 371.78999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 375.15,
+       "x1": 286.36,
+       "y1": 383.73999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 387.11,
+       "x1": 286.36,
+       "y1": 395.7
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 399.06,
+       "x1": 286.36,
+       "y1": 407.65
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 411.02,
+       "x1": 286.36,
+       "y1": 419.60999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 422.97,
+       "x1": 157.70999999999998,
+       "y1": 431.56
+      },
+      {
+       "page": 1,
+       "x0": 162.96,
+       "y0": 422.97,
+       "x1": 286.37,
+       "y1": 431.56
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 434.93,
+       "x1": 286.36,
+       "y1": 443.52
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 446.88,
+       "x1": 286.36,
+       "y1": 455.46999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 458.84,
+       "x1": 286.36,
+       "y1": 467.42999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 470.79,
+       "x1": 286.36,
+       "y1": 479.38
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 482.75,
+       "x1": 286.36,
+       "y1": 491.34
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 494.7,
+       "x1": 68.09,
+       "y1": 503.28999999999996
+      },
+      {
+       "page": 1,
+       "x0": 74.35,
+       "y0": 494.7,
+       "x1": 286.36,
+       "y1": 503.28999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 506.66,
+       "x1": 286.36,
+       "y1": 515.25
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 518.61,
+       "x1": 286.36,
+       "y1": 527.2
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 530.57,
+       "x1": 286.36,
+       "y1": 539.1600000000001
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 542.52,
+       "x1": 286.36,
+       "y1": 551.11
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 554.48,
+       "x1": 243.73000000000002,
+       "y1": 563.07
+      },
+      {
+       "page": 1,
+       "x0": 249.29,
+       "y0": 554.48,
+       "x1": 286.36,
+       "y1": 563.07
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 566.43,
+       "x1": 194.39999999999998,
+       "y1": 575.02
+      },
+      {
+       "page": 1,
+       "x0": 226.97,
+       "y0": 579.5,
+       "x1": 232.87,
+       "y1": 586.51
+      }
+     ],
+     "quote": "This paper presents a new vision Transformer, called Swin Transformer, that capably serves as a general-purpose backbone for computer vision. Challenges in adapting Transformer from language to vision arise from differences between the two domains, such as large variations in the scale of visual entities and the high resolution of pixels in images compared to words in text. To address these differences, we propose a hierarchical Transformer whose representation is computed with Shifted windows. The shifted windowing scheme brings greater efficiency by limiting self-attention computation to non-overlapping local windows while also allowing for cross-window connection. This hierarchical architecture has the flexibility to model at various scales and has linear computational complexity with respect to image size. These qualities of Swin Transformer make it compatible with a broad range of vision tasks, including image classification (87.3 top-1 accuracy on ImageNet-1K) and dense prediction tasks such as object detection (58.7 box AP and 51.1 mask AP on COCO testdev) and semantic segmentation (53.5 mIoU on ADE20K val). Its performance surpasses the previous state-of-theart by a large margin of +2.7 box AP and +2.6 mask AP on COCO, and +3.2 mIoU on ADE20K, demonstrating the potential of Transformer-based models as vision backbones. The hierarchical design and the shifted window approach also prove beneficial for all-MLP architectures. The code and models are publicly available at https://github. com/microsoft/Swin-Transformer.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "Swin Transformer achieves 87.3 top-1 accuracy on ImageNet-1K.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 422.97,
+      "x1": 286.37,
+      "y1": 503.28999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 162.96,
+       "y0": 422.97,
+       "x1": 286.37,
+       "y1": 431.56
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 434.93,
+       "x1": 286.36,
+       "y1": 443.52
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 446.88,
+       "x1": 286.36,
+       "y1": 455.46999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 458.84,
+       "x1": 286.36,
+       "y1": 467.42999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 470.79,
+       "x1": 286.36,
+       "y1": 479.38
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 482.75,
+       "x1": 286.36,
+       "y1": 491.34
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 494.7,
+       "x1": 68.09,
+       "y1": 503.28999999999996
+      }
+     ],
+     "quote": "These qualities of Swin Transformer make it compatible with a broad range of vision tasks, including image classification (87.3 top-1 accuracy on ImageNet-1K) and dense prediction tasks such as object detection (58.7 box AP and 51.1 mask AP on COCO testdev) and semantic segmentation (53.5 mIoU on ADE20K val).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "Swin Transformer achieves 58.7 box AP and 51.1 mask AP on COCO testdev.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 422.97,
+      "x1": 286.37,
+      "y1": 503.28999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 162.96,
+       "y0": 422.97,
+       "x1": 286.37,
+       "y1": 431.56
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 434.93,
+       "x1": 286.36,
+       "y1": 443.52
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 446.88,
+       "x1": 286.36,
+       "y1": 455.46999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 458.84,
+       "x1": 286.36,
+       "y1": 467.42999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 470.79,
+       "x1": 286.36,
+       "y1": 479.38
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 482.75,
+       "x1": 286.36,
+       "y1": 491.34
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 494.7,
+       "x1": 68.09,
+       "y1": 503.28999999999996
+      }
+     ],
+     "quote": "These qualities of Swin Transformer make it compatible with a broad range of vision tasks, including image classification (87.3 top-1 accuracy on ImageNet-1K) and dense prediction tasks such as object detection (58.7 box AP and 51.1 mask AP on COCO testdev) and semantic segmentation (53.5 mIoU on ADE20K val).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "Swin Transformer achieves 53.5 mIoU on ADE20K val.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 422.97,
+      "x1": 286.37,
+      "y1": 503.28999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 162.96,
+       "y0": 422.97,
+       "x1": 286.37,
+       "y1": 431.56
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 434.93,
+       "x1": 286.36,
+       "y1": 443.52
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 446.88,
+       "x1": 286.36,
+       "y1": 455.46999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 458.84,
+       "x1": 286.36,
+       "y1": 467.42999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 470.79,
+       "x1": 286.36,
+       "y1": 479.38
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 482.75,
+       "x1": 286.36,
+       "y1": 491.34
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 494.7,
+       "x1": 68.09,
+       "y1": 503.28999999999996
+      }
+     ],
+     "quote": "These qualities of Swin Transformer make it compatible with a broad range of vision tasks, including image classification (87.3 top-1 accuracy on ImageNet-1K) and dense prediction tasks such as object detection (58.7 box AP and 51.1 mask AP on COCO testdev) and semantic segmentation (53.5 mIoU on ADE20K val).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.3",
+   "value": "Swin Transformer performance surpasses the previous state-of-the-art by large margins on COCO and ADE20K.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 494.7,
+      "x1": 286.36,
+      "y1": 539.1600000000001
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 74.35,
+       "y0": 494.7,
+       "x1": 286.36,
+       "y1": 503.28999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 506.66,
+       "x1": 286.36,
+       "y1": 515.25
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 518.61,
+       "x1": 286.36,
+       "y1": 527.2
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 530.57,
+       "x1": 286.36,
+       "y1": 539.1600000000001
+      }
+     ],
+     "quote": "Its performance surpasses the previous state-of-the-art by a large margin of +2.7 box AP and +2.6 mask AP on COCO, and +3.2 mIoU on ADE20K, demonstrating the potential of Transformer-based models as vision backbones.",
+     "grounding_status": "verified",
+     "match_score": 99.5
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

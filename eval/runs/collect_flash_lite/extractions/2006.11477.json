@@ -1,0 +1,3175 @@
+{
+ "metadata": {
+  "title": "wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations",
+  "authors": [
+   "Alexei Baevski",
+   "Henry Zhou",
+   "Abdelrahman Mohamed",
+   "Michael Auli"
+  ],
+  "venue": null,
+  "year": null,
+  "arxiv_id": null,
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Labeled training data is much scarcer than unlabeled data, making current speech recognition systems difficult to scale for thousands of languages.",
+   "evidence": [
+    {
+     "chunk_id": "b0003",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 470.88,
+      "x1": 504.0,
+      "y1": 512.25
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 395.95,
+       "y0": 470.88,
+       "x1": 504.0,
+       "y1": 479.52
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 481.79,
+       "x1": 504.0,
+       "y1": 490.43
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 492.7,
+       "x1": 504.0,
+       "y1": 501.34
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 503.61,
+       "x1": 438.5,
+       "y1": 512.25
+      }
+     ],
+     "quote": "However, in many settings labeled data is much harder to come by than unlabeled data: current speech recognition systems require thousands of hours of transcribed speech to reach acceptable performance which is not available for the vast majority of the nearly 7,000 languages spoken worldwide [31].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "We present a framework for self-supervised learning of representations directly from raw audio data.",
+   "evidence": [
+    {
+     "chunk_id": "b0005",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 108.0,
+      "y0": 590.93,
+      "x1": 504.0,
+      "y1": 610.48
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 590.93,
+       "x1": 504.0,
+       "y1": 599.5699999999999
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 601.84,
+       "x1": 127.43,
+       "y1": 610.48
+      }
+     ],
+     "quote": "In this paper, we present a framework for self-supervised learning of representations from raw audio data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "We learn discrete speech units via a gumbel softmax to represent latent representations in the contrastive task.",
+   "evidence": [
+    {
+     "chunk_id": "b0006",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 107.64,
+      "y0": 661.87,
+      "x1": 504.0,
+      "y1": 692.3199999999999
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 107.64,
+       "y0": 661.87,
+       "x1": 504.0,
+       "y1": 670.51
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 672.77,
+       "x1": 504.0,
+       "y1": 681.41
+      },
+      {
+       "page": 1,
+       "x0": 108.0,
+       "y0": 683.68,
+       "x1": 251.88,
+       "y1": 692.3199999999999
+      }
+     ],
+     "quote": "As part of training, we learn discrete speech units [53,32,7,18] via a gumbel softmax [24,5] to represent the latent representations in the contrastive task (Figure 1) which we find to be more effective than non-quantized targets.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "speech recognition",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 402.01,
+      "x1": 468.14,
+      "y1": 421.56
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 380.68,
+       "y0": 402.01,
+       "x1": 468.14,
+       "y1": 410.65
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 412.92,
+       "x1": 422.79,
+       "y1": 421.56
+      },
+      {
+       "page": 1,
+       "x0": 422.79,
+       "y0": 411.25,
+       "x1": 426.28000000000003,
+       "y1": 417.3
+      }
+     ],
+     "quote": "This demonstrates the feasibility of speech recognition with limited amounts of labeled data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "task.1",
+   "value": "phoneme recognition",
+   "evidence": [
+    {
+     "chunk_id": "b0011",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 107.53,
+      "y0": 397.67,
+      "x1": 503.99,
+      "y1": 417.21999999999997
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 107.53,
+       "y0": 397.67,
+       "x1": 503.99,
+       "y1": 406.31
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 408.58,
+       "x1": 170.29,
+       "y1": 417.21999999999997
+      }
+     ],
+     "quote": "We set a new state of the art on TIMIT phoneme recognition as well as the 100 hour clean subset of Librispeech.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "The architecture comprises a multi-layer convolutional feature encoder that converts raw audio into latent representations, a Transformer context network, and a quantization module using product quantization and Gumbel-softmax.",
+   "evidence": [
+    {
+     "chunk_id": "b0013",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 491.03,
+      "x1": 503.99,
+      "y1": 519.23
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 491.95,
+       "x1": 407.51,
+       "y1": 500.90999999999997
+      },
+      {
+       "page": 2,
+       "x0": 410.3,
+       "y0": 491.03,
+       "x1": 441.62,
+       "y1": 508.32
+      },
+      {
+       "page": 2,
+       "x0": 444.91,
+       "y0": 492.27,
+       "x1": 503.99,
+       "y1": 500.90999999999997
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 503.17,
+       "x1": 171.05,
+       "y1": 511.81
+      },
+      {
+       "page": 2,
+       "x0": 173.54,
+       "y0": 501.94,
+       "x1": 180.65,
+       "y1": 519.23
+      },
+      {
+       "page": 2,
+       "x0": 184.59,
+       "y0": 502.83,
+       "x1": 377.73,
+       "y1": 512.51
+      },
+      {
+       "page": 2,
+       "x0": 379.39,
+       "y0": 502.83,
+       "x1": 465.56,
+       "y1": 512.51
+      }
+     ],
+     "quote": "Our model is composed of a multi-layer convolutional feature encoder f : X → Z which takes as input raw audio X and outputs latent speech representations z 1 , . . . , z T for T time-steps.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "The self-supervised pre-training objective involves masking portions of the feature encoder outputs and solving a contrastive task to identify the true quantized latent speech representation among distractors, combined with a codebook diversity loss.",
+   "evidence": [
+    {
+     "chunk_id": "b0026",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 108.0,
+      "y0": 474.03,
+      "x1": 504.0,
+      "y1": 505.72999999999996
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 475.27,
+       "x1": 460.83,
+       "y1": 483.90999999999997
+      },
+      {
+       "page": 3,
+       "x0": 463.27,
+       "y0": 474.03,
+       "x1": 470.14,
+       "y1": 491.32
+      },
+      {
+       "page": 3,
+       "x0": 470.14,
+       "y0": 475.27,
+       "x1": 504.0,
+       "y1": 484.59999999999997
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 486.18,
+       "x1": 504.0,
+       "y1": 494.82
+      },
+      {
+       "page": 3,
+       "x0": 108.0,
+       "y0": 497.09,
+       "x1": 162.63,
+       "y1": 505.72999999999996
+      }
+     ],
+     "quote": "During pre-training, we learn representations of speech audio by solving a contrastive task L m which requires to identify the true quantized latent speech representation for a masked time step within a set of distractors.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "Fine-tuning for speech recognition is performed by adding a randomly initialized linear projection on top of the context network and optimizing via CTC loss while keeping the feature encoder frozen.",
+   "evidence": [
+    {
+     "chunk_id": "b0036",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 174.63,
+      "x1": 505.74,
+      "y1": 194.18
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 174.63,
+       "x1": 504.17,
+       "y1": 183.26999999999998
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 185.22,
+       "x1": 505.74,
+       "y1": 194.18
+      }
+     ],
+     "quote": "Pre-trained models are fine-tuned for speech recognition by adding a randomly initialized linear projection on top of the context network into C classes representing the vocabulary of the task [4].",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "Unlike prior work such as vq-wav2vec, the model builds context representations over continuous speech representations and uses self-attention to capture dependencies over the entire sequence end-to-end.",
+   "evidence": [
+    {
+     "chunk_id": "b0013",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 535.9,
+      "x1": 505.74,
+      "y1": 566.36
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 463.25,
+       "y0": 535.9,
+       "x1": 504.01,
+       "y1": 544.54
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 546.81,
+       "x1": 503.99,
+       "y1": 555.4499999999999
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 557.72,
+       "x1": 505.74,
+       "y1": 566.36
+      }
+     ],
+     "quote": "Compared to vq-wav2vec [5], our model builds context representations over continuous speech representations and self-attention captures dependencies over the entire sequence of latent representations end-to-end.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "Instead of fixed positional embeddings, the model uses a convolutional layer acting as a relative positional embedding followed by GELU and layer normalization.",
+   "evidence": [
+    {
+     "chunk_id": "b0015",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 647.04,
+      "x1": 504.17,
+      "y1": 677.5
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 401.34,
+       "y0": 647.04,
+       "x1": 503.99,
+       "y1": 655.68
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 657.95,
+       "x1": 504.17,
+       "y1": 666.59
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 668.86,
+       "x1": 346.4,
+       "y1": 677.5
+      }
+     ],
+     "quote": "Instead of fixed positional embeddings which encode absolute positional information, we use a convolutional layer similar to [37,4,57] which acts as relative positional embedding.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "Librispeech corpus containing 960 hours of transcribed audio, used for unlabeled data or fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 107.64,
+      "y0": 303.49,
+      "x1": 504.0,
+      "y1": 323.03999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 107.64,
+       "y0": 303.49,
+       "x1": 504.0,
+       "y1": 312.13
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 314.4,
+       "x1": 375.49,
+       "y1": 323.03999999999996
+      }
+     ],
+     "quote": "As unlabeled data we consider the Librispeech corpus [40] without transcriptions containing 960 hours of audio (LS-960) or the audio data from LibriVox (LV-60k).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Librispeech",
+   "split": "LS-960",
+   "size": "960 hours",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "LibriVox audio data, used as unlabeled data",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 107.64,
+      "y0": 303.49,
+      "x1": 504.0,
+      "y1": 323.03999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 107.64,
+       "y0": 303.49,
+       "x1": 504.0,
+       "y1": 312.13
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 314.4,
+       "x1": 375.49,
+       "y1": 323.03999999999996
+      }
+     ],
+     "quote": "As unlabeled data we consider the Librispeech corpus [40] without transcriptions containing 960 hours of audio (LS-960) or the audio data from LibriVox (LV-60k).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "LibriVox",
+   "split": "LV-60k",
+   "size": "53.2k hours",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "Librispeech train-clean-100 subset comprising 100 hours of labeled data",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 325.31,
+      "x1": 505.25,
+      "y1": 366.66999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 319.05,
+       "y0": 325.31,
+       "x1": 503.99,
+       "y1": 333.95
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 336.22,
+       "x1": 505.24,
+       "y1": 344.86
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 347.12,
+       "x1": 505.25,
+       "y1": 355.76
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 358.03,
+       "x1": 487.68,
+       "y1": 366.66999999999996
+      }
+     ],
+     "quote": "We fine-tune on five labeled data settings: 960 hours of transcribed Librispeech, the train-clean-100 subset comprising 100 hours (100 hours labeled), as well as the Libri-light limited resource training subsets originally extracted from Librispeech, these are train-10h (10 hours labeled), train-1h (1 hour labeled), train-10min (10 min labeled).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "train-clean-100",
+   "split": "train-clean-100",
+   "size": "100 hours",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "Libri-light train-10h limited resource training subset",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 325.31,
+      "x1": 505.25,
+      "y1": 366.66999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 319.05,
+       "y0": 325.31,
+       "x1": 503.99,
+       "y1": 333.95
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 336.22,
+       "x1": 505.24,
+       "y1": 344.86
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 347.12,
+       "x1": 505.25,
+       "y1": 355.76
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 358.03,
+       "x1": 487.68,
+       "y1": 366.66999999999996
+      }
+     ],
+     "quote": "We fine-tune on five labeled data settings: 960 hours of transcribed Librispeech, the train-clean-100 subset comprising 100 hours (100 hours labeled), as well as the Libri-light limited resource training subsets originally extracted from Librispeech, these are train-10h (10 hours labeled), train-1h (1 hour labeled), train-10min (10 min labeled).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "train-10h",
+   "split": "train-10h",
+   "size": "10 hours",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "Libri-light train-1h limited resource training subset",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 325.31,
+      "x1": 505.25,
+      "y1": 366.66999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 319.05,
+       "y0": 325.31,
+       "x1": 503.99,
+       "y1": 333.95
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 336.22,
+       "x1": 505.24,
+       "y1": 344.86
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 347.12,
+       "x1": 505.25,
+       "y1": 355.76
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 358.03,
+       "x1": 487.68,
+       "y1": 366.66999999999996
+      }
+     ],
+     "quote": "We fine-tune on five labeled data settings: 960 hours of transcribed Librispeech, the train-clean-100 subset comprising 100 hours (100 hours labeled), as well as the Libri-light limited resource training subsets originally extracted from Librispeech, these are train-10h (10 hours labeled), train-1h (1 hour labeled), train-10min (10 min labeled).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "train-1h",
+   "split": "train-1h",
+   "size": "1 hour",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "Libri-light train-10min limited resource training subset",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 325.31,
+      "x1": 505.25,
+      "y1": 366.66999999999996
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 319.05,
+       "y0": 325.31,
+       "x1": 503.99,
+       "y1": 333.95
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 336.22,
+       "x1": 505.24,
+       "y1": 344.86
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 347.12,
+       "x1": 505.25,
+       "y1": 355.76
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 358.03,
+       "x1": 487.68,
+       "y1": 366.66999999999996
+      }
+     ],
+     "quote": "We fine-tune on five labeled data settings: 960 hours of transcribed Librispeech, the train-clean-100 subset comprising 100 hours (100 hours labeled), as well as the Libri-light limited resource training subsets originally extracted from Librispeech, these are train-10h (10 hours labeled), train-1h (1 hour labeled), train-10min (10 min labeled).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "train-10min",
+   "split": "train-10min",
+   "size": "10 min",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.6",
+   "value": "TIMIT training data for phoneme recognition",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 648.06,
+      "x1": 504.0,
+      "y1": 667.61
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 648.06,
+       "x1": 504.0,
+       "y1": 656.6999999999999
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 658.97,
+       "x1": 234.3,
+       "y1": 667.61
+      }
+     ],
+     "quote": "Next, we evaluate accuracy on TIMIT phoneme recognition by fine-tuning the pre-trained models on the labeled TIMIT training data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "TIMIT",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Discrete BERT baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0088",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 116.79000091552734,
+      "y0": 177.53533935546875,
+      "x1": 495.20941162109375,
+      "y1": 188.44189453125
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 116.79000091552734,
+       "y0": 177.53533935546875,
+       "x1": 495.20941162109375,
+       "y1": 188.44189453125
+      }
+     ],
+     "quote": "Discrete BERT [4] | LS-960 | 4-gram | 15.7 | 24.1 | 16.3 | 25.2",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Iterative pseudo-labeling baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0088",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 116.79000091552734,
+      "y0": 345.1563415527344,
+      "x1": 495.20941162109375,
+      "y1": 356.0628967285156
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 116.79000091552734,
+       "y0": 345.1563415527344,
+       "x1": 495.20941162109375,
+       "y1": 356.0628967285156
+      }
+     ],
+     "quote": "Iter. pseudo-labeling [58] | LS-960 | 4-gram+Transf. | 23.51 | 25.48 | 24.37 | 26.02",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "Hybrid DNN/HMM baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0088",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 116.79000091552734,
+      "y0": 434.4213562011719,
+      "x1": 495.20941162109375,
+      "y1": 445.3279113769531
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 116.79000091552734,
+       "y0": 434.4213562011719,
+       "x1": 495.20941162109375,
+       "y1": 445.3279113769531
+      }
+     ],
+     "quote": "Hybrid DNN/HMM [34] | - | 4-gram | 5.0 | 19.5 | 5.8 | 18.6",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "TTS data augmentation baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0088",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 116.79000091552734,
+      "y0": 445.3303527832031,
+      "x1": 495.20941162109375,
+      "y1": 456.2369079589844
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 116.79000091552734,
+       "y0": 445.3303527832031,
+       "x1": 495.20941162109375,
+       "y1": 456.2369079589844
+      }
+     ],
+     "quote": "TTS data augm. [30] | - | LSTM |  |  | 4.3 | 13.5",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "Noisy student baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0088",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 116.79000091552734,
+      "y0": 488.9663391113281,
+      "x1": 495.20941162109375,
+      "y1": 499.8728942871094
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 116.79000091552734,
+       "y0": 488.9663391113281,
+       "x1": 495.20941162109375,
+       "y1": 499.8728942871094
+      }
+     ],
+     "quote": "Noisy student [42] | LS-860 | LSTM | 3.9 | 8.8 | 4.2 | 8.6",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.5",
+   "value": "CTC Transformer supervised baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0089",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 120.12799835205078,
+      "y0": 131.40838623046875,
+      "x1": 491.87249755859375,
+      "y1": 142.31494140625
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 120.12799835205078,
+       "y0": 131.40838623046875,
+       "x1": 491.87249755859375,
+       "y1": 142.31494140625
+      }
+     ],
+     "quote": "CTC Transf [51] |  | - | CLM+Transf. | 2.20 | 4.94 | 2.47 | 5.45",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.6",
+   "value": "Sequence-to-sequence Transformer supervised baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0089",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 120.12799835205078,
+      "y0": 142.3173828125,
+      "x1": 491.87249755859375,
+      "y1": 153.22393798828125
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 120.12799835205078,
+       "y0": 142.3173828125,
+       "x1": 491.87249755859375,
+       "y1": 153.22393798828125
+      }
+     ],
+     "quote": "S2S Transf. | [51] | - | CLM+Transf. | 2.10 | 4.79 | 2.33 | 5.17",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.7",
+   "value": "Transformer Transducer baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0089",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 120.12799835205078,
+      "y0": 153.22637939453125,
+      "x1": 491.87249755859375,
+      "y1": 164.1329345703125
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 120.12799835205078,
+       "y0": 153.22637939453125,
+       "x1": 491.87249755859375,
+       "y1": 164.1329345703125
+      }
+     ],
+     "quote": "Transf. Transducer [60] |  | - | Transf. | - | - | 2.0 | 4.6",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.8",
+   "value": "ContextNet baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0089",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 120.12799835205078,
+      "y0": 164.1353759765625,
+      "x1": 491.87249755859375,
+      "y1": 175.04193115234375
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 120.12799835205078,
+       "y0": 164.1353759765625,
+       "x1": 491.87249755859375,
+       "y1": 175.04193115234375
+      }
+     ],
+     "quote": "ContextNet [17] |  | - | LSTM | 1.9 | 3.9 | 1.9 | 4.1",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.9",
+   "value": "Conformer baseline",
+   "evidence": [
+    {
+     "chunk_id": "b0089",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 120.12799835205078,
+      "y0": 175.04437255859375,
+      "x1": 491.87249755859375,
+      "y1": 185.950927734375
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 120.12799835205078,
+       "y0": 175.04437255859375,
+       "x1": 491.87249755859375,
+       "y1": 185.950927734375
+      }
+     ],
+     "quote": "Conformer [15] |  | - | LSTM | 2.1 | 4.3 | 1.9 | 3.9",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.10",
+   "value": "CNN + TD-filterbanks baseline for TIMIT",
+   "evidence": [
+    {
+     "chunk_id": "b0090",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 204.6060028076172,
+      "y0": 109.59033203125,
+      "x1": 407.3946838378906,
+      "y1": 120.49689483642578
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 204.6060028076172,
+       "y0": 109.59033203125,
+       "x1": 407.3946838378906,
+       "y1": 120.49689483642578
+      }
+     ],
+     "quote": "CNN + TD-ﬁlterbanks [59] | 15.6 | 18.0",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.11",
+   "value": "PASE+ baseline for TIMIT",
+   "evidence": [
+    {
+     "chunk_id": "b0090",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 204.6060028076172,
+      "y0": 120.49932861328125,
+      "x1": 407.3946838378906,
+      "y1": 131.4058837890625
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 204.6060028076172,
+       "y0": 120.49932861328125,
+       "x1": 407.3946838378906,
+       "y1": 131.4058837890625
+      }
+     ],
+     "quote": "PASE+ [47] | - | 17.2",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.12",
+   "value": "Li-GRU + fMLLR baseline for TIMIT",
+   "evidence": [
+    {
+     "chunk_id": "b0090",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 204.6060028076172,
+      "y0": 131.4083251953125,
+      "x1": 407.3946838378906,
+      "y1": 142.31488037109375
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 204.6060028076172,
+       "y0": 131.4083251953125,
+       "x1": 407.3946838378906,
+       "y1": 142.31488037109375
+      }
+     ],
+     "quote": "Li-GRU + fMLLR [46] | – | 14.9",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.13",
+   "value": "wav2vec baseline for TIMIT",
+   "evidence": [
+    {
+     "chunk_id": "b0090",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 204.6060028076172,
+      "y0": 142.31732177734375,
+      "x1": 407.3946838378906,
+      "y1": 153.223876953125
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 204.6060028076172,
+       "y0": 142.31732177734375,
+       "x1": 407.3946838378906,
+       "y1": 153.223876953125
+      }
+     ],
+     "quote": "wav2vec [49] | 12.9 | 14.7",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    },
+    {
+     "chunk_id": "b0090",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 204.6060028076172,
+      "y0": 153.226318359375,
+      "x1": 407.3946838378906,
+      "y1": 164.13287353515625
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 204.6060028076172,
+       "y0": 153.226318359375,
+       "x1": 407.3946838378906,
+       "y1": 164.13287353515625
+      }
+     ],
+     "quote": "vq-wav2vec [5] | 9.6 | 11.6",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Word Error Rate (WER)",
+   "evidence": [
+    {
+     "chunk_id": "b0050",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 272.74,
+      "x1": 504.0,
+      "y1": 314.11
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 190.47,
+       "y0": 272.74,
+       "x1": 504.0,
+       "y1": 281.38
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 283.65,
+       "x1": 504.0,
+       "y1": 292.28999999999996
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 294.56,
+       "x1": 504.0,
+       "y1": 303.2
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 305.47,
+       "x1": 191.29000000000002,
+       "y1": 314.11
+      }
+     ],
+     "quote": "For Libri-light, we train three seeds with two different learning rates (2e-5 and 3e-5) for all subsets and choose the configuration with lowest WER on dev-other subset decoded with the official 4-gram language model (LM) with beam 50 and fixed model weights (LM weight 2, word insertion penalty -1).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Phoneme Error Rate (PER)",
+   "evidence": [
+    {
+     "chunk_id": "b0062",
+     "page": 7,
+     "bbox": {
+      "page": 7,
+      "x0": 108.0,
+      "y0": 669.88,
+      "x1": 505.25,
+      "y1": 689.43
+     },
+     "boxes": [
+      {
+       "page": 7,
+       "x0": 177.64,
+       "y0": 669.88,
+       "x1": 505.25,
+       "y1": 678.52
+      },
+      {
+       "page": 7,
+       "x0": 108.0,
+       "y0": 680.79,
+       "x1": 448.58,
+       "y1": 689.43
+      }
+     ],
+     "quote": "Table 3 shows that our approach can achieve a new state of the art on this dataset, reducing PER by a relative 23%/29% over the next best result on the dev/test sets.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Dropout rate of 0.1 in Transformer, feature encoder output, and quantization module input",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 666.37,
+      "x1": 504.17,
+      "y1": 685.92
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 203.26,
+       "y0": 666.37,
+       "x1": 504.17,
+       "y1": 675.01
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 677.28,
+       "x1": 272.41999999999996,
+       "y1": 685.92
+      }
+     ],
+     "quote": "We use dropout 0.1 in the Transformer, at the output of the feature encoder and the input to the quantization module.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "dropout",
+   "value_raw": "0.1",
+   "value_norm": 0.1,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Layer drop rate of 0.05 for BASE",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.25,
+      "y0": 677.28,
+      "x1": 504.15999999999997,
+      "y1": 721.93
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 275.5,
+       "y0": 677.28,
+       "x1": 504.15999999999997,
+       "y1": 685.92
+      },
+      {
+       "page": 4,
+       "x0": 108.25,
+       "y0": 688.19,
+       "x1": 313.33000000000004,
+       "y1": 696.83
+      },
+      {
+       "page": 4,
+       "x0": 120.65,
+       "y0": 712.3,
+       "x1": 123.64,
+       "y1": 717.4799999999999
+      },
+      {
+       "page": 4,
+       "x0": 124.14,
+       "y0": 714.16,
+       "x1": 276.17,
+       "y1": 721.93
+      }
+     ],
+     "quote": "Layers are dropped at a rate of 0.05 for BASE and 0.2 for LARGE [22,12]; there is no layer drop for LV-60k.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "layer drop rate",
+   "value_raw": "0.05",
+   "value_norm": 0.05,
+   "scope": "BASE"
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Layer drop rate of 0.2 for LARGE",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.25,
+      "y0": 677.28,
+      "x1": 504.15999999999997,
+      "y1": 721.93
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 275.5,
+       "y0": 677.28,
+       "x1": 504.15999999999997,
+       "y1": 685.92
+      },
+      {
+       "page": 4,
+       "x0": 108.25,
+       "y0": 688.19,
+       "x1": 313.33000000000004,
+       "y1": 696.83
+      },
+      {
+       "page": 4,
+       "x0": 120.65,
+       "y0": 712.3,
+       "x1": 123.64,
+       "y1": 717.4799999999999
+      },
+      {
+       "page": 4,
+       "x0": 124.14,
+       "y0": 714.16,
+       "x1": 276.17,
+       "y1": 721.93
+      }
+     ],
+     "quote": "Layers are dropped at a rate of 0.05 for BASE and 0.2 for LARGE [22,12]; there is no layer drop for LV-60k.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "layer drop rate",
+   "value_raw": "0.2",
+   "value_norm": 0.2,
+   "scope": "LARGE"
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Optimizer is Adam",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 107.53,
+      "y0": 75.48,
+      "x1": 503.99,
+      "y1": 102.44
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 107.53,
+       "y0": 75.48,
+       "x1": 503.99,
+       "y1": 84.12
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 86.07,
+       "x1": 112.98,
+       "y1": 94.80999999999999
+      },
+      {
+       "page": 5,
+       "x0": 115.2,
+       "y0": 85.15,
+       "x1": 122.95,
+       "y1": 102.44
+      },
+      {
+       "page": 5,
+       "x0": 125.16,
+       "y0": 86.07,
+       "x1": 135.12,
+       "y1": 94.80999999999999
+      },
+      {
+       "page": 5,
+       "x0": 135.12,
+       "y0": 84.49,
+       "x1": 145.32,
+       "y1": 90.61
+      },
+      {
+       "page": 5,
+       "x0": 148.68,
+       "y0": 86.07,
+       "x1": 212.60000000000002,
+       "y1": 95.03
+      },
+      {
+       "page": 5,
+       "x0": 214.81,
+       "y0": 85.15,
+       "x1": 222.56,
+       "y1": 102.44
+      },
+      {
+       "page": 5,
+       "x0": 224.77,
+       "y0": 86.07,
+       "x1": 234.73000000000002,
+       "y1": 94.80999999999999
+      },
+      {
+       "page": 5,
+       "x0": 234.73,
+       "y0": 84.49,
+       "x1": 244.92999999999998,
+       "y1": 90.61
+      },
+      {
+       "page": 5,
+       "x0": 248.29,
+       "y0": 86.39,
+       "x1": 405.88,
+       "y1": 95.03
+      }
+     ],
+     "quote": "We optimize with Adam [29], warming up the learning rate for the first 8% of updates to a peak of 5 × 10 -4 for BASE and 3 × 10 -4 for LARGE, and then linearly decay it.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "Adam",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Learning rate warmup for first 8% of updates to a peak of 5 x 10^-4 for BASE",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 107.53,
+      "y0": 75.48,
+      "x1": 503.99,
+      "y1": 102.44
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 107.53,
+       "y0": 75.48,
+       "x1": 503.99,
+       "y1": 84.12
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 86.07,
+       "x1": 112.98,
+       "y1": 94.80999999999999
+      },
+      {
+       "page": 5,
+       "x0": 115.2,
+       "y0": 85.15,
+       "x1": 122.95,
+       "y1": 102.44
+      },
+      {
+       "page": 5,
+       "x0": 125.16,
+       "y0": 86.07,
+       "x1": 135.12,
+       "y1": 94.80999999999999
+      },
+      {
+       "page": 5,
+       "x0": 135.12,
+       "y0": 84.49,
+       "x1": 145.32,
+       "y1": 90.61
+      },
+      {
+       "page": 5,
+       "x0": 148.68,
+       "y0": 86.07,
+       "x1": 212.60000000000002,
+       "y1": 95.03
+      },
+      {
+       "page": 5,
+       "x0": 214.81,
+       "y0": 85.15,
+       "x1": 222.56,
+       "y1": 102.44
+      },
+      {
+       "page": 5,
+       "x0": 224.77,
+       "y0": 86.07,
+       "x1": 234.73000000000002,
+       "y1": 94.80999999999999
+      },
+      {
+       "page": 5,
+       "x0": 234.73,
+       "y0": 84.49,
+       "x1": 244.92999999999998,
+       "y1": 90.61
+      },
+      {
+       "page": 5,
+       "x0": 248.29,
+       "y0": 86.39,
+       "x1": 405.88,
+       "y1": 95.03
+      }
+     ],
+     "quote": "We optimize with Adam [29], warming up the learning rate for the first 8% of updates to a peak of 5 × 10 -4 for BASE and 3 × 10 -4 for LARGE, and then linearly decay it.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate peak",
+   "value_raw": "5 × 10 -4",
+   "value_norm": 0.0005,
+   "scope": "BASE"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Learning rate warmup for first 8% of updates to a peak of 3 x 10^-4 for LARGE",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 107.53,
+      "y0": 75.48,
+      "x1": 503.99,
+      "y1": 102.44
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 107.53,
+       "y0": 75.48,
+       "x1": 503.99,
+       "y1": 84.12
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 86.07,
+       "x1": 112.98,
+       "y1": 94.80999999999999
+      },
+      {
+       "page": 5,
+       "x0": 115.2,
+       "y0": 85.15,
+       "x1": 122.95,
+       "y1": 102.44
+      },
+      {
+       "page": 5,
+       "x0": 125.16,
+       "y0": 86.07,
+       "x1": 135.12,
+       "y1": 94.80999999999999
+      },
+      {
+       "page": 5,
+       "x0": 135.12,
+       "y0": 84.49,
+       "x1": 145.32,
+       "y1": 90.61
+      },
+      {
+       "page": 5,
+       "x0": 148.68,
+       "y0": 86.07,
+       "x1": 212.60000000000002,
+       "y1": 95.03
+      },
+      {
+       "page": 5,
+       "x0": 214.81,
+       "y0": 85.15,
+       "x1": 222.56,
+       "y1": 102.44
+      },
+      {
+       "page": 5,
+       "x0": 224.77,
+       "y0": 86.07,
+       "x1": 234.73000000000002,
+       "y1": 94.80999999999999
+      },
+      {
+       "page": 5,
+       "x0": 234.73,
+       "y0": 84.49,
+       "x1": 244.92999999999998,
+       "y1": 90.61
+      },
+      {
+       "page": 5,
+       "x0": 248.29,
+       "y0": 86.39,
+       "x1": 405.88,
+       "y1": 95.03
+      }
+     ],
+     "quote": "We optimize with Adam [29], warming up the learning rate for the first 8% of updates to a peak of 5 × 10 -4 for BASE and 3 × 10 -4 for LARGE, and then linearly decay it.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate peak",
+   "value_raw": "3 × 10 -4",
+   "value_norm": 0.00030000000000000003,
+   "scope": "LARGE"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Training duration of 250k updates for LARGE",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 86.39,
+      "x1": 504.25,
+      "y1": 105.94
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 410.32,
+       "y0": 86.39,
+       "x1": 504.25,
+       "y1": 95.03
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 97.3,
+       "x1": 407.96,
+       "y1": 105.94
+      }
+     ],
+     "quote": "LARGE trains for 250k updates, BASE for 400k updates, and LARGE on LV-60k for 600k updates.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs/steps",
+   "value_raw": "250k updates",
+   "value_norm": null,
+   "scope": "LARGE"
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Training duration of 400k updates for BASE",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 86.39,
+      "x1": 504.25,
+      "y1": 105.94
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 410.32,
+       "y0": 86.39,
+       "x1": 504.25,
+       "y1": 95.03
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 97.3,
+       "x1": 407.96,
+       "y1": 105.94
+      }
+     ],
+     "quote": "LARGE trains for 250k updates, BASE for 400k updates, and LARGE on LV-60k for 600k updates.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs/steps",
+   "value_raw": "400k updates",
+   "value_norm": null,
+   "scope": "BASE"
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "Training duration of 600k updates for LARGE on LV-60k",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 86.39,
+      "x1": 504.25,
+      "y1": 105.94
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 410.32,
+       "y0": 86.39,
+       "x1": 504.25,
+       "y1": 95.03
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 97.3,
+       "x1": 407.96,
+       "y1": 105.94
+      }
+     ],
+     "quote": "LARGE trains for 250k updates, BASE for 400k updates, and LARGE on LV-60k for 600k updates.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs/steps",
+   "value_raw": "600k updates",
+   "value_norm": null,
+   "scope": "LARGE on LV-60k"
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "Diversity loss weight alpha of 0.1",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 96.98,
+      "x1": 505.0,
+      "y1": 127.75
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 411.04,
+       "y0": 96.98,
+       "x1": 505.0,
+       "y1": 105.94
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 107.89,
+       "x1": 504.0,
+       "y1": 116.85
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 119.11,
+       "x1": 376.7,
+       "y1": 127.75
+      }
+     ],
+     "quote": "We use weight α = 0.1 for the diversity loss Equation 2.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "diversity loss weight",
+   "value_raw": "α = 0.1",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.10",
+   "value": "Quantization module parameters G = 2 and V = 320",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 96.98,
+      "x1": 505.0,
+      "y1": 127.75
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 411.04,
+       "y0": 96.98,
+       "x1": 505.0,
+       "y1": 105.94
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 107.89,
+       "x1": 504.0,
+       "y1": 116.85
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 119.11,
+       "x1": 376.7,
+       "y1": 127.75
+      }
+     ],
+     "quote": "For the quantization module we use G = 2 and V = 320 for both models, resulting in a theoretical maximum of 102.4k codewords.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "quantization groups and codebook size",
+   "value_raw": "G = 2 and V = 320",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.11",
+   "value": "Contrastive loss temperature set to kappa = 0.1",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 140.93,
+      "x1": 504.0,
+      "y1": 160.48000000000002
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 488.2,
+       "y0": 140.93,
+       "x1": 504.0,
+       "y1": 149.57
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 151.52,
+       "x1": 362.47,
+       "y1": 160.48000000000002
+      }
+     ],
+     "quote": "The temperature in the contrastive loss (Equation 3) is set to κ = 0.1.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "contrastive loss temperature",
+   "value_raw": "κ = 0.1",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.12",
+   "value": "Number of distractors K = 100 in contrastive loss",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 195.16,
+      "x1": 504.25,
+      "y1": 215.02999999999997
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 349.95,
+       "y0": 195.16,
+       "x1": 504.25,
+       "y1": 204.12
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 206.39,
+       "x1": 151.99,
+       "y1": 215.02999999999997
+      }
+     ],
+     "quote": "In the contrastive loss we use K = 100 distractors.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "number of distractors",
+   "value_raw": "K = 100",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.13",
+   "value": "Learning rates 2e-5 and 3e-5 tested for Libri-light",
+   "evidence": [
+    {
+     "chunk_id": "b0050",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 272.74,
+      "x1": 504.0,
+      "y1": 314.11
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 190.47,
+       "y0": 272.74,
+       "x1": 504.0,
+       "y1": 281.38
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 283.65,
+       "x1": 504.0,
+       "y1": 292.28999999999996
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 294.56,
+       "x1": 504.0,
+       "y1": 303.2
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 305.47,
+       "x1": 191.29000000000002,
+       "y1": 314.11
+      }
+     ],
+     "quote": "For Libri-light, we train three seeds with two different learning rates (2e-5 and 3e-5) for all subsets and choose the configuration with lowest WER on dev-other subset decoded with the official 4-gram language model (LM) with beam 50 and fixed model weights (LM weight 2, word insertion penalty -1).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "2e-5 and 3e-5",
+   "value_norm": null,
+   "scope": "Libri-light fine-tuning"
+  },
+  {
+   "id": "hyperparameters.14",
+   "value": "Learning rate of 1e-4 for BASE on labeled 960h subset",
+   "evidence": [
+    {
+     "chunk_id": "b0050",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 194.38,
+      "y0": 305.47,
+      "x1": 464.94,
+      "y1": 314.11
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 194.38,
+       "y0": 305.47,
+       "x1": 464.94,
+       "y1": 314.11
+      }
+     ],
+     "quote": "For BASE on the labeled 960h subset we use a learning rate of 1e-4.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "1e-4",
+   "value_norm": 0.0001,
+   "scope": "BASE on labeled 960h subset"
+  },
+  {
+   "id": "hyperparameters.15",
+   "value": "Optimizer is Adam with a tri-state rate schedule",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 107.25,
+      "y0": 321.85,
+      "x1": 504.0,
+      "y1": 341.4
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 107.53,
+       "y0": 321.85,
+       "x1": 504.0,
+       "y1": 330.49
+      },
+      {
+       "page": 5,
+       "x0": 107.25,
+       "y0": 332.76,
+       "x1": 477.31,
+       "y1": 341.4
+      }
+     ],
+     "quote": "We optimize with Adam and a tri-state rate schedule where the learning rate is warmed up for the first 10% of updates, held constant for the next 40% and then linearly decayed for the remainder.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "Adam",
+   "value_norm": null,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.16",
+   "value": "First 10k updates only train the output classifier",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 365.49,
+      "x1": 505.24,
+      "y1": 385.03999999999996
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 262.56,
+       "y0": 365.49,
+       "x1": 505.24,
+       "y1": 374.13
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 376.4,
+       "x1": 287.21000000000004,
+       "y1": 385.03999999999996
+      }
+     ],
+     "quote": "For the first 10k updates only the output classifier is trained, after which the Transformer is also updated.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "classifier-only update steps",
+   "value_raw": "10k updates",
+   "value_norm": null,
+   "scope": "fine-tuning"
+  },
+  {
+   "id": "hyperparameters.17",
+   "value": "BASE model size contains 12 transformer blocks, model dimension 768, inner dimension 3,072, and 8 attention heads",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 107.53,
+      "y0": 573.62,
+      "x1": 504.0,
+      "y1": 604.08
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 107.53,
+       "y0": 573.62,
+       "x1": 503.99,
+       "y1": 582.26
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 584.53,
+       "x1": 504.0,
+       "y1": 593.17
+      },
+      {
+       "page": 4,
+       "x0": 107.67,
+       "y0": 595.44,
+       "x1": 249.70999999999998,
+       "y1": 604.08
+      }
+     ],
+     "quote": "BASE contains 12 transformer blocks, model dimension 768, inner dimension (FFN) 3,072 and 8 attention heads.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "model size",
+   "value_raw": "12 transformer blocks, model dimension 768, inner dimension (FFN) 3,072 and 8 attention heads",
+   "value_norm": null,
+   "scope": "BASE"
+  },
+  {
+   "id": "hyperparameters.18",
+   "value": "LARGE model contains 24 transformer blocks with model dimension 1,024, inner dimension 4,096 and 16 attention heads",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 107.65,
+      "y0": 633.64,
+      "x1": 504.0,
+      "y1": 653.1899999999999
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 107.69,
+       "y0": 633.64,
+       "x1": 504.0,
+       "y1": 642.28
+      },
+      {
+       "page": 4,
+       "x0": 107.65,
+       "y0": 644.55,
+       "x1": 225.69,
+       "y1": 653.1899999999999
+      }
+     ],
+     "quote": "The LARGE model contains 24 transformer blocks with model dimension 1,024, inner dimension 4,096 and 16 attention heads.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "model size",
+   "value_raw": "24 transformer blocks with model dimension 1,024, inner dimension 4,096 and 16 attention heads",
+   "value_norm": null,
+   "scope": "LARGE"
+  },
+  {
+   "id": "hyperparameters.19",
+   "value": "Masking probability p = 0.075 for ablation pre-training",
+   "evidence": [
+    {
+     "chunk_id": "b0064",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 379.33,
+      "x1": 504.25,
+      "y1": 420.7
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 197.27,
+       "y0": 379.33,
+       "x1": 504.0,
+       "y1": 387.96999999999997
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 390.24,
+       "x1": 504.0,
+       "y1": 398.88
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 400.83,
+       "x1": 504.25,
+       "y1": 409.78999999999996
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 412.06,
+       "x1": 286.25,
+       "y1": 420.7
+      }
+     ],
+     "quote": "we pre-train BASE on LS-960 for 250k updates with masking probability p = 0.075, fine-tune on train-10h for 60k updates on a single GPU with 640k samples per batch, or 40 sec of s",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "masking probability",
+   "value_raw": "p = 0.075",
+   "value_norm": null,
+   "scope": "ablation pre-training"
+  },
+  {
+   "id": "hyperparameters.20",
+   "value": "LayerDrop rate of 0.05 for BASE during fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 108.25,
+      "y0": 153.14,
+      "x1": 504.16999999999996,
+      "y1": 172.68
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 316.7,
+       "y0": 153.14,
+       "x1": 504.16999999999996,
+       "y1": 161.77999999999997
+      },
+      {
+       "page": 13,
+       "x0": 108.25,
+       "y0": 164.04,
+       "x1": 287.24,
+       "y1": 172.68
+      }
+     ],
+     "quote": "We use LayerDrop [22,12] at a rate of 0.05 for BASE and 0.1 for LARGE during fine-tuning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "LayerDrop rate",
+   "value_raw": "0.05",
+   "value_norm": 0.05,
+   "scope": "BASE fine-tuning"
+  },
+  {
+   "id": "hyperparameters.21",
+   "value": "LayerDrop rate of 0.1 for LARGE during fine-tuning",
+   "evidence": [
+    {
+     "chunk_id": "b0075",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 108.25,
+      "y0": 153.14,
+      "x1": 504.16999999999996,
+      "y1": 172.68
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 316.7,
+       "y0": 153.14,
+       "x1": 504.16999999999996,
+       "y1": 161.77999999999997
+      },
+      {
+       "page": 13,
+       "x0": 108.25,
+       "y0": 164.04,
+       "x1": 287.24,
+       "y1": 172.68
+      }
+     ],
+     "quote": "We use LayerDrop [22,12] at a rate of 0.05 for BASE and 0.1 for LARGE during fine-tuning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "LayerDrop rate",
+   "value_raw": "0.1",
+   "value_norm": 0.1,
+   "scope": "LARGE fine-tuning"
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Training on a total of 64 V100 GPUs for 1.6 days for BASE",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 606.34,
+      "x1": 504.0,
+      "y1": 625.89
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 188.27,
+       "y0": 606.34,
+       "x1": 504.0,
+       "y1": 614.98
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 617.25,
+       "x1": 386.92,
+       "y1": 625.89
+      }
+     ],
+     "quote": "Crops are batched together to not exceed 1.4m samples per GPU and we train on a total of 64 V100 GPUs for 1.6 days [38]; the total batch size is 1.6h.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "compute.1",
+   "value": "Training on 128 V100 GPUs over 2.3 days for Librispeech and 5.2 days for LibriVox for LARGE",
+   "evidence": [
+    {
+     "chunk_id": "b0046",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 108.0,
+      "y0": 644.55,
+      "x1": 504.0,
+      "y1": 675.01
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 228.79,
+       "y0": 644.55,
+       "x1": 504.0,
+       "y1": 653.1899999999999
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 655.46,
+       "x1": 504.0,
+       "y1": 664.1
+      },
+      {
+       "page": 4,
+       "x0": 108.0,
+       "y0": 666.37,
+       "x1": 200.17000000000002,
+       "y1": 675.01
+      }
+     ],
+     "quote": "We crop 320k audio samples, or 20sec, with a limit of 1.2m samples per GPU and train on 128 V100 GPUs over 2.3 days for Librispeech and 5.2 days for LibriVox; the total batch size is 2.7h.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Training three seeds for Libri-light and reporting average WER and standard deviation",
+   "evidence": [
+    {
+     "chunk_id": "b0050",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 108.0,
+      "y0": 272.74,
+      "x1": 504.0,
+      "y1": 314.11
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 190.47,
+       "y0": 272.74,
+       "x1": 504.0,
+       "y1": 281.38
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 283.65,
+       "x1": 504.0,
+       "y1": 292.28999999999996
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 294.56,
+       "x1": 504.0,
+       "y1": 303.2
+      },
+      {
+       "page": 5,
+       "x0": 108.0,
+       "y0": 305.47,
+       "x1": 191.29000000000002,
+       "y1": 314.11
+      }
+     ],
+     "quote": "For Libri-light, we train three seeds with two different learning rates (2e-5 and 3e-5) for all subsets and choose the configuration with lowest WER on dev-other subset decoded with the official 4-gram language model (LM) with beam 50 and fixed model weights (LM weight 2, word insertion penalty -1).",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "seeds_and_runs.1",
+   "value": "Reporting average WER and standard deviation for three seeds of fine-tuning in ablation setup",
+   "evidence": [
+    {
+     "chunk_id": "b0064",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 108.0,
+      "y0": 412.06,
+      "x1": 504.0,
+      "y1": 431.61
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 289.35,
+       "y0": 412.06,
+       "x1": 504.0,
+       "y1": 420.7
+      },
+      {
+       "page": 8,
+       "x0": 108.0,
+       "y0": 422.97,
+       "x1": 451.15,
+       "y1": 431.61
+      }
+     ],
+     "quote": "We report the average WER and standard deviation on the concatenation of dev-clean and dev-other (dev PER) for three seeds of fine-tuning.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Ablating quantizing the context network input and the targets in the contrastive loss",
+   "evidence": [
+    {
+     "chunk_id": "b0091",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 167.9737091064453,
+      "y0": 230.08538818359375,
+      "x1": 438.46038818359375,
+      "y1": 238.991943359375
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 167.9737091064453,
+       "y0": 230.08538818359375,
+       "x1": 438.46038818359375,
+       "y1": 238.991943359375
+      }
+     ],
+     "quote": "We ablate quantizing the context network input and the targets in the contrastive loss.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.1",
+   "value": "Ablating adding an MLP on top of continuous targets and using separate encoders for input and target representations",
+   "evidence": [
+    {
+     "chunk_id": "b0080",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 108.0,
+      "y0": 560.74,
+      "x1": 504.0,
+      "y1": 602.1
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 224.18,
+       "y0": 560.74,
+       "x1": 504.0,
+       "y1": 569.38
+      },
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 571.65,
+       "x1": 504.0,
+       "y1": 580.29
+      },
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 582.56,
+       "x1": 504.0,
+       "y1": 591.1999999999999
+      },
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 593.46,
+       "x1": 149.22,
+       "y1": 602.1
+      }
+     ],
+     "quote": "First, we tried to improve the continuous input and continuous target model ( § 5.4) by adding an MLP on top of the continuous target representation and we also tried to use a separate set of encoder parameters for the representations used as input and targets (Separate encoders).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ablations.2",
+   "value": "Ablating receptive field size, diversity penalty weight, number of relative positional embeddings, gradient flow from quantizer, number of negatives, negative sampling strategy, Gumbel noise, and number of codebooks",
+   "evidence": [
+    {
+     "chunk_id": "b0081",
+     "page": 18,
+     "bbox": {
+      "page": 18,
+      "x0": 108.0,
+      "y0": 609.85,
+      "x1": 388.6,
+      "y1": 618.49
+     },
+     "boxes": [
+      {
+       "page": 18,
+       "x0": 108.0,
+       "y0": 609.85,
+       "x1": 388.6,
+       "y1": 618.49
+      }
+     ],
+     "quote": "Increasing the receptive field size from 25ms to 30ms had little effect.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Switching to a sequence-to-sequence architecture and word piece vocabulary for performance gains",
+   "evidence": [
+    {
+     "chunk_id": "b0068",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 107.64,
+      "y0": 702.61,
+      "x1": 504.0,
+      "y1": 722.15
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 212.54,
+       "y0": 702.61,
+       "x1": 504.0,
+       "y1": 711.25
+      },
+      {
+       "page": 8,
+       "x0": 107.64,
+       "y0": 713.51,
+       "x1": 199.72,
+       "y1": 722.15
+      }
+     ],
+     "quote": "We expect performance gains by switching to a seq2seq architecture and a word piece vocabulary.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [
+  {
+   "id": "ethics.0",
+   "value": "Making speech recognition technology available to more languages and dialects",
+   "evidence": [
+    {
+     "chunk_id": "b0070",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 107.64,
+      "y0": 131.12,
+      "x1": 504.16,
+      "y1": 161.57999999999998
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 453.31,
+       "y0": 131.12,
+       "x1": 504.16,
+       "y1": 139.76
+      },
+      {
+       "page": 9,
+       "x0": 107.64,
+       "y0": 142.03,
+       "x1": 503.99,
+       "y1": 150.67000000000002
+      },
+      {
+       "page": 9,
+       "x0": 108.0,
+       "y0": 152.94,
+       "x1": 140.93,
+       "y1": 161.57999999999998
+      }
+     ],
+     "quote": "We hope our work will make speech recognition technology more broadly available to many more languages and dialects.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "code_urls": [
+  {
+   "id": "code_urls.0",
+   "value": "https://github.com/pytorch/fairseqPreprint",
+   "evidence": [
+    {
+     "chunk_id": "b0083",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 124.13999938964844,
+      "y0": 704.227783203125,
+      "x1": 233.79908752441406,
+      "y1": 712.2437744140625
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 124.13999938964844,
+       "y0": 704.227783203125,
+       "x1": 233.79908752441406,
+       "y1": 712.2437744140625
+      }
+     ],
+     "quote": "Code and models are available at https://github.com/pytorch/fairseqPreprint.Under review.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  },
+  {
+   "id": "code_urls.1",
+   "value": "https://github.com/facebook/Ax",
+   "evidence": [
+    {
+     "chunk_id": "b0087",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 124.13999938964844,
+      "y0": 714.5215454101562,
+      "x1": 265.3520202636719,
+      "y1": 721.9905395507812
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 124.13999938964844,
+       "y0": 714.5215454101562,
+       "x1": 265.3520202636719,
+       "y1": 721.9905395507812
+      }
+     ],
+     "quote": "https://github.com/facebook/Ax",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "rule"
+  }
+ ],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "Experiments using all labeled data of Librispeech achieve 1.8/3.3 WER on the clean/other test sets.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 347.47,
+      "x1": 468.3,
+      "y1": 377.93
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 417.02,
+       "y0": 347.47,
+       "x1": 468.14,
+       "y1": 356.11
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 358.38,
+       "x1": 363.32,
+       "y1": 367.02
+      },
+      {
+       "page": 1,
+       "x0": 366.99,
+       "y0": 358.38,
+       "x1": 468.3,
+       "y1": 367.02
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 369.29,
+       "x1": 178.91,
+       "y1": 377.93
+      }
+     ],
+     "quote": "Experiments using all labeled data of Librispeech achieve 1.8/3.3 WER on the clean/other test sets.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "Using just ten minutes of labeled data and pre-training on 53k hours of unlabeled data achieves 4.8/8.2 WER.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 143.87,
+      "y0": 391.1,
+      "x1": 468.13,
+      "y1": 410.65
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 243.4,
+       "y0": 391.1,
+       "x1": 468.13,
+       "y1": 399.74
+      },
+      {
+       "page": 1,
+       "x0": 143.87,
+       "y0": 402.01,
+       "x1": 351.06,
+       "y1": 410.65
+      },
+      {
+       "page": 1,
+       "x0": 353.55,
+       "y0": 402.01,
+       "x1": 378.18,
+       "y1": 410.65
+      }
+     ],
+     "quote": "Using just ten minutes of labeled data and pre-training on 53k hours of unlabeled data still achieves 4.8/8.2 WER.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.2",
+   "value": "Jointly learning discrete speech units with contextualized representations achieves substantially better results than fixed units learned in a prior step.",
+   "evidence": [
+    {
+     "chunk_id": "b0011",
+     "page": 2,
+     "bbox": {
+      "page": 2,
+      "x0": 108.0,
+      "y0": 354.03,
+      "x1": 504.0,
+      "y1": 373.58
+     },
+     "boxes": [
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 354.03,
+       "x1": 504.0,
+       "y1": 362.66999999999996
+      },
+      {
+       "page": 2,
+       "x0": 108.0,
+       "y0": 364.94,
+       "x1": 418.16,
+       "y1": 373.58
+      }
+     ],
+     "quote": "Our results show that jointly learning discrete speech units with contextualized representations achieves substantially better results than fixed units learned in a prior step [4].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm",
+   "kind": "qualitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

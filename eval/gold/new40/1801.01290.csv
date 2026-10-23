@@ -1,0 +1,34 @@
+1801.01290,task,,continuous control,deep reinforcement learning|reinforcement learning|continuous control tasks,6,
+1801.01290,datasets,,OpenAI Gym MuJoCo tasks,OpenAI gym|MuJoCo|Hopper-v1|Walker2d-v1|HalfCheetah-v1|Ant-v1|Humanoid-v1,6,
+1801.01290,datasets,,Humanoid (rllab),rllab|rllab Humanoid,6,
+1801.01290,baselines,,DDPG,deep deterministic policy gradient,6,
+1801.01290,baselines,,PPO,proximal policy optimization,6,
+1801.01290,baselines,,soft Q-learning,SQL,6,
+1801.01290,baselines,,TD3,twin delayed deep deterministic policy gradient,6,
+1801.01290,baselines,,Trust-PCL,trust region path consistency learning,6,appendix E
+1801.01290,metrics,,average return,total average return|return,7,
+1801.01290,hyperparameters,optimizer,Adam,,13,
+1801.01290,hyperparameters,learning_rate,3e-4,3 · 10−4,13,
+1801.01290,hyperparameters,gamma,0.99,discount|γ,13,
+1801.01290,hyperparameters,replay_buffer_size,1e6,106|replay buffer size,13,
+1801.01290,hyperparameters,num_layers,2,hidden layers,13,all networks
+1801.01290,hyperparameters,hidden_size,256,hidden units per layer,13,
+1801.01290,hyperparameters,batch_size,256,samples per minibatch,13,
+1801.01290,hyperparameters,target_smoothing_tau,0.005,τ|target smoothing coefficient,13,SAC
+1801.01290,hyperparameters,target_smoothing_tau,1,τ,13,SAC hard target update
+1801.01290,hyperparameters,target_update_interval,1,,13,SAC
+1801.01290,hyperparameters,target_update_interval,1000,,13,SAC hard target update
+1801.01290,hyperparameters,gradient_steps,1,,13,SAC; hard-update humanoids
+1801.01290,hyperparameters,gradient_steps,4,,13,hard target update except humanoids
+1801.01290,hyperparameters,reward_scale,5,,13,Hopper Walker2d HalfCheetah Ant
+1801.01290,hyperparameters,reward_scale,20,,13,Humanoid-v1
+1801.01290,hyperparameters,reward_scale,10,,13,Humanoid (rllab); also Fig. 3 sweep
+1801.01290,hyperparameters,reward_scale,1,,8,sensitivity sweep (Fig. 3)
+1801.01290,hyperparameters,reward_scale,3,,8,sensitivity sweep (Fig. 3)
+1801.01290,hyperparameters,reward_scale,30,,8,sensitivity sweep (Fig. 3)
+1801.01290,hyperparameters,reward_scale,100,,8,sensitivity sweep (Fig. 3)
+1801.01290,hyperparameters,target_smoothing_tau,0.0001,τ,8,sensitivity sweep (Fig. 3)
+1801.01290,hyperparameters,target_smoothing_tau,0.001,τ,8,sensitivity sweep (Fig. 3)
+1801.01290,hyperparameters,target_smoothing_tau,0.01,τ,8,sensitivity sweep (Fig. 3)
+1801.01290,hyperparameters,target_smoothing_tau,0.1,τ,8,sensitivity sweep (Fig. 3)
+1801.01290,code_urls,,https://github.com/haarnoja/sac,github.com/haarnoja/sac,6,

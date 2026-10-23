@@ -1,0 +1,2152 @@
+{
+ "metadata": {
+  "title": "Training Compute-Optimal Large Language Models",
+  "authors": [
+   "Jordan Hoffmann",
+   "Sebastian Borgeaud",
+   "Arthur Mensch",
+   "Elena Buchatskaya",
+   "Trevor Cai",
+   "Eliza Rutherford",
+   "Diego De",
+   "Las Casas",
+   "Lisa Anne Hendricks",
+   "Johannes Welbl",
+   "Aidan Clark",
+   "Tom Hennigan",
+   "Eric Noland",
+   "Katie Millican",
+   "George Van Den Driessche",
+   "Bogdan Damoc",
+   "Aurelia Guy",
+   "Simon Osindero",
+   "Karen Simonyan",
+   "Erich Elsen",
+   "Jack W Rae",
+   "Oriol Vinyals",
+   "Laurent Sifre"
+  ],
+  "venue": null,
+  "year": "2022",
+  "arxiv_id": "2203.15556v1[cs.CL]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Current large language models are significantly undertrained because recent focus has been on scaling model size while keeping the amount of training data constant.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 62.36,
+      "y0": 224.66,
+      "x1": 534.54,
+      "y1": 262.33
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 215.5,
+       "y0": 224.66,
+       "x1": 534.54,
+       "y1": 233.64
+      },
+      {
+       "page": 1,
+       "x0": 62.36,
+       "y0": 239.01,
+       "x1": 532.91,
+       "y1": 247.98999999999998
+      },
+      {
+       "page": 1,
+       "x0": 62.36,
+       "y0": 253.35,
+       "x1": 166.91,
+       "y1": 262.33
+      }
+     ],
+     "quote": "We find that current large language models are significantly undertrained, a consequence of the recent focus on scaling language models whilst keeping the amount of training data constant.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "Training over 400 language models to find that compute-optimal training requires scaling model size and training tokens equally.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 62.36,
+      "y0": 253.35,
+      "x1": 533.12,
+      "y1": 305.37
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 170.12,
+       "y0": 253.35,
+       "x1": 532.9200000000001,
+       "y1": 262.33
+      },
+      {
+       "page": 1,
+       "x0": 62.36,
+       "y0": 267.7,
+       "x1": 532.91,
+       "y1": 276.68
+      },
+      {
+       "page": 1,
+       "x0": 62.36,
+       "y0": 282.05,
+       "x1": 533.12,
+       "y1": 291.03000000000003
+      },
+      {
+       "page": 1,
+       "x0": 62.36,
+       "y0": 296.39,
+       "x1": 261.23,
+       "y1": 305.37
+      }
+     ],
+     "quote": "By training over 400 language models ranging from 70 million to over 16 billion parameters on 5 to 500 billion tokens, we find that for compute-optimal training, the model size and the number of training tokens should be scaled equally: for every doubling of model size the number of training tokens should also be doubled.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "Introducing Chinchilla, a compute-optimal model that outperforms existing large language models.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 61.78,
+      "y0": 296.39,
+      "x1": 534.54,
+      "y1": 334.06
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 267.26,
+       "y0": 296.39,
+       "x1": 534.54,
+       "y1": 305.37
+      },
+      {
+       "page": 1,
+       "x0": 62.36,
+       "y0": 310.74,
+       "x1": 532.92,
+       "y1": 319.72
+      },
+      {
+       "page": 1,
+       "x0": 61.78,
+       "y0": 325.08,
+       "x1": 154.05,
+       "y1": 334.06
+      }
+     ],
+     "quote": "We test this hypothesis by training a predicted computeoptimal model, Chinchilla, that uses the same compute budget as Gopher but with 70B parameters and 4× more more data.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "Training transformer language models under a given compute budget.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 61.89,
+      "y0": 210.32,
+      "x1": 532.91,
+      "y1": 233.64
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 61.89,
+       "y0": 210.32,
+       "x1": 532.91,
+       "y1": 219.29999999999998
+      },
+      {
+       "page": 1,
+       "x0": 62.36,
+       "y0": 224.66,
+       "x1": 209.39999999999998,
+       "y1": 233.64
+      }
+     ],
+     "quote": "We investigate the optimal model size and number of tokens for training a transformer language model under a given compute budget.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "Varying training steps across a fixed family of models to extract minimum loss for given training FLOPs and fitting power laws.",
+   "evidence": [
+    {
+     "chunk_id": "b0018",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 62.06,
+      "y0": 337.49,
+      "x1": 534.74,
+      "y1": 361.95000000000005
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 62.36,
+       "y0": 337.49,
+       "x1": 532.91,
+       "y1": 348.40000000000003
+      },
+      {
+       "page": 5,
+       "x0": 62.06,
+       "y0": 351.04,
+       "x1": 534.74,
+       "y1": 361.95000000000005
+      }
+     ],
+     "quote": "In our first approach we vary the number of training steps for a fixed family of models (ranging from 70M to over 10B parameters), training each model for 4 different number of training sequences.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "Varying model size for a fixed set of training FLOP counts and considering the final training loss to find the optimal parameter count per FLOP budget.",
+   "evidence": [
+    {
+     "chunk_id": "b0022",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 61.46,
+      "y0": 617.92,
+      "x1": 532.9,
+      "y1": 655.93
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 62.36,
+       "y0": 617.92,
+       "x1": 527.99,
+       "y1": 628.8299999999999
+      },
+      {
+       "page": 5,
+       "x0": 61.46,
+       "y0": 631.47,
+       "x1": 163.46,
+       "y1": 642.38
+      },
+      {
+       "page": 5,
+       "x0": 163.46,
+       "y0": 629.71,
+       "x1": 172.32,
+       "y1": 637.6800000000001
+      },
+      {
+       "page": 5,
+       "x0": 176.01,
+       "y0": 631.47,
+       "x1": 219.48,
+       "y1": 642.38
+      },
+      {
+       "page": 5,
+       "x0": 219.48,
+       "y0": 629.71,
+       "x1": 228.33999999999997,
+       "y1": 637.6800000000001
+      },
+      {
+       "page": 5,
+       "x0": 232.03,
+       "y0": 631.47,
+       "x1": 532.9,
+       "y1": 642.38
+      },
+      {
+       "page": 5,
+       "x0": 62.36,
+       "y0": 645.02,
+       "x1": 476.85,
+       "y1": 655.93
+      }
+     ],
+     "quote": "In our second approach we vary the model size for a fixed set of 9 different training FLOP counts (ranging from 6 × 10 18 to 3 × 10 21 FLOPs), and consider the final training loss for each point .",
+     "grounding_status": "verified",
+     "match_score": 93.9
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "Minimizing the Huber loss using the L-BFGS algorithm on a parametric modeling of the loss to estimate optimal scaling.",
+   "evidence": [
+    {
+     "chunk_id": "b0025",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 62.36,
+      "y0": 638.2,
+      "x1": 532.92,
+      "y1": 662.66
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 141.54,
+       "y0": 638.2,
+       "x1": 532.92,
+       "y1": 649.11
+      },
+      {
+       "page": 6,
+       "x0": 62.36,
+       "y0": 651.75,
+       "x1": 423.75,
+       "y1": 662.66
+      }
+     ],
+     "quote": "To estimate ( , , , , ), we minimize the Huber loss (Huber, 1964) between the predicted and observed log loss using the L-BFGS algorithm (Nocedal, 1980)",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "The finding that parameter count and number of training tokens should be scaled equally with increased compute is in contrast to previous work.",
+   "evidence": [
+    {
+     "chunk_id": "b0016",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 61.94,
+      "y0": 654.33,
+      "x1": 532.91,
+      "y1": 678.79
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 248.02,
+       "y0": 654.33,
+       "x1": 532.91,
+       "y1": 665.24
+      },
+      {
+       "page": 4,
+       "x0": 61.94,
+       "y0": 667.88,
+       "x1": 206.67,
+       "y1": 678.79
+      }
+     ],
+     "quote": "This is in clear contrast to previous work on this topic and warrants further investigation.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "MassiveText subset used for pre-training Chinchilla",
+   "evidence": [
+    {
+     "chunk_id": "b0038",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 77.74,
+      "y0": 326.89,
+      "x1": 534.48,
+      "y1": 351.35
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 77.74,
+       "y0": 326.89,
+       "x1": 533.09,
+       "y1": 337.8
+      },
+      {
+       "page": 9,
+       "x0": 89.64,
+       "y0": 340.44,
+       "x1": 534.48,
+       "y1": 351.35
+      }
+     ],
+     "quote": "• We train Chinchilla on MassiveText (the same dataset as Gopher) but use a slightly different subset distribution (shown in Table A1) to account for the increased number of training tokens.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "MassiveText",
+   "split": "",
+   "size": "",
+   "public": "unknown"
+  },
+  {
+   "id": "datasets.1",
+   "value": "The Pile evaluation subsets",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 62.06,
+      "y0": 660.15,
+      "x1": 534.43,
+      "y1": 711.7099999999999
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 79.3,
+       "y0": 660.15,
+       "x1": 534.43,
+       "y1": 671.06
+      },
+      {
+       "page": 10,
+       "x0": 62.06,
+       "y0": 673.7,
+       "x1": 532.9200000000001,
+       "y1": 684.61
+      },
+      {
+       "page": 10,
+       "x0": 62.36,
+       "y0": 687.25,
+       "x1": 533.33,
+       "y1": 698.16
+      },
+      {
+       "page": 10,
+       "x0": 62.36,
+       "y0": 700.8,
+       "x1": 183.86,
+       "y1": 711.7099999999999
+      }
+     ],
+     "quote": "Chinchilla significantly outperforms Gopher on all evaluation subsets of The Pile (Gao et al., 2020), as shown in Figure 5.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "The Pile",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "Wikitext103 benchmark for language modelling",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 62.06,
+      "y0": 700.8,
+      "x1": 532.9100000000001,
+      "y1": 725.26
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 187.44,
+       "y0": 700.8,
+       "x1": 532.9100000000001,
+       "y1": 711.7099999999999
+      },
+      {
+       "page": 10,
+       "x0": 62.06,
+       "y0": 714.35,
+       "x1": 225.13,
+       "y1": 725.26
+      }
+     ],
+     "quote": "On Wikitext103 (Merity et al., 2017), Chinchilla achieves a perplexity of 7.16 compared to 7.75 for Gopher.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Wikitext103",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "Massive Multitask Language Understanding (MMLU) benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 62.04,
+      "y0": 372.67,
+      "x1": 532.92,
+      "y1": 397.13000000000005
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 62.04,
+       "y0": 372.67,
+       "x1": 532.92,
+       "y1": 383.58000000000004
+      },
+      {
+       "page": 11,
+       "x0": 62.36,
+       "y0": 386.22,
+       "x1": 330.3,
+       "y1": 397.13000000000005
+      }
+     ],
+     "quote": "The Massive Multitask Language Understanding (MMLU) benchmark (Hendrycks et al., 2020) consists of a range of exam-like questions on academic subjects.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Massive Multitask Language Understanding (MMLU)",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.4",
+   "value": "LAMBADA final word prediction dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 61.96,
+      "y0": 595.17,
+      "x1": 533.38,
+      "y1": 619.63
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 61.96,
+       "y0": 595.17,
+       "x1": 533.38,
+       "y1": 606.0799999999999
+      },
+      {
+       "page": 11,
+       "x0": 62.36,
+       "y0": 608.72,
+       "x1": 515.48,
+       "y1": 619.63
+      }
+     ],
+     "quote": "On the final word prediction dataset LAMBADA (Paperno et al., 2016), Chinchilla achieves 77.4% accuracy, compared to 74.5% accuracy from Gopher and 76.6% from MT-NLG 530B (see Table 7).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "LAMBADA",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.5",
+   "value": "RACE-h and RACE-m reading comprehension datasets",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 62.36,
+      "y0": 608.72,
+      "x1": 533.18,
+      "y1": 646.7199999999999
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 518.98,
+       "y0": 608.72,
+       "x1": 532.91,
+       "y1": 619.63
+      },
+      {
+       "page": 11,
+       "x0": 62.36,
+       "y0": 622.27,
+       "x1": 533.18,
+       "y1": 633.18
+      },
+      {
+       "page": 11,
+       "x0": 62.36,
+       "y0": 635.81,
+       "x1": 280.19,
+       "y1": 646.7199999999999
+      }
+     ],
+     "quote": "On RACE-h and RACE-m (Lai et al., 2017), Chinchilla greatly outperforms Gopher, improving accuracy by more than 10% in both cases-see Table 7.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "RACE-h and RACE-m",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.6",
+   "value": "BIG-bench tasks collection",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 61.86,
+      "y0": 688.95,
+      "x1": 532.91,
+      "y1": 713.41
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 61.86,
+       "y0": 688.95,
+       "x1": 532.91,
+       "y1": 699.86
+      },
+      {
+       "page": 11,
+       "x0": 62.36,
+       "y0": 702.5,
+       "x1": 159.49,
+       "y1": 713.41
+      }
+     ],
+     "quote": "We analysed Chinchilla on the same set of BIG-bench tasks (BIG-bench collaboration, 2021) reported in Rae et al. (2021).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "BIG-bench",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.7",
+   "value": "Common sense benchmarks including PIQA, SIQA, Winogrande, HellaSwag, and BoolQ",
+   "evidence": [
+    {
+     "chunk_id": "b0055",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 61.46,
+      "y0": 587.09,
+      "x1": 533.47,
+      "y1": 625.1
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 61.86,
+       "y0": 587.09,
+       "x1": 532.91,
+       "y1": 598.0
+      },
+      {
+       "page": 12,
+       "x0": 62.36,
+       "y0": 600.64,
+       "x1": 533.47,
+       "y1": 611.55
+      },
+      {
+       "page": 12,
+       "x0": 61.46,
+       "y0": 614.19,
+       "x1": 158.53,
+       "y1": 625.1
+      }
+     ],
+     "quote": "We evaluate Chinchilla on various common sense benchmarks: PIQA (Bisk et al., 2020), SIQA (Sap et al., 2019), Winogrande (Sakaguchi et al., 2020), HellaSwag (Zellers et al., 2019), and BoolQ (Clark et al., 2019).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "PIQA, SIQA, Winogrande, HellaSwag, and BoolQ",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.8",
+   "value": "TruthfulQA benchmark",
+   "evidence": [
+    {
+     "chunk_id": "b0056",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 62.36,
+      "y0": 648.07,
+      "x1": 532.92,
+      "y1": 672.52
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 79.3,
+       "y0": 648.07,
+       "x1": 532.92,
+       "y1": 658.98
+      },
+      {
+       "page": 12,
+       "x0": 62.36,
+       "y0": 661.61,
+       "x1": 244.47000000000003,
+       "y1": 672.52
+      }
+     ],
+     "quote": "On TruthfulQA (Lin et al., 2021), Chinchilla reaches 43.6%, 58.5%, and 66.7% accuracy with 0-shot, 5-shot, and 10-shot respectively.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "TruthfulQA",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.9",
+   "value": "Natural Questions closed-book question answering dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 61.96,
+      "y0": 391.46,
+      "x1": 534.3100000000001,
+      "y1": 429.47
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 459.16,
+       "y0": 391.46,
+       "x1": 532.9100000000001,
+       "y1": 402.37
+      },
+      {
+       "page": 13,
+       "x0": 61.96,
+       "y0": 405.01,
+       "x1": 534.3100000000001,
+       "y1": 415.92
+      },
+      {
+       "page": 13,
+       "x0": 62.06,
+       "y0": 418.56,
+       "x1": 470.54,
+       "y1": 429.47
+      }
+     ],
+     "quote": "On the Natural Questions dataset (Kwiatkowski et al., 2019), Chinchilla achieves new closed-book SOTA accuracies: 31.5% 5-shot and 35.5% 64-shot, compared to 21% and 28% respectively, for Gopher.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "Natural Questions",
+   "split": "dev",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.10",
+   "value": "TriviaQA question answering dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0059",
+     "page": 13,
+     "bbox": {
+      "page": 13,
+      "x0": 61.46,
+      "y0": 418.56,
+      "x1": 533.26,
+      "y1": 456.56
+     },
+     "boxes": [
+      {
+       "page": 13,
+       "x0": 474.08,
+       "y0": 418.56,
+       "x1": 533.26,
+       "y1": 429.47
+      },
+      {
+       "page": 13,
+       "x0": 61.46,
+       "y0": 432.11,
+       "x1": 533.2,
+       "y1": 443.02000000000004
+      },
+      {
+       "page": 13,
+       "x0": 61.94,
+       "y0": 445.65,
+       "x1": 459.39,
+       "y1": 456.56
+      }
+     ],
+     "quote": "On TriviaQA (Joshi et al., 2017) we show results for both the filtered (previously used in retrieval and open-book work) and unfiltered set (previously used in large language model evaluations).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "TriviaQA",
+   "split": "filtered and unfiltered",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.11",
+   "value": "C4 dataset used for IsoFLOP analysis",
+   "evidence": [
+    {
+     "chunk_id": "b0198",
+     "page": 22,
+     "bbox": {
+      "page": 22,
+      "x0": 61.86,
+      "y0": 547.68,
+      "x1": 534.31,
+      "y1": 585.6899999999999
+     },
+     "boxes": [
+      {
+       "page": 22,
+       "x0": 61.86,
+       "y0": 547.68,
+       "x1": 534.31,
+       "y1": 558.5899999999999
+      },
+      {
+       "page": 22,
+       "x0": 62.01,
+       "y0": 561.23,
+       "x1": 532.91,
+       "y1": 572.14
+      },
+      {
+       "page": 22,
+       "x0": 62.36,
+       "y0": 574.78,
+       "x1": 172.76,
+       "y1": 585.6899999999999
+      }
+     ],
+     "quote": "We show scaling results from an IsoFLOP (Approach 2) analysis after training on two different datasets: C4 (Raffel et al., 2020b) and GitHub code (we show results with data from Rae et al. ( 2021)), results are shown in Table A2.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "C4",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.12",
+   "value": "GitHub code dataset used for IsoFLOP analysis",
+   "evidence": [
+    {
+     "chunk_id": "b0198",
+     "page": 22,
+     "bbox": {
+      "page": 22,
+      "x0": 61.86,
+      "y0": 547.68,
+      "x1": 534.31,
+      "y1": 585.6899999999999
+     },
+     "boxes": [
+      {
+       "page": 22,
+       "x0": 61.86,
+       "y0": 547.68,
+       "x1": 534.31,
+       "y1": 558.5899999999999
+      },
+      {
+       "page": 22,
+       "x0": 62.01,
+       "y0": 561.23,
+       "x1": 532.91,
+       "y1": 572.14
+      },
+      {
+       "page": 22,
+       "x0": 62.36,
+       "y0": 574.78,
+       "x1": 172.76,
+       "y1": 585.6899999999999
+      }
+     ],
+     "quote": "We show scaling results from an IsoFLOP (Approach 2) analysis after training on two different datasets: C4 (Raffel et al., 2020b) and GitHub code (we show results with data from Rae et al. ( 2021)), results are shown in Table A2.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "GitHub code",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "Gopher model",
+   "evidence": [
+    {
+     "chunk_id": "b0034",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 62.36,
+      "y0": 153.77,
+      "x1": 533.12,
+      "y1": 178.23
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 136.39,
+       "y0": 153.77,
+       "x1": 533.12,
+       "y1": 164.68
+      },
+      {
+       "page": 9,
+       "x0": 62.36,
+       "y0": 167.32,
+       "x1": 90.38,
+       "y1": 178.23
+      }
+     ],
+     "quote": "In this section we compare this model, which we call Chinchilla, to Gopher and other LLMs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "Jurassic-1 (178B)",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 62.06,
+      "y0": 660.15,
+      "x1": 534.43,
+      "y1": 711.7099999999999
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 79.3,
+       "y0": 660.15,
+       "x1": 534.43,
+       "y1": 671.06
+      },
+      {
+       "page": 10,
+       "x0": 62.06,
+       "y0": 673.7,
+       "x1": 532.9200000000001,
+       "y1": 684.61
+      },
+      {
+       "page": 10,
+       "x0": 62.36,
+       "y0": 687.25,
+       "x1": 533.33,
+       "y1": 698.16
+      },
+      {
+       "page": 10,
+       "x0": 62.36,
+       "y0": 700.8,
+       "x1": 183.86,
+       "y1": 711.7099999999999
+      }
+     ],
+     "quote": "Compared to Jurassic-1 (178B) Lieber et al. (2021), Chinchilla is more performant on all but two subsets-dm_mathematics and ubuntu_irc-see Table A5 for a raw bits-per-byte comparison.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "MT-NLG 530B",
+   "evidence": [
+    {
+     "chunk_id": "b0051",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 61.96,
+      "y0": 595.17,
+      "x1": 533.38,
+      "y1": 619.63
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 61.96,
+       "y0": 595.17,
+       "x1": 533.38,
+       "y1": 606.0799999999999
+      },
+      {
+       "page": 11,
+       "x0": 62.36,
+       "y0": 608.72,
+       "x1": 515.48,
+       "y1": 619.63
+      }
+     ],
+     "quote": "On the final word prediction dataset LAMBADA (Paperno et al., 2016), Chinchilla achieves 77.4% accuracy, compared to 74.5% accuracy from Gopher and 76.6% from MT-NLG 530B (see Table 7).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "GPT-3",
+   "evidence": [
+    {
+     "chunk_id": "b0055",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 62.36,
+      "y0": 614.19,
+      "x1": 532.9100000000001,
+      "y1": 638.65
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 162.99,
+       "y0": 614.19,
+       "x1": 532.9100000000001,
+       "y1": 625.1
+      },
+      {
+       "page": 12,
+       "x0": 62.36,
+       "y0": 627.74,
+       "x1": 346.66,
+       "y1": 638.65
+      }
+     ],
+     "quote": "We find that Chinchilla outperforms both Gopher and GPT-3 on all tasks and outperforms MT-NLG 530B on all but one task-see Table 8.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Language modelling loss",
+   "evidence": [
+    {
+     "chunk_id": "b0038",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 77.74,
+      "y0": 353.99,
+      "x1": 532.92,
+      "y1": 391.99
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 77.74,
+       "y0": 353.99,
+       "x1": 532.91,
+       "y1": 364.90000000000003
+      },
+      {
+       "page": 9,
+       "x0": 89.64,
+       "y0": 367.54,
+       "x1": 532.92,
+       "y1": 378.45000000000005
+      },
+      {
+       "page": 9,
+       "x0": 89.64,
+       "y0": 381.08,
+       "x1": 166.57999999999998,
+       "y1": 391.99
+      }
+     ],
+     "quote": "• We use AdamW (Loshchilov and Hutter, 2019) for Chinchilla rather than Adam (Kingma and Ba, 2014) as this improves the language modelling loss and the downstream task performance after finetuning.foot_7",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "Bits-per-byte",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 62.06,
+      "y0": 660.15,
+      "x1": 534.43,
+      "y1": 711.7099999999999
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 79.3,
+       "y0": 660.15,
+       "x1": 534.43,
+       "y1": 671.06
+      },
+      {
+       "page": 10,
+       "x0": 62.06,
+       "y0": 673.7,
+       "x1": 532.9200000000001,
+       "y1": 684.61
+      },
+      {
+       "page": 10,
+       "x0": 62.36,
+       "y0": 687.25,
+       "x1": 533.33,
+       "y1": 698.16
+      },
+      {
+       "page": 10,
+       "x0": 62.36,
+       "y0": 700.8,
+       "x1": 183.86,
+       "y1": 711.7099999999999
+      }
+     ],
+     "quote": "Compared to Jurassic-1 (178B) Lieber et al. (2021), Chinchilla is more performant on all but two subsets-dm_mathematics and ubuntu_irc-see Table A5 for a raw bits-per-byte comparison.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "Perplexity",
+   "evidence": [
+    {
+     "chunk_id": "b0045",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 62.06,
+      "y0": 700.8,
+      "x1": 532.9100000000001,
+      "y1": 725.26
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 187.44,
+       "y0": 700.8,
+       "x1": 532.9100000000001,
+       "y1": 711.7099999999999
+      },
+      {
+       "page": 10,
+       "x0": 62.06,
+       "y0": 714.35,
+       "x1": 225.13,
+       "y1": 725.26
+      }
+     ],
+     "quote": "On Wikitext103 (Merity et al., 2017), Chinchilla achieves a perplexity of 7.16 compared to 7.75 for Gopher.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.3",
+   "value": "Accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0048",
+     "page": 11,
+     "bbox": {
+      "page": 11,
+      "x0": 62.04,
+      "y0": 399.77,
+      "x1": 534.43,
+      "y1": 437.77000000000004
+     },
+     "boxes": [
+      {
+       "page": 11,
+       "x0": 444.13,
+       "y0": 399.77,
+       "x1": 534.43,
+       "y1": 410.68
+      },
+      {
+       "page": 11,
+       "x0": 62.04,
+       "y0": 413.31,
+       "x1": 532.92,
+       "y1": 424.22
+      },
+      {
+       "page": 11,
+       "x0": 62.06,
+       "y0": 426.86,
+       "x1": 254.23,
+       "y1": 437.77000000000004
+      }
+     ],
+     "quote": "On this benchmark, Chinchilla significantly outperforms Gopher despite being much smaller, with an average accuracy of 67.6% (improving upon Gopher by 7.6%).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.4",
+   "value": "PerspectiveAPI toxicity score",
+   "evidence": [
+    {
+     "chunk_id": "b0063",
+     "page": 14,
+     "bbox": {
+      "page": 14,
+      "x0": 62.36,
+      "y0": 733.6,
+      "x1": 143.23000000000002,
+      "y1": 744.51
+     },
+     "boxes": [
+      {
+       "page": 14,
+       "x0": 62.36,
+       "y0": 733.6,
+       "x1": 143.23000000000002,
+       "y1": 744.51
+      },
+      {
+       "page": 15,
+       "x0": 200.86,
+       "y0": 251.79,
+       "x1": 532.9100000000001,
+       "y1": 262.7
+      },
+      {
+       "page": 15,
+       "x0": 62.36,
+       "y0": 265.34,
+       "x1": 495.01,
+       "y1": 276.25
+      }
+     ],
+     "quote": "We generate 25,000 unprompted samples from Chinchilla, and compare their PerspectiveAPI toxicity score distribution to that of Gopher-generated samples.",
+     "grounding_status": "verified",
+     "match_score": 99.3
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Optimizer used for Chinchilla",
+   "evidence": [
+    {
+     "chunk_id": "b0038",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 77.74,
+      "y0": 353.99,
+      "x1": 532.92,
+      "y1": 391.99
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 77.74,
+       "y0": 353.99,
+       "x1": 532.91,
+       "y1": 364.90000000000003
+      },
+      {
+       "page": 9,
+       "x0": 89.64,
+       "y0": 367.54,
+       "x1": 532.92,
+       "y1": 378.45000000000005
+      },
+      {
+       "page": 9,
+       "x0": 89.64,
+       "y0": 381.08,
+       "x1": 166.57999999999998,
+       "y1": 391.99
+      }
+     ],
+     "quote": "• We use AdamW (Loshchilov and Hutter, 2019) for Chinchilla rather than Adam (Kingma and Ba, 2014) as this improves the language modelling loss and the downstream task performance after finetuning.foot_7",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "AdamW",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Maximum learning rate for Gopher 280B",
+   "evidence": [
+    {
+     "chunk_id": "b0178",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 70.864013671875,
+      "y0": 598.4887084960938,
+      "x1": 524.4117431640625,
+      "y1": 611.583251953125
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 70.864013671875,
+       "y0": 598.4887084960938,
+       "x1": 524.4117431640625,
+       "y1": 611.583251953125
+      }
+     ],
+     "quote": "Gopher 280B | 80 | 128 | 128 | 16,384 | 4 × 10^−^5 | 3M → 6M",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "maximum learning rate",
+   "value_raw": "4 × 10^−^5",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Batch size for Gopher 280B",
+   "evidence": [
+    {
+     "chunk_id": "b0178",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 70.864013671875,
+      "y0": 598.4887084960938,
+      "x1": 524.4117431640625,
+      "y1": 611.583251953125
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 70.864013671875,
+       "y0": 598.4887084960938,
+       "x1": 524.4117431640625,
+       "y1": 611.583251953125
+      }
+     ],
+     "quote": "Gopher 280B | 80 | 128 | 128 | 16,384 | 4 × 10^−^5 | 3M → 6M",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "3M → 6M",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Maximum learning rate for Chinchilla 70B",
+   "evidence": [
+    {
+     "chunk_id": "b0178",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 70.864013671875,
+      "y0": 612.0386962890625,
+      "x1": 524.4117431640625,
+      "y1": 625.1332397460938
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 70.864013671875,
+       "y0": 612.0386962890625,
+       "x1": 524.4117431640625,
+       "y1": 625.1332397460938
+      }
+     ],
+     "quote": "Chinchilla 70B | 80 | 64 | 128 | 8,192 | 1 × 10^−^4 | 1.5M → 3M",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "maximum learning rate",
+   "value_raw": "1 × 10^−^4",
+   "value_norm": null,
+   "scope": ""
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Batch size for Chinchilla 70B",
+   "evidence": [
+    {
+     "chunk_id": "b0178",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 70.864013671875,
+      "y0": 612.0386962890625,
+      "x1": 524.4117431640625,
+      "y1": 625.1332397460938
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 70.864013671875,
+       "y0": 612.0386962890625,
+       "x1": 524.4117431640625,
+       "y1": 625.1332397460938
+      }
+     ],
+     "quote": "Chinchilla 70B | 80 | 64 | 128 | 8,192 | 1 × 10^−^4 | 1.5M → 3M",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "1.5M → 3M",
+   "value_norm": null,
+   "scope": ""
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "Hardware used for training models",
+   "evidence": [
+    {
+     "chunk_id": "b0040",
+     "page": 9,
+     "bbox": {
+      "page": 9,
+      "x0": 61.88,
+      "y0": 518.77,
+      "x1": 532.92,
+      "y1": 543.23
+     },
+     "boxes": [
+      {
+       "page": 9,
+       "x0": 121.84,
+       "y0": 518.77,
+       "x1": 532.92,
+       "y1": 529.68
+      },
+      {
+       "page": 9,
+       "x0": 61.88,
+       "y0": 532.32,
+       "x1": 362.34,
+       "y1": 543.23
+      }
+     ],
+     "quote": "All models in this analysis have been trained on TPUv3/TPUv4 (Jouppi et al., 2017) with JAX (Bradbury et al., 2018) and Haiku (Hennigan et al., 2020).",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [],
+ "results": [],
+ "ablations": [],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "Only two large-scale training runs are available for comparison due to high costs.",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 62.36,
+      "y0": 638.74,
+      "x1": 533.1800000000001,
+      "y1": 676.74
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 300.82,
+       "y0": 638.74,
+       "x1": 533.1800000000001,
+       "y1": 649.65
+      },
+      {
+       "page": 15,
+       "x0": 62.36,
+       "y0": 652.29,
+       "x1": 532.91,
+       "y1": 663.1999999999999
+      },
+      {
+       "page": 15,
+       "x0": 62.36,
+       "y0": 665.83,
+       "x1": 249.57,
+       "y1": 676.74
+      }
+     ],
+     "quote": "Due to the cost of training large models, we only have two comparable training runs at large scale (Chinchilla and Gopher), and we do not have additional tests at intermediate scales.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.1",
+   "value": "The power-law assumption shows concavity at high compute budgets, risking overestimation of optimal model sizes.",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 62.36,
+      "y0": 665.83,
+      "x1": 532.92,
+      "y1": 703.8399999999999
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 254.74,
+       "y0": 665.83,
+       "x1": 532.9100000000001,
+       "y1": 676.74
+      },
+      {
+       "page": 15,
+       "x0": 62.36,
+       "y0": 679.38,
+       "x1": 532.92,
+       "y1": 690.29
+      },
+      {
+       "page": 15,
+       "x0": 62.36,
+       "y0": 692.93,
+       "x1": 185.34,
+       "y1": 703.8399999999999
+      }
+     ],
+     "quote": "Furthermore, we assume that the efficient computational frontier can be described by a power-law relationship between the compute budget, model size, and number of training tokens.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.2",
+   "value": "All training runs used less than a single epoch of data.",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 61.94,
+      "y0": 720.03,
+      "x1": 532.91,
+      "y1": 744.49
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 62.36,
+       "y0": 720.03,
+       "x1": 532.91,
+       "y1": 730.9399999999999
+      },
+      {
+       "page": 15,
+       "x0": 61.94,
+       "y0": 733.58,
+       "x1": 277.2,
+       "y1": 744.49
+      }
+     ],
+     "quote": "Finally, the training runs for our analysis have all been trained on less than an epoch of data; future work may consider the multiple epoch regime.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "limitations.3",
+   "value": "Chinchilla was only trained once because of the high costs of large language model training.",
+   "evidence": [
+    {
+     "chunk_id": "b0138",
+     "page": 32,
+     "bbox": {
+      "page": 32,
+      "x0": 245.39,
+      "y0": 600.86,
+      "x1": 527.72,
+      "y1": 625.3199999999999
+     },
+     "boxes": [
+      {
+       "page": 32,
+       "x0": 245.39,
+       "y0": 600.86,
+       "x1": 527.72,
+       "y1": 611.77
+      },
+      {
+       "page": 32,
+       "x0": 245.39,
+       "y0": 614.41,
+       "x1": 416.65999999999997,
+       "y1": 625.3199999999999
+      }
+     ],
+     "quote": "Due to the costs of training large language models, we did not train Chinchilla multiple times.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Explore the multiple epoch regime in future training runs.",
+   "evidence": [
+    {
+     "chunk_id": "b0067",
+     "page": 15,
+     "bbox": {
+      "page": 15,
+      "x0": 61.94,
+      "y0": 720.03,
+      "x1": 532.91,
+      "y1": 744.49
+     },
+     "boxes": [
+      {
+       "page": 15,
+       "x0": 62.36,
+       "y0": 720.03,
+       "x1": 532.91,
+       "y1": 730.9399999999999
+      },
+      {
+       "page": 15,
+       "x0": 61.94,
+       "y0": 733.58,
+       "x1": 277.2,
+       "y1": 744.49
+      }
+     ],
+     "quote": "Finally, the training runs for our analysis have all been trained on less than an epoch of data; future work may consider the multiple epoch regime.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.1",
+   "value": "Better understand the interaction between large language model performance and toxicity.",
+   "evidence": [
+    {
+     "chunk_id": "b0068",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 62.36,
+      "y0": 230.08,
+      "x1": 532.92,
+      "y1": 268.09000000000003
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 434.34,
+       "y0": 230.08,
+       "x1": 532.92,
+       "y1": 240.99
+      },
+      {
+       "page": 16,
+       "x0": 62.36,
+       "y0": 243.63,
+       "x1": 532.91,
+       "y1": 254.54
+      },
+      {
+       "page": 16,
+       "x0": 62.36,
+       "y0": 257.18,
+       "x1": 105.41,
+       "y1": 268.09000000000003
+      }
+     ],
+     "quote": "Better understanding how performance of large language models and toxicity interact is an important future research question.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "future_work.2",
+   "value": "Account for curvature in the FLOP-minimal loss frontier for large FLOP budgets.",
+   "evidence": [
+    {
+     "chunk_id": "b0104",
+     "page": 27,
+     "bbox": {
+      "page": 27,
+      "x0": 61.94,
+      "y0": 539.59,
+      "x1": 534.43,
+      "y1": 577.6
+     },
+     "boxes": [
+      {
+       "page": 27,
+       "x0": 475.75,
+       "y0": 539.59,
+       "x1": 534.43,
+       "y1": 550.5
+      },
+      {
+       "page": 27,
+       "x0": 61.94,
+       "y0": 553.14,
+       "x1": 532.9100000000001,
+       "y1": 564.05
+      },
+      {
+       "page": 27,
+       "x0": 62.36,
+       "y0": 566.69,
+       "x1": 324.68,
+       "y1": 577.6
+      }
+     ],
+     "quote": "In this work, we do not take this in to account and we leave this as interesting future work as it suggests that even smaller models may be optimal for large FLOP budgets.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "ethics": [
+  {
+   "id": "ethics.0",
+   "value": "Training on trillions of tokens from web-scraped datasets introduces privacy, bias, and toxic language concerns.",
+   "evidence": [
+    {
+     "chunk_id": "b0068",
+     "page": 16,
+     "bbox": {
+      "page": 16,
+      "x0": 62.36,
+      "y0": 175.89,
+      "x1": 532.91,
+      "y1": 200.35
+     },
+     "boxes": [
+      {
+       "page": 16,
+       "x0": 239.6,
+       "y0": 175.89,
+       "x1": 532.91,
+       "y1": 186.79999999999998
+      },
+      {
+       "page": 16,
+       "x0": 62.36,
+       "y0": 189.44,
+       "x1": 165.31,
+       "y1": 200.35
+      }
+     ],
+     "quote": "Finally, training for trillions of tokens introduces many ethical and privacy concerns.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.1",
+   "value": "The model can output toxic language, emulate societal stereotypes, and reflect biased sentiment regarding race, religion, and country.",
+   "evidence": [
+    {
+     "chunk_id": "b0149",
+     "page": 33,
+     "bbox": {
+      "page": 33,
+      "x0": 260.77,
+      "y0": 592.7,
+      "x1": 527.72,
+      "y1": 617.16
+     },
+     "boxes": [
+      {
+       "page": 33,
+       "x0": 260.77,
+       "y0": 592.7,
+       "x1": 527.72,
+       "y1": 603.61
+      },
+      {
+       "page": 33,
+       "x0": 272.66,
+       "y0": 606.25,
+       "x1": 432.20000000000005,
+       "y1": 617.16
+      }
+     ],
+     "quote": "Our model is capable of outputting toxic language as measured by the PerspectiveAPI.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.2",
+   "value": "Internet-derived training data undoubtedly contains personal information, toxic content, and biases.",
+   "evidence": [
+    {
+     "chunk_id": "b0160",
+     "page": 34,
+     "bbox": {
+      "page": 34,
+      "x0": 245.39,
+      "y0": 275.29,
+      "x1": 527.99,
+      "y1": 299.75
+     },
+     "boxes": [
+      {
+       "page": 34,
+       "x0": 245.39,
+       "y0": 275.29,
+       "x1": 527.99,
+       "y1": 286.20000000000005
+      },
+      {
+       "page": 34,
+       "x0": 245.39,
+       "y0": 288.84,
+       "x1": 503.25,
+       "y1": 299.75
+      }
+     ],
+     "quote": "The data is collected from the internet, and thus undoubtedly there is toxic/biased content in our training dataset.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "code_urls": [],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "Chinchilla reaches a state-of-the-art average accuracy of 67.5% on the MMLU benchmark.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 62.07,
+      "y0": 368.12,
+      "x1": 532.9200000000001,
+      "y1": 391.45000000000005
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 207.61,
+       "y0": 368.12,
+       "x1": 532.9200000000001,
+       "y1": 377.1
+      },
+      {
+       "page": 1,
+       "x0": 62.07,
+       "y0": 382.47,
+       "x1": 424.94,
+       "y1": 391.45000000000005
+      }
+     ],
+     "quote": "As a highlight, Chinchilla reaches a state-of-the-art average accuracy of 67.5% on the MMLU benchmark, greater than a 7% improvement over Gopher.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  },
+  {
+   "id": "claims.1",
+   "value": "Chinchilla uniformly and significantly outperforms Gopher, GPT-3, Jurassic-1, and Megatron-Turing NLG.",
+   "evidence": [
+    {
+     "chunk_id": "b0001",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 61.9,
+      "y0": 325.08,
+      "x1": 534.63,
+      "y1": 348.41
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 157.9,
+       "y0": 325.08,
+       "x1": 534.35,
+       "y1": 334.06
+      },
+      {
+       "page": 1,
+       "x0": 61.9,
+       "y0": 339.43,
+       "x1": 534.63,
+       "y1": 348.41
+      }
+     ],
+     "quote": "Chinchilla uniformly and significantly outperforms Gopher (280B), GPT-3 (175B), Jurassic-1 (178B), and Megatron-Turing NLG (530B) on a large range of downstream evaluation tasks.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.99,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}

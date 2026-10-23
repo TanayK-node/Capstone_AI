@@ -1,0 +1,2298 @@
+{
+ "metadata": {
+  "title": "A ConvNet for the 2020s",
+  "authors": [
+   "Zhuang Liu",
+   "Hanzi Mao",
+   "Chao-Yuan Wu",
+   "Christoph Feichtenhofer",
+   "Trevor Darrell",
+   "Saining Xie"
+  ],
+  "venue": null,
+  "year": "2022",
+  "arxiv_id": "2201.03545v2[cs.CV]",
+  "doi": null,
+  "urls": []
+ },
+ "problem": [
+  {
+   "id": "problem.0",
+   "value": "Vanilla Vision Transformers face difficulties when applied to general computer vision tasks such as object detection and semantic segmentation.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 269.33,
+      "x1": 286.36,
+      "y1": 301.83
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 96.63,
+       "y0": 269.33,
+       "x1": 286.36,
+       "y1": 277.91999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 281.28,
+       "x1": 286.36,
+       "y1": 289.86999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 293.24,
+       "x1": 201.39999999999998,
+       "y1": 301.83
+      }
+     ],
+     "quote": "A vanilla ViT, on the other hand, faces difficulties when applied to general computer vision tasks such as object detection and semantic segmentation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "problem.1",
+   "value": "The effectiveness of hybrid hierarchical Transformer approaches is credited to Transformers rather than convolution inductive biases.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 341.06,
+      "x1": 288.09999999999997,
+      "y1": 385.52
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 250.14,
+       "y0": 341.06,
+       "x1": 288.09999999999997,
+       "y1": 349.65
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 353.01,
+       "x1": 286.36,
+       "y1": 361.59999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 364.97,
+       "x1": 286.36,
+       "y1": 373.56
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 376.93,
+       "x1": 256.05,
+       "y1": 385.52
+      }
+     ],
+     "quote": "However, the effectiveness of such hybrid approaches is still largely credited to the intrinsic superiority of Transformers, rather than the inherent inductive biases of convolutions.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "contributions": [
+  {
+   "id": "contributions.0",
+   "value": "We gradually modernize a standard ResNet toward the design of a vision Transformer and discover key performance components.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 400.84,
+      "x1": 288.57,
+      "y1": 445.28999999999996
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 183.79,
+       "y0": 400.84,
+       "x1": 288.57,
+       "y1": 409.42999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 412.79,
+       "x1": 288.1,
+       "y1": 421.38
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 424.75,
+       "x1": 286.35,
+       "y1": 433.34
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 436.7,
+       "x1": 204.37,
+       "y1": 445.28999999999996
+      }
+     ],
+     "quote": "We gradually \"modernize\" a standard ResNet toward the design of a vision Transformer, and discover several key components that contribute to the performance difference along the way.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "contributions.1",
+   "value": "We propose a family of pure ConvNet models dubbed ConvNeXt that compete favorably with Transformers in accuracy and scalability.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 436.7,
+      "x1": 288.01,
+      "y1": 469.2
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 207.45,
+       "y0": 436.7,
+       "x1": 286.36,
+       "y1": 445.28999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 448.66,
+       "x1": 288.01,
+       "y1": 457.25
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 460.61,
+       "x1": 76.41,
+       "y1": 469.2
+      }
+     ],
+     "quote": "The outcome of this exploration is a family of pure ConvNet models dubbed Con-vNeXt.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "task": [
+  {
+   "id": "task.0",
+   "value": "image classification",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 269.33,
+      "x1": 286.36,
+      "y1": 301.83
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 96.63,
+       "y0": 269.33,
+       "x1": 286.36,
+       "y1": 277.91999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 281.28,
+       "x1": 286.36,
+       "y1": 289.86999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 293.24,
+       "x1": 201.39999999999998,
+       "y1": 301.83
+      }
+     ],
+     "quote": "A vanilla ViT, on the other hand, faces difficulties when applied to general computer vision tasks such as object detection and semantic segmentation.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "task.1",
+   "value": "object detection",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 269.33,
+      "x1": 286.36,
+      "y1": 301.83
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 96.63,
+       "y0": 269.33,
+       "x1": 286.36,
+       "y1": 277.91999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 281.28,
+       "x1": 286.36,
+       "y1": 289.86999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 293.24,
+       "x1": 201.39999999999998,
+       "y1": 301.83
+      }
+     ],
+     "quote": "A vanilla ViT, on the other hand, faces difficulties when applied to general computer vision tasks such as object detection and semantic segmentation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "task.2",
+   "value": "semantic segmentation",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 50.11,
+      "y0": 269.33,
+      "x1": 286.36,
+      "y1": 301.83
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 96.63,
+       "y0": 269.33,
+       "x1": 286.36,
+       "y1": 277.91999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 281.28,
+       "x1": 286.36,
+       "y1": 289.86999999999995
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 293.24,
+       "x1": 201.39999999999998,
+       "y1": 301.83
+      }
+     ],
+     "quote": "A vanilla ViT, on the other hand, faces difficulties when applied to general computer vision tasks such as object detection and semantic segmentation.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "method_summary": [
+  {
+   "id": "method_summary.0",
+   "value": "Starting from a ResNet-50 baseline, the authors progressively modernize the architecture by adopting various design choices inspired by Swin Transformers, such as macro design adjustments, inverted bottlenecks, and large kernel sizes.",
+   "evidence": [
+    {
+     "chunk_id": "b0014",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 86.18,
+      "y0": 493.93,
+      "x1": 251.4,
+      "y1": 502.57
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 86.18,
+       "y0": 493.93,
+       "x1": 251.4,
+       "y1": 502.57
+      }
+     ],
+     "quote": "Our starting point is a ResNet-50 model.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.1",
+   "value": "The network is trained using an enhanced training recipe close to DeiT and Swin Transformer, utilizing the AdamW optimizer, extensive data augmentations, and regularization techniques over 300 epochs.",
+   "evidence": [
+    {
+     "chunk_id": "b0016",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 308.5,
+      "y0": 183.07,
+      "x1": 546.36,
+      "y1": 215.62
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 493.81,
+       "y0": 183.07,
+       "x1": 546.36,
+       "y1": 191.70999999999998
+      },
+      {
+       "page": 3,
+       "x0": 308.5,
+       "y0": 195.03,
+       "x1": 545.11,
+       "y1": 203.67000000000002
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 206.98,
+       "x1": 412.29,
+       "y1": 215.62
+      }
+     ],
+     "quote": "In our study, we use a training recipe that is close to DeiT's [73] and Swin Transformer's [45].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.2",
+   "value": "Macro design modifications include changing the stage compute ratio to 1:1:9:1 or equivalent, and replacing the standard ResNet stem with a patchify layer using a non-overlapping convolution.",
+   "evidence": [
+    {
+     "chunk_id": "b0022",
+     "page": 4,
+     "bbox": {
+      "page": 4,
+      "x0": 49.75,
+      "y0": 206.98,
+      "x1": 288.01,
+      "y1": 239.52999999999997
+     },
+     "boxes": [
+      {
+       "page": 4,
+       "x0": 131.38,
+       "y0": 206.98,
+       "x1": 286.37,
+       "y1": 215.62
+      },
+      {
+       "page": 4,
+       "x0": 49.75,
+       "y0": 218.94,
+       "x1": 288.01,
+       "y1": 227.57999999999998
+      },
+      {
+       "page": 4,
+       "x0": 49.86,
+       "y0": 230.89,
+       "x1": 115.55,
+       "y1": 239.52999999999997
+      }
+     ],
+     "quote": "We replace the ResNet-style stem cell with a patchify layer implemented using a 4×4, stride 4 convolutional layer.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "method_summary.3",
+   "value": "Micro-level designs are updated to match Transformer properties, including the use of depthwise convolutions for ResNeXt-style grouped convolutions, inverted bottlenecks, 7x7 large kernels, a single GELU activation per block, and Layer Normalization instead of BatchNorm.",
+   "evidence": [
+    {
+     "chunk_id": "b0044",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 308.86,
+      "y0": 660.93,
+      "x1": 545.12,
+      "y1": 681.48
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 320.82,
+       "y0": 660.93,
+       "x1": 545.12,
+       "y1": 669.52
+      },
+      {
+       "page": 5,
+       "x0": 308.86,
+       "y0": 672.89,
+       "x1": 467.54,
+       "y1": 681.48
+      }
+     ],
+     "quote": "From now on, we will use one LayerNorm as our choice of normalization in each residual block.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "novelty": [
+  {
+   "id": "novelty.0",
+   "value": "The paper demonstrates that design choices from vision Transformers can be systematically mapped and adapted to standard ConvNets to create a modernized architecture called ConvNeXt.",
+   "evidence": [
+    {
+     "chunk_id": "b0037",
+     "page": 5,
+     "bbox": {
+      "page": 5,
+      "x0": 50.11,
+      "y0": 195.23,
+      "x1": 288.02,
+      "y1": 227.77999999999997
+     },
+     "boxes": [
+      {
+       "page": 5,
+       "x0": 213.11,
+       "y0": 195.23,
+       "x1": 288.02,
+       "y1": 203.87
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 207.19,
+       "x1": 288.01,
+       "y1": 215.82999999999998
+      },
+      {
+       "page": 5,
+       "x0": 50.11,
+       "y0": 219.14,
+       "x1": 249.22000000000003,
+       "y1": 227.77999999999997
+      }
+     ],
+     "quote": "Intriguingly, a significant portion of the design choices taken in a vision Transformer may be mapped to ConvNet instantiations.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "novelty.1",
+   "value": "The authors show that while individual architectural components were previously researched separately in the past decade, combining them collectively yields a pure ConvNet that can outperform the Swin Transformer without specialized modules like shifted window attention.",
+   "evidence": [
+    {
+     "chunk_id": "b0049",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11,
+      "y0": 335.76,
+      "x1": 288.01,
+      "y1": 368.26
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 152.6,
+       "y0": 335.76,
+       "x1": 286.35,
+       "y1": 344.58
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 347.71,
+       "x1": 288.01,
+       "y1": 356.29999999999995
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 359.67,
+       "x1": 64.97,
+       "y1": 368.26
+      }
+     ],
+     "quote": "It is worth noting that all design choices discussed so far are adapted from vision Transformers.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "datasets": [
+  {
+   "id": "datasets.0",
+   "value": "ImageNet-1K dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 50.11,
+      "y0": 262.86,
+      "x1": 422.05,
+      "y1": 713.15
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 210.84,
+       "y0": 692.56,
+       "x1": 286.36,
+       "y1": 701.1999999999999
+      },
+      {
+       "page": 6,
+       "x0": 50.11,
+       "y0": 704.51,
+       "x1": 136.48000000000002,
+       "y1": 713.15
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 262.86,
+       "x1": 422.05,
+       "y1": 271.82
+      }
+     ],
+     "quote": "Training on ImageNet-1K.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ImageNet-1K",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.1",
+   "value": "ImageNet-22K dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 399.09,
+      "x1": 441.75,
+      "y1": 408.04999999999995
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 399.09,
+       "x1": 441.75,
+       "y1": 408.04999999999995
+      }
+     ],
+     "quote": "Pre-training on ImageNet-22K.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ImageNet-22K",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.2",
+   "value": "COCO dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0069",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 388.49,
+      "x1": 288.02,
+      "y1": 421.03999999999996
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 253.07,
+       "y0": 388.49,
+       "x1": 288.02,
+       "y1": 397.13
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 400.44,
+       "x1": 286.36,
+       "y1": 409.08
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 412.4,
+       "x1": 240.63,
+       "y1": 421.03999999999996
+      }
+     ],
+     "quote": "We finetune Mask R-CNN [27] and Cascade Mask R-CNN [9] on the COCO dataset with ConvNeXt backbones.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "COCO",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  },
+  {
+   "id": "datasets.3",
+   "value": "ADE20K dataset",
+   "evidence": [
+    {
+     "chunk_id": "b0070",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 564.73,
+      "x1": 288.01,
+      "y1": 597.28
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 215.03,
+       "y0": 564.73,
+       "x1": 286.37,
+       "y1": 573.37
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 576.69,
+       "x1": 288.01,
+       "y1": 585.33
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 588.64,
+       "x1": 167.24,
+       "y1": 597.28
+      }
+     ],
+     "quote": "We also evaluate ConvNeXt backbones on the ADE20K semantic segmentation task with UperNet [85].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "ADE20K",
+   "split": "",
+   "size": "",
+   "public": "yes"
+  }
+ ],
+ "baselines": [
+  {
+   "id": "baselines.0",
+   "value": "ResNet-50/200",
+   "evidence": [
+    {
+     "chunk_id": "b0016",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 308.86,
+      "y0": 123.3,
+      "x1": 546.76,
+      "y1": 167.8
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 465.85,
+       "y0": 123.3,
+       "x1": 545.11,
+       "y1": 131.94
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 135.25,
+       "x1": 546.76,
+       "y1": 143.89
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 147.21,
+       "x1": 546.76,
+       "y1": 155.85000000000002
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 159.16,
+       "x1": 339.63,
+       "y1": 167.8
+      }
+     ],
+     "quote": "Thus, the first step of our exploration is to train a baseline model with the vision Transformer training procedure, in this case, ResNet-50/200.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.1",
+   "value": "DeiT",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 608.87,
+      "x1": 546.76,
+      "y1": 665.33
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 373.88,
+       "y0": 608.87,
+       "x1": 546.76,
+       "y1": 617.51
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 620.83,
+       "x1": 545.11,
+       "y1": 629.47
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 632.78,
+       "x1": 545.11,
+       "y1": 641.42
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 644.74,
+       "x1": 545.11,
+       "y1": 653.38
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 656.69,
+       "x1": 396.37,
+       "y1": 665.33
+      }
+     ],
+     "quote": "Table 1 (upper) shows the result comparison with two recent Transformer variants, DeiT [73] and Swin Transformers [45], as well as two ConvNets from architecture search -RegNets [54], EfficientNets [71] and EfficientNetsV2 [72].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.2",
+   "value": "Swin Transformers",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 608.87,
+      "x1": 546.76,
+      "y1": 665.33
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 373.88,
+       "y0": 608.87,
+       "x1": 546.76,
+       "y1": 617.51
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 620.83,
+       "x1": 545.11,
+       "y1": 629.47
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 632.78,
+       "x1": 545.11,
+       "y1": 641.42
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 644.74,
+       "x1": 545.11,
+       "y1": 653.38
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 656.69,
+       "x1": 396.37,
+       "y1": 665.33
+      }
+     ],
+     "quote": "Table 1 (upper) shows the result comparison with two recent Transformer variants, DeiT [73] and Swin Transformers [45], as well as two ConvNets from architecture search -RegNets [54], EfficientNets [71] and EfficientNetsV2 [72].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.3",
+   "value": "RegNets",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 608.87,
+      "x1": 546.76,
+      "y1": 665.33
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 373.88,
+       "y0": 608.87,
+       "x1": 546.76,
+       "y1": 617.51
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 620.83,
+       "x1": 545.11,
+       "y1": 629.47
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 632.78,
+       "x1": 545.11,
+       "y1": 641.42
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 644.74,
+       "x1": 545.11,
+       "y1": 653.38
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 656.69,
+       "x1": 396.37,
+       "y1": 665.33
+      }
+     ],
+     "quote": "Table 1 (upper) shows the result comparison with two recent Transformer variants, DeiT [73] and Swin Transformers [45], as well as two ConvNets from architecture search -RegNets [54], EfficientNets [71] and EfficientNetsV2 [72].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "baselines.4",
+   "value": "EfficientNets",
+   "evidence": [
+    {
+     "chunk_id": "b0057",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 608.87,
+      "x1": 546.76,
+      "y1": 665.33
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 373.88,
+       "y0": 608.87,
+       "x1": 546.76,
+       "y1": 617.51
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 620.83,
+       "x1": 545.11,
+       "y1": 629.47
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 632.78,
+       "x1": 545.11,
+       "y1": 641.42
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 644.74,
+       "x1": 545.11,
+       "y1": 653.38
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 656.69,
+       "x1": 396.37,
+       "y1": 665.33
+      }
+     ],
+     "quote": "Table 1 (upper) shows the result comparison with two recent Transformer variants, DeiT [73] and Swin Transformers [45], as well as two ConvNets from architecture search -RegNets [54], EfficientNets [71] and EfficientNetsV2 [72].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "metrics": [
+  {
+   "id": "metrics.0",
+   "value": "Top-1 Accuracy",
+   "evidence": [
+    {
+     "chunk_id": "b0094",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 308.86,
+      "y0": 524.21,
+      "x1": 546.76,
+      "y1": 556.76
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 435.01,
+       "y0": 524.21,
+       "x1": 546.76,
+       "y1": 532.85
+      },
+      {
+       "page": 10,
+       "x0": 308.86,
+       "y0": 536.17,
+       "x1": 545.11,
+       "y1": 544.81
+      },
+      {
+       "page": 10,
+       "x0": 308.86,
+       "y0": 548.12,
+       "x1": 338.82,
+       "y1": 556.76
+      }
+     ],
+     "quote": "The ImageNet-1K top-1 accuracies and FLOPs for each step are shown in Table 10 and 11.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.1",
+   "value": "AP",
+   "evidence": [
+    {
+     "chunk_id": "b0064",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 313.32,
+      "x1": 286.37,
+      "y1": 332.03999999999996
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 216.09,
+       "y0": 313.32,
+       "x1": 286.37,
+       "y1": 321.09
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 324.27,
+       "x1": 209.55,
+       "y1": 332.03999999999996
+      }
+     ],
+     "quote": "AP numbers of the ResNet-50 and X101 models are from [45].",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  },
+  {
+   "id": "metrics.2",
+   "value": "mIoU",
+   "evidence": [
+    {
+     "chunk_id": "b0066",
+     "page": 8,
+     "bbox": null,
+     "boxes": [],
+     "quote": "In Appendix B, we report validation mIoU with multi-scale testing.",
+     "grounding_status": "unlocated",
+     "match_score": null
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "hyperparameters": [
+  {
+   "id": "hyperparameters.0",
+   "value": "Optimizer for ImageNet-1K training",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 263.25,
+      "x1": 546.85,
+      "y1": 283.84
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 427.04,
+       "y0": 263.25,
+       "x1": 545.11,
+       "y1": 271.89
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 275.2,
+       "x1": 546.85,
+       "y1": 283.84
+      }
+     ],
+     "quote": "We train ConvNeXts for 300 epochs using AdamW [46] with a learning rate of 4e-3.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "AdamW",
+   "value_norm": null,
+   "scope": "Training on ImageNet-1K"
+  },
+  {
+   "id": "hyperparameters.1",
+   "value": "Learning rate for ImageNet-1K training",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 263.25,
+      "x1": 546.85,
+      "y1": 283.84
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 427.04,
+       "y0": 263.25,
+       "x1": 545.11,
+       "y1": 271.89
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 275.2,
+       "x1": 546.85,
+       "y1": 283.84
+      }
+     ],
+     "quote": "We train ConvNeXts for 300 epochs using AdamW [46] with a learning rate of 4e-3.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "4e-3",
+   "value_norm": 0.004,
+   "scope": "Training on ImageNet-1K"
+  },
+  {
+   "id": "hyperparameters.2",
+   "value": "Warmup epochs for ImageNet-1K training",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.55,
+      "y0": 287.16,
+      "x1": 545.11,
+      "y1": 307.75
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 308.55,
+       "y0": 287.16,
+       "x1": 545.11,
+       "y1": 295.8
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 299.11,
+       "x1": 389.67,
+       "y1": 307.75
+      }
+     ],
+     "quote": "There is a 20-epoch linear warmup and a cosine decaying schedule afterward.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "warmup epochs",
+   "value_raw": "20",
+   "value_norm": 20.0,
+   "scope": "Training on ImageNet-1K"
+  },
+  {
+   "id": "hyperparameters.3",
+   "value": "Batch size for ImageNet-1K training",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.5,
+      "y0": 299.11,
+      "x1": 545.11,
+      "y1": 319.71
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 396.92,
+       "y0": 299.11,
+       "x1": 545.11,
+       "y1": 307.75
+      },
+      {
+       "page": 6,
+       "x0": 308.5,
+       "y0": 311.07,
+       "x1": 398.7,
+       "y1": 319.71
+      }
+     ],
+     "quote": "We use a batch size of 4096 and a weight decay of 0.05.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "4096",
+   "value_norm": 4096.0,
+   "scope": "Training on ImageNet-1K"
+  },
+  {
+   "id": "hyperparameters.4",
+   "value": "Weight decay for ImageNet-1K training",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.5,
+      "y0": 299.11,
+      "x1": 545.11,
+      "y1": 319.71
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 396.92,
+       "y0": 299.11,
+       "x1": 545.11,
+       "y1": 307.75
+      },
+      {
+       "page": 6,
+       "x0": 308.5,
+       "y0": 311.07,
+       "x1": 398.7,
+       "y1": 319.71
+      }
+     ],
+     "quote": "We use a batch size of 4096 and a weight decay of 0.05.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "0.05",
+   "value_norm": 0.05,
+   "scope": "Training on ImageNet-1K"
+  },
+  {
+   "id": "hyperparameters.5",
+   "value": "Training epochs for ImageNet-1K training",
+   "evidence": [
+    {
+     "chunk_id": "b0052",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 263.25,
+      "x1": 546.85,
+      "y1": 283.84
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 427.04,
+       "y0": 263.25,
+       "x1": 545.11,
+       "y1": 271.89
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 275.2,
+       "x1": 546.85,
+       "y1": 283.84
+      }
+     ],
+     "quote": "We train ConvNeXts for 300 epochs using AdamW [46] with a learning rate of 4e-3.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "300",
+   "value_norm": 300.0,
+   "scope": "Training on ImageNet-1K"
+  },
+  {
+   "id": "hyperparameters.6",
+   "value": "Pre-training epochs on ImageNet-22K",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 399.48,
+      "x1": 546.86,
+      "y1": 420.08
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 446.74,
+       "y0": 399.48,
+       "x1": 545.11,
+       "y1": 408.12
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 411.44,
+       "x1": 546.86,
+       "y1": 420.08
+      }
+     ],
+     "quote": "We pre-train ConvNeXts on ImageNet-22K for 90 epochs with a warmup of 5 epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "90",
+   "value_norm": 90.0,
+   "scope": "Pre-training on ImageNet-22K"
+  },
+  {
+   "id": "hyperparameters.7",
+   "value": "Pre-training warmup epochs on ImageNet-22K",
+   "evidence": [
+    {
+     "chunk_id": "b0053",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 399.48,
+      "x1": 546.86,
+      "y1": 420.08
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 446.74,
+       "y0": 399.48,
+       "x1": 545.11,
+       "y1": 408.12
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 411.44,
+       "x1": 546.86,
+       "y1": 420.08
+      }
+     ],
+     "quote": "We pre-train ConvNeXts on ImageNet-22K for 90 epochs with a warmup of 5 epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "warmup epochs",
+   "value_raw": "5",
+   "value_norm": 5.0,
+   "scope": "Pre-training on ImageNet-22K"
+  },
+  {
+   "id": "hyperparameters.8",
+   "value": "Fine-tuning epochs on ImageNet-1K",
+   "evidence": [
+    {
+     "chunk_id": "b0054",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 440.07,
+      "x1": 546.77,
+      "y1": 460.66999999999996
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 444.05,
+       "y0": 440.07,
+       "x1": 546.77,
+       "y1": 448.71
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 452.03,
+       "x1": 529.1800000000001,
+       "y1": 460.66999999999996
+      }
+     ],
+     "quote": "We fine-tune ImageNet-22K pre-trained models on ImageNet-1K for 30 epochs.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "epochs",
+   "value_raw": "30",
+   "value_norm": 30.0,
+   "scope": "Fine-tuning on ImageNet-1K"
+  },
+  {
+   "id": "hyperparameters.9",
+   "value": "Fine-tuning optimizer on ImageNet-1K",
+   "evidence": [
+    {
+     "chunk_id": "b0054",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 452.03,
+      "x1": 546.35,
+      "y1": 496.53
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 532.31,
+       "y0": 452.03,
+       "x1": 545.1099999999999,
+       "y1": 460.66999999999996
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 463.98,
+       "x1": 545.11,
+       "y1": 472.62
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 475.94,
+       "x1": 546.35,
+       "y1": 484.58
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 487.89,
+       "x1": 495.41,
+       "y1": 496.53
+      }
+     ],
+     "quote": "We use AdamW, a learning rate of 5e-5, cosine learning rate schedule, layer-wise learning rate decay [6,12], no warmup, a batch size of 512, and weight decay of 1e-8.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "optimizer",
+   "value_raw": "AdamW",
+   "value_norm": null,
+   "scope": "Fine-tuning on ImageNet-1K"
+  },
+  {
+   "id": "hyperparameters.10",
+   "value": "Fine-tuning learning rate on ImageNet-1K",
+   "evidence": [
+    {
+     "chunk_id": "b0054",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 452.03,
+      "x1": 546.35,
+      "y1": 496.53
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 532.31,
+       "y0": 452.03,
+       "x1": 545.1099999999999,
+       "y1": 460.66999999999996
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 463.98,
+       "x1": 545.11,
+       "y1": 472.62
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 475.94,
+       "x1": 546.35,
+       "y1": 484.58
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 487.89,
+       "x1": 495.41,
+       "y1": 496.53
+      }
+     ],
+     "quote": "We use AdamW, a learning rate of 5e-5, cosine learning rate schedule, layer-wise learning rate decay [6,12], no warmup, a batch size of 512, and weight decay of 1e-8.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "learning rate",
+   "value_raw": "5e-5",
+   "value_norm": 0.00005,
+   "scope": "Fine-tuning on ImageNet-1K"
+  },
+  {
+   "id": "hyperparameters.11",
+   "value": "Fine-tuning batch size on ImageNet-1K",
+   "evidence": [
+    {
+     "chunk_id": "b0054",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 452.03,
+      "x1": 546.35,
+      "y1": 496.53
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 532.31,
+       "y0": 452.03,
+       "x1": 545.1099999999999,
+       "y1": 460.66999999999996
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 463.98,
+       "x1": 545.11,
+       "y1": 472.62
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 475.94,
+       "x1": 546.35,
+       "y1": 484.58
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 487.89,
+       "x1": 495.41,
+       "y1": 496.53
+      }
+     ],
+     "quote": "We use AdamW, a learning rate of 5e-5, cosine learning rate schedule, layer-wise learning rate decay [6,12], no warmup, a batch size of 512, and weight decay of 1e-8.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "512",
+   "value_norm": 512.0,
+   "scope": "Fine-tuning on ImageNet-1K"
+  },
+  {
+   "id": "hyperparameters.12",
+   "value": "Fine-tuning weight decay on ImageNet-1K",
+   "evidence": [
+    {
+     "chunk_id": "b0054",
+     "page": 6,
+     "bbox": {
+      "page": 6,
+      "x0": 308.86,
+      "y0": 452.03,
+      "x1": 546.35,
+      "y1": 496.53
+     },
+     "boxes": [
+      {
+       "page": 6,
+       "x0": 532.31,
+       "y0": 452.03,
+       "x1": 545.1099999999999,
+       "y1": 460.66999999999996
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 463.98,
+       "x1": 545.11,
+       "y1": 472.62
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 475.94,
+       "x1": 546.35,
+       "y1": 484.58
+      },
+      {
+       "page": 6,
+       "x0": 308.86,
+       "y0": 487.89,
+       "x1": 495.41,
+       "y1": 496.53
+      }
+     ],
+     "quote": "We use AdamW, a learning rate of 5e-5, cosine learning rate schedule, layer-wise learning rate decay [6,12], no warmup, a batch size of 512, and weight decay of 1e-8.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "weight decay",
+   "value_raw": "1e-8",
+   "value_norm": 1e-8,
+   "scope": "Fine-tuning on ImageNet-1K"
+  },
+  {
+   "id": "hyperparameters.13",
+   "value": "Semantic segmentation iterations on ADE20K",
+   "evidence": [
+    {
+     "chunk_id": "b0070",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 588.64,
+      "x1": 286.37,
+      "y1": 609.24
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 170.3,
+       "y0": 588.64,
+       "x1": 286.37,
+       "y1": 597.28
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 600.6,
+       "x1": 216.16000000000003,
+       "y1": 609.24
+      }
+     ],
+     "quote": "All model variants are trained for 160K iterations with a batch size of 16.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "iterations",
+   "value_raw": "160K",
+   "value_norm": 160000.0,
+   "scope": "Semantic segmentation on ADE20K"
+  },
+  {
+   "id": "hyperparameters.14",
+   "value": "Semantic segmentation batch size on ADE20K",
+   "evidence": [
+    {
+     "chunk_id": "b0070",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 588.64,
+      "x1": 286.37,
+      "y1": 609.24
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 170.3,
+       "y0": 588.64,
+       "x1": 286.37,
+       "y1": 597.28
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 600.6,
+       "x1": 216.16000000000003,
+       "y1": 609.24
+      }
+     ],
+     "quote": "All model variants are trained for 160K iterations with a batch size of 16.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "name": "batch size",
+   "value_raw": "16",
+   "value_norm": 16.0,
+   "scope": "Semantic segmentation on ADE20K"
+  }
+ ],
+ "compute": [
+  {
+   "id": "compute.0",
+   "value": "A100 GPU throughput benchmarking",
+   "evidence": [
+    {
+     "chunk_id": "b0064",
+     "page": 8,
+     "bbox": {
+      "page": 8,
+      "x0": 50.11,
+      "y0": 324.27,
+      "x1": 286.37,
+      "y1": 343.0
+     },
+     "boxes": [
+      {
+       "page": 8,
+       "x0": 212.56,
+       "y0": 324.27,
+       "x1": 286.37,
+       "y1": 332.03999999999996
+      },
+      {
+       "page": 8,
+       "x0": 50.11,
+       "y0": 335.23,
+       "x1": 102.28,
+       "y1": 343.0
+      }
+     ],
+     "quote": "We measure FPS on an A100 GPU.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "seeds_and_runs": [
+  {
+   "id": "seeds_and_runs.0",
+   "value": "Three random seeds averaged for ResNet-50 regime",
+   "evidence": [
+    {
+     "chunk_id": "b0016",
+     "page": 3,
+     "bbox": {
+      "page": 3,
+      "x0": 308.86,
+      "y0": 362.4,
+      "x1": 546.77,
+      "y1": 394.95
+     },
+     "boxes": [
+      {
+       "page": 3,
+       "x0": 475.79,
+       "y0": 362.4,
+       "x1": 546.77,
+       "y1": 371.03999999999996
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 374.36,
+       "x1": 545.11,
+       "y1": 383.0
+      },
+      {
+       "page": 3,
+       "x0": 308.86,
+       "y0": 386.31,
+       "x1": 478.49,
+       "y1": 394.95
+      }
+     ],
+     "quote": "Each reported accuracy on the ResNet-50 regime is an average obtained from training with three different random seeds.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "results": [],
+ "ablations": [
+  {
+   "id": "ablations.0",
+   "value": "Modernization steps on ResNet-50 and ResNet-200 architectures and training procedures",
+   "evidence": [
+    {
+     "chunk_id": "b0094",
+     "page": 10,
+     "bbox": {
+      "page": 10,
+      "x0": 308.86,
+      "y0": 500.12,
+      "x1": 546.77,
+      "y1": 532.85
+     },
+     "boxes": [
+      {
+       "page": 10,
+       "x0": 320.82,
+       "y0": 500.12,
+       "x1": 546.77,
+       "y1": 508.94
+      },
+      {
+       "page": 10,
+       "x0": 308.86,
+       "y0": 512.08,
+       "x1": 545.11,
+       "y1": 520.9000000000001
+      },
+      {
+       "page": 10,
+       "x0": 308.86,
+       "y0": 524.21,
+       "x1": 431.93,
+       "y1": 532.85
+      }
+     ],
+     "quote": "Here we provide detailed tabulated results for the modernization experiments, at both ResNet-50 / Swin-T and ResNet-200 / Swin-B regimes.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm"
+  }
+ ],
+ "limitations": [
+  {
+   "id": "limitations.0",
+   "value": "ConvNeXts might not be suitable for all computer vision applications, such as multi-modal learning or tasks requiring discretized, sparse, or structured outputs.",
+   "evidence": [
+    {
+     "chunk_id": "b0103",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 50.11,
+      "y0": 668.65,
+      "x1": 286.37,
+      "y1": 701.1999999999999
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 163.69,
+       "y0": 668.65,
+       "x1": 286.37,
+       "y1": 677.29
+      },
+      {
+       "page": 12,
+       "x0": 50.11,
+       "y0": 680.6,
+       "x1": 286.36,
+       "y1": 689.24
+      },
+      {
+       "page": 12,
+       "x0": 50.11,
+       "y0": 692.56,
+       "x1": 90.44,
+       "y1": 701.1999999999999
+      }
+     ],
+     "quote": "ConvNeXt may be more suited for certain tasks, while Transformers may be more flexible for others.",
+     "grounding_status": "partial",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "future_work": [
+  {
+   "id": "future_work.0",
+   "value": "Further investigation into the robustness behavior comparing ConvNeXt and Transformers.",
+   "evidence": [
+    {
+     "chunk_id": "b0105",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 308.55,
+      "y0": 311.44,
+      "x1": 546.85,
+      "y1": 343.99
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 515.36,
+       "y0": 311.44,
+       "x1": 545.28,
+       "y1": 320.08
+      },
+      {
+       "page": 12,
+       "x0": 308.86,
+       "y0": 323.4,
+       "x1": 546.85,
+       "y1": 332.03999999999996
+      },
+      {
+       "page": 12,
+       "x0": 308.55,
+       "y0": 335.35,
+       "x1": 530.48,
+       "y1": 343.99
+      }
+     ],
+     "quote": "Further investigation on the robustness behavior of ConvNeXt vs. Transformer will be an interesting research direction.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "ethics": [
+  {
+   "id": "ethics.0",
+   "value": "Investigating large model designs leads to increased carbon emissions.",
+   "evidence": [
+    {
+     "chunk_id": "b0105",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 308.86,
+      "y0": 227.76,
+      "x1": 545.12,
+      "y1": 248.35000000000002
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 413.36,
+       "y0": 227.76,
+       "x1": 545.12,
+       "y1": 236.39999999999998
+      },
+      {
+       "page": 12,
+       "x0": 308.86,
+       "y0": 239.71,
+       "x1": 524.22,
+       "y1": 248.35000000000002
+      }
+     ],
+     "quote": "Investigating those model designs inevitably results in an increase in carbon emissions.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.1",
+   "value": "Large models and datasets raise concerns regarding model robustness and fairness.",
+   "evidence": [
+    {
+     "chunk_id": "b0105",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 308.86,
+      "y0": 299.49,
+      "x1": 545.11,
+      "y1": 320.08
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 347.77,
+       "y0": 299.49,
+       "x1": 545.11,
+       "y1": 308.13
+      },
+      {
+       "page": 12,
+       "x0": 308.86,
+       "y0": 311.44,
+       "x1": 510.49,
+       "y1": 320.08
+      }
+     ],
+     "quote": "Additionally, large models and datasets present issues in terms of model robustness and fairness.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  },
+  {
+   "id": "ethics.2",
+   "value": "A careful approach to data selection is needed to prevent data biases.",
+   "evidence": [
+    {
+     "chunk_id": "b0105",
+     "page": 12,
+     "bbox": {
+      "page": 12,
+      "x0": 308.86,
+      "y0": 395.13,
+      "x1": 545.11,
+      "y1": 427.68
+     },
+     "boxes": [
+      {
+       "page": 12,
+       "x0": 361.27,
+       "y0": 395.13,
+       "x1": 545.11,
+       "y1": 403.77
+      },
+      {
+       "page": 12,
+       "x0": 308.86,
+       "y0": 407.08,
+       "x1": 545.11,
+       "y1": 415.71999999999997
+      },
+      {
+       "page": 12,
+       "x0": 308.86,
+       "y0": 419.04,
+       "x1": 354.79,
+       "y1": 427.68
+      }
+     ],
+     "quote": "A more circumspect and responsible approach to data selection is required to avoid potential concerns with data biases.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 0.95,
+   "source": "llm"
+  }
+ ],
+ "code_urls": [],
+ "claims": [
+  {
+   "id": "claims.0",
+   "value": "ConvNeXt achieves 87.8% ImageNet top-1 accuracy and outperforms Swin Transformers on COCO and ADE20K.",
+   "evidence": [
+    {
+     "chunk_id": "b0002",
+     "page": 1,
+     "bbox": {
+      "page": 1,
+      "x0": 49.78,
+      "y0": 460.61,
+      "x1": 288.1,
+      "y1": 528.98
+     },
+     "boxes": [
+      {
+       "page": 1,
+       "x0": 79.37,
+       "y0": 460.61,
+       "x1": 288.1,
+       "y1": 469.2
+      },
+      {
+       "page": 1,
+       "x0": 49.78,
+       "y0": 472.57,
+       "x1": 286.35,
+       "y1": 481.15999999999997
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 484.52,
+       "x1": 286.85,
+       "y1": 493.10999999999996
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 496.48,
+       "x1": 286.36,
+       "y1": 505.07
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 508.43,
+       "x1": 286.36,
+       "y1": 517.02
+      },
+      {
+       "page": 1,
+       "x0": 50.11,
+       "y0": 520.39,
+       "x1": 237.33999999999997,
+       "y1": 528.98
+      }
+     ],
+     "quote": "Constructed entirely from standard ConvNet modules, ConvNeXts compete favorably with Transformers in terms of accuracy and scalability, achieving 87.8% ImageNet top-1 accuracy and outperforming Swin Transformers on COCO detection and ADE20K segmentation, while maintaining the simplicity and efficiency of standard ConvNets.",
+     "grounding_status": "verified",
+     "match_score": 100.0
+    }
+   ],
+   "confidence": 1.0,
+   "source": "llm",
+   "kind": "quantitative",
+   "metric": null,
+   "dataset": null,
+   "baseline": null,
+   "delta": null,
+   "verdict": null,
+   "checked_cells": []
+  }
+ ]
+}
