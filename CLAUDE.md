@@ -42,6 +42,8 @@ See SCOPE.md for the full scope, architecture and phase plan.
 - Sandbox image for the code scan: `docker build -t paperlens-sandbox sandbox/`
 - Phase 6 evaluation (all tables, one command): `uv run python -m app.eval.run_eval` (scores every
   run in eval/runs/ against eval/gold/extraction_gold.csv; writes eval/results/)
+- Gold set to 50 papers: `uv run python -m app.eval.collect [--no-llm | --bundle]` (papers in
+  eval/papers.csv; needs arXiv + GROBID, Gemini without --no-llm; resumable; see eval/README.md)
 - Phase 5 exit check: `uv run python -m app.pipeline.check_phase5` (needs GROBID + GEMINI_API_KEY;
   downloads 5 math-heavy arXiv papers and their LaTeX source; about 6 Gemini calls per paper)
 

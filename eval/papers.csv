@@ -1,0 +1,51 @@
+arxiv_id,name,title,year,area,set
+1409.0473,Bahdanau,Neural Machine Translation by Jointly Learning to Align and Translate,2014,NLP,reference
+1409.1556,VGG,Very Deep Convolutional Networks for Large-Scale Image Recognition,2014,CV,reference
+1512.03385,ResNet,Deep Residual Learning for Image Recognition,2015,CV,reference
+1706.03762,Transformer,Attention Is All You Need,2017,NLP,reference
+1810.04805,BERT,BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding,2018,NLP,reference
+1907.11692,RoBERTa,RoBERTa: A Robustly Optimized BERT Pretraining Approach,2019,NLP,reference
+1910.01108,DistilBERT,"DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter",2019,NLP,reference
+2002.05709,SimCLR,A Simple Framework for Contrastive Learning of Visual Representations,2020,CV,reference
+2010.11929,ViT,An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale,2020,CV,reference
+2106.09685,LoRA,LoRA: Low-Rank Adaptation of Large Language Models,2021,NLP,reference
+1910.10683,T5,Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer,2019,NLP,new
+2003.10555,ELECTRA,ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators,2020,NLP,new
+2104.08821,SimCSE,SimCSE: Simple Contrastive Learning of Sentence Embeddings,2021,NLP,new
+2005.11401,RAG,Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,2020,NLP,new
+2201.11903,Chain-of-thought,Chain-of-Thought Prompting Elicits Reasoning in Large Language Models,2022,NLP,new
+2210.03629,ReAct,ReAct: Synergizing Reasoning and Acting in Language Models,2022,NLP,new
+2302.13971,LLaMA,LLaMA: Open and Efficient Foundation Language Models,2023,NLP,new
+2305.18290,DPO,Direct Preference Optimization: Your Language Model is Secretly a Reward Model,2023,NLP,new
+2305.14314,QLoRA,QLoRA: Efficient Finetuning of Quantized LLMs,2023,NLP,new
+2402.03300,DeepSeekMath,DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models,2024,NLP,new
+1506.01497,Faster R-CNN,Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks,2015,CV,new
+1505.04597,U-Net,U-Net: Convolutional Networks for Biomedical Image Segmentation,2015,CV,new
+2103.14030,Swin,Swin Transformer: Hierarchical Vision Transformer using Shifted Windows,2021,CV,new
+2111.06377,MAE,Masked Autoencoders Are Scalable Vision Learners,2021,CV,new
+2201.03545,ConvNeXt,A ConvNet for the 2020s,2022,CV,new
+2304.07193,DINOv2,DINOv2: Learning Robust Visual Features without Supervision,2023,CV,new
+2304.02643,SAM,Segment Anything,2023,CV,new
+2309.16588,ViT registers,Vision Transformers Need Registers,2023,CV,new
+2303.15343,SigLIP,Sigmoid Loss for Language Image Pre-Training,2023,CV,new
+2112.10752,Latent diffusion,High-Resolution Image Synthesis with Latent Diffusion Models,2021,Generative,new
+2212.09748,DiT,Scalable Diffusion Models with Transformers,2022,Generative,new
+2210.02747,Flow matching,Flow Matching for Generative Modeling,2022,Generative,new
+2304.08485,LLaVA,Visual Instruction Tuning,2023,Multimodal,new
+1502.03167,BatchNorm,Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift,2015,ML,new
+1711.05101,AdamW,Decoupled Weight Decay Regularization,2017,ML,new
+1706.06083,PGD,Towards Deep Learning Models Resistant to Adversarial Attacks,2017,ML,new
+1803.03635,Lottery ticket,The Lottery Ticket Hypothesis: Finding Sparse Trainable Neural Networks,2018,ML,new
+2001.08361,Scaling laws,Scaling Laws for Neural Language Models,2020,ML,new
+2203.15556,Chinchilla,Training Compute-Optimal Large Language Models,2022,ML,new
+2205.14135,FlashAttention,FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness,2022,ML,new
+2312.00752,Mamba,Mamba: Linear-Time Sequence Modeling with Selective State Spaces,2023,ML,new
+2404.19756,KAN,KAN: Kolmogorov-Arnold Networks,2024,ML,new
+1609.02907,GCN,Semi-Supervised Classification with Graph Convolutional Networks,2016,Graph,new
+1710.10903,GAT,Graph Attention Networks,2017,Graph,new
+1707.06347,PPO,Proximal Policy Optimization Algorithms,2017,RL,new
+1801.01290,SAC,Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor,2018,RL,new
+2006.11477,wav2vec 2.0,wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations,2020,Speech,new
+2212.04356,Whisper,Robust Speech Recognition via Large-Scale Weak Supervision,2022,Speech,new
+2211.14730,PatchTST,A Time Series is Worth 64 Words: Long-term Forecasting with Transformers,2022,Time series,new
+2310.06625,iTransformer,iTransformer: Inverted Transformers Are Effective for Time Series Forecasting,2023,Time series,new

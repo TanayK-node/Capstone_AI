@@ -32,3 +32,26 @@ It scores every run in `runs/` against the gold set and writes `results/`:
 Ablations without LLM calls: `uv run python -m app.eval.run_eval --pdf-dir <10 PDFs>`
 (add `--tei-dir <cached TEI>` to skip GROBID). Pending, needing Gemini quota: Qasper, A2, A4,
 A5, A7, the full A3; A6 dense / hybrid needs the local embedding model.
+
+## Growing the gold set to 50 papers (`papers.csv`)
+
+`papers.csv` lists the 10 reference papers and 40 new ones (NLP, CV, generative, multimodal,
+general ML, graphs, RL, speech, time series; 21 of the 50 from 2022 or later). On a machine that
+reaches arXiv, with GROBID running (`docker compose up grobid`), from `backend/`:
+
+```bash
+uv run python -m app.eval.collect --no-llm      # 1. PDFs, GROBID TEI, page text (no Gemini)
+uv run python -m app.eval.collect               # 2. + PaperLens extraction (~6 Gemini calls/paper)
+uv run python -m app.eval.collect --bundle      # 3. pack bundle.zip (+ pdfs.zip)
+```
+
+Every step is resumable: stop it at any time (or when the quota runs out: it stops by itself
+after 3 papers fail in a row) and run the same command again the next day. A PDF whose first
+page does not show the expected title is not processed (wrong id): fix the id and re-run.
+`--set new`, `--limit N` and `--only <id or name>` select a batch. Everything goes to
+`<data_dir>/eval_collect/`; `status.json` says what is done for each paper.
+
+Upload `bundle.zip` (TEI, page text, the run's extractions and report.md; no PDFs) and, if its
+size allows, `pdfs.zip` (needed for the A1/A6 ablations). From the page text the gold rows of
+the 40 new papers are annotated the same way as the first 10 (LLM-annotated, logged in
+`gold/CHANGES.md`); the run becomes `runs/collect_flash_lite/` and `run_eval` scores all 50.

@@ -78,7 +78,7 @@ ignore_missing_imports = true
 # PyMuPDF's API is only partly annotated.
 module = ["app.pipeline.parse.*", "app.pipeline.verify.*",
     "app.pipeline.repro.*",
-    "app.pipeline.math.*", "app.pipeline.context.*", "app.pipeline.review.*", "app.pipeline.ingest.validate", "tests.*"]
+    "app.pipeline.math.*", "app.pipeline.context.*", "app.pipeline.review.*", "app.pipeline.ingest.validate", "app.eval.collect", "tests.*"]
 disallow_untyped_calls = false
 
 [[tool.mypy.overrides]]
