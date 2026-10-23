@@ -11,6 +11,12 @@ export default function Home() {
         <p className="text-zinc-600 dark:text-zinc-400">
           Not just what the paper says, but whether you can reproduce it.
         </p>
+        <p className="text-sm text-zinc-500">
+          Upload a paper to get its datasets, metrics and hyperparameters with the sentence each
+          comes from, a reproducibility scorecard, claims checked against its own tables, the code
+          repository compared with the paper, a glossary of its notation, its key references, and a
+          chat that cites pages.
+        </p>
       </header>
       <UploadCard />
       <section className="space-y-3">

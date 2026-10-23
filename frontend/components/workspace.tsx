@@ -56,21 +56,40 @@ const STAGES = [
   "context",
 ] as const;
 const ACTIVE = ["queued", "processing"];
-const TABS = [
-  "pipeline",
-  "overview",
-  "chat",
-  "reproducibility",
-  "claims",
-  "code",
-  "math",
-  "context",
-  "review",
-  "results",
-  "structure",
-  "block",
-] as const;
-type Tab = (typeof TABS)[number];
+type Tab =
+  | "pipeline"
+  | "overview"
+  | "chat"
+  | "reproducibility"
+  | "claims"
+  | "code"
+  | "math"
+  | "context"
+  | "review"
+  | "results"
+  | "structure"
+  | "block";
+// Tabs in the order a reader needs them; the debug views last.
+const TAB_GROUPS: { label: string; tabs: Tab[] }[] = [
+  { label: "Read", tabs: ["overview", "chat", "review"] },
+  { label: "Check", tabs: ["reproducibility", "claims", "results", "code"] },
+  { label: "Understand", tabs: ["math", "context"] },
+  { label: "Debug", tabs: ["pipeline", "structure", "block"] },
+];
+const TAB_LABELS: Partial<Record<Tab, string>> = {
+  reproducibility: "Reproducibility",
+  block: "Block",
+};
+// The stage behind a tab: a dot on the tab shows it running (amber) or failed (red).
+const TAB_STAGE: Partial<Record<Tab, string>> = {
+  overview: "extract",
+  chat: "index",
+  reproducibility: "repro",
+  claims: "claims",
+  code: "code",
+  math: "math",
+  context: "context",
+};
 
 export function Workspace() {
   const { id } = useParams<{ id: string }>();
@@ -249,19 +268,42 @@ export function Workspace() {
             setVisible={setVisible}
             counts={p.parse?.block_counts ?? {}}
           />
-          <nav className="flex gap-1 overflow-x-auto whitespace-nowrap border-b border-zinc-200 px-3 dark:border-zinc-800">
-            {TABS.map((t) => (
-              <button
-                key={t}
-                onClick={() => setTab(t)}
-                className={`px-3 py-2 text-sm capitalize ${
-                  tab === t
-                    ? "border-b-2 border-zinc-900 font-medium dark:border-zinc-100"
-                    : "text-zinc-500"
-                }`}
-              >
-                {t === "results" && results.data ? `Results (${results.data.length})` : t}
-              </button>
+          <nav className="flex flex-wrap items-end gap-x-4 border-b border-zinc-200 px-3 pt-1 dark:border-zinc-800">
+            {TAB_GROUPS.map((g) => (
+              <div key={g.label} className="flex flex-col">
+                <span className="px-2 text-[10px] font-semibold uppercase tracking-wide text-zinc-400">
+                  {g.label}
+                </span>
+                <div className="flex">
+                  {g.tabs.map((t) => {
+                    const stage = TAB_STAGE[t] ? p.stages[TAB_STAGE[t]] : undefined;
+                    return (
+                      <button
+                        key={t}
+                        onClick={() => setTab(t)}
+                        className={`flex items-center gap-1 px-2 py-1.5 text-sm capitalize ${
+                          tab === t
+                            ? "border-b-2 border-zinc-900 font-medium dark:border-zinc-100"
+                            : "border-b-2 border-transparent text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
+                        }`}
+                      >
+                        {t === "results" && results.data
+                          ? `Results (${results.data.length})`
+                          : (TAB_LABELS[t] ?? t)}
+                        {stage?.status === "running" && (
+                          <span
+                            title="running"
+                            className="h-1.5 w-1.5 animate-pulse rounded-full bg-amber-500"
+                          />
+                        )}
+                        {stage?.status === "failed" && (
+                          <span title="failed" className="h-1.5 w-1.5 rounded-full bg-red-500" />
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             ))}
           </nav>
           <div className="min-h-0 flex-1 overflow-y-auto p-4 text-sm">

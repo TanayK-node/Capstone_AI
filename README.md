@@ -4,7 +4,9 @@ Not just what a paper says, but whether you can reproduce it. Every extracted fa
 back to the sentence it came from. See [SCOPE.md](SCOPE.md) for the full plan and
 [CLAUDE.md](CLAUDE.md) for the working rules.
 
-**Status: Phase 2 (grounded extraction).** Upload a PDF or paste a link; the pipeline parses
+**Status: Phase 7 (polish).** All features of SCOPE.md are built; see
+[docs/DEMO.md](docs/DEMO.md) for a 10-minute walkthrough and [eval/README.md](eval/README.md)
+for the evaluation. Upload a PDF or paste a link; the pipeline parses
 it into blocks with page coordinates, rebuilds results tables, labels sections, then asks
 Gemini for a structured Overview (problem, contributions, method, datasets, hyperparameters,
 compute, limitations, ...). Every item carries a verbatim quote; Python locates the quote in
@@ -42,6 +44,19 @@ Papers are processed one at a time in upload order, so uploading several just qu
 Gemini free-tier hiccups are absorbed in three layers: retries with backoff (2+4+8+16 s),
 then the configured backup model (`llm.gemini.overload_fallback`), then one more try of a
 failed section group after `extraction.retry_failed_after_s`.
+
+## Reviewer mode, Word report, comparison (Phase 7)
+
+- **Review** tab: "Write review" asks Gemini (one call) for a draft review: summary,
+  strengths, weaknesses, missing ablations and questions for the authors, each point with a
+  grounded quote. Facts from the reproducibility, claims and code checks are listed
+  separately (Python established them). No score is given.
+- **Download Word report** (paper header, or `GET /api/papers/{id}/export?format=docx`): a
+  summary, then every extracted field with page, evidence status and quote, the review, the
+  claims, the scorecard, paper vs code, the notation and the results tables. No LLM call.
+- **Compare** (top bar, or `GET /api/compare?ids=..&ids=..`, `&format=csv`): 2 to 10
+  analysed papers side by side: shared datasets, metrics and baselines, training settings,
+  compute, code, scores, and results columns whose header reads the same. No LLM call.
 
 ## Chat, math and context (Phase 5)
 
