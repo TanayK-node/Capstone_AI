@@ -179,6 +179,17 @@ def test_exports(client: TestClient) -> None:
     csv_text = client.get(f"/api/papers/{pid}/export?format=csv").text
     assert csv_text.splitlines()[0].startswith("field,id,value")
     assert "attachment" in as_json.headers["content-disposition"]
+    word = client.get(f"/api/papers/{pid}/export?format=docx")
+    assert word.status_code == 200 and word.headers["content-type"].startswith(
+        "application/vnd.openxmlformats-officedocument.wordprocessingml"
+    )
+    import io
+
+    import docx
+
+    text = "\n".join(p.text for p in docx.Document(io.BytesIO(word.content)).paragraphs)
+    assert "Summary" in text and "Extracted information" in text
+    assert "Sparse Routing Improves Low-Resource Translation" in text
     assert client.get(f"/api/papers/{pid}/export?format=xml").status_code == 422
 
 

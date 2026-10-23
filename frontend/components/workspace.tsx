@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import {
   eventsUrl,
+  exportUrl,
   getBlocks,
   getClaims,
   getCode,
@@ -432,6 +433,15 @@ function Header({
           {authors && <p className="text-sm text-zinc-500">{authors}</p>}
         </div>
         <div className="flex gap-2">
+          {paper.stages.extract?.status === "done" && (
+            <a
+              href={exportUrl(paper.id, "docx")}
+              title="Summary and every extracted field with page references, plus the scorecard, claims, code check, notation and results tables"
+              className="rounded-lg bg-zinc-900 px-3 py-1.5 text-xs text-white hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900"
+            >
+              Download Word report
+            </a>
+          )}
           {paper.stages.structure?.status === "done" && (
             <button
               onClick={() =>

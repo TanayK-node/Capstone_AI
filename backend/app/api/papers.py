@@ -33,6 +33,7 @@ from app.models import (
 )
 from app.pipeline import dispatch, export
 from app.pipeline.chat.service import answer as chat_answer
+from app.pipeline.docx_report import PaperBundle, build_docx
 from app.pipeline.ingest import storage
 from app.pipeline.ingest.resolver import InputError
 from app.pipeline.ingest.service import IngestResult, ingest_link, ingest_pdf_bytes
@@ -43,7 +44,10 @@ from app.pipeline.retrieval.embedder import get_embedder
 from app.pipeline.retrieval.store import load_index
 from app.pipeline.runner import ANALYSIS_STAGES, STAGES, load_document, stage_statuses
 from app.schemas.chat import ChatAnswer, ChatRequest
+from app.schemas.claims import ClaimReport
+from app.schemas.code import CodeReport
 from app.schemas.extraction import PaperExtraction
+from app.schemas.math import MathReport
 from app.schemas.repro import Scorecard
 from app.schemas.results import ResultsTable
 
@@ -329,10 +333,12 @@ def get_extraction(paper_id: str, session: Session = Depends(get_session)) -> Ex
 @router.get("/{paper_id}/export")
 def export_paper(
     paper_id: str,
-    format: Literal["json", "md", "bib", "csv"] = Query("json"),
+    format: Literal["json", "md", "bib", "csv", "docx"] = Query("json"),
     session: Session = Depends(get_session),
 ) -> Response:
     row = _load_extraction(session, paper_id)
+    if format == "docx":
+        return _docx_response(session, paper_id, PaperExtraction.model_validate(row.data))
     media_type, ext = export.FORMATS[format]
     repro = session.get(ReproReport, paper_id)
     card = Scorecard.model_validate(repro.data) if repro is not None else None
@@ -343,6 +349,36 @@ def export_paper(
         media_type=media_type,
         headers={"Content-Disposition": f'attachment; filename="{name}"'},
     )
+
+
+DOCX_TYPE = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+
+
+def _docx_response(session: Session, paper_id: str, extraction: PaperExtraction) -> Response:
+    """The Word report: summary, every field with evidence, and every analysis stored."""
+    paper = _paper_or_404(session, paper_id)
+
+    def stored(model: type[Any], schema: type[BaseModel]) -> Any:
+        row = session.get(model, paper_id)
+        return schema.model_validate(row.data) if row is not None else None
+
+    doc = load_document(session, paper_id)
+    ex_row = session.get(ExtractionRow, paper_id)
+    bundle = PaperBundle(
+        paper_id=paper_id,
+        title=paper.title or "",
+        extraction=extraction,
+        source_url=paper.source_url,
+        scorecard=stored(ReproReport, Scorecard),
+        claims=stored(ClaimReportRow, ClaimReport),
+        code=stored(CodeReportRow, CodeReport),
+        math=stored(MathReportRow, MathReport),
+        tables=build_results(doc, extraction) if doc is not None else [],
+        model=ex_row.model if ex_row is not None else None,
+    )
+    name = f"paperlens-{paper_id[:12]}.docx"
+    return Response(build_docx(bundle), media_type=DOCX_TYPE,
+                    headers={"Content-Disposition": f'attachment; filename="{name}"'})  # fmt: skip
 
 
 class ReproResponse(BaseModel):

@@ -93,7 +93,7 @@ export function Overview({
         <GroundingSummary extraction={extraction} />
         <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
           <span className="text-zinc-500">Export:</span>
-          {(["json", "md", "bib", "csv"] as ExportFormat[]).map((f) => (
+          {(["docx", "md", "json", "bib", "csv"] as ExportFormat[]).map((f) => (
             <a
               key={f}
               href={exportUrl(paperId, f)}

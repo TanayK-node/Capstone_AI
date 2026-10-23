@@ -208,7 +208,7 @@ export type ExtractionResponse = {
   data: PaperExtraction;
 };
 
-export type ExportFormat = "json" | "md" | "bib" | "csv";
+export type ExportFormat = "json" | "md" | "bib" | "csv" | "docx";
 
 // ---- results tables (mirrors app/schemas/results.py)
 
