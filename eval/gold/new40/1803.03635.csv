@@ -1,0 +1,45 @@
+1803.03635,task,,neural network pruning,pruning|finding sparse trainable networks,1,
+1803.03635,task,,image classification,,3,
+1803.03635,datasets,,MNIST,,3,
+1803.03635,datasets,,CIFAR10,CIFAR-10,2,
+1803.03635,baselines,,randomly reinitialized networks,random reinitialization|reinitialized,3,
+1803.03635,baselines,,randomly sampled sparse networks,random sparse networks|random pruning,2,
+1803.03635,baselines,,one-shot pruning,,2,
+1803.03635,baselines,,unpruned network,original network|dense network,3,
+1803.03635,metrics,,test accuracy,accuracy,2,
+1803.03635,metrics,,early-stopping iteration,iteration of early-stopping,1,
+1803.03635,hyperparameters,architecture,Lenet-300-100,Lenet,3,MNIST
+1803.03635,hyperparameters,architecture,Conv-2,,3,CIFAR10
+1803.03635,hyperparameters,architecture,Conv-4,,3,CIFAR10
+1803.03635,hyperparameters,architecture,Conv-6,,3,CIFAR10
+1803.03635,hyperparameters,architecture,Resnet-18,ResNet-18,3,CIFAR10
+1803.03635,hyperparameters,architecture,VGG-19,,3,CIFAR10
+1803.03635,hyperparameters,train_steps,50K,50K iterations,3,Lenet
+1803.03635,hyperparameters,train_steps,20K,,3,Conv-2
+1803.03635,hyperparameters,train_steps,25K,,3,Conv-4
+1803.03635,hyperparameters,train_steps,30K,,3,Conv-6 and Resnet-18
+1803.03635,hyperparameters,train_steps,112K,,3,VGG-19
+1803.03635,hyperparameters,batch_size,60,,3,Lenet and Conv-2/4/6
+1803.03635,hyperparameters,batch_size,128,,3,Resnet-18
+1803.03635,hyperparameters,batch_size,64,,3,VGG-19
+1803.03635,hyperparameters,optimizer,Adam,,3,Lenet and Conv-2/4/6
+1803.03635,hyperparameters,optimizer,SGD with momentum,SGD|Momentum 0.9,3,Resnet-18 and VGG-19
+1803.03635,hyperparameters,learning_rate,1.2e-3,Adam 1.2e-3,3,Lenet
+1803.03635,hyperparameters,learning_rate,2e-4,Adam 2e-4,3,Conv-2
+1803.03635,hyperparameters,learning_rate,3e-4,Adam 3e-4,3,Conv-4 and Conv-6
+1803.03635,hyperparameters,learning_rate,0.1,SGD 0.1-0.01-0.001,3,Resnet-18 and VGG-19 schedule
+1803.03635,hyperparameters,learning_rate,0.01,,3,
+1803.03635,hyperparameters,learning_rate,0.001,,3,
+1803.03635,hyperparameters,learning_rate,0.03,rate 0.03,8,Resnet-18 with warmup
+1803.03635,hyperparameters,momentum,0.9,,3,
+1803.03635,hyperparameters,pruning_rate,20%,fc20%,3,fully-connected layers
+1803.03635,hyperparameters,pruning_rate,10%,conv10%,3,Conv-2 and Conv-4 conv layers
+1803.03635,hyperparameters,pruning_rate,15%,conv15%,3,Conv-6 conv layers
+1803.03635,hyperparameters,pruning_rate,0%,fc0%,3,Resnet-18 and VGG-19 output layer
+1803.03635,hyperparameters,initialization,Gaussian Glorot,Glorot,3,
+1803.03635,hyperparameters,hidden_size,300,"300, 100, 10",3,Lenet FC layers
+1803.03635,hyperparameters,hidden_size,100,,3,Lenet FC layers
+1803.03635,hyperparameters,hidden_size,256,"256, 256, 10",3,Conv-2/4/6 FC layers
+1803.03635,hyperparameters,dropout,0.5,dropout rate of 0.5,6,
+1803.03635,hyperparameters,warmup_steps,10000,k = 10000|warmup 10K,8,VGG-19
+1803.03635,hyperparameters,warmup_steps,20000,warmup 20K,8,Resnet-18

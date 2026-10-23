@@ -1,0 +1,52 @@
+2303.15343,task,,language-image pre-training,image-text pre-training|sigmoid loss for language image pre-training,1,
+2303.15343,task,,zero-shot image classification,zero-shot transfer|0-shot classification,4,
+2303.15343,task,,image-text retrieval,cross-modal retrieval|zero-shot retrieval,4,
+2303.15343,datasets,,WebLI,,1,pre-training
+2303.15343,datasets,,LiT image-text dataset,LiT dataset,1,SigLiT pre-training
+2303.15343,datasets,,ImageNet,ImageNet-1k,4,
+2303.15343,datasets,,XM3600,,4,36-language retrieval
+2303.15343,datasets,,ObjectNet,,7,
+2303.15343,datasets,,ImageNet-v2,ImageNet v2,7,
+2303.15343,datasets,,ImageNet ReaL,ReaL,7,
+2303.15343,datasets,,MSCOCO,COCO,7,retrieval
+2303.15343,baselines,,softmax loss,softmax-based contrastive loss,2,
+2303.15343,baselines,,CLIP,CLIP (WebLI),5,
+2303.15343,baselines,,LiT,,1,
+2303.15343,baselines,,OpenCLIP,,8,
+2303.15343,baselines,,EVA-CLIP,,8,
+2303.15343,baselines,,CLIPA-v2,,8,
+2303.15343,baselines,,FLIP,,2,
+2303.15343,baselines,,ALIGN,,2,
+2303.15343,metrics,,zero-shot accuracy,0-shot accuracy|ImageNet 0-shot|accuracy,1,
+2303.15343,metrics,,recall@1,R@1|COCO R@1,6,retrieval
+2303.15343,hyperparameters,optimizer,ScalingViT-Adafactor,Adafactor,4,default
+2303.15343,hyperparameters,adam_beta1,0.9,β1 = 0.9,14,
+2303.15343,hyperparameters,adam_beta2,0.95,β2 = 0.95,14,
+2303.15343,hyperparameters,learning_rate,0.001,,14,SigLiT
+2303.15343,hyperparameters,warmup_examples,200M,first 200 M examples seen,14,SigLiT
+2303.15343,hyperparameters,lr_schedule,cosine,cosine learning rate schedule,14,
+2303.15343,hyperparameters,weight_decay,0.0001,,14,SigLiT
+2303.15343,hyperparameters,vocab_size,32000,32 k vocabulary,14,
+2303.15343,hyperparameters,max_seq_length,16,16 text tokens,14,
+2303.15343,hyperparameters,vocab_size,250000,250 k tokens,5,multilingual
+2303.15343,hyperparameters,image_size,288,288 × 288,14,SigLiT precomputed embeddings
+2303.15343,hyperparameters,image_size,224,224×224,5,SigLIP
+2303.15343,hyperparameters,optimizer,LION,Lion,6,SigLiT on four TPU-v4 chips
+2303.15343,hyperparameters,learning_rate,1e-4,1 × 10−4,6,LION peak
+2303.15343,hyperparameters,weight_decay,1e-7,1 × 10−7,6,LION
+2303.15343,hyperparameters,warmup_steps,6500,6.5k steps,6,LION
+2303.15343,hyperparameters,train_steps,65000,65 000 steps,6,LION
+2303.15343,hyperparameters,batch_size,32k,32 k,2,recommended
+2303.15343,hyperparameters,batch_size,1M,one million,1,largest SigLiT batch
+2303.15343,hyperparameters,batch_size,16k,16 k batch size,7,unlocked fine-tuning
+2303.15343,hyperparameters,temperature_init,log 10,t′,3,
+2303.15343,hyperparameters,bias_init,-10,−10,3,
+2303.15343,hyperparameters,lr_multiplier,0.1,0.1 learning rate multiplier,7,pre-trained image tower
+2303.15343,hyperparameters,backbone,ViT-B/16,B/16,5,SigLIP
+2303.15343,hyperparameters,backbone,ViT-g,ViT-g/14,4,SigLiT frozen image tower
+2303.15343,hyperparameters,backbone,So-400m,SoViT-400m,7,
+2303.15343,hyperparameters,train_examples,40B,40 billion examples,7,Table 3 models
+2303.15343,compute,,four TPUv4 chips,4 TPU-v4 chips,1,SigLiT
+2303.15343,compute,,16 TPU-v4 chips,,1,SigLIP
+2303.15343,compute,,32 TPUv4 chips,,2,
+2303.15343,code_urls,,https://github.com/google-research/big_vision,github.com/google-research/big_vision,1,
