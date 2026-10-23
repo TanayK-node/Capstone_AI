@@ -46,8 +46,11 @@ See SCOPE.md for the full scope, architecture and phase plan.
 ## Current phase
 Phase 5 (chat, math, context: M11 grounded chat, M10 equations + glossary, M12 citation graph +
 novelty; Chat, Math, Context tabs). Exit: chat answers cite pages; glossary built for 5
-math-heavy papers; graph renders. Built; check_phase5 not yet run with Gemini (the sandbox
-reaches neither arXiv nor Semantic Scholar: only the fallbacks were exercised there).
+math-heavy papers; graph renders. ACCEPTED by the team (Oct 2026), re-run pending: second
+check_phase5 run had chat 5/5, graph 5/5, glossary 3/5 (VAE: model copied the paper's own
+macros, 2/48 quotes found; DDPM: 65k-char runaway output). Fixed in glossary@2 (macros written
+out, plain-text quotes, <= 30 symbols, LaTeX-flattened quote retry); not yet re-run.
+Semantic Scholar answered 429 for most papers without S2_API_KEY.
 Phase 4 (code and claims: M7 code check, M8 claim verifier, M9 results tables; Code, Claims,
 Results tabs). Exit: correct repo found for >= 80% of papers that have code; at least one real
 paper-code mismatch demonstrated. Built. Discovery: 8/8 papers with code (offline). Mismatch:
