@@ -1,0 +1,27 @@
+1706.06083,task,,adversarial robustness,adversarially robust classification|robustness to adversarial examples|adversarial training,1,
+1706.06083,task,,image classification,classification,9,
+1706.06083,datasets,,MNIST,,9,
+1706.06083,datasets,,CIFAR10,CIFAR-10,9,
+1706.06083,baselines,,standard training,natural training|naturally trained network|Anat,11,
+1706.06083,baselines,,FGSM adversarial training,FGSM training,11,
+1706.06083,metrics,,accuracy,adversarial accuracy|natural accuracy,11,
+1706.06083,metrics,,cross-entropy loss,adversarial loss|loss value,12,
+1706.06083,hyperparameters,epsilon,0.3,ε,11,MNIST l∞ perturbation
+1706.06083,hyperparameters,epsilon,8,ε,12,CIFAR10 l∞ perturbation
+1706.06083,hyperparameters,pgd_steps,40,iterations,11,MNIST
+1706.06083,hyperparameters,pgd_step_size,0.01,step size,11,MNIST
+1706.06083,hyperparameters,pgd_steps,7,steps,12,CIFAR10 training
+1706.06083,hyperparameters,pgd_step_size,2,step size,12,CIFAR10
+1706.06083,hyperparameters,pgd_steps,20,steps,12,CIFAR10 hardest adversary
+1706.06083,hyperparameters,pgd_steps,100,steps,12,evaluation for different ε
+1706.06083,hyperparameters,num_restarts,20,restarts,13,MNIST evaluation
+1706.06083,hyperparameters,cw_confidence,50,κ,11,CW+
+1706.06083,hyperparameters,conv_filters,32 and 64,filters,11,MNIST network
+1706.06083,hyperparameters,hidden_size,1024,fully connected layer,11,MNIST network
+1706.06083,hyperparameters,width_multiplier,10,wider layers by a factor of 10,9,CIFAR10 ResNet
+1706.06083,hyperparameters,resnet_filters,"(16, 160, 320, 640)",filters,9,CIFAR10 wide ResNet
+1706.06083,hyperparameters,num_residual_units,5,residual units,9,CIFAR10
+1706.06083,hyperparameters,hidden_size,64,fully connected hidden layer,9,MNIST capacity study initial network
+1706.06083,hyperparameters,dba_steps,2000,Decision Boundary Attack steps,14,
+1706.06083,code_urls,,https://github.com/MadryLab/mnist_challenge,,1,
+1706.06083,code_urls,,https://github.com/MadryLab/cifar10_challenge,,1,

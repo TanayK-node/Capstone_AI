@@ -1,0 +1,76 @@
+2111.06377,task,,self-supervised visual representation learning,self-supervised learning|masked image modeling|visual pre-training,1,
+2111.06377,task,,image classification,ImageNet classification,6,
+2111.06377,task,,object detection,COCO detection,8,
+2111.06377,task,,instance segmentation,COCO segmentation,8,
+2111.06377,task,,semantic segmentation,ADE20K segmentation,8,
+2111.06377,datasets,,ImageNet-1K,IN1K|ImageNet,4,
+2111.06377,datasets,,COCO,,8,
+2111.06377,datasets,,ADE20K,,8,
+2111.06377,datasets,,iNaturalist 2017,iNat 2017|iNaturalist,8,
+2111.06377,datasets,,iNaturalist 2018,iNat 2018|iNaturalist,8,
+2111.06377,datasets,,iNaturalist 2019,iNat 2019|iNaturalist,8,
+2111.06377,datasets,,Places205,Places,8,
+2111.06377,datasets,,Places365,Places,8,
+2111.06377,datasets,,ImageNet-C,IN-Corruption|IN-C,12,robustness
+2111.06377,datasets,,ImageNet-A,IN-Adversarial|IN-A,12,robustness
+2111.06377,datasets,,ImageNet-R,IN-Rendition,12,robustness
+2111.06377,datasets,,ImageNet-Sketch,IN-Sketch,12,robustness
+2111.06377,baselines,,DINO,,7,
+2111.06377,baselines,,MoCo v3,,7,
+2111.06377,baselines,,BEiT,,7,
+2111.06377,baselines,,supervised pre-training,supervised|training from scratch|supervised ViT,7,
+2111.06377,baselines,,iGPT,iGPT-L|iGPT-XL,12,linear probing
+2111.06377,metrics,,top-1 accuracy,fine-tuning accuracy|accuracy,4,
+2111.06377,metrics,,linear probing accuracy,linear probing|lin,4,
+2111.06377,metrics,,box AP,APbox|AP,8,
+2111.06377,metrics,,mask AP,APmask,8,
+2111.06377,metrics,,mIoU,,8,ADE20K
+2111.06377,metrics,,mean corruption error,mCE,12,IN-C
+2111.06377,metrics,,wall-clock training time,training time|hours,5,
+2111.06377,hyperparameters,mask_ratio,75%,masking ratio|0.75,4,
+2111.06377,hyperparameters,decoder_depth,8,decoder blocks,5,
+2111.06377,hyperparameters,decoder_width,512,decoder width|512-d,5,
+2111.06377,hyperparameters,epochs,800,pre-training epochs,5,ablations
+2111.06377,hyperparameters,epochs,1600,pre-training epochs,7,final models
+2111.06377,hyperparameters,optimizer,AdamW,,11,pre-training and fine-tuning
+2111.06377,hyperparameters,learning_rate,1.5e-4,base learning rate,11,pre-training
+2111.06377,hyperparameters,weight_decay,0.05,,11,pre-training and fine-tuning
+2111.06377,hyperparameters,adam_beta2,0.95,β2,11,pre-training and supervised scratch
+2111.06377,hyperparameters,adam_beta1,0.9,β1,11,
+2111.06377,hyperparameters,batch_size,4096,,11,pre-training and supervised scratch
+2111.06377,hyperparameters,lr_schedule,cosine decay,cosine,11,
+2111.06377,hyperparameters,warmup_epochs,40,,11,pre-training
+2111.06377,hyperparameters,learning_rate,1e-3,base learning rate,11,fine-tuning
+2111.06377,hyperparameters,adam_beta2,0.999,β2,11,fine-tuning
+2111.06377,hyperparameters,layerwise_lr_decay,0.75,layer-wise lr decay,11,fine-tuning
+2111.06377,hyperparameters,batch_size,1024,,11,fine-tuning
+2111.06377,hyperparameters,warmup_epochs,5,,11,fine-tuning
+2111.06377,hyperparameters,epochs,100,training epochs,11,fine-tuning ViT-B; ADE20K
+2111.06377,hyperparameters,epochs,50,training epochs,11,fine-tuning ViT-L/H
+2111.06377,hyperparameters,randaugment,"(9, 0.5)",RandAug,11,
+2111.06377,hyperparameters,label_smoothing,0.1,,11,
+2111.06377,hyperparameters,mixup,0.8,,11,
+2111.06377,hyperparameters,cutmix,1.0,,11,
+2111.06377,hyperparameters,drop_path,0.1,,11,ViT-B/L fine-tuning; ViT-B scratch
+2111.06377,hyperparameters,drop_path,0.2,,11,ViT-H fine-tuning; L/H scratch
+2111.06377,hyperparameters,optimizer,LARS,,11,linear probing
+2111.06377,hyperparameters,learning_rate,0.1,base learning rate,11,linear probing
+2111.06377,hyperparameters,weight_decay,0,,11,linear probing
+2111.06377,hyperparameters,momentum,0.9,,11,linear probing
+2111.06377,hyperparameters,batch_size,16384,,11,linear probing
+2111.06377,hyperparameters,warmup_epochs,10,,11,linear probing
+2111.06377,hyperparameters,epochs,90,training epochs,11,linear probing
+2111.06377,hyperparameters,learning_rate,1e-4,base learning rate,12,supervised from scratch
+2111.06377,hyperparameters,weight_decay,0.3,,11,supervised from scratch
+2111.06377,hyperparameters,warmup_epochs,20,,12,supervised from scratch
+2111.06377,hyperparameters,epochs,300,training epochs,12,supervised ViT-B from scratch
+2111.06377,hyperparameters,epochs,200,training epochs,12,supervised ViT-L/H from scratch
+2111.06377,hyperparameters,ema_decay,0.9999,EMA|exponential moving average,12,supervised from scratch
+2111.06377,hyperparameters,batch_size,16,,12,ADE20K
+2111.06377,hyperparameters,image_size,224,,7,
+2111.06377,hyperparameters,image_size,448,,7,ViT-H448
+2111.06377,hyperparameters,model_size,304M,params,12,ViT-L
+2111.06377,hyperparameters,model_size,632M,params,12,ViT-H
+2111.06377,hyperparameters,model_size,86M,params,12,ViT-B
+2111.06377,compute,,128 TPU-v3 cores,TPU-v3,5,
+2111.06377,compute,,31 hours for 1600 epochs (ViT-L),31 hours,7,

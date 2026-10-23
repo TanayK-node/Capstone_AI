@@ -1,0 +1,45 @@
+2212.09748,task,,class-conditional image generation,image generation|generative modeling|diffusion models,5,
+2212.09748,datasets,,ImageNet 256×256,ImageNet|ImageNet 256x256,5,
+2212.09748,datasets,,ImageNet 512×512,ImageNet|ImageNet 512x512,5,
+2212.09748,baselines,,BigGAN-deep,BigGAN,9,
+2212.09748,baselines,,StyleGAN-XL,,9,
+2212.09748,baselines,,ADM,ADM-U|ADM-G,9,
+2212.09748,baselines,,CDM,,9,
+2212.09748,baselines,,LDM,LDM-8|LDM-4|LDM-8-G|LDM-4-G|latent diffusion,9,
+2212.09748,metrics,,FID,FID-50K|FID-10K|Fréchet Inception Distance,5,
+2212.09748,metrics,,sFID,,5,
+2212.09748,metrics,,Inception Score,IS,5,
+2212.09748,metrics,,Precision,,5,
+2212.09748,metrics,,Recall,,5,
+2212.09748,metrics,,Gflops,transformer Gflops|compute,8,
+2212.09748,hyperparameters,num_layers,12,layers N,5,DiT-S and DiT-B
+2212.09748,hyperparameters,num_layers,24,layers N,5,DiT-L
+2212.09748,hyperparameters,num_layers,28,layers N,5,DiT-XL
+2212.09748,hyperparameters,hidden_size,384,hidden size d,5,DiT-S
+2212.09748,hyperparameters,hidden_size,768,hidden size d,5,DiT-B
+2212.09748,hyperparameters,hidden_size,1024,hidden size d,5,DiT-L
+2212.09748,hyperparameters,hidden_size,1152,hidden size d,5,DiT-XL
+2212.09748,hyperparameters,num_heads,6,heads,5,DiT-S
+2212.09748,hyperparameters,num_heads,12,heads,5,DiT-B
+2212.09748,hyperparameters,num_heads,16,heads,5,DiT-L and DiT-XL
+2212.09748,hyperparameters,patch_size,2,p,8,
+2212.09748,hyperparameters,patch_size,4,p,8,
+2212.09748,hyperparameters,patch_size,8,p,8,
+2212.09748,hyperparameters,optimizer,AdamW,,5,
+2212.09748,hyperparameters,learning_rate,1e-4,1 × 10−4|constant learning rate,6,
+2212.09748,hyperparameters,weight_decay,0,no weight decay,6,
+2212.09748,hyperparameters,batch_size,256,,6,
+2212.09748,hyperparameters,ema_decay,0.9999,EMA,6,
+2212.09748,hyperparameters,diffusion_steps,1000,tmax,6,
+2212.09748,hyperparameters,beta_start,1e-4,linear variance schedule,6,
+2212.09748,hyperparameters,beta_end,2e-2,linear variance schedule|0.02,6,
+2212.09748,hyperparameters,vae_downsample,8,downsample factor,6,
+2212.09748,hyperparameters,sampling_steps,250,DDPM sampling steps,6,
+2212.09748,hyperparameters,train_steps,400K,training iterations,8,scaling study
+2212.09748,hyperparameters,train_steps,7M,steps,8,DiT-XL/2 256×256
+2212.09748,hyperparameters,train_steps,3M,iterations,9,DiT-XL/2 512×512
+2212.09748,hyperparameters,cfg_scale,1.25,classifier-free guidance|cfg,9,
+2212.09748,hyperparameters,cfg_scale,1.50,classifier-free guidance|cfg|1.5,9,
+2212.09748,hyperparameters,image_size,256,256 × 256,5,
+2212.09748,hyperparameters,image_size,512,512 × 512,5,
+2212.09748,compute,,TPU v3-256 pod,TPU-v3 pods|TPU v3,6,

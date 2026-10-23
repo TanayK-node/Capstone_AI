@@ -1,0 +1,45 @@
+2305.18290,task,,controlled sentiment generation,sentiment generation|controlled generation,7,
+2305.18290,task,,summarization,text summarization|TL;DR summarization,7,
+2305.18290,task,,single-turn dialogue,dialogue|response generation,7,
+2305.18290,task,,learning from human preferences,preference learning|RLHF|alignment,1,
+2305.18290,datasets,,IMDb,IMDB,7,
+2305.18290,datasets,,Reddit TL;DR,TL;DR|Reddit TL;DR summarization dataset,7,with human preferences from Stiennon et al.
+2305.18290,datasets,,Anthropic Helpful and Harmless,Anthropic HH|Anthropic-HH,7,
+2305.18290,datasets,,CNN/DailyMail,CNN DailyMail,9,out-of-distribution
+2305.18290,baselines,,PPO,RLHF with PPO|PPO-1,8,
+2305.18290,baselines,,PPO-GT,,8,oracle reward
+2305.18290,baselines,,SFT,supervised fine-tuning,8,
+2305.18290,baselines,,Preferred-FT,,8,
+2305.18290,baselines,,Unlikelihood,,8,
+2305.18290,baselines,,Best of N,Best of 128,8,
+2305.18290,baselines,,GPT-J zero-shot,GPT-J,8,summarization
+2305.18290,baselines,,Pythia-2.8B 2-shot,Pythia-2.8B|Pythia,8,dialogue
+2305.18290,metrics,,win rate,GPT-4 win rate|human win rate,7,
+2305.18290,metrics,,reward,average reward|reward-KL frontier,8,sentiment
+2305.18290,metrics,,KL divergence,KL|sequence-level KL,8,
+2305.18290,metrics,,agreement,human agreement|GPT-4 human agreement,10,
+2305.18290,hyperparameters,dpo_beta,0.1,β,20,default
+2305.18290,hyperparameters,dpo_beta,0.5,β,20,TL;DR summarization
+2305.18290,hyperparameters,dpo_beta,0.05,β,8,sentiment sweep
+2305.18290,hyperparameters,dpo_beta,1,β,8,sentiment sweep
+2305.18290,hyperparameters,dpo_beta,5,β,8,sentiment sweep
+2305.18290,hyperparameters,batch_size,64,,20,
+2305.18290,hyperparameters,optimizer,RMSprop,,20,
+2305.18290,hyperparameters,learning_rate,1e-6,,20,
+2305.18290,hyperparameters,warmup_steps,150,,20,
+2305.18290,hyperparameters,kl_target,3,target KL,8,PPO sweep
+2305.18290,hyperparameters,kl_target,6,target KL,8,PPO sweep
+2305.18290,hyperparameters,kl_target,9,target KL,8,PPO sweep
+2305.18290,hyperparameters,kl_target,12,target KL,8,PPO sweep
+2305.18290,hyperparameters,unlikelihood_alpha,0.05,α,8,unlikelihood sweep
+2305.18290,hyperparameters,unlikelihood_alpha,0.1,α,8,unlikelihood sweep
+2305.18290,hyperparameters,unlikelihood_alpha,0.5,α,8,unlikelihood sweep
+2305.18290,hyperparameters,unlikelihood_alpha,1,α,8,unlikelihood sweep
+2305.18290,hyperparameters,epochs,1,,20,IMDb SFT
+2305.18290,hyperparameters,epochs,3,,20,IMDb reward model
+2305.18290,hyperparameters,ppo_batch_size,1024,batch samples per PPO step,20,IMDb
+2305.18290,hyperparameters,num_samples,128,Best of 128|N,9,dialogue Best of N
+2305.18290,hyperparameters,temperature,0.25,sampling temperature,9,DPO human evaluation
+2305.18290,hyperparameters,base_model,GPT-2-large,gpt2-large,7,sentiment
+2305.18290,hyperparameters,base_model,GPT-J,,9,summarization SFT
+2305.18290,hyperparameters,base_model,Pythia-2.8B,,9,dialogue

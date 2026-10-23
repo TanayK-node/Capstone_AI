@@ -1,0 +1,83 @@
+2006.11477,task,,speech recognition,automatic speech recognition|ASR|low-resource speech recognition,1,
+2006.11477,task,,phoneme recognition,TIMIT phoneme recognition,4,
+2006.11477,task,,self-supervised speech representation learning,self-supervised learning of speech representations|pre-training,1,
+2006.11477,datasets,,Librispeech,LS-960|Librispeech 960h|train-clean-100,4,
+2006.11477,datasets,,LibriVox,LV-60k,4,53.2k hours unlabeled
+2006.11477,datasets,,Libri-light,train-10h|train-1h|train-10min,4,low-resource labeled splits
+2006.11477,datasets,,TIMIT,,4,
+2006.11477,datasets,,Librispeech LM corpus,LM corpus,5,language model training
+2006.11477,baselines,,Discrete BERT,,6,
+2006.11477,baselines,,iterative pseudo-labeling,Iter. pseudo-labeling,6,
+2006.11477,baselines,,Hybrid DNN/HMM,,6,
+2006.11477,baselines,,TTS data augmentation,TTS data augm.,6,
+2006.11477,baselines,,Noisy student,iterative self-training,6,
+2006.11477,baselines,,CTC Transformer,CTC Transf|CTC Transf. + PL,7,
+2006.11477,baselines,,S2S Transformer,S2S Transf.|S2S Transf. + PL,7,
+2006.11477,baselines,,Transformer Transducer,Transf. Transducer,7,
+2006.11477,baselines,,ContextNet,,7,
+2006.11477,baselines,,Conformer,,7,
+2006.11477,baselines,,LARGE from scratch,supervised training from scratch,7,
+2006.11477,baselines,,CNN + TD-filterbanks,,8,TIMIT
+2006.11477,baselines,,PASE+,,8,TIMIT
+2006.11477,baselines,,Li-GRU + fMLLR,,8,TIMIT
+2006.11477,baselines,,wav2vec,,8,TIMIT
+2006.11477,baselines,,vq-wav2vec,,8,TIMIT
+2006.11477,metrics,,word error rate,WER,5,
+2006.11477,metrics,,phoneme error rate,PER,8,
+2006.11477,hyperparameters,mask_prob,0.065,p|masking probability,4,pre-training
+2006.11477,hyperparameters,mask_length,10,M,4,
+2006.11477,hyperparameters,mask_prob,0.075,p,8,ablation pre-training; 10 min and 1 hour fine-tuning
+2006.11477,hyperparameters,num_layers,12,transformer blocks,4,BASE
+2006.11477,hyperparameters,num_layers,24,transformer blocks,4,LARGE
+2006.11477,hyperparameters,hidden_size,768,model dimension,4,BASE
+2006.11477,hyperparameters,hidden_size,1024,model dimension,4,LARGE
+2006.11477,hyperparameters,ffn_size,3072,inner dimension,4,BASE
+2006.11477,hyperparameters,ffn_size,4096,inner dimension,4,LARGE
+2006.11477,hyperparameters,num_heads,8,attention heads,4,BASE
+2006.11477,hyperparameters,num_heads,16,attention heads,4,LARGE
+2006.11477,hyperparameters,encoder_channels,512,channels,4,feature encoder
+2006.11477,hyperparameters,dropout,0.1,,4,
+2006.11477,hyperparameters,layer_drop,0.05,LayerDrop,4,BASE
+2006.11477,hyperparameters,layer_drop,0.2,LayerDrop,4,LARGE pre-training
+2006.11477,hyperparameters,layer_drop,0.1,LayerDrop,13,LARGE fine-tuning
+2006.11477,hyperparameters,optimizer,Adam,,5,
+2006.11477,hyperparameters,warmup_ratio,0.08,8%,5,pre-training
+2006.11477,hyperparameters,learning_rate,5e-4,peak,5,BASE pre-training
+2006.11477,hyperparameters,learning_rate,3e-4,peak,5,LARGE pre-training
+2006.11477,hyperparameters,train_steps,250k,updates,5,LARGE
+2006.11477,hyperparameters,train_steps,400k,updates,5,BASE
+2006.11477,hyperparameters,train_steps,600k,updates,5,LARGE on LV-60k
+2006.11477,hyperparameters,diversity_loss_weight,0.1,α,5,
+2006.11477,hyperparameters,codebook_groups,2,G,5,
+2006.11477,hyperparameters,codebook_entries,320,V,5,
+2006.11477,hyperparameters,gumbel_temperature_min,0.5,τ,5,BASE
+2006.11477,hyperparameters,gumbel_temperature_min,0.1,τ,5,LARGE
+2006.11477,hyperparameters,temperature,0.1,κ|contrastive temperature,5,
+2006.11477,hyperparameters,num_distractors,100,K|distractors,5,
+2006.11477,hyperparameters,learning_rate,2e-5,,5,Libri-light fine-tuning
+2006.11477,hyperparameters,learning_rate,3e-5,,5,Libri-light fine-tuning
+2006.11477,hyperparameters,learning_rate,1e-4,,5,BASE fine-tuning on 960h
+2006.11477,hyperparameters,lr_schedule,tri-state,tri-state rate schedule,5,fine-tuning
+2006.11477,hyperparameters,freeze_updates,10k,10k updates,5,only output classifier trained
+2006.11477,hyperparameters,beam_size,50,beam,5,4-gram LM model selection; Transformer LM tuning
+2006.11477,hyperparameters,beam_size,500,beam,5,4-gram LM tuning; Transformer LM test
+2006.11477,hyperparameters,beam_size,1500,beam,5,n-gram LM test
+2006.11477,hyperparameters,lm_weight,2,LM weight,5,model selection
+2006.11477,hyperparameters,word_insertion_penalty,-1,,5,model selection
+2006.11477,hyperparameters,channel_mask_prob,0.008,,13,10 min and 100 hours
+2006.11477,hyperparameters,channel_mask_prob,0.004,,13,1 hour and 10 hours
+2006.11477,hyperparameters,channel_mask_prob,0.0016,,13,960 hours
+2006.11477,hyperparameters,channel_mask_prob,0.012,,13,TIMIT
+2006.11477,hyperparameters,mask_prob,0.05,timestep mask prob,13,100 and 960 hours fine-tuning
+2006.11477,hyperparameters,train_steps,12k,updates,13,10 min fine-tuning
+2006.11477,hyperparameters,train_steps,13k,updates,13,1 hour fine-tuning
+2006.11477,hyperparameters,train_steps,20k,updates,13,10 hours fine-tuning
+2006.11477,hyperparameters,train_steps,50k,updates,13,100 hours fine-tuning
+2006.11477,hyperparameters,train_steps,320k,updates,13,960 hours fine-tuning
+2006.11477,hyperparameters,train_steps,40k,updates,13,TIMIT fine-tuning
+2006.11477,hyperparameters,model_size,95M,parameters,6,BASE
+2006.11477,hyperparameters,model_size,317M,parameters,6,LARGE
+2006.11477,compute,,64 V100 GPUs for 1.6 days,V100|64 V100 GPUs,4,BASE pre-training
+2006.11477,compute,,128 V100 GPUs for 2.3 / 5.2 days,128 V100 GPUs,4,LARGE pre-training
+2006.11477,compute,,8 / 24 GPUs fine-tuning,8 GPUs|24 GPUs,5,
+2006.11477,code_urls,,https://github.com/pytorch/fairseq,fairseq,1,
