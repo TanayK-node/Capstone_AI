@@ -459,6 +459,26 @@ export type GraphResponse = {
   report: ContextReport;
 };
 
+// ---- reviewer mode (mirrors app/schemas/review.py)
+
+export type ReviewPoint = { point: string; evidence: Evidence[] };
+export type Review = {
+  summary: string;
+  strengths: ReviewPoint[];
+  weaknesses: ReviewPoint[];
+  missing_ablations: ReviewPoint[];
+  questions: string[];
+  findings: { source: "reproducibility" | "claims" | "code"; text: string; evidence: Evidence[] }[];
+  warnings: string[];
+};
+export type ReviewResponse = {
+  paper_id: string;
+  model: string | null;
+  prompt_version: string | null;
+  created_at: string;
+  review: Review;
+};
+
 // ---- reproducibility (mirrors app/schemas/repro.py)
 
 export type ItemStatus = "present" | "partial" | "missing" | "not_applicable" | "unknown";
@@ -555,6 +575,15 @@ export const confirmRepo = (id: string, url: string) =>
   });
 export const getGlossary = (id: string) => request<GlossaryResponse>(`/api/papers/${id}/glossary`);
 export const getGraph = (id: string) => request<GraphResponse>(`/api/papers/${id}/graph`);
+/** The stored review, or null when none has been written yet (404). */
+export const getReview = async (id: string): Promise<ReviewResponse | null> => {
+  const res = await fetch(`${API_URL}/api/papers/${id}/review`, { cache: "no-store" });
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json() as Promise<ReviewResponse>;
+};
+export const writeReview = (id: string) =>
+  request<ReviewResponse>(`/api/papers/${id}/review`, { method: "POST" });
 export const askPaper = (id: string, question: string, history: ChatTurn[]) =>
   request<ChatAnswer>(`/api/papers/${id}/chat`, {
     method: "POST",

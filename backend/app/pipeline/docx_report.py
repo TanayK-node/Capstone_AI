@@ -24,6 +24,7 @@ from app.schemas.extraction import Dataset, Evidence, Hyperparameter, Item, Pape
 from app.schemas.math import MathReport
 from app.schemas.repro import Scorecard
 from app.schemas.results import ResultsTable
+from app.schemas.review import Review, ReviewPoint
 
 STATUS_TEXT = {
     "verified": "verified",
@@ -48,6 +49,7 @@ class PaperBundle:
     code: CodeReport | None = None
     math: MathReport | None = None
     tables: list[ResultsTable] = field(default_factory=list)
+    review: Review | None = None
     model: str | None = None
 
 
@@ -194,6 +196,33 @@ def build_docx(b: PaperBundle) -> bytes:
             continue
         for item in items:
             _bullet(doc, item)
+
+    # ---- reviewer mode
+    if b.review is not None:
+        rv = b.review
+        doc.add_heading("Review (reviewer mode)", level=1)
+        _grey(doc.add_paragraph(), "Written by the LLM from the paper and the analyses; facts "
+              "from the analyses were established in Python. No score is given.")  # fmt: skip
+        doc.add_paragraph(rv.summary)
+        sections: list[tuple[str, list[ReviewPoint]]] = [
+            ("Strengths", rv.strengths), ("Weaknesses", rv.weaknesses),
+            ("Missing ablations", rv.missing_ablations)]  # fmt: skip
+        for title, points in sections:
+            if points:
+                doc.add_heading(title, level=3)
+                for pt in points:
+                    par = doc.add_paragraph(style="List Bullet")
+                    par.add_run(pt.point)
+                    if pt.evidence:
+                        _grey(par, f"  [{_pages(pt.evidence)}; {_status(pt.evidence)}]")
+        if rv.findings:
+            doc.add_heading("Facts from the analyses", level=3)
+            for f in rv.findings:
+                doc.add_paragraph(f"[{f.source}] {f.text}", style="List Bullet")
+        if rv.questions:
+            doc.add_heading("Questions for the authors", level=3)
+            for q in rv.questions:
+                doc.add_paragraph(q, style="List Number")
 
     # ---- analyses
     if b.claims is not None and b.claims.claims:

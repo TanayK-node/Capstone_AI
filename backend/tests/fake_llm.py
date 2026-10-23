@@ -64,6 +64,8 @@ class FakePaperProvider:
         paragraphs = _TAGGED.findall(request.prompt)
         if fields == ["symbols"]:
             return ProviderResponse(json.dumps({"symbols": self._glossary(request.prompt)}))
+        if fields == ["summary", "strengths", "weaknesses", "missing_ablations", "questions"]:
+            return ProviderResponse(json.dumps(self._review(paragraphs)))
         if fields == ["summary", "positions"]:
             return ProviderResponse(json.dumps(self._novelty(paragraphs)))
         if fields == ["answerable", "answer"]:
@@ -143,6 +145,19 @@ class FakePaperProvider:
                  "note": "stated"}
             )  # fmt: skip
         return answers
+
+    def _review(self, paragraphs: list[tuple[str, str]]) -> dict[str, Any]:
+        """A strength quoting the paper, a weakness with an invented quote, one question."""
+        bid, text = paragraphs[0] if paragraphs else ("b0001", "")
+        return {
+            "summary": "The paper proposes a method and evaluates it.",
+            "strengths": [{"point": "Clear motivation.", "quote": _SENT.split(text)[0],
+                           "chunk_id": bid}],
+            "weaknesses": [{"point": "Few seeds.", "quote": "We ran a single seed only.",
+                            "chunk_id": bid}],
+            "missing_ablations": [],
+            "questions": ["How sensitive is it to the learning rate?"],
+        }  # fmt: skip
 
     def _novelty(self, paragraphs: list[tuple[str, str]]) -> dict[str, Any]:
         """R1 from a real citing sentence, R2 with an invented quote, R99 does not exist."""

@@ -32,6 +32,7 @@ import { CodeView } from "./code-view";
 import { MathView } from "./math-view";
 import { ReproView } from "./repro-view";
 import { ResultsView } from "./results-view";
+import { ReviewView } from "./review-view";
 import type { Highlight } from "./pdf/pdf-viewer";
 import { StatusBadge } from "./status-badge";
 import { TableView } from "./table-view";
@@ -64,6 +65,7 @@ const TABS = [
   "code",
   "math",
   "context",
+  "review",
   "results",
   "structure",
   "block",
@@ -390,6 +392,14 @@ export function Workspace() {
                         : "No citation graph yet. Re-run the analysis to create one."}
                 </p>
               ))}
+            {tab === "review" && (
+              <ReviewView
+                paperId={id}
+                ready={extracted && !ACTIVE.includes(p.status)}
+                activeKey={highlight?.key ?? null}
+                onEvidence={setEvidence}
+              />
+            )}
             {tab === "results" &&
               (results.data ? (
                 <ResultsView paperId={id} tables={results.data} onShowTable={showTable} />

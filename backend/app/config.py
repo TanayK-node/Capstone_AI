@@ -154,6 +154,10 @@ class ContextSection(BaseModel):
     novelty_references: int = 10  # reference abstracts given to the novelty call
 
 
+class ReviewSection(BaseModel):
+    max_context_chars: int = 40_000  # paper text sent with the review call
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_prefix="PAPERLENS_",
@@ -177,6 +181,7 @@ class Settings(BaseSettings):
     chat: ChatSection = Field(default_factory=ChatSection)
     embeddings: EmbeddingsSection = Field(default_factory=EmbeddingsSection)
     context: ContextSection = Field(default_factory=ContextSection)
+    review: ReviewSection = Field(default_factory=ReviewSection)
     features: dict[str, bool] = Field(default_factory=dict)
 
     # Secrets: read from the conventional unprefixed names as well.

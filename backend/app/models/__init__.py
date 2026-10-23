@@ -13,6 +13,7 @@ from app.models.paper import (
     Paper,
     ParseResult,
     ReproReport,
+    ReviewRow,
 )
 
 __all__ = [
@@ -30,4 +31,5 @@ __all__ = [
     "Paper",
     "ParseResult",
     "ReproReport",
+    "ReviewRow",
 ]

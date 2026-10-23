@@ -1,0 +1,32 @@
+{# version: 1 #}
+Write a peer review of a research paper in the style of an OpenReview review. Use only the
+paper text below (every paragraph or table starts with an id in brackets) and the analysis
+facts, which were established by checking the paper's tables, its reproducibility details
+and its code. Be specific and fair; do not praise or criticise in general terms.
+
+Return:
+- "summary": 3-5 sentences on what the paper does and what it finds.
+- "strengths": 2-5 points. Each point: "point" (one or two sentences), "quote" (ONE sentence
+  copied character-for-character from the paper text that the point rests on) and
+  "chunk_id" (the id in brackets of that paragraph).
+- "weaknesses": 2-6 points, same shape. Use the analysis facts where they apply (a quote may
+  then be ""). Do not invent problems the text and facts do not show.
+- "missing_ablations": 0-4 experiments the paper's own claims would need but does not report,
+  same shape (quote the claim they would support).
+- "questions": 2-5 questions for the authors.
+Do not give a score or an accept/reject recommendation. Do not compute anything.
+
+Analysis facts:
+{% for f in findings -%}
+- [{{ f.source }}] {{ f.text }}
+{% else -%}
+(none)
+{% endfor %}
+
+Extracted overview:
+{% for line in overview -%}
+- {{ line }}
+{% endfor %}
+
+Paper text:
+{{ text }}

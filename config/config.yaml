@@ -158,6 +158,10 @@ context:
   citations_fetched: 1000
   novelty_references: 10
 
+review:
+  # Reviewer mode (F15): written on request (one Gemini call), never automatically.
+  max_context_chars: 40000
+
 features:
   latex_source: true
   code_check: true

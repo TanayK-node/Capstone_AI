@@ -8,7 +8,7 @@ import json
 import re
 import time
 from collections.abc import AsyncIterator, Iterator
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any, Literal
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, Query, Request, UploadFile
@@ -30,6 +30,7 @@ from app.models import (
     Paper,
     ParseResult,
     ReproReport,
+    ReviewRow,
 )
 from app.pipeline import dispatch, export
 from app.pipeline.chat.service import answer as chat_answer
@@ -42,6 +43,7 @@ from app.pipeline.ingest.validate import InvalidPdfError
 from app.pipeline.results.builder import build_results
 from app.pipeline.retrieval.embedder import get_embedder
 from app.pipeline.retrieval.store import load_index
+from app.pipeline.review.service import build_review
 from app.pipeline.runner import ANALYSIS_STAGES, STAGES, load_document, stage_statuses
 from app.schemas.chat import ChatAnswer, ChatRequest
 from app.schemas.claims import ClaimReport
@@ -50,6 +52,7 @@ from app.schemas.extraction import PaperExtraction
 from app.schemas.math import MathReport
 from app.schemas.repro import Scorecard
 from app.schemas.results import ResultsTable
+from app.schemas.review import Review
 
 router = APIRouter(prefix="/api/papers", tags=["papers"])
 
@@ -373,6 +376,7 @@ def _docx_response(session: Session, paper_id: str, extraction: PaperExtraction)
         claims=stored(ClaimReportRow, ClaimReport),
         code=stored(CodeReportRow, CodeReport),
         math=stored(MathReportRow, MathReport),
+        review=stored(ReviewRow, Review),
         tables=build_results(doc, extraction) if doc is not None else [],
         model=ex_row.model if ex_row is not None else None,
     )
@@ -511,6 +515,59 @@ def get_graph(paper_id: str, session: Session = Depends(get_session)) -> dict[st
         raise HTTPException(404, "no citation graph yet for this paper")
     return {"paper_id": paper_id, "model": row.model, "prompt_version": row.prompt_version,
             "created_at": row.created_at, "report": row.data}  # fmt: skip
+
+
+@router.get("/{paper_id}/review")
+def get_review(paper_id: str, session: Session = Depends(get_session)) -> dict[str, Any]:
+    """The stored reviewer-mode review (F15), if one was written."""
+    _paper_or_404(session, paper_id)
+    row = session.get(ReviewRow, paper_id)
+    if row is None:
+        raise HTTPException(404, "no review yet: POST to write one")
+    return {"paper_id": paper_id, "model": row.model, "prompt_version": row.prompt_version,
+            "created_at": row.created_at, "review": row.data}  # fmt: skip
+
+
+@router.post("/{paper_id}/review")
+def write_review(
+    paper_id: str,
+    session: Session = Depends(get_session),
+    settings: Settings = Depends(get_settings),
+) -> dict[str, Any]:
+    """Write (or rewrite) the review: one LLM call, on request only."""
+    from app.llm import get_llm_client
+    from app.llm.errors import LLMError
+
+    paper = _paper_or_404(session, paper_id)
+    llm = get_llm_client()
+    if not llm.providers:
+        raise HTTPException(503, "no LLM provider configured: set GEMINI_API_KEY in .env")
+    doc = load_document(session, paper_id)
+    ex_row = session.get(ExtractionRow, paper_id)
+    if doc is None or ex_row is None:
+        raise HTTPException(409, "the paper has no extraction yet; run the analysis first")
+
+    def stored(model: type[Any], schema: type[BaseModel]) -> Any:
+        row = session.get(model, paper_id)
+        return schema.model_validate(row.data) if row is not None else None
+
+    try:
+        run = build_review(
+            doc, PaperExtraction.model_validate(ex_row.data), llm,
+            scorecard=stored(ReproReport, Scorecard), claims=stored(ClaimReportRow, ClaimReport),
+            code=stored(CodeReportRow, CodeReport), pdf_path=storage.pdf_path(settings, paper.id),
+            max_chars=settings.review.max_context_chars,
+        )  # fmt: skip
+    except LLMError as exc:
+        detail = f"the review could not be written: {type(exc).__name__}: {exc}"
+        raise HTTPException(502, detail) from exc
+    row = ReviewRow(paper_id=paper_id, data=run.review.model_dump(mode="json"),
+                    provider=run.provider, model=run.model, prompt_version=run.prompt_version,
+                    created_at=datetime.now(UTC))  # fmt: skip
+    session.merge(row)
+    session.commit()
+    return {"paper_id": paper_id, "model": run.model, "prompt_version": run.prompt_version,
+            "created_at": row.created_at, "review": row.data}  # fmt: skip
 
 
 @router.post("/{paper_id}/chat", response_model=ChatAnswer)

@@ -155,6 +155,12 @@ def test_upload_runs_pipeline_and_serves_results(client: TestClient) -> None:
     assert graph["paper"]["title"] == "Sparse Routing Improves Low-Resource Translation"
 
     code = client.get(f"/api/papers/{pid}/code").json()["report"]
+    assert client.get(f"/api/papers/{pid}/review").status_code == 404
+    written = client.post(f"/api/papers/{pid}/review").json()["review"]
+    assert written["summary"] and written["questions"]
+    assert written["strengths"][0]["evidence"][0]["grounding_status"] == "verified"
+    assert written["weaknesses"][0]["evidence"][0]["grounding_status"] == "unlocated"
+    assert client.get(f"/api/papers/{pid}/review").json()["review"] == written
     assert code["status"] == "ok" and code["sandbox"] == "process"
     rows = {r["canonical"]: r for r in code["comparisons"]}
     assert rows["learning_rate"]["status"] == "match"  # README command uses 3e-4
