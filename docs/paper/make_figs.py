@@ -148,3 +148,30 @@ b.legend(fontsize=6, ncol=2, loc="upper center", bbox_to_anchor=(0.45, -0.13), h
 fig.subplots_adjust(left=0.11, right=0.99, top=0.9, bottom=0.3)
 fig.savefig(f"{OUT}/fig_errors.pdf"); plt.close(fig)
 print("ok")
+
+# 5. A1 parser: gold values still in the parsed text, by field (from ablations.md)
+a1 = text.split("## A1:")[1].split("## A6:")[0]
+head_row = next(line for line in a1.splitlines() if line.startswith("| parser | baselines"))
+fl = [c.strip() for c in head_row.strip("|").split("|")][1:]
+overall, by = {}, {}
+for line in a1.splitlines():
+    cells = [c.strip() for c in line.strip("|").split("|")]
+    if len(cells) == 10 and cells[1].isdigit():
+        overall[cells[0]] = cells[9]
+    elif len(cells) == len(fl) + 1 and cells[0] in overall:
+        by[cells[0]] = [int(c.rstrip("%")) for c in cells[1:]]
+gro, pym = by["GROBID (cached TEI)"], by["PyMuPDF only"]
+n = re.search(r"\| GROBID \(cached TEI\) \| (\d+) \|", a1).group(1)
+fig, ax = plt.subplots(figsize=(W, 1.95)); x = np.arange(len(fl)); w = 0.38
+bars(ax, x - w / 2, gro, w, C1, f"GROBID ({overall['GROBID (cached TEI)']} overall)")
+bars(ax, x + w / 2, pym, w, C2, f"PyMuPDF only ({overall['PyMuPDF only']} overall)")
+for i in range(len(fl)):
+    for dx, v in ((-w / 2, gro[i]), (w / 2, pym[i])):
+        if v < 100:
+            ax.text(i + dx, v + 1, v, ha="center", fontsize=6, color=INK)
+ax.set_xticks(x, [NAMES[f] for f in fl], fontsize=6.5, rotation=25, ha="right")
+ax.set_ylim(55, 106); ax.set_ylabel(f"Gold values in text (%, {n} papers)", fontsize=7)
+ax.grid(axis="x", visible=False)
+ax.legend(ncol=2, fontsize=6.5, loc="upper center", bbox_to_anchor=(0.5, 1.18))
+fig.tight_layout(pad=0.3); fig.savefig(f"{OUT}/fig_a1.pdf"); plt.close(fig)
+print("a1 ok")

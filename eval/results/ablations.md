@@ -22,6 +22,8 @@ Items kept under each policy, scored on the core fields (micro over all papers).
 | quote found + verifier: supports or partly | 379 | 0.97 | 0.46 | 0.62 | 0% |
 | quote found + verifier: supports | 337 | 0.96 | 0.43 | 0.59 | 0% |
 
+_A1 and A6 kept from the last run with --pdf-dir (not recomputed now)._
+
 ## A1: parser
 
 | parser | papers | s/paper | sections | paragraphs | tables | tables with grid | references | equations | gold items in parsed text |
@@ -52,9 +54,9 @@ Questions built from the gold set (field questions and one per hyperparameter); 
 
 | ablation | what | needs |
 |---|---|---|
-| A2 | extraction granularity (whole paper / section groups / per field) | Gemini runs |
+| A2 | extraction granularity (whole paper / section groups / per field) | collect --set reference --arm groups / whole / per_field |
 | A4 | rule hints (LLM only vs regex hints + LLM) | Gemini runs |
-| A5 | model (Gemini Flash vs Flash-Lite) | a check_extract run with Flash |
+| A5 | model (Gemini Flash vs Flash-Lite) | collect --set reference --model gemini-3.5-flash |
 | A7 | claim verification (LLM verdict vs Python recomputation) | Gemini runs + claim gold |
-| A3 full | extraction without asking for quotes | Gemini runs |
+| A3 full | extraction without asking for quotes | collect --set reference --arm noquote |
 | Qasper | grounded QA benchmark, 100 questions | Gemini runs |

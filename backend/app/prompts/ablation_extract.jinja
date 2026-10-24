@@ -1,0 +1,48 @@
+{# version: 1 #}
+{#- Evaluation-only prompt (app/eval/ablate.py, ablations A2 and A3). The rules and field
+    definitions are copied from extract_front / extract_experiments so that only the
+    granularity (which text, which fields per call) and the quote requirement change. -#}
+You extract structured information from a research paper. Use only the text below
+(sections, tables and appendix excerpts). Every paragraph or table starts with an id in
+brackets.
+
+Rules for every item:
+{% if quotes -%}
+- "value": a short statement in your own words.
+- "quote": ONE sentence (or one table caption/row) copied character-for-character from the
+  text that states the item.
+- "chunk_id": the id in brackets of the paragraph or table the quote comes from.
+{% else -%}
+- "value": a short statement in your own words.
+{% endif -%}
+- "confidence": 0 to 1.
+- If the text does not state something, return an empty list for it. Never invent items.
+- Do not compute or convert numbers; copy values exactly as written (e.g. "3e-4", "50k").
+
+Fields:
+{% for f in fields -%}
+{% if f == "task" -%}
+- task: the task(s) studied, e.g. "machine translation", "image classification".
+{% elif f == "datasets" -%}
+- datasets: every dataset used. name as written; split(s) used; size as stated; public:
+  "yes" if it is a public benchmark, "no" if private/internal, otherwise "unknown".
+{% elif f == "baselines" -%}
+- baselines: methods the paper compares against.
+{% elif f == "metrics" -%}
+- metrics: evaluation metrics (e.g. BLEU, top-1 accuracy, F1).
+{% elif f == "hyperparameters" -%}
+- hyperparameters: name, value_raw exactly as written, scope (e.g. "pre-training",
+  "fine-tuning") or empty. Include optimizer, learning rate, batch size, epochs/steps,
+  dropout, warmup, model sizes.
+{% elif f == "compute" -%}
+- compute: hardware, number of devices, training time or GPU hours.
+{% endif -%}
+{% endfor %}
+{% if hints %}
+Hints found by pattern matching (they may be wrong or incomplete; check them against the text):
+{% for h in hints -%}
+- {{ h.kind }} in [{{ h.block_id }}]: {{ h.sentence }}
+{% endfor %}
+{% endif %}
+Text:
+{{ text }}

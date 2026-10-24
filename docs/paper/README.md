@@ -22,8 +22,8 @@ Before submission (search for `TEAM` in `paperlens.tex`): author names and affil
 the acknowledgement, and the outcome of the gold-set spot-check (Threats to validity).
 
 Figures: the charts come from `eval/results/` (50-paper run `collect_flash_lite`, earlier
-10-paper run `phase2_flash_lite` for A3, A1 on the 10 reference PDFs) and the hand audit
-`eval/gold/audit_v2.csv`; `python docs/paper/make_figs.py` redraws fields, papers, A3 and
-errors after `run_eval` (`fig_a1.pdf` was drawn from the A1 table). The screenshots show the
+10-paper run `phase2_flash_lite` for A3; A1 on all 50 PDFs from the laptop) and the hand audit
+`eval/gold/audit_v2.csv`; `python docs/paper/make_figs.py` redraws fields, papers, A3,
+errors and A1 after `run_eval`. The screenshots show the
 app with the real Gemini output of the 10-paper run, loaded from
 `eval/runs/phase2_flash_lite/report.md` and re-grounded on the parse.

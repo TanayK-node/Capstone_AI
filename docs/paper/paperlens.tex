@@ -184,29 +184,53 @@ overlap~\cite{liang2024feedback}, and Zhou et al.\ find LLM reviewers unreliable
 scoring~\cite{zhou2024reliable}. PaperLens therefore offers a draft review without a score,
 and it lists facts established in Python separately from the LLM's opinions.
 
-\begin{table}[t]
-\caption{Positioning against representative prior work (\yes{} = core feature,
-\part{} = partial or indirect, \no{} = not a goal).}
+\subsection{How PaperLens compares}
+Table~\ref{tab:related} compares PaperLens with representative systems along the design
+properties that matter for trusting a paper analysis. Each prior line of work covers part
+of the problem well: SciREX and AxCell extract task, dataset and result tuples but need
+trained models and give no evidence per item; PaperQA and OpenScholar cite their sources
+but answer questions rather than fill a schema; SciTab and SciFact study verification but
+leave the verdict to a model; CORE-Bench and PaperBench check reproducibility by running
+code, at hours of agent time per paper. PaperLens is, to our knowledge, the only system in
+the table that (i)~fills a full extraction schema including hyperparameters, (ii)~attaches
+a quote to every item and checks it against the paper in code, (iii)~leaves every numeric
+verdict to Python, and (iv)~adds reproducibility, claim and paper-vs-code checks, all
+without fine-tuning and on a free-tier API. The table compares design, not accuracy: the
+systems solve different tasks on different data, so their reported scores are not
+comparable. The closest like-for-like comparison we can make is internal: the ``keep all''
+arm of ablation A3 is what an LLM extractor without our evidence checks would deliver, and
+in our first run it hallucinated 10\% of its items against 0\% with the checks
+(Section~\ref{sec:results}).
+
+\begin{table*}[t]
+\caption{Comparison with representative frameworks (\yes{} = core feature, \part{} =
+partial or indirect, \no{} = absent or not a goal). The last column says what each needs to
+run. Design comparison only: the systems address different tasks, so accuracy numbers are
+not comparable.}
 \label{tab:related}
 \centering
 \footnotesize
-\setlength{\tabcolsep}{2.4pt}
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{@{}lcccccc@{}}
+\setlength{\tabcolsep}{3pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lccccccccccl@{}}
 \toprule
- & \makecell{Schema\\IE} & \makecell{Item\\evidence} & \makecell{Repro.\\check} & \makecell{Claims\\vs tables} & \makecell{Code\\check} & \makecell{Runs\\code} \\
+Framework & \makecell{Schema\\extraction\\(incl.\ HPs)} & \makecell{Quote\\per item} & \makecell{Quote\\checked\\in code} & \makecell{Highlight\\in PDF} & \makecell{Numeric\\verdicts\\in code} & \makecell{Repro.\\check} & \makecell{Claims\\vs\\tables} & \makecell{Paper\\vs\\code} & \makecell{Halluc.\\measured} & \makecell{No fine-\\tuning} & Needs \\
 \midrule
-SciREX, AxCell~\cite{jain2020scirex,kardas2020axcell} & \yes & \no & \no & \part & \no & \no \\
-PaperQA, OpenScholar~\cite{lala2023paperqa,asai2026openscholar} & \no & \yes & \no & \no & \no & \no \\
-ScholarPhi~\cite{head2021scholarphi} & \no & \yes & \no & \no & \no & \no \\
-SciTab~\cite{lu2023scitab} & \no & \no & \no & \yes & \no & \no \\
-CORE-Bench, PaperBench~\cite{siegel2024corebench,starace2025paperbench} & \no & \no & \yes & \no & \part & \yes \\
-LLM reviewers~\cite{liang2024feedback} & \no & \no & \part & \no & \no & \no \\
+SciREX~\cite{jain2020scirex} & \part & \part & \no & \no & \no & \no & \no & \no & \no & \no & trained model \\
+AxCell~\cite{kardas2020axcell} & \part & \no & \no & \no & \no & \no & \part & \no & \no & \no & trained model \\
+LLM-NERRE~\cite{dagdelen2024structured} & \yes & \no & \no & \no & \no & \no & \no & \no & \no & \no & fine-tuned LLM \\
+PaperQA~\cite{lala2023paperqa} & \no & \yes & \part & \no & \no & \no & \no & \no & \part & \yes & LLM API \\
+OpenScholar~\cite{asai2026openscholar} & \no & \yes & \part & \no & \no & \no & \no & \no & \part & \part & LLM + paper datastore \\
+ScholarPhi / Semantic Reader~\cite{head2021scholarphi,lo2024semanticreader} & \no & \yes & \part & \yes & \no & \no & \no & \no & \no & \no & trained detectors \\
+SciFact, SciTab~\cite{wadden2020scifact,lu2023scitab} & \no & \part & \no & \no & \no & \no & \yes & \no & \no & \part & model verdict \\
+SUPER, CORE-Bench, PaperBench~\cite{bogin2024super,siegel2024corebench,starace2025paperbench} & \no & \no & \no & \no & \part & \yes & \no & \part & \no & \yes & agent runs code (hours) \\
+LLM reviewers~\cite{liang2024feedback} & \no & \no & \no & \no & \no & \part & \no & \no & \no & \yes & LLM API \\
+General LLM chat over a PDF & \part & \part & \no & \no & \no & \part & \part & \no & \no & \yes & LLM API \\
 \midrule
-\textbf{PaperLens} & \yes & \yes & \yes & \yes & \yes & \no \\
+\textbf{PaperLens (ours)} & \yes & \yes & \yes & \yes & \yes & \yes & \yes & \yes & \yes & \yes & free-tier API, CPU \\
 \bottomrule
 \end{tabular}}
-\end{table}
+\end{table*}
 
 % =========================================================================================
 \section{System Overview}
@@ -472,7 +496,7 @@ first built) is reported alongside. All tables and figures in this paper are reg
 by one command from the stored runs.
 
 % =========================================================================================
-\section{Results}
+\section{Results}\label{sec:results}
 
 \subsection{Extraction quality}
 Table~\ref{tab:main} and Fig.~\ref{fig:fields} report per-field scores over the 50 papers.
@@ -594,22 +618,47 @@ hallucinated items at a moderate cost in recall.}
 \end{figure*}
 
 \subsection{Parser (ablation A1) and retrieval (ablation A6)}
-Fig.~\ref{fig:a1} compares GROBID with a PyMuPDF-only parse by the share of gold values
-still present in the parsed text, which is an upper bound on extraction recall. Both A1
-and A6 need the PDFs and are reported on the reference ten. Raw
-PyMuPDF text keeps slightly more of the values (93\% vs 89\%), mostly numbers in tables
-and footnotes. GROBID, however, recovers the structure the rest of the pipeline depends
-on: 260 vs 181 section headings, 463 vs 344 references, 67 vs 30 equations, and in-text
-citations. With GROBID, 23\% of gold hyperparameter values are absent from the parsed
-text, so no prompt change can recover them. For chat, BM25 alone finds the passage holding
-a gold answer in its top five for 47\% of questions built from the gold set. The dense and
-hybrid arms are pending (Section~\ref{sec:limits}).
+Fig.~\ref{fig:a1} compares GROBID with a PyMuPDF-only parse on all 50 papers by the share
+of gold values still present in the parsed text, which is an upper bound on extraction
+recall. Raw PyMuPDF text keeps more of the values (90\% vs 83\%), mostly numbers in tables,
+footnotes and appendix lists. GROBID, however, recovers the structure the rest of the
+pipeline depends on: 1{,}520 vs 1{,}165 section headings, 3{,}026 vs 2{,}394 references,
+580 vs 243 equations, and in-text citations. The gap is largest for hyperparameters: a
+third of the gold values (33\%) never reach the extractor through GROBID's text, against
+19\% with PyMuPDF. Since 67\% is the ceiling for hyperparameter coverage and PaperLens
+reaches 30\%, the extractor recovers less than half of what the parse makes available,
+and a parse that keeps table and appendix text would raise the ceiling itself.
+
+For chat (A6), we ask one question per field and per hyperparameter name and count a gold
+item as found when it occurs in the top five passages (2{,}086 question--item pairs,
+Table~\ref{tab:a6}). BM25 and hybrid retrieval tie at 45\% recall@5; dense retrieval alone
+is clearly worse (36\%), above all on task questions (19\% vs 53\%), where the answer
+shares words with the question (``task'', the paper's own terms) rather than meaning.
+Hybrid fusion helps on datasets, metrics and hyperparameters and costs on tasks, which
+supports keeping BM25 in the chat's fusion rather than relying on embeddings.
+
+\begin{table}[t]
+\caption{Ablation A6: retrieval recall@5 for chat (50 papers, GROBID parse).}
+\label{tab:a6}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+Retrieval & All & Task & Datasets & Baselines & Metrics & HPs \\
+\midrule
+BM25   & \textbf{45\%} & \textbf{53\%} & 36\% & \textbf{41\%} & 48\% & 50\% \\
+Dense  & 36\% & 19\% & 37\% & 29\% & 46\% & 41\% \\
+Hybrid & \textbf{45\%} & 45\% & \textbf{40\%} & 38\% & \textbf{49\%} & \textbf{51\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figs/fig_a1.pdf}
-\caption{Ablation A1: gold values still present in the parsed text, by field (unlabelled
-bars are 100\%).}
+\caption{Ablation A1: gold values still present in the parsed text, by field (50 papers).
+GROBID loses a third of the hyperparameter values, which caps extraction recall.}
 \label{fig:a1}
 \end{figure}
 
@@ -731,7 +780,7 @@ Section~\ref{sec:threats}.
 \item \textbf{Baselines cited by author name only,} such as T5's ``previous best'' results
   given as citations. Our scorer also undercounts one case: ``Krizhevsky et al.''\ does not
   match ``Krizhevsky et al.\ 2012'' because digit sequences must be equal.
-\item \textbf{Parsing ceiling.} On the reference ten, 11\% of gold values do not survive
+\item \textbf{Parsing ceiling.} 17\% of gold values, and 33\% of hyperparameter values, do not survive
   GROBID's text at all (A1).
 \end{enumerate}
 
@@ -772,7 +821,6 @@ design: an ambiguous table match yields ``unsupported'', never ``contradicted''.
   \item a stronger model (A5);
   \item LLM vs Python claim verdicts (A7);
   \item extraction without quotes (full A3);
-  \item dense and hybrid retrieval (A6);
   \item LaTeX and Docling parsers (A1);
   \item Qasper~\cite{dasigi2021qasper}.
   \end{itemize}

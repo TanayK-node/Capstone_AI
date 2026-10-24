@@ -7,7 +7,7 @@ from pathlib import Path
 from app.eval.data import GoldItem, PredItem, from_extraction, from_markdown
 from app.eval.extraction import evaluate
 from app.eval.match import numbers, parts, text_match, value_match
-from app.eval.run_eval import audit_md, breakdown_md
+from app.eval.run_eval import audit_md, breakdown_md, gemini_arms_md, previous_a1_a6
 from app.schemas.extraction import Evidence, Hyperparameter, Item, PaperExtraction
 
 
@@ -157,3 +157,29 @@ def test_breakdown_by_group_and_shared_papers(tmp_path: Path) -> None:
     audit.write_text("\n".join(rows) + "\n", encoding="utf-8")
     md = audit_md([audit])
     assert "| datasets | 1 | 0 |" in md and "| all | 1 | 1 |" in md
+
+
+def test_a1_a6_sections_survive_a_run_without_pdfs() -> None:
+    md = (
+        "# Ablations\n\n## A3: x\n\n## A1: parser\n\n| a |\n\n"
+        "## A6: retrieval\n\n| b |\n\n## A2 / A3 / A5: Gemini arms\n\n| c |\n\n## Pending\n"
+    )
+    kept = previous_a1_a6(md)
+    assert kept[0].startswith("_A1 and A6 kept") and "## A1: parser" in kept
+    assert "## A6: retrieval" in kept and not any("Pending" in x for x in kept)
+    assert "| b |" in kept and not any("Gemini arms" in x or "| c |" in x for x in kept)
+    assert previous_a1_a6("# Ablations\n\nA1 and A6 not run\n\n## Pending\n") == []
+
+
+def test_gemini_arms_table_on_shared_papers(tmp_path: Path) -> None:
+    gold = [GoldItem(pid, "datasets", "SQuAD") for pid in ("a", "b")]
+    preds = {
+        "collect_flash_lite": [PredItem(p, "datasets", "SQuAD", status="verified") for p in "ab"],
+        "a3_noquote": [PredItem("a", "datasets", "SQuAD", status="unchecked")],
+    }
+    (tmp_path / "a3_noquote").mkdir()
+    (tmp_path / "a3_noquote" / "calls.json").write_text('{"a": {"calls": 2, "model": "m"}}')
+    md = "\n".join(gemini_arms_md(gold, preds, tmp_path))
+    assert "Same 1 papers" in md  # only paper a is in both runs
+    assert "| `a3_noquote` | 2.0 |" in md and "n/a (no quotes)" in md
+    assert gemini_arms_md(gold, {"collect_flash_lite": preds["collect_flash_lite"]}, tmp_path) == []

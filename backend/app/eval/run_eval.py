@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from collections.abc import Callable
 from pathlib import Path
@@ -235,31 +236,96 @@ def main() -> int:
               f"{_pct(rep.hp_coverage)}, numeric accuracy {_pct(rep.numeric_accuracy)}, "
               f"verified evidence {_pct(grounded(rep))}, hallucination "
               f"{_pct(rep.hallucination_rate)}")  # fmt: skip
-    md = ablations_md(results, gold, args.pdf_dir, args.tei_dir)
+    old_md = args.out / "ablations.md"
+    previous = old_md.read_text(encoding="utf-8") if old_md.exists() else None
+    md = ablations_md(results, gold, args.pdf_dir, args.tei_dir, previous, preds)
     (args.out / "ablations.md").write_text(md, encoding="utf-8")
     print(f"tables: {args.out}")
     return 0
 
 
+# Gemini ablation runs (app.eval.collect --arm / --model) and the row each gets.
+GEMINI_ARMS = [
+    ("collect_flash_lite", "production: 4 section groups + extra fields, Flash-Lite"),
+    ("a5_flash", "A5: production pipeline with Flash"),
+    ("a2_groups", "A2/A3 control: 2 calls (front, experiments), quotes"),
+    ("a3_noquote", "A3: the same 2 calls without quotes"),
+    ("a2_whole", "A2: whole paper, 1 call"),
+    ("a2_per_field", "A2: whole paper, 1 call per field (6)"),
+]
+DONE_BY = {"A2": ("a2_whole", "a2_per_field"), "A5": ("a5_flash",), "A3 full": ("a3_noquote",)}
+
+
+def gemini_arms_md(gold: list[GoldItem], preds: dict[str, list[PredItem]],
+                   runs_dir: Path) -> list[str]:  # fmt: skip
+    """A2 / A3 / A5 side by side, on the papers every present arm covers."""
+    present = [(r, label) for r, label in GEMINI_ARMS if r in preds]
+    if not any(r != "collect_flash_lite" for r, _ in present):
+        return []
+    shared = set.intersection(*({p.paper_id for p in preds[r]} for r, _ in present))
+    shared &= {g.paper_id for g in gold}
+    out = ["## A2 / A3 / A5: Gemini arms", "",
+           f"Same {len(shared)} papers for every arm; core fields, micro. Calls per paper from "
+           "`runs/<run>/calls.json` (extraction + grounding; parse and section roles left out).",
+           "", "| arm | run | calls/paper | precision | recall | F1 | hyperparameter coverage "
+           "| numeric accuracy | hallucination |",
+           "|---|---|---|---|---|---|---|---|---|"]  # fmt: skip
+    for run, label in present:
+        rep = evaluate([g for g in gold if g.paper_id in shared],
+                       [p for p in preds[run] if p.paper_id in shared])  # fmt: skip
+        p, r, f1 = ablations.core_scores(rep)
+        log = runs_dir / run / "calls.json"
+        calls = json.loads(log.read_text(encoding="utf-8")) if log.exists() else {}
+        n = [v["calls"] for k, v in calls.items() if k in shared]
+        per = f"{sum(n) / len(n):.1f}" if n else "-"
+        # Without quotes every item lacks evidence, which the metric counts as hallucinated.
+        hall = "n/a (no quotes)" if run == "a3_noquote" else _pct(rep.hallucination_rate)
+        cov, acc = _pct(rep.hp_coverage), _pct(rep.numeric_accuracy)
+        out.append(f"| {label} | `{run}` | {per} | {_num(p)} | {_num(r)} | {_num(f1)} | "
+                   f"{cov} | {acc} | {hall} |")  # fmt: skip
+    return [*out, ""]
+
+
 PENDING = [
-    ("A2", "extraction granularity (whole paper / section groups / per field)", "Gemini runs"),
+    (
+        "A2",
+        "extraction granularity (whole paper / section groups / per field)",
+        "collect --set reference --arm groups / whole / per_field",
+    ),
     ("A4", "rule hints (LLM only vs regex hints + LLM)", "Gemini runs"),
-    ("A5", "model (Gemini Flash vs Flash-Lite)", "a check_extract run with Flash"),
+    (
+        "A5",
+        "model (Gemini Flash vs Flash-Lite)",
+        "collect --set reference --model gemini-3.5-flash",
+    ),
     ("A7", "claim verification (LLM verdict vs Python recomputation)", "Gemini runs + claim gold"),
-    ("A3 full", "extraction without asking for quotes", "Gemini runs"),
+    ("A3 full", "extraction without asking for quotes", "collect --set reference --arm noquote"),
     ("Qasper", "grounded QA benchmark, 100 questions", "Gemini runs"),
 ]
 
 
+def previous_a1_a6(md: str) -> list[str]:
+    """The A1/A6 sections of an earlier ablations.md: they need the PDFs, which may live on
+    another machine, so a run without --pdf-dir keeps them instead of erasing them."""
+    sections = [s for s in ("\n" + md).split("\n## ") if s.startswith(("A1:", "A6:"))]
+    if not sections:
+        return []
+    note = "_A1 and A6 kept from the last run with --pdf-dir (not recomputed now)._"
+    body = "\n\n".join("## " + s.rstrip("\n") for s in sections)
+    return [note, "", *body.split("\n"), ""]
+
+
 def ablations_md(results: dict[str, ExtractionReport], gold: list[GoldItem],
-                 pdf_dir: Path | None, tei_dir: Path | None) -> str:  # fmt: skip
+                 pdf_dir: Path | None, tei_dir: Path | None,
+                 previous: str | None = None,
+                 run_preds: dict[str, list[PredItem]] | None = None) -> str:  # fmt: skip
     out = ["# Ablations", "", "## A3: evidence policy (post-hoc, same extraction)", "",
            "Items kept under each policy, scored on the core fields (micro over all papers).",
            ""]  # fmt: skip
     runs_dir = EVAL_DIR / "runs"
     for name in results:
         src = predictions_path(runs_dir / name)
-        if src is None:
+        if src is None or name == "a3_noquote":  # no quotes: no evidence policy to vary
             continue
         preds = load_predictions(src)
         out += [f"### {name}", "",
@@ -272,13 +338,22 @@ def ablations_md(results: dict[str, ExtractionReport], gold: list[GoldItem],
                        f"{_pct(rep.hallucination_rate)} |")  # fmt: skip
         out.append("")
     if pdf_dir is None:
-        out += ["A1 and A6 not run: pass --pdf-dir (and --tei-dir) to run them.", ""]
+        old = previous_a1_a6(previous or "")
+        out += old or ["A1 and A6 not run: pass --pdf-dir (and --tei-dir) to run them.", ""]
     else:
         out += a1_a6_md(gold, pdf_dir, tei_dir)
+    done = run_preds or {}
+    out += gemini_arms_md(gold, done, runs_dir)
+    pending = [x for x in PENDING if not any(r in done for r in DONE_BY.get(x[0], ()))]
     out += ["## Pending (need Gemini quota; run later)", "", "| ablation | what | needs |",
             "|---|---|---|"]  # fmt: skip
-    out += [f"| {a} | {what} | {needs} |" for a, what, needs in PENDING]
+    out += [f"| {a} | {what} | {needs} |" for a, what, needs in pending]
     return "\n".join(out) + "\n"
+
+
+def _log(msg: str) -> None:
+    """Progress of the slow ablations, on stderr so the tables on stdout stay clean."""
+    print(msg, file=sys.stderr, flush=True)
 
 
 def a1_a6_md(gold: list[GoldItem], pdf_dir: Path, tei_dir: Path | None) -> list[str]:
@@ -302,7 +377,10 @@ def a1_a6_md(gold: list[GoldItem], pdf_dir: Path, tei_dir: Path | None) -> list[
         else:
             out.append("GROBID not reachable and no --tei-dir: GROBID arm skipped.")
     parsers["PyMuPDF only"] = get_parser(settings, "pymupdf").parse
-    parsed = {name: ablations.parse_all(fn, pdfs) for name, fn in parsers.items()}
+    parsed: dict[str, dict[str, tuple[ParsedDocument, float]]] = {}
+    for name, fn in parsers.items():
+        _log(f"A1: parsing {len(pdfs)} PDFs with {name}")
+        parsed[name] = ablations.parse_all(fn, pdfs, _log)
     stats = [ablations.parse_stats(name, docs, gold) for name, docs in parsed.items()]
     out += ["| parser | papers | s/paper | sections | paragraphs | tables | tables with grid | "
             "references | equations | gold items in parsed text |",
@@ -322,10 +400,12 @@ def a1_a6_md(gold: list[GoldItem], pdf_dir: Path, tei_dir: Path | None) -> list[
     out += ["", "LaTeX-source and Docling arms: pending (LaTeX needs the arXiv e-prints; Docling "
             "is not wired in).", ""]  # fmt: skip
 
+    _log("A6: loading the embedding model (the first time it is downloaded)")
     embedder = get_embedder(settings)
     first = next(iter(parsed.values()))
     docs = {pid: doc for pid, (doc, _) in first.items()}
-    scores = ablations.retrieval(docs, gold, embedder)
+    _log(f"A6: retrieval on {len(docs)} papers ({'BM25, dense, hybrid' if embedder else 'BM25'})")
+    scores = ablations.retrieval(docs, gold, embedder, _log)
     out += ["## A6: retrieval for chat", "",
             f"Questions built from the gold set (field questions and one per hyperparameter); "
             f"recall@{ablations.K} = gold items whose answer is in the top {ablations.K} "

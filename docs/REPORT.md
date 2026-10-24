@@ -329,22 +329,35 @@ because some correct items come with a paraphrased quote that cannot be found. I
 every item and badges it rather than filtering. The user sees the status, and the
 hallucination metric still counts the item.
 
-**A1: parser** (the 10 reference PDFs; the new papers' PDFs stayed on the laptop, so A1 and
-A6 on all 50 are run there with `run_eval --pdf-dir`):
+**A1: parser** (all 50 papers, run on the laptop with `--pdf-dir --tei-dir`):
 
 | Parser | Sections | Tables with grid | References | Equations | Gold values found in parsed text |
 |---|---|---|---|---|---|
-| GROBID (+ PyMuPDF words for tables) | 260 | 66 / 74 | 463 | 67 | 89% |
-| PyMuPDF only | 181 | 74 / 74 | 344 | 30 | 93% |
+| GROBID (+ PyMuPDF words for tables) | 1,520 | 321 / 436 | 3,026 | 580 | 83% |
+| PyMuPDF only | 1,165 | 344 / 344 | 2,394 | 243 | 90% |
+
+By field, GROBID / PyMuPDF: baselines 97% / 99%, compute 92% / 97%, datasets 98% / 100%,
+hyperparameters 67% / 81%, metrics 95% / 99%, task 98% / 98%.
 
 GROBID gives the structure the rest of the pipeline relies on: section roles,
-references, in-text citations and equations. Raw PyMuPDF text keeps slightly more of the
-gold values (hyperparameters: 85% vs 77%), mostly numbers in tables and footnotes that
-GROBID drops. Gold values missing from the parse (11% with GROBID) put a ceiling on the
-recall extraction can reach.
+references, in-text citations and equations. Raw PyMuPDF text keeps more of the gold
+values, mostly numbers in tables, footnotes and appendix lists that GROBID drops. A third
+of the gold hyperparameter values never reach the extractor through GROBID's text, so
+67% is the ceiling for hyperparameter coverage; the run reaches 30%, less than half of
+what the parse makes available.
 
-**A6: chat retrieval.** BM25 recall@5 is 47% on questions built from the gold set (task
-58%, datasets 52%, baselines 30%, metrics 37%, hyperparameters 58%).
+**A6: chat retrieval** (recall@5 on 2,086 question-item pairs built from the gold set,
+GROBID parse):
+
+| Retrieval | All | Task | Datasets | Baselines | Metrics | Hyperparameters |
+|---|---|---|---|---|---|---|
+| BM25 | 45% | 53% | 36% | 41% | 48% | 50% |
+| dense (bge-small) | 36% | 19% | 37% | 29% | 46% | 41% |
+| hybrid (RRF) | 45% | 45% | 40% | 38% | 49% | 51% |
+
+Dense retrieval alone is worse, above all on task questions; hybrid ties with BM25 overall
+and helps on datasets, metrics and hyperparameters, which supports keeping BM25 in the
+chat's fusion.
 
 ## 6.5 Pending experiments
 
@@ -358,7 +371,6 @@ them in `eval/results/ablations.md`.
 | A5 | model: Gemini Flash vs Flash-Lite |
 | A7 | claim verdicts: LLM judge vs Python recomputation |
 | A3 (full) | extraction without asking for quotes at all |
-| A6 dense / hybrid | needs the local embedding model downloaded |
 | A1 LaTeX / Docling | LaTeX-source and Docling parser arms |
 | Qasper | grounded QA, 100 questions |
 | Dashboard | evaluation dashboard in the UI |
@@ -428,8 +440,8 @@ The main causes of missed items, with examples:
 4. **Baselines cited only by author name** (VGG's "Chatfield et al. 2014"; T5's "previous
    best" sources). A matching issue also shows up: "Krizhevsky et al." does not match
    "Krizhevsky et al. 2012", because the scorer requires equal digit sequences.
-5. **Parsing ceiling.** On the reference papers, 11% of gold values are not present in the
-   GROBID text at all (A1), so no prompt change can recover them.
+5. **Parsing ceiling.** 17% of gold values, and 33% of hyperparameter values, are not
+   present in the GROBID text at all (A1), so no prompt change can recover them.
 
 **[TEAM]** SCOPE.md asks for at least 100 errors classified by category. The audit above
 classifies 246 extracted items; the categories SCOPE.md lists (parsing failure, retrieval
