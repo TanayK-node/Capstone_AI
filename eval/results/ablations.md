@@ -26,15 +26,15 @@ Items kept under each policy, scored on the core fields (micro over all papers).
 
 | parser | papers | s/paper | sections | paragraphs | tables | tables with grid | references | equations | gold items in parsed text |
 |---|---|---|---|---|---|---|---|---|---|
-| GROBID (cached TEI) | 10 | cached | 260 | 789 | 74 | 66 | 463 | 67 | 89% |
-| PyMuPDF only | 10 | 1.0 | 181 | 3288 | 74 | 74 | 344 | 30 | 93% |
+| GROBID (cached TEI) | 50 | cached | 1520 | 5199 | 436 | 321 | 3026 | 580 | 83% |
+| PyMuPDF only | 50 | 4.9 | 1165 | 21770 | 344 | 344 | 2394 | 243 | 90% |
 
 Gold items still findable in the parsed text, by field:
 
 | parser | baselines | compute | datasets | hyperparameters | metrics | task |
 |---|---|---|---|---|---|---|
-| GROBID (cached TEI) | 99% | 100% | 100% | 77% | 94% | 100% |
-| PyMuPDF only | 100% | 100% | 100% | 85% | 100% | 100% |
+| GROBID (cached TEI) | 97% | 92% | 98% | 67% | 95% | 98% |
+| PyMuPDF only | 99% | 97% | 100% | 81% | 99% | 98% |
 
 LaTeX-source and Docling arms: pending (LaTeX needs the arXiv e-prints; Docling is not wired in).
 
@@ -44,9 +44,9 @@ Questions built from the gold set (field questions and one per hyperparameter); 
 
 | retrieval | items | recall@5 | task | datasets | baselines | metrics | hyperparameters |
 |---|---|---|---|---|---|---|---|
-| bm25 | 359 | 47% | 58% | 52% | 30% | 37% | 58% |
-
-Dense and hybrid: pending (the embedding model was not available; run with embeddings enabled on a machine that can download it).
+| bm25 | 2086 | 45% | 53% | 36% | 41% | 48% | 50% |
+| dense | 2086 | 36% | 19% | 37% | 29% | 46% | 41% |
+| hybrid | 2086 | 45% | 45% | 40% | 38% | 49% | 51% |
 
 ## Pending (need Gemini quota; run later)
 
