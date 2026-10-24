@@ -235,7 +235,9 @@ def main() -> int:
               f"{_pct(rep.hp_coverage)}, numeric accuracy {_pct(rep.numeric_accuracy)}, "
               f"verified evidence {_pct(grounded(rep))}, hallucination "
               f"{_pct(rep.hallucination_rate)}")  # fmt: skip
-    md = ablations_md(results, gold, args.pdf_dir, args.tei_dir)
+    old_md = args.out / "ablations.md"
+    previous = old_md.read_text(encoding="utf-8") if old_md.exists() else None
+    md = ablations_md(results, gold, args.pdf_dir, args.tei_dir, previous)
     (args.out / "ablations.md").write_text(md, encoding="utf-8")
     print(f"tables: {args.out}")
     return 0
@@ -251,8 +253,19 @@ PENDING = [
 ]
 
 
+def previous_a1_a6(md: str) -> list[str]:
+    """The A1/A6 sections of an earlier ablations.md: they need the PDFs, which may live on
+    another machine, so a run without --pdf-dir keeps them instead of erasing them."""
+    start, end = md.find("## A1:"), md.find("## Pending")
+    if start < 0 or end < start:
+        return []
+    note = "_A1 and A6 kept from the last run with --pdf-dir (not recomputed now)._"
+    return [note, "", *md[start:end].rstrip("\n").split("\n"), ""]
+
+
 def ablations_md(results: dict[str, ExtractionReport], gold: list[GoldItem],
-                 pdf_dir: Path | None, tei_dir: Path | None) -> str:  # fmt: skip
+                 pdf_dir: Path | None, tei_dir: Path | None,
+                 previous: str | None = None) -> str:  # fmt: skip
     out = ["# Ablations", "", "## A3: evidence policy (post-hoc, same extraction)", "",
            "Items kept under each policy, scored on the core fields (micro over all papers).",
            ""]  # fmt: skip
@@ -272,7 +285,8 @@ def ablations_md(results: dict[str, ExtractionReport], gold: list[GoldItem],
                        f"{_pct(rep.hallucination_rate)} |")  # fmt: skip
         out.append("")
     if pdf_dir is None:
-        out += ["A1 and A6 not run: pass --pdf-dir (and --tei-dir) to run them.", ""]
+        old = previous_a1_a6(previous or "")
+        out += old or ["A1 and A6 not run: pass --pdf-dir (and --tei-dir) to run them.", ""]
     else:
         out += a1_a6_md(gold, pdf_dir, tei_dir)
     out += ["## Pending (need Gemini quota; run later)", "", "| ablation | what | needs |",

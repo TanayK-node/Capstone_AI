@@ -18,7 +18,7 @@ It scores every run in `runs/` against the gold set and writes `results/`:
 | `gold/repro_gold.csv` | reproducibility checklist gold (team-annotated, Phase 3) |
 | `gold/code_repos.csv` | official repository per paper (Phase 4) |
 | `runs/<name>/` | one system setting's output: `report.md` from `check_extract`, or `extractions/<paper id>.json` |
-| `results/` | generated tables (do not edit); `ablations.md` = A3 (every run), A1 and A6 (with `--pdf-dir`) |
+| `results/` | generated tables (do not edit); `ablations.md` = A3 (every run), A1 and A6 (with `--pdf-dir`; kept from the last such run otherwise) |
 
 ## Adding a run (a new model, or an ablation setting)
 
@@ -29,9 +29,10 @@ It scores every run in `runs/` against the gold set and writes `results/`:
 
 `runs/phase2_flash_lite/` is the Phase 2 exit run (Gemini Flash-Lite, Oct 2026).
 
-Ablations without LLM calls: `uv run python -m app.eval.run_eval --pdf-dir <10 PDFs>`
+Ablations without LLM calls: `uv run python -m app.eval.run_eval --pdf-dir <PDFs>`
 (add `--tei-dir <cached TEI>` to skip GROBID). Pending, needing Gemini quota: Qasper, A2, A4,
-A5, A7, the full A3; A6 dense / hybrid needs the local embedding model.
+A5, A7, the full A3. A1 and A6 need the PDFs: a later run without `--pdf-dir` keeps the
+last A1/A6 sections of `results/ablations.md` instead of erasing them.
 
 ## Growing the gold set to 50 papers (`papers.csv`)
 

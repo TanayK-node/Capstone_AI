@@ -618,22 +618,47 @@ hallucinated items at a moderate cost in recall.}
 \end{figure*}
 
 \subsection{Parser (ablation A1) and retrieval (ablation A6)}
-Fig.~\ref{fig:a1} compares GROBID with a PyMuPDF-only parse by the share of gold values
-still present in the parsed text, which is an upper bound on extraction recall. Both A1
-and A6 need the PDFs and are reported on the reference ten. Raw
-PyMuPDF text keeps slightly more of the values (93\% vs 89\%), mostly numbers in tables
-and footnotes. GROBID, however, recovers the structure the rest of the pipeline depends
-on: 260 vs 181 section headings, 463 vs 344 references, 67 vs 30 equations, and in-text
-citations. With GROBID, 23\% of gold hyperparameter values are absent from the parsed
-text, so no prompt change can recover them. For chat, BM25 alone finds the passage holding
-a gold answer in its top five for 47\% of questions built from the gold set. The dense and
-hybrid arms are pending (Section~\ref{sec:limits}).
+Fig.~\ref{fig:a1} compares GROBID with a PyMuPDF-only parse on all 50 papers by the share
+of gold values still present in the parsed text, which is an upper bound on extraction
+recall. Raw PyMuPDF text keeps more of the values (90\% vs 83\%), mostly numbers in tables,
+footnotes and appendix lists. GROBID, however, recovers the structure the rest of the
+pipeline depends on: 1{,}520 vs 1{,}165 section headings, 3{,}026 vs 2{,}394 references,
+580 vs 243 equations, and in-text citations. The gap is largest for hyperparameters: a
+third of the gold values (33\%) never reach the extractor through GROBID's text, against
+19\% with PyMuPDF. Since 67\% is the ceiling for hyperparameter coverage and PaperLens
+reaches 30\%, the extractor recovers less than half of what the parse makes available,
+and a parse that keeps table and appendix text would raise the ceiling itself.
+
+For chat (A6), we ask one question per field and per hyperparameter name and count a gold
+item as found when it occurs in the top five passages (2{,}086 question--item pairs,
+Table~\ref{tab:a6}). BM25 and hybrid retrieval tie at 45\% recall@5; dense retrieval alone
+is clearly worse (36\%), above all on task questions (19\% vs 53\%), where the answer
+shares words with the question (``task'', the paper's own terms) rather than meaning.
+Hybrid fusion helps on datasets, metrics and hyperparameters and costs on tasks, which
+supports keeping BM25 in the chat's fusion rather than relying on embeddings.
+
+\begin{table}[t]
+\caption{Ablation A6: retrieval recall@5 for chat (50 papers, GROBID parse).}
+\label{tab:a6}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+Retrieval & All & Task & Datasets & Baselines & Metrics & HPs \\
+\midrule
+BM25   & \textbf{45\%} & \textbf{53\%} & 36\% & \textbf{41\%} & 48\% & 50\% \\
+Dense  & 36\% & 19\% & 37\% & 29\% & 46\% & 41\% \\
+Hybrid & \textbf{45\%} & 45\% & \textbf{40\%} & 38\% & \textbf{49\%} & \textbf{51\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figs/fig_a1.pdf}
-\caption{Ablation A1: gold values still present in the parsed text, by field (unlabelled
-bars are 100\%).}
+\caption{Ablation A1: gold values still present in the parsed text, by field (50 papers).
+GROBID loses a third of the hyperparameter values, which caps extraction recall.}
 \label{fig:a1}
 \end{figure}
 
@@ -755,7 +780,7 @@ Section~\ref{sec:threats}.
 \item \textbf{Baselines cited by author name only,} such as T5's ``previous best'' results
   given as citations. Our scorer also undercounts one case: ``Krizhevsky et al.''\ does not
   match ``Krizhevsky et al.\ 2012'' because digit sequences must be equal.
-\item \textbf{Parsing ceiling.} On the reference ten, 11\% of gold values do not survive
+\item \textbf{Parsing ceiling.} 17\% of gold values, and 33\% of hyperparameter values, do not survive
   GROBID's text at all (A1).
 \end{enumerate}
 
@@ -796,7 +821,6 @@ design: an ambiguous table match yields ``unsupported'', never ``contradicted''.
   \item a stronger model (A5);
   \item LLM vs Python claim verdicts (A7);
   \item extraction without quotes (full A3);
-  \item dense and hybrid retrieval (A6);
   \item LaTeX and Docling parsers (A1);
   \item Qasper~\cite{dasigi2021qasper}.
   \end{itemize}

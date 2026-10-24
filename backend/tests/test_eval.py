@@ -7,7 +7,7 @@ from pathlib import Path
 from app.eval.data import GoldItem, PredItem, from_extraction, from_markdown
 from app.eval.extraction import evaluate
 from app.eval.match import numbers, parts, text_match, value_match
-from app.eval.run_eval import audit_md, breakdown_md
+from app.eval.run_eval import audit_md, breakdown_md, previous_a1_a6
 from app.schemas.extraction import Evidence, Hyperparameter, Item, PaperExtraction
 
 
@@ -157,3 +157,14 @@ def test_breakdown_by_group_and_shared_papers(tmp_path: Path) -> None:
     audit.write_text("\n".join(rows) + "\n", encoding="utf-8")
     md = audit_md([audit])
     assert "| datasets | 1 | 0 |" in md and "| all | 1 | 1 |" in md
+
+
+def test_a1_a6_sections_survive_a_run_without_pdfs() -> None:
+    md = (
+        "# Ablations\n\n## A3: x\n\n## A1: parser\n\n| a |\n\n"
+        "## A6: retrieval\n\n| b |\n\n## Pending\n"
+    )
+    kept = previous_a1_a6(md)
+    assert kept[0].startswith("_A1 and A6 kept") and "## A1: parser" in kept
+    assert "## A6: retrieval" in kept and not any("Pending" in x for x in kept)
+    assert previous_a1_a6("# Ablations\n\nA1 and A6 not run\n\n## Pending\n") == []
