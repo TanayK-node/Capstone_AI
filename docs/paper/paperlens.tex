@@ -184,29 +184,53 @@ overlap~\cite{liang2024feedback}, and Zhou et al.\ find LLM reviewers unreliable
 scoring~\cite{zhou2024reliable}. PaperLens therefore offers a draft review without a score,
 and it lists facts established in Python separately from the LLM's opinions.
 
-\begin{table}[t]
-\caption{Positioning against representative prior work (\yes{} = core feature,
-\part{} = partial or indirect, \no{} = not a goal).}
+\subsection{How PaperLens compares}
+Table~\ref{tab:related} compares PaperLens with representative systems along the design
+properties that matter for trusting a paper analysis. Each prior line of work covers part
+of the problem well: SciREX and AxCell extract task, dataset and result tuples but need
+trained models and give no evidence per item; PaperQA and OpenScholar cite their sources
+but answer questions rather than fill a schema; SciTab and SciFact study verification but
+leave the verdict to a model; CORE-Bench and PaperBench check reproducibility by running
+code, at hours of agent time per paper. PaperLens is, to our knowledge, the only system in
+the table that (i)~fills a full extraction schema including hyperparameters, (ii)~attaches
+a quote to every item and checks it against the paper in code, (iii)~leaves every numeric
+verdict to Python, and (iv)~adds reproducibility, claim and paper-vs-code checks, all
+without fine-tuning and on a free-tier API. The table compares design, not accuracy: the
+systems solve different tasks on different data, so their reported scores are not
+comparable. The closest like-for-like comparison we can make is internal: the ``keep all''
+arm of ablation A3 is what an LLM extractor without our evidence checks would deliver, and
+in our first run it hallucinated 10\% of its items against 0\% with the checks
+(Section~\ref{sec:results}).
+
+\begin{table*}[t]
+\caption{Comparison with representative frameworks (\yes{} = core feature, \part{} =
+partial or indirect, \no{} = absent or not a goal). The last column says what each needs to
+run. Design comparison only: the systems address different tasks, so accuracy numbers are
+not comparable.}
 \label{tab:related}
 \centering
 \footnotesize
-\setlength{\tabcolsep}{2.4pt}
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{@{}lcccccc@{}}
+\setlength{\tabcolsep}{3pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lccccccccccl@{}}
 \toprule
- & \makecell{Schema\\IE} & \makecell{Item\\evidence} & \makecell{Repro.\\check} & \makecell{Claims\\vs tables} & \makecell{Code\\check} & \makecell{Runs\\code} \\
+Framework & \makecell{Schema\\extraction\\(incl.\ HPs)} & \makecell{Quote\\per item} & \makecell{Quote\\checked\\in code} & \makecell{Highlight\\in PDF} & \makecell{Numeric\\verdicts\\in code} & \makecell{Repro.\\check} & \makecell{Claims\\vs\\tables} & \makecell{Paper\\vs\\code} & \makecell{Halluc.\\measured} & \makecell{No fine-\\tuning} & Needs \\
 \midrule
-SciREX, AxCell~\cite{jain2020scirex,kardas2020axcell} & \yes & \no & \no & \part & \no & \no \\
-PaperQA, OpenScholar~\cite{lala2023paperqa,asai2026openscholar} & \no & \yes & \no & \no & \no & \no \\
-ScholarPhi~\cite{head2021scholarphi} & \no & \yes & \no & \no & \no & \no \\
-SciTab~\cite{lu2023scitab} & \no & \no & \no & \yes & \no & \no \\
-CORE-Bench, PaperBench~\cite{siegel2024corebench,starace2025paperbench} & \no & \no & \yes & \no & \part & \yes \\
-LLM reviewers~\cite{liang2024feedback} & \no & \no & \part & \no & \no & \no \\
+SciREX~\cite{jain2020scirex} & \part & \part & \no & \no & \no & \no & \no & \no & \no & \no & trained model \\
+AxCell~\cite{kardas2020axcell} & \part & \no & \no & \no & \no & \no & \part & \no & \no & \no & trained model \\
+LLM-NERRE~\cite{dagdelen2024structured} & \yes & \no & \no & \no & \no & \no & \no & \no & \no & \no & fine-tuned LLM \\
+PaperQA~\cite{lala2023paperqa} & \no & \yes & \part & \no & \no & \no & \no & \no & \part & \yes & LLM API \\
+OpenScholar~\cite{asai2026openscholar} & \no & \yes & \part & \no & \no & \no & \no & \no & \part & \part & LLM + paper datastore \\
+ScholarPhi / Semantic Reader~\cite{head2021scholarphi,lo2024semanticreader} & \no & \yes & \part & \yes & \no & \no & \no & \no & \no & \no & trained detectors \\
+SciFact, SciTab~\cite{wadden2020scifact,lu2023scitab} & \no & \part & \no & \no & \no & \no & \yes & \no & \no & \part & model verdict \\
+SUPER, CORE-Bench, PaperBench~\cite{bogin2024super,siegel2024corebench,starace2025paperbench} & \no & \no & \no & \no & \part & \yes & \no & \part & \no & \yes & agent runs code (hours) \\
+LLM reviewers~\cite{liang2024feedback} & \no & \no & \no & \no & \no & \part & \no & \no & \no & \yes & LLM API \\
+General LLM chat over a PDF & \part & \part & \no & \no & \no & \part & \part & \no & \no & \yes & LLM API \\
 \midrule
-\textbf{PaperLens} & \yes & \yes & \yes & \yes & \yes & \no \\
+\textbf{PaperLens (ours)} & \yes & \yes & \yes & \yes & \yes & \yes & \yes & \yes & \yes & \yes & free-tier API, CPU \\
 \bottomrule
 \end{tabular}}
-\end{table}
+\end{table*}
 
 % =========================================================================================
 \section{System Overview}
@@ -472,7 +496,7 @@ first built) is reported alongside. All tables and figures in this paper are reg
 by one command from the stored runs.
 
 % =========================================================================================
-\section{Results}
+\section{Results}\label{sec:results}
 
 \subsection{Extraction quality}
 Table~\ref{tab:main} and Fig.~\ref{fig:fields} report per-field scores over the 50 papers.
