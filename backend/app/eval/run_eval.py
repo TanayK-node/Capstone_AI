@@ -281,6 +281,11 @@ def ablations_md(results: dict[str, ExtractionReport], gold: list[GoldItem],
     return "\n".join(out) + "\n"
 
 
+def _log(msg: str) -> None:
+    """Progress of the slow ablations, on stderr so the tables on stdout stay clean."""
+    print(msg, file=sys.stderr, flush=True)
+
+
 def a1_a6_md(gold: list[GoldItem], pdf_dir: Path, tei_dir: Path | None) -> list[str]:
     from app.pipeline.parse import get_parser
     from app.pipeline.parse.grobid import GrobidParser, parse_with_tei
@@ -302,7 +307,10 @@ def a1_a6_md(gold: list[GoldItem], pdf_dir: Path, tei_dir: Path | None) -> list[
         else:
             out.append("GROBID not reachable and no --tei-dir: GROBID arm skipped.")
     parsers["PyMuPDF only"] = get_parser(settings, "pymupdf").parse
-    parsed = {name: ablations.parse_all(fn, pdfs) for name, fn in parsers.items()}
+    parsed: dict[str, dict[str, tuple[ParsedDocument, float]]] = {}
+    for name, fn in parsers.items():
+        _log(f"A1: parsing {len(pdfs)} PDFs with {name}")
+        parsed[name] = ablations.parse_all(fn, pdfs, _log)
     stats = [ablations.parse_stats(name, docs, gold) for name, docs in parsed.items()]
     out += ["| parser | papers | s/paper | sections | paragraphs | tables | tables with grid | "
             "references | equations | gold items in parsed text |",
@@ -322,10 +330,12 @@ def a1_a6_md(gold: list[GoldItem], pdf_dir: Path, tei_dir: Path | None) -> list[
     out += ["", "LaTeX-source and Docling arms: pending (LaTeX needs the arXiv e-prints; Docling "
             "is not wired in).", ""]  # fmt: skip
 
+    _log("A6: loading the embedding model (the first time it is downloaded)")
     embedder = get_embedder(settings)
     first = next(iter(parsed.values()))
     docs = {pid: doc for pid, (doc, _) in first.items()}
-    scores = ablations.retrieval(docs, gold, embedder)
+    _log(f"A6: retrieval on {len(docs)} papers ({'BM25, dense, hybrid' if embedder else 'BM25'})")
+    scores = ablations.retrieval(docs, gold, embedder, _log)
     out += ["## A6: retrieval for chat", "",
             f"Questions built from the gold set (field questions and one per hyperparameter); "
             f"recall@{ablations.K} = gold items whose answer is in the top {ablations.K} "

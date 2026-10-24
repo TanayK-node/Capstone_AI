@@ -125,13 +125,22 @@ def parse_stats(name: str, docs: dict[str, tuple[ParsedDocument, float]],
     return st
 
 
-def parse_all(parse: Callable[[Path], ParsedDocument], pdfs: dict[str, Path]
+def parse_all(parse: Callable[[Path], ParsedDocument], pdfs: dict[str, Path],
+              log: Callable[[str], None] | None = None,
               ) -> dict[str, tuple[ParsedDocument, float]]:  # fmt: skip
+    """Parses every PDF; one that fails is left out (and logged) instead of ending the run."""
     out: dict[str, tuple[ParsedDocument, float]] = {}
-    for pid, path in pdfs.items():
+    for n, (pid, path) in enumerate(pdfs.items(), 1):
         t = time.perf_counter()
-        doc = parse(path)
+        try:
+            doc = parse(path)
+        except Exception as e:  # one bad PDF must not lose a long run
+            if log:
+                log(f"  [{n}/{len(pdfs)}] {pid}: failed ({type(e).__name__}: {e}), skipped")
+            continue
         out[pid] = (doc, time.perf_counter() - t)
+        if log:
+            log(f"  [{n}/{len(pdfs)}] {pid}: {out[pid][1]:.1f} s")
     return out
 
 
@@ -180,12 +189,15 @@ class RetrievalScore:
 
 
 def retrieval(docs: dict[str, ParsedDocument], gold: list[GoldItem],
-              embedder: Embedder | None) -> list[RetrievalScore]:  # fmt: skip
+              embedder: Embedder | None,
+              log: Callable[[str], None] | None = None) -> list[RetrievalScore]:  # fmt: skip
     """Recall@5 of gold items: field questions ("Which datasets...") for entity fields, one
     question per hyperparameter ("What learning rate is used?")."""
     modes = ["bm25"] + (["dense", "hybrid"] if embedder is not None else [])
     scores = {m: RetrievalScore(m) for m in modes}
-    for pid, doc in docs.items():
+    for n, (pid, doc) in enumerate(docs.items(), 1):
+        if log:
+            log(f"  [{n}/{len(docs)}] {pid}")
         ps = passages(doc)
         vectors = (
             embedder.embed([p.text[:2000] for p in ps]) if embedder is not None and ps else None
