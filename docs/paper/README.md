@@ -18,8 +18,10 @@ Build:
 pdflatex paperlens && bibtex paperlens && pdflatex paperlens && pdflatex paperlens
 ```
 
-Before submission (search for `TEAM` in `paperlens.tex`): author names and affiliation,
-the acknowledgement, and the outcome of the gold-set spot-check (Threats to validity).
+Before submission: replace the author block (names, e-mails, affiliation) and, if the
+conference is double-blind, anonymise it and the acknowledgment. Format: IEEEtran
+conference, 7 pages including references (fits 6 + 2 extra-page limits; 6 pages of body
+plus references for most others).
 
 Figures: the charts come from `eval/results/` (50-paper run `collect_flash_lite`, earlier
 10-paper run `phase2_flash_lite` for A3; A1 on all 50 PDFs from the laptop) and the hand audit

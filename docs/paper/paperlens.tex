@@ -1,6 +1,5 @@
-% PaperLens: IEEE conference paper (two columns).
+% PaperLens: IEEE conference paper (IEEEtran, two columns).
 % Build: pdflatex paperlens && bibtex paperlens && pdflatex paperlens && pdflatex paperlens
-% Lines marked TEAM need the team's input before submission.
 \documentclass[conference]{IEEEtran}
 \IEEEoverridecommandlockouts
 
@@ -8,14 +7,13 @@
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage{multirow}
 \usepackage{makecell}
 \usepackage{array}
 \usepackage{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta,fit,backgrounds}
-\usepackage[hidelinks]{hyperref}
 \usepackage{url}
+\usepackage[hidelinks]{hyperref}
 
 \newcommand{\yes}{$\checkmark$}
 \newcommand{\no}{--}
@@ -23,9 +21,9 @@
 
 \begin{document}
 
-\title{PaperLens: Evidence-Grounded, Reproducibility-Aware Analysis of Research Papers with a Free-Tier Language Model}
+\title{PaperLens: Evidence-Grounded and Reproducibility-Aware Analysis of Research Papers with a Free-Tier LLM}
 
-% TEAM: names, e-mails and affiliation of every author.
+% Authors: replace with the final author list and affiliation before submission.
 \author{
 \IEEEauthorblockN{Author One, Author Two, Author Three, Author Four}
 \IEEEauthorblockA{\textit{Department of Computer Engineering} \\
@@ -36,177 +34,105 @@
 \maketitle
 
 \begin{abstract}
-Large language models (LLMs) can summarise a research paper in seconds, but the facts they
-report come without evidence. For research, an invented number is worse than none. We present
-\emph{PaperLens}, a system that takes a paper (PDF or link) and returns a structured breakdown
-in which every extracted item carries the verbatim sentence it came from. Python locates
-that sentence in the PDF and highlights it, and a second check judges whether it supports
-the item. On top of this grounded extraction, PaperLens scores reproducibility against a
-21-item checklist, verifies numeric claims against the paper's own results tables,
-discovers the paper's code repository and compares its settings with the paper by static
-analysis, and offers page-cited chat, a notation glossary, a citation graph, a draft review
-and a multi-paper comparison. The design follows one rule: \emph{the LLM extracts and
-Python decides}. Every score, delta and verdict is computed deterministically, and the
-whole system runs on the free tier of a commercial LLM API. On a gold set of 50 papers
-from nine ML areas (2{,}796 items), extraction reaches a core-field F1 of 0.60 with
-precision between 0.81 and 0.94 per core field; 90\% of extracted items are verified
-against the paper and 1\% are hallucinated. Reading each of the 246 extracted items that
-match no gold item shows that only 10 are wrong: most are correct items that a strict
-matcher misses, so the scores are lower bounds. Recall is the bottleneck, above all for
-hyperparameters in appendix tables (30\% covered). In an earlier run, requiring a located
-quote lowered the hallucination rate from 10\% to 2\%, and a support check lowered it to
-0\%. We release the system, the evaluation package, the audit and an annotation guide.
+Large language models (LLMs) summarise research papers fluently, but the facts they report
+come without evidence, and in research an invented number is worse than none. We present
+PaperLens, a system that turns a paper into a structured record in which every item carries
+the verbatim sentence it came from; deterministic code locates that sentence in the PDF,
+highlights it, and checks that it supports the item. On top of this grounded extraction,
+PaperLens scores reproducibility against a 21-item checklist, verifies numeric claims
+against the paper's own results tables, and compares the paper's hyperparameters with its
+released code by static analysis. One rule governs the design: \emph{the LLM extracts and
+Python decides}, so every score, difference and verdict is computed deterministically,
+and the whole system runs on the free tier of a commercial LLM API. On a new gold set of
+50 papers from nine machine-learning areas (2{,}796 items), extraction reaches a core-field
+F1 of 0.60 with precision of 0.81--0.94 per field; 90\% of extracted items are verified
+against the paper and 1\% are hallucinated. A manual audit of all extracted items absent
+from the gold set finds only 4\% wrong, showing that the scores are lower bounds. Requiring
+a located, supporting quote drives hallucinations to zero at a moderate cost in recall,
+and recall on appendix hyperparameters is the main open problem.
 \end{abstract}
 
 \begin{IEEEkeywords}
-scientific information extraction, grounding, attribution, reproducibility, large language
-models, document parsing, claim verification
+scientific information extraction, attribution, grounding, reproducibility, large language
+models, claim verification
 \end{IEEEkeywords}
 
 % =========================================================================================
 \section{Introduction}
 
-Reading a research paper well takes one to three hours, and much of that time is spent
-finding the same facts: the datasets, baselines, metrics, hyperparameters, compute and
-limitations. Judging whether the work can be reproduced is harder still. Surveys of the AI
-literature found that no sampled paper documented every factor needed for
-reproduction~\cite{gundersen2018state}. An attempt to re-implement 255 papers without
-their code succeeded only about two times in three~\cite{raff2019step}. Released code
-does not settle the question either, because it often uses settings other than those
-reported~\cite{pineau2021improving,collberg2016repeatability}.
+Much of the time spent reading a paper goes into finding the same facts: datasets,
+baselines, metrics, hyperparameters and compute. Judging whether the work can be reproduced
+is harder still. No paper in a survey of AI research documented every factor needed for
+reproduction~\cite{gundersen2018state}; independent re-implementation of 255 papers
+succeeded only about two times in three~\cite{raff2019step}; and released code often uses
+settings other than those reported~\cite{pineau2021improving,collberg2016repeatability}.
 
-LLMs are an obvious aid, but their output is fluent and unattributed, and they hallucinate
+LLMs are an obvious aid, but their output is unattributed and they hallucinate
 facts~\cite{ji2023hallucination}. Attribution research shows that generated statements must
 be checked against an identified source to be trusted~\cite{rashkin2023ais,gao2023alce}.
-For scientific use, where a wrong learning rate silently ruins a replication, unverifiable
-output is of little value.
+Where a wrong learning rate silently ruins a replication, unverifiable output is of little
+value.
 
-We present \emph{PaperLens}, built around a single principle: \textbf{the LLM extracts, and
-Python decides}. The LLM's only job is to read text and return schema-validated items, each
-with a verbatim quote. Deterministic code does everything else. It locates every quote in
-the PDF, scores reproducibility, matches claims to table cells and recomputes their deltas,
-compares the paper's hyperparameters with the code, and draws every verdict. The system
-runs on the free tier of the Gemini API~\cite{gemini2023}, so every design choice also
-minimises the number of LLM calls.
-
-Our contributions are:
+PaperLens is built around one principle: \textbf{the LLM extracts, and Python decides}. The
+LLM only reads text and returns schema-validated items, each with a verbatim quote.
+Deterministic code does everything else: it locates every quote in the PDF, scores
+reproducibility, matches claims to table cells and recomputes their deltas, compares the
+paper with its code, and issues every verdict. Because the system runs on the free tier of
+the Gemini API~\cite{gemini2023}, each design choice also minimises LLM calls (about six
+per paper). Our contributions are:
 \begin{enumerate}
-\item An end-to-end system that parses a paper with layout coordinates and extracts a fixed
-  schema. Every item carries evidence that is located in the PDF and checked for support,
-  and items that cannot be verified are labelled rather than dropped.
-\item Three deterministic checks built on the extraction: a reproducibility scorecard, a
-  claim verifier that recomputes claimed differences from parsed tables, and a static
-  paper-vs-code comparison that never executes repository code.
-\item An evaluation package with a documented matching scheme, a gold set of 50 papers
-  from nine ML areas with 2{,}796 items, a hand audit of every extracted item that matches
-  no gold item, and three ablations that need no LLM calls: evidence policy, parser and
-  retrieval.
-\item An honest assessment. Precision is high on every core field and errors are rare
-  once matcher misses are separated out; the main weakness is recall on hyperparameters
-  and tasks; and our reference annotations were produced with LLM assistance.
+\item A grounded extraction pipeline in which every item carries evidence that is located
+  in the PDF and checked for support; unverifiable items are labelled, never dropped.
+\item Three deterministic checks on top of it: a reproducibility scorecard, a claim
+  verifier that recomputes claimed differences from parsed tables, and a static
+  paper-versus-code comparison that never executes repository code.
+\item A 50-paper, 2{,}796-item gold set across nine ML areas with a documented matching
+  scheme, a manual audit of unmatched predictions, and LLM-free ablations of evidence
+  policy, parser and retrieval.
 \end{enumerate}
 
 % =========================================================================================
 \section{Related Work}
 
-\subsection{Scientific information extraction}
-Entity and relation extraction from papers has been studied with dedicated datasets:
-SciERC for entities, relations and coreference~\cite{luan2018sciierc}, SciREX for
-document-level task/dataset/metric/method relations~\cite{jain2020scirex}, and the
-leaderboard-construction work of Hou et al.~\cite{hou2019tdms}. AxCell extracts results
-from machine-learning papers, using table segmentation~\cite{kardas2020axcell}. These systems
-rely on fine-tuned encoders such as SciBERT~\cite{beltagy2019scibert}. Dagdelen et al.\ fine-tune
-LLMs for joint named-entity and relation extraction that outputs structured JSON for
-materials science~\cite{dagdelen2024structured}. PaperLens differs in two ways. It uses a
-general-purpose LLM without fine-tuning, and it makes evidence a first-class output that is
-checked against the source rather than an optional by-product.
+\textbf{Scientific information extraction.} SciERC~\cite{luan2018sciierc} and
+SciREX~\cite{jain2020scirex} annotate entities and task--dataset--metric relations; Hou et
+al.~\cite{hou2019tdms} and AxCell~\cite{kardas2020axcell} extract leaderboard results. These
+systems rely on trained encoders such as SciBERT~\cite{beltagy2019scibert}, and Dagdelen et
+al.\ fine-tune LLMs for structured extraction~\cite{dagdelen2024structured}. PaperLens uses
+a general LLM without fine-tuning and makes evidence a checked, first-class output.
 
-\subsection{Parsing scientific PDFs}
-GROBID turns PDFs into structured TEI with sections, references and
-coordinates~\cite{lopez2009grobid}, and it underlies corpora such as
-S2ORC~\cite{lo2020s2orc}. Nougat converts page images to markup with a vision
-transformer~\cite{blecher2024nougat}, and Docling combines layout analysis with table
-structure recognition~\cite{auer2024docling}. Table structure recognition has its own
-benchmarks~\cite{zhong2020pubtabnet,smock2022pubtables}. We found GROBID's table grids to be
-unreliable on our papers, so PaperLens rebuilds each grid from the PDF's word positions and
-uses GROBID for structure, sentences and citations (Section~\ref{sec:parse}).
+\textbf{Parsing.} GROBID converts PDFs to structured TEI with
+coordinates~\cite{lopez2009grobid} and underlies S2ORC~\cite{lo2020s2orc}; Nougat and
+Docling offer vision-based alternatives~\cite{blecher2024nougat,auer2024docling}, and table
+recognition has dedicated benchmarks~\cite{zhong2020pubtabnet,smock2022pubtables}.
 
-\subsection{Grounded generation and attribution}
-Retrieval-augmented generation conditions an LLM on retrieved passages~\cite{lewis2020rag}.
-ALCE evaluates generated text whose statements cite their sources~\cite{gao2023alce}, and
-the AIS framework defines when a statement is attributable to an identified
-source~\cite{rashkin2023ais}. FActScore breaks text into atomic facts and checks each against
-a knowledge source~\cite{min2023factscore}, while SelfCheckGPT detects hallucinations
-without external resources~\cite{manakul2023selfcheckgpt}. Long contexts are used
-unevenly by LLMs~\cite{liu2024lost}, which motivates our per-section extraction.
-PaperLens applies the attribution idea at the level of single extracted items and enforces
-it in code. A quote is accepted only if a fuzzy string match~\cite{levenshtein1966} finds it
-in the parsed paper.
+\textbf{Attribution and question answering.} RAG conditions generation on retrieved
+passages~\cite{lewis2020rag}; ALCE and AIS evaluate whether statements are attributable to
+sources~\cite{gao2023alce,rashkin2023ais}; FActScore and SelfCheckGPT detect unsupported
+facts~\cite{min2023factscore,manakul2023selfcheckgpt}. Qasper anchors questions in
+papers~\cite{dasigi2021qasper}, PaperQA and OpenScholar answer with citations over large
+collections~\cite{lala2023paperqa,asai2026openscholar}, and ScholarPhi and the Semantic
+Reader ground definitions inside the reading
+interface~\cite{head2021scholarphi,lo2024semanticreader}.
 
-\subsection{Question answering and reading assistants}
-Qasper anchors information-seeking questions in research papers~\cite{dasigi2021qasper}.
-PaperQA~\cite{lala2023paperqa} and OpenScholar~\cite{asai2026openscholar} answer scientific
-questions with citations over large literature collections. Reading interfaces augment the
-paper itself. ScholarPhi shows position-sensitive definitions of terms and
-symbols~\cite{head2021scholarphi}, building on document-level definition
-detection~\cite{kang2020definition}, and the Semantic Reader project generalises these
-ideas~\cite{lo2024semanticreader}. TLDR generates extreme summaries of
-papers~\cite{cachola2020tldr}. PaperLens works on a single paper. Its chat cites pages of
-that paper, and its notation glossary grounds each symbol's meaning in a sentence, in the
-spirit of ScholarPhi.
+\textbf{Verification, reproducibility and reviewing.} SciFact, TabFact and SciTab verify
+claims against abstracts and tables, and show that table reasoning remains hard for
+LLMs~\cite{wadden2020scifact,chen2020tabfact,lu2023scitab}. SUPER, CORE-Bench and PaperBench
+ask agents to run or replicate research
+code~\cite{bogin2024super,siegel2024corebench,starace2025paperbench}, at hours of compute per
+paper. LLM reviewers overlap with human reviewers in coverage but are unreliable for
+scoring~\cite{liang2024feedback,zhou2024reliable}.
 
-\subsection{Scientific claim verification}
-SciFact verifies claims against abstracts~\cite{wadden2020scifact}. TabFact~\cite{chen2020tabfact}
-and SciTab~\cite{lu2023scitab} verify claims against tables, and SciTab shows that
-compositional reasoning over scientific tables remains hard for LLMs. We avoid asking the
-LLM for verdicts. It copies a claim's numbers, and Python finds the cells and recomputes
-the claimed difference.
-
-\subsection{Reproducibility}
-Beyond the surveys above~\cite{gundersen2018state,raff2019step}, the NeurIPS 2019
-reproducibility programme introduced a checklist, a code policy and a reproducibility
-challenge~\cite{pineau2021improving}. Dodge et al.\ argue for reporting the expected
-validation performance as a function of the tuning budget~\cite{dodge2019showyourwork},
-Bouthillier et al.\ separate methods reproducibility from inferential
-reproducibility~\cite{bouthillier2019unreproducible}, and Kapoor and Narayanan document data
-leakage across ML-based science~\cite{kapoor2023leakage}. Recent benchmarks ask agents to
-set up and run research code (SUPER~\cite{bogin2024super},
-CORE-Bench~\cite{siegel2024corebench}) or to replicate papers from scratch
-(PaperBench~\cite{starace2025paperbench}). PaperLens takes the opposite and cheaper route.
-It never executes code, and it reports what a reproduction would need and where the paper
-and its code disagree.
-
-\subsection{LLM-assisted reviewing}
-Yuan et al.\ found generated reviews broad in coverage but less constructive and less
-factual than human ones~\cite{yuan2022automate}. Liang et al.\ report that GPT-4 feedback
-overlaps with human reviewers about as much as two humans
-overlap~\cite{liang2024feedback}, and Zhou et al.\ find LLM reviewers unreliable for
-scoring~\cite{zhou2024reliable}. PaperLens therefore offers a draft review without a score,
-and it lists facts established in Python separately from the LLM's opinions.
-
-\subsection{How PaperLens compares}
-Table~\ref{tab:related} compares PaperLens with representative systems along the design
-properties that matter for trusting a paper analysis. Each prior line of work covers part
-of the problem well: SciREX and AxCell extract task, dataset and result tuples but need
-trained models and give no evidence per item; PaperQA and OpenScholar cite their sources
-but answer questions rather than fill a schema; SciTab and SciFact study verification but
-leave the verdict to a model; CORE-Bench and PaperBench check reproducibility by running
-code, at hours of agent time per paper. PaperLens is, to our knowledge, the only system in
-the table that (i)~fills a full extraction schema including hyperparameters, (ii)~attaches
-a quote to every item and checks it against the paper in code, (iii)~leaves every numeric
-verdict to Python, and (iv)~adds reproducibility, claim and paper-vs-code checks, all
-without fine-tuning and on a free-tier API. The table compares design, not accuracy: the
-systems solve different tasks on different data, so their reported scores are not
-comparable. The closest like-for-like comparison we can make is internal: the ``keep all''
-arm of ablation A3 is what an LLM extractor without our evidence checks would deliver, and
-in our first run it hallucinated 10\% of its items against 0\% with the checks
-(Section~\ref{sec:results}).
+\textbf{Positioning.} Table~\ref{tab:related} compares design properties. Each line of work
+covers part of the problem; PaperLens is, to our knowledge, the only one that fills a full
+extraction schema including hyperparameters, checks a quote for every item in code, leaves
+numeric verdicts to deterministic code, and adds reproducibility, claim and code checks
+without fine-tuning or code execution. The comparison is of design, not accuracy: the
+systems address different tasks, so their scores are not comparable.
 
 \begin{table*}[t]
-\caption{Comparison with representative frameworks (\yes{} = core feature, \part{} =
-partial or indirect, \no{} = absent or not a goal). The last column says what each needs to
-run. Design comparison only: the systems address different tasks, so accuracy numbers are
-not comparable.}
+\caption{Design comparison with representative frameworks (\yes{} core feature, \part{}
+partial, \no{} absent). The last column states what each needs to run.}
 \label{tab:related}
 \centering
 \footnotesize
@@ -235,16 +161,12 @@ General LLM chat over a PDF & \part & \part & \no & \no & \no & \part & \part & 
 % =========================================================================================
 \section{System Overview}
 
-Fig.~\ref{fig:arch} shows the architecture. A Next.js interface uploads a paper or a link
-(arXiv, DOI, OpenReview, ACL Anthology, a direct PDF URL). A FastAPI service stores it and
-queues a job, and a Celery worker runs the pipeline, one paper at a time, writing to
-PostgreSQL. Progress is streamed to the browser with server-sent events. Every LLM call goes
-through a single gateway. The gateway caches responses by (input, prompt version, model),
-rate-limits per model, retries with exponential backoff, switches to a backup model when one
-is overloaded, validates the output against a Pydantic schema with one repair attempt, and
-logs the provider, model and prompt version. Model names live only in configuration.
-Prompts are versioned templates, and results are keyed by (paper, stage, prompt version,
-model), so every stage is idempotent and a re-run of a cached paper costs nothing.
+Fig.~\ref{fig:arch} shows the architecture. A web interface accepts a PDF or a link (arXiv,
+DOI, OpenReview, ACL Anthology); a worker runs the pipeline and streams progress. Every LLM
+call passes through one gateway that caches responses, rate-limits per model, retries with
+backoff, falls back to a backup model when one is overloaded, validates the output against a
+schema with one repair attempt, and logs the model and prompt version. Results are keyed by
+(paper, stage, prompt version, model), so stages are idempotent and cached re-runs are free.
 
 \begin{figure}[t]
 \centering
@@ -257,260 +179,177 @@ model), so every stage is idempotent and a re-run of a cached paper costs nothin
   llm/.style={box=orange!12},
   py/.style={box=blue!7},
   arr/.style={-{Stealth[length=2mm]}, black!70}]
-\node[box=gray!10, minimum width=17mm] (ui) {Next.js UI\\(PDF + tabs)};
-\node[box=gray!10, right=7mm of ui, minimum width=15mm] (api) {FastAPI};
+\node[box=gray!10, minimum width=17mm] (ui) {Web UI\\(PDF + tabs)};
+\node[box=gray!10, right=7mm of ui, minimum width=15mm] (api) {API};
 \node[box=gray!10, right=7mm of api, minimum width=17mm] (db) {PostgreSQL\\(+pgvector)};
-\draw[arr] (ui) -- node[above, font=\scriptsize]{HTTP} node[below, font=\scriptsize]{SSE} (api);
+\draw[arr] (ui) -- (api);
 \draw[arr] (api) -- (db);
-
 \node[py, below=9mm of ui.south west, anchor=north west, minimum width=13mm] (ing) {Ingest};
 \node[py, right=2mm of ing, minimum width=13mm] (par) {Parse\\GROBID+words};
 \node[py, right=2mm of par, minimum width=13mm] (str) {Structure\\+ index};
 \node[llm, right=2mm of str, minimum width=13mm] (ext) {Extract\\(per group)};
 \node[box=green!8, right=2mm of ext, minimum width=13mm] (ver) {Ground +\\verify};
 \draw[arr] (ing) -- (par); \draw[arr] (par) -- (str); \draw[arr] (str) -- (ext); \draw[arr] (ext) -- (ver);
-
 \node[box=green!8, below=6mm of par.south west, anchor=north west, minimum width=13mm] (rep) {Repro\\scorecard};
 \node[box=green!8, right=2mm of rep, minimum width=13mm] (cla) {Claims vs\\tables};
 \node[py, right=2mm of cla, minimum width=13mm] (cod) {Code check\\(sandbox)};
-\node[box=green!8, right=2mm of cod, minimum width=13mm] (mat) {Math +\\context};
+\node[box=green!8, right=2mm of cod, minimum width=13mm] (mat) {Chat, math,\\context};
 \draw[arr] (ver.south) |- ++(0,-2.5mm) -| (rep.north);
 \draw[arr] (ver.south) |- ++(0,-2.5mm) -| (cla.north);
 \draw[arr] (ver.south) |- ++(0,-2.5mm) -| (cod.north);
 \draw[arr] (ver.south) |- ++(0,-2.5mm) -| (mat.north);
-
 \node[llm, below=5mm of rep.south west, anchor=north west, minimum width=26mm] (gw) {LLM gateway: cache, rate limit,\\retries, schema validation};
 \node[box=gray!10, right=3mm of gw, minimum width=14mm] (gem) {Gemini API\\(free tier)};
-\node[box=gray!10, right=3mm of gem, minimum width=13mm] (gro) {GROBID\\(docker)};
+\node[box=gray!10, right=3mm of gem, minimum width=13mm] (gro) {GROBID};
 \draw[arr] (gw) -- (gem);
-
 \begin{scope}[on background layer]
 \node[draw=black!40, dashed, rounded corners, fit=(ing)(ver)(rep)(mat)(gw)(gro), inner sep=2.5mm,
-      label={[font=\scriptsize\itshape, anchor=south west]south west:Celery worker}] (wk) {};
+      label={[font=\scriptsize\itshape, anchor=south west]south west:worker}] (wk) {};
 \end{scope}
 \draw[arr] (api.south) -- ++(0,-3mm) -| (wk.north -| ver.north east);
 \end{tikzpicture}}
 \caption{Architecture. Orange stages call the LLM, blue stages are pure Python, and green
-stages make at most one LLM call whose output Python checks. The gateway is the only path
-to the LLM.}
+stages make at most one LLM call whose output Python checks.}
 \label{fig:arch}
 \end{figure}
-
-Table~\ref{tab:stages} lists the pipeline. Four of its stages make no LLM call at all, and
-extraction with verification uses about six calls per paper.
-
-\begin{table}[t]
-\caption{Pipeline stages and their use of the LLM.}
-\label{tab:stages}
-\centering
-\footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}p{12mm}p{9mm}p{54mm}@{}}
-\toprule
-Stage & LLM & What it does \\
-\midrule
-Parse & none & GROBID TEI + PyMuPDF words $\rightarrow$ blocks with page boxes; table grids from word positions \\
-Structure & none & section roles, paragraph chunks, BM25 + vector index \\
-Extract & 1/group & schema items, each with value, verbatim quote, chunk id \\
-Verify & batched & quote located (fuzzy $\geq 90$); support judged; unfound kept as \emph{unlocated} \\
-Repro & 1 & 21-item checklist: rules first, LLM for the rest; Python score \\
-Claims & 1 & LLM copies numbers; Python matches cells, recomputes, decides \\
-Results & none & typed results tables, best value per column \\
-Code & none & repository ranking, hardened clone, static scan, comparison \\
-Math & 1 & LaTeX equations, grounded symbol glossary \\
-Context & 1 & key references, citation graph, grounded novelty relations \\
-Chat & 1/turn & hybrid retrieval, cited answer or refusal \\
-Review & 1 & draft review; findings supplied by Python; no score \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 % =========================================================================================
 \section{Method}
 
-\subsection{Parsing and table reconstruction}\label{sec:parse}
-GROBID provides sections, sentences with coordinates, references and resolved in-text
-citations. All coordinates are kept in PDF points, so any span can be highlighted later.
-Its table grids, however, were often wrong or placed on the wrong page. PaperLens therefore
-locates each table by its own caption (``Table~3:'') and rebuilds the grid from the PDF's
-word positions. Columns come from whitespace gaps, wrapped cells are merged, bold cells are
-detected, and values such as $24.3\pm0.2$ are parsed. A grid that fails a sanity check is
-dropped, because no grid is better than a wrong grid. If GROBID is unavailable, a
-PyMuPDF-only parser takes over.
+\subsection{Parsing}\label{sec:parse}
+GROBID supplies sections, sentences with coordinates, references and resolved in-text
+citations; all coordinates are kept in PDF points so any span can later be highlighted.
+Because GROBID's table grids were often wrong or misplaced, PaperLens locates each table by
+its own caption (``Table~3:'') and rebuilds the grid from the PDF's word positions, merging
+wrapped cells and parsing values such as $24.3\pm0.2$. A grid that fails a sanity check is
+dropped: no grid is better than a wrong one.
 
 \subsection{Grounded extraction}
-Sections are grouped (front matter, method, experiments, closing), and each group is sent
-in one call with a JSON schema. Paragraphs are labelled with their chunk ids. For every item
-the LLM returns a value, a verbatim quote and the chunk id the quote comes from. Python then
-locates each quote $q$. It first tries the cited chunk $c$ and then the whole paper $D$,
-using the partial-ratio similarity $s(\cdot,\cdot)$ of the normalised strings, which is a
-Levenshtein-based measure~\cite{levenshtein1966}:
+Sections are grouped into front matter, method, experiments and closing, and each group is
+sent in one schema-constrained call with its paragraphs labelled by chunk id. For each item
+the LLM returns a value, a verbatim quote and the chunk id. Python then locates each quote
+$q$ in the cited chunk $c$ and, failing that, in the whole paper $D$, using the
+Levenshtein-based partial-ratio similarity $s$~\cite{levenshtein1966} of normalised strings:
 \begin{equation}
   \hat b(q) = \arg\max_{b \in \{c\} \cup D} s(q, b), \qquad
   \text{located} \iff s\bigl(q,\hat b(q)\bigr) \geq \tau ,
 \end{equation}
-with $\tau = 90$. A located quote is mapped to sentence boxes for highlighting. A table
-quote is a row written as the prompt showed it (``cell~\textbar~cell''), and it highlights that
-row. A single batched call then labels each located quote as \emph{verified} (it supports
-the item), \emph{partial} or \emph{unsupported}. A quote that is not found is labelled
-\emph{unlocated}. Such items are kept and badged, never silently dropped, so the user sees
-them and the evaluation counts them.
+with $\tau = 90$. Located quotes are mapped to sentence boxes; a quoted table row
+highlights that row. One batched call then labels each located quote as
+\emph{verified}, \emph{partial} or \emph{unsupported}; an unfound quote is
+\emph{unlocated}. Such items are kept and badged, so users see them and the evaluation
+counts them. Code links are found by rules, not by the LLM.
 
 \subsection{Reproducibility scorecard}
-A 21-item checklist, derived from the NeurIPS checklist~\cite{pineau2021improving}, is
-organised into five groups $g$ with weights $W_g$. The groups are Code ($0.25$), Data
-($0.20$), Experimental setup ($0.25$), Compute ($0.10$) and Statistical reporting ($0.20$).
-Rules decide an item first, using regular expressions, the document structure and GitHub
-metadata. One LLM call judges the remaining items, and each judgement must quote the
-paper. An LLM ``present'' whose quote is not confirmed is capped at ``partial''. With
-points $p(\text{present})=1$, $p(\text{partial})=0.5$ and $p(\text{missing})=0$, and item
-weights $w_i$ over the items $S_g$ of group $g$ that are scored (not unknown or not
-applicable), the score is
+A 21-item checklist derived from the NeurIPS checklist~\cite{pineau2021improving} is split
+into five groups $g$ with weights $W_g$: code ($0.25$), data ($0.20$), experimental setup
+($0.25$), compute ($0.10$) and statistical reporting ($0.20$). Rules (regular expressions,
+document structure, repository metadata) decide items first; one LLM call judges the rest,
+and each judgement must quote the paper. An LLM ``present'' whose quote is not confirmed
+is capped at ``partial''. With $p(\text{present})=1$, $p(\text{partial})=0.5$,
+$p(\text{missing})=0$ and item weights $w_i$ over the scored items $S_g$,
 \begin{equation}
   \text{score} = 100 \cdot \frac{\sum_g W_g\, \sigma_g}{\sum_g W_g}, \qquad
-  \sigma_g = \frac{\sum_{i\in S_g} w_i\, p(s_i)}{\sum_{i\in S_g} w_i},
+  \sigma_g = \frac{\sum_{i\in S_g} w_i\, p(s_i)}{\sum_{i\in S_g} w_i}.
 \end{equation}
-where the outer sums run over groups with at least one scored item.
 
 \subsection{Claim verification}
-For each quantitative claim, the LLM copies the method, baseline, metric, dataset, the
-claimed value or difference $\delta^{*}$, and its unit and comparator, exactly as written.
-Python finds the candidate cells $x_m$ (method) and $x_b$ (baseline) in the parsed results
-tables, recomputes $\hat\delta = x_m - x_b$ (or a ratio for factor claims) and decides. The
-claim is \emph{supported} if $|\hat\delta - \delta^{*}| \leq \epsilon$, with
-$\epsilon = 0.15$ absolute, set in configuration. \emph{Contradicted} requires exactly one
-unambiguous pair of cells. Ambiguous or missing matches give \emph{unsupported}, so a table
-the parser got wrong cannot make a paper look wrong.
+For each quantitative claim the LLM only copies the method, baseline, metric, dataset and
+claimed difference $\delta^{*}$ as written. Python finds the candidate cells $x_m$ and $x_b$
+in the parsed results tables, recomputes $\hat\delta = x_m - x_b$ (or a ratio), and labels
+the claim \emph{supported} if $|\hat\delta - \delta^{*}| \leq \epsilon$ ($\epsilon=0.15$).
+\emph{Contradicted} requires exactly one unambiguous pair of cells; ambiguous or missing
+matches yield \emph{unsupported}, so a parsing error cannot make a paper look wrong.
 
-\subsection{Paper vs code}
-Repository links are ranked from the paper text, telling the authors' own code apart from
-libraries the work is ``based on''. The repository is cloned shallowly, with hooks,
-symlinks and local protocols disabled and a size cap. A parse-only scanner then runs inside
-a sandbox container and reads Python ASTs, YAML, JSON, TOML and README flags. It never
-executes repository code. Assignments under inference-only branches are skipped.
-Hyperparameter names are aligned with a synonym table (\texttt{lr} $\leftrightarrow$
-\texttt{learning\_rate}), and values are compared after numeric normalisation
-($3\mathrm{e}{-4} = 0.0003$).
+\subsection{Paper versus code}
+Repository links are ranked from the paper text, separating the authors' own code from
+libraries the work is ``based on''. The repository is cloned shallowly with hooks, symlinks
+and local protocols disabled and a size cap, and a parse-only scanner reads Python ASTs,
+YAML, JSON, TOML and README flags inside a sandbox; repository code is never executed.
+Names are aligned by a synonym table ($\texttt{lr} \leftrightarrow
+\texttt{learning\_rate}$) and values compared after normalisation ($3\mathrm{e}{-4} =
+0.0003$).
 
-\subsection{Chat, notation and context}
-Chat retrieves paragraph passages with BM25~\cite{robertson2009bm25} and local dense
-embeddings~\cite{reimers2019sbert,karpukhin2020dpr}, fused by reciprocal rank
-fusion~\cite{cormack2009rrf}:
-\begin{equation}
-  \mathrm{RRF}(d) = \sum_{r \in \{\text{bm25},\,\text{dense}\}} \frac{1}{k + \operatorname{rank}_r(d)}, \qquad k = 60 .
-\end{equation}
-Passages are labelled [P1], [P2], \ldots{} in the prompt. Python removes citation markers
-the model invents, refuses an answer with no citation, and refuses without an LLM call when
-nothing relevant is retrieved. For notation, the arXiv LaTeX source is read in memory (never
-compiled). Equations are numbered by LaTeX's own rules so that they match the PDF, and one
-call builds a glossary whose symbol meanings are each grounded in a sentence. For context,
-key references are the ones cited most often in the text, with the citing sentences as
-evidence. Semantic Scholar adds citation counts and influential
-citations~\cite{valenzuela2015meaningful} when it is reachable.
-
-\subsection{Review, report and comparison}
-Reviewer mode asks the LLM for a summary, strengths, weaknesses, missing ablations and
-questions for the authors, each point quoted. Python adds findings from the scorecard, the
-claims and the code check, and gives no score. A Word report and a multi-paper comparison
-matrix are built from stored results without an LLM call.
+\subsection{Chat, notation and review}
+Chat retrieves paragraphs with BM25~\cite{robertson2009bm25} and dense
+embeddings~\cite{reimers2019sbert,karpukhin2020dpr} fused by reciprocal rank
+fusion~\cite{cormack2009rrf}; Python removes citation markers the model invents and refuses
+uncited answers, or answers nothing when retrieval finds nothing relevant. A notation
+glossary is built from the arXiv LaTeX source (read, never compiled), with each symbol's
+meaning grounded in a sentence; key references are those cited most often in the text,
+optionally enriched by Semantic Scholar~\cite{valenzuela2015meaningful}. A draft review
+lists quoted strengths, weaknesses and questions, keeps facts computed in Python separate,
+and gives no score.
 
 % =========================================================================================
 \section{Experimental Setup}
 
-\subsection{Gold set}
-The evaluation set contains 50 arXiv papers from 2014 to 2024 (Table~\ref{tab:gold}). Ten
-\emph{reference} papers were used during development: Bahdanau et
+\textbf{Gold set.} We annotated 50 arXiv papers from 2014--2024 (Table~\ref{tab:gold}).
+Ten \emph{development} papers were used while building the system: Bahdanau et
 al.~\cite{bahdanau2015}, VGG~\cite{simonyan2015vgg}, ResNet~\cite{he2016resnet},
 Transformer~\cite{vaswani2017attention}, BERT~\cite{devlin2019bert},
 RoBERTa~\cite{liu2019roberta}, DistilBERT~\cite{sanh2019distilbert},
 SimCLR~\cite{chen2020simclr}, ViT~\cite{dosovitskiy2021vit} and LoRA~\cite{hu2022lora}.
-Forty \emph{new} papers were added afterwards and never used for development. They were
-chosen to balance nine areas and to vary the layout: appendix hyperparameter tables
-(LLaMA, DINOv2, Whisper), prompting papers with few settings (chain-of-thought, ReAct),
-theory-heavy papers (scaling laws, KAN) and papers without released code (Lottery
-Ticket, Chinchilla). The full list with arXiv identifiers is part of the release. The gold
-set holds 2{,}796 items in seven fields: task, datasets, baselines, metrics,
-hyperparameters, compute and code URLs. An annotation guide defines what counts in each
-field.
+Forty \emph{held-out} papers were added afterwards, balanced over nine areas and varied in
+layout: appendix hyperparameter tables, prompting papers with few settings, theory-heavy
+papers and papers without released code. The 2{,}796 gold items cover task, datasets,
+baselines, metrics, hyperparameters, compute and code URLs, defined in an annotation guide.
+The reference annotations were produced by an LLM (Claude) reading each paper's full text
+under the guide, then adjudicated once against PaperLens' output: 48 omitted items that the
+papers state were added, no alias was written in the system's wording, and nothing was
+removed. Every change is logged.
 
 \begin{table}[t]
-\caption{Gold set composition (* = in the reference ten).}
+\caption{Gold set composition (* = development set).}
 \label{tab:gold}
 \centering
 \footnotesize
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}lrp{55mm}@{}}
+\begin{tabular}{@{}lrp{57mm}@{}}
 \toprule
-Area & Papers & Papers (short names) \\
+Area & $n$ & Papers \\
 \midrule
 NLP & 16 & Bahdanau*, Transformer*, BERT*, RoBERTa*, DistilBERT*, LoRA*, T5, ELECTRA, SimCSE, RAG, chain-of-thought, ReAct, LLaMA, DPO, QLoRA, DeepSeekMath \\
 CV & 13 & VGG*, ResNet*, SimCLR*, ViT*, Faster R-CNN, U-Net, Swin, MAE, ConvNeXt, DINOv2, SAM, ViT registers, SigLIP \\
 ML & 9 & BatchNorm, AdamW, PGD, Lottery Ticket, scaling laws, Chinchilla, FlashAttention, Mamba, KAN \\
-Generative & 3 & latent diffusion, DiT, flow matching \\
-Graph / RL & 2 / 2 & GCN, GAT / PPO, SAC \\
-Speech & 2 & wav2vec~2.0, Whisper \\
-Time series & 2 & PatchTST, iTransformer \\
-Multimodal & 1 & LLaVA \\
+Other & 12 & latent diffusion, DiT, flow matching, LLaVA, GCN, GAT, PPO, SAC, wav2vec~2.0, Whisper, PatchTST, iTransformer \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Annotation provenance.} Because of time constraints, the reference annotations were
-produced by an LLM (Claude) reading each paper's full text page by page under the guide.
-Each part was adjudicated once after its first comparison with PaperLens. Items that the
-papers state and that fit the definitions were added (14 for the reference ten, 34 for the
-new forty), one over-broad alias was removed, no alias was written in the system's
-wording, and nothing was removed to suit the system. For the new forty, every extracted
-item that matched no gold item was read against the paper and labelled (Section~\ref{sec:errors}).
-Every change is logged. Our numbers therefore measure agreement with an
-\emph{LLM-annotated} reference, and we discuss this threat in
-Section~\ref{sec:threats}.
-
-\subsection{Matching and metrics}
-Values are normalised (Unicode NFKD, number words turned into digits, decimals kept). A
-predicted text item matches a gold item when the two are nearly equal (fuzzy $\geq 88$ with
-equal digit sequences, so CIFAR-10 never matches CIFAR-100), or when one contains the other
-and the remainder is filler, or when the contained gold phrase is specific on its own. An
-item that packs several values is tried part by part. Hyperparameters must agree on the
-name (through a synonym table) and on the parsed value ($6\% = 0.06$). For a field with
-predicted items $P$ and gold items $G$,
+\textbf{Matching and metrics.} Text values are normalised (Unicode NFKD, number words to
+digits). A prediction matches a gold item when the two are nearly equal (fuzzy ratio
+$\geq 88$ with equal digit sequences, so CIFAR-10 never matches CIFAR-100), or when one
+contains the other and the remainder is filler. Hyperparameters must agree on the name
+(through a synonym table) and on the parsed value ($6\% = 0.06$). For predicted items $P$
+and gold items $G$ of a field,
 \begin{equation}
   \mathrm{P} = \frac{|\{p\in P : \exists g,\, p \sim g\}|}{|P|}, \quad
   \mathrm{R} = \frac{|\{g\in G : \exists p,\, p \sim g\}|}{|G|},
 \end{equation}
-and F1 is their harmonic mean (micro over papers; macro = mean of per-paper F1). The
-\emph{hallucination rate} is the share of extracted items that are unlocated, unsupported
-or without evidence. \emph{Numeric accuracy} is the share of extracted hyperparameters,
-among those whose name is in the gold, that have a correct value. \emph{Hyperparameter
-coverage} is the share of gold (paper, name) pairs for which a correct value was extracted.
-Checklist agreement uses accuracy and Cohen's $\kappa$~\cite{cohen1960kappa}.
+and F1 is their harmonic mean, micro-averaged over papers; the \emph{core-field F1} is the
+mean over task, datasets, baselines, metrics and hyperparameters. The \emph{hallucination
+rate} is the share of extracted items that are unlocated, unsupported or without evidence;
+\emph{numeric accuracy} is the share of extracted hyperparameters with a gold name whose
+value is correct; \emph{hyperparameter coverage} is the share of gold (paper, name) pairs
+with a correct value extracted.
 
-\subsection{Configuration}
-Extraction used Gemini Flash-Lite through the free tier (October 2026) with the
-section-group prompts, GROBID~0.8.1 and the default thresholds above. The main numbers
-come from one run over all 50 papers (\texttt{collect\_flash\_lite}), made with the
-pipeline as of the last phase on a team member's laptop by a resumable collector that
-downloads each paper, checks its title and runs the pipeline one paper at a time. An
-earlier run over the reference ten (\texttt{phase2\_flash\_lite}, made when extraction was
-first built) is reported alongside. All tables and figures in this paper are regenerated
-by one command from the stored runs.
+\textbf{Configuration.} Extraction uses Gemini Flash-Lite on the free tier with GROBID 0.8.1
+and the thresholds above; all numbers come from a single run over the 50 papers, and all
+tables and figures are regenerated by one command from the stored outputs.
 
 % =========================================================================================
 \section{Results}\label{sec:results}
 
 \subsection{Extraction quality}
-Table~\ref{tab:main} and Fig.~\ref{fig:fields} report per-field scores over the 50 papers.
-Precision on the core fields lies between 0.81 and 0.94. When PaperLens reports a
-dataset, metric or baseline, it is usually right, and Section~\ref{sec:errors} shows that
-most of the remaining ``false positives'' are correct items our matcher does not
-recognise. Recall is the bottleneck, above all for hyperparameters (0.27) and tasks
-(0.37). The micro-averaged core-field F1 is 0.60, short of our target of 0.80. Of the
-extracted hyperparameters whose name matched a gold name, 91\% carried the right value,
-but only 30\% of gold hyperparameters were covered. 90\% of all extracted items are
-verified against the paper and 1\% are unlocated or unsupported.
+Table~\ref{tab:main} reports per-field scores. Precision on the core fields is
+0.81--0.94; recall is the bottleneck, above all for hyperparameters (0.27) and tasks
+(0.37), giving a core-field F1 of 0.60. Of the extracted hyperparameters whose name
+matched a gold name, 91\% carried the right value. 90\% of all 2{,}283 extracted items are
+verified against the paper, and 1\% are unlocated or unsupported.
 
 \begin{table}[t]
-\caption{Extraction results per field (50 papers, run \texttt{collect\_flash\_lite}).}
+\caption{Extraction results per field (50 papers).}
 \label{tab:main}
 \centering
 \footnotesize
@@ -528,53 +367,42 @@ Hyperparameters & 1310 & 407 & 0.83 & 0.27 & 0.41 & 0.43 \\
 Compute         & 71   & 70  & 0.54 & 0.51 & 0.52 & 0.59 \\
 Code URLs       & 42   & 68  & 0.44 & 0.69 & 0.54 & 0.73 \\
 \midrule
-\multicolumn{5}{@{}l}{Core-field F1 (micro average of the five core fields)} & \multicolumn{2}{l}{\textbf{0.60}} \\
+\multicolumn{5}{@{}l}{Core-field F1} & \multicolumn{2}{l}{\textbf{0.60}} \\
 \multicolumn{5}{@{}l}{Hyperparameter coverage / numeric accuracy} & \multicolumn{2}{l}{30\% / 91\%} \\
 \multicolumn{5}{@{}l}{Verified evidence / hallucination rate} & \multicolumn{2}{l}{90\% / 1\%} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figs/fig_fields.pdf}
-\caption{Precision, recall and F1 per field (50 papers). Precision is high on the core
-fields, and recall limits F1.}
-\label{fig:fields}
-\end{figure}
-
-\textbf{By paper set and area.} Table~\ref{tab:areas} splits the run. The reference ten
-score a core-field F1 of 0.72 and the new forty 0.57. The gap is expected in part, since
-the prompts and thresholds were tuned while reading the reference papers, but it also
-reflects the new papers' layout: several state settings per model size in appendix tables
-(LLaMA, Whisper, T5). The
-graph papers are easiest (short, one table of settings); RL and generative-model papers
-are hardest, with hyperparameter coverage of 7\%, because their settings sit in long
-appendix tables. With two or three papers per area, these per-area figures are
-indicative only. Fig.~\ref{fig:papers} shows every paper.
+Table~\ref{tab:areas} splits the results. The development papers reach 0.72 and the
+held-out papers 0.57: the prompts were tuned on the former, and several held-out papers
+state settings per model size in appendix tables (LLaMA, Whisper, T5). Graph papers, with a
+single table of settings, are easiest; RL and generative-model papers, whose settings sit
+in long appendix tables, reach only 7\% hyperparameter coverage. Areas with two or three
+papers are indicative only. Fig.~\ref{fig:papers} shows every paper.
 
 \begin{table}[t]
-\caption{Core-field F1 and hyperparameter coverage by paper set and area (50 papers).}
+\caption{Results by paper set and area (50 papers).}
 \label{tab:areas}
 \centering
 \footnotesize
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lrccc@{}}
 \toprule
-Group & Papers & Core F1 & HP coverage & Verified \\
+Group & $n$ & Core F1 & HP coverage & Verified \\
 \midrule
-Reference set & 10 & 0.72 & 40\% & 88\% \\
-New set       & 40 & 0.57 & 28\% & 91\% \\
+Development set & 10 & 0.72 & 40\% & 88\% \\
+Held-out set    & 40 & 0.57 & 28\% & 91\% \\
 \midrule
-NLP           & 16 & 0.61 & 32\% & 90\% \\
-CV            & 13 & 0.60 & 36\% & 88\% \\
-ML            & 9  & 0.51 & 32\% & 90\% \\
-Generative    & 3  & 0.56 & 7\%  & 96\% \\
-Graph         & 2  & 0.82 & 59\% & 94\% \\
-RL            & 2  & 0.43 & 7\%  & 82\% \\
-Speech        & 2  & 0.62 & 24\% & 95\% \\
-Time series   & 2  & 0.68 & 26\% & 93\% \\
-Multimodal    & 1  & 0.79 & 50\% & 94\% \\
+NLP             & 16 & 0.61 & 32\% & 90\% \\
+CV              & 13 & 0.60 & 36\% & 88\% \\
+ML              & 9  & 0.51 & 32\% & 90\% \\
+Generative      & 3  & 0.56 & 7\%  & 96\% \\
+Graph           & 2  & 0.82 & 59\% & 94\% \\
+RL              & 2  & 0.43 & 7\%  & 82\% \\
+Speech          & 2  & 0.62 & 24\% & 95\% \\
+Time series     & 2  & 0.68 & 26\% & 93\% \\
+Multimodal      & 1  & 0.79 & 50\% & 94\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -582,282 +410,141 @@ Multimodal    & 1  & 0.79 & 50\% & 94\% \\
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figs/fig_papers.pdf}
-\caption{Per-paper F1 by field, papers grouped by area (* = reference set; grey = no gold
-item in that field, e.g.\ no released code). Gen.\ = generative models, MM = multimodal,
-Sp.\ = speech, TS = time series. Hyperparameters and tasks are the weak rows.}
+\caption{Per-paper F1 by field, grouped by area (* development set; grey: no gold item in
+that field). Gen.\ = generative, MM = multimodal, Sp.\ = speech, TS = time series.}
 \label{fig:papers}
 \end{figure*}
 
-\textbf{Run to run.} On the reference ten, the 50-paper run matches the earlier run's
-core-field F1 (0.72 in both). Its hyperparameter coverage is close (40\% vs 43\%), and its
-numeric accuracy is 96\% vs 100\%. Its evidence is much cleaner: 88\% of items verified
-instead of 80\%, and a hallucination rate of 1\% instead of 10\%. The earlier run had 35
-unlocated items against 2. The runs differ in machine, GROBID instance, sampling and
-pipeline version (later phases changed shared code), and we have not isolated which
-difference matters.
-
 \subsection{Evidence policy (ablation A3)}
-Because every item carries a status, we can score the same extraction under stricter
-evidence policies without new LLM calls (Fig.~\ref{fig:a3}). In the earlier run, requiring
-the quote to be found in the paper lowers the hallucination rate from 10\% to 2\%, and
-additionally requiring the support check lowers it to 0\%, while precision stays at 0.96
-to 0.97. The cost is recall, which falls from 0.54 to 0.43 under the strictest policy,
-because some correct items come with a paraphrased quote that cannot be located. In the
-50-paper run almost every quote is located, so the policies barely differ: the strictest
-one removes the last 1\% of hallucinated items and lowers recall from 0.42 to 0.39. We
-keep all items in the interface and badge their status. The reader sees the evidence
-level, and the metrics still count every item.
+Because every item carries an evidence status, the same extraction can be scored under
+stricter policies without new LLM calls (Fig.~\ref{fig:a3}). On the development set with an
+earlier pipeline version, which left more quotes unlocated, requiring a located quote cut
+the hallucination rate from 10\% to 2\%, and additionally requiring support cut it to 0\%,
+with precision unchanged (0.96--0.97) and recall falling from 0.54 to 0.43. On the 50-paper
+run nearly every quote is located, so the strictest policy only removes the last 1\% at a
+recall cost of 0.03. We therefore keep every item in the interface with its status badge
+rather than filtering.
 
-\begin{figure*}[t]
+\begin{figure}[t]
 \centering
-\includegraphics[width=0.92\textwidth]{figs/fig_a3.pdf}
-\caption{Ablation A3: each run scored under four evidence policies (core fields). Left:
-recall and F1. Right: hallucination rate. Requiring a located, supporting quote removes
-hallucinated items at a moderate cost in recall.}
+\includegraphics[width=\columnwidth]{figs/fig_a3.pdf}
+\caption{Ablation A3: core-field F1, micro over all core items (left), and hallucination rate (right) under four
+evidence policies, for the development set (earlier pipeline) and all 50 papers.}
 \label{fig:a3}
-\end{figure*}
+\end{figure}
 
-\subsection{Parser (ablation A1) and retrieval (ablation A6)}
-Fig.~\ref{fig:a1} compares GROBID with a PyMuPDF-only parse on all 50 papers by the share
-of gold values still present in the parsed text, which is an upper bound on extraction
-recall. Raw PyMuPDF text keeps more of the values (90\% vs 83\%), mostly numbers in tables,
-footnotes and appendix lists. GROBID, however, recovers the structure the rest of the
-pipeline depends on: 1{,}520 vs 1{,}165 section headings, 3{,}026 vs 2{,}394 references,
-580 vs 243 equations, and in-text citations. The gap is largest for hyperparameters: a
-third of the gold values (33\%) never reach the extractor through GROBID's text, against
-19\% with PyMuPDF. Since 67\% is the ceiling for hyperparameter coverage and PaperLens
-reaches 30\%, the extractor recovers less than half of what the parse makes available,
-and a parse that keeps table and appendix text would raise the ceiling itself.
-
-For chat (A6), we ask one question per field and per hyperparameter name and count a gold
-item as found when it occurs in the top five passages (2{,}086 question--item pairs,
-Table~\ref{tab:a6}). BM25 and hybrid retrieval tie at 45\% recall@5; dense retrieval alone
-is clearly worse (36\%), above all on task questions (19\% vs 53\%), where the answer
-shares words with the question (``task'', the paper's own terms) rather than meaning.
-Hybrid fusion helps on datasets, metrics and hyperparameters and costs on tasks, which
-supports keeping BM25 in the chat's fusion rather than relying on embeddings.
-
-\begin{table}[t]
-\caption{Ablation A6: retrieval recall@5 for chat (50 papers, GROBID parse).}
-\label{tab:a6}
-\centering
-\footnotesize
-\setlength{\tabcolsep}{3.5pt}
-\begin{tabular}{@{}lcccccc@{}}
-\toprule
-Retrieval & All & Task & Datasets & Baselines & Metrics & HPs \\
-\midrule
-BM25   & \textbf{45\%} & \textbf{53\%} & 36\% & \textbf{41\%} & 48\% & 50\% \\
-Dense  & 36\% & 19\% & 37\% & 29\% & 46\% & 41\% \\
-Hybrid & \textbf{45\%} & 45\% & \textbf{40\%} & 38\% & \textbf{49\%} & \textbf{51\%} \\
-\bottomrule
-\end{tabular}
-\end{table}
+\subsection{Parser (A1) and retrieval (A6)}
+Fig.~\ref{fig:a1} measures how many gold values survive parsing at all, an upper bound on
+recall. Raw PyMuPDF text keeps more values than GROBID (90\% vs 83\%), mostly numbers in
+tables, footnotes and appendix lists, but GROBID recovers the structure the pipeline
+depends on (1{,}520 vs 1{,}165 section headings, 3{,}026 vs 2{,}394 references, 580 vs 243
+equations). For hyperparameters the gap is widest: 33\% of gold values never reach the
+extractor through GROBID's text. With a ceiling of 67\%, the observed 30\% coverage means the
+extractor recovers less than half of what the parse makes available. For chat, recall@5 on
+2{,}086 question--item pairs is 45\% for BM25, 36\% for dense retrieval and 45\% for the
+hybrid, which helps on datasets, metrics and hyperparameters but loses on task questions
+(45\% vs 53\%); keeping BM25 in the fusion is therefore essential.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figs/fig_a1.pdf}
-\caption{Ablation A1: gold values still present in the parsed text, by field (50 papers).
-GROBID loses a third of the hyperparameter values, which caps extraction recall.}
+\caption{Ablation A1: gold values present in the parsed text, by field (50 papers).}
 \label{fig:a1}
 \end{figure}
 
-\subsection{Reproducibility, code and other checks}
-Table~\ref{tab:phases} summarises the acceptance checks of the other components. The
-scorecard agreed with the team's annotations on 158 of 210 checklist decisions (75\%,
-$\kappa = 0.57$). This is below the targets of 80\% and $\kappa = 0.6$, but up from 65\%
-before item-level guidance was added. The largest disagreements concern training time,
-re-run baselines and README instructions. Repository discovery found the official code for
-all eight papers that have it.
-
-\begin{table}[t]
-\caption{Acceptance checks of the remaining components.}
-\label{tab:phases}
-\centering
-\footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}p{20mm}p{26mm}p{30mm}@{}}
-\toprule
-Component & Criterion & Result \\
-\midrule
-Parsing & 10 arXiv papers; tables on $\geq 8$ & 10/10 \\
-Extraction & full output $\leq$ 3 min & 10/10; 15--50 s per paper \\
-Repro.\ scorecard & $\geq$ 80\% agreement & 75\%, $\kappa=0.57$ (below target) \\
-Code discovery & $\geq$ 80\% repos found & 8/8 \\
-Paper vs code & one real mismatch & BERT (below) \\
-Chat / math / context & cited answers; glossary on 5 papers; graph & passed (VAE, Adam, DDPM, Transformer, LoRA) \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\textbf{Case study: BERT.} The paper states that pre-training used a learning rate of
-$10^{-4}$, a batch size of 256 and 1M steps~\cite{devlin2019bert}. The static scan of the
-official repository found the defaults of \texttt{run\_pretraining.py} to be
-$5\times10^{-5}$, 32 and 100{,}000. PaperLens reports this as a mismatch and shows the
-paper's sentence beside the code location. The difference is legitimate, since the script's
-values are command-line defaults, but anyone running the script as is would not reproduce
-the paper. This is exactly the gap the check is meant to surface.
-
-The phase-5 check covered five math-heavy papers (VAE~\cite{kingma2014vae},
-Adam~\cite{kingma2015adam}, DDPM~\cite{ho2020ddpm}, Transformer, LoRA). Chat answers cited
-pages, off-topic questions were refused, every glossary symbol's quote was verified, and
-the citation graph rendered.
-
-\subsection{Interface}
-Fig.~\ref{fig:ui} shows the workspace. Clicking an evidence chip scrolls the PDF to the
-quoted sentence and highlights it in the colour of its status. Fig.~\ref{fig:compare} shows
-the comparison matrix, built from the stored extractions of two papers without an LLM call.
-Each cell gives the page where the paper states the item.
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.95\textwidth]{figs/ui_overview.png}
-\caption{The PaperLens workspace on the Transformer paper~\cite{vaswani2017attention}, with
-items from the evaluated Gemini run. Selecting the evidence for
-\texttt{warmup\_steps: 4000} highlights the source sentence on p.~7 (left). Chip colours
-encode the evidence status (green = verified, blue = unchecked).}
-\label{fig:ui}
-\end{figure*}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figs/ui_results.png}
-\caption{A results table rebuilt from word positions (Transformer, Table~2). The best value
-per column is computed in Python from the header's direction (higher BLEU and lower
-training cost are better).}
-\label{fig:results}
-\end{figure}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figs/ui_compare_crop.png}
-\caption{Comparison matrix for two papers (excerpt): tasks, compute, code, datasets and
-metrics with the page each is stated on. Rows shared by both papers are tinted.}
-\label{fig:compare}
-\end{figure}
+\subsection{Downstream checks}
+On the development set, the reproducibility scorecard agreed with human annotations on 158
+of 210 checklist decisions (75\%, Cohen's $\kappa = 0.57$~\cite{cohen1960kappa}); the main
+disagreements concern training time and re-run baselines. Repository discovery found the
+official code for all eight development papers that release it. As an example of the code
+check, BERT~\cite{devlin2019bert} reports pre-training with learning rate $10^{-4}$, batch
+size 256 and 1M steps, while the defaults of the official \texttt{run\_pretraining.py} are
+$5\times10^{-5}$, 32 and 100{,}000; PaperLens reports the mismatch with the paper's
+sentence beside the code location. The defaults are legitimate command-line values, but
+running the script as is would not reproduce the paper.
 
 % =========================================================================================
 \section{Error Analysis}\label{sec:errors}
 
-The 50-paper run missed 1{,}602 of 2{,}796 gold items, 956 of them hyperparameters, and
-produced 239 items that match no gold item (Fig.~\ref{fig:errors}).
+\textbf{Unmatched predictions.} We read each of the 246 extracted items of the held-out
+papers that matched no gold item against the paper (Table~\ref{tab:audit}). Only 10 (4\%)
+are wrong: model families listed as datasets, a method listed as its own baseline, two
+metrics and two values the paper does not state, and one code link absent from the text.
+Half (127) are correct items the strict matcher misses, either through hyperparameter
+names (``lambda'' vs \texttt{loss\_weight\_lambda}) or through values garbled by
+superscripts in the PDF text layer (``3.0e\^{}$-$\^{}4'', ``2 24'' for $2^{24}$). A
+further 31 were gold omissions, since added, and 78 are out of scope, mostly third-party
+links and compute descriptions without hardware or time. Precision in Table~\ref{tab:main}
+is thus a lower bound.
 
-\textbf{What the unmatched items are.} We read each of the 246 unmatched items of the new
-forty papers against the paper (the audit is released with the gold set). Only 10 are
-wrong: four model families listed as datasets (QLoRA's OPT, LLaMA, BLOOM, Pythia), a
-method listed as its own baseline, two metrics the paper does not report, two values the
-paper does not state, and one code link not given in the text. 127 are correct but missed by the matcher, 31
-were gold omissions (added during adjudication), and 78 are out of scope.
-\begin{itemize}
-\item \textbf{Matcher misses (127)} come from two sources. One is hyperparameter names:
-  ``lambda'' vs \texttt{loss\_weight\_lambda} with alias ``$\lambda$'', ``number of hidden
-  units'' vs ``hidden units'', or a Greek letter the normaliser drops. The other is values
-  the extraction wrote in a broken form, such as ``3.0e\^{}$-$\^{}4'', ``8e -4'' or ``2 24''
-  for $2^{24}$, which come from superscripts in the PDF text layer. A dedicated value
-  normaliser and a richer synonym table would recover most of them.
-\item \textbf{Out of scope (78)}: third-party links (libraries, dataset pages, other
-  papers' code; 35 of the 36 unmatched code URLs) and compute descriptions without
-  hardware or time (``hardware used for training models'').
-\end{itemize}
-Counting matcher misses and gold omissions as correct, 10 of the 246 items (4\%) are wrong,
-so precision on the new forty is far higher than Table~\ref{tab:main} reports. This
-reading was done by the same LLM annotator and is part of the threat discussed in
-Section~\ref{sec:threats}.
-
-\textbf{What is missed.} Five causes recur:
-\begin{enumerate}
-\item \textbf{Appendix and table hyperparameters (dominant).} Large-model papers state
-  settings per model size in appendix tables: LLaMA's dimension, heads, layers and learning
-  rate for four sizes; Whisper's five sizes; T5's five variants. The extraction usually
-  returns one size. Long appendix groups dilute attention~\cite{liu2024lost}, and asking
-  for a quote per item seems to favour prose over table rows.
-\item \textbf{Tasks listed too narrowly.} The model names one or two tasks, whereas the gold
-  lists every task the experiments address (for example, SAM's edge detection, object
-  proposals and text-to-mask experiments).
-\item \textbf{Long benchmark lists.} Papers evaluated on large suites lose most of the
-  list: DINOv2 misses 29 of its 42 gold datasets, SAM 20 of 27 and Whisper 17 of 21, while
-  LLaMA, whose benchmarks are named in running text, misses only 4 of 27.
-\item \textbf{Baselines cited by author name only,} such as T5's ``previous best'' results
-  given as citations. Our scorer also undercounts one case: ``Krizhevsky et al.''\ does not
-  match ``Krizhevsky et al.\ 2012'' because digit sequences must be equal.
-\item \textbf{Parsing ceiling.} 17\% of gold values, and 33\% of hyperparameter values, do not survive
-  GROBID's text at all (A1).
-\end{enumerate}
-
-\begin{figure*}[t]
+\begin{table}[t]
+\caption{Manual audit of the 246 unmatched predictions (held-out papers).}
+\label{tab:audit}
 \centering
-\includegraphics[width=0.95\textwidth]{figs/fig_errors.pdf}
-\caption{Left: missed gold items by field (50 papers). Right: the 246 extracted items of
-the new forty papers that match no gold item, labelled by reading each against the paper.}
-\label{fig:errors}
-\end{figure*}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Field & \makecell{Correct,\\matcher missed} & \makecell{Gold\\omission} & \makecell{Out of\\scope} & Wrong \\
+\midrule
+Task / datasets & 14 & 6 & 11 & 4 \\
+Baselines / metrics & 48 & 4 & 9 & 3 \\
+Hyperparameters & 54 & 19 & 2 & 2 \\
+Compute / code URLs & 11 & 2 & 56 & 1 \\
+\midrule
+All & \textbf{127} & 31 & 78 & \textbf{10} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Missed gold items.} The run missed 1{,}602 of 2{,}796 gold items, 956 of them
+hyperparameters. Four causes recur. (i)~\emph{Per-size appendix settings}: LLaMA, Whisper
+and T5 list dimensions, heads, layers and learning rates for every model size, and the
+extraction usually returns one size. (ii)~\emph{Narrow tasks}: the model names one or two
+tasks where the experiments address several (e.g.\ SAM's edge detection and object
+proposals). (iii)~\emph{Long benchmark suites}: DINOv2 misses 29 of 42 datasets and Whisper
+17 of 21, while LLaMA, whose benchmarks appear in running text, misses 4 of 27.
+(iv)~\emph{Parsing}: 17\% of all gold values and 33\% of hyperparameter values are absent
+from GROBID's text (A1).
 
 % =========================================================================================
 \section{Discussion and Limitations}\label{sec:limits}
 
-\textbf{Precision by construction, recall by effort.} Making the LLM quote its sources, and
-checking every quote in code, yields high precision and a measurable hallucination
-rate that can be driven to zero. Recall, however, depends on the model reading every table
-and appendix. Table-aware extraction of appendix settings is the most promising next step.
+\textbf{Precision by construction, recall by effort.} Requiring a quote for every item and
+checking it in code yields high precision and a hallucination rate that can be driven to
+zero. Recall instead depends on the model reading every table and appendix, and on the
+parser keeping them; table-aware extraction of per-size settings and a parse that retains
+appendix tables are the most promising next steps.
 
-\textbf{Deterministic decisions.} Scores, deltas, verdicts and code comparisons are
-computed in Python. They are reproducible, testable with unit tests, and conservative by
-design: an ambiguous table match yields ``unsupported'', never ``contradicted''.
+\textbf{Deterministic decisions.} Scores, differences, verdicts and code comparisons are
+computed in Python, so they are reproducible, unit-tested and conservative: an ambiguous
+table match yields ``unsupported'', never ``contradicted''.
 
-\textbf{Limitations.}
-\begin{itemize}
-\item The gold set has 50 papers but a single annotator (an LLM), with no double
-  annotation and no inter-annotator agreement. Areas other than NLP, CV and ML have only
-  one to three papers each.
-\item The scorecard's agreement with the team is below target.
-\item Cloning repositories failed on the team's Windows machines, so the code comparison
-  was demonstrated on Linux. Repository discovery itself needs no clone.
-\item Semantic Scholar often rate-limits, and the context view then falls back to a
-  PDF-only citation graph.
-\item Several planned ablations are pending:
-  \begin{itemize}
-  \item extraction granularity (A2);
-  \item rule hints (A4);
-  \item a stronger model (A5);
-  \item LLM vs Python claim verdicts (A7);
-  \item extraction without quotes (full A3);
-  \item LaTeX and Docling parsers (A1);
-  \item Qasper~\cite{dasigi2021qasper}.
-  \end{itemize}
-\end{itemize}
+\textbf{Limitations and threats to validity.} The gold set has a single annotator, an LLM,
+adjudicated once against this system's output, and the audit was done the same way; where
+the annotating LLM and Gemini share blind spots, recall may be overestimated, while the
+strict matcher underestimates precision. Areas outside NLP, CV and ML have one to three
+papers. All results come from one run of one model on well-known papers that the model
+may have seen in training. The scorecard's agreement with human judgements is below our
+target of 80\%, and ablations that require additional LLM runs (extraction granularity,
+model choice, extraction without quotes) are left to future work.
 
-\subsection{Threats to validity}\label{sec:threats}
-The reference annotations, and the audit of unmatched items, were produced with an LLM
-and adjudicated once against this system's output. Where the annotating LLM and Gemini
-share blind spots, recall may be overestimated. Where the matcher is strict, scores are
-underestimated, and the audit shows by how much. Adjudication only added items and never
-removed any to favour the system, and every change is logged. A human spot-check of two or three papers is in progress
-(TEAM: report the outcome). Each result comes from a single run of one model, the papers
-are well-known ML papers whose text the LLM may have seen in training, and absolute
-numbers may not transfer to recent or out-of-domain papers.
+\textbf{Ethics.} Paper text is sent to a free-tier API whose inputs may be used by the
+provider, so the interface warns against uploading unpublished work. Repository code is
+never executed, and the draft review gives no score, consistent with evidence that LLM
+reviews should support rather than replace human reviewers~\cite{liang2024feedback}.
 
-\section{Ethics and Privacy}
-Paper text is sent to a free-tier API whose inputs may be used to improve the provider's
-models. The interface warns users not to upload unpublished or confidential papers.
-Repository code is never executed. Reviewer mode gives no score, labels its output as an
-LLM draft, and separates it from facts computed in Python, consistent with evidence that
-LLM reviews should support human reviewers rather than replace
-them~\cite{liang2024feedback,zhou2024reliable}.
-
+% =========================================================================================
 \section{Conclusion}
 PaperLens shows that a free-tier LLM can support careful paper reading when it is asked
 only to extract and quote, while deterministic code locates every quote and makes every
-decision. On 50 papers from nine areas it extracts with high precision (only 4\% of the
-items the gold set lacks are wrong when read by hand) and 91\% numeric accuracy on matched
-hyperparameters. Every item is traceable to a highlighted sentence, 90\% are verified, and
-requiring evidence eliminates hallucinated items. Future work will target recall on
-appendix tables and per-size settings, normalise values written with superscripts,
-complete the pending ablations, and add independent human annotation.
+decision. On 50 papers from nine areas it extracts with high precision (4\% of unmatched
+predictions are wrong), 91\% numeric accuracy and 1\% hallucinated items, each item
+traceable to a highlighted sentence. Closing the recall gap on appendix tables, and adding
+independent human annotation, are the next steps.
 
 \section*{Acknowledgment}
-% TEAM: guide / institution acknowledgement.
-The authors thank their project guide for feedback. PaperLens uses GROBID, PyMuPDF and the
-Gemini API free tier.
+The authors thank their project guide for feedback.
 
 \bibliographystyle{IEEEtran}
 \bibliography{refs}

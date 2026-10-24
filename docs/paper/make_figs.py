@@ -94,25 +94,25 @@ def a3(run):
     return out
 
 
-pol = ["Keep all", "Quote found", "Found + supports\nor partly", "Found +\nsupports"]
-fig, (a, b) = plt.subplots(1, 2, figsize=(7.1, 2.0), gridspec_kw={"width_ratios": [1.6, 1]})
-x = np.arange(4); w = 0.2
-for k, (run, lab) in enumerate([(REF, "10 papers (first run)"), (RUN, "50 papers")]):
+pol = ["Keep\nall", "Quote\nfound", "+ supp.\nor part.", "+ sup-\nports"]
+fig, (a, b) = plt.subplots(1, 2, figsize=(W, 1.75))
+x = np.arange(4); w = 0.38
+for k, (run, lab, c) in enumerate([(REF, "development set (earlier pipeline)", C2),
+                                   (RUN, "all 50 papers", C1)]):
     rs = a3(run)
-    bars(a, x + (2 * k - 1.5) * w, [r[2] for r in rs], w, [C2, C1][k], f"Recall, {lab}")
-    bars(a, x + (2 * k - 0.5) * w, [r[3] for r in rs], w, ["#f4b393", "#9cc1ee"][k], f"F1, {lab}")
-    hb = b.bar(x + (k - 0.5) * 0.36, [r[4] for r in rs], 0.36, color=[C2, C1][k],
-               edgecolor="white", label=lab)
+    bars(a, x + (k - 0.5) * w, [r[3] for r in rs], w, c, lab)
+    bars(b, x + (k - 0.5) * w, [r[4] for r in rs], w, c, lab)
     for i, r in enumerate(rs):
-        b.text(i + (k - 0.5) * 0.36, r[4] + 0.3, f"{r[4]}%", ha="center", fontsize=6, color=INK)
-a.set_xticks(x, pol, fontsize=7); a.set_ylim(0, 0.85)
-a.set_title("Core-field recall and F1 (precision 0.84-0.97 throughout)", fontsize=7.5, color=INK,
-            loc="left")
-a.legend(ncol=2, fontsize=6, loc="upper right", bbox_to_anchor=(1.0, 1.02)); a.grid(axis="x", visible=False)
-b.set_xticks(x, ["Keep all", "Found", "Found +\nsupp./part.", "Found +\nsupports"], fontsize=7)
-b.set_ylim(0, 12); b.set_title("Hallucination rate (%)", fontsize=7.5, color=INK)
-b.legend(fontsize=6, loc="upper right"); b.grid(axis="x", visible=False)
-fig.tight_layout(pad=0.3); fig.savefig(f"{OUT}/fig_a3.pdf"); plt.close(fig)
+        a.text(i + (k - 0.5) * w, r[3] + 0.01, f"{r[3]:.2f}", ha="center", fontsize=4.8,
+               color=INK)
+        b.text(i + (k - 0.5) * w, r[4] + 0.2, f"{r[4]}", ha="center", fontsize=5.5, color=INK)
+for ax, title in ((a, "Core-field F1"), (b, "Hallucination rate (%)")):
+    ax.set_xticks(x, pol, fontsize=5.8); ax.grid(axis="x", visible=False)
+    ax.set_title(title, fontsize=7, color=INK); ax.tick_params(axis="y", labelsize=6)
+a.set_ylim(0.4, 0.75); b.set_ylim(0, 11.5)
+h, l = a.get_legend_handles_labels()
+fig.legend(h, l, ncol=2, fontsize=6, loc="upper center", bbox_to_anchor=(0.5, 1.02))
+fig.tight_layout(pad=0.3, rect=(0, 0, 1, 0.9)); fig.savefig(f"{OUT}/fig_a3.pdf"); plt.close(fig)
 
 # 4. errors: missed gold items by field + audit of the not-in-gold items (new 40 papers)
 missed, f = Counter(), None
