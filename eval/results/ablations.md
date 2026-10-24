@@ -54,9 +54,9 @@ Questions built from the gold set (field questions and one per hyperparameter); 
 
 | ablation | what | needs |
 |---|---|---|
-| A2 | extraction granularity (whole paper / section groups / per field) | Gemini runs |
+| A2 | extraction granularity (whole paper / section groups / per field) | collect --set reference --arm groups / whole / per_field |
 | A4 | rule hints (LLM only vs regex hints + LLM) | Gemini runs |
-| A5 | model (Gemini Flash vs Flash-Lite) | a check_extract run with Flash |
+| A5 | model (Gemini Flash vs Flash-Lite) | collect --set reference --model gemini-3.5-flash |
 | A7 | claim verification (LLM verdict vs Python recomputation) | Gemini runs + claim gold |
-| A3 full | extraction without asking for quotes | Gemini runs |
+| A3 full | extraction without asking for quotes | collect --set reference --arm noquote |
 | Qasper | grounded QA benchmark, 100 questions | Gemini runs |

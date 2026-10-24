@@ -44,6 +44,8 @@ See SCOPE.md for the full scope, architecture and phase plan.
   run in eval/runs/ against eval/gold/extraction_gold.csv; writes eval/results/)
 - Gold set to 50 papers: `uv run python -m app.eval.collect [--no-llm | --bundle]` (papers in
   eval/papers.csv; needs arXiv + GROBID, Gemini without --no-llm; resumable; see eval/README.md)
+- Gemini ablations A2/A3/A5 on collected papers: `uv run python -m app.eval.collect --set reference
+  --arm groups|noquote|whole|per_field` or `--model gemini-3.5-flash` (eval/README.md; ~200 calls)
 - Phase 5 exit check: `uv run python -m app.pipeline.check_phase5` (needs GROBID + GEMINI_API_KEY;
   downloads 5 math-heavy arXiv papers and their LaTeX source; about 6 Gemini calls per paper)
 

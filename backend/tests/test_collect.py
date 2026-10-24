@@ -71,6 +71,19 @@ def test_collect_is_resumable_and_skips_wrong_titles(tmp_path: Path) -> None:
     assert zipfile.ZipFile(pdfs).namelist() == ["pdfs/2401.00001.pdf", "pdfs/2401.00002.pdf"]
     assert json.loads((tmp_path / "status.json").read_text())["2401.00001"]["title_score"] >= 85
 
+    # A second run (an ablation arm) keeps its own markdown; one bundle can carry both runs.
+    collect(rows, tmp_path, steps, "arm", log=lambda _m: None)
+    assert (tmp_path / "runs/arm/md/2401.00001.md").exists()
+    assert calls["download"] == 2 and calls["tei"] == 1 and calls["extract"] == 2
+    small, _ = bundle(rows, tmp_path, "r,arm")
+    names = zipfile.ZipFile(small).namelist()
+    assert {
+        "runs/r/report.md",
+        "runs/arm/report.md",
+        "runs/arm/extractions/2401.00001.json",
+    } <= set(names)
+    assert not any("/md/" in n for n in names)
+
 
 def test_llm_failures_stop_the_run(tmp_path: Path) -> None:
     def extract(_p: Path, _t: bytes) -> tuple[str, str]:
